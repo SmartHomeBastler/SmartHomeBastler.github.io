@@ -36,6 +36,7 @@ layout: page
     img {
         width: 100%;
         height: auto;
+        cursor: crosshair; /* Mauszeiger auf Fadenkreuz setzen */
     }
     .coords {
         position: absolute;
