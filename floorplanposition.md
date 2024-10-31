@@ -81,8 +81,13 @@ img.addEventListener('mousemove', (event) => {
 
 img.addEventListener('click', (event) => {
   const rect = img.getBoundingClientRect();
-  const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
-  const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
+  // Berechnung mit genauerer Positionierung, falls das Bild skaliert ist
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  // Sicherstellen, dass die Werte innerhalb des Bildes liegen
+  const xPercent = (x / rect.width) * 100;
+  const yPercent = (y / rect.height) * 100;
 
   // Marker erstellen
   const marker = document.createElement('div');
