@@ -13,6 +13,7 @@ layout: page
     <label for="image-upload">Bild hochladen:</label>
     <input type="file" id="image-upload" accept="image/*">
 </div>
+<p id="image-dimensions">Bildabmessungen: Noch kein Bild hochgeladen</p>
 
 <!-- Bildcontainer -->
 <div class="container" id="container">
@@ -30,7 +31,7 @@ layout: page
 <style>
     .container {
         position: relative;
-        width: 100%;
+        width: 80%;
         max-width: 600px;
     }
     img {
@@ -64,12 +65,13 @@ layout: page
 </style>
 
 <script>
-// JavaScript zur Markierungserstellung und Bild-Upload
+// JavaScript zur Markierungserstellung, Bild-Upload und Anzeige der Bildabmessungen
 const img = document.getElementById('floorplan');
 const coordsDisplay = document.getElementById('coords');
 const container = document.getElementById('container');
 const coordList = document.getElementById('coord-list');
 const imageUpload = document.getElementById('image-upload');
+const imageDimensions = document.getElementById('image-dimensions');
 
 img.addEventListener('mousemove', (event) => {
   const rect = img.getBoundingClientRect();
@@ -81,13 +83,8 @@ img.addEventListener('mousemove', (event) => {
 
 img.addEventListener('click', (event) => {
   const rect = img.getBoundingClientRect();
-  // Berechnung mit genauerer Positionierung, falls das Bild skaliert ist
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-
-  // Sicherstellen, dass die Werte innerhalb des Bildes liegen
-  const xPercent = (x / rect.width) * 100;
-  const yPercent = (y / rect.height) * 100;
+  const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
+  const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
 
   // Marker erstellen
   const marker = document.createElement('div');
@@ -111,6 +108,13 @@ imageUpload.addEventListener('change', (event) => {
     reader.onload = (e) => {
       img.src = e.target.result;
       removeMarkers(); // Entferne bestehende Markierungen beim neuen Bild
+
+      // Bildabmessungen anzeigen
+      const tempImg = new Image();
+      tempImg.onload = function() {
+        imageDimensions.textContent = `Bildabmessungen: Breite ${tempImg.width}px, Höhe ${tempImg.height}px`;
+      };
+      tempImg.src = e.target.result;
     };
     reader.readAsDataURL(file);
   }
