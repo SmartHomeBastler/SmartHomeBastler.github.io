@@ -30,7 +30,7 @@ layout: page
 <style>
     .container {
         position: relative;
-        width: 80%;
+        width: 100%;
         max-width: 600px;
     }
     img {
