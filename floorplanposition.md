@@ -30,7 +30,7 @@ layout: page
 <style>
     .container {
         position: relative;
-        width: 95%;
+        width: 80%;
         max-width: 600px;
     }
     img {
@@ -53,7 +53,7 @@ layout: page
         height: 10px;
         background: red;
         border-radius: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); /* Korrektur für die exakte Zentrierung */
     }
     .coord-list {
         margin-top: 20px;
@@ -89,6 +89,7 @@ img.addEventListener('click', (event) => {
   marker.classList.add('marker');
   marker.style.left = `${xPercent}%`;
   marker.style.top = `${yPercent}%`;
+  marker.style.transform = "translate(-50%, -50%)"; // Zentriert die Markierung
   container.appendChild(marker);
 
   // Koordinate zur Liste hinzufügen
