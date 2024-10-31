@@ -24,3 +24,8 @@
   dropdown:
     - name: ICS zusammenführen
       link: /icszusammenfuhren
+- name: Floorplan Tools
+  link: /#
+  dropdown:
+    - name: Floorplan Position
+      link: /floorplanposition
