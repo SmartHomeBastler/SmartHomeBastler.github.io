@@ -68,17 +68,15 @@ layout: page
 <style>
     .floorplan-container {
         position: relative;
-        width: 100%;
-        max-width: 100%; /* Füllt die gesamte Breite des umgebenden Containers aus */
+        display: inline-block; /* Passt die Größe des Containers automatisch an das Bild an */
         margin-top: 20px;
         border: 1px solid #ddd;
-        padding: 10px;
+        padding: 0; /* Kein Padding, damit die Größe genau dem Bild entspricht */
         background-color: #f9f9f9;
         border-radius: 8px;
     }
     img {
-        width: 100%;
-        height: auto;
+        display: block; /* Entfernt Abstände unterhalb des Bildes */
         cursor: crosshair;
     }
     .floorplan-coords {
@@ -99,7 +97,7 @@ layout: page
         border-radius: 50%;
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         transform: translate(-50%, -50%);
-        pointer-events: none; /* Verhindert, dass der Marker selbst anklickbar ist */
+        pointer-events: none;
     }
     .floorplan-marker-form {
         display: grid;
@@ -181,30 +179,29 @@ img.addEventListener('mousemove', (event) => {
 });
 
 img.addEventListener('click', (event) => {
-    const rect = img.getBoundingClientRect();
-    const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
-    const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
+  const rect = img.getBoundingClientRect();
+  const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
+  const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
 
-    // Marker erstellen
-    const marker = document.createElement('div');
-    marker.classList.add('floorplan-marker');
-    marker.style.left = `${xPercent}%`;
-    marker.style.top = `${yPercent}%`;
-    container.appendChild(marker);
+  // Marker erstellen
+  const marker = document.createElement('div');
+  marker.classList.add('floorplan-marker');
+  marker.style.left = `${xPercent}%`;
+  marker.style.top = `${yPercent}%`;
+  container.appendChild(marker);
 
-    // Speichert die Markierung und aktuelle Eingaben
-    markers.push({
-        x: xPercent.toFixed(2),
-        y: yPercent.toFixed(2),
-        entity: document.getElementById('marker-entity').value || "",
-        path: document.getElementById('marker-path').value || "/local/lovelace/icon/",
-        defaultIcon: document.getElementById('marker-default-icon').value || "icon_fail.png",
-        onIcon: document.getElementById('marker-on-icon').value || "button_spot_on.png",
-        offIcon: document.getElementById('marker-off-icon').value || "button_spot_off.png",
-        size: document.getElementById('marker-size').value || "2%"
-    });
+  // Speichert die Markierung und aktuelle Eingaben
+  markers.push({
+    x: xPercent.toFixed(2),
+    y: yPercent.toFixed(2),
+    entity: document.getElementById('marker-entity').value || "",
+    path: document.getElementById('marker-path').value || "/local/lovelace/icon/",
+    defaultIcon: document.getElementById('marker-default-icon').value || "icon_fail.png",
+    onIcon: document.getElementById('marker-on-icon').value || "button_spot_on.png",
+    offIcon: document.getElementById('marker-off-icon').value || "button_spot_off.png",
+    size: document.getElementById('marker-size').value || "2%"
+  });
 });
-
 
 // Bild hochladen und anzeigen
 imageUpload.addEventListener('change', (event) => {
@@ -213,13 +210,14 @@ imageUpload.addEventListener('change', (event) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       img.src = e.target.result;
-      removeMarkers();
+      img.onload = function() {
+        container.style.width = `${img.width}px`;  // Setzt die Breite des Containers auf die Bildbreite
+        container.style.height = `${img.height}px`; // Setzt die Höhe des Containers auf die Bildhöhe
+        removeMarkers();
 
-      const tempImg = new Image();
-      tempImg.onload = function() {
-        imageDimensions.textContent = `Bildabmessungen: Breite ${tempImg.width}px, Höhe ${tempImg.height}px`;
+        // Bildabmessungen anzeigen
+        imageDimensions.textContent = `Bildabmessungen: Breite ${img.width}px, Höhe ${img.height}px`;
       };
-      tempImg.src = e.target.result;
     };
     reader.readAsDataURL(file);
   }
