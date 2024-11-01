@@ -93,12 +93,12 @@ layout: page
     }
     .floorplan-marker {
         position: absolute;
-        width: 12px;
-        height: 12px;
+        width: 10px; /* kleinerer Marker */
+        height: 10px;
         background: red;
         border-radius: 50%;
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); /* Zentriert den Marker */
     }
     .floorplan-marker-form {
         display: grid;
