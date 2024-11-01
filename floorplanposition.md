@@ -69,7 +69,7 @@ layout: page
     .floorplan-container {
         position: relative;
         width: 100%;
-        max-width: 600px; /* Begrenzt die Breite des Containers */
+        max-width: 100%; /* Füllt die gesamte Breite des umgebenden Containers aus */
         margin-top: 20px;
         border: 1px solid #ddd;
         padding: 10px;
@@ -77,7 +77,7 @@ layout: page
         border-radius: 8px;
     }
     img {
-        width: 100%; /* Bild füllt die gesamte Container-Breite */
+        width: 100%;
         height: auto;
         cursor: crosshair;
     }
