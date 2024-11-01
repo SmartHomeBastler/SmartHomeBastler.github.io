@@ -189,6 +189,7 @@ img.addEventListener('click', (event) => {
   marker.classList.add('floorplan-marker');
   marker.style.left = `${xPercent}%`;
   marker.style.top = `${yPercent}%`;
+  marker.style.transform = 'translate(-50%, -50%)';
   container.appendChild(marker);
 
   // Speichert die Markierung und aktuelle Eingaben
