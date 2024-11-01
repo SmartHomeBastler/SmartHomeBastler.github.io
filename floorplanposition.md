@@ -59,6 +59,7 @@ layout: page
     <button class="floorplan-button floorplan-button-primary" onclick="generateYAML()">YAML-Code generieren</button>
     <button class="floorplan-button floorplan-button-info" onclick="copyYAML()">YAML-Code kopieren</button>
     <button class="floorplan-button floorplan-button-warning" onclick="removeMarkers()">Alle Markierungen entfernen</button>
+    <button class="floorplan-button floorplan-button-danger" onclick="clearYAML()">YAML-Code löschen</button>
 </div>
 
 <h3>Generierter YAML-Code:</h3>
@@ -68,7 +69,7 @@ layout: page
     .floorplan-container {
         position: relative;
         width: 100%;
-        max-width: 100%; /* Füllt die gesamte Breite des umgebenden Containers aus */
+        max-width: 600px; /* Begrenzt die Breite des Containers */
         margin-top: 20px;
         border: 1px solid #ddd;
         padding: 10px;
@@ -76,7 +77,7 @@ layout: page
         border-radius: 8px;
     }
     img {
-        width: 100%;
+        width: 100%; /* Bild füllt die gesamte Container-Breite */
         height: auto;
         cursor: crosshair;
     }
@@ -143,8 +144,12 @@ layout: page
         background-color: #ffc107;
         color: #fff;
     }
+    .floorplan-button-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
     #yaml-output {
-        width: 100%;
+        width: 100%; /* Ausgabe-Textfeld nimmt die gesamte Breite ein */
         margin-top: 20px;
         padding: 10px;
         font-size: 14px;
@@ -190,21 +195,13 @@ img.addEventListener('click', (event) => {
   markers.push({
     x: xPercent.toFixed(2),
     y: yPercent.toFixed(2),
-    entity: document.getElementById('marker-entity').value || "light.default_entity",
+    entity: document.getElementById('marker-entity').value || "",
     path: document.getElementById('marker-path').value || "/local/lovelace/icon/",
     defaultIcon: document.getElementById('marker-default-icon').value || "icon_fail.png",
     onIcon: document.getElementById('marker-on-icon').value || "button_spot_on.png",
     offIcon: document.getElementById('marker-off-icon').value || "button_spot_off.png",
     size: document.getElementById('marker-size').value || "2%"
   });
-
-  // Eingabefelder leeren
-  document.getElementById('marker-entity').value = "";
-  document.getElementById('marker-path').value = "";
-  document.getElementById('marker-default-icon').value = "";
-  document.getElementById('marker-on-icon').value = "";
-  document.getElementById('marker-off-icon').value = "";
-  document.getElementById('marker-size').value = "";
 });
 
 // Bild hochladen und anzeigen
@@ -229,6 +226,12 @@ imageUpload.addEventListener('change', (event) => {
 // Funktion zum Entfernen aller Markierungen im Bild
 function removeMarkers() {
   document.querySelectorAll('.floorplan-marker').forEach(marker => marker.remove());
+  markers = [];
+}
+
+// Funktion zum Leeren des YAML-Code-Feldes
+function clearYAML() {
+  yamlOutput.value = '';
 }
 
 // Generiert YAML-Code basierend auf den Markierungen
@@ -236,7 +239,7 @@ function generateYAML() {
   let yaml = "";
   markers.forEach(marker => {
     yaml += `  - type: custom:button-card\n`;
-    yaml += `    entity: ${marker.entity}\n`;
+    yaml += `    entity: ${marker.entity || "light.default_entity"}\n`;
     yaml += `    show_name: false\n`;
     yaml += `    show_entity_picture: true\n`;
     yaml += `    entity_picture: ${marker.path}${marker.defaultIcon}\n`;
