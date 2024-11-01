@@ -75,20 +75,16 @@ const imageDimensions = document.getElementById('image-dimensions');
 
 img.addEventListener('mousemove', (event) => {
   const rect = img.getBoundingClientRect();
-  const xPercent = ((event.clientX - rect.left) / img.naturalWidth) * 100;
-  const yPercent = ((event.clientY - rect.top) / img.naturalHeight) * 100;
+  const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
+  const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
 
   coordsDisplay.textContent = `left: ${xPercent.toFixed(2)}%, top: ${yPercent.toFixed(2)}%`;
 });
 
 img.addEventListener('click', (event) => {
   const rect = img.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-
-  // Berechnung auf Grundlage der Originalbildgröße
-  const xPercent = (x / img.naturalWidth) * 100;
-  const yPercent = (y / img.naturalHeight) * 100;
+  const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
+  const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
 
   // Marker erstellen
   const marker = document.createElement('div');
@@ -103,7 +99,6 @@ img.addEventListener('click', (event) => {
   coordItem.textContent = `left: ${xPercent.toFixed(2)}%, top: ${yPercent.toFixed(2)}%`;
   coordList.appendChild(coordItem);
 });
-
 
 // Bild hochladen und anzeigen
 imageUpload.addEventListener('change', (event) => {
