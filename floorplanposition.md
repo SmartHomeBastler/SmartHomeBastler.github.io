@@ -226,12 +226,11 @@ imageUpload.addEventListener('change', (event) => {
   }
 });
 
-// Funktion zum Entfernen aller Markierungen
+// Funktion zum Entfernen aller Markierungen im Bild, ohne die Marker-Einstellungen zu löschen
 function removeMarkers() {
   document.querySelectorAll('.marker').forEach(marker => marker.remove());
-  yamlOutput.value = '';
-  markers = [];
 }
+
 
 // Generiert YAML-Code basierend auf den Markierungen
 function generateYAML() {
