@@ -179,32 +179,28 @@ img.addEventListener('mousemove', (event) => {
 });
 
 img.addEventListener('click', (event) => {
-    const rect = img.getBoundingClientRect();
-    const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
-    const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
+  const rect = img.getBoundingClientRect();
+  const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
+  const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
 
-    // Leichter Offset zur besseren Anpassung
-    const adjustedXPercent = xPercent - 0.5; // ggf. anpassen
-    const adjustedYPercent = yPercent - 0.5; // ggf. anpassen
+  // Marker erstellen
+  const marker = document.createElement('div');
+  marker.classList.add('floorplan-marker');
+  marker.style.left = `${xPercent}%`;
+  marker.style.top = `${yPercent}%`;
+  container.appendChild(marker);
 
-    // Marker erstellen
-    const marker = document.createElement('div');
-    marker.classList.add('floorplan-marker');
-    marker.style.left = `${adjustedXPercent}%`;
-    marker.style.top = `${adjustedYPercent}%`;
-    container.appendChild(marker);
-
-    // Speichert die Markierung und aktuelle Eingaben
-    markers.push({
-        x: adjustedXPercent.toFixed(2),
-        y: adjustedYPercent.toFixed(2),
-        entity: document.getElementById('marker-entity').value || "",
-        path: document.getElementById('marker-path').value || "/local/lovelace/icon/",
-        defaultIcon: document.getElementById('marker-default-icon').value || "icon_fail.png",
-        onIcon: document.getElementById('marker-on-icon').value || "button_spot_on.png",
-        offIcon: document.getElementById('marker-off-icon').value || "button_spot_off.png",
-        size: document.getElementById('marker-size').value || "2%"
-    });
+  // Speichert die Markierung und aktuelle Eingaben
+  markers.push({
+    x: xPercent.toFixed(2),
+    y: yPercent.toFixed(2),
+    entity: document.getElementById('marker-entity').value || "",
+    path: document.getElementById('marker-path').value || "/local/lovelace/icon/",
+    defaultIcon: document.getElementById('marker-default-icon').value || "icon_fail.png",
+    onIcon: document.getElementById('marker-on-icon').value || "button_spot_on.png",
+    offIcon: document.getElementById('marker-off-icon').value || "button_spot_off.png",
+    size: document.getElementById('marker-size').value || "2%"
+  });
 });
 
 // Bild hochladen und anzeigen
