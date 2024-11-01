@@ -9,63 +9,63 @@ layout: page
 <p>Lade ein Bild hoch, klicke auf das Bild, um Markierungen zu setzen, und gib zusätzliche Informationen ein, um den YAML-Code zu generieren:</p>
 
 <!-- Bild-Upload -->
-<div class="image-upload">
+<div class="floorplan-image-upload">
     <label for="image-upload">Bild hochladen:</label>
     <input type="file" id="image-upload" accept="image/*">
 </div>
 <p id="image-dimensions">Bildabmessungen: Noch kein Bild hochgeladen</p>
 
 <!-- Bildcontainer -->
-<div class="container" id="container">
+<div class="floorplan-container" id="container">
   <img src="floorplan.png" alt="Floorplan" id="floorplan">
-  <div class="coords" id="coords">left: 0%, top: 0%</div>
+  <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
 </div>
 
 <!-- Formular für zusätzliche Angaben -->
 <h3>Marker-Einstellungen</h3>
-<div class="marker-form">
-    <div class="form-group">
+<div class="floorplan-marker-form">
+    <div class="floorplan-form-group">
         <label for="marker-entity">Entität (entity):</label>
         <input type="text" id="marker-entity" placeholder="z.B. light.esszimmer_spots">
     </div>
     
-    <div class="form-group">
+    <div class="floorplan-form-group">
         <label for="marker-path">Speicherpfad der Icons:</label>
         <input type="text" id="marker-path" placeholder="/local/lovelace/icon/">
     </div>
     
-    <div class="form-group">
+    <div class="floorplan-form-group">
         <label for="marker-default-icon">Standard Icon Bild:</label>
         <input type="text" id="marker-default-icon" placeholder="icon_fail.png">
     </div>
     
-    <div class="form-group">
+    <div class="floorplan-form-group">
         <label for="marker-on-icon">Bild im Zustand 'An':</label>
         <input type="text" id="marker-on-icon" placeholder="button_spot_on.png">
     </div>
     
-    <div class="form-group">
+    <div class="floorplan-form-group">
         <label for="marker-off-icon">Bild im Zustand 'Aus':</label>
         <input type="text" id="marker-off-icon" placeholder="button_spot_off.png">
     </div>
     
-    <div class="form-group">
+    <div class="floorplan-form-group">
         <label for="marker-size">Größe des Icons (%):</label>
         <input type="text" id="marker-size" placeholder="z.B. 2%">
     </div>
 </div>
 
-<div class="button-container">
-    <button class="button is-primary" onclick="generateYAML()">YAML-Code generieren</button>
-    <button class="button is-info" onclick="copyYAML()">YAML-Code kopieren</button>
-    <button class="button is-warning" onclick="removeMarkers()">Alle Markierungen entfernen</button>
+<div class="floorplan-button-container">
+    <button class="floorplan-button floorplan-button-primary" onclick="generateYAML()">YAML-Code generieren</button>
+    <button class="floorplan-button floorplan-button-info" onclick="copyYAML()">YAML-Code kopieren</button>
+    <button class="floorplan-button floorplan-button-warning" onclick="removeMarkers()">Alle Markierungen entfernen</button>
 </div>
 
 <h3>Generierter YAML-Code:</h3>
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 
 <style>
-    .container {
+    .floorplan-container {
         position: relative;
         width: 100%;
         max-width: 600px;
@@ -75,12 +75,7 @@ layout: page
         background-color: #f9f9f9;
         border-radius: 8px;
     }
-    img {
-        width: 100%;
-        height: auto;
-        cursor: crosshair;
-    }
-    .coords {
+    .floorplan-coords {
         position: absolute;
         top: 10px;
         left: 10px;
@@ -90,7 +85,7 @@ layout: page
         border-radius: 5px;
         font-size: 14px;
     }
-    .marker {
+    .floorplan-marker {
         position: absolute;
         width: 12px;
         height: 12px;
@@ -99,47 +94,47 @@ layout: page
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         transform: translate(-50%, -50%);
     }
-    .marker-form {
+    .floorplan-marker-form {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
         margin-top: 20px;
     }
-    .form-group {
+    .floorplan-form-group {
         display: flex;
         flex-direction: column;
     }
-    .form-group label {
+    .floorplan-form-group label {
         font-weight: bold;
         margin-bottom: 5px;
     }
-    .form-group input {
+    .floorplan-form-group input {
         padding: 8px;
         border: 1px solid #ddd;
         border-radius: 5px;
         font-size: 14px;
     }
-    .button-container {
+    .floorplan-button-container {
         display: flex;
         gap: 10px;
         margin-top: 20px;
     }
-    .button {
+    .floorplan-button {
         padding: 10px 15px;
         font-size: 14px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
     }
-    .button.is-primary {
+    .floorplan-button-primary {
         background-color: #007bff;
         color: #fff;
     }
-    .button.is-info {
+    .floorplan-button-info {
         background-color: #17a2b8;
         color: #fff;
     }
-    .button.is-warning {
+    .floorplan-button-warning {
         background-color: #ffc107;
         color: #fff;
     }
@@ -181,7 +176,7 @@ img.addEventListener('click', (event) => {
 
   // Marker erstellen
   const marker = document.createElement('div');
-  marker.classList.add('marker');
+  marker.classList.add('floorplan-marker');
   marker.style.left = `${xPercent}%`;
   marker.style.top = `${yPercent}%`;
   container.appendChild(marker);
@@ -226,11 +221,9 @@ imageUpload.addEventListener('change', (event) => {
   }
 });
 
-// Funktion zum Entfernen aller Markierungen
+// Funktion zum Entfernen aller Markierungen im Bild
 function removeMarkers() {
-  document.querySelectorAll('.marker').forEach(marker => marker.remove());
-  yamlOutput.value = '';
-  markers = [];
+  document.querySelectorAll('.floorplan-marker').forEach(marker => marker.remove());
 }
 
 // Generiert YAML-Code basierend auf den Markierungen
