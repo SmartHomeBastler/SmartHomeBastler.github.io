@@ -185,6 +185,7 @@ function generateYAML() {
             yaml += `      - ${entity}\n`;
             yaml += `    element:\n`;
             yaml += `      type: image\n`;
+            yaml += `      entity: ${entity}\n`;
             yaml += `      image: ${path}${transparentImage}\n`;
             yaml += `      state_image:\n`;
             yaml += `        "on": ${path}${entityImage}\n`;
