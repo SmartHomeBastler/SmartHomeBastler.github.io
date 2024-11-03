@@ -26,7 +26,7 @@ layout: page
 <div class="floorplan-marker-form">
     <div class="floorplan-form-group">
         <label for="marker-entity">Entität (entity):</label>
-        <input type="text" id="marker-entity" placeholder="z.B. light.esszimmer_spots">
+        <input type="text" id="marker-entity" placeholder="z.B. light.<DEINE-ENTITÄT>">
     </div>
     
     <div class="floorplan-form-group">
@@ -36,22 +36,22 @@ layout: page
     
     <div class="floorplan-form-group">
         <label for="marker-default-icon">Bild bei Fehler:</label>
-        <input type="text" id="marker-default-icon" placeholder="icon_fail.png">
+        <input type="text" id="marker-default-icon" placeholder="<DEIN-FEHLER-BUTTON-BILD>.png">
     </div>
     
     <div class="floorplan-form-group">
         <label for="marker-on-icon">Bild im Zustand 'An':</label>
-        <input type="text" id="marker-on-icon" placeholder="button_spot_on.png">
+        <input type="text" id="marker-on-icon" placeholder="<DEIN-AN-BUTTON-BILD>.png">
     </div>
     
     <div class="floorplan-form-group">
         <label for="marker-off-icon">Bild im Zustand 'Aus':</label>
-        <input type="text" id="marker-off-icon" placeholder="button_spot_off.png">
+        <input type="text" id="marker-off-icon" placeholder="<DEIN-AUS-BUTTON-BILD>.png">
     </div>
     
     <div class="floorplan-form-group">
         <label for="marker-size">Größe des Icons (%):</label>
-        <input type="text" id="marker-size" placeholder="z.B. 2%">
+        <input type="text" id="marker-size" placeholder="z.B. 2">
     </div>
     
     <!-- Auswahl für die Form des Markers -->
