@@ -22,7 +22,7 @@ layout: page
 </div>
 
 <!-- Formular für zusätzliche Angaben -->
-<h3>Marker-Einstellungen</h3>
+<h3>Button-Einstellungen</h3>
 <div class="floorplan-marker-form">
     <div class="floorplan-form-group">
         <label for="marker-entity">Entität (entity):</label>
@@ -35,7 +35,7 @@ layout: page
     </div>
     
     <div class="floorplan-form-group">
-        <label for="marker-default-icon">Standard Icon Bild:</label>
+        <label for="marker-default-icon">Bild bei Fehler:</label>
         <input type="text" id="marker-default-icon" placeholder="icon_fail.png">
     </div>
     
@@ -56,7 +56,7 @@ layout: page
     
     <!-- Auswahl für die Form des Markers -->
     <div class="floorplan-form-group">
-        <label for="marker-shape">Form des Markers:</label>
+        <label for="marker-shape">Form des Buttons:</label>
         <select id="marker-shape">
             <option value="50%">Rund</option>
             <option value="0%">Eckig</option>
@@ -209,10 +209,10 @@ img.addEventListener('click', (event) => {
     y: yPercent.toFixed(2),
     entity: document.getElementById('marker-entity').value || "",
     path: document.getElementById('marker-path').value || "/local/lovelace/icon/",
-    defaultIcon: document.getElementById('marker-default-icon').value || "icon_fail.png",
-    onIcon: document.getElementById('marker-on-icon').value || "button_spot_on.png",
-    offIcon: document.getElementById('marker-off-icon').value || "button_spot_off.png",
-    size: document.getElementById('marker-size').value || "2%",
+    defaultIcon: document.getElementById('marker-default-icon').value || "DEIN-FEHLER-BUTTON-BILD.png",
+    onIcon: document.getElementById('marker-on-icon').value || "DEIN-AN-BUTTON-BILD.png",
+    offIcon: document.getElementById('marker-off-icon').value || "DEIN-AUS-BUTTON-BILD.png",
+    size: document.getElementById('marker-size').value || "2",
     shape: shape
   });
 });
@@ -282,7 +282,7 @@ function generateYAML() {
     yaml += `    style:\n`;
     yaml += `      left: ${marker.x}%\n`;
     yaml += `      top: ${marker.y}%\n`;
-    yaml += `      width: ${marker.size}\n\n`;
+    yaml += `      width: ${marker.size}%\n\n`;
   });
   yamlOutput.value = yaml;
 }
