@@ -27,5 +27,7 @@
 - name: Floorplan Tools
   link: /#
   dropdown:
+    - name: Floorplan Beleuchtungs Bilder
+      link: /floorplanbeleuchtungsbilder
     - name: Floorplan Position
       link: /floorplanposition
