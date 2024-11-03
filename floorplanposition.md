@@ -262,6 +262,10 @@ function generateYAML() {
     yaml += `        styles:\n`;
     yaml += `          card:\n`;
     yaml += `            - border: 2px solid var(--primary-color)\n`;
+    yaml += `    tap_action:\n`;
+    yaml += `      action: toggle\n`;
+    yaml += `    hold_action:\n`;
+    yaml += `      action: more-info\n`;
     yaml += `    style:\n`;
     yaml += `      left: ${marker.x}%\n`;
     yaml += `      top: ${marker.y}%\n`;
