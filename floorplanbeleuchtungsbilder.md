@@ -43,11 +43,11 @@ layout: page
                     <option value="cover">Abdeckungen</option>
                 </select>
             </td>
-            <td><button class="custom-button" onclick="removeRow(this)">-</button></td>
+            <td><button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button></td>
         </tr>
     </tbody>
 </table>
-<button class="custom-button" onclick="addRow()">+</button>
+<button class="action-button add-button" onclick="addRow()">&#x2b;</button>
 
 <div class="custom-button-container">
     <button class="custom-button generate" onclick="generateYAML()">YAML-Code generieren</button>
@@ -60,7 +60,7 @@ layout: page
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 
 <style>
-    /* Verhindert Konflikte mit Jekyll-Standardstilen durch spezifischere Klassen */
+    /* Formulargestaltung */
     .custom-form-group {
         margin-bottom: 15px;
     }
@@ -77,6 +77,49 @@ layout: page
         border-radius: 5px;
     }
 
+    /* Tabellengestaltung */
+    #entities-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+    #entities-table th, #entities-table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    #entities-table th {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+    #entities-table td input, #entities-table td select {
+        width: 100%;
+        padding: 6px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    /* Buttons für Zeilen hinzufügen und entfernen */
+    .action-button {
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        color: #fff;
+    }
+    .add-button {
+        background-color: #28a745;
+        margin-top: 10px;
+    }
+    .remove-button {
+        background-color: #dc3545;
+    }
+
+    /* Hauptbuttons Styling */
     .custom-button-container {
         display: flex;
         gap: 10px;
