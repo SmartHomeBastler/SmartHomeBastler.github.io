@@ -193,11 +193,17 @@ function clearInputs() {
 // Funktion zum Generieren des YAML-Codes
 function generateYAML() {
     const path = document.getElementById('path-input').value;
-    const backgroundImage = document.getElementById('background-image-input').value;
+    const backgroundImage = document.getElementById('background-image-input').value || "hintergrund_nacht_org.png";
     const transparentImage = document.getElementById('transparent-image-input').value || "1x1_transparent.png";
     const tableRows = document.querySelectorAll('#entities-table tbody tr');
     let yaml = '';
 
+    // Anfang des Picture Elements-Codes basierend auf den Eingaben
+    yaml += `type: picture-elements\n`;
+    yaml += `image: ${path}${backgroundImage}\n`;
+    yaml += `elements:\n`;
+
+    // Elemente für jede Zeile in der Tabelle generieren
     tableRows.forEach(row => {
         const entity = row.cells[0].querySelector('input').value;
         const entityImage = row.cells[1].querySelector('input').value;
