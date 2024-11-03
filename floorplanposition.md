@@ -53,6 +53,16 @@ layout: page
         <label for="marker-size">Größe des Icons (%):</label>
         <input type="text" id="marker-size" placeholder="z.B. 2%">
     </div>
+    
+    <!-- Auswahl für die Form des Markers -->
+    <div class="floorplan-form-group">
+        <label for="marker-shape">Form des Markers:</label>
+        <select id="marker-shape">
+            <option value="50%">Rund</option>
+            <option value="0%">Eckig</option>
+            <option value="10%">Abgerundet</option>
+        </select>
+    </div>
 </div>
 
 <div class="floorplan-button-container">
@@ -68,15 +78,15 @@ layout: page
 <style>
     .floorplan-container {
         position: relative;
-        display: inline-block; /* Passt die Größe des Containers automatisch an das Bild an */
+        display: inline-block;
         margin-top: 20px;
         border: 1px solid #ddd;
-        padding: 0; /* Kein Padding, damit die Größe genau dem Bild entspricht */
+        padding: 0;
         background-color: #f9f9f9;
         border-radius: 8px;
     }
     img {
-        display: block; /* Entfernt Abstände unterhalb des Bildes */
+        display: block;
         cursor: crosshair;
     }
     .floorplan-coords {
@@ -91,10 +101,9 @@ layout: page
     }
     .floorplan-marker {
         position: absolute;
-        width: 10px; /* Kleinere Größe für präzise Markierung */
+        width: 10px;
         height: 10px;
         background: red;
-        border-radius: 50%;
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         transform: translate(-50%, -50%);
         pointer-events: none;
@@ -113,7 +122,7 @@ layout: page
         font-weight: bold;
         margin-bottom: 5px;
     }
-    .floorplan-form-group input {
+    .floorplan-form-group input, .floorplan-form-group select {
         padding: 8px;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -148,7 +157,7 @@ layout: page
         color: #fff;
     }
     #yaml-output {
-        width: 100%; /* Ausgabe-Textfeld nimmt die gesamte Breite ein */
+        width: 100%;
         margin-top: 20px;
         padding: 10px;
         font-size: 14px;
@@ -183,11 +192,15 @@ img.addEventListener('click', (event) => {
   const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
   const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
 
+  // Auswahl der Form des Markers
+  const shape = document.getElementById('marker-shape').value;
+
   // Marker erstellen
   const marker = document.createElement('div');
   marker.classList.add('floorplan-marker');
   marker.style.left = `${xPercent}%`;
   marker.style.top = `${yPercent}%`;
+  marker.style.borderRadius = shape; // Setzt die Form des Markers
   container.appendChild(marker);
 
   // Speichert die Markierung und aktuelle Eingaben
@@ -199,7 +212,8 @@ img.addEventListener('click', (event) => {
     defaultIcon: document.getElementById('marker-default-icon').value || "icon_fail.png",
     onIcon: document.getElementById('marker-on-icon').value || "button_spot_on.png",
     offIcon: document.getElementById('marker-off-icon').value || "button_spot_off.png",
-    size: document.getElementById('marker-size').value || "2%"
+    size: document.getElementById('marker-size').value || "2%",
+    shape: shape
   });
 });
 
@@ -211,11 +225,10 @@ imageUpload.addEventListener('change', (event) => {
     reader.onload = (e) => {
       img.src = e.target.result;
       img.onload = function() {
-        container.style.width = `${img.width}px`;  // Setzt die Breite des Containers auf die Bildbreite
-        container.style.height = `${img.height}px`; // Setzt die Höhe des Containers auf die Bildhöhe
+        container.style.width = `${img.width}px`;  
+        container.style.height = `${img.height}px`; 
         removeMarkers();
 
-        // Bildabmessungen anzeigen
         imageDimensions.textContent = `Bildabmessungen: Breite ${img.width}px, Höhe ${img.height}px`;
       };
     };
@@ -249,7 +262,7 @@ function generateYAML() {
     yaml += `    styles:\n`;
     yaml += `      card:\n`;
     yaml += `        - border: 2px solid var(--state-icon-color)\n`;
-    yaml += `        - border-radius: 50%\n`;
+    yaml += `        - border-radius: ${marker.shape}\n`; // Form des Markers
     yaml += `        - background-color: var(--primary-background-color)\n`;
     yaml += `    state:\n`;
     yaml += `      - value: "on"\n`;
