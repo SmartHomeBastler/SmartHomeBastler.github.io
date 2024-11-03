@@ -130,9 +130,10 @@ function generateYAML() {
             yaml += `    hold_action:\n`;
             yaml += `      action: none\n`;
             yaml += `    style:\n`;
-            yaml += `      left: 50%\n`;
+            yaml += `      mix-blend-mode: lighten\n`;
             yaml += `      opacity: >-\n`;
             yaml += `        \${LEUCHTENSTATUS === 'on' ? (HELLIGKEIT / 254) : '100'}\n`;
+            yaml += `      left: 50%\n`;
             yaml += `      top: 50%\n`;
             yaml += `      width: 100%\n\n`;
         } else if (option === 'rgb') {
@@ -146,6 +147,7 @@ function generateYAML() {
             yaml += `      - ${entity}\n`;
             yaml += `    element:\n`;
             yaml += `      type: image\n`;
+            yaml += `      entity: ${entity}\n`;
             yaml += `      image: ${path}1x1_transparent.png\n`;
             yaml += `      state_image:\n`;
             yaml += `        "on": ${path}${entityImage}\n`;
@@ -173,11 +175,13 @@ function generateYAML() {
             yaml += `      - ${entity}\n`;
             yaml += `    element:\n`;
             yaml += `      type: image\n`;
+            yaml += `      entity: ${entity}\n`;
             yaml += `      image: ${path}1x1_transparent.png\n`;
             yaml += `      state_image:\n`;
             yaml += `        "on": >-\n`;
             yaml += `          \${FARBMODUS === 'color_temp' ? '${path}${entityImage.replace('_farbe.png', '_weiss.png')}' : '${path}${entityImage}'}\n`;
             yaml += `    style:\n`;
+            yaml += `      mix-blend-mode: lighten\n`;
             yaml += `      filter: >-\n`;
             yaml += `        \${ "hue-rotate(" + (LICHTFARBE ? LICHTFARBE[0] : 0) + "deg)"}\n`;
             yaml += `      opacity: >-\n`;
