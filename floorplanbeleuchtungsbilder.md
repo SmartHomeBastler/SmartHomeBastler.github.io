@@ -7,13 +7,17 @@ layout: page
 ---
 
 <h3>Allgemeine Einstellungen</h3>
-<div>
+<div class="form-group">
     <label for="path-input">Speicherpfad der Floorplan Bilder:</label>
     <input type="text" id="path-input" value="/local/lovelace/floorplan/" placeholder="/local/lovelace/floorplan/">
 </div>
-<div>
+<div class="form-group">
     <label for="background-image-input">Dateiname Hintergrundbild:</label>
     <input type="text" id="background-image-input" placeholder="z.B. hintergrund_nacht.png">
+</div>
+<div class="form-group">
+    <label for="transparent-image-input">Dateiname 1 Pixel Bild:</label>
+    <input type="text" id="transparent-image-input" placeholder="z.B. 1x1_transparent.png">
 </div>
 
 <h3>Entitätsbilder Einstellungen</h3>
@@ -55,6 +59,49 @@ layout: page
 <h3>Generierter YAML-Code:</h3>
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 
+<style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .button-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .button-container button {
+        padding: 10px 15px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .button-container .generate {
+        background-color: #007bff;
+        color: #fff;
+    }
+    .button-container .copy {
+        background-color: #17a2b8;
+        color: #fff;
+    }
+    .button-container .remove {
+        background-color: #ffc107;
+        color: #fff;
+    }
+    .button-container .clear {
+        background-color: #dc3545;
+        color: #fff;
+    }
+    #yaml-output {
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+    }
+</style>
+
 <script>
 // Funktion zum Hinzufügen einer neuen Zeile zur Tabelle
 function addRow() {
@@ -82,6 +129,7 @@ function clearYAML() {
 function clearInputs() {
     document.getElementById('path-input').value = '/local/lovelace/floorplan/';
     document.getElementById('background-image-input').value = '';
+    document.getElementById('transparent-image-input').value = '';
     document.querySelectorAll('#entities-table input').forEach(input => input.value = '');
 }
 
@@ -89,6 +137,7 @@ function clearInputs() {
 function generateYAML() {
     const path = document.getElementById('path-input').value;
     const backgroundImage = document.getElementById('background-image-input').value;
+    const transparentImage = document.getElementById('transparent-image-input').value || "1x1_transparent.png";
     const tableRows = document.querySelectorAll('#entities-table tbody tr');
     let yaml = '';
 
@@ -100,7 +149,7 @@ function generateYAML() {
         if (option === 'switch') {
             yaml += `  - type: image\n`;
             yaml += `    entity: ${entity}\n`;
-            yaml += `    image: ${path}1x1_transparent.png\n`;
+            yaml += `    image: ${path}${transparentImage}\n`;
             yaml += `    state_image:\n`;
             yaml += `      "on": ${path}${entityImage}\n`;
             yaml += `    tap_action:\n`;
@@ -122,7 +171,7 @@ function generateYAML() {
             yaml += `      - ${entity}\n`;
             yaml += `    element:\n`;
             yaml += `      type: image\n`;
-            yaml += `      image: ${path}1x1_transparent.png\n`;
+            yaml += `      image: ${path}${transparentImage}\n`;
             yaml += `      state_image:\n`;
             yaml += `        "on": ${path}${entityImage}\n`;
             yaml += `    tap_action:\n`;
@@ -148,7 +197,7 @@ function generateYAML() {
             yaml += `    element:\n`;
             yaml += `      type: image\n`;
             yaml += `      entity: ${entity}\n`;
-            yaml += `      image: ${path}1x1_transparent.png\n`;
+            yaml += `      image: ${path}${transparentImage}\n`;
             yaml += `      state_image:\n`;
             yaml += `        "on": ${path}${entityImage}\n`;
             yaml += `    tap_action:\n`;
@@ -176,7 +225,7 @@ function generateYAML() {
             yaml += `    element:\n`;
             yaml += `      type: image\n`;
             yaml += `      entity: ${entity}\n`;
-            yaml += `      image: ${path}1x1_transparent.png\n`;
+            yaml += `      image: ${path}${transparentImage}\n`;
             yaml += `      state_image:\n`;
             yaml += `        "on": >-\n`;
             yaml += `          \${FARBMODUS === 'color_temp' ? '${path}${entityImage.replace('_farbe.png', '_weiss.png')}' : '${path}${entityImage}'}\n`;
@@ -194,7 +243,7 @@ function generateYAML() {
             yaml += `    entity: ${entity}\n`;
             yaml += `    tap_action:\n`;
             yaml += `      action: none\n`;
-            yaml += `    image: ${path}1x1_transparent.png\n`;
+            yaml += `    image: ${path}${transparentImage}\n`;
             yaml += `    state_image:\n`;
             yaml += `      closed: ${path}${entityImage}\n`;
             yaml += `    style:\n`;
