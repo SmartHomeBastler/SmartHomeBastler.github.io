@@ -7,15 +7,15 @@ layout: page
 ---
 
 <h3>Allgemeine Einstellungen</h3>
-<div class="form-group">
+<div class="custom-form-group">
     <label for="path-input">Speicherpfad der Floorplan Bilder:</label>
     <input type="text" id="path-input" value="/local/lovelace/floorplan/" placeholder="/local/lovelace/floorplan/">
 </div>
-<div class="form-group">
+<div class="custom-form-group">
     <label for="background-image-input">Dateiname Hintergrundbild:</label>
     <input type="text" id="background-image-input" placeholder="z.B. hintergrund_nacht.png">
 </div>
-<div class="form-group">
+<div class="custom-form-group">
     <label for="transparent-image-input">Dateiname 1 Pixel Bild:</label>
     <input type="text" id="transparent-image-input" placeholder="z.B. 1x1_transparent.png">
 </div>
@@ -43,54 +43,68 @@ layout: page
                     <option value="cover">Abdeckungen</option>
                 </select>
             </td>
-            <td><button onclick="removeRow(this)">-</button></td>
+            <td><button class="custom-button" onclick="removeRow(this)">-</button></td>
         </tr>
     </tbody>
 </table>
-<button onclick="addRow()">+</button>
+<button class="custom-button" onclick="addRow()">+</button>
 
-<div class="button-container">
-    <button onclick="generateYAML()">YAML-Code generieren</button>
-    <button onclick="copyYAML()">YAML-Code kopieren</button>
-    <button onclick="clearYAML()">YAML-Code löschen</button>
-    <button onclick="clearInputs()">Eingaben löschen</button>
+<div class="custom-button-container">
+    <button class="custom-button generate" onclick="generateYAML()">YAML-Code generieren</button>
+    <button class="custom-button copy" onclick="copyYAML()">YAML-Code kopieren</button>
+    <button class="custom-button remove" onclick="clearYAML()">YAML-Code löschen</button>
+    <button class="custom-button clear" onclick="clearInputs()">Eingaben löschen</button>
 </div>
 
 <h3>Generierter YAML-Code:</h3>
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 
 <style>
-    .form-group {
+    /* Verhindert Konflikte mit Jekyll-Standardstilen durch spezifischere Klassen */
+    .custom-form-group {
         margin-bottom: 15px;
     }
-    .button-container {
+    .custom-form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .custom-form-group input {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .custom-button-container {
         display: flex;
         gap: 10px;
         margin-top: 20px;
     }
-    .button-container button {
+    .custom-button {
         padding: 10px 15px;
         font-size: 14px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        color: #fff;
     }
-    .button-container .generate {
+    .custom-button.generate {
         background-color: #007bff;
-        color: #fff;
     }
-    .button-container .copy {
+    .custom-button.copy {
         background-color: #17a2b8;
-        color: #fff;
     }
-    .button-container .remove {
+    .custom-button.remove {
         background-color: #ffc107;
-        color: #fff;
+        color: #000;
     }
-    .button-container .clear {
+    .custom-button.clear {
         background-color: #dc3545;
-        color: #fff;
     }
+
+    /* YAML-Ausgabe Styling */
     #yaml-output {
         width: 100%;
         margin-top: 20px;
