@@ -1,6 +1,6 @@
 ---
-title: Floorplan Position Generator
-subtitle: Erstelle Home Assistant Picture Elements Code mit Markierungen und Koordinaten
+title: Floorplan Button Position Generator
+subtitle: Erstelle Buttons auf dem Home Assistant Picture Elements Floorplan
 description: Generiere YAML-Code für Home Assistant anhand der Markierungen und Positionen.
 show_sidebar: false
 layout: page

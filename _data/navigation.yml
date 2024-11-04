@@ -29,5 +29,5 @@
   dropdown:
     - name: Floorplan Beleuchtungs Bilder
       link: /floorplanbeleuchtungsbilder
-    - name: Floorplan Position
-      link: /floorplanposition
+    - name: Floorplan Button Position
+      link: /floorplanbuttonposition
