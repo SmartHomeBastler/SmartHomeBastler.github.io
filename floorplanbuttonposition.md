@@ -81,9 +81,9 @@ layout: page
 <div class="floorplan-form-group">
     <label for="marker-hold-action">Hold Action:</label>
     <select id="marker-hold-action" onchange="toggleNavigationPathInput('hold')">
-        <option value="toggle">Umschalten</option>
+        <option value="more-info" selected>Mehr Info</option>
         <option value="none">Keine</option>
-        <option value="more-info">Mehr Info</option>
+        <option value="toggle">Umschalten</option>
         <option value="navigate">Navigieren</option>
         <option value="call-service">Taster</option>
         <option value="fire-dom-event">Pop-Up</option>
@@ -341,14 +341,12 @@ function generateYAML() {
         yaml += `    tap_action:\n      action: fire-dom-event\n      browser_mod:\n        service: browser_mod.more_info\n        data:\n          entity: ${entity}\n`;
     }
 
-    // Hold Action Configuration
+    // Hold Action Configuration with default "Mehr Info"
     const holdAction = document.getElementById("marker-hold-action").value;
     if (holdAction === "toggle") {
         yaml += `    hold_action:\n      action: toggle\n`;
     } else if (holdAction === "none") {
         yaml += `    hold_action:\n      action: none\n`;
-    } else if (holdAction === "more-info") {
-        yaml += `    hold_action:\n      action: more-info\n`;
     } else if (holdAction === "navigate") {
         const navigationPath = document.getElementById("navigation-path-hold").value;
         yaml += `    hold_action:\n      action: navigate\n      navigation_path: ${navigationPath || "/"}\n`;
@@ -356,12 +354,16 @@ function generateYAML() {
         yaml += `    hold_action:\n      action: call-service\n      service: input_button.press\n      service_data:\n        entity_id: ${entity}\n`;
     } else if (holdAction === "fire-dom-event") {
         yaml += `    hold_action:\n      action: fire-dom-event\n      browser_mod:\n        service: browser_mod.more_info\n        data:\n          entity: ${entity}\n`;
+    } else {
+        // Standard "Mehr Info" für hold_action
+        yaml += `    hold_action:\n      action: more-info\n`;
     }
 
     yaml += `    style:\n      left: ${marker.x}%\n      top: ${marker.y}%\n      width: ${marker.size}%\n\n`;
   });
   yamlOutput.value = yaml;
 }
+
 
 // Funktion zum Kopieren des YAML-Codes
 function copyYAML() {
