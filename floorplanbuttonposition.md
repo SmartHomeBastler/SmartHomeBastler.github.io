@@ -98,6 +98,10 @@ layout: page
         padding: 5px 10px;
         border-radius: 5px;
         font-size: 14px;
+        display: none;
+    }
+    .floorplan-container:hover .floorplan-coords {
+        display: block;
     }
     .floorplan-marker {
         position: absolute;
