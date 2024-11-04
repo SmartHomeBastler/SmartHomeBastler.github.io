@@ -222,6 +222,7 @@ function generateYAML() {
             yaml += `    style:\n`;
             yaml += `      opacity: 1\n\n`;
             yaml += `      mix-blend-mode: lighten\n`;
+            yaml += `      pointer-events: none\n`;
             yaml += `      left: 50%\n`;
             yaml += `      top: 50%\n`;
             yaml += `      width: 100%\n`;
@@ -244,6 +245,7 @@ function generateYAML() {
             yaml += `      action: none\n`;
             yaml += `    style:\n`;
             yaml += `      mix-blend-mode: lighten\n`;
+            yaml += `      pointer-events: none\n`;
             yaml += `      opacity: >-\n`;
             yaml += `        \${LEUCHTENSTATUS === 'on' ? (HELLIGKEIT / 254) : '100'}\n`;
             yaml += `      left: 50%\n`;
@@ -270,6 +272,7 @@ function generateYAML() {
             yaml += `      action: none\n`;
             yaml += `    style:\n`;
             yaml += `      mix-blend-mode: lighten\n`;
+            yaml += `      pointer-events: none\n`;
             yaml += `      filter: >-\n`;
             yaml += `        \${ "hue-rotate(" + (LICHTFARBE ? LICHTFARBE[0] : 0) + "deg)"}\n`;
             yaml += `      opacity: >-\n`;
@@ -293,8 +296,13 @@ function generateYAML() {
             yaml += `      state_image:\n`;
             yaml += `        "on": >-\n`;
             yaml += `          \${FARBMODUS === 'color_temp' ? '${path}${entityImage.replace('_farbe.png', '_weiss.png')}' : '${path}${entityImage}'}\n`;
+            yaml += `    tap_action:\n`;
+            yaml += `      action: none\n`;
+            yaml += `    hold_action:\n`;
+            yaml += `      action: none\n`;
             yaml += `    style:\n`;
             yaml += `      mix-blend-mode: lighten\n`;
+            yaml += `      pointer-events: none\n`;
             yaml += `      filter: >-\n`;
             yaml += `        \${ "hue-rotate(" + (LICHTFARBE ? LICHTFARBE[0] : 0) + "deg)"}\n`;
             yaml += `      opacity: >-\n`;
@@ -307,10 +315,13 @@ function generateYAML() {
             yaml += `    entity: ${entity}\n`;
             yaml += `    tap_action:\n`;
             yaml += `      action: none\n`;
+            yaml += `    hold_action:\n`;
+            yaml += `      action: none\n`;
             yaml += `    image: ${path}${transparentImage}\n`;
             yaml += `    state_image:\n`;
             yaml += `      closed: ${path}${entityImage}\n`;
             yaml += `    style:\n`;
+            yaml += `      pointer-events: none\n`;
             yaml += `      left: 50%\n`;
             yaml += `      top: 50%\n`;
             yaml += `      width: 100%\n`;
