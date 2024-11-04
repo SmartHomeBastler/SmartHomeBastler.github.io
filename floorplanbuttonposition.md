@@ -65,6 +65,27 @@ layout: page
     </div>
 </div>
 
+
+<!-- Auswahl für tap_action -->
+<div class="floorplan-form-group">
+    <label for="marker-tap-action">Tap Action:</label>
+    <select id="marker-tap-action" onchange="toggleNavigationPathInput()">
+        <option value="toggle">Umschalten</option>
+        <option value="none">Keine</option>
+        <option value="more-info">Mehr Info</option>
+        <option value="navigate">Navigieren</option>
+        <option value="call-service">Taster</option>
+        <option value="fire-dom-event">Pop-Up</option>
+    </select>
+</div>
+<!-- Eingabefeld für den Navigationspfad, nur sichtbar, wenn "Navigieren" ausgewählt ist -->
+<div class="floorplan-form-group" id="navigation-path-group" style="display: none;">
+    <label for="navigation-path">Navigationspfad:</label>
+    <input type="text" id="navigation-path" placeholder="Pfad für Navigation">
+</div>
+
+
+
 <div class="floorplan-button-container">
     <button class="floorplan-button floorplan-button-primary" onclick="generateYAML()">YAML-Code generieren</button>
     <button class="floorplan-button floorplan-button-info" onclick="copyYAML()">YAML-Code kopieren</button>
@@ -251,6 +272,13 @@ function clearYAML() {
   yamlOutput.value = '';
 }
 
+function toggleNavigationPathInput() {
+    const tapAction = document.getElementById("marker-tap-action").value;
+    const navigationPathGroup = document.getElementById("navigation-path-group");
+    navigationPathGroup.style.display = tapAction === "navigate" ? "block" : "none";
+}
+
+
 // Generiert YAML-Code basierend auf den Markierungen
 function generateYAML() {
   let yaml = "";
@@ -279,17 +307,31 @@ function generateYAML() {
     yaml += `        styles:\n`;
     yaml += `          card:\n`;
     yaml += `            - border: 2px solid var(--primary-color)\n`;
-    yaml += `    tap_action:\n`;
-    yaml += `      action: toggle\n`;
-    yaml += `    hold_action:\n`;
-    yaml += `      action: more-info\n`;
-    yaml += `    style:\n`;
-    yaml += `      left: ${marker.x}%\n`;
-    yaml += `      top: ${marker.y}%\n`;
-    yaml += `      width: ${marker.size}%\n\n`;
+
+    // Tap Action Configuration
+    const tapAction = document.getElementById("marker-tap-action").value;
+    const entity = marker.entity;
+    if (tapAction === "toggle") {
+        yaml += `    tap_action:\n      action: toggle\n`;
+    } else if (tapAction === "none") {
+        yaml += `    tap_action:\n      action: none\n`;
+    } else if (tapAction === "more-info") {
+        yaml += `    tap_action:\n      action: more-info\n`;
+    } else if (tapAction === "navigate") {
+        const navigationPath = document.getElementById("navigation-path").value;
+        yaml += `    tap_action:\n      action: navigate\n      navigation_path: ${navigationPath || "/"}\n`;
+    } else if (tapAction === "call-service") {
+        yaml += `    tap_action:\n      action: call-service\n      service: input_button.press\n      service_data:\n        entity_id: ${entity}\n`;
+    } else if (tapAction === "fire-dom-event") {
+        yaml += `    tap_action:\n      action: fire-dom-event\n      browser_mod:\n        service: browser_mod.more_info\n        data:\n          entity: ${entity}\n`;
+    }
+
+    yaml += `    hold_action:\n      action: more-info\n`;
+    yaml += `    style:\n      left: ${marker.x}%\n      top: ${marker.y}%\n      width: ${marker.size}%\n\n`;
   });
   yamlOutput.value = yaml;
 }
+
 
 // Funktion zum Kopieren des YAML-Codes
 function copyYAML() {
