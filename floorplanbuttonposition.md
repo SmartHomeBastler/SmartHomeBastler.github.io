@@ -66,29 +66,35 @@ layout: page
 </div>
 
 
-<!-- Auswahl für tap_action und hold_action -->
-<div class="floorplan-form-group">
-    <label for="marker-tap-action">Tap Action:</label>
-    <select id="marker-tap-action" onchange="toggleNavigationPathInput('tap')">
-        <option value="toggle">Umschalten</option>
-        <option value="none">Keine</option>
-        <option value="more-info">Mehr Info</option>
-        <option value="navigate">Navigieren</option>
-        <option value="call-service">Taster</option>
-        <option value="fire-dom-event">Pop-Up</option>
-    </select>
+<!-- Auswahl für die Tap- und Hold-Action mit jeweiligen Navigationspfaden -->
+<div class="floorplan-form-group-horizontal">
+    <div class="floorplan-form-group">
+        <label for="marker-tap-action">Tap Action:</label>
+        <select id="marker-tap-action" onchange="toggleNavigationPathInput('tap')">
+            <option value="toggle">Umschalten</option>
+            <option value="none">Keine</option>
+            <option value="more-info">Mehr Info</option>
+            <option value="navigate">Navigieren</option>
+            <option value="call-service">Taster</option>
+            <option value="fire-dom-event">Pop-Up</option>
+        </select>
+        <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)" style="display:none; margin-top: 5px;">
+    </div>
+
+    <div class="floorplan-form-group">
+        <label for="marker-hold-action">Hold Action:</label>
+        <select id="marker-hold-action" onchange="toggleNavigationPathInput('hold')">
+            <option value="more-info" selected>Mehr Info</option>
+            <option value="none">Keine</option>
+            <option value="toggle">Umschalten</option>
+            <option value="navigate">Navigieren</option>
+            <option value="call-service">Taster</option>
+            <option value="fire-dom-event">Pop-Up</option>
+        </select>
+        <input type="text" id="navigation-path-hold" placeholder="Pfad für Navigation (Hold)" style="display:none; margin-top: 5px;">
+    </div>
 </div>
-<div class="floorplan-form-group">
-    <label for="marker-hold-action">Hold Action:</label>
-    <select id="marker-hold-action" onchange="toggleNavigationPathInput('hold')">
-        <option value="more-info" selected>Mehr Info</option>
-        <option value="none">Keine</option>
-        <option value="toggle">Umschalten</option>
-        <option value="navigate">Navigieren</option>
-        <option value="call-service">Taster</option>
-        <option value="fire-dom-event">Pop-Up</option>
-    </select>
-</div>
+
 
 <!-- Eingabefelder für den Navigationspfad, nur sichtbar, wenn "Navigieren" ausgewählt ist -->
 <div class="floorplan-form-group" id="navigation-path-group-tap" style="display: none;">
@@ -205,6 +211,14 @@ layout: page
         border-radius: 5px;
         background-color: #f8f8f8;
     }
+    .floorplan-form-group-horizontal {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .floorplan-form-group-horizontal .floorplan-form-group {
+        flex: 1;
+    }
 </style>
 
 <script>
@@ -288,9 +302,16 @@ function clearYAML() {
 }
 
 function toggleNavigationPathInput(actionType) {
-    const action = document.getElementById(`marker-${actionType}-action`).value;
-    const navigationPathGroup = document.getElementById(`navigation-path-group-${actionType}`);
-    navigationPathGroup.style.display = action === "navigate" ? "block" : "none";
+  const tapPathInput = document.getElementById('navigation-path-tap');
+  const holdPathInput = document.getElementById('navigation-path-hold');
+
+  if (actionType === 'tap') {
+    const tapAction = document.getElementById('marker-tap-action').value;
+    tapPathInput.style.display = tapAction === 'navigate' ? 'block' : 'none';
+  } else if (actionType === 'hold') {
+    const holdAction = document.getElementById('marker-hold-action').value;
+    holdPathInput.style.display = holdAction === 'navigate' ? 'block' : 'none';
+  }
 }
 
 
