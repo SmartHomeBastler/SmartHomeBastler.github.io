@@ -66,10 +66,10 @@ layout: page
 </div>
 
 
-<!-- Auswahl für tap_action -->
+<!-- Auswahl für tap_action und hold_action -->
 <div class="floorplan-form-group">
     <label for="marker-tap-action">Tap Action:</label>
-    <select id="marker-tap-action" onchange="toggleNavigationPathInput()">
+    <select id="marker-tap-action" onchange="toggleNavigationPathInput('tap')">
         <option value="toggle">Umschalten</option>
         <option value="none">Keine</option>
         <option value="more-info">Mehr Info</option>
@@ -78,12 +78,27 @@ layout: page
         <option value="fire-dom-event">Pop-Up</option>
     </select>
 </div>
-<!-- Eingabefeld für den Navigationspfad, nur sichtbar, wenn "Navigieren" ausgewählt ist -->
-<div class="floorplan-form-group" id="navigation-path-group" style="display: none;">
-    <label for="navigation-path">Navigationspfad:</label>
-    <input type="text" id="navigation-path" placeholder="Pfad für Navigation">
+<div class="floorplan-form-group">
+    <label for="marker-hold-action">Hold Action:</label>
+    <select id="marker-hold-action" onchange="toggleNavigationPathInput('hold')">
+        <option value="toggle">Umschalten</option>
+        <option value="none">Keine</option>
+        <option value="more-info">Mehr Info</option>
+        <option value="navigate">Navigieren</option>
+        <option value="call-service">Taster</option>
+        <option value="fire-dom-event">Pop-Up</option>
+    </select>
 </div>
 
+<!-- Eingabefelder für den Navigationspfad, nur sichtbar, wenn "Navigieren" ausgewählt ist -->
+<div class="floorplan-form-group" id="navigation-path-group-tap" style="display: none;">
+    <label for="navigation-path-tap">Navigationspfad (Tap):</label>
+    <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)">
+</div>
+<div class="floorplan-form-group" id="navigation-path-group-hold" style="display: none;">
+    <label for="navigation-path-hold">Navigationspfad (Hold):</label>
+    <input type="text" id="navigation-path-hold" placeholder="Pfad für Navigation (Hold)">
+</div>
 
 
 <div class="floorplan-button-container">
@@ -272,10 +287,10 @@ function clearYAML() {
   yamlOutput.value = '';
 }
 
-function toggleNavigationPathInput() {
-    const tapAction = document.getElementById("marker-tap-action").value;
-    const navigationPathGroup = document.getElementById("navigation-path-group");
-    navigationPathGroup.style.display = tapAction === "navigate" ? "block" : "none";
+function toggleNavigationPathInput(actionType) {
+    const action = document.getElementById(`marker-${actionType}-action`).value;
+    const navigationPathGroup = document.getElementById(`navigation-path-group-${actionType}`);
+    navigationPathGroup.style.display = action === "navigate" ? "block" : "none";
 }
 
 
@@ -294,7 +309,7 @@ function generateYAML() {
     yaml += `    styles:\n`;
     yaml += `      card:\n`;
     yaml += `        - border: 2px solid var(--state-icon-color)\n`;
-    yaml += `        - border-radius: ${marker.shape}\n`; // Form des Markers
+    yaml += `        - border-radius: ${marker.shape}\n`;
     yaml += `        - background-color: var(--primary-background-color)\n`;
     yaml += `    state:\n`;
     yaml += `      - value: "on"\n`;
@@ -318,7 +333,7 @@ function generateYAML() {
     } else if (tapAction === "more-info") {
         yaml += `    tap_action:\n      action: more-info\n`;
     } else if (tapAction === "navigate") {
-        const navigationPath = document.getElementById("navigation-path").value;
+        const navigationPath = document.getElementById("navigation-path-tap").value;
         yaml += `    tap_action:\n      action: navigate\n      navigation_path: ${navigationPath || "/"}\n`;
     } else if (tapAction === "call-service") {
         yaml += `    tap_action:\n      action: call-service\n      service: input_button.press\n      service_data:\n        entity_id: ${entity}\n`;
@@ -326,12 +341,27 @@ function generateYAML() {
         yaml += `    tap_action:\n      action: fire-dom-event\n      browser_mod:\n        service: browser_mod.more_info\n        data:\n          entity: ${entity}\n`;
     }
 
-    yaml += `    hold_action:\n      action: more-info\n`;
+    // Hold Action Configuration
+    const holdAction = document.getElementById("marker-hold-action").value;
+    if (holdAction === "toggle") {
+        yaml += `    hold_action:\n      action: toggle\n`;
+    } else if (holdAction === "none") {
+        yaml += `    hold_action:\n      action: none\n`;
+    } else if (holdAction === "more-info") {
+        yaml += `    hold_action:\n      action: more-info\n`;
+    } else if (holdAction === "navigate") {
+        const navigationPath = document.getElementById("navigation-path-hold").value;
+        yaml += `    hold_action:\n      action: navigate\n      navigation_path: ${navigationPath || "/"}\n`;
+    } else if (holdAction === "call-service") {
+        yaml += `    hold_action:\n      action: call-service\n      service: input_button.press\n      service_data:\n        entity_id: ${entity}\n`;
+    } else if (holdAction === "fire-dom-event") {
+        yaml += `    hold_action:\n      action: fire-dom-event\n      browser_mod:\n        service: browser_mod.more_info\n        data:\n          entity: ${entity}\n`;
+    }
+
     yaml += `    style:\n      left: ${marker.x}%\n      top: ${marker.y}%\n      width: ${marker.size}%\n\n`;
   });
   yamlOutput.value = yaml;
 }
-
 
 // Funktion zum Kopieren des YAML-Codes
 function copyYAML() {
