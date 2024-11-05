@@ -25,7 +25,8 @@ layout: page
     </div>
 </div>
 
-<h3>Lade ein Bild hoch, klicke auf das Bild, um Markierungen zu setzen, und gib zusätzliche Informationen ein, um den YAML-Code zu generieren:</h3>
+<h3>Bild hochladen</h3>
+<p>Lade ein Bild hoch, fülle die gewünschten Button-Einstellungen aus, und klicke dann auf die Position im Bild, an der der Button platziert werden soll. Für jede Positionierung kannst du unterschiedliche Einstellungen, wie Entität, Icons, und Aktionen (Tap/Hold), angeben. Nachdem du alle gewünschten Buttons gesetzt hast, klicke auf "YAML-Code generieren". Der erstellte YAML-Code wird unten angezeigt und kann kopiert werden, um ihn in dein Home Assistant-Dashboard einzufügen.</p>
 
 <!-- Bild-Upload -->
 <div class="floorplan-image-upload">
