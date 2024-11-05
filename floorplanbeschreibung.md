@@ -2,7 +2,7 @@
 title: Floorplan Codegenerator Beschribung
 subtitle: Hier erfährst du alles über die Handhabung der Codegeneratoren
 description: Details und Infos zu den Floorplan Codegeneratoren
-show_sidebar: true
+show_sidebar: false
 layout: page
 ---
 
