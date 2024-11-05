@@ -25,7 +25,7 @@
     - name: ICS zusammenführen
       link: /icszusammenfuhren
 - name: Floorplan Tools
-  link: /#
+  link: /floorplanbeschreibung.md
   dropdown:
     - name: Floorplan Beleuchtungs Bilder
       link: /floorplanbeleuchtungsbilder
