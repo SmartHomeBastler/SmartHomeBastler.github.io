@@ -27,6 +27,8 @@
 - name: Floorplan Tools
   link: /floorplanbeschreibung
   dropdown:
+    - name: Beschreibung Floorplan Codegenerator
+      link: /floorplanbeschreibung
     - name: Floorplan Beleuchtungs Bilder
       link: /floorplanbeleuchtungsbilder
     - name: Floorplan Button Position
