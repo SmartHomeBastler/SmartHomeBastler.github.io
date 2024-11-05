@@ -143,6 +143,7 @@ layout: page
         background-color: #fff3cd;
         border-radius: 12px;
         margin-top: 20px;
+        margin-bottom: 30px; /* Adds space below the support section */
         text-align: center;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -155,7 +156,7 @@ layout: page
     .support-links {
         display: flex;
         justify-content: center;
-        gap: 30px;
+        gap: 40px;
     }
     .support-links a {
         text-decoration: none;
@@ -164,7 +165,7 @@ layout: page
         text-align: center;
     }
     .support-icon {
-        width: 50px;
+        width: 80px; /* Increased image size */
         height: auto;
         margin-bottom: 5px;
         transition: transform 0.2s;
