@@ -25,7 +25,7 @@ layout: page
     </div>
 </div>
 
-<p>Lade ein Bild hoch, klicke auf das Bild, um Markierungen zu setzen, und gib zusätzliche Informationen ein, um den YAML-Code zu generieren:</p>
+<h3>Lade ein Bild hoch, klicke auf das Bild, um Markierungen zu setzen, und gib zusätzliche Informationen ein, um den YAML-Code zu generieren:</h3>
 
 <!-- Bild-Upload -->
 <div class="floorplan-image-upload">
