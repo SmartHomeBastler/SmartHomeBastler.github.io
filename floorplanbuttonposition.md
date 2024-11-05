@@ -6,6 +6,22 @@ show_sidebar: false
 layout: page
 ---
 
+<div class="support-note">
+    <p>Wenn du Interesse daran hast, mich, meinen Kanal oder meine kreative Arbeit zu unterstützen, freue ich mich über jeglichen Support:</p>
+    
+    <div class="support-links">
+        <a href="https://www.amazon.de/hz/wishlist/ls/3FT7MNGRVOTM3?ref_=wl_share" target="_blank">
+            <img src="img/amazon_wishlist_logo.png" alt="Amazon Wishlist" class="support-icon">
+        </a>
+        <a href="https://www.buymeacoffee.com/bastler" target="_blank">
+            <img src="img/buy_me_a_coffee_logo.png" alt="Buy Me a Coffee" class="support-icon">
+        </a>
+        <a href="https://www.paypal.me/kramlmaxx" target="_blank">
+            <img src="img/paypal_donate_logo.png" alt="PayPal Donate" class="support-icon">
+        </a>
+    </div>
+</div>
+
 <p>Lade ein Bild hoch, klicke auf das Bild, um Markierungen zu setzen, und gib zusätzliche Informationen ein, um den YAML-Code zu generieren:</p>
 
 <!-- Bild-Upload -->
@@ -118,6 +134,32 @@ layout: page
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 
 <style>
+    .support-note {
+        border: 1px solid #ddd;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .support-note p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    .support-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    .support-icon {
+        width: 100px;
+        height: auto;
+        transition: transform 0.2s;
+    }
+    .support-icon:hover {
+        transform: scale(1.1);
+    }
     .floorplan-container {
         position: relative;
         display: inline-block;
