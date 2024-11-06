@@ -78,6 +78,11 @@ card_mod:
     </code></pre>
 </div>
 
+In meinem Fall sieht das Endergebnis so aus:
+
+
+![Digitale Uhr 2](/img/blog-post-eigene-schriftart-digital-uhr-2.png)
+
 <style>
     /* Hintergrundfarbe und Rahmen für den Code-Container */
     .code-container {
@@ -97,6 +102,7 @@ card_mod:
         font-size: 0.95em;
         line-height: 1.5;
         white-space: pre;
+        word-wrap: break-word;
     }
 
     /* Stil für den Copy-Button */
