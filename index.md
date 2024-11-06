@@ -3,6 +3,9 @@ title: Smart Home Bastler
 subtitle: Schritt für Schritt ins smarte Zuhause!
 layout: page
 show_sidebar: true
+meeting_title: "2024.11"
+meeting_date: "14. November 2024"
+meeting_time: "18:00 Uhr"
 ---
 
 # Herzlich willkommen auf meiner Home Assistant Code Website
@@ -12,8 +15,8 @@ Viel Spaß beim Schmökern, Testen und Designen.
 
 Beste Grüße, Maxx
 
-# Einladung zum 2024.11 Home Assistant-Treffen 
-# in Linz am 14.11.2024 18:00Uhr
+# Einladung zum {{ page.meeting_title }} Home Assistant-Treffen 
+# in Linz am {{ page.meeting_date }} um {{ page.meeting_time }}
 
 <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
     <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One' , sans-serif;">
@@ -34,23 +37,20 @@ Beste Grüße, Maxx
 
 ich möchte mich herzlich für eure Teilnahme am letzten Treffen 2024.10 bedanken. Eure rege Beteiligung und die inspirierenden Gespräche haben dazu beigetragen, dass unsere Community weiter gewachsen ist. Vielen Dank für euer Engagement!
 
-Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euch den Termin für das 2024.11 – Home Assistant Treffen:
+Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euch den Termin für das {{ page.meeting_title }} – Home Assistant Treffen:
 
-<div style="background-color: black; padding: 20px;"> <!-- Single background for both details and map -->
+<div style="background-color: black; padding: 20px;">
     <div style="display: flex; padding: 20px; margin: 0;">
         <div style="flex: 1; color: white; padding: 20px; margin-right: 20px;">
             <h3 style="margin: 0; color: orange;">Termin:</h3>
-            <p style="margin: 0;">Donnerstag, </p>
-            <p style="margin: 0;">14. November 2024</p>
-            <p style="margin: 0;">Uhrzeit: 18:00 Uhr</p>
+            <p style="margin: 0;">Donnerstag, {{ page.meeting_date }}</p>
+            <p style="margin: 0;">Uhrzeit: {{ page.meeting_time }}</p>
             
-
             <h3 style="margin: 10px 0 0; color: orange;">Ort:</h3>
-            <p style="margin: 0;">Gemeinschaftszentrum Auwiesen</p>
+            <p style="margin: 0;">Gemeinschaftszentrum Auweisen</p>
             <p style="margin: 0;">Wüstenrotplatz 2</p>
-            <p style="margin: 0;">4030 Linz Auwiesen</p>
+            <p style="margin: 0;">4030 Linz Auweisen</p>
             
-
             <p style="margin: 10px 0 0;">WIFI und Strom vorhanden</p>
         </div>
 
