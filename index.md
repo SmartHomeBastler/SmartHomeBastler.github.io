@@ -4,7 +4,7 @@ subtitle: Schritt für Schritt ins smarte Zuhause!
 layout: page
 show_sidebar: true
 meeting_title: "2024.11"
-meeting_date: "14. November 2024"
+meeting_date: "14-11-2024"  <!-- Entered in DD-MM-YYYY format -->
 meeting_time: "18:00 Uhr"
 ---
 
@@ -16,18 +16,18 @@ Viel Spaß beim Schmökern, Testen und Designen.
 Beste Grüße, Maxx
 
 # Einladung zum {{ page.meeting_title }} Home Assistant-Treffen 
-# in Linz am {{ page.meeting_date }} um {{ page.meeting_time }}
+# in Linz am {{ page.meeting_date | date: "%d. %B %Y" }} um {{ page.meeting_time }}
 
 <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
-    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One' , sans-serif;">
+    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One', sans-serif;">
         <div id="days" style="font-size: 64px;">00</div>
         <div style="font-size: 20px;">Tage</div>
     </div>
-    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One' , sans-serif;">
+    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One', sans-serif;">
         <div id="hours" style="font-size: 64px;">00</div>
         <div style="font-size: 20px;">Stunden</div>
     </div>
-    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One' , sans-serif;">
+    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One', sans-serif;">
         <div id="minutes" style="font-size: 64px;">00</div>
         <div style="font-size: 20px;">Minuten</div>
     </div>
@@ -44,7 +44,7 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
         <div style="flex: 1; color: white; padding: 20px; margin-right: 20px;">
             <h3 style="margin: 0; color: orange;">Termin:</h3>
             <p style="margin: 0;" id="meetingDay"></p> <!-- Placeholder for the day of the week -->
-            <p style="margin: 0;">{{ page.meeting_date }}</p>
+            <p style="margin: 0;">{{ page.meeting_date | date: "%d. %B %Y" }}</p>
             <p style="margin: 0;">Uhrzeit: {{ page.meeting_time }}</p>
             
             <h3 style="margin: 10px 0 0; color: orange;">Ort:</h3>
@@ -84,15 +84,18 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
 </div>
 
 <script>
+    // Parse the meeting date in DD-MM-YYYY format
+    var dateParts = "{{ page.meeting_date }}".split("-");
+    var meetingDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); // Month is 0-indexed
+
     // Set the date we're counting down to
-    var countDownDate = new Date("{{ page.meeting_date }}T{{ page.meeting_time }}").getTime(); // Use the variables for the countdown
+    var countDownDate = meetingDate.getTime(); // Use the parsed date for the countdown
 
     // Get the day of the week from the date
-    var date = new Date(countDownDate);
     var options = { weekday: 'long' };
-    document.getElementById("meetingDay").innerHTML = date.toLocaleDateString('de-DE', options) + ', ' + date.getDate() + '. ' + (date.getMonth() + 1) + '. ' + date.getFullYear(); // Format the day
+    document.getElementById("meetingDay").innerHTML = meetingDate.toLocaleDateString('de-DE', options) + ', ' + meetingDate.getDate() + '. ' + (meetingDate.getMonth() + 1) + '. ' + meetingDate.getFullYear(); // Format the day
 
-    // Update the count down every 1 second
+    // Update the countdown every 1 second
     var x = setInterval(function() {
         // Get today's date and time
         var now = new Date().getTime();
