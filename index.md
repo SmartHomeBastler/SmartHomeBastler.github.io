@@ -36,7 +36,7 @@ ich möchte mich herzlich für eure Teilnahme am letzten Treffen 2024.10 bedanke
 
 Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euch den Termin für das 2024.11 – Home Assistant Treffen:
 
-<div style="display: flex; justify-content: space-between; padding: 20px;">
+<div style="display: flex; padding: 20px;">
     <div style="flex: 1; background-color: black; color: white; padding: 20px; margin-right: 20px;">
         <h3 style="margin: 0; color: orange;">Termin:</h3>
         <p style="margin: 0;">Donnerstag, 14. November 2024 Uhrzeit: 18:00 Uhr</p>
@@ -49,7 +49,7 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
         <p style="margin: 10px 0 0;">WIFI und Strom vorhanden</p>
     </div>
 
-    <div style="flex: 2; background-color: black; padding: 20px;">
+    <div style="flex: 2; background-color: black; padding: 20px; margin-left: 20px;"> <!-- Added margin-left to create space for sidebar -->
         <div class="mapouter">
             <div class="gmap_canvas">
                 <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=450&amp;hl=en&amp;q=4030%20Linz%20Wüstenrotplatz%203&amp;t=h&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
@@ -60,7 +60,6 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
                     text-align: right;
                     width: 600px;
                     height: 450px;
-                    background-color: black; /* Set black background for the map container */
                 }
                 .gmap_canvas {
                     overflow: hidden;
