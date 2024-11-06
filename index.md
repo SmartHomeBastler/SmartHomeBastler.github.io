@@ -5,7 +5,7 @@ layout: page
 show_sidebar: true
 meeting_title: "2024.11"
 meeting_date: "14-11-2024"  # Eingabe im DD-MM-YYYY Format
-meeting_time: "18:00 Uhr"
+meeting_time: "18:00"       # Eingabe im HH:mm Format
 ---
 
 # Herzlich willkommen auf meiner Home Assistant Code Website
@@ -85,7 +85,8 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
 <script>
     // Parse the meeting date in DD-MM-YYYY format
     var dateParts = "{{ page.meeting_date }}".split("-");
-    var meetingDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0], 18, 0); // Uhrzeit hinzugefügt (18:00)
+    var timeParts = "{{ page.meeting_time }}".split(":");
+    var meetingDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0], timeParts[0], timeParts[1]); // Monat ist 0-indexiert, Uhrzeit hinzugefügt
 
     // Set the date we're counting down to
     var countDownDate = meetingDate.getTime(); // Verwende das geparste Datum für den Countdown
