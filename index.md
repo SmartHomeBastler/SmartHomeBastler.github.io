@@ -15,17 +15,17 @@ Beste Grüße, Maxx
 # Einladung zum Home Assistant-Treffen in Linz 2024.11
 
 <div id="countdown" style="display: flex; justify-content: center; background-color: black; padding: 20px; color: orange; font-family: 'Digital', sans-serif;">
-    <div style="text-align: center; margin: 0 10px;">
-        <div id="days" style="font-size: 48px;">00</div>
-        <div>Tage</div>
+    <div style="text-align: center; margin: 0 20px;">
+        <div id="days" style="font-size: 64px;">00</div>
+        <div style="font-size: 20px;">Tage</div>
     </div>
-    <div style="text-align: center; margin: 0 10px;">
-        <div id="hours" style="font-size: 48px;">00</div>
-        <div>Stunden</div>
+    <div style="text-align: center; margin: 0 20px;">
+        <div id="hours" style="font-size: 64px;">00</div>
+        <div style="font-size: 20px;">Stunden</div>
     </div>
-    <div style="text-align: center; margin: 0 10px;">
-        <div id="minutes" style="font-size: 48px;">00</div>
-        <div>Minuten</div>
+    <div style="text-align: center; margin: 0 20px;">
+        <div id="minutes" style="font-size: 64px;">00</div>
+        <div style="font-size: 20px;">Minuten</div>
     </div>
 </div>
 
