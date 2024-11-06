@@ -43,7 +43,8 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
     <div style="display: flex; padding: 20px; margin: 0;">
         <div style="flex: 1; color: white; padding: 20px; margin-right: 20px;">
             <h3 style="margin: 0; color: orange;">Termin:</h3>
-            <p style="margin: 0;">Donnerstag, {{ page.meeting_date }}</p>
+            <p style="margin: 0;" id="meetingDay"></p> <!-- Placeholder for the day of the week -->
+            <p style="margin: 0;">{{ page.meeting_date }}</p>
             <p style="margin: 0;">Uhrzeit: {{ page.meeting_time }}</p>
             
             <h3 style="margin: 10px 0 0; color: orange;">Ort:</h3>
@@ -84,7 +85,12 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
 
 <script>
     // Set the date we're counting down to
-    var countDownDate = new Date("2024-11-14T18:00:00").getTime(); // Change this date to your target date
+    var countDownDate = new Date("{{ page.meeting_date }}T{{ page.meeting_time }}").getTime(); // Use the variables for the countdown
+
+    // Get the day of the week from the date
+    var date = new Date(countDownDate);
+    var options = { weekday: 'long' };
+    document.getElementById("meetingDay").innerHTML = date.toLocaleDateString('de-DE', options) + ', ' + date.getDate() + '. ' + (date.getMonth() + 1) + '. ' + date.getFullYear(); // Format the day
 
     // Update the count down every 1 second
     var x = setInterval(function() {
