@@ -65,7 +65,7 @@ loadcss();
 # WICHTIG! Du musst card-mod installiert haben um den Stil der Karte zu ändern!
 # Ändere die font-family auf deine Schriftart
 type: markdown
-content: '# &lt;center&gt; {{states("sensor.time")}} &lt;/center&gt;'
+content: '# &lt;center&gt; &#123;&#123;states("sensor.time")&#125;&#125; &lt;/center&gt;'
 card_mod:
   style: |
     ha-card {
@@ -77,6 +77,7 @@ card_mod:
     }
     </code></pre>
 </div>
+
 
 In meinem Fall sieht das Endergebnis so aus:
 
