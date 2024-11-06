@@ -38,7 +38,7 @@ Hier die notwendigen Schritte und Codes zum Nachmachen:
 
 <div class="code-container">
     <button class="copy-button">Copy</button>
-    <pre><code>
+    <pre class="line-numbers"><code class="language-js">
 function loadcss() {
     let css = '/local/fonts.css?v=0.005';
 
@@ -56,6 +56,7 @@ function loadcss() {
 loadcss();
     </code></pre>
 </div>
+
 
 - Leere den Browser-Cache und teste, ob die Schrift funktioniert. Z.B. kannst du folgende Karte manuell in dein Dashboard einfügen:
 
@@ -84,25 +85,23 @@ In meinem Fall sieht das Endergebnis so aus:
 ![Digitale Uhr 2](/img/blog-post-eigene-schriftart-digital-uhr-2.png)
 
 <style>
-    /* Hintergrundfarbe und Rahmen für den Code-Container */
+    /* Stil für den Code-Container */
     .code-container {
         position: relative;
-        background-color: #f5f5f5;
-        border: 1px solid #ddd;
+        background-color: #2d2d2d;
+        border: 1px solid #555;
         border-radius: 5px;
         padding: 15px;
         margin-bottom: 20px;
-        overflow-x: auto;
+        overflow: hidden;
     }
 
-    /* Stil für den Code-Text innerhalb des Containers */
+    /* Stil für Code-Text */
     .code-container code {
-        color: #333;
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 0.95em;
         line-height: 1.5;
-        white-space: pre;
-        word-wrap: break-word;
+        color: #ccc;
     }
 
     /* Stil für den Copy-Button */
@@ -117,12 +116,14 @@ In meinem Fall sieht das Endergebnis so aus:
         padding: 5px 10px;
         font-size: 0.85em;
         cursor: pointer;
+        z-index: 10;
     }
 
     /* Hover-Effekt für den Copy-Button */
     .copy-button:hover {
         background: #005a9c;
     }
+
 </style>
 
 <script>
@@ -142,4 +143,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
 </script>
