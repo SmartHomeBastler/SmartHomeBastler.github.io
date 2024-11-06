@@ -16,15 +16,15 @@ Beste Grüße, Maxx
 # in Linz am 14.11.2024 18:00Uhr
 
 <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
-    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Gugi' , sans-serif;">
+    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One' , sans-serif;">
         <div id="days" style="font-size: 64px;">00</div>
         <div style="font-size: 20px;">Tage</div>
     </div>
-    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Gugi' , sans-serif;">
+    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One' , sans-serif;">
         <div id="hours" style="font-size: 64px;">00</div>
         <div style="font-size: 20px;">Stunden</div>
     </div>
-    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Gugi' , sans-serif;">
+    <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One' , sans-serif;">
         <div id="minutes" style="font-size: 64px;">00</div>
         <div style="font-size: 20px;">Minuten</div>
     </div>
@@ -108,4 +108,4 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gugi&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gugi&family=Keania+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
