@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Eigene Schriftart in Home Assistant integrieren"
-date:   2023-05-03 06:58:00
+title: "Eigene Schriftart in Home Assistant integrieren"
+date: 2023-05-03 06:58:00
 categories: Dashboard
 description: "Einen Weg, eigene Schriftarten in Home Assistant einzufügen, zeige ich hier."
 image: /img/blog-post-eigene-schriftarten.png
@@ -17,35 +17,30 @@ Hier die notwendigen Schritte und Codes zum Nachmachen:
 
 - Lade dir eine Schrift deiner Wahl aus dem Internet z.B von [https://www.1001fonts.com/technology-font.html](https://www.1001fonts.com/technology-font.html)
 
-
-
 - Dann musst du die heruntergeladene "ttf-Datei" in ein "woff2" konvertieren. Nutze dazu diesen [Konverter](https://www.fontconverter.io/de)
-
 
 - Entpacke die erstellte Datei und speichere das `<deine-Schrift>.woff2` in deinen `www-Ordner` in Home Assistant. In meinem Fall ist es `Technology.woff2`
 
+- Nun öffne in Home Assistant deinen File-Editor oder Studio Code Server und erstelle im `www-Ordner` ein neues File mit Namen `font.css` und füge folgende Codezeilen ein:
 
-- Nun öffne in Home Assistant deinen File-Editor oder Studio Code Server und erstelle im `www-Ordner` ein neues File mit Namen
-`font.css`
-und füge folgende Codezeilen ein:
-
-```css
+<div class="code-container">
+    <button class="copy-button">Copy</button>
+    <pre><code>
 /* Ersetze "Technology" mit dem Namen deiner Schriftart */
-
 @font-face {
   font-family: "DJBGetDigital";
   src: url(/local/Technology.woff2) format('woff2');
 }
-```
+    </code></pre>
+</div>
 
+- Füge ein weiteres File in deinen "www-Order" hinzu und gib ihm den Namen `loadfonts.js`. In dieses File füge folgenden Code ein:
 
-- Füge ein weiteres File in deinen "www-Order" hinzu und gib ihm den Namen `loadfonts.js`.
-In dieses File füge folgenden Code ein:
-
-
-```js
+<div class="code-container">
+    <button class="copy-button">Copy</button>
+    <pre><code>
 function loadcss() {
-    let css = '/local/fonts.css?v=0.005'
+    let css = '/local/fonts.css?v=0.005';
 
     let link = document.createElement('link');
     let head = document.getElementsByTagName('head')[0];
@@ -59,18 +54,14 @@ function loadcss() {
     console.info('%c Font Style sheet loaded', 'color: white; background: #000; font-weight: 700;');
 }
 loadcss();
-```
+    </code></pre>
+</div>
 
-- Als nächsten Schritt gehe in Home Assistant auf `Einstellungen` - `Dashboards` danach oben rechts auf die 3 Punkte und wähle `Ressourcen`. Dann klicke rechts unten auf `Ressource hinzufügen` und füge im geöffneten Fenster bei URL `/local/loadfonts.js` ein. Bei Ressource-Typ wähle `JavaScript-Modul` und klicke auf `ERSTELLEN`.
+- Leere den Browser-Cache und teste, ob die Schrift funktioniert. Z.B. kannst du folgende Karte manuell in dein Dashboard einfügen:
 
-![Ressource JS](/img/blog-post-eigene-schriftart-ressourcen-js.png)
-
-
-- Leere den Browser-Cache und teste ob die Schrift funktioniert.
-Z.B. kannst du folgende Karte manuell in dein Dashboard einfügen
-
-
-```yaml
+<div class="code-container">
+    <button class="copy-button">Copy</button>
+    <pre><code>
 # WICHTIG! Du musst card-mod installiert haben um den Stil der Karte zu ändern!
 # Ändere die font-family auf deine Schriftart
 type: markdown
@@ -84,10 +75,65 @@ card_mod:
       background: transparent;
       border: transparent;
     }
-```
+    </code></pre>
+</div>
 
+<style>
+    /* Hintergrundfarbe und Rahmen für den Code-Container */
+    .code-container {
+        position: relative;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+    }
 
-In meinem Fall sieht das Endergebnis so aus:
+    /* Stil für den Code-Text innerhalb des Containers */
+    .code-container code {
+        color: #333;
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 0.95em;
+        line-height: 1.5;
+        white-space: pre;
+    }
 
+    /* Stil für den Copy-Button */
+    .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #007acc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 0.85em;
+        cursor: pointer;
+    }
 
-![Digitale Uhr 2](/img/blog-post-eigene-schriftart-digital-uhr-2.png)
+    /* Hover-Effekt für den Copy-Button */
+    .copy-button:hover {
+        background: #005a9c;
+    }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.copy-button').forEach((button) => {
+        button.addEventListener('click', () => {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const code = codeBlock.innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        });
+    });
+});
+</script>
