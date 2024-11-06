@@ -15,31 +15,6 @@ Beste Grüße, Maxx
 # Einladung zum 2024.11 Home Assistant-Treffen 
 # in Linz am 14.11.2024 18:00Uhr
 
-<div style="display: flex; justify-content: space-between; padding: 20px;">
-    <div style="flex: 1; background-color: black; color: white; padding: 20px; margin-right: 20px;">
-        <h3 style="margin: 0;">Termin:</h3>
-        <p style="margin: 0;">Donnerstag, 14. November 2024 Uhrzeit: 18:00 Uhr</p>
-        
-        <h3 style="margin: 10px 0 0;">Ort:</h3>
-        <p style="margin: 0;">Gemeinschaftszentrum Auweisen</p>
-        <p style="margin: 0;">Wüstenrotplatz 2</p>
-        <p style="margin: 0;">4030 Linz Auweisen</p>
-        
-        <p style="margin: 10px 0 0;">WIFI und Strom vorhanden</p>
-    </div>
-
-    <div style="flex: 2; padding: 20px;">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2632.5150785052203!2d14.30928441569169!3d48.23498427923953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476ecb4ee4702f37%3A0xd49114de5109cd3b!2sW%C3%BCstenrotplatz%202%2C%204030%20Linz%20Auweisen!5e0!3m2!1sen!2sat!4v1699256728777!5m2!1sen!2sat" 
-            width="600" 
-            height="450" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy">
-        </iframe>
-    </div>
-</div>
-
 <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
     <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Digital', sans-serif;">
         <div id="days" style="font-size: 64px;">00</div>
@@ -60,6 +35,46 @@ Beste Grüße, Maxx
 ich möchte mich herzlich für eure Teilnahme am letzten Treffen 2024.10 bedanken. Eure rege Beteiligung und die inspirierenden Gespräche haben dazu beigetragen, dass unsere Community weiter gewachsen ist. Vielen Dank für euer Engagement!
 
 Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euch den Termin für das 2024.11 – Home Assistant Treffen:
+
+<div style="display: flex; justify-content: space-between; padding: 20px;">
+    <div style="flex: 1; background-color: black; color: white; padding: 20px; margin-right: 20px;">
+        <h3 style="margin: 0;">Termin:</h3>
+        <p style="margin: 0;">Donnerstag, 14. November 2024 Uhrzeit: 18:00 Uhr</p>
+        
+        <h3 style="margin: 10px 0 0;">Ort:</h3>
+        <p style="margin: 0;">Gemeinschaftszentrum Auweisen</p>
+        <p style="margin: 0;">Wüstenrotplatz 2</p>
+        <p style="margin: 0;">4030 Linz Auweisen</p>
+        
+        <p style="margin: 10px 0 0;">WIFI und Strom vorhanden</p>
+    </div>
+
+    <div style="flex: 2; padding: 20px;">
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=450&amp;hl=en&amp;q=4030%20Linz%20Wüstenrotplatz%203&amp;t=h&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            </div>
+            <style>
+                .mapouter {
+                    position: relative;
+                    text-align: right;
+                    width: 600px;
+                    height: 450px;
+                }
+                .gmap_canvas {
+                    overflow: hidden;
+                    background: none!important;
+                    width: 600px;
+                    height: 450px;
+                }
+                .gmap_iframe {
+                    width: 600px!important;
+                    height: 450px!important;
+                }
+            </style>
+        </div>
+    </div>
+</div>
 
 <script>
     // Set the date we're counting down to
