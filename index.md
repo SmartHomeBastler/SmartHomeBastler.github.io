@@ -4,7 +4,7 @@ subtitle: Schritt für Schritt ins smarte Zuhause!
 layout: page
 show_sidebar: true
 meeting_title: "2024.11"
-meeting_date: "14-11-2024"  # Eingabe im DD-MM-YYYY Format
+meeting_date: "14-11-2024"
 meeting_time: "18:00 Uhr"
 ---
 
@@ -15,8 +15,7 @@ Viel Spaß beim Schmökern, Testen und Designen.
 
 Beste Grüße, Maxx
 
-# Einladung zum {{ page.meeting_title }} Home Assistant-Treffen 
-# in Linz am <span id="formatted-date"></span> um {{ page.meeting_time }}
+# Einladung zum {{ page.meeting_title }} Home Assistant-Treffen in Linz am {{ page.meeting_date | date: "%d. %B %Y" }} um {{ page.meeting_time }}
 
 <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
     <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One', sans-serif;">
@@ -35,7 +34,7 @@ Beste Grüße, Maxx
 
 ## Liebe Home Assistant-Enthusiasten,
 
-ich möchte mich herzlich für eure Teilnahme am letzten Treffen 2024.10 bedanken. Eure rege Beteiligung und die inspirierenden Gespräche haben dazu beigetragen, dass unsere Community weiter gewachsen ist. Vielen Dank für euer Engagement!
+ich möchte mich herzlich für eure Teilnahme am letzten Treffen bedanken. Eure rege Beteiligung und die inspirierenden Gespräche haben dazu beigetragen, dass unsere Community weiter gewachsen ist. Vielen Dank für euer Engagement!
 
 Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euch den Termin für das {{ page.meeting_title }} – Home Assistant Treffen:
 
@@ -43,8 +42,8 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
     <div style="display: flex; padding: 20px; margin: 0;">
         <div style="flex: 1; color: white; padding: 20px; margin-right: 20px;">
             <h3 style="margin: 0; color: orange;">Termin:</h3>
-            <p style="margin: 0;" id="meetingDay"></p> <!-- Platzhalter für den Wochentag -->
-            <p style="margin: 0;" id="formattedDate"></p> <!-- Platzhalter für das Datum -->
+            <p style="margin: 0;" id="meetingDay"></p> <!-- Placeholder for the day of the week -->
+            <p style="margin: 0;">{{ page.meeting_date | date: "%d. %B %Y" }}</p>
             <p style="margin: 0;">Uhrzeit: {{ page.meeting_time }}</p>
             
             <h3 style="margin: 10px 0 0; color: orange;">Ort:</h3>
@@ -64,18 +63,18 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
                     .mapouter {
                         position: relative;
                         text-align: right;
-                        width: 100%; /* Volle Breite */
-                        height: 450px; /* Feste Höhe */
+                        width: 100%; /* Full width */
+                        height: 450px; /* Fixed height */
                     }
                     .gmap_canvas {
                         overflow: hidden;
                         background: none!important;
-                        width: 100%; /* Volle Breite */
-                        height: 450px; /* Feste Höhe */
+                        width: 100%; /* Full width */
+                        height: 450px; /* Fixed height */
                     }
                     .gmap_iframe {
-                        width: 100%!important; /* Volle Breite */
-                        height: 450px!important; /* Feste Höhe */
+                        width: 100%!important; /* Full width */
+                        height: 450px!important; /* Fixed height */
                     }
                 </style>
             </div>
@@ -86,35 +85,34 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
 <script>
     // Parse the meeting date in DD-MM-YYYY format
     var dateParts = "{{ page.meeting_date }}".split("-");
-    var meetingDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); // Monat ist 0-indexiert
+    var meetingDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); // Month is 0-indexed
 
     // Set the date we're counting down to
-    var countDownDate = meetingDate.getTime(); // Verwende das geparste Datum für den Countdown
+    var countDownDate = meetingDate.getTime(); // Use the parsed date for the countdown
 
     // Get the day of the week from the date
     var options = { weekday: 'long' };
-    document.getElementById("meetingDay").innerHTML = meetingDate.toLocaleDateString('de-DE', options); // Wochentag anzeigen
-    document.getElementById("formattedDate").innerHTML = meetingDate.getDate() + '. ' + (meetingDate.getMonth() + 1) + '. ' + meetingDate.getFullYear(); // Datum formatieren
+    document.getElementById("meetingDay").innerHTML = meetingDate.toLocaleDateString('de-DE', options); // Format the day
 
     // Update the countdown every 1 second
     var x = setInterval(function() {
-        // Aktuelles Datum und Uhrzeit
+        // Get today's date and time
         var now = new Date().getTime();
         
-        // Abstand zwischen jetzt und dem Countdown-Datum
+        // Find the distance between now and the countdown date
         var distance = countDownDate - now;
         
-        // Berechnungen für Tage, Stunden und Minuten
+        // Time calculations for days, hours and minutes
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         
-        // Ausgabe der Ergebnisse in die Elemente mit den jeweiligen IDs
+        // Output the result in the elements with respective IDs
         document.getElementById("days").innerHTML = days;
         document.getElementById("hours").innerHTML = hours;
         document.getElementById("minutes").innerHTML = minutes;
 
-        // Wenn der Countdown abgelaufen ist, schreibe einen Text
+        // If the countdown is over, write some text 
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("countdown").innerHTML = "EXPIRED";
