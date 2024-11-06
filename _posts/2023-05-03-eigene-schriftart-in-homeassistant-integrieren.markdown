@@ -9,8 +9,8 @@ published: true
 ---
 
 <head>
-    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern (helles Theme) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
@@ -94,8 +94,8 @@ In meinem Fall sieht das Endergebnis so aus:
     /* Hintergrundfarbe und Rahmen für den Code-Container */
     .code-container {
         position: relative;
-        background-color: #2d2d2d;
-        border: 1px solid #555;
+        background-color: #fdfdfd; /* Heller Hintergrund */
+        border: 1px solid #ddd;
         border-radius: 5px;
         padding: 15px;
         margin-bottom: 20px;
@@ -107,7 +107,7 @@ In meinem Fall sieht das Endergebnis so aus:
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 0.95em;
         line-height: 1.5;
-        color: #ccc;
+        color: #333; /* Dunklere Textfarbe für bessere Lesbarkeit */
     }
 
     /* Stil für den Copy-Button */
