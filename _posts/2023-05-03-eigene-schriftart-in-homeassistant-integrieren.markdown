@@ -8,6 +8,14 @@ image: /img/blog-post-eigene-schriftarten.png
 published: true
 ---
 
+<head>
+    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+</head>
+
 Ich wollte unbedingt für meine Dashboards eine Schriftart zur Auswahl haben, welche meine Uhr in digitaler Schrift anzeigt.
 
 Da ich als "font-family" keine passende Schrift gefunden habe, fügte ich mir eine im Netz gefundene in Home Assistant hinzu.
@@ -25,7 +33,7 @@ Hier die notwendigen Schritte und Codes zum Nachmachen:
 
 <div class="code-container">
     <button class="copy-button">Copy</button>
-    <pre><code>
+    <pre class="line-numbers"><code class="language-css">
 /* Ersetze "Technology" mit dem Namen deiner Schriftart */
 @font-face {
   font-family: "DJBGetDigital";
@@ -57,12 +65,11 @@ loadcss();
     </code></pre>
 </div>
 
-
 - Leere den Browser-Cache und teste, ob die Schrift funktioniert. Z.B. kannst du folgende Karte manuell in dein Dashboard einfügen:
 
 <div class="code-container">
     <button class="copy-button">Copy</button>
-    <pre><code>
+    <pre class="line-numbers"><code class="language-yaml">
 # WICHTIG! Du musst card-mod installiert haben um den Stil der Karte zu ändern!
 # Ändere die font-family auf deine Schriftart
 type: markdown
@@ -79,13 +86,12 @@ card_mod:
     </code></pre>
 </div>
 
-
 In meinem Fall sieht das Endergebnis so aus:
 
 ![Digitale Uhr 2](/img/blog-post-eigene-schriftart-digital-uhr-2.png)
 
 <style>
-    /* Stil für den Code-Container */
+    /* Hintergrundfarbe und Rahmen für den Code-Container */
     .code-container {
         position: relative;
         background-color: #2d2d2d;
@@ -123,7 +129,6 @@ In meinem Fall sieht das Endergebnis so aus:
     .copy-button:hover {
         background: #005a9c;
     }
-
 </style>
 
 <script>
@@ -143,5 +148,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
 </script>
