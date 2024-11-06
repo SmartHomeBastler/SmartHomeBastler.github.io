@@ -36,42 +36,44 @@ ich möchte mich herzlich für eure Teilnahme am letzten Treffen 2024.10 bedanke
 
 Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euch den Termin für das 2024.11 – Home Assistant Treffen:
 
-<div style="display: flex; padding: 20px;">
-    <div style="flex: 1; background-color: black; color: white; padding: 20px; margin-right: 20px;">
-        <h3 style="margin: 0; color: orange;">Termin:</h3>
-        <p style="margin: 0;">Donnerstag, 14. November 2024 Uhrzeit: 18:00 Uhr</p>
-        
-        <h3 style="margin: 10px 0 0; color: orange;">Ort:</h3>
-        <p style="margin: 0;">Gemeinschaftszentrum Auweisen</p>
-        <p style="margin: 0;">Wüstenrotplatz 2</p>
-        <p style="margin: 0;">4030 Linz Auweisen</p>
-        
-        <p style="margin: 10px 0 0;">WIFI und Strom vorhanden</p>
-    </div>
+<div style="background-color: black; padding: 20px;"> <!-- Single background for both details and map -->
+    <div style="display: flex; padding: 20px; margin: 0;">
+        <div style="flex: 1; color: white; padding: 20px; margin-right: 20px;">
+            <h3 style="margin: 0; color: orange;">Termin:</h3>
+            <p style="margin: 0;">Donnerstag, 14. November 2024 Uhrzeit: 18:00 Uhr</p>
+            
+            <h3 style="margin: 10px 0 0; color: orange;">Ort:</h3>
+            <p style="margin: 0;">Gemeinschaftszentrum Auweisen</p>
+            <p style="margin: 0;">Wüstenrotplatz 2</p>
+            <p style="margin: 0;">4030 Linz Auweisen</p>
+            
+            <p style="margin: 10px 0 0;">WIFI und Strom vorhanden</p>
+        </div>
 
-    <div style="flex: 2; background-color: black; padding: 20px; margin-left: 20px;"> <!-- Added margin-left to create space for sidebar -->
-        <div class="mapouter">
-            <div class="gmap_canvas">
-                <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=450&amp;hl=en&amp;q=4030%20Linz%20Wüstenrotplatz%203&amp;t=h&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+        <div style="flex: 2; padding: 20px;">
+            <div class="mapouter">
+                <div class="gmap_canvas">
+                    <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=450&amp;hl=en&amp;q=4030%20Linz%20Wüstenrotplatz%203&amp;t=h&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                </div>
+                <style>
+                    .mapouter {
+                        position: relative;
+                        text-align: right;
+                        width: 100%; /* Full width */
+                        height: 450px; /* Fixed height */
+                    }
+                    .gmap_canvas {
+                        overflow: hidden;
+                        background: none!important;
+                        width: 100%; /* Full width */
+                        height: 450px; /* Fixed height */
+                    }
+                    .gmap_iframe {
+                        width: 100%!important; /* Full width */
+                        height: 450px!important; /* Fixed height */
+                    }
+                </style>
             </div>
-            <style>
-                .mapouter {
-                    position: relative;
-                    text-align: right;
-                    width: 600px;
-                    height: 450px;
-                }
-                .gmap_canvas {
-                    overflow: hidden;
-                    background: none!important;
-                    width: 600px;
-                    height: 450px;
-                }
-                .gmap_iframe {
-                    width: 600px!important;
-                    height: 450px!important;
-                }
-            </style>
         </div>
     </div>
 </div>
