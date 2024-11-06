@@ -4,7 +4,7 @@ subtitle: Schritt für Schritt ins smarte Zuhause!
 layout: page
 show_sidebar: true
 meeting_title: "2024.11"
-meeting_date: "14-11-2024"  <!-- Entered in DD-MM-YYYY format -->
+meeting_date: "14-11-2024"
 meeting_time: "18:00 Uhr"
 ---
 
