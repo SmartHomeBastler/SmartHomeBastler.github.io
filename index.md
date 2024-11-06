@@ -1,5 +1,5 @@
 ---
-title: Smart Home bastler
+title: Smart Home Bastler
 subtitle: Schritt für Schritt ins smarte Zuhause!
 layout: page
 show_sidebar: true
@@ -12,7 +12,8 @@ Viel Spaß beim Schmökern, Testen und Designen.
 
 Beste Grüße, Maxx
 
-# Einladung zum Home Assistant-Treffen in Linz 2024.11
+# Einladung zum 2024.11 Home Assistant-Treffen 
+# in Linz am 14.11.2024 18:00Uhr
 
 <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
     <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Digital', sans-serif;">
@@ -28,6 +29,22 @@ Beste Grüße, Maxx
         <div style="font-size: 20px;">Minuten</div>
     </div>
 </div>
+
+
+## Liebe Home Assistant-Enthusiasten,
+
+ich möchte mich herzlich für eure Teilnahme am letzten Treffen 2024.10 bedanken. Eure rege Beteiligung und die inspirierenden Gespräche haben dazu beigetragen, dass unsere Community weiter gewachsen ist. Vielen Dank für euer Engagement!
+
+Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euch den Termin für das 2024.11 – Home Assistant Treffen:
+
+Termin: Donnerstag, 14. November 2024 Uhrzeit: 18:00 Uhr
+
+Wir können es kaum erwarten, Dich zu sehen!
+
+Mit besten Grüßen,
+
+Maxx der SmartHomeBastler
+
 
 <script>
     // Set the date we're counting down to
