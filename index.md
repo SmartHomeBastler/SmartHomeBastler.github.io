@@ -30,21 +30,33 @@ Beste Grüße, Maxx
     </div>
 </div>
 
-
 ## Liebe Home Assistant-Enthusiasten,
 
 ich möchte mich herzlich für eure Teilnahme am letzten Treffen 2024.10 bedanken. Eure rege Beteiligung und die inspirierenden Gespräche haben dazu beigetragen, dass unsere Community weiter gewachsen ist. Vielen Dank für euer Engagement!
 
 Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euch den Termin für das 2024.11 – Home Assistant Treffen:
 
-Termin: Donnerstag, 14. November 2024 Uhrzeit: 18:00 Uhr
+**Termin:** Donnerstag, 14. November 2024 Uhrzeit: 18:00 Uhr
 
-Wir können es kaum erwarten, Dich zu sehen!
+**Ort:**
+Gemeinschaftszentrum Auweisen  
+Wüstenrotplatz 2  
+4030 Linz Auweisen  
 
-Mit besten Grüßen,
+**WIFI und Strom vorhanden**
 
-Maxx der SmartHomeBastler
+### Karte
 
+<div style="padding: 20px; text-align: center;">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2632.9284990559843!2d14.313016515691857!3d48.23909097924521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476ecb86e57477f3%3A0xd49114de5109cd3b!2sW%C3%BCstenrotplatz%202%2C%204030%20Linz%20Auweisen!5e0!3m2!1sen!2sat!4v1699256728777!5m2!1sen!2sat" 
+        width="600" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+    </iframe>
+</div>
 
 <script>
     // Set the date we're counting down to
