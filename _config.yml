@@ -4,17 +4,17 @@ title: Smart Home Bastler
 tagline: Smart Home Bastler
 email: your-email@domain.com
 description: >
-  The demo site for Bulma Clean Theme, made for Jekyll and GitHub pages websites
+  Auf dieser Website dreht sich alles um Code-Snippets, Codegeneratoren und Code-Vorlagen für die Einrichtung, die Erweiterung und das Design von Home Assistant
 baseurl:
 url: "https://smarthomebastler.github.io"
 permalink: pretty
 #favicon: /path/to/favicon.png
-gh_sponsor: chrisrhymes
+#gh_sponsor: chrisrhymes
 #hide_share_buttons: true
 #theme_color: '#eeeeee'
 #fixed_navbar: top
 #direction: one of <ltr, rtl, auto>, default: ltr
-force_theme: light
+force_theme: dark
 
 paginate: 5
 paginate_path: "/blog/page:num"
@@ -83,9 +83,7 @@ collections:
     show_sidebar: false
 
 social:
-  facebook: https://www.facebook.com/
-  instagram: https://www.instagram.com/
-  threads: https://www.threads.net/
-  tiktok: https://www.tiktok.com/
-  x: https://www.x.com/
-  youtube: https://www.youtube.com/
+  youtube: https://www.youtube.com/@SmartHomeBastler
+  facebook: https://www.facebook.com/SmartHomeBastler
+  instagram: https://www.instagram.com/smarthomebastler/
+  discord: https://discord.gg/Wt42rpwQye
