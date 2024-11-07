@@ -67,13 +67,13 @@ layout: page
     <div id="code-output" style="display:none;">
         <h4>Werte Template Nächste Abholung</h4>
         <div class="code-block">
-            <pre id="next-pickup-template">{{ '{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}' }}</pre>
+            <pre id="next-pickup-template"></pre>
             <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
         </div>
 
         <h4>Werte Template einzelne Abholungen</h4>
         <div class="code-block">
-            <pre id="individual-pickup-template">{{ '{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}' }}</pre>
+            <pre id="individual-pickup-template"></pre>
             <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
         </div>
     </div>
@@ -174,6 +174,25 @@ layout: page
 </style>
 
 <script>
+    // Code templates as JavaScript strings
+    const nextPickupTemplate = "{{ value.types | join(', ') }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}";
+    const individualPickupTemplate = "{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}";
+
+    // Display templates in pre blocks
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
+        document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
+    });
+
+    function copyCode(elementId) {
+        const code = document.getElementById(elementId).textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            alert("Code erfolgreich kopiert!");
+        }).catch(err => {
+            alert("Fehler beim Kopieren des Codes: " + err);
+        });
+    }
+    
     async function extractEntries() {
         const fileInput = document.getElementById('icsFile');
         const urlInput = document.getElementById('calendarUrl');
