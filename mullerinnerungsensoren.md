@@ -38,6 +38,7 @@ layout: page
 
     <h3 class="custom-subtitle">Generierter Code</h3>
     <pre id="generatedCode" class="custom-pre">Hier erscheint der generierte Code...</pre>
+    <button class="custom-button" onclick="copyToClipboard()">Code kopieren</button>
 </div>
 
 <style>
@@ -186,11 +187,33 @@ layout: page
 
         let code = "";
 
+        if (templateOption === "configuration") {
+            code += `###---- Template Müllabholung Heute ----###\ntemplate:\n  - sensor:\n`;
+        } else if (templateOption === "templateFile") {
+            code += `###---- Template Müllabholung Heute ----###\n- sensor:\n`;
+        } else if (templateOption === "templateFolder") {
+            code += `###---- Template Müllabholung Heute ----###\nsensor:\n`;
+        }
+
         entries.forEach(entry => {
             const sensorName = `sensor.${entry.custom.toLowerCase().replace(/\s+/g, "_")}`;
-            code += `# Sensor für ${entry.original}\n${sensorName}:\n  unique_id: ${sensorName}_id\n  icon: mdi:trash-can-outline\n\n`;
+            code += `  - name: ${entry.custom}\n    unique_id: ${sensorName}_id\n    icon: mdi:trash-can-outline\n    state: >\n`;
+            code += `      {% set ALTPAPIER = states.sensor.altpapier.state %}\n`;
+            code += `      {% set LEICHTVERPACKUNG = states.sensor.leichtverpackung.state %}\n`;
+            code += `      {% set BIOABFALL = states.sensor.bioabfall.state %}\n`;
+            code += `      {% set RESTABFALL = states.sensor.restabfall.state %}\n`;
+            code += `      ...\n\n`; // Placeholder for further template logic
         });
 
         generatedCode.textContent = code.trim();
+    }
+
+    function copyToClipboard() {
+        const generatedCode = document.getElementById("generatedCode");
+        navigator.clipboard.writeText(generatedCode.textContent).then(() => {
+            alert("Code erfolgreich in die Zwischenablage kopiert!");
+        }).catch(err => {
+            alert("Fehler beim Kopieren des Codes: " + err);
+        });
     }
 </script>
