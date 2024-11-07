@@ -52,9 +52,9 @@ layout: page
     <table class="custom-table" id="sensor-table" style="display:none;">
         <thead>
             <tr>
-                <th>Eigene Bezeichnung</th>
-                <th>Sensorname</th>
-                <th>Farbe</th>
+                <th>Sensor Name</th>
+                <th>Entity ID</th>
+                <th>Tonnen Farbe</th>
             </tr>
         </thead>
         <tbody>
