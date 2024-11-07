@@ -6,75 +6,22 @@ show_sidebar: false
 layout: page
 ---
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Müllkalender Import</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 500px;
-            margin: auto;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        input, button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #entry-list {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f7f7f7;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            font-family: monospace;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-    </style>
-</head>
-<body>
+<div class="container mt-5">
+    <h2 class="text-center">Müllkalender Import</h2>
+    <div class="form-group">
+        <label for="icsFile">ICS-Datei hochladen</label>
+        <input type="file" id="icsFile" class="form-control" accept=".ics" />
+    </div>
+    
+    <div class="form-group mt-3">
+        <label for="calendarUrl">oder ICS-URL eingeben</label>
+        <input type="url" id="calendarUrl" class="form-control" placeholder="https://example.com/kalender.ics" />
+    </div>
 
-<div class="container">
-    <h2>Müllkalender Import</h2>
-    <label for="icsFile">ICS-Datei hochladen</label>
-    <input type="file" id="icsFile" accept=".ics" />
+    <button class="btn btn-success w-100 mt-3" onclick="extractEntries()">Einträge extrahieren</button>
 
-    <label for="calendarUrl">oder ICS-URL eingeben</label>
-    <input type="url" id="calendarUrl" placeholder="https://example.com/kalender.ics" />
-
-    <button onclick="extractEntries()">Einträge extrahieren</button>
-
-    <h3>Extrahierte Einträge</h3>
-    <pre id="entry-list">Hier erscheinen die "Summary"-Einträge...</pre>
+    <h3 class="mt-4">Extrahierte Einträge</h3>
+    <pre id="entry-list" class="p-3 bg-light border rounded">Hier erscheinen die "Summary"-Einträge...</pre>
 </div>
 
 <script>
@@ -87,11 +34,11 @@ layout: page
         let icsData;
         
         if (fileInput.files.length > 0) {
-            // File upload
+            // Datei-Upload
             const file = fileInput.files[0];
             icsData = await file.text();
         } else if (urlInput.value) {
-            // URL input
+            // URL-Eingabe
             try {
                 const response = await fetch(urlInput.value);
                 if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
@@ -105,7 +52,7 @@ layout: page
             return;
         }
 
-        // Extract "SUMMARY" entries
+        // "SUMMARY"-Einträge extrahieren
         const summaryEntries = [];
         const lines = icsData.split("\n");
         for (let line of lines) {
@@ -114,12 +61,9 @@ layout: page
             }
         }
 
-        // Display extracted summaries
+        // Extrahierte Einträge anzeigen
         entryList.textContent = summaryEntries.length > 0 
             ? summaryEntries.join("\n")
             : "Keine 'Summary'-Einträge gefunden.";
     }
 </script>
-
-</body>
-</html>
