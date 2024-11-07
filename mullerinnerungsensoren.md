@@ -67,13 +67,13 @@ layout: page
     <div id="code-output" style="display:none;">
         <h4>Werte Template Nächste Abholung</h4>
         <div class="code-block">
-            <pre id="next-pickup-template">{{ '{% raw %}' }}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{{ '{% endraw %}' }}</pre>
+            <pre id="next-pickup-template">{{ '{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}' }}</pre>
             <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
         </div>
 
         <h4>Werte Template einzelne Abholungen</h4>
         <div class="code-block">
-            <pre id="individual-pickup-template">{{ '{% raw %}' }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{{ '{% endraw %}' }}</pre>
+            <pre id="individual-pickup-template">{{ '{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}' }}</pre>
             <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
         </div>
     </div>
