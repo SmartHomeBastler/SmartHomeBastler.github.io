@@ -6,23 +6,83 @@ show_sidebar: false
 layout: page
 ---
 
-<div class="container mt-5">
-    <h2 class="text-center">Müllkalender Import</h2>
-    <div class="form-group">
-        <label for="icsFile">ICS-Datei hochladen</label>
-        <input type="file" id="icsFile" class="form-control" accept=".ics" />
+<div class="custom-container">
+    <h2 class="custom-title">Müllkalender Import</h2>
+    <div class="custom-form-group">
+        <label for="icsFile" class="custom-label">ICS-Datei hochladen</label>
+        <input type="file" id="icsFile" class="custom-input" accept=".ics" />
     </div>
     
-    <div class="form-group mt-3">
-        <label for="calendarUrl">oder ICS-URL eingeben</label>
-        <input type="url" id="calendarUrl" class="form-control" placeholder="https://example.com/kalender.ics" />
+    <div class="custom-form-group">
+        <label for="calendarUrl" class="custom-label">oder ICS-URL eingeben</label>
+        <input type="url" id="calendarUrl" class="custom-input" placeholder="https://example.com/kalender.ics" />
     </div>
 
-    <button class="btn btn-success w-100 mt-3" onclick="extractEntries()">Einträge extrahieren</button>
+    <button class="custom-button" onclick="extractEntries()">Einträge extrahieren</button>
 
-    <h3 class="mt-4">Extrahierte Einträge</h3>
-    <pre id="entry-list" class="p-3 bg-light border rounded">Hier erscheinen die "Summary"-Einträge...</pre>
+    <h3 class="custom-subtitle">Extrahierte Einträge</h3>
+    <pre id="entry-list" class="custom-pre">Hier erscheinen die "Summary"-Einträge...</pre>
 </div>
+
+<style>
+    .custom-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .custom-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.5em;
+        margin-bottom: 1em;
+    }
+    .custom-form-group {
+        margin-top: 15px;
+    }
+    .custom-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .custom-input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+    }
+    .custom-button {
+        margin-top: 15px;
+        padding: 10px;
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .custom-button:hover {
+        background-color: #45a049;
+    }
+    .custom-subtitle {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    .custom-pre {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f7f7f7;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-family: monospace;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+</style>
 
 <script>
     async function extractEntries() {
