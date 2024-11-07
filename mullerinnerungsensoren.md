@@ -7,7 +7,9 @@ layout: page
 ---
 
 <div class="custom-container-wide">
-    <h2 class="custom-title">Müllkalender Import</h2>
+    <h2 class="custom-title">Müllkalender Import und Code-Generator</h2>
+
+    <!-- File Upload and URL Input -->
     <div class="custom-form-group">
         <label for="icsFile" class="custom-label">ICS-Datei hochladen</label>
         <input type="file" id="icsFile" class="custom-input" accept=".ics" />
@@ -18,10 +20,24 @@ layout: page
         <input type="url" id="calendarUrl" class="custom-input" placeholder="https://example.com/kalender.ics" />
     </div>
 
-    <button class="custom-button" onclick="extractEntries()">Einträge extrahieren</button>
+    <button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
 
-    <h3 class="custom-subtitle">Kalendereinträge</h3>
+    <h3 class="custom-subtitle">Kalendereinträge und Eigene Bezeichnungen</h3>
     <div id="entry-fields" class="custom-entry-fields">Lade Daten...</div>
+
+    <!-- Selection for Code Template -->
+    <h3 class="custom-subtitle">Template-Optionen</h3>
+    <label for="templateOption" class="custom-label">Template auswählen:</label>
+    <select id="templateOption" class="custom-input">
+        <option value="configuration">configuration.yaml</option>
+        <option value="templateFile">Template File</option>
+        <option value="templateFolder">Template Folder</option>
+    </select>
+
+    <button class="custom-button" onclick="generateCode()">Code generieren</button>
+
+    <h3 class="custom-subtitle">Generierter Code</h3>
+    <pre id="generatedCode" class="custom-pre">Hier erscheint der generierte Code...</pre>
 </div>
 
 <style>
@@ -94,6 +110,16 @@ layout: page
         border: 1px solid #ddd;
         box-sizing: border-box;
     }
+    .custom-pre {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f7f7f7;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-family: monospace;
+        max-height: 300px;
+        overflow-y: auto;
+    }
 </style>
 
 <script>
@@ -106,11 +132,9 @@ layout: page
         let icsData;
         
         if (fileInput.files.length > 0) {
-            // Datei-Upload
             const file = fileInput.files[0];
             icsData = await file.text();
         } else if (urlInput.value) {
-            // URL-Eingabe
             try {
                 const response = await fetch(urlInput.value);
                 if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
@@ -124,7 +148,6 @@ layout: page
             return;
         }
 
-        // "SUMMARY"-Einträge extrahieren und duplizierte entfernen
         const summaryEntries = new Set();
         const lines = icsData.split("\n");
         for (let line of lines) {
@@ -133,7 +156,6 @@ layout: page
             }
         }
 
-        // Einträge anzeigen mit Eingabefeldern für eigene Bezeichnungen
         entryFields.innerHTML = "";
         summaryEntries.forEach(entry => {
             const entryRow = document.createElement("div");
@@ -146,10 +168,29 @@ layout: page
             const entryInput = document.createElement("input");
             entryInput.className = "entry-input";
             entryInput.placeholder = "Eigene Bezeichnung";
+            entryInput.dataset.original = entry;
 
             entryRow.appendChild(entrySummary);
             entryRow.appendChild(entryInput);
             entryFields.appendChild(entryRow);
         });
+    }
+
+    function generateCode() {
+        const templateOption = document.getElementById("templateOption").value;
+        const entryFields = document.getElementById("entry-fields");
+        const generatedCode = document.getElementById("generatedCode");
+
+        const entries = Array.from(entryFields.getElementsByClassName("entry-input"))
+            .map(input => ({ original: input.dataset.original, custom: input.value || input.dataset.original }));
+
+        let code = "";
+
+        entries.forEach(entry => {
+            const sensorName = `sensor.${entry.custom.toLowerCase().replace(/\s+/g, "_")}`;
+            code += `# Sensor für ${entry.original}\n${sensorName}:\n  unique_id: ${sensorName}_id\n  icon: mdi:trash-can-outline\n\n`;
+        });
+
+        generatedCode.textContent = code.trim();
     }
 </script>
