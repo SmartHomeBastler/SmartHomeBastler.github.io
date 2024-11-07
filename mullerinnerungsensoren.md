@@ -49,6 +49,21 @@ layout: page
 
     <!-- Table for Sensor Configurations -->
     <h3 class="custom-subtitle">Sensor-Konfigurationen</h3>
+
+    <div class="important-container">
+        <h3>Hinweis!</h3>
+        <p>
+            An diesem Punkt kann die Integration <strong>"Waste Collection Schedule"</strong> in Home assistant unter <strong>"Einstellungen"</strong>, <strong>"Geräte & Dienste"</strong> eingerichtet werden. Dazu rechts unten auf <strong>"+ INTEGRATION HINZUFÜGEN"</strong>, nach Waste Collection Schedule suchen und diese auswählen.
+            Dann wähle dein Land, am nächsten Fenster deine Region bzw. deinen Abfallentsorger und danch füge etweder deine Kalender URL oder den Dateipfad ein. Im nächsten Schritt setze den Haken bei <strong>"Sensor Konfiguration Anzeigen"</strong> und klicke auf <strong>"SPEICHERN"</strong>.
+        </p>
+        <p>
+            Als nächstes ist der Sensor für die nächste Abholung an der Reihe. Füge den Namen <strong>"Nächste Abholung"</strong> ein, setze den Haken bei <strong>"Nächste"</strong>, kopiere dir das <strong>"Werte Template Nächste Abholung"</strong> von unten und füge es bei <strong>"Werte Template"</strong> ein. Weiter unten bei den Sensor Einstellungen findest du das Auswahlfeld <strong>"Typen"</strong>. In diesem wählst du alle deine Abholungs-Typen aus, dann setzt du einen Haken bei <strong>"Weitere Sensoren hinzufügen"</strong> und klickst auf <strong>"SPEICHERN"</strong>.
+        </p>
+        <p>
+            Nun sind die Sensoren für die einzelnen Abholungen an der Reihe. Füge den ersten Sensor Namen aus dem genenerator ein, setze den Haken bei <strong>"Abfallarten"</strong>, kopiere dir das <strong>"Werte Template einzelne Abholung"</strong> von unten und füge es bei <strong>"Werte Template"</strong> ein. Weiter unten im Auswahlfeld <strong>"Typen"</strong> wählst du jene Abholungs-Type aus, welche deinem Sensor Namen entspricht. Wenn du noch weitere Sensoren anlegen möchtest, setzt du einen Haken bei <strong>"Weitere Sensoren hinzufügen"</strong> und klickst auf <strong>"SPEICHERN"</strong>.
+        </p>
+    </div>
+
     <table class="custom-table" id="sensor-table" style="display:none;">
         <thead>
             <tr>
@@ -333,7 +348,7 @@ layout: page
             const colorCell = document.createElement("td");
             const colorSelect = document.createElement("select");
             colorSelect.className = "color-select";
-            ["Schwarz-Schwarz", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack"].forEach(color => {
+            ["Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack"].forEach(color => {
                 const option = document.createElement("option");
                 option.value = color;
                 option.textContent = color;
