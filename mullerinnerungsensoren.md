@@ -37,6 +37,23 @@ layout: page
         </tbody>
     </table>
 
+    <button class="custom-button" onclick="checkEntries()">Eingaben überprüfen</button>
+
+    <!-- Table for Sensor Configurations -->
+    <h3 class="custom-subtitle">Sensor-Konfigurationen</h3>
+    <table class="custom-table" id="sensor-table" style="display:none;">
+        <thead>
+            <tr>
+                <th>Eigene Bezeichnung</th>
+                <th>Sensorname</th>
+                <th>Farbe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamically populated rows will go here -->
+        </tbody>
+    </table>
+
     <h3 class="custom-subtitle">Template-Optionen</h3>
     <label for="templateOption" class="custom-label">Template auswählen:</label>
     <select id="templateOption" class="custom-input">
@@ -180,42 +197,71 @@ layout: page
         });
     }
 
-    function generateCode() {
-        const templateOption = document.getElementById("templateOption").value;
-        const entryTableBody = document.getElementById("entry-table").querySelector('tbody');
-        const generatedCode = document.getElementById("generatedCode");
-
+    function checkEntries() {
+        const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
+        const umlautPattern = /[äöüÄÖÜß]/;
         const selectedEntries = Array.from(entryTableBody.querySelectorAll("tr")).filter(row => {
             return row.querySelector(".entry-checkbox").checked;
-        }).map(row => {
-            const summary = row.querySelector("td:nth-child(2)").textContent;
-            const customName = row.querySelector(".entry-custom-name").value || summary;
-            return { summary, customName };
         });
 
-        let code = `{% raw %}\n`;
+        let umlautWarning = false;
 
-        if (templateOption === "configuration") {
-            code += `###---- Template Müllabholung ----###\ntemplate:\n  - sensor:\n`;
-        } else if (templateOption === "templateFile") {
-            code += `###---- Template Müllabholung ----###\n- sensor:\n`;
-        } else if (templateOption === "templateFolder") {
-            code += `###---- Template Müllabholung ----###\nsensor:\n`;
+        selectedEntries.forEach(row => {
+            const customName = row.querySelector(".entry-custom-name").value;
+            if (umlautPattern.test(customName)) {
+                umlautWarning = true;
+            }
+        });
+
+        if (umlautWarning) {
+            alert("Umlaute verwendet! Bitte eigene Bezeichnungen kontrollieren!");
+        } else {
+            generateSensorTable(selectedEntries);
         }
+    }
 
-        selectedEntries.forEach(entry => {
-            const sensorName = `sensor.${entry.customName.toLowerCase().replace(/\s+/g, "_")}`;
-            code += `  - name: ${entry.customName}\n    unique_id: ${sensorName}_id\n    icon: mdi:trash-can-outline\n    state: >\n`;
-            code += `      {% set ALTPAPIER = states.sensor.altpapier.state %}\n`;
-            code += `      {% set LEICHTVERPACKUNG = states.sensor.leichtverpackung.state %}\n`;
-            code += `      {% set BIOABFALL = states.sensor.bioabfall.state %}\n`;
-            code += `      {% set RESTABFALL = states.sensor.restabfall.state %}\n`;
-            code += `      ...\n\n`; // Placeholder for further template logic
+    function generateSensorTable(selectedEntries) {
+        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+        const sensorTable = document.getElementById('sensor-table');
+        sensorTableBody.innerHTML = "";
+        sensorTable.style.display = "table";
+
+        selectedEntries.forEach((row, index) => {
+            const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
+            const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
+                return {
+                    'ä': 'ae', 'ö': 'oe', 'ü': 'ue',
+                    'Ä': 'Ae', 'Ö': 'Oe', 'Ü': 'Ue', 'ß': 'ss'
+                }[match];
+            })}`;
+
+            const sensorRow = document.createElement("tr");
+
+            // Eigene Bezeichnung
+            const customNameCell = document.createElement("td");
+            customNameCell.textContent = customName;
+            sensorRow.appendChild(customNameCell);
+
+            // Sensorname
+            const sensorNameCell = document.createElement("td");
+            sensorNameCell.textContent = sensorName;
+            sensorRow.appendChild(sensorNameCell);
+
+            // Farbe Auswahlfeld
+            const colorCell = document.createElement("td");
+            const colorSelect = document.createElement("select");
+            colorSelect.className = "color-select";
+            ["Schwarz-Schwarz", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack"].forEach(color => {
+                const option = document.createElement("option");
+                option.value = color;
+                option.textContent = color;
+                colorSelect.appendChild(option);
+            });
+            colorCell.appendChild(colorSelect);
+            sensorRow.appendChild(colorCell);
+
+            sensorTableBody.appendChild(sensorRow);
         });
-
-        code += `{% endraw %}`;
-
-        generatedCode.textContent = code.trim();
     }
 
     function copyToClipboard() {
