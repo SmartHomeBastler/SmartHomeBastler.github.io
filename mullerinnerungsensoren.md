@@ -6,7 +6,7 @@ show_sidebar: false
 layout: page
 ---
 
-<div class="custom-container">
+<div class="custom-container-wide">
     <h2 class="custom-title">Müllkalender Import</h2>
     <div class="custom-form-group">
         <label for="icsFile" class="custom-label">ICS-Datei hochladen</label>
@@ -20,16 +20,16 @@ layout: page
 
     <button class="custom-button" onclick="extractEntries()">Einträge extrahieren</button>
 
-    <h3 class="custom-subtitle">Extrahierte Einträge</h3>
-    <pre id="entry-list" class="custom-pre">Hier erscheinen die "Summary"-Einträge...</pre>
+    <h3 class="custom-subtitle">Kalendereinträge</h3>
+    <div id="entry-fields" class="custom-entry-fields">Lade Daten...</div>
 </div>
 
 <style>
-    .custom-container {
+    .custom-container-wide {
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
-        max-width: 500px;
+        max-width: 90%;
         margin: auto;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
@@ -72,15 +72,27 @@ layout: page
         font-weight: bold;
         font-size: 1.2em;
     }
-    .custom-pre {
+    .custom-entry-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         margin-top: 10px;
-        padding: 10px;
-        background-color: #f7f7f7;
+    }
+    .entry-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .entry-summary {
+        flex: 1;
+        font-weight: bold;
+    }
+    .entry-input {
+        flex: 1;
+        padding: 8px;
         border-radius: 4px;
         border: 1px solid #ddd;
-        font-family: monospace;
-        max-height: 300px;
-        overflow-y: auto;
+        box-sizing: border-box;
     }
 </style>
 
@@ -88,8 +100,8 @@ layout: page
     async function extractEntries() {
         const fileInput = document.getElementById('icsFile');
         const urlInput = document.getElementById('calendarUrl');
-        const entryList = document.getElementById('entry-list');
-        entryList.textContent = "Lade und verarbeite Daten...";
+        const entryFields = document.getElementById('entry-fields');
+        entryFields.textContent = "Lade und verarbeite Daten...";
 
         let icsData;
         
@@ -104,26 +116,40 @@ layout: page
                 if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
                 icsData = await response.text();
             } catch (error) {
-                entryList.textContent = `Fehler beim Laden der ICS-Datei: ${error.message}`;
+                entryFields.textContent = `Fehler beim Laden der ICS-Datei: ${error.message}`;
                 return;
             }
         } else {
-            entryList.textContent = "Bitte eine ICS-Datei hochladen oder eine URL eingeben.";
+            entryFields.textContent = "Bitte eine ICS-Datei hochladen oder eine URL eingeben.";
             return;
         }
 
-        // "SUMMARY"-Einträge extrahieren
-        const summaryEntries = [];
+        // "SUMMARY"-Einträge extrahieren und duplizierte entfernen
+        const summaryEntries = new Set();
         const lines = icsData.split("\n");
         for (let line of lines) {
             if (line.startsWith("SUMMARY:")) {
-                summaryEntries.push(line.replace("SUMMARY:", "").trim());
+                summaryEntries.add(line.replace("SUMMARY:", "").trim());
             }
         }
 
-        // Extrahierte Einträge anzeigen
-        entryList.textContent = summaryEntries.length > 0 
-            ? summaryEntries.join("\n")
-            : "Keine 'Summary'-Einträge gefunden.";
+        // Einträge anzeigen mit Eingabefeldern für eigene Bezeichnungen
+        entryFields.innerHTML = "";
+        summaryEntries.forEach(entry => {
+            const entryRow = document.createElement("div");
+            entryRow.className = "entry-row";
+            
+            const entrySummary = document.createElement("span");
+            entrySummary.className = "entry-summary";
+            entrySummary.textContent = entry;
+
+            const entryInput = document.createElement("input");
+            entryInput.className = "entry-input";
+            entryInput.placeholder = "Eigene Bezeichnung";
+
+            entryRow.appendChild(entrySummary);
+            entryRow.appendChild(entryInput);
+            entryFields.appendChild(entryRow);
+        });
     }
 </script>
