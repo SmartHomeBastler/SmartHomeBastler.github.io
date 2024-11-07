@@ -9,6 +9,14 @@ layout: page
 <div class="custom-container-wide">
     <h2 class="custom-title">Müllkalender Import und Code-Generator</h2>
 
+    <!-- Important Notice -->
+    <div class="important-container">
+        <h3>Wichtig!</h3>
+        <p>
+            Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist. Mit der neuesten Version dieser Integration ist es möglich, die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einzurichten. Im Weiteren Verlauf dieser Code-Generierung, werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
+        </p>
+    </div>
+
     <!-- File Upload and URL Input -->
     <div class="custom-form-group">
         <label for="icsFile" class="custom-label">ICS-Datei hochladen</label>
@@ -82,6 +90,22 @@ layout: page
         text-align: center;
         font-weight: bold;
         margin-top: 20px;
+    }
+    .important-container {
+        background-color: #ffeb3b;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ffc107;
+    }
+    .important-container h3 {
+        margin: 0;
+        font-size: 1.2em;
+        color: #333;
+    }
+    .important-container p {
+        margin: 5px 0 0;
+        color: #555;
     }
     .custom-form-group {
         margin-top: 15px;
