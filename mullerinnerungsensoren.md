@@ -22,10 +22,21 @@ layout: page
 
     <button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
 
-    <h3 class="custom-subtitle">Kalendereinträge und Eigene Bezeichnungen</h3>
-    <div id="entry-fields" class="custom-entry-fields">Lade Daten...</div>
+    <!-- Table for Calendar Entries -->
+    <h3 class="custom-subtitle">Kalendereinträge</h3>
+    <table class="custom-table" id="entry-table">
+        <thead>
+            <tr>
+                <th>Auswählen</th>
+                <th>Kalendereintrag</th>
+                <th>Eigene Bezeichnung</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamically populated rows will go here -->
+        </tbody>
+    </table>
 
-    <!-- Selection for Code Template -->
     <h3 class="custom-subtitle">Template-Optionen</h3>
     <label for="templateOption" class="custom-label">Template auswählen:</label>
     <select id="templateOption" class="custom-input">
@@ -50,11 +61,10 @@ layout: page
         margin: auto;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
-    .custom-title {
+    .custom-title, .custom-subtitle {
         text-align: center;
         font-weight: bold;
-        font-size: 1.5em;
-        margin-bottom: 1em;
+        margin-top: 20px;
     }
     .custom-form-group {
         margin-top: 15px;
@@ -64,52 +74,30 @@ layout: page
         font-weight: bold;
         margin-bottom: 5px;
     }
-    .custom-input {
+    .custom-input, .custom-button, select {
         width: 100%;
         padding: 8px;
+        margin-top: 5px;
         border-radius: 4px;
         border: 1px solid #ddd;
-        box-sizing: border-box;
     }
     .custom-button {
-        margin-top: 15px;
-        padding: 10px;
-        width: 100%;
         background-color: #4CAF50;
         color: white;
-        border: none;
-        border-radius: 4px;
         cursor: pointer;
     }
     .custom-button:hover {
         background-color: #45a049;
     }
-    .custom-subtitle {
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
         margin-top: 20px;
-        font-weight: bold;
-        font-size: 1.2em;
     }
-    .custom-entry-fields {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-    }
-    .entry-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .entry-summary {
-        flex: 1;
-        font-weight: bold;
-    }
-    .entry-input {
-        flex: 1;
-        padding: 8px;
-        border-radius: 4px;
+    .custom-table th, .custom-table td {
         border: 1px solid #ddd;
-        box-sizing: border-box;
+        padding: 8px;
+        text-align: center;
     }
     .custom-pre {
         margin-top: 10px;
@@ -127,8 +115,8 @@ layout: page
     async function extractEntries() {
         const fileInput = document.getElementById('icsFile');
         const urlInput = document.getElementById('calendarUrl');
-        const entryFields = document.getElementById('entry-fields');
-        entryFields.textContent = "Lade und verarbeite Daten...";
+        const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
+        entryTableBody.innerHTML = "Lade und verarbeite Daten...";
 
         let icsData;
         
@@ -141,11 +129,11 @@ layout: page
                 if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
                 icsData = await response.text();
             } catch (error) {
-                entryFields.textContent = `Fehler beim Laden der ICS-Datei: ${error.message}`;
+                entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
                 return;
             }
         } else {
-            entryFields.textContent = "Bitte eine ICS-Datei hochladen oder eine URL eingeben.";
+            entryTableBody.innerHTML = "<tr><td colspan='3'>Bitte eine ICS-Datei hochladen oder eine URL eingeben.</td></tr>";
             return;
         }
 
@@ -157,47 +145,67 @@ layout: page
             }
         }
 
-        entryFields.innerHTML = "";
+        entryTableBody.innerHTML = "";
+        let idCounter = 0;
         summaryEntries.forEach(entry => {
-            const entryRow = document.createElement("div");
-            entryRow.className = "entry-row";
-            
-            const entrySummary = document.createElement("span");
-            entrySummary.className = "entry-summary";
-            entrySummary.textContent = entry;
+            const row = document.createElement("tr");
 
-            const entryInput = document.createElement("input");
-            entryInput.className = "entry-input";
-            entryInput.placeholder = "Eigene Bezeichnung";
-            entryInput.dataset.original = entry;
+            // Checkbox
+            const checkboxCell = document.createElement("td");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.className = "entry-checkbox";
+            checkbox.id = `entry-checkbox-${idCounter}`;
+            checkboxCell.appendChild(checkbox);
+            row.appendChild(checkboxCell);
 
-            entryRow.appendChild(entrySummary);
-            entryRow.appendChild(entryInput);
-            entryFields.appendChild(entryRow);
+            // Summary Entry
+            const summaryCell = document.createElement("td");
+            summaryCell.textContent = entry;
+            summaryCell.id = `summary-${idCounter}`;
+            row.appendChild(summaryCell);
+
+            // Custom Name Input
+            const customNameCell = document.createElement("td");
+            const customNameInput = document.createElement("input");
+            customNameInput.type = "text";
+            customNameInput.placeholder = "Eigene Bezeichnung";
+            customNameInput.className = "entry-custom-name";
+            customNameInput.id = `custom-name-${idCounter}`;
+            customNameCell.appendChild(customNameInput);
+            row.appendChild(customNameCell);
+
+            entryTableBody.appendChild(row);
+            idCounter++;
         });
     }
 
     function generateCode() {
         const templateOption = document.getElementById("templateOption").value;
-        const entryFields = document.getElementById("entry-fields");
+        const entryTableBody = document.getElementById("entry-table").querySelector('tbody');
         const generatedCode = document.getElementById("generatedCode");
 
-        const entries = Array.from(entryFields.getElementsByClassName("entry-input"))
-            .map(input => ({ original: input.dataset.original, custom: input.value || input.dataset.original }));
+        const selectedEntries = Array.from(entryTableBody.querySelectorAll("tr")).filter(row => {
+            return row.querySelector(".entry-checkbox").checked;
+        }).map(row => {
+            const summary = row.querySelector("td:nth-child(2)").textContent;
+            const customName = row.querySelector(".entry-custom-name").value || summary;
+            return { summary, customName };
+        });
 
         let code = `{% raw %}\n`;
 
         if (templateOption === "configuration") {
-            code += `###---- Template Müllabholung Heute ----###\ntemplate:\n  - sensor:\n`;
+            code += `###---- Template Müllabholung ----###\ntemplate:\n  - sensor:\n`;
         } else if (templateOption === "templateFile") {
-            code += `###---- Template Müllabholung Heute ----###\n- sensor:\n`;
+            code += `###---- Template Müllabholung ----###\n- sensor:\n`;
         } else if (templateOption === "templateFolder") {
-            code += `###---- Template Müllabholung Heute ----###\nsensor:\n`;
+            code += `###---- Template Müllabholung ----###\nsensor:\n`;
         }
 
-        entries.forEach(entry => {
-            const sensorName = `sensor.${entry.custom.toLowerCase().replace(/\s+/g, "_")}`;
-            code += `  - name: ${entry.custom}\n    unique_id: ${sensorName}_id\n    icon: mdi:trash-can-outline\n    state: >\n`;
+        selectedEntries.forEach(entry => {
+            const sensorName = `sensor.${entry.customName.toLowerCase().replace(/\s+/g, "_")}`;
+            code += `  - name: ${entry.customName}\n    unique_id: ${sensorName}_id\n    icon: mdi:trash-can-outline\n    state: >\n`;
             code += `      {% set ALTPAPIER = states.sensor.altpapier.state %}\n`;
             code += `      {% set LEICHTVERPACKUNG = states.sensor.leichtverpackung.state %}\n`;
             code += `      {% set BIOABFALL = states.sensor.bioabfall.state %}\n`;
