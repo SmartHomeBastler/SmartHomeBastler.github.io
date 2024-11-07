@@ -174,9 +174,9 @@ layout: page
 </style>
 
 <script>
-    // Code templates as JavaScript strings
-    const nextPickupTemplate = "{{ value.types | join(', ') }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}";
-    const individualPickupTemplate = "{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}";
+    // Code templates as JavaScript strings using template literals
+    const nextPickupTemplate = `{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}`;
+    const individualPickupTemplate = `{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}`;
 
     // Display templates in pre blocks
     document.addEventListener("DOMContentLoaded", function() {
