@@ -15,7 +15,7 @@ Viel Spaß beim Schmökern, Testen und Designen.
 
 Beste Grüße, Maxx
 
-# Einladung zum {{ page.meeting_title }} Home Assistant-Treffen in Linz am {{ page.meeting_date | date: "%d. %B %Y" }} um {{ page.meeting_time }}
+# Einladung zum {{ page.meeting_title }} Home Assistant-Treffen in Linz am {{ page.meeting_date | date: "%d. %B %Y" }} um {{ page.meeting_time }} Uhr
 
 <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
     <div style="flex: 1; background-color: black; padding: 20px; margin: 0 5px; text-align: center; color: orange; font-family: 'Keania One', sans-serif;">
@@ -44,7 +44,7 @@ Ich freue mich, euch bereits zum nächsten Treffen einzuladen. Bitte notiert euc
             <h3 style="margin: 0; color: orange;">Termin:</h3>
             <p style="margin: 0;" id="meetingDay"></p> <!-- Platzhalter für den Wochentag -->
             <p style="margin: 0;">{{ page.meeting_date | date: "%d. %B %Y" }}</p>
-            <p style="margin: 0;">Uhrzeit: {{ page.meeting_time }}</p>
+            <p style="margin: 0;">Uhrzeit: {{ page.meeting_time }} Uhr</p>
             
             <h3 style="margin: 10px 0 0; color: orange;">Ort:</h3>
             <p style="margin: 0;">Gemeinschaftszentrum Auweisen</p>

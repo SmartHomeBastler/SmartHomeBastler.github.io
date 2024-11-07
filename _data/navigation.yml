@@ -24,6 +24,8 @@
   dropdown:
     - name: ICS zusammenführen
       link: /icszusammenfuhren
+    - name: Müllerinnerung Sensoren
+      link: /mullerinnerungsensoren
 - name: Floorplan Tools
   link: /floorplanbeschreibung
   dropdown:
