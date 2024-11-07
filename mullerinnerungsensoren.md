@@ -185,7 +185,7 @@ layout: page
         const entries = Array.from(entryFields.getElementsByClassName("entry-input"))
             .map(input => ({ original: input.dataset.original, custom: input.value || input.dataset.original }));
 
-        let code = "";
+        let code = `{% raw %}\n`;
 
         if (templateOption === "configuration") {
             code += `###---- Template Müllabholung Heute ----###\ntemplate:\n  - sensor:\n`;
@@ -204,6 +204,8 @@ layout: page
             code += `      {% set RESTABFALL = states.sensor.restabfall.state %}\n`;
             code += `      ...\n\n`; // Placeholder for further template logic
         });
+
+        code += `{% endraw %}`;
 
         generatedCode.textContent = code.trim();
     }
