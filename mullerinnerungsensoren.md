@@ -62,19 +62,15 @@ layout: page
         </tbody>
     </table>
 
-    <h3 class="custom-subtitle">Template-Optionen</h3>
-    <label for="templateOption" class="custom-label">Template auswählen:</label>
-    <select id="templateOption" class="custom-input">
-        <option value="configuration">configuration.yaml</option>
-        <option value="templateFile">Template File</option>
-        <option value="templateFolder">Template Folder</option>
-    </select>
-
-    <button class="custom-button" onclick="generateCode()">Code generieren</button>
-
-    <h3 class="custom-subtitle">Generierter Code</h3>
-    <pre id="generatedCode" class="custom-pre">Hier erscheint der generierte Code...</pre>
-    <button class="custom-button" onclick="copyToClipboard()">Code kopieren</button>
+    <!-- Code Output for Templates -->
+    <h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates</h3>
+    <div id="code-output" style="display:none;">
+        <h4>Werte Template Nächste Abholung</h4>
+        <pre class="custom-pre" id="next-pickup-template">{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}</pre>
+        
+        <h4>Werte Template einzelne Abholungen</h4>
+        <pre class="custom-pre" id="individual-pickup-template">{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}</pre>
+    </div>
 </div>
 
 <style>
@@ -241,6 +237,8 @@ layout: page
             alert("Umlaute verwendet! Bitte eigene Bezeichnungen kontrollieren!");
         } else {
             generateSensorTable(selectedEntries);
+            document.getElementById("template-header").style.display = "block";
+            document.getElementById("code-output").style.display = "block";
         }
     }
 
@@ -248,8 +246,24 @@ layout: page
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const sensorTable = document.getElementById('sensor-table');
         sensorTableBody.innerHTML = "";
-        sensorTable.style.display = "table";
 
+        // Add standard row for "Nächste Abholung"
+        const standardRow = document.createElement("tr");
+        const standardNameCell = document.createElement("td");
+        standardNameCell.textContent = "Nächste Abholung";
+        standardRow.appendChild(standardNameCell);
+
+        const standardSensorCell = document.createElement("td");
+        standardSensorCell.textContent = "sensor.nachste_abholung";
+        standardRow.appendChild(standardSensorCell);
+
+        const standardColorCell = document.createElement("td");
+        standardColorCell.textContent = "-"; // No color selection for "Nächste Abholung"
+        standardRow.appendChild(standardColorCell);
+
+        sensorTableBody.appendChild(standardRow);
+
+        // Add rows for selected entries
         selectedEntries.forEach((row, index) => {
             const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
             const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
@@ -286,6 +300,8 @@ layout: page
 
             sensorTableBody.appendChild(sensorRow);
         });
+
+        sensorTable.style.display = "table";
     }
 
     function copyToClipboard() {
