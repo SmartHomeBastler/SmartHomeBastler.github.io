@@ -62,14 +62,20 @@ layout: page
         </tbody>
     </table>
 
-    <!-- Code Output for Templates -->
+    <!-- Code Output for Templates in a Code Block with Copy Button -->
     <h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates</h3>
     <div id="code-output" style="display:none;">
         <h4>Werte Template Nächste Abholung</h4>
-        <pre class="custom-pre" id="next-pickup-template">{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}</pre>
-        
+        <div class="code-block">
+            <pre id="next-pickup-template">{{ '{% raw %}' }}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{{ '{% endraw %}' }}</pre>
+            <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
+        </div>
+
         <h4>Werte Template einzelne Abholungen</h4>
-        <pre class="custom-pre" id="individual-pickup-template">{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}</pre>
+        <div class="code-block">
+            <pre id="individual-pickup-template">{{ '{% raw %}' }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{{ '{% endraw %}' }}</pre>
+            <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
+        </div>
     </div>
 </div>
 
@@ -136,15 +142,34 @@ layout: page
         padding: 8px;
         text-align: center;
     }
-    .custom-pre {
-        margin-top: 10px;
-        padding: 10px;
-        background-color: #f7f7f7;
-        border-radius: 4px;
+    .code-block {
+        position: relative;
+        background-color: #f5f5f5;
         border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
         font-family: monospace;
-        max-height: 300px;
-        overflow-y: auto;
+        white-space: pre-wrap;
+    }
+    .code-block pre {
+        margin: 0;
+        padding-right: 50px;
+    }
+    .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .copy-button:hover {
+        background-color: #0056b3;
     }
 </style>
 
@@ -304,10 +329,10 @@ layout: page
         sensorTable.style.display = "table";
     }
 
-    function copyToClipboard() {
-        const generatedCode = document.getElementById("generatedCode");
-        navigator.clipboard.writeText(generatedCode.textContent).then(() => {
-            alert("Code erfolgreich in die Zwischenablage kopiert!");
+    function copyCode(elementId) {
+        const code = document.getElementById(elementId).textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            alert("Code erfolgreich kopiert!");
         }).catch(err => {
             alert("Fehler beim Kopieren des Codes: " + err);
         });
