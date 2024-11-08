@@ -400,7 +400,7 @@ layout: page
         
         rows.forEach(row => {
             const customName = row.cells[0].textContent.trim();
-            const sensorName = `states.sensor.${customName.toLowerCase().replace(/\s+/g, "_")}.state`;
+            const sensorName = "states.sensor." + customName.toLowerCase().replace(/\s+/g, "_") + ".state";
             const color = row.cells[2].querySelector("select").value;
     
             if (color !== "Schwarz") {
@@ -419,12 +419,11 @@ layout: page
         }
     
         // Generiere das Template als reine Zeichenkette
-        let templateText = "";
-        templateText += "{% raw %}\n";
+        let templateText = "{% raw %}\n";
     
         // Setzen der Variablen
         sensorAssignments.forEach(({ customName, sensorName }) => {
-            templateText += `{% assign ${customName.toUpperCase()} = ${sensorName} %}\n`;
+            templateText += "{% assign " + customName.toUpperCase() + " = " + sensorName + " %}\n";
         });
     
         // Bedingungserstellung als Zeichenkette
@@ -438,30 +437,36 @@ layout: page
     }
     
     function generateConditionsAsText(assignments, hasSack) {
-        let yaml = `"{% if `;
+        let yaml = "{% if ";
     
         const combinations = getAllCombinations(assignments);
         combinations.forEach((combination, index) => {
-            const condition = combination.map(a => `${a.customName.toUpperCase()} == 'Morgen'`).join(" and ");
+            const condition = combination.map(function(a) {
+                return a.customName.toUpperCase() + " == 'Morgen'";
+            }).join(" and ");
             const output = generateOutputText(combination, hasSack);
     
             // Generiere jede Bedingung als reinen Text
-            yaml += (index === 0 ? `${condition} %}\n` : `{% elsif ${condition} %}\n`);
-            yaml += `    ${output}`;
+            if (index === 0) {
+                yaml += condition + " %}\n";
+            } else {
+                yaml += "{% elsif " + condition + " %}\n";
+            }
+            yaml += "    " + output + "\n";
         });
     
         // Standardausgabe für keine übereinstimmenden Bedingungen
-        yaml += `{% else %}keine{% endif %}"`;
+        yaml += "{% else %}keine{% endif %}";
     
         return yaml;
     }
     
     function generateOutputText(assignments, hasSack) {
-        const formattedNames = assignments.map(({ customName, color }) => {
+        const formattedNames = assignments.map(function({ customName, color }) {
             if (hasSack && color === "Sack") {
-                return `den ${customName} Sack`;
+                return "den " + customName + " Sack";
             }
-            return `die ${customName}`;
+            return "die " + customName;
         });
     
         if (formattedNames.length > 1) {
@@ -473,21 +478,21 @@ layout: page
     
     function getAllCombinations(arr) {
         const result = [];
-        const f = (prefix = [], arr) => {
+        const f = function(prefix = [], arr) {
             result.push(prefix);
             for (let i = 0; i < arr.length; i++) {
                 f(prefix.concat(arr[i]), arr.slice(i + 1));
             }
         };
         f([], arr);
-        return result.filter(comb => comb.length > 0);
+        return result.filter(function(comb) { return comb.length > 0; });
     }
     
     function copyCode(elementId) {
         const code = document.getElementById(elementId).textContent;
-        navigator.clipboard.writeText(code).then(() => {
+        navigator.clipboard.writeText(code).then(function() {
             alert("Code erfolgreich kopiert!");
-        }).catch(err => {
+        }).catch(function(err) {
             alert("Fehler beim Kopieren des Codes: " + err);
         });
     }
