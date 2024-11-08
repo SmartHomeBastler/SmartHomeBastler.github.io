@@ -6,16 +6,6 @@ show_sidebar: false
 layout: page
 ---
 
-
-<head>
-    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern (helles Theme) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-</head>
-
-
 <div class="custom-container-wide">
     <h2 class="custom-title">Müllkalender Import und Code-Generator</h2>
 
@@ -236,7 +226,6 @@ layout: page
             document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
             document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
 
-            Prism.highlightAll();
         } catch (error) {
             console.error("Error during DOMContentLoaded setup:", error);
         }
@@ -447,9 +436,6 @@ layout: page
         helperTemplateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
         document.getElementById("helper-template-output").style.display = "block";
         document.getElementById("helper-template-header").style.display = "block";
-    
-        // Manuell Prism.js Syntax-Hervorhebung anwenden
-        Prism.highlightElement(helperTemplateElement);
     }
     
 {% raw %}
