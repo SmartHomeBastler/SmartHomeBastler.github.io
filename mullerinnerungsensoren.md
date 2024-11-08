@@ -92,10 +92,11 @@ layout: page
             <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
         </div>
     </div>
-    <!-- Code for "Templates erstellen" button and helper template generation -->
+    <!-- Button to create Templates for both Today and Tomorrow -->
     <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
     <button class="custom-button" onclick="createTemplates()">Templates erstellen</button>
-    <!-- Ausgabe für "Müllabholung Heute" -->
+    
+    <!-- Output for "Müllabholung Heute" -->
     <div id="helper-template-output-heute" style="display:none;">
         <h4>Müllabholung Heute</h4>
         <div class="code-container">
@@ -104,7 +105,7 @@ layout: page
         </div>
     </div>
     
-    <!-- Ausgabe für "Müllabholung Morgen" -->
+    <!-- Output for "Müllabholung Morgen" -->
     <div id="helper-template-output-morgen" style="display:none;">
         <h4>Müllabholung Morgen</h4>
         <div class="code-container">
@@ -402,6 +403,14 @@ layout: page
         sensorTable.style.display = "table";
     }
 
+    // Function to create both "Heute" and "Morgen" templates
+    function createTemplates() {
+        // Create "Heute" template
+        createTemplate("Heute", "helper-template-heute", "helper-template-output-heute");
+        // Create "Morgen" template
+        createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen");
+    }
+    
     function createTemplate(day, templateId, outputId) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
