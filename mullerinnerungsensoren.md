@@ -92,13 +92,10 @@ layout: page
             <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
         </div>
     </div>
-    
     <!-- Code for "Templates erstellen" button and helper template generation -->
     <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
     <button class="custom-button" onclick="createHelperTemplate()">Templates erstellen</button>
     <div id="helper-template-output" style="display:none;">
-
-    
         <h4>Generiertes Helfer Template</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template')">Copy</button>
@@ -163,6 +160,7 @@ layout: page
         background-color: #4CAF50;
         color: white;
         cursor: pointer;
+        margin-bottom: 20px;
     }
     .custom-button:hover {
         background-color: #45a049;
@@ -185,6 +183,7 @@ layout: page
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 15px;
+        margin-top: 20px;
         margin-bottom: 20px;
         overflow: hidden;
     }
