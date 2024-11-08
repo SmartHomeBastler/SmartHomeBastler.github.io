@@ -435,23 +435,23 @@ layout: page
 
 {% raw %}
     function generateConditionsAsText(assignments, hasSack) {
-        let yaml = "{% if "; // Start des Bedingungsblocks
-
+        let yaml = "{% if ";
+    
         const combinations = getAllCombinations(assignments);
         combinations.forEach((combination, index) => {
-            const condition = combination.map(a => a.customName.toUpperCase() + " == 'Morgen'").join(" and ");
+            const condition = combination.map(a => `${a.customName.toUpperCase()} == "Morgen"`).join(" and ");
             const output = generateOutputText(combination, hasSack);
-
+    
             if (index === 0) {
-                yaml += condition + " %}\n";
+                yaml += `${condition} %}\n`;
             } else {
-                yaml += "{% elsif " + condition + " %}\n";
+                yaml += `{% elif ${condition} %}\n`;
             }
-            yaml += "    " + output + "\n";
+            yaml += `    ${output}\n`;
         });
-
-        yaml += "{% else %}keine{% endif %}"; // Abschluss des Bedingungsblocks
-
+    
+        yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
+    
         return yaml;
     }
 {% endraw %}
