@@ -194,18 +194,19 @@ layout: page
         border-radius: 5px;
         padding: 15px;
         margin-bottom: 20px;
-        overflow: hidden;
+        overflow: auto; /* Ändern Sie es auf auto, um zu testen */
+        box-shadow: none; /* Schatten entfernen */
     }
-
+    
     /* Stil für Code-Text */
     .code-container code {
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 0.95em;
         line-height: 1.5;
-        color: #333; /* Dunklere Textfarbe für bessere Lesbarkeit */
+        color: #333;
+        white-space: pre-wrap; /* Zeilenumbruch aktivieren */
+        text-shadow: none; /* Textschatten entfernen */
     }
-
-    /* Stil für den Copy-Button */
     .copy-button {
         position: absolute;
         top: 10px;
