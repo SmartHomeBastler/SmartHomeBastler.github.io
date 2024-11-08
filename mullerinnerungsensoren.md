@@ -95,19 +95,21 @@ layout: page
     <!-- Code for "Templates erstellen" button and helper template generation -->
     <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
     <button class="custom-button" onclick="createHelperTemplate()">Templates erstellen</button>
-    <div id="helper-template-output" style="display:none;">
-        <h4>Müllabholug Morgen</h4>
-        <div class="code-container">
-            <button class="copy-button" onclick="copyCode('helper-template')">Copy</button>
-            <pre id="helper-template" class="language-yaml"><code></code></pre>
-        </div>
-    </div>
     <!-- Ausgabe für "Müllabholung Heute" -->
     <div id="helper-template-output-heute" style="display:none;">
         <h4>Müllabholung Heute</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
             <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
+        </div>
+    </div>
+    
+    <!-- Ausgabe für "Müllabholung Morgen" -->
+    <div id="helper-template-output-morgen" style="display:none;">
+        <h4>Müllabholung Morgen</h4>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
+            <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
         </div>
     </div>
 </div>
@@ -400,7 +402,7 @@ layout: page
         sensorTable.style.display = "table";
     }
 
-    function createHelperTemplate() {
+    function createTemplate(day, templateId, outputId) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
         
@@ -428,7 +430,7 @@ layout: page
             return;
         }
     
-        // Generiere das Template als reine Zeichenkette
+        // Generiere das Template für den angegebenen Tag ("Heute" oder "Morgen")
         let templateText = "{% raw %}\n";
     
         // Setzen der Variablen
@@ -436,84 +438,37 @@ layout: page
             templateText += "{% set " + customName.toUpperCase() + " = " + sensorName + " %}\n";
         });
     
-        templateText += generateConditionsAsText(sensorAssignments, hasSack);
+        templateText += generateConditionsAsText(sensorAssignments, hasSack, day);
     
         templateText += "\n{% endraw %}";
     
-        // Setze den Inhalt in das <pre> Element
-        const helperTemplateElement = document.getElementById("helper-template");
-        helperTemplateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
-        document.getElementById("helper-template-output").style.display = "block";
-        document.getElementById("helper-template-header").style.display = "block";
-    }
-    
-    function createTodayTemplate() {
-            const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-            const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
-            
-            let allBlack = true;
-            let hasSack = false;
-            const sensorAssignments = [];
-            
-            rows.forEach(row => {
-                const customName = row.cells[0].textContent.trim();
-                const sensorName = "states.sensor." + customName.toLowerCase().replace(/\s+/g, "_") + ".state";
-                const color = row.cells[2].querySelector("select").value;
-        
-                if (color !== "Schwarz") {
-                    allBlack = false;
-                }
-                if (color === "Sack") {
-                    hasSack = true;
-                }
-        
-                sensorAssignments.push({ customName, sensorName, color });
-            });
-        
-            if (allBlack) {
-                alert("Die Farben der Tonne sollten zugeordnet werden!");
-                return;
-            }
-        
-            // Generiere das Template für "Heute"
-            let templateText = "{% raw %}\n";
-        
-            // Setzen der Variablen
-            sensorAssignments.forEach(({ customName, sensorName }) => {
-                templateText += "{% set " + customName.toUpperCase() + " = " + sensorName + " %}\n";
-            });
-        
-            templateText += generateConditionsAsText(sensorAssignments, hasSack, "Heute");
-        
-            templateText += "\n{% endraw %}";
-        
-            // Setze den Inhalt in das <pre> Element
-            const helperTemplateElement = document.getElementById("helper-template-heute");
-            helperTemplateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
-            document.getElementById("helper-template-output-heute").style.display = "block";
-        }    
+        // Setze den Inhalt in das entsprechende <pre> Element
+        const templateElement = document.getElementById(templateId);
+        templateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
+        document.getElementById(outputId).style.display = "block";
+    }    
     
 {% raw %}
     function generateConditionsAsText(assignments, hasSack, conditionDay) {
-            let yaml = `{% if `;
-        
-            const combinations = getAllCombinations(assignments);
-            combinations.forEach((combination, index) => {
-                const condition = combination.map(a => `${a.customName.toUpperCase()} == "${conditionDay}"`).join(" and ");
-                const output = generateOutputText(combination, hasSack);
-        
-                if (index === 0) {
-                    yaml += `${condition} %}\n`;
-                } else {
-                    yaml += `{% elif ${condition} %}\n`;
-                }
-                yaml += `    ${output}\n`;
-            });
-        
-            yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
-        
-            return yaml;
-        }
+        let yaml = `{% if `;
+    
+        const combinations = getAllCombinations(assignments);
+        combinations.forEach((combination, index) => {
+            const condition = combination.map(a => `${a.customName.toUpperCase()} == "${conditionDay}"`).join(" and ");
+            const output = generateOutputText(combination, hasSack);
+    
+            if (index === 0) {
+                yaml += `${condition} %}\n`;
+            } else {
+                yaml += `{% elif ${condition} %}\n`;
+            }
+            yaml += `    ${output}\n`;
+        });
+    
+        yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
+    
+        return yaml;
+    }
 {% endraw %}
     
     function generateOutputText(assignments, hasSack) {
