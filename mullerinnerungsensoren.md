@@ -418,6 +418,7 @@ layout: page
             return;
         }
     
+        // Generiere das Template als reine Zeichenkette
         let templateText = "";
         templateText += "{% raw %}\n";
     
@@ -426,8 +427,8 @@ layout: page
             templateText += `{% assign ${customName.toUpperCase()} = ${sensorName} %}\n`;
         });
     
-        // Bedingungserstellung
-        templateText += buildConditionalStatements(sensorAssignments, hasSack);
+        // Bedingungserstellung als Zeichenkette
+        templateText += generateConditionsAsText(sensorAssignments, hasSack);
     
         templateText += "\n{% endraw %}";
     
@@ -436,27 +437,23 @@ layout: page
         document.getElementById("helper-template-header").style.display = "block";
     }
     
-    function buildConditionalStatements(assignments, hasSack) {
-        let template = "";
+    function generateConditionsAsText(assignments, hasSack) {
+        let yaml = `"{% if `;
     
         const combinations = getAllCombinations(assignments);
         combinations.forEach((combination, index) => {
-            const condition = generateConditions(combination);
+            const condition = combination.map(a => `${a.customName.toUpperCase()} == 'Morgen'`).join(" and ");
             const output = generateOutputText(combination, hasSack);
     
-            // Erste Bedingung mit {% if %} starten, danach {% elsif %} verwenden
-            template += index === 0 ? `{% if ${condition} %}\n` : `{% elsif ${condition} %}\n`;
-            template += `    ${output}\n`;
+            // Generiere jede Bedingung als reinen Text
+            yaml += (index === 0 ? `${condition} %}\n` : `{% elsif ${condition} %}\n`);
+            yaml += `    ${output}`;
         });
     
         // Standardausgabe für keine übereinstimmenden Bedingungen
-        template += `{% else %}keine{% endif %}`;
+        yaml += `{% else %}keine{% endif %}"`;
     
-        return template;
-    }
-    
-    function generateConditions(assignments) {
-        return assignments.map(a => `${a.customName.toUpperCase()} == "Morgen"`).join(" and ");
+        return yaml;
     }
     
     function generateOutputText(assignments, hasSack) {
@@ -467,7 +464,6 @@ layout: page
             return `die ${customName}`;
         });
     
-        // Füge 'und' zwischen den letzten beiden Elementen ein
         if (formattedNames.length > 1) {
             formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
         }
