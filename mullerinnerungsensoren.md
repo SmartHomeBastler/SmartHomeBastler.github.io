@@ -393,11 +393,11 @@ layout: page
     function createHelperTemplate() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Kopfzeile
-    
+        
         let allBlack = true;
         let hasSack = false;
         const sensorAssignments = [];
-    
+        
         rows.forEach(row => {
             const customName = row.cells[0].textContent.trim();
             const sensorName = `states.sensor.${customName.toLowerCase().replace(/\s+/g, "_")}.state`;
@@ -418,14 +418,16 @@ layout: page
             return;
         }
     
+        // Start YAML Template with {% raw %} to prevent Liquid parsing
         let yaml = `{% raw %}\n`;
         sensorAssignments.forEach(({ customName, sensorName }) => {
             yaml += `{% assign ${customName.toUpperCase()} = ${sensorName} %}\n`;
         });
-        
+    
         yaml += buildYamlConditional(sensorAssignments, hasSack);
         yaml += `{% endraw %}`;
     
+        // Display the generated template
         document.getElementById("helper-template").textContent = yaml;
         document.getElementById("helper-template-output").style.display = "block";
         document.getElementById("helper-template-header").style.display = "block";
