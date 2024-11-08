@@ -418,13 +418,14 @@ layout: page
             return;
         }
     
-        let yaml = `\n`;
+        let yaml = `{% raw %}\n`;
         sensorAssignments.forEach(({ customName, sensorName }) => {
-            yaml += `{% set ${customName.toUpperCase()} = ${sensorName} %}\n`;
+            yaml += `{% assign ${customName.toUpperCase()} = ${sensorName} %}\n`;
         });
         
         yaml += buildYamlConditional(sensorAssignments, hasSack);
-        
+        yaml += `{% endraw %}`;
+    
         document.getElementById("helper-template").textContent = yaml;
         document.getElementById("helper-template-output").style.display = "block";
         document.getElementById("helper-template-header").style.display = "block";
