@@ -393,81 +393,78 @@ layout: page
     function createHelperTemplate() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Kopfzeile
-
+    
         let allBlack = true;
         let hasSack = false;
         const sensorAssignments = [];
-
+    
         rows.forEach(row => {
             const customName = row.cells[0].textContent.trim();
             const sensorName = `states.sensor.${customName.toLowerCase().replace(/\s+/g, "_")}.state`;
             const color = row.cells[2].querySelector("select").value;
-
+    
             if (color !== "Schwarz") {
                 allBlack = false;
             }
             if (color === "Sack") {
                 hasSack = true;
             }
-
+    
             sensorAssignments.push({ customName, sensorName, color });
         });
-
+    
         if (allBlack) {
             alert("Die Farben der Tonne sollten zugeordnet werden!");
             return;
         }
-
-        let helperTemplate = `{% raw %}\n`;
-        
-        // Setzt die Variablen basierend auf den Sensorzuweisungen
+    
+        let yaml = `\n`;
         sensorAssignments.forEach(({ customName, sensorName }) => {
-            helperTemplate += `{% set ${customName.toUpperCase()} = ${sensorName} %}\n`;
+            yaml += `{% set ${customName.toUpperCase()} = ${sensorName} %}\n`;
         });
         
-        helperTemplate += buildHelperTemplate(sensorAssignments, hasSack);
-        helperTemplate += `{% endraw %}`;
-
-        document.getElementById("helper-template").textContent = helperTemplate;
+        yaml += buildYamlConditional(sensorAssignments, hasSack);
+        
+        document.getElementById("helper-template").textContent = yaml;
         document.getElementById("helper-template-output").style.display = "block";
         document.getElementById("helper-template-header").style.display = "block";
     }
-
-    function buildHelperTemplate(assignments, hasSack) {
-        let template = `{% if ${generateConditions(assignments)} %}\n`;
-        template += `    ${generateOutput(assignments, hasSack)}\n`;
-
+    
+    function buildYamlConditional(assignments, hasSack) {
+        let yaml = `{% if ${generateConditions(assignments)} %}\n`;
+        yaml += `    ${generateYamlOutput(assignments, hasSack)}\n`;
+    
         for (let i = assignments.length - 1; i > 0; i--) {
             const combinations = getCombinations(assignments, i);
             combinations.forEach(combination => {
-                template += `{% elsif ${generateConditions(combination)} %}\n`;
-                template += `    ${generateOutput(combination, hasSack)}\n`;
+                yaml += `{% elsif ${generateConditions(combination)} %}\n`;
+                yaml += `    ${generateYamlOutput(combination, hasSack)}\n`;
             });
         }
-
-        template += `{% else %}keine{% endif %}`;
-        return template;
+    
+        yaml += `{% else %}keine{% endif %}`;
+        return yaml;
     }
-
+    
     function generateConditions(assignments) {
         return assignments.map(a => `${a.customName.toUpperCase()} == "Morgen"`).join(" and ");
     }
-
-    function generateOutput(assignments, hasSack) {
+    
+    function generateYamlOutput(assignments, hasSack) {
         const formattedNames = assignments.map(({ customName, color }) => {
             if (hasSack && color === "Sack") {
                 return `den ${customName} Sack`;
             }
             return `die ${customName}`;
         });
-
+    
         if (formattedNames.length > 1) {
             formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
         }
-
+    
         return formattedNames.join(", ") + " Tonne";
     }
-
+    
     function getCombinations(arr, size) {
         const result = [];
         const f = (prefix = [], arr) => {
@@ -482,7 +479,7 @@ layout: page
         f([], arr);
         return result;
     }
-
+    
     function copyCode(elementId) {
         const code = document.getElementById(elementId).textContent;
         navigator.clipboard.writeText(code).then(() => {
