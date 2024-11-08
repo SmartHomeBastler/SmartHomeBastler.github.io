@@ -477,11 +477,6 @@ layout: page
             sensorAssignments.push({ customName, sensorName, color });
         });
     
-        if (allBlack) {
-            alert("Die Farben der Tonne sollten zugeordnet werden!");
-            return;
-        }
-    
         // Generiere das Template für den angegebenen Tag ("Heute" oder "Morgen")
         let templateText = "{% raw %}\n";
     
