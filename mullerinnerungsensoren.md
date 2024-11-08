@@ -393,11 +393,11 @@ layout: page
     function createHelperTemplate() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Kopfzeile
-        
+    
         let allBlack = true;
         let hasSack = false;
         const sensorAssignments = [];
-        
+    
         rows.forEach(row => {
             const customName = row.cells[0].textContent.trim();
             const sensorName = `states.sensor.${customName.toLowerCase().replace(/\s+/g, "_")}.state`;
@@ -418,42 +418,44 @@ layout: page
             return;
         }
     
-        // Start YAML Template with {% raw %} to prevent Liquid parsing
-        let yaml = `{% raw %}\n`;
+        // Start des Templates als Textzeichenkette
+        let templateText = `{% raw %}{% set ALTPAPIER = states.sensor.altpapier.state %}\n`;
         sensorAssignments.forEach(({ customName, sensorName }) => {
-            yaml += `{% assign ${customName.toUpperCase()} = ${sensorName} %}\n`;
+            templateText += `{% assign ${customName.toUpperCase()} = ${sensorName} %}\n`;
         });
+        
+        templateText += buildConditionalStatements(sensorAssignments, hasSack);
+        templateText += "{% endraw %}";
     
-        yaml += buildYamlConditional(sensorAssignments, hasSack);
-        yaml += `{% endraw %}`;
-    
-        // Display the generated template
-        document.getElementById("helper-template").textContent = yaml;
+        // Anzeige im Ausgabe-Bereich
+        document.getElementById("helper-template").textContent = templateText;
         document.getElementById("helper-template-output").style.display = "block";
         document.getElementById("helper-template-header").style.display = "block";
     }
     
-    function buildYamlConditional(assignments, hasSack) {
-        let yaml = `{% if ${generateConditions(assignments)} %}\n`;
-        yaml += `    ${generateYamlOutput(assignments, hasSack)}\n`;
+    function buildConditionalStatements(assignments, hasSack) {
+        let template = "";
     
-        for (let i = assignments.length - 1; i > 0; i--) {
+        // Generiere alle möglichen Bedingungen
+        for (let i = assignments.length; i > 0; i--) {
             const combinations = getCombinations(assignments, i);
             combinations.forEach(combination => {
-                yaml += `{% elsif ${generateConditions(combination)} %}\n`;
-                yaml += `    ${generateYamlOutput(combination, hasSack)}\n`;
+                template += `{% if ${generateConditions(combination)} %}\n`;
+                template += `    ${generateOutputText(combination, hasSack)}\n`;
+                template += `{% endif %}\n`;
             });
         }
     
-        yaml += `{% else %}keine{% endif %}`;
-        return yaml;
+        // Standardausgabe, wenn keine Bedingungen erfüllt sind
+        template += "{% else %}keine{% endif %}";
+        return template;
     }
     
     function generateConditions(assignments) {
         return assignments.map(a => `${a.customName.toUpperCase()} == "Morgen"`).join(" and ");
     }
     
-    function generateYamlOutput(assignments, hasSack) {
+    function generateOutputText(assignments, hasSack) {
         const formattedNames = assignments.map(({ customName, color }) => {
             if (hasSack && color === "Sack") {
                 return `den ${customName} Sack`;
@@ -461,6 +463,7 @@ layout: page
             return `die ${customName}`;
         });
     
+        // Füge 'und' zwischen den letzten beiden Elementen ein
         if (formattedNames.length > 1) {
             formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
         }
@@ -470,16 +473,16 @@ layout: page
     
     function getCombinations(arr, size) {
         const result = [];
-        const f = (prefix = [], arr) => {
+        const combinations = (prefix = [], arr) => {
             if (prefix.length === size) {
                 result.push(prefix);
                 return;
             }
             for (let i = 0; i < arr.length; i++) {
-                f(prefix.concat(arr[i]), arr.slice(i + 1));
+                combinations(prefix.concat(arr[i]), arr.slice(i + 1));
             }
         };
-        f([], arr);
+        combinations([], arr);
         return result;
     }
     
