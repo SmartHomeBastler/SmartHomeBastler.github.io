@@ -8,11 +8,11 @@ layout: page
 
 
 <head>
+    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern (helles Theme) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 </head>
 
 
@@ -194,19 +194,18 @@ layout: page
         border-radius: 5px;
         padding: 15px;
         margin-bottom: 20px;
-        overflow: auto; /* Ändern Sie es auf auto, um zu testen */
-        box-shadow: none; /* Schatten entfernen */
+        overflow: hidden;
     }
-    
+
     /* Stil für Code-Text */
     .code-container code {
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 0.95em;
         line-height: 1.5;
-        color: #333;
-        white-space: pre-wrap; /* Zeilenumbruch aktivieren */
-        text-shadow: none; /* Textschatten entfernen */
+        color: #333; /* Dunklere Textfarbe für bessere Lesbarkeit */
     }
+
+    /* Stil für den Copy-Button */
     .copy-button {
         position: absolute;
         top: 10px;
