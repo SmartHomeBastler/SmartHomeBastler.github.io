@@ -455,28 +455,36 @@ layout: page
         return yaml;
     }
 {% endraw %}
-
+    
     function generateOutputText(assignments, hasSack) {
+        // Sortiere "Sack"-Einträge an den Anfang
         const formattedNames = assignments.map(({ customName, color }) => {
             if (hasSack && color === "Sack") {
-                return "den " + customName + " Sack";
+                return { text: "den " + customName + " Sack", order: 0 };
             }
-            return "die " + customName;
+            return { text: "die " + customName, order: 1 };
         });
     
-        // Wenn es mehr als einen Eintrag gibt, füge "und" vor dem letzten Eintrag hinzu
-        if (formattedNames.length > 1) {
-            formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
+        // Sortiere nach der Reihenfolge: Sack zuerst, dann die anderen
+        formattedNames.sort((a, b) => a.order - b.order);
+    
+        // Extrahiere die Texte aus den Objekten und erstelle die finale Liste
+        const sortedTexts = formattedNames.map(item => item.text);
+    
+        // Füge "und" vor dem letzten Eintrag hinzu, wenn es mehrere gibt
+        if (sortedTexts.length > 1) {
+            sortedTexts[sortedTexts.length - 1] = "und " + sortedTexts[sortedTexts.length - 1];
         }
     
-        // Wenn die Liste nur "Sack" enthält, KEIN "Tonne" anhängen
-        if (formattedNames.length === 1 && hasSack && assignments[0].color === "Sack") {
-            return formattedNames[0];
+        // Wenn nur "Sack" enthalten ist, füge kein "Tonne" hinzu
+        if (sortedTexts.length === 1 && hasSack && assignments[0].color === "Sack") {
+            return sortedTexts[0];
         }
     
         // Verbinde alle Einträge mit Komma und füge "Tonne" am Ende hinzu
-        return formattedNames.join(", ") + " Tonne";
+        return sortedTexts.join(", ") + " Tonne";
     }
+
 
     function getAllCombinations(arr) {
         const result = [];
