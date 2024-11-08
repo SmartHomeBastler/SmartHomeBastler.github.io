@@ -464,10 +464,12 @@ layout: page
             return "die " + customName;
         });
     
+        // Wenn mehr als ein Eintrag vorhanden ist, das letzte Element mit "und" verbinden
         if (formattedNames.length > 1) {
             formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
         }
     
+        // Alle Teile mit einem Komma verbinden und am Ende "Tonne" hinzufügen
         return formattedNames.join(", ") + " Tonne";
     }
 
