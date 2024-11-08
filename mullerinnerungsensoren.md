@@ -216,12 +216,10 @@ layout: page
 </style>
 
 <script>
-    // Code templates as JavaScript strings using template literals
-    const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
-    const individualPickupTemplate = `{% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
-
-    // Display templates in pre blocks
     document.addEventListener("DOMContentLoaded", function() {
+        const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
+        const individualPickupTemplate = `{% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
+        
         document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
         document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
     });
@@ -234,7 +232,7 @@ layout: page
             alert("Fehler beim Kopieren des Codes: " + err);
         });
     }
-    
+
     async function extractEntries() {
         const fileInput = document.getElementById('icsFile');
         const urlInput = document.getElementById('calendarUrl');
@@ -392,7 +390,7 @@ layout: page
 
     function createHelperTemplate() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Kopfzeile
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
         
         let allBlack = true;
         let hasSack = false;
@@ -426,7 +424,6 @@ layout: page
             templateText += "{% assign " + customName.toUpperCase() + " = " + sensorName + " %}\n";
         });
     
-        // Bedingungserstellung als Zeichenkette
         templateText += generateConditionsAsText(sensorAssignments, hasSack);
     
         templateText += "\n{% endraw %}";
@@ -435,18 +432,15 @@ layout: page
         document.getElementById("helper-template-output").style.display = "block";
         document.getElementById("helper-template-header").style.display = "block";
     }
-    
+
     function generateConditionsAsText(assignments, hasSack) {
         let yaml = "{% if ";
     
         const combinations = getAllCombinations(assignments);
         combinations.forEach((combination, index) => {
-            const condition = combination.map(function(a) {
-                return a.customName.toUpperCase() + " == 'Morgen'";
-            }).join(" and ");
+            const condition = combination.map(a => a.customName.toUpperCase() + " == 'Morgen'").join(" and ");
             const output = generateOutputText(combination, hasSack);
     
-            // Generiere jede Bedingung als reinen Text
             if (index === 0) {
                 yaml += condition + " %}\n";
             } else {
@@ -455,14 +449,13 @@ layout: page
             yaml += "    " + output + "\n";
         });
     
-        // Standardausgabe für keine übereinstimmenden Bedingungen
         yaml += "{% else %}keine{% endif %}";
     
         return yaml;
     }
-    
+
     function generateOutputText(assignments, hasSack) {
-        const formattedNames = assignments.map(function({ customName, color }) {
+        const formattedNames = assignments.map(({ customName, color }) => {
             if (hasSack && color === "Sack") {
                 return "den " + customName + " Sack";
             }
@@ -475,7 +468,7 @@ layout: page
     
         return formattedNames.join(", ") + " Tonne";
     }
-    
+
     function getAllCombinations(arr) {
         const result = [];
         const f = function(prefix = [], arr) {
@@ -485,15 +478,7 @@ layout: page
             }
         };
         f([], arr);
-        return result.filter(function(comb) { return comb.length > 0; });
-    }
-    
-    function copyCode(elementId) {
-        const code = document.getElementById(elementId).textContent;
-        navigator.clipboard.writeText(code).then(function() {
-            alert("Code erfolgreich kopiert!");
-        }).catch(function(err) {
-            alert("Fehler beim Kopieren des Codes: " + err);
-        });
+        return result.filter(comb => comb.length > 0);
     }
 </script>
+
