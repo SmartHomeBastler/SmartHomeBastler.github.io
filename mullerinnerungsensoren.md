@@ -105,12 +105,30 @@ layout: page
         </div>
     </div>
     
+    <!-- Ausgabe für "Müllabholung Text Heute" -->
+    <div id="helper-template-output-text-heute" style="display:none;">
+        <h4>Müllabholung Text Heute</h4>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode('helper-template-text-heute')">Copy</button>
+            <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
+        </div>
+    </div>
+    
     <!-- Output for "Müllabholung Morgen" -->
     <div id="helper-template-output-morgen" style="display:none;">
         <h4>Müllabholung Morgen</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
             <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
+        </div>
+    </div>
+    
+    <!-- Ausgabe für "Müllabholung Text Morgen" -->
+    <div id="helper-template-output-text-morgen" style="display:none;">
+        <h4>Müllabholung Text Morgen</h4>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode('helper-template-text-morgen')">Copy</button>
+            <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
         </div>
     </div>
 </div>
@@ -403,14 +421,25 @@ layout: page
 
         sensorTable.style.display = "table";
     }
-
-    // Function to create both "Heute" and "Morgen" templates
     function createTemplates() {
-        // Create "Heute" template
         createTemplate("Heute", "helper-template-heute", "helper-template-output-heute");
-        // Create "Morgen" template
         createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen");
+    
+        // Erstellen und Anzeigen der neuen Ausgaben für "Müllabholung Text Heute" und "Müllabholung Text Morgen"
+        const textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
+        const textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
+    
+        // Setzen Sie den Text für "Müllabholung Text Heute"
+        const textHeuteElement = document.getElementById("helper-template-text-heute");
+        textHeuteElement.innerHTML = `<code class="language-yaml">${textHeute}</code>`;
+        document.getElementById("helper-template-output-text-heute").style.display = "block";
+    
+        // Setzen Sie den Text für "Müllabholung Text Morgen"
+        const textMorgenElement = document.getElementById("helper-template-text-morgen");
+        textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
+        document.getElementById("helper-template-output-text-morgen").style.display = "block";
     }
+
     
     function createTemplate(day, templateId, outputId) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
