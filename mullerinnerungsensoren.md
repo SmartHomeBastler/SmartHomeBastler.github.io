@@ -106,6 +106,7 @@ layout: page
 </div>
 
 <style>
+    /* Allgemeine Container-Einstellungen */
     .custom-container-wide {
         background-color: #fff;
         padding: 20px;
@@ -114,11 +115,15 @@ layout: page
         margin: auto;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
+    
+    /* Titel und Untertitel */
     .custom-title, .custom-subtitle {
         text-align: center;
         font-weight: bold;
         margin-top: 20px;
     }
+    
+    /* Wichtiges Hinweis-Container */
     .important-container {
         background-color: #ffeb3b;
         padding: 15px;
@@ -126,15 +131,8 @@ layout: page
         margin-bottom: 20px;
         border: 1px solid #ffc107;
     }
-    .important-container h3 {
-        margin: 0;
-        font-size: 1.2em;
-        color: #333;
-    }
-    .important-container p {
-        margin: 5px 0 0;
-        color: #555;
-    }
+    
+    /* Hinweise */
     .note-container {
         background-color: #3bfffd;
         padding: 15px;
@@ -142,15 +140,8 @@ layout: page
         margin-bottom: 20px;
         border: 1px solid #07aaff;
     }
-    .note-container h3 {
-        margin: 0;
-        font-size: 1.2em;
-        color: #003333;
-    }
-    .note-container p {
-        margin: 5px 0 0;
-        color: #003333;
-    }
+
+    /* Formulareingabefelder und Buttons */
     .custom-form-group {
         margin-top: 15px;
     }
@@ -174,6 +165,8 @@ layout: page
     .custom-button:hover {
         background-color: #45a049;
     }
+    
+    /* Tabellen für Kalender- und Sensorkonfigurationen */
     .custom-table {
         width: 100%;
         border-collapse: collapse;
@@ -184,20 +177,25 @@ layout: page
         padding: 8px;
         text-align: center;
     }
+    
+    /* Code-Block für Template-Ausgabe */
     .code-block {
         position: relative;
         background-color: #f5f5f5;
         border: 1px solid #ddd;
         border-radius: 5px;
-        padding: 15px;
-        margin-bottom: 20px;
+        padding: 10px; /* Reduzierte Höhe */
+        margin-bottom: 10px; /* Reduzierter unterer Abstand */
         font-family: monospace;
         white-space: pre-wrap;
     }
-    .code-block pre {
-        margin: 0;
-        padding-right: 50px;
+    
+    /* Überschrift und Button für Helfer Templates */
+    #helper-template-header {
+        margin-top: 20px; /* Mehr Abstand über dem Helfer-Template-Button */
     }
+    
+    /* Abstand der Copy-Buttons */
     .copy-button {
         position: absolute;
         top: 10px;
@@ -214,6 +212,7 @@ layout: page
         background-color: #0056b3;
     }
 </style>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
