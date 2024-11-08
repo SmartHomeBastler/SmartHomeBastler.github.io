@@ -8,12 +8,13 @@ layout: page
 
 
 <head>
-    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern (helles Theme) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 </head>
+
 
 <div class="custom-container-wide">
     <h2 class="custom-title">Müllkalender Import und Code-Generator</h2>
@@ -91,14 +92,14 @@ layout: page
     <div id="code-output" style="display:none;">
         <h4>Werte Template Nächste Abholung</h4>
         <div class="code-container">
-            <button class="copy-button">Copy</button>
-            <pre id="next-pickup-template" class="line-numbers"><code class="language-yaml"></code></pre>
+            <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
+            <pre id="next-pickup-template" class="line-numbers language-yaml"><code></code></pre>
         </div>
     
         <h4>Werte Template einzelne Abholungen</h4>
        <div class="code-container">
-            <button class="copy-button">Copy</button>
-            <pre id="individual-pickup-template" class="line-numbers"><code class="language-yaml"></code></pre>
+            <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
+            <pre id="individual-pickup-template" class="line-numbers language-yaml"><code></code></pre>
         </div>
     </div>
     
@@ -108,8 +109,8 @@ layout: page
     <div id="helper-template-output" style="display:none;">
         <h4>Generiertes Helfer Template</h4>
         <div class="code-container">
-            <button class="copy-button">Copy</button>
-            <pre id="helper-template" class="line-numbers"><code class="language-yaml"></code></pre>
+            <button class="copy-button" onclick="copyCode('helper-template')">Copy</button>
+            <pre id="helper-template" class="line-numbers language-yaml"><code></code></pre>
         </div>
     </div>
 </div>
@@ -234,6 +235,8 @@ layout: page
             
             document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
             document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
+
+            Prism.highlightAll();
         } catch (error) {
             console.error("Error during DOMContentLoaded setup:", error);
         }
@@ -510,11 +513,13 @@ layout: page
     }
 
     function copyCode(elementId) {
-        const code = document.getElementById(elementId).textContent;
-        navigator.clipboard.writeText(code).then(() => {
+        const codeElement = document.getElementById(elementId);
+        const codeText = codeElement.innerText || codeElement.textContent;
+        
+        navigator.clipboard.writeText(codeText).then(() => {
             alert("Code erfolgreich kopiert!");
         }).catch(err => {
-            alert("Fehler beim Kopieren des Codes: " + err);
+            console.error("Fehler beim Kopieren des Codes: ", err);
         });
     }
 </script>
