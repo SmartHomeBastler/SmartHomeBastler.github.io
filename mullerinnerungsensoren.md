@@ -421,7 +421,7 @@ layout: page
     
         // Setzen der Variablen
         sensorAssignments.forEach(({ customName, sensorName }) => {
-            templateText += "{% assign " + customName.toUpperCase() + " = " + sensorName + " %}\n";
+            templateText += "{% set " + customName.toUpperCase() + " = " + sensorName + " %}\n";
         });
     
         templateText += generateConditionsAsText(sensorAssignments, hasSack);
