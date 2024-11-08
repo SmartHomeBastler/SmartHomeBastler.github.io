@@ -399,7 +399,7 @@ layout: page
         const sensorAssignments = [];
 
         rows.forEach(row => {
-            const customName = row.cells[0].textContent;
+            const customName = row.cells[0].textContent.trim();
             const sensorName = `states.sensor.${customName.toLowerCase().replace(/\s+/g, "_")}.state`;
             const color = row.cells[2].querySelector("select").value;
 
@@ -418,36 +418,30 @@ layout: page
             return;
         }
 
-        // Hilfervorlage generieren
         let helperTemplate = `{% raw %}\n`;
+        
+        // Setzt die Variablen basierend auf den Sensorzuweisungen
         sensorAssignments.forEach(({ customName, sensorName }) => {
             helperTemplate += `{% set ${customName.toUpperCase()} = ${sensorName} %}\n`;
         });
-
-        helperTemplate += buildConditionalStatements(sensorAssignments);
+        
+        helperTemplate += buildHelperTemplate(sensorAssignments, hasSack);
         helperTemplate += `{% endraw %}`;
 
-        // Zeige das generierte Template an
         document.getElementById("helper-template").textContent = helperTemplate;
         document.getElementById("helper-template-output").style.display = "block";
-        document.getElementById("helper-template-header").style.display = "block";  // Überschrift anzeigen
+        document.getElementById("helper-template-header").style.display = "block";
     }
 
-    function buildConditionalStatements(assignments) {
-        const morgenAssignments = assignments.map(a => a.customName.toUpperCase() + ' == "Morgen"');
-        const names = assignments.map(a => a.customName);
-        const sackAssignment = assignments.find(a => a.color === "Sack");
+    function buildHelperTemplate(assignments, hasSack) {
+        let template = `{% if ${generateConditions(assignments)} %}\n`;
+        template += `    ${generateOutput(assignments, hasSack)}\n`;
 
-        let template = `{% if ${morgenAssignments.join(" and ")} %}\n`;
-        template += formatOutput(names, sackAssignment) + "\n";
-
-        // Erstelle alle anderen bedingten Kombinationen
         for (let i = assignments.length - 1; i > 0; i--) {
-            const combinations = getCombinations(morgenAssignments, i);
+            const combinations = getCombinations(assignments, i);
             combinations.forEach(combination => {
-                template += `{% elsif ${combination.join(" and ")} %}\n`;
-                const comboNames = combination.map(c => c.split(" == ")[0]);
-                template += formatOutput(comboNames, sackAssignment) + "\n";
+                template += `{% elsif ${generateConditions(combination)} %}\n`;
+                template += `    ${generateOutput(combination, hasSack)}\n`;
             });
         }
 
@@ -455,35 +449,38 @@ layout: page
         return template;
     }
 
-    function getCombinations(arr, size) {
-        const result = [];
-        const combinations = (prefix = [], rest) => {
-            if (prefix.length === size) {
-                result.push(prefix);
-                return;
-            }
-            for (let i = 0; i < rest.length; i++) {
-                combinations(prefix.concat(rest[i]), rest.slice(i + 1));
-            }
-        };
-        combinations([], arr);
-        return result;
+    function generateConditions(assignments) {
+        return assignments.map(a => `${a.customName.toUpperCase()} == "Morgen"`).join(" and ");
     }
 
-    function formatOutput(names, sackAssignment) {
-        const formattedNames = names.map(name => {
-            if (sackAssignment && name === sackAssignment.customName.toUpperCase()) {
-                return `den ${sackAssignment.customName} Sack`;
+    function generateOutput(assignments, hasSack) {
+        const formattedNames = assignments.map(({ customName, color }) => {
+            if (hasSack && color === "Sack") {
+                return `den ${customName} Sack`;
             }
-            return `die ${name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}`;
+            return `die ${customName}`;
         });
 
-        // Fügt "und" zwischen den letzten zwei Einträgen hinzu, falls mehr als ein Eintrag vorhanden ist
         if (formattedNames.length > 1) {
             formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
         }
 
         return formattedNames.join(", ") + " Tonne";
+    }
+
+    function getCombinations(arr, size) {
+        const result = [];
+        const f = (prefix = [], arr) => {
+            if (prefix.length === size) {
+                result.push(prefix);
+                return;
+            }
+            for (let i = 0; i < arr.length; i++) {
+                f(prefix.concat(arr[i]), arr.slice(i + 1));
+            }
+        };
+        f([], arr);
+        return result;
     }
 
     function copyCode(elementId) {
@@ -494,5 +491,4 @@ layout: page
             alert("Fehler beim Kopieren des Codes: " + err);
         });
     }
-
 </script>
