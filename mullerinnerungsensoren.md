@@ -7,11 +7,11 @@ layout: page
 ---
 
 <head>
-    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern (helles Theme) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 </head>
 
 
@@ -92,13 +92,13 @@ layout: page
         <h4>Werte Template Nächste Abholung</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
-            <pre id="next-pickup-template" class="line-numbers"><code class="language-yaml"></code></pre>
+            <pre id="next-pickup-template" class="line-numbers language-yaml"><code></code></pre>
         </div>
     
         <h4>Werte Template einzelne Abholungen</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
-            <pre id="individual-pickup-template" class="line-numbers"><code class="language-yaml"></code></pre>
+            <pre id="individual-pickup-template" class="line-numbers language-yaml"><code></code></pre>
         </div>
     </div>
     
@@ -109,7 +109,7 @@ layout: page
         <h4>Generiertes Helfer Template</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
-            <pre id="helper-template" class="line-numbers"><code class="language-yaml"></code></pre>
+            <pre id="helper-template" class="line-numbers language-yaml"><code></code></pre>
         </div>
     </div>
 </div>
@@ -186,11 +186,10 @@ layout: page
         padding: 8px;
         text-align: center;
     }
-
-    /* Container für die Code-Ausgabe */
+    /* Code Container für Zeilennummern und Kopier-Button */
     .code-container {
         position: relative;
-        background-color: #fdfdfd; /* Heller Hintergrund */
+        background-color: #fdfdfd;
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 15px;
@@ -198,17 +197,17 @@ layout: page
         overflow: hidden;
     }
 
-    /* Stil für den Code */
+    /* Stil für Code */
     .code-container code {
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 0.95em;
         line-height: 1.5;
-        color: #333; /* Dunklere Textfarbe für bessere Lesbarkeit */
+        color: #333;
         display: block;
-        white-space: pre-wrap; /* Zeilenumbruch für lange Zeilen */
+        white-space: pre-wrap;
     }
 
-    /* Stil für den Copy-Button */
+    /* Stil für den Kopier-Button */
     .copy-button {
         position: absolute;
         top: 10px;
@@ -221,19 +220,9 @@ layout: page
         cursor: pointer;
         font-size: 12px;
     }
+
     .copy-button:hover {
         background-color: #0056b3;
-    }
-
-    /* Abstandsanpassung für bessere Darstellung */
-    #code-output h4, #helper-template-output h4 {
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-
-    /* Abstandsanpassung zwischen Button und Überschrift */
-    #helper-template-header {
-        margin-top: 30px;
     }
 </style>
 
