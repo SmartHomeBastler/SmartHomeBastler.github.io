@@ -94,6 +94,22 @@ layout: page
     </div>
     <!-- Button to create Templates for both Today and Tomorrow -->
     <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
+
+    <!-- Hinweisfenster mit Beschreibung -->
+    <div class="note-container">
+        <p>
+            Vor der Erstellung der Templates solltest du entscheiden, ob du den Text "Du musst heute keine Tonne rausstellen!" bzw. "Du musst morgen keine Tonne rausstellen!" angezeigt bekommen möchtest oder nicht. Für eine Anzeige dieses Textes, aktiviere die jeweilige Checkbox.
+        </p>
+    </div>
+    
+    <!-- Checkboxen für "keine"-Anzeige -->
+    <div class="custom-form-group">
+        <input type="checkbox" id="keineHeute" />
+        <label for="keineHeute">Anzeige "keine" für Heute</label><br>
+        <input type="checkbox" id="keineMorgen" />
+        <label for="keineMorgen">Anzeige "keine" für Morgen</label>
+    </div>
+    
     <button class="custom-button" onclick="createTemplates()">Templates erstellen</button>
     
     <!-- Output for "Müllabholung Heute" -->
@@ -439,18 +455,28 @@ layout: page
             alert("Die Farben der Tonne sollten zugeordnet werden!");
             return;
         }
-        createTemplate("Heute", "helper-template-heute", "helper-template-output-heute");
-        createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen");
-    
-        // Erstellen und Anzeigen der neuen Ausgaben für "Müllabholung Text Heute" und "Müllabholung Text Morgen"
-        const textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
-        const textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
-    
+        const heuteCheckbox = document.getElementById("keineHeute").checked;
+        const morgenCheckbox = document.getElementById("keineMorgen").checked;
+
+        let textHeute, textMorgen;
+
+        if (heuteCheckbox) {
+            textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\nDu musst heute keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
+        } else {
+            textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
+        }
+
+        if (morgenCheckbox) {
+            textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\nDu musst morgen keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
+        } else {
+            textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
+        }
+
         // Setzen Sie den Text für "Müllabholung Text Heute"
         const textHeuteElement = document.getElementById("helper-template-text-heute");
         textHeuteElement.innerHTML = `<code class="language-yaml">${textHeute}</code>`;
         document.getElementById("helper-template-output-text-heute").style.display = "block";
-    
+
         // Setzen Sie den Text für "Müllabholung Text Morgen"
         const textMorgenElement = document.getElementById("helper-template-text-morgen");
         textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
