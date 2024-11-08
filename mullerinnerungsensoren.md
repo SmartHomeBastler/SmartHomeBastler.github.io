@@ -93,13 +93,13 @@ layout: page
         <h4>Werte Template Nächste Abholung</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
-            <pre id="next-pickup-template" class="line-numbers language-yaml"><code></code></pre>
+            <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
         </div>
     
         <h4>Werte Template einzelne Abholungen</h4>
        <div class="code-container">
             <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
-            <pre id="individual-pickup-template" class="line-numbers language-yaml"><code></code></pre>
+            <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
         </div>
     </div>
     
@@ -110,7 +110,7 @@ layout: page
         <h4>Generiertes Helfer Template</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template')">Copy</button>
-            <pre id="helper-template" class="line-numbers language-yaml"><code></code></pre>
+            <pre id="helper-template" class="language-yaml"><code></code></pre>
         </div>
     </div>
 </div>
