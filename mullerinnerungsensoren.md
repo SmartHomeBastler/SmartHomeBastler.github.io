@@ -464,12 +464,17 @@ layout: page
             return "die " + customName;
         });
     
-        // Wenn mehr als ein Eintrag vorhanden ist, das letzte Element mit "und" verbinden
+        // Wenn es mehr als einen Eintrag gibt, füge "und" vor dem letzten Eintrag hinzu
         if (formattedNames.length > 1) {
             formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
         }
     
-        // Alle Teile mit einem Komma verbinden und am Ende "Tonne" hinzufügen
+        // Wenn die Liste nur "Sack" enthält, KEIN "Tonne" anhängen
+        if (formattedNames.length === 1 && hasSack && assignments[0].color === "Sack") {
+            return formattedNames[0];
+        }
+    
+        // Verbinde alle Einträge mit Komma und füge "Tonne" am Ende hinzu
         return formattedNames.join(", ") + " Tonne";
     }
 
