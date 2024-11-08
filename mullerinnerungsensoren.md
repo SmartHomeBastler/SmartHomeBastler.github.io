@@ -393,11 +393,11 @@ layout: page
     function createHelperTemplate() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Kopfzeile
-    
+        
         let allBlack = true;
         let hasSack = false;
         const sensorAssignments = [];
-    
+        
         rows.forEach(row => {
             const customName = row.cells[0].textContent.trim();
             const sensorName = `states.sensor.${customName.toLowerCase().replace(/\s+/g, "_")}.state`;
@@ -418,16 +418,19 @@ layout: page
             return;
         }
     
-        // Start des Templates als Textzeichenkette
-        let templateText = `{% raw %}{% set ALTPAPIER = states.sensor.altpapier.state %}\n`;
+        let templateText = "";
+        templateText += "{% raw %}\n";
+    
+        // Setzen der Variablen
         sensorAssignments.forEach(({ customName, sensorName }) => {
             templateText += `{% assign ${customName.toUpperCase()} = ${sensorName} %}\n`;
         });
-        
-        templateText += buildConditionalStatements(sensorAssignments, hasSack);
-        templateText += "{% endraw %}";
     
-        // Anzeige im Ausgabe-Bereich
+        // Bedingungserstellung
+        templateText += buildConditionalStatements(sensorAssignments, hasSack);
+    
+        templateText += "\n{% endraw %}";
+    
         document.getElementById("helper-template").textContent = templateText;
         document.getElementById("helper-template-output").style.display = "block";
         document.getElementById("helper-template-header").style.display = "block";
@@ -436,18 +439,19 @@ layout: page
     function buildConditionalStatements(assignments, hasSack) {
         let template = "";
     
-        // Generiere alle möglichen Bedingungen
-        for (let i = assignments.length; i > 0; i--) {
-            const combinations = getCombinations(assignments, i);
-            combinations.forEach(combination => {
-                template += `{% if ${generateConditions(combination)} %}\n`;
-                template += `    ${generateOutputText(combination, hasSack)}\n`;
-                template += `{% endif %}\n`;
-            });
-        }
+        const combinations = getAllCombinations(assignments);
+        combinations.forEach((combination, index) => {
+            const condition = generateConditions(combination);
+            const output = generateOutputText(combination, hasSack);
     
-        // Standardausgabe, wenn keine Bedingungen erfüllt sind
-        template += "{% else %}keine{% endif %}";
+            // Erste Bedingung mit {% if %} starten, danach {% elsif %} verwenden
+            template += index === 0 ? `{% if ${condition} %}\n` : `{% elsif ${condition} %}\n`;
+            template += `    ${output}\n`;
+        });
+    
+        // Standardausgabe für keine übereinstimmenden Bedingungen
+        template += `{% else %}keine{% endif %}`;
+    
         return template;
     }
     
@@ -471,19 +475,16 @@ layout: page
         return formattedNames.join(", ") + " Tonne";
     }
     
-    function getCombinations(arr, size) {
+    function getAllCombinations(arr) {
         const result = [];
-        const combinations = (prefix = [], arr) => {
-            if (prefix.length === size) {
-                result.push(prefix);
-                return;
-            }
+        const f = (prefix = [], arr) => {
+            result.push(prefix);
             for (let i = 0; i < arr.length; i++) {
-                combinations(prefix.concat(arr[i]), arr.slice(i + 1));
+                f(prefix.concat(arr[i]), arr.slice(i + 1));
             }
         };
-        combinations([], arr);
-        return result;
+        f([], arr);
+        return result.filter(comb => comb.length > 0);
     }
     
     function copyCode(elementId) {
