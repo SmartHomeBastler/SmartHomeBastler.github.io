@@ -407,7 +407,7 @@ layout: page
             const colorCell = document.createElement("td");
             const colorSelect = document.createElement("select");
             colorSelect.className = "color-select";
-            ["Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack"].forEach(color => {
+            ["Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack"].forEach(color => {
                 const option = document.createElement("option");
                 option.value = color;
                 option.textContent = color;
@@ -454,7 +454,7 @@ layout: page
             const sensorName = "states.sensor." + customName.toLowerCase().replace(/\s+/g, "_") + ".state";
             const color = row.cells[2].querySelector("select").value;
     
-            if (color !== "Schwarz") {
+            if (color !== "Farbe wählen") {
                 allBlack = false;
             }
             if (color === "Sack") {
