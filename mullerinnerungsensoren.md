@@ -217,88 +217,88 @@ layout: page
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
-        const individualPickupTemplate = `{% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
-        
-        document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
-        document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
+        try {
+            const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
+            const individualPickupTemplate = `{% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
+            
+            document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
+            document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
+        } catch (error) {
+            console.error("Error during DOMContentLoaded setup:", error);
+        }
     });
 
-    function copyCode(elementId) {
-        const code = document.getElementById(elementId).textContent;
-        navigator.clipboard.writeText(code).then(() => {
-            alert("Code erfolgreich kopiert!");
-        }).catch(err => {
-            alert("Fehler beim Kopieren des Codes: " + err);
-        });
-    }
-
     async function extractEntries() {
-        const fileInput = document.getElementById('icsFile');
-        const urlInput = document.getElementById('calendarUrl');
-        const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
-        entryTableBody.innerHTML = "Lade und verarbeite Daten...";
+        try {
+            const fileInput = document.getElementById('icsFile');
+            const urlInput = document.getElementById('calendarUrl');
+            const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
+            entryTableBody.innerHTML = "Lade und verarbeite Daten...";
 
-        let icsData;
-        
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            icsData = await file.text();
-        } else if (urlInput.value) {
-            try {
-                const response = await fetch(urlInput.value);
-                if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
-                icsData = await response.text();
-            } catch (error) {
-                entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
+            let icsData;
+            
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                icsData = await file.text();
+            } else if (urlInput.value) {
+                try {
+                    const response = await fetch(urlInput.value);
+                    if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
+                    icsData = await response.text();
+                } catch (error) {
+                    entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
+                    console.error("Fetch error:", error);
+                    return;
+                }
+            } else {
+                entryTableBody.innerHTML = "<tr><td colspan='3'>Bitte eine ICS-Datei hochladen oder eine URL eingeben.</td></tr>";
                 return;
             }
-        } else {
-            entryTableBody.innerHTML = "<tr><td colspan='3'>Bitte eine ICS-Datei hochladen oder eine URL eingeben.</td></tr>";
-            return;
-        }
 
-        const summaryEntries = new Set();
-        const lines = icsData.split("\n");
-        for (let line of lines) {
-            if (line.startsWith("SUMMARY:")) {
-                summaryEntries.add(line.replace("SUMMARY:", "").trim());
+            const summaryEntries = new Set();
+            const lines = icsData.split("\n");
+            for (let line of lines) {
+                if (line.startsWith("SUMMARY:")) {
+                    summaryEntries.add(line.replace("SUMMARY:", "").trim());
+                }
             }
+
+            entryTableBody.innerHTML = "";
+            let idCounter = 0;
+            summaryEntries.forEach(entry => {
+                const row = document.createElement("tr");
+
+                // Checkbox
+                const checkboxCell = document.createElement("td");
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.className = "entry-checkbox";
+                checkbox.id = `entry-checkbox-${idCounter}`;
+                checkboxCell.appendChild(checkbox);
+                row.appendChild(checkboxCell);
+
+                // Summary Entry
+                const summaryCell = document.createElement("td");
+                summaryCell.textContent = entry;
+                summaryCell.id = `summary-${idCounter}`;
+                row.appendChild(summaryCell);
+
+                // Custom Name Input
+                const customNameCell = document.createElement("td");
+                const customNameInput = document.createElement("input");
+                customNameInput.type = "text";
+                customNameInput.placeholder = "Eigene Bezeichnung";
+                customNameInput.className = "entry-custom-name";
+                customNameInput.id = `custom-name-${idCounter}`;
+                customNameCell.appendChild(customNameInput);
+                row.appendChild(customNameCell);
+
+                entryTableBody.appendChild(row);
+                idCounter++;
+            });
+        } catch (error) {
+            console.error("Error in extractEntries:", error);
         }
-
-        entryTableBody.innerHTML = "";
-        let idCounter = 0;
-        summaryEntries.forEach(entry => {
-            const row = document.createElement("tr");
-
-            // Checkbox
-            const checkboxCell = document.createElement("td");
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.className = "entry-checkbox";
-            checkbox.id = `entry-checkbox-${idCounter}`;
-            checkboxCell.appendChild(checkbox);
-            row.appendChild(checkboxCell);
-
-            // Summary Entry
-            const summaryCell = document.createElement("td");
-            summaryCell.textContent = entry;
-            summaryCell.id = `summary-${idCounter}`;
-            row.appendChild(summaryCell);
-
-            // Custom Name Input
-            const customNameCell = document.createElement("td");
-            const customNameInput = document.createElement("input");
-            customNameInput.type = "text";
-            customNameInput.placeholder = "Eigene Bezeichnung";
-            customNameInput.className = "entry-custom-name";
-            customNameInput.id = `custom-name-${idCounter}`;
-            customNameCell.appendChild(customNameInput);
-            row.appendChild(customNameCell);
-
-            entryTableBody.appendChild(row);
-            idCounter++;
-        });
     }
 
     function checkEntries() {
@@ -480,5 +480,15 @@ layout: page
         f([], arr);
         return result.filter(comb => comb.length > 0);
     }
+
+    function copyCode(elementId) {
+        const code = document.getElementById(elementId).textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            alert("Code erfolgreich kopiert!");
+        }).catch(err => {
+            alert("Fehler beim Kopieren des Codes: " + err);
+        });
+    }
 </script>
+
 
