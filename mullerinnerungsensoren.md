@@ -14,7 +14,6 @@ layout: page
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 </head>
 
-
 <div class="custom-container-wide">
     <h2 class="custom-title">Müllkalender Import und Code-Generator</h2>
 
