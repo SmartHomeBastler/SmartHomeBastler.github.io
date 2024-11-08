@@ -81,26 +81,26 @@ layout: page
     <h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates</h3>
     <div id="code-output" style="display:none;">
         <h4>Werte Template Nächste Abholung</h4>
-        <div class="code-block">
-            <pre id="next-pickup-template"></pre>
-            <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
+            <pre id="next-pickup-template" class="line-numbers"><code class="language-yaml"></code></pre>
         </div>
-
+    
         <h4>Werte Template einzelne Abholungen</h4>
-        <div class="code-block">
-            <pre id="individual-pickup-template"></pre>
-            <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
+            <pre id="individual-pickup-template" class="line-numbers"><code class="language-yaml"></code></pre>
         </div>
     </div>
-
+    
     <!-- Code for "Templates erstellen" button and helper template generation -->
     <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
     <button class="custom-button" onclick="createHelperTemplate()">Templates erstellen</button>
     <div id="helper-template-output" style="display:none;">
         <h4>Generiertes Helfer Template</h4>
-        <div class="code-block">
-            <pre id="helper-template"></pre>
-            <button class="copy-button" onclick="copyCode('helper-template')">Copy</button>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
+            <pre id="helper-template" class="line-numbers"><code class="language-yaml"></code></pre>
         </div>
     </div>
 </div>
@@ -177,25 +177,29 @@ layout: page
         padding: 8px;
         text-align: center;
     }
-    
-    /* Code-Block für Template-Ausgabe */
-    .code-block {
+
+    /* Container für die Code-Ausgabe */
+    .code-container {
         position: relative;
-        background-color: #f5f5f5;
+        background-color: #fdfdfd; /* Heller Hintergrund */
         border: 1px solid #ddd;
         border-radius: 5px;
-        padding: 10px; /* Reduzierte Höhe */
-        margin-bottom: 10px; /* Reduzierter unterer Abstand */
-        font-family: monospace;
-        white-space: pre-wrap;
+        padding: 15px;
+        margin-bottom: 20px;
+        overflow: hidden;
     }
-    
-    /* Überschrift und Button für Helfer Templates */
-    #helper-template-header {
-        margin-top: 20px; /* Mehr Abstand über dem Helfer-Template-Button */
+
+    /* Stil für den Code */
+    .code-container code {
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #333; /* Dunklere Textfarbe für bessere Lesbarkeit */
+        display: block;
+        white-space: pre-wrap; /* Zeilenumbruch für lange Zeilen */
     }
-    
-    /* Abstand der Copy-Buttons */
+
+    /* Stil für den Copy-Button */
     .copy-button {
         position: absolute;
         top: 10px;
@@ -210,6 +214,17 @@ layout: page
     }
     .copy-button:hover {
         background-color: #0056b3;
+    }
+
+    /* Abstandsanpassung für bessere Darstellung */
+    #code-output h4, #helper-template-output h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    /* Abstandsanpassung zwischen Button und Überschrift */
+    #helper-template-header {
+        margin-top: 30px;
     }
 </style>
 
