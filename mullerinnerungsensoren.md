@@ -392,7 +392,7 @@ layout: page
 
     function createHelperTemplate() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Skip header row
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Kopfzeile
 
         let allBlack = true;
         let hasSack = false;
@@ -418,7 +418,7 @@ layout: page
             return;
         }
 
-        // Construct the dynamic helper template
+        // Hilfervorlage generieren
         let helperTemplate = `{% raw %}\n`;
         sensorAssignments.forEach(({ customName, sensorName }) => {
             helperTemplate += `{% set ${customName.toUpperCase()} = ${sensorName} %}\n`;
@@ -427,10 +427,10 @@ layout: page
         helperTemplate += buildConditionalStatements(sensorAssignments);
         helperTemplate += `{% endraw %}`;
 
-        // Display the generated template
+        // Zeige das generierte Template an
         document.getElementById("helper-template").textContent = helperTemplate;
         document.getElementById("helper-template-output").style.display = "block";
-        document.getElementById("helper-template-header").style.display = "block";  // Show the header
+        document.getElementById("helper-template-header").style.display = "block";  // Überschrift anzeigen
     }
 
     function buildConditionalStatements(assignments) {
@@ -441,7 +441,7 @@ layout: page
         let template = `{% if ${morgenAssignments.join(" and ")} %}\n`;
         template += formatOutput(names, sackAssignment) + "\n";
 
-        // Create all other conditional combinations
+        // Erstelle alle anderen bedingten Kombinationen
         for (let i = assignments.length - 1; i > 0; i--) {
             const combinations = getCombinations(morgenAssignments, i);
             combinations.forEach(combination => {
@@ -478,7 +478,7 @@ layout: page
             return `die ${name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}`;
         });
 
-        // Add 'und' between the last two items if more than one item
+        // Fügt "und" zwischen den letzten zwei Einträgen hinzu, falls mehr als ein Eintrag vorhanden ist
         if (formattedNames.length > 1) {
             formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
         }
@@ -494,4 +494,5 @@ layout: page
             alert("Fehler beim Kopieren des Codes: " + err);
         });
     }
+
 </script>
