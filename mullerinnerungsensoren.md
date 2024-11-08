@@ -396,11 +396,11 @@ layout: page
 
         let allBlack = true;
         let hasSack = false;
-        const sensorNames = [];
-        const colorAssignments = {};
+        const sensorAssignments = [];
 
         rows.forEach(row => {
-            const sensorName = row.cells[0].textContent;
+            const customName = row.cells[0].textContent;
+            const sensorName = `states.sensor.${customName.toLowerCase().replace(/\s+/g, "_")}.state`;
             const color = row.cells[2].querySelector("select").value;
 
             if (color !== "Schwarz") {
@@ -410,8 +410,7 @@ layout: page
                 hasSack = true;
             }
 
-            sensorNames.push(sensorName.toUpperCase());
-            colorAssignments[sensorName.toUpperCase()] = color;
+            sensorAssignments.push({ customName, sensorName, color });
         });
 
         if (allBlack) {
@@ -419,26 +418,73 @@ layout: page
             return;
         }
 
-        const helperTemplateParts = sensorNames.map(sensor => {
-            if (colorAssignments[sensor] === "Sack") {
-                return `den ${sensor} Sack`;
-            }
-            return `die ${sensor} Tonne`;
-        });
-
         // Construct the dynamic helper template
         let helperTemplate = `{% raw %}\n`;
-        sensorNames.forEach(sensor => {
-            helperTemplate += `{% set ${sensor} = states.sensor.${sensor.toLowerCase()}.state %}\n`;
+        sensorAssignments.forEach(({ customName, sensorName }) => {
+            helperTemplate += `{% set ${customName.toUpperCase()} = ${sensorName} %}\n`;
         });
-        helperTemplate += `{% if ` + sensorNames.map(s => `${s} == "Morgen"`).join(" and ") + ` %}\n`;
-        helperTemplate += helperTemplateParts.join(", ") + `\n`;
-        helperTemplate += `{% else %}keine{% endif %}{% endraw %}`;
+
+        helperTemplate += buildConditionalStatements(sensorAssignments);
+        helperTemplate += `{% endraw %}`;
 
         // Display the generated template
         document.getElementById("helper-template").textContent = helperTemplate;
         document.getElementById("helper-template-output").style.display = "block";
     }
+
+    function buildConditionalStatements(assignments) {
+        const morgenAssignments = assignments.map(a => a.customName.toUpperCase() + ' == "Morgen"');
+        const names = assignments.map(a => a.customName);
+        const sackAssignment = assignments.find(a => a.color === "Sack");
+
+        let template = `{% if ${morgenAssignments.join(" and ")} %}\n`;
+        template += formatOutput(names, sackAssignment) + "\n";
+
+        // Create all other conditional combinations
+        for (let i = assignments.length - 1; i > 0; i--) {
+            const combinations = getCombinations(morgenAssignments, i);
+            combinations.forEach(combination => {
+                template += `{% elif ${combination.join(" and ")} %}\n`;
+                const comboNames = combination.map(c => c.split(" == ")[0]);
+                template += formatOutput(comboNames, sackAssignment) + "\n";
+            });
+        }
+
+        template += `{% else %}keine{% endif %}`;
+        return template;
+    }
+
+    function getCombinations(arr, size) {
+        const result = [];
+        const combinations = (prefix = [], rest) => {
+            if (prefix.length === size) {
+                result.push(prefix);
+                return;
+            }
+            for (let i = 0; i < rest.length; i++) {
+                combinations(prefix.concat(rest[i]), rest.slice(i + 1));
+            }
+        };
+        combinations([], arr);
+        return result;
+    }
+
+    function formatOutput(names, sackAssignment) {
+        const formattedNames = names.map(name => {
+            if (sackAssignment && name === sackAssignment.customName.toUpperCase()) {
+                return `den ${sackAssignment.customName} Sack`;
+            }
+            return `die ${name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}`;
+        });
+
+        // Add 'und' between the last two items if more than one item
+        if (formattedNames.length > 1) {
+            formattedNames[formattedNames.length - 1] = "und " + formattedNames[formattedNames.length - 1];
+        }
+
+        return formattedNames.join(", ") + " Tonne";
+    }
+
 
     function copyCode(elementId) {
         const code = document.getElementById(elementId).textContent;
