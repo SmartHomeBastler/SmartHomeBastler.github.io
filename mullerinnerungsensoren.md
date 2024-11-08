@@ -196,7 +196,8 @@ layout: page
         padding: 15px;
         margin-top: 20px;
         margin-bottom: 20px;
-        overflow: hidden;
+        overflow: auto; /* Ermöglicht Scrollen */
+        max-height: 300px; /* Maximale Höhe auf 300px begrenzt */
     }
 
     /* Stil für Code-Text */
