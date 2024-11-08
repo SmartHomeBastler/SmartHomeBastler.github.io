@@ -422,6 +422,23 @@ layout: page
         sensorTable.style.display = "table";
     }
     function createTemplates() {
+        // Prüfen, ob eine der Farben auf "Farbe wählen" gesetzt ist
+        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
+    
+        let colorNotSelected = false;
+        
+        rows.forEach(row => {
+            const color = row.cells[2].querySelector("select").value;
+            if (color === "Farbe wählen") {
+                colorNotSelected = true;
+            }
+        });
+    
+        if (colorNotSelected) {
+            alert("Die Farben der Tonne sollten zugeordnet werden!");
+            return;
+        }
         createTemplate("Heute", "helper-template-heute", "helper-template-output-heute");
         createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen");
     
@@ -445,7 +462,6 @@ layout: page
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
         
-        let allBlack = true;
         let hasSack = false;
         const sensorAssignments = [];
         
@@ -454,9 +470,6 @@ layout: page
             const sensorName = "states.sensor." + customName.toLowerCase().replace(/\s+/g, "_") + ".state";
             const color = row.cells[2].querySelector("select").value;
     
-            if (color !== "Farbe wählen") {
-                allBlack = false;
-            }
             if (color === "Sack") {
                 hasSack = true;
             }
