@@ -6,12 +6,13 @@ show_sidebar: false
 layout: page
 ---
 
+
 <head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern (helles Theme) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 </head>
 
 <div class="custom-container-wide">
@@ -90,14 +91,14 @@ layout: page
     <div id="code-output" style="display:none;">
         <h4>Werte Template Nächste Abholung</h4>
         <div class="code-container">
-            <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
-            <pre id="next-pickup-template" class="line-numbers language-yaml"><code></code></pre>
+            <button class="copy-button">Copy</button>
+            <pre class="line-numbers"><code class="language-yaml">id="next-pickup-template"</code></pre>
         </div>
     
         <h4>Werte Template einzelne Abholungen</h4>
-        <div class="code-container">
-            <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
-            <pre id="individual-pickup-template" class="line-numbers language-yaml"><code></code></pre>
+       <div class="code-container">
+            <button class="copy-button">Copy</button>
+            <pre class="line-numbers"><code class="language-yaml">id="individual-pickup-template"</code></pre>
         </div>
     </div>
     
@@ -107,8 +108,8 @@ layout: page
     <div id="helper-template-output" style="display:none;">
         <h4>Generiertes Helfer Template</h4>
         <div class="code-container">
-            <button class="copy-button" onclick="copyCodeFromContainer(this)">Copy</button>
-            <pre id="helper-template" class="line-numbers language-yaml"><code></code></pre>
+            <button class="copy-button">Copy</button>
+            <pre class="line-numbers"><code class="language-yaml"> id="helper-template"</code></pre>
         </div>
     </div>
 </div>
@@ -185,10 +186,9 @@ layout: page
         padding: 8px;
         text-align: center;
     }
-    /* Code Container für Zeilennummern und Kopier-Button */
     .code-container {
         position: relative;
-        background-color: #fdfdfd;
+        background-color: #fdfdfd; /* Heller Hintergrund */
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 15px;
@@ -196,32 +196,32 @@ layout: page
         overflow: hidden;
     }
 
-    /* Stil für Code */
+    /* Stil für Code-Text */
     .code-container code {
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 0.95em;
         line-height: 1.5;
-        color: #333;
-        display: block;
-        white-space: pre-wrap;
+        color: #333; /* Dunklere Textfarbe für bessere Lesbarkeit */
     }
 
-    /* Stil für den Kopier-Button */
+    /* Stil für den Copy-Button */
     .copy-button {
         position: absolute;
         top: 10px;
         right: 10px;
-        background-color: #007bff;
-        color: white;
+        background: #007acc;
+        color: #fff;
         border: none;
+        border-radius: 5px;
         padding: 5px 10px;
-        border-radius: 3px;
+        font-size: 0.85em;
         cursor: pointer;
-        font-size: 12px;
+        z-index: 10;
     }
 
+    /* Hover-Effekt für den Copy-Button */
     .copy-button:hover {
-        background-color: #0056b3;
+        background: #005a9c;
     }
 </style>
 
