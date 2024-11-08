@@ -50,7 +50,7 @@ layout: page
     <!-- Table for Sensor Configurations -->
     <h3 class="custom-subtitle">Sensor-Konfigurationen</h3>
 
-    <div class="important-container">
+    <div class="note-container">
         <h3>Hinweis!</h3>
         <p>
             An diesem Punkt kann die Integration <strong>"Waste Collection Schedule"</strong> in Home assistant unter <strong>"Einstellungen"</strong>, <strong>"Geräte & Dienste"</strong> eingerichtet werden. Dazu rechts unten auf <strong>"+ INTEGRATION HINZUFÜGEN"</strong>, nach Waste Collection Schedule suchen und diese auswählen.
@@ -123,6 +123,22 @@ layout: page
     .important-container p {
         margin: 5px 0 0;
         color: #555;
+    }
+    .note-container {
+        background-color: #3bfffd;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #07aaff;
+    }
+    .note-container h3 {
+        margin: 0;
+        font-size: 1.2em;
+        color: #003333;
+    }
+    .note-container p {
+        margin: 5px 0 0;
+        color: #003333;
     }
     .custom-form-group {
         margin-top: 15px;
