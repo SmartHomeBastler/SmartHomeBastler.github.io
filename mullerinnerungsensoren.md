@@ -450,7 +450,8 @@ layout: page
     
         // Manuell Prism.js Syntax-Hervorhebung anwenden
         Prism.highlightElement(helperTemplateElement);
-            
+    }
+    
 {% raw %}
     function generateConditionsAsText(assignments, hasSack) {
         let yaml = "{% if ";
