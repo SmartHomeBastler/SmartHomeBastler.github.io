@@ -96,10 +96,18 @@ layout: page
     <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
     <button class="custom-button" onclick="createHelperTemplate()">Templates erstellen</button>
     <div id="helper-template-output" style="display:none;">
-        <h4>Template <strong>Müllabholug Morgen</strong></h4>
+        <h4>Müllabholug Morgen</h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template')">Copy</button>
             <pre id="helper-template" class="language-yaml"><code></code></pre>
+        </div>
+    </div>
+    <!-- Ausgabe für "Müllabholung Heute" -->
+    <div id="helper-template-output-heute" style="display:none;">
+        <h4>Müllabholung Heute</h4>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
+            <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
         </div>
     </div>
 </div>
@@ -439,27 +447,73 @@ layout: page
         document.getElementById("helper-template-header").style.display = "block";
     }
     
-{% raw %}
-    function generateConditionsAsText(assignments, hasSack) {
-        let yaml = "{% if ";
-    
-        const combinations = getAllCombinations(assignments);
-        combinations.forEach((combination, index) => {
-            const condition = combination.map(a => `${a.customName.toUpperCase()} == "Morgen"`).join(" and ");
-            const output = generateOutputText(combination, hasSack);
-    
-            if (index === 0) {
-                yaml += `${condition} %}\n`;
-            } else {
-                yaml += `{% elif ${condition} %}\n`;
+    function createTodayTemplate() {
+            const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+            const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
+            
+            let allBlack = true;
+            let hasSack = false;
+            const sensorAssignments = [];
+            
+            rows.forEach(row => {
+                const customName = row.cells[0].textContent.trim();
+                const sensorName = "states.sensor." + customName.toLowerCase().replace(/\s+/g, "_") + ".state";
+                const color = row.cells[2].querySelector("select").value;
+        
+                if (color !== "Schwarz") {
+                    allBlack = false;
+                }
+                if (color === "Sack") {
+                    hasSack = true;
+                }
+        
+                sensorAssignments.push({ customName, sensorName, color });
+            });
+        
+            if (allBlack) {
+                alert("Die Farben der Tonne sollten zugeordnet werden!");
+                return;
             }
-            yaml += `    ${output}\n`;
-        });
+        
+            // Generiere das Template für "Heute"
+            let templateText = "{% raw %}\n";
+        
+            // Setzen der Variablen
+            sensorAssignments.forEach(({ customName, sensorName }) => {
+                templateText += "{% set " + customName.toUpperCase() + " = " + sensorName + " %}\n";
+            });
+        
+            templateText += generateConditionsAsText(sensorAssignments, hasSack, "Heute");
+        
+            templateText += "\n{% endraw %}";
+        
+            // Setze den Inhalt in das <pre> Element
+            const helperTemplateElement = document.getElementById("helper-template-heute");
+            helperTemplateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
+            document.getElementById("helper-template-output-heute").style.display = "block";
+        }    
     
-        yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
-    
-        return yaml;
-    }
+{% raw %}
+    function generateConditionsAsText(assignments, hasSack, conditionDay) {
+            let yaml = `{% if `;
+        
+            const combinations = getAllCombinations(assignments);
+            combinations.forEach((combination, index) => {
+                const condition = combination.map(a => `${a.customName.toUpperCase()} == "${conditionDay}"`).join(" and ");
+                const output = generateOutputText(combination, hasSack);
+        
+                if (index === 0) {
+                    yaml += `${condition} %}\n`;
+                } else {
+                    yaml += `{% elif ${condition} %}\n`;
+                }
+                yaml += `    ${output}\n`;
+            });
+        
+            yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
+        
+            return yaml;
+        }
 {% endraw %}
     
     function generateOutputText(assignments, hasSack) {
