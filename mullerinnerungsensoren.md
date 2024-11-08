@@ -96,7 +96,7 @@ layout: page
     <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
     <button class="custom-button" onclick="createHelperTemplate()">Templates erstellen</button>
     <div id="helper-template-output" style="display:none;">
-        <h4>Generiertes Helfer Template</h4>
+        <h4>Template <strong>Müllabholug Morgen</strong></h4>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template')">Copy</button>
             <pre id="helper-template" class="language-yaml"><code></code></pre>
