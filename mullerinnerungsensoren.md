@@ -109,7 +109,7 @@ layout: page
         <input type="checkbox" id="keineMorgen" />
         <label for="keineMorgen">Anzeige "keine" für Morgen</label>
     </div>
-    
+
     <button class="custom-button" onclick="createTemplates()">Templates erstellen</button>
     
     <!-- Output for "Müllabholung Heute" -->
@@ -455,28 +455,33 @@ layout: page
             alert("Die Farben der Tonne sollten zugeordnet werden!");
             return;
         }
+        
+        createTemplate("Heute", "helper-template-heute", "helper-template-output-heute");
+        createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen");
+    
+        // Prüfen, ob die Checkboxen für "keine"-Anzeige aktiviert sind
         const heuteCheckbox = document.getElementById("keineHeute").checked;
         const morgenCheckbox = document.getElementById("keineMorgen").checked;
-
+    
         let textHeute, textMorgen;
-
+    
         if (heuteCheckbox) {
             textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\nDu musst heute keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
         } else {
             textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
         }
-
+    
         if (morgenCheckbox) {
             textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\nDu musst morgen keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
         } else {
             textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
         }
-
+    
         // Setzen Sie den Text für "Müllabholung Text Heute"
         const textHeuteElement = document.getElementById("helper-template-text-heute");
         textHeuteElement.innerHTML = `<code class="language-yaml">${textHeute}</code>`;
         document.getElementById("helper-template-output-text-heute").style.display = "block";
-
+    
         // Setzen Sie den Text für "Müllabholung Text Morgen"
         const textMorgenElement = document.getElementById("helper-template-text-morgen");
         textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
