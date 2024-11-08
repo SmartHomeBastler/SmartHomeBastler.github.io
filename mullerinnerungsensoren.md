@@ -434,8 +434,8 @@ layout: page
     }
 
     function generateConditionsAsText(assignments, hasSack) {
-        let yaml = "{% if ";
-    
+        let yaml = "{% if "; // Start der Bedingungserstellung
+        
         const combinations = getAllCombinations(assignments);
         combinations.forEach((combination, index) => {
             const condition = combination.map(a => a.customName.toUpperCase() + " == 'Morgen'").join(" and ");
@@ -448,9 +448,9 @@ layout: page
             }
             yaml += "    " + output + "\n";
         });
-    
-        yaml += "{% else %}keine{% endif %}";
-    
+        
+        yaml += "{% else %}keine{% endif %}"; // Abschluss der Bedingungserstellung
+        
         return yaml;
     }
 
