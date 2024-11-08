@@ -53,7 +53,7 @@ layout: page
     <div class="note-container">
         <h3>Hinweis!</h3>
         <p>
-            An diesem Punkt kann die Integration <strong>"Waste Collection Schedule"</strong> in Home assistant unter <strong>"Einstellungen"</strong>, <strong>"Geräte & Dienste"</strong> eingerichtet werden. Dazu rechts unten auf <strong>"+ INTEGRATION HINZUFÜGEN"</strong>, nach Waste Collection Schedule suchen und diese auswählen.
+            An diesem Punkt kann die Integration <strong>"Waste Collection Schedule"</strong> in Home Assistant unter <strong>"Einstellungen"</strong>, <strong>"Geräte & Dienste"</strong> eingerichtet werden. Dazu rechts unten auf <strong>"+ INTEGRATION HINZUFÜGEN"</strong>, nach Waste Collection Schedule suchen und diese auswählen.
             Dann wähle dein Land, am nächsten Fenster deine Region bzw. deinen Abfallentsorger und danch füge etweder deine Kalender URL oder den Dateipfad ein. Im nächsten Schritt setze den Haken bei <strong>"Sensor Konfiguration Anzeigen"</strong> und klicke auf <strong>"SPEICHERN"</strong>.
         </p>
         <p>
@@ -90,6 +90,17 @@ layout: page
         <div class="code-block">
             <pre id="individual-pickup-template"></pre>
             <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
+        </div>
+    </div>
+
+    <!-- New Helper Templates Section -->
+    <h3 class="custom-subtitle" id="helper-template-header" style="display:none;">Helfer Templates</h3>
+    <button class="custom-button" onclick="createHelperTemplate()">Templates erstellen</button>
+    <div id="helper-template-output" style="display:none;">
+        <h4>Generiertes Helfer Template</h4>
+        <div class="code-block">
+            <pre id="helper-template"></pre>
+            <button class="copy-button" onclick="copyCode('helper-template')">Copy</button>
         </div>
     </div>
 </div>
@@ -377,6 +388,56 @@ layout: page
         });
 
         sensorTable.style.display = "table";
+    }
+
+    function createHelperTemplate() {
+        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Skip header row
+
+        let allBlack = true;
+        let hasSack = false;
+        const sensorNames = [];
+        const colorAssignments = {};
+
+        rows.forEach(row => {
+            const sensorName = row.cells[0].textContent;
+            const color = row.cells[2].querySelector("select").value;
+
+            if (color !== "Schwarz") {
+                allBlack = false;
+            }
+            if (color === "Sack") {
+                hasSack = true;
+            }
+
+            sensorNames.push(sensorName.toUpperCase());
+            colorAssignments[sensorName.toUpperCase()] = color;
+        });
+
+        if (allBlack) {
+            alert("Die Farben der Tonne sollten zugeordnet werden!");
+            return;
+        }
+
+        const helperTemplateParts = sensorNames.map(sensor => {
+            if (colorAssignments[sensor] === "Sack") {
+                return `den ${sensor} Sack`;
+            }
+            return `die ${sensor} Tonne`;
+        });
+
+        // Construct the dynamic helper template
+        let helperTemplate = `{% raw %}\n`;
+        sensorNames.forEach(sensor => {
+            helperTemplate += `{% set ${sensor} = states.sensor.${sensor.toLowerCase()}.state %}\n`;
+        });
+        helperTemplate += `{% if ` + sensorNames.map(s => `${s} == "Morgen"`).join(" and ") + ` %}\n`;
+        helperTemplate += helperTemplateParts.join(", ") + `\n`;
+        helperTemplate += `{% else %}keine{% endif %}{% endraw %}`;
+
+        // Display the generated template
+        document.getElementById("helper-template").textContent = helperTemplate;
+        document.getElementById("helper-template-output").style.display = "block";
     }
 
     function copyCode(elementId) {
