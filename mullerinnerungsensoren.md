@@ -273,6 +273,11 @@ layout: page
     .copy-button:hover {
         background: #005a9c;
     }
+    .title-inline h4, .title-inline p {
+        line-height: 1;
+        margin: 0;
+        padding: 0;
+    }
     .title-inline {
         display: flex;
         align-items: center;
