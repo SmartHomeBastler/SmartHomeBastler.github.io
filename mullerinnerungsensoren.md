@@ -442,11 +442,15 @@ layout: page
     
         templateText += "\n{% endraw %}";
     
-        document.getElementById("helper-template").textContent = templateText;
+        // Setze den Inhalt in das <pre> Element
+        const helperTemplateElement = document.getElementById("helper-template");
+        helperTemplateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
         document.getElementById("helper-template-output").style.display = "block";
         document.getElementById("helper-template-header").style.display = "block";
-    }
-
+    
+        // Manuell Prism.js Syntax-Hervorhebung anwenden
+        Prism.highlightElement(helperTemplateElement);
+            
 {% raw %}
     function generateConditionsAsText(assignments, hasSack) {
         let yaml = "{% if ";
