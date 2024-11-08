@@ -114,7 +114,10 @@ layout: page
     
     <!-- Output for "Müllabholung Heute" -->
     <div id="helper-template-output-heute" style="display:none;">
-        <h4>Müllabholung Heute</h4>  <p>(Überschrift = Sensor Name)</p>
+        <div class="title-inline">
+            <h4>Müllabholung Heute</h4>
+            <p>(Überschrift = Sensor Name)</p>
+        </div>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
             <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
@@ -123,7 +126,10 @@ layout: page
     
     <!-- Ausgabe für "Müllabholung Text Heute" -->
     <div id="helper-template-output-text-heute" style="display:none;">
-        <h4>Müllabholung Text Heute</h4>  <p>(Überschrift = Sensor Name)</p>
+        <div class="title-inline">
+            <h4>Müllabholung Text Heute</h4>
+            <p>(Überschrift = Sensor Name)</p>
+        </div>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template-text-heute')">Copy</button>
             <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
@@ -132,7 +138,10 @@ layout: page
     
     <!-- Output for "Müllabholung Morgen" -->
     <div id="helper-template-output-morgen" style="display:none;">
-        <h4>Müllabholung Morgen</h4>  <p>(Überschrift = Sensor Name)</p>
+        <div class="title-inline">
+            <h4>Müllabholung Morgen</h4>
+            <p>(Überschrift = Sensor Name)</p>
+        </div>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
             <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
@@ -141,7 +150,10 @@ layout: page
     
     <!-- Ausgabe für "Müllabholung Text Morgen" -->
     <div id="helper-template-output-text-morgen" style="display:none;">
-        <h4>Müllabholung Text Morgen</h4>  <p>(Überschrift = Sensor Name)</p>
+        <div class="title-inline">
+            <h4>Müllabholung Text Morgen</h4>
+            <p>(Überschrift = Sensor Name)</p>
+        </div>
         <div class="code-container">
             <button class="copy-button" onclick="copyCode('helper-template-text-morgen')">Copy</button>
             <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
@@ -260,6 +272,11 @@ layout: page
     /* Hover-Effekt für den Copy-Button */
     .copy-button:hover {
         background: #005a9c;
+    }
+    .title-inline {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Passt den Abstand zwischen Überschrift und Text an */
     }
 </style>
 
