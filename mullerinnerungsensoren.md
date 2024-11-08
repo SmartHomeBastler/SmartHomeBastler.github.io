@@ -94,7 +94,7 @@ layout: page
     </div>
     <!-- Code for "Templates erstellen" button and helper template generation -->
     <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
-    <button class="custom-button" onclick="createHelperTemplate()">Templates erstellen</button>
+    <button class="custom-button" onclick="createHelperTemplates()">Templates erstellen</button>
     <!-- Ausgabe für "Müllabholung Heute" -->
     <div id="helper-template-output-heute" style="display:none;">
         <h4>Müllabholung Heute</h4>
