@@ -93,8 +93,8 @@ layout: page
         </div>
     </div>
 
-    <!-- New Helper Templates Section -->
-    <h3 class="custom-subtitle" id="helper-template-header" style="display:none;">Helfer Templates</h3>
+    <!-- Code for "Templates erstellen" button and helper template generation -->
+    <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
     <button class="custom-button" onclick="createHelperTemplate()">Templates erstellen</button>
     <div id="helper-template-output" style="display:none;">
         <h4>Generiertes Helfer Template</h4>
@@ -430,6 +430,7 @@ layout: page
         // Display the generated template
         document.getElementById("helper-template").textContent = helperTemplate;
         document.getElementById("helper-template-output").style.display = "block";
+        document.getElementById("helper-template-header").style.display = "block";  // Show the header
     }
 
     function buildConditionalStatements(assignments) {
@@ -444,7 +445,7 @@ layout: page
         for (let i = assignments.length - 1; i > 0; i--) {
             const combinations = getCombinations(morgenAssignments, i);
             combinations.forEach(combination => {
-                template += `{% elsif ${combination.join(" and ")} %}\n`;  // Use 'elsif' instead of 'elif'
+                template += `{% elsif ${combination.join(" and ")} %}\n`;
                 const comboNames = combination.map(c => c.split(" == ")[0]);
                 template += formatOutput(comboNames, sackAssignment) + "\n";
             });
@@ -453,7 +454,6 @@ layout: page
         template += `{% else %}keine{% endif %}`;
         return template;
     }
-
 
     function getCombinations(arr, size) {
         const result = [];
@@ -485,7 +485,6 @@ layout: page
 
         return formattedNames.join(", ") + " Tonne";
     }
-
 
     function copyCode(elementId) {
         const code = document.getElementById(elementId).textContent;
