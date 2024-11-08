@@ -444,7 +444,7 @@ layout: page
         for (let i = assignments.length - 1; i > 0; i--) {
             const combinations = getCombinations(morgenAssignments, i);
             combinations.forEach(combination => {
-                template += `{% elif ${combination.join(" and ")} %}\n`;
+                template += `{% elsif ${combination.join(" and ")} %}\n`;  // Use 'elsif' instead of 'elif'
                 const comboNames = combination.map(c => c.split(" == ")[0]);
                 template += formatOutput(comboNames, sackAssignment) + "\n";
             });
@@ -453,6 +453,7 @@ layout: page
         template += `{% else %}keine{% endif %}`;
         return template;
     }
+
 
     function getCombinations(arr, size) {
         const result = [];
