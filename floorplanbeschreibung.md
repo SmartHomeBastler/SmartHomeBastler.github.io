@@ -47,8 +47,8 @@ layout: page
     }
     .support-links {
         display: flex;
-        justify-content: center;
-        gap: 40px;
+        justify-content: space-around; /* Gleichmäßige Verteilung über den Container */
+        gap: 0; /* Keine zusätzlichen Abstände zwischen den Elementen */
     }
     .support-links a {
         text-decoration: none;
@@ -69,3 +69,5 @@ layout: page
         transform: scale(1.3);
     }
 </style>
+
+
