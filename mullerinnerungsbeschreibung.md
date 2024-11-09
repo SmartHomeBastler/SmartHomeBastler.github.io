@@ -1,5 +1,5 @@
 ---
-title: MKüllerinnerungs Codegenerator Beschreibung
+title: Müllerinnerungs Codegenerator Beschreibung
 subtitle: Hier erfährst du alles über die Handhabung der Müllerinnerungs Codegeneratoren
 description: Details und Infos zu den Müllerinnerungs Codegeneratoren
 show_sidebar: false
