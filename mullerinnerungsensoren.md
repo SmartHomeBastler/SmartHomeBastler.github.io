@@ -6,172 +6,163 @@ show_sidebar: false
 layout: page
 ---
 
-<div class="custom-container-wide">
-    <h2 class="custom-title">Müllkalender Import und Code-Generator</h2>
+<h2 class="custom-title">Müllkalender Import und Code-Generator</h2>
 
-    <!-- Important Notice -->
-    <div class="important-container">
-        <h3>Wichtig!</h3>
-        <p>
-            Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist. Mit der neuesten Version dieser Integration ist es möglich, die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einzurichten. Im Weiteren Verlauf dieser Code-Generierung, werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
-        </p>
+<!-- Important Notice -->
+<div class="important-container">
+    <h3>Wichtig!</h3>
+    <p>
+        Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist. Mit der neuesten Version dieser Integration ist es möglich, die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einzurichten. Im Weiteren Verlauf dieser Code-Generierung, werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
+    </p>
+</div>
+
+<!-- File Upload and URL Input -->
+<div class="custom-form-group">
+    <label for="icsFile" class="custom-label">ICS-Datei hochladen</label>
+    <input type="file" id="icsFile" class="custom-input" accept=".ics" />
+</div>
+
+<div class="custom-form-group">
+    <label for="calendarUrl" class="custom-label">oder ICS-URL eingeben</label>
+    <input type="url" id="calendarUrl" class="custom-input" placeholder="https://example.com/kalender.ics" />
+</div>
+
+<button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
+
+<!-- Table for Calendar Entries -->
+<h3 class="custom-subtitle">Kalendereinträge</h3>
+
+<table class="custom-table" id="entry-table">
+    <thead>
+        <tr>
+            <th>Auswählen</th>
+            <th>Kalendereintrag</th>
+            <th>Eigene Bezeichnung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dynamically populated rows will go here -->
+    </tbody>
+</table>
+
+<button class="custom-button" onclick="checkEntries()">Eingaben überprüfen</button>
+
+<!-- Table for Sensor Configurations -->
+<h3 class="custom-subtitle">Sensor-Konfigurationen</h3>
+
+<div class="note-container">
+    <h3>Hinweis!</h3>
+    <p>
+        An diesem Punkt kann die Integration <strong>"Waste Collection Schedule"</strong> in Home Assistant unter <strong>"Einstellungen"</strong>, <strong>"Geräte & Dienste"</strong> eingerichtet werden. Dazu rechts unten auf <strong>"+ INTEGRATION HINZUFÜGEN"</strong>, nach Waste Collection Schedule suchen und diese auswählen.
+        Dann wähle dein Land, am nächsten Fenster deine Region bzw. deinen Abfallentsorger und danch füge etweder deine Kalender URL oder den Dateipfad ein. Im nächsten Schritt setze den Haken bei <strong>"Sensor Konfiguration Anzeigen"</strong> und klicke auf <strong>"SPEICHERN"</strong>.
+    </p>
+    <p>
+        Als nächstes ist der Sensor für die nächste Abholung an der Reihe. Füge den Namen <strong>"Nächste Abholung"</strong> ein, setze den Haken bei <strong>"Nächste"</strong>, kopiere dir das <strong>"Werte Template Nächste Abholung"</strong> von unten und füge es bei <strong>"Werte Template"</strong> ein. Weiter unten bei den Sensor Einstellungen findest du das Auswahlfeld <strong>"Typen"</strong>. In diesem wählst du alle deine Abholungs-Typen aus, dann setzt du einen Haken bei <strong>"Weitere Sensoren hinzufügen"</strong> und klickst auf <strong>"SPEICHERN"</strong>.
+    </p>
+    <p>
+        Nun sind die Sensoren für die einzelnen Abholungen an der Reihe. Füge den ersten Sensor Namen aus dem genenerator ein, setze den Haken bei <strong>"Abfallarten"</strong>, kopiere dir das <strong>"Werte Template einzelne Abholung"</strong> von unten und füge es bei <strong>"Werte Template"</strong> ein. Weiter unten im Auswahlfeld <strong>"Typen"</strong> wählst du jene Abholungs-Type aus, welche deinem Sensor Namen entspricht. Wenn du noch weitere Sensoren anlegen möchtest, setzt du einen Haken bei <strong>"Weitere Sensoren hinzufügen"</strong> und klickst auf <strong>"SPEICHERN"</strong>.
+    </p>
+</div>
+
+<table class="custom-table" id="sensor-table" style="display:none;">
+    <thead>
+        <tr>
+            <th>Sensor Name</th>
+            <th>Entity ID</th>
+            <th>Tonnen Farbe</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dynamically populated rows will go here -->
+    </tbody>
+</table>
+
+<!-- Code Output for Templates in a Code Block with Copy Button -->
+<h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates</h3>
+
+<div id="code-output" style="display:none;">
+    <h4>Werte Template Nächste Abholung</h4>
+    <div class="code-container">
+        <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
+        <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 
-    <!-- File Upload and URL Input -->
-    <div class="custom-form-group">
-        <label for="icsFile" class="custom-label">ICS-Datei hochladen</label>
-        <input type="file" id="icsFile" class="custom-input" accept=".ics" />
+    <h4>Werte Template einzelne Abholungen</h4>
+    <div class="code-container">
+        <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
+        <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
     </div>
-    
-    <div class="custom-form-group">
-        <label for="calendarUrl" class="custom-label">oder ICS-URL eingeben</label>
-        <input type="url" id="calendarUrl" class="custom-input" placeholder="https://example.com/kalender.ics" />
+</div>
+
+<!-- Button to create Templates for both Today and Tomorrow -->
+<h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
+
+<!-- Hinweisfenster mit Beschreibung -->
+<div class="note-container">
+    <p>
+        Vor der Erstellung der Templates solltest du entscheiden, ob du den Text "Du musst heute keine Tonne rausstellen!" bzw. "Du musst morgen keine Tonne rausstellen!" angezeigt bekommen möchtest oder nicht. Für eine Anzeige dieses Textes, aktiviere die jeweilige Checkbox.
+    </p>
+</div>
+
+<!-- Checkboxen für "keine"-Anzeige -->
+<div class="custom-form-group">
+    <input type="checkbox" id="keineHeute" />
+    <label for="keineHeute">Anzeige "keine" für Heute</label><br>
+    <input type="checkbox" id="keineMorgen" />
+    <label for="keineMorgen">Anzeige "keine" für Morgen</label>
+</div>
+
+<button class="custom-button" onclick="createTemplates()">Templates erstellen</button>
+
+<!-- Output for "Müllabholung Heute" -->
+<div id="helper-template-output-heute" style="display:none;">
+    <div class="title-inline">
+        <h4>Müllabholung Heute</h4>
+        <p>(Überschrift = Sensor Name)</p>
     </div>
-
-    <button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
-
-    <!-- Table for Calendar Entries -->
-    <h3 class="custom-subtitle">Kalendereinträge</h3>
-    <table class="custom-table" id="entry-table">
-        <thead>
-            <tr>
-                <th>Auswählen</th>
-                <th>Kalendereintrag</th>
-                <th>Eigene Bezeichnung</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Dynamically populated rows will go here -->
-        </tbody>
-    </table>
-
-    <button class="custom-button" onclick="checkEntries()">Eingaben überprüfen</button>
-
-    <!-- Table for Sensor Configurations -->
-    <h3 class="custom-subtitle">Sensor-Konfigurationen</h3>
-
-    <div class="note-container">
-        <h3>Hinweis!</h3>
-        <p>
-            An diesem Punkt kann die Integration <strong>"Waste Collection Schedule"</strong> in Home Assistant unter <strong>"Einstellungen"</strong>, <strong>"Geräte & Dienste"</strong> eingerichtet werden. Dazu rechts unten auf <strong>"+ INTEGRATION HINZUFÜGEN"</strong>, nach Waste Collection Schedule suchen und diese auswählen.
-            Dann wähle dein Land, am nächsten Fenster deine Region bzw. deinen Abfallentsorger und danch füge etweder deine Kalender URL oder den Dateipfad ein. Im nächsten Schritt setze den Haken bei <strong>"Sensor Konfiguration Anzeigen"</strong> und klicke auf <strong>"SPEICHERN"</strong>.
-        </p>
-        <p>
-            Als nächstes ist der Sensor für die nächste Abholung an der Reihe. Füge den Namen <strong>"Nächste Abholung"</strong> ein, setze den Haken bei <strong>"Nächste"</strong>, kopiere dir das <strong>"Werte Template Nächste Abholung"</strong> von unten und füge es bei <strong>"Werte Template"</strong> ein. Weiter unten bei den Sensor Einstellungen findest du das Auswahlfeld <strong>"Typen"</strong>. In diesem wählst du alle deine Abholungs-Typen aus, dann setzt du einen Haken bei <strong>"Weitere Sensoren hinzufügen"</strong> und klickst auf <strong>"SPEICHERN"</strong>.
-        </p>
-        <p>
-            Nun sind die Sensoren für die einzelnen Abholungen an der Reihe. Füge den ersten Sensor Namen aus dem genenerator ein, setze den Haken bei <strong>"Abfallarten"</strong>, kopiere dir das <strong>"Werte Template einzelne Abholung"</strong> von unten und füge es bei <strong>"Werte Template"</strong> ein. Weiter unten im Auswahlfeld <strong>"Typen"</strong> wählst du jene Abholungs-Type aus, welche deinem Sensor Namen entspricht. Wenn du noch weitere Sensoren anlegen möchtest, setzt du einen Haken bei <strong>"Weitere Sensoren hinzufügen"</strong> und klickst auf <strong>"SPEICHERN"</strong>.
-        </p>
+    <div class="code-container">
+        <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
+        <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
     </div>
+</div>
 
-    <table class="custom-table" id="sensor-table" style="display:none;">
-        <thead>
-            <tr>
-                <th>Sensor Name</th>
-                <th>Entity ID</th>
-                <th>Tonnen Farbe</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Dynamically populated rows will go here -->
-        </tbody>
-    </table>
+<!-- Ausgabe für "Müllabholung Text Heute" -->
+<div id="helper-template-output-text-heute" style="display:none;">
+    <div class="title-inline">
+        <h4>Müllabholung Text Heute</h4>
+        <p>(Überschrift = Sensor Name)</p>
+    </div>
+    <div class="code-container">
+        <button class="copy-button" onclick="copyCode('helper-template-text-heute')">Copy</button>
+        <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
+    </div>
+</div>
 
-    <!-- Code Output for Templates in a Code Block with Copy Button -->
-    <h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates</h3>
-    <div id="code-output" style="display:none;">
-        <h4>Werte Template Nächste Abholung</h4>
-        <div class="code-container">
-            <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
-            <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
-        </div>
-    
-        <h4>Werte Template einzelne Abholungen</h4>
-       <div class="code-container">
-            <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
-            <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
-        </div>
+<!-- Output for "Müllabholung Morgen" -->
+<div id="helper-template-output-morgen" style="display:none;">
+    <div class="title-inline">
+        <h4>Müllabholung Morgen</h4>
+        <p>(Überschrift = Sensor Name)</p>
     </div>
-    <!-- Button to create Templates for both Today and Tomorrow -->
-    <h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
+    <div class="code-container">
+        <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
+        <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
+    </div>
+</div>
 
-    <!-- Hinweisfenster mit Beschreibung -->
-    <div class="note-container">
-        <p>
-            Vor der Erstellung der Templates solltest du entscheiden, ob du den Text "Du musst heute keine Tonne rausstellen!" bzw. "Du musst morgen keine Tonne rausstellen!" angezeigt bekommen möchtest oder nicht. Für eine Anzeige dieses Textes, aktiviere die jeweilige Checkbox.
-        </p>
+<!-- Ausgabe für "Müllabholung Text Morgen" -->
+<div id="helper-template-output-text-morgen" style="display:none;">
+    <div class="title-inline">
+        <h4>Müllabholung Text Morgen</h4>
+        <p>(Überschrift = Sensor Name)</p>
     </div>
-    
-    <!-- Checkboxen für "keine"-Anzeige -->
-    <div class="custom-form-group">
-        <input type="checkbox" id="keineHeute" />
-        <label for="keineHeute">Anzeige "keine" für Heute</label><br>
-        <input type="checkbox" id="keineMorgen" />
-        <label for="keineMorgen">Anzeige "keine" für Morgen</label>
-    </div>
-
-    <button class="custom-button" onclick="createTemplates()">Templates erstellen</button>
-    
-    <!-- Output for "Müllabholung Heute" -->
-    <div id="helper-template-output-heute" style="display:none;">
-        <div class="title-inline">
-            <h4>Müllabholung Heute</h4>
-            <p>(Überschrift = Sensor Name)</p>
-        </div>
-        <div class="code-container">
-            <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
-            <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
-        </div>
-    </div>
-    
-    <!-- Ausgabe für "Müllabholung Text Heute" -->
-    <div id="helper-template-output-text-heute" style="display:none;">
-        <div class="title-inline">
-            <h4>Müllabholung Text Heute</h4>
-            <p>(Überschrift = Sensor Name)</p>
-        </div>
-        <div class="code-container">
-            <button class="copy-button" onclick="copyCode('helper-template-text-heute')">Copy</button>
-            <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
-        </div>
-    </div>
-    
-    <!-- Output for "Müllabholung Morgen" -->
-    <div id="helper-template-output-morgen" style="display:none;">
-        <div class="title-inline">
-            <h4>Müllabholung Morgen</h4>
-            <p>(Überschrift = Sensor Name)</p>
-        </div>
-        <div class="code-container">
-            <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
-            <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
-        </div>
-    </div>
-    
-    <!-- Ausgabe für "Müllabholung Text Morgen" -->
-    <div id="helper-template-output-text-morgen" style="display:none;">
-        <div class="title-inline">
-            <h4>Müllabholung Text Morgen</h4>
-            <p>(Überschrift = Sensor Name)</p>
-        </div>
-        <div class="code-container">
-            <button class="copy-button" onclick="copyCode('helper-template-text-morgen')">Copy</button>
-            <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
-        </div>
+    <div class="code-container">
+        <button class="copy-button" onclick="copyCode('helper-template-text-morgen')">Copy</button>
+        <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
 
 <style>
-    /* Allgemeine Container-Einstellungen */
-    .custom-container-wide {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        max-width: 90%;
-        margin: auto;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-    
     /* Titel und Untertitel */
     .custom-title, .custom-subtitle {
         text-align: center;
