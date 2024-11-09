@@ -4,8 +4,8 @@ subtitle: Hier erfährst du alles über die Handhabung der Floorplan Codegenerat
 description: Details und Infos zu den Floorplan Codegeneratoren
 show_sidebar: false
 layout: page
-hero_image: /img/SHB-Git-Back.png  # Pfad zu deinem Bild
-hero_height: is-fullwidth        # Optional: Größe des Hero-Bereichs anpassen
+hero_image: /img/SHB-Git-Back.png
+#hero_height: is-fullwidth
 hero_darken: true 
 ---
 
