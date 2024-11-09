@@ -30,6 +30,8 @@ layout: page
 
 <style>
     .support-note {
+        width: 80%;
+        margin: 0 auto;
         border: 2px solid #f39c12;
         padding: 20px;
         background-color: #fff3cd;
@@ -47,8 +49,8 @@ layout: page
     }
     .support-links {
         display: flex;
-        justify-content: space-around; /* Gleichmäßige Verteilung über den Container */
-        gap: 0; /* Keine zusätzlichen Abstände zwischen den Elementen */
+        justify-content: space-around;
+        gap: 0;
     }
     .support-links a {
         text-decoration: none;
