@@ -72,6 +72,9 @@ layout: page
     .support-icon:hover {
         transform: scale(1.3);
     }
+    .support-note p:last-of-type {
+        margin-top: 20px;
+    }
 </style>
 
 
