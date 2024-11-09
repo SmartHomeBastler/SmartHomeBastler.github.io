@@ -19,9 +19,11 @@
       link: /showcase/
 - name: Blog
   link: /blog/
-- name: Codegeneratoren
-  link: /#
+- name: Müllerinnerung Tools
+  link: /mullerinnerungsbeschreibung
   dropdown:
+    - name: Beschreibung Müllerinnerung Codegenerator
+      link: /mullerinnerungsbeschreibung
     - name: ICS zusammenführen
       link: /icszusammenfuhren
     - name: Müllerinnerung Sensoren
