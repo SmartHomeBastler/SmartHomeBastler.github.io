@@ -12,15 +12,15 @@ layout: page
     <div class="support-links">
         <a href="https://www.amazon.de/hz/wishlist/ls/3FT7MNGRVOTM3?ref_=wl_share" target="_blank">
             <img src="/img/amazon_wishlist_logo.png" alt="Amazon Wishlist" class="support-icon">
-            Amazon Wishlist
+            <span>Amazon Wishlist</span>
         </a>
         <a href="https://www.buymeacoffee.com/bastler" target="_blank">
             <img src="/img/buy_me_a_coffee_logo.png" alt="Buy Me a Coffee" class="support-icon">
-            Buy Me a Coffee
+            <span>Buy Me a Coffee</span>
         </a>
         <a href="https://www.paypal.me/kramlmaxx" target="_blank">
             <img src="/img/paypal_donate_logo.png" alt="PayPal Donate" class="support-icon">
-            PayPal Donate
+            <span>PayPal Donate</span>
         </a>
     </div>
 </div>
@@ -35,7 +35,7 @@ layout: page
         background-color: #fff3cd;
         border-radius: 12px;
         margin-top: 20px;
-        margin-bottom: 30px; /* Adds space below the support section */
+        margin-bottom: 30px;
         text-align: center;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -55,14 +55,17 @@ layout: page
         color: #007bff;
         font-weight: bold;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .support-icon {
-        width: 160px; /* Increased image size */
+        width: 160px;
         height: auto;
         margin-bottom: 5px;
         transition: transform 0.2s;
     }
     .support-icon:hover {
         transform: scale(1.3);
-    }  
+    }
 </style>
