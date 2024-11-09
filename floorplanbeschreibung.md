@@ -57,12 +57,12 @@ layout: page
         text-align: center;
     }
     .support-icon {
-        width: 80px; /* Increased image size */
+        width: 160px; /* Increased image size */
         height: auto;
         margin-bottom: 5px;
         transition: transform 0.2s;
     }
     .support-icon:hover {
-        transform: scale(1.1);
+        transform: scale(1.3);
     }  
 </style>
