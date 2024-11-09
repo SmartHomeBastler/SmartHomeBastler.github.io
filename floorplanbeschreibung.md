@@ -4,6 +4,9 @@ subtitle: Hier erfährst du alles über die Handhabung der Floorplan Codegenerat
 description: Details und Infos zu den Floorplan Codegeneratoren
 show_sidebar: false
 layout: page
+hero_image: /img/Etikette_Logo_gross.png  # Pfad zu deinem Bild
+hero_height: is-large         # Optional: Größe des Hero-Bereichs anpassen
+hero_darken: true 
 ---
 
 <div class="support-note">
