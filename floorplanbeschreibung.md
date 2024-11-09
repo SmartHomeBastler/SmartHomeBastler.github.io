@@ -1,13 +1,13 @@
 ---
-title: Floorplan Codegenerator Beschribung
-subtitle: Hier erfährst du alles über die Handhabung der Codegeneratoren
+title: Floorplan Codegenerator Beschreibung
+subtitle: Hier erfährst du alles über die Handhabung der Floorplan Codegeneratoren
 description: Details und Infos zu den Floorplan Codegeneratoren
 show_sidebar: false
 layout: page
 ---
 
 <div class="support-note">
-    <p>Wenn du Interesse daran hast, mich, meinen Kanal oder meine kreative Arbeit zu unterstützen, freue ich mich über jeglichen Support:</p>
+    <p>Wenn dir meine Videos auf 'Smart Home Bastler' oder die hilfreichen Tools auf meiner Website gefallen und du meine Arbeit unterstützen möchtest, freue ich mich über jede Art von Unterstützung</p>
     
     <div class="support-links">
         <a href="https://www.amazon.de/hz/wishlist/ls/3FT7MNGRVOTM3?ref_=wl_share" target="_blank">
@@ -23,6 +23,8 @@ layout: page
             <span>PayPal Donate</span>
         </a>
     </div>
+
+    <p>❤️ Danke, dass du Teil der Community bist! ❤️</p>
 </div>
 
 
