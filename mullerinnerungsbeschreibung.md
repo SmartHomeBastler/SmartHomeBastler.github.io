@@ -122,9 +122,7 @@ layout: page
         display: inline-block;
     }
     .dropdown-toggle span {
-        display: block;
-        margin-top: 5px; /* optional, für Abstand zwischen Text und Pfeil */
-        text-align: center;
+        float: right;
     }
     .dropdown-content {
         padding: 20px;
