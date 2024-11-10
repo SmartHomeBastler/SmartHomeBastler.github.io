@@ -24,6 +24,24 @@
         </div>
     </div>
     <footer class="card-footer">
-        <p class="card-footer-item">Veröffentlicht: {{ post.date | date: '%d. %B %Y' }}</p>
+        <p class="post-date">
+            Veröffentlicht am:
+            {{ post.date | date: "%-d." }}
+            {% case post.date | date: "%B" %}
+            {% when "January" %}Januar
+            {% when "February" %}Februar
+            {% when "March" %}März
+            {% when "April" %}April
+            {% when "May" %}Mai
+            {% when "June" %}Juni
+            {% when "July" %}Juli
+            {% when "August" %}August
+            {% when "September" %}September
+            {% when "October" %}Oktober
+            {% when "November" %}November
+            {% when "December" %}Dezember
+            {% endcase %}
+            {{ post.date | date: "%Y" }}
+        </p>
     </footer>
 </div>
