@@ -58,7 +58,6 @@ layout: page
         </div>
     </div>
 </div>
-
 <style>
     .support-note {
         width: 80%;
@@ -106,6 +105,7 @@ layout: page
     }
     .dropdown {
         margin: 20px 0;
+        text-align: center;
     }
     .dropdown-toggle {
         font-size: 18px;
@@ -116,9 +116,10 @@ layout: page
         padding: 10px 15px;
         border: none;
         border-radius: 5px;
-        text-align: left;
+        text-align: center;
         width: 100%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: inline-block;
     }
     .dropdown-toggle span {
         float: right;
