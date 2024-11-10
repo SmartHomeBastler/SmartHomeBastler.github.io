@@ -17,7 +17,7 @@ published: true
 </head>
 
 <div style="text-align: center;">
-    <img src="/img/blog-post-eigene-schriftarten.png" alt="Titelbild" style="max-width: 60%; height: auto;">
+    <img src="/img/blog-post-eigene-schriftarten.png" alt="Titelbild" style="max-width: 60%; height: auto;height: auto; border-radius: 10px;">
 </div>
 
 
