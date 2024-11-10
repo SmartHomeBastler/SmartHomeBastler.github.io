@@ -60,9 +60,6 @@ layout: page
 </div>
 
 
-[Argon One V3](https://www.amazon.de/Argon-NVME-PCIE-Case-Raspberry-schwarz/dp/B0CVL9BRZL?pd_rd_w=FdWun&content-id=amzn1.sym.13dbab83-f61c-4000-b9ab-184f02ce8fa2&pf_rd_p=13dbab83-f61c-4000-b9ab-184f02ce8fa2&pf_rd_r=BNMW7BMW0XAZ8B6KG7YQ&pd_rd_wg=Kd75R&pd_rd_r=1a820e29-9a0a-47fa-b829-fc1bbe8b7e62&pd_rd_i=B0CVL9BRZL&psc=1&linkCode=ll1&tag=smarthomebast-21&linkId=725e247ef6fe143b5da0444daebf0e55&language=de_DE&ref_=as_li_ss_tl)
-
-
 <style>
     .support-note {
         width: 80%;
