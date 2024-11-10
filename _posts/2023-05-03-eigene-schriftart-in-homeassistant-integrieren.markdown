@@ -21,6 +21,8 @@ published: true
 </div>
 
 
+## Eigene Schriftart
+
 Ich wollte unbedingt für meine Dashboards eine Schriftart zur Auswahl haben, welche meine Uhr in digitaler Schrift anzeigt.
 
 Da ich als "font-family" keine passende Schrift gefunden habe, fügte ich mir eine im Netz gefundene in Home Assistant hinzu.
