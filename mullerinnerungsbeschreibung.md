@@ -4,7 +4,6 @@ subtitle: Hier erfährst du alles über die Handhabung der Müllerinnerungs Code
 description: Details und Infos zu den Müllerinnerungs Codegeneratoren
 show_sidebar: false
 layout: page 
-gallery: gallery_mull_helfer
 ---
 
 <div class="support-note">
@@ -32,7 +31,7 @@ gallery: gallery_mull_helfer
 <h3>Hier erfolgt die Beschreibung für die Müllerinnerungs Codegeneratoren</h3>
 
 
-{% include gallery.html page=page.gallery %}
+{% include gallery.html page="gallery_mull_helfer" %}
 
 <style>
     .support-note {
