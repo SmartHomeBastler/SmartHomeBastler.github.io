@@ -16,9 +16,8 @@ published: true
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 </head>
 
-
-<div class="card-image">
-    <img src="{{ post.image }}" alt="{{ post.title }}">
+<div style="text-align: center;">
+    <img src="/img/blog-post-eigene-schriftarten.png" alt="Titelbild" style="max-width: 60%; height: auto;">
 </div>
 
 
