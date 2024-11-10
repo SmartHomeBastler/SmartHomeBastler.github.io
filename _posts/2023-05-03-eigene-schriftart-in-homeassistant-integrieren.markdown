@@ -16,29 +16,11 @@ published: true
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 </head>
 
-<div class="card">
-    {% if post.image %}
-    <div class="card-image">
-        <img src="{{ post.image }}" alt="{{ post.title }}">
-    </div>
-    {% else %}
-    <header class="card-header">
-        <a class="card-header-title" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-    </header>
-    {% endif %}
-    <div class="card-content">
-        <div class="content">
-            {% if post.image %}
-            <a class="title is-4" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-            {% endif %}
-            {% if post.summary %}
-            {{ post.summary | markdownify }}
-            {% else %}
-            <p>{{ post.excerpt }}</p>
-            {% endif %}
-        </div>
-    </div>
+
+<div class="card-image">
+    <img src="{{ post.image }}" alt="{{ post.title }}">
 </div>
+
 
 Ich wollte unbedingt für meine Dashboards eine Schriftart zur Auswahl haben, welche meine Uhr in digitaler Schrift anzeigt.
 
