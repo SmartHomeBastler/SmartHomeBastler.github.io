@@ -3,7 +3,8 @@ title: Müllerinnerungs Codegenerator Beschreibung
 subtitle: Hier erfährst du alles über die Handhabung der Müllerinnerungs Codegeneratoren
 description: Details und Infos zu den Müllerinnerungs Codegeneratoren
 show_sidebar: false
-layout: page
+layout: page 
+gallery: gallery_mull_helfer
 ---
 
 <div class="support-note">
