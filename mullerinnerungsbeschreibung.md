@@ -31,6 +31,9 @@ gallery: gallery_mull_helfer
 
 <h3>Hier erfolgt die Beschreibung für die Müllerinnerungs Codegeneratoren</h3>
 
+
+{% include gallery.html page=page.gallery %}
+
 <style>
     .support-note {
         width: 80%;
