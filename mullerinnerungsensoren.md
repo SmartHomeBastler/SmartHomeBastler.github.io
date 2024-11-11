@@ -198,15 +198,24 @@ layout: page
         margin-top: 20px;
     }
     
-    /* Wichtiges Hinweis-Container */
+    /* Important Notice Container */
     .important-container {
         background-color: #f39c12;
-        color: #ffffff;
+        color: #ffffff; /* Changes all text color to white */
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
         border: 1px solid #ff2e00;
     }
+    
+    .important-container h3 {
+        color: #ffffff; /* Ensures heading color is also white */
+    }
+    
+    .important-container p {
+        color: #ffffff; /* Ensures paragraph text color is also white */
+    }
+
     
     /* Hinweise */
     .note-container {
