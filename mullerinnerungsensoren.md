@@ -200,11 +200,11 @@ layout: page
     
     /* Wichtiges Hinweis-Container */
     .important-container {
-        background-color: #ffeb3b;
+        background-color: #f39c12;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
-        border: 1px solid #ffc107;
+        border: 1px solid #ff2e00;
     }
     
     /* Hinweise */
