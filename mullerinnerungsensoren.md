@@ -321,8 +321,9 @@ layout: page
             const summaryEntries = new Set();
             const lines = icsData.split("\n");
             for (let line of lines) {
-                if (line.startsWith("SUMMARY:")) {
-                    summaryEntries.add(line.replace("SUMMARY:", "").trim());
+                if (line.startsWith("SUMMARY")) {
+                    const summaryText = line.split(":").slice(1).join(":").trim();
+                    summaryEntries.add(summaryText);
                 }
             }
 
