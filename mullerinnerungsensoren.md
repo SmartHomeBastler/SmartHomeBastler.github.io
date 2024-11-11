@@ -518,16 +518,23 @@ layout: page
         sensorTable.style.display = "table";
     }
     function createTemplates() {
-        // Prüfen, ob eine der Farben auf "Farbe wählen" gesetzt ist
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
-    
-        let colorNotSelected = false;
         
+        let colorNotSelected = false;
+        const selectedColors = new Set();
+        let duplicateColor = false;
+    
         rows.forEach(row => {
             const color = row.cells[2].querySelector("select").value;
             if (color === "Farbe wählen") {
                 colorNotSelected = true;
+            } else {
+                if (selectedColors.has(color)) {
+                    duplicateColor = true; // Farbe wurde schon einmal ausgewählt
+                } else {
+                    selectedColors.add(color);
+                }
             }
         });
     
@@ -535,7 +542,13 @@ layout: page
             alert("Die Farben der Tonne sollten zugeordnet werden!");
             return;
         }
-        
+    
+        if (duplicateColor) {
+            alert("Jede Farbe darf nur einmal ausgewählt werden!");
+            return;
+        }
+    
+        // Falls keine Fehler vorliegen, fahre mit der Template-Erstellung fort
         createTemplate("Heute", "helper-template-heute", "helper-template-output-heute");
         createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen");
     
@@ -567,7 +580,6 @@ layout: page
         textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
     }
-
     
     function createTemplate(day, templateId, outputId) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
