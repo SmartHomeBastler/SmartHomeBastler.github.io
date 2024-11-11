@@ -190,7 +190,8 @@ layout: page
     </div>
 </div>
 
-<button class="custom-button" onclick="createImageList">Bilder Liste erstellen</button>
+<button class="custom-button" onclick="createImageList()">Bilder Liste erstellen</button>
+<div id="image-list-output"></div>
 
 <style>
     /* Titel und Untertitel */
@@ -703,6 +704,52 @@ layout: page
             dropdownContent.style.display = "none";
         }
     }
+    function createImageList() {
+        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
+    
+        // Tabelle für die Ausgabe erstellen
+        let imageTable = '<table class="custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th></tr></thead><tbody>';
+    
+        // Mapping von Farben zu Bilddateinamen
+        const colorToImageMap = {
+            "Schwarz": "schwarz.png",
+            "Blau": "blau.png",
+            "Rot": "rot.png",
+            "Gelb": "gelb.png",
+            "Grün": "gruen.png",
+            "Braun": "braun.png",
+            "Sack": "sack.png",
+            "Schwarz-Blau": "schwarz-blau.png",
+            "Schwarz-Rot": "schwarz-rot.png",
+            "Schwarz-Gelb": "schwarz-gelb.png",
+            "Schwarz-Grün": "schwarz-gruen.png",
+            "Schwarz-Braun": "schwarz-braun.png"
+        };
+    
+        // Zeilen der Tabelle durchlaufen und Bildnamen zuordnen
+        rows.forEach(row => {
+            const sensorName = row.cells[0].textContent.trim();
+            const selectedColor = row.cells[2].querySelector("select").value;
+            
+            if (colorToImageMap[selectedColor]) {
+                const imageName = colorToImageMap[selectedColor];
+                imageTable += `<tr><td>${sensorName}</td><td>${imageName}</td></tr>`;
+            }
+        });
+    
+        imageTable += '</tbody></table>';
+    
+        // Tabelle im HTML anzeigen
+        const outputContainer = document.getElementById('image-list-output');
+        if (!outputContainer) {
+            const newOutputContainer = document.createElement('div');
+            newOutputContainer.id = 'image-list-output';
+            document.body.appendChild(newOutputContainer);
+        }
+        document.getElementById('image-list-output').innerHTML = imageTable;
+    }
+
 </script>
 
 
