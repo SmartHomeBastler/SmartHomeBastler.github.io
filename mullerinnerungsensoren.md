@@ -198,23 +198,22 @@ layout: page
         margin-top: 20px;
     }
     
-    /* Important Notice Container */
-    .important-container {
-        background-color: #f39c12;
-        color: #ffffff; /* Changes all text color to white */
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 1px solid #ff2e00;
-    }
-    
-    .important-container h3 {
-        color: #ffffff; /* Ensures heading color is also white */
-    }
-    
-    .important-container p {
-        color: #ffffff; /* Ensures paragraph text color is also white */
-    }
+/* Wichtiges Hinweis-Container */
+.important-container {
+    background-color: #f39c12;
+    color: #ffffff; /* Setzt die gesamte Textfarbe auf weiß */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ff2e00;
+}
+
+.important-container h3,
+.important-container p,
+.important-container strong {
+    color: #ffffff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+}
+
 
     
     /* Hinweise */
