@@ -190,6 +190,8 @@ layout: page
     </div>
 </div>
 
+<button class="custom-button" onclick="createImageList">Bilder Liste erstellen</button>
+
 <style>
     /* Titel und Untertitel */
     .custom-title, .custom-subtitle {
@@ -503,7 +505,7 @@ layout: page
             const colorCell = document.createElement("td");
             const colorSelect = document.createElement("select");
             colorSelect.className = "color-select";
-            ["Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack"].forEach(color => {
+            ["Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun"].forEach(color => {
                 const option = document.createElement("option");
                 option.value = color;
                 option.textContent = color;
