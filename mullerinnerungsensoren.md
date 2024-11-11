@@ -709,7 +709,7 @@ layout: page
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
     
         // Tabelle für die Ausgabe erstellen
-        let imageTable = '<table class="custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th></tr></thead><tbody>';
+        let imageTable = '<table class="custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Bild Vorschau</th></tr></thead><tbody>';
     
         // Mapping von Farben zu Bilddateinamen
         const colorToImageMap = {
@@ -727,14 +727,26 @@ layout: page
             "Schwarz-Braun": "schwarz-braun.png"
         };
     
-        // Zeilen der Tabelle durchlaufen und Bildnamen zuordnen
+        // Zeilen der Tabelle durchlaufen und Bildnamen sowie Bildvorschau zuordnen
         rows.forEach(row => {
             const sensorName = row.cells[0].textContent.trim();
             const selectedColor = row.cells[2].querySelector("select").value;
             
             if (colorToImageMap[selectedColor]) {
                 const imageName = colorToImageMap[selectedColor];
-                imageTable += `<tr><td>${sensorName}</td><td>${imageName}</td></tr>`;
+                const imagePath = `/img/muell/${imageName}`;
+                
+                // Tabellenzeile erstellen
+                imageTable += `
+                    <tr>
+                        <td>${sensorName}</td>
+                        <td>${imageName}</td>
+                        <td>
+                            <a href="${imagePath}" download="${imageName}">
+                                <img src="${imagePath}" alt="${imageName}" style="width: 50px; height: auto; cursor: pointer;" title="Bild herunterladen">
+                            </a>
+                        </td>
+                    </tr>`;
             }
         });
     
@@ -749,7 +761,6 @@ layout: page
         }
         document.getElementById('image-list-output').innerHTML = imageTable;
     }
-
 </script>
 
 
