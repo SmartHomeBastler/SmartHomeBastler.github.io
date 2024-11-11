@@ -672,6 +672,14 @@ layout: page
             console.error("Fehler beim Kopieren des Codes: ", err);
         });
     }
+    function toggleDropdown() {
+        var dropdownContent = document.getElementById("galleryDropdown");
+        if (dropdownContent.style.display === "none") {
+            dropdownContent.style.display = "block";
+        } else {
+            dropdownContent.style.display = "none";
+        }
+    }
 </script>
 
 
