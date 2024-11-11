@@ -201,6 +201,7 @@ layout: page
     /* Wichtiges Hinweis-Container */
     .important-container {
         background-color: #f39c12;
+        color: #ffffff;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
