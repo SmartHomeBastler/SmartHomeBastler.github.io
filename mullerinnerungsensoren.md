@@ -6,7 +6,7 @@ show_sidebar: false
 layout: page
 ---
 
-<h2 class="custom-title">Müllkalender Import und Code-Generator</h2>
+<h1 class="custom-title">Müllkalender Code-Generator</h1>
 
 <!-- Important Notice -->
 <div class="important-container">
@@ -15,6 +15,8 @@ layout: page
         Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist. Mit der neuesten Version dieser Integration ist es möglich, die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einzurichten. Im Weiteren Verlauf dieser Code-Generierung, werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
     </p>
 </div>
+
+<h2 class="custom-title">1. Kalenderdaten Auslesen</h2>
 
 Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte deine URL an oder lade die ICS Datei hoch und bestätige mit **Kalendereinträge extrahieren**
 
@@ -31,8 +33,13 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
 
 <button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
 
-<!-- Table for Calendar Entries -->
-<h3 class="custom-subtitle">Kalendereinträge</h3>
+<h2 class="custom-title">2. Kalenderdaten umwandeln</h2>
+
+Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen. 
+
+Beispiel: Bezeichnug `Papier` oder `Gelber` = `Papier Tonne` oder `Gelber Sack`
+
+Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 
 <table class="custom-table" id="entry-table">
     <thead>
@@ -47,24 +54,12 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
     </tbody>
 </table>
 
-<button class="custom-button" onclick="checkEntries()">Eingaben überprüfen</button>
+<button class="custom-button" onclick="checkEntries()">Kalendereinträge in Sensoren umwandeln</button>
 
-<!-- Table for Sensor Configurations -->
-<h3 class="custom-subtitle">Sensor-Konfigurationen</h3>
+<h2 class="custom-title">3. Sensoren Konfiguration</h2>
 
-<div class="note-container">
-    <h3>Hinweis!</h3>
-    <p>
-        An diesem Punkt kann die Integration <strong>"Waste Collection Schedule"</strong> in Home Assistant unter <strong>"Einstellungen"</strong>, <strong>"Geräte & Dienste"</strong> eingerichtet werden. Dazu rechts unten auf <strong>"+ INTEGRATION HINZUFÜGEN"</strong>, nach Waste Collection Schedule suchen und diese auswählen.
-        Dann wähle dein Land, am nächsten Fenster deine Region bzw. deinen Abfallentsorger und danch füge etweder deine Kalender URL oder den Dateipfad ein. Im nächsten Schritt setze den Haken bei <strong>"Sensor Konfiguration Anzeigen"</strong> und klicke auf <strong>"SPEICHERN"</strong>.
-    </p>
-    <p>
-        Als nächstes ist der Sensor für die nächste Abholung an der Reihe. Füge den Namen <strong>"Nächste Abholung"</strong> ein, setze den Haken bei <strong>"Nächste"</strong>, kopiere dir das <strong>"Werte Template Nächste Abholung"</strong> von unten und füge es bei <strong>"Werte Template"</strong> ein. Weiter unten bei den Sensor Einstellungen findest du das Auswahlfeld <strong>"Typen"</strong>. In diesem wählst du alle deine Abholungs-Typen aus, dann setzt du einen Haken bei <strong>"Weitere Sensoren hinzufügen"</strong> und klickst auf <strong>"SPEICHERN"</strong>.
-    </p>
-    <p>
-        Nun sind die Sensoren für die einzelnen Abholungen an der Reihe. Füge den ersten Sensor Namen aus dem genenerator ein, setze den Haken bei <strong>"Abfallarten"</strong>, kopiere dir das <strong>"Werte Template einzelne Abholung"</strong> von unten und füge es bei <strong>"Werte Template"</strong> ein. Weiter unten im Auswahlfeld <strong>"Typen"</strong> wählst du jene Abholungs-Type aus, welche deinem Sensor Namen entspricht. Wenn du noch weitere Sensoren anlegen möchtest, setzt du einen Haken bei <strong>"Weitere Sensoren hinzufügen"</strong> und klickst auf <strong>"SPEICHERN"</strong>.
-    </p>
-</div>
+An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
+Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
 
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
@@ -93,6 +88,8 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
         </div>
     </div>
 </div>
+
+Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.
 
 <table class="custom-table" id="sensor-table" style="display:none;">
     <thead>
