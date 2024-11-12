@@ -16,6 +16,8 @@ layout: page
     </p>
 </div>
 
+Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte deine URL an oder lade die ICS Datei hoch und bestätige mit **Kalendereinträge extrahieren**
+
 <!-- File Upload and URL Input -->
 <div class="custom-form-group">
     <label for="icsFile" class="custom-label">ICS-Datei hochladen</label>
