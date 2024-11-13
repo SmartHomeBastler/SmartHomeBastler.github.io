@@ -14,7 +14,10 @@ layout: page
 
 <!-- Eingabefeld und Auswahloptionen im Formular-Design -->
 <div class="custom-form-group" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
-    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 60%; max-width: 400px; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+    <div style="flex-direction: column; width: 60%;">
+        <label for="textInput">Texteingabe:</label>
+        <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+    </div>
     
     <div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
         <div class="custom-form-group">
