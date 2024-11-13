@@ -6,14 +6,6 @@ show_sidebar: false
 layout: page
 ---
 
----
-title: ASCII Art Code Überschriften
-subtitle: Erstelle deine eigenen ASCII Art Überschriften
-description: Um die Überschriften in deinem Code Editor besser aussehen zu lassen, ist der ASCII Art Text generator genau richtig.
-show_sidebar: false
-layout: page
----
-
 <div style="text-align: center;">
     <h1>{{ page.title }}</h1>
     <p>{{ page.subtitle }}</p>
@@ -40,8 +32,8 @@ layout: page
     <button onclick="copyToClipboard()" style="margin-top: 10px; padding: 10px 20px;">Kopieren</button>
 </div>
 
-<!-- FIGlet.js Bibliothek von einem CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/figlet/1.2.4/figlet.min.js"></script>
+<!-- Lokale figlet.js Bibliothek -->
+<script src="{{ '/assets/js/figlet.js' | relative_url }}"></script>
 
 <!-- JavaScript für die ASCII-Art-Generierung und Kopieren -->
 <script>
@@ -66,6 +58,9 @@ function copyToClipboard() {
         console.log("Kopierfehler:", err);
     });
 }
+
+// Testen, ob figlet.js geladen wurde
+console.log(typeof figlet);  // Sollte "object" anzeigen, wenn die Bibliothek korrekt geladen wurde
 </script>
 
 <!-- Inline CSS für eine ansprechende Ansicht -->
