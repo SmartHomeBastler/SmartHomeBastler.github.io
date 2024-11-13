@@ -7,45 +7,52 @@ layout: page
 ---
 
 <div style="text-align: center; max-width: 800px; margin: auto;">
-    <p style="font-size: 1.2em;">Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke "Generieren", um den Text anzuzeigen, oder "Test All", um alle Schriftarten auf einmal anzuzeigen.</p>
+    <p style="font-size: 1.2em; margin-bottom: 20px;">
+        Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke "Generieren", um den Text anzuzeigen, oder "Test All", um alle Schriftarten auf einmal anzuzeigen.
+    </p>
 </div>
 
-<!-- Eingabefeld und Auswahloptionen in einer Zeile -->
-<div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
-    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 40%; max-width: 300px; height: 80px; resize: vertical;"></textarea>
+<!-- Eingabefeld und Auswahloptionen im Formular-Design -->
+<div class="custom-form-group" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
+    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 60%; max-width: 400px; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
     
-    <label for="fontSelect" style="margin-left: 15px;">Schriftart:</label>
-    <select id="fontSelect" style="padding: 5px; margin-left: 5px;">
-        <option value="Banner" selected>Banner</option>
-        <option value="Banner3">Banner3</option>
-        <option value="Big">Big</option>
-        <option value="Colossal">Colossal</option>
-        <option value="Doom">Doom</option>
-        <option value="Slant">Slant</option>
-        <option value="Small">Small</option>
-        <option value="Standard">Standard</option>
-    </select>
-    
-    <label for="widthSelect" style="margin-left: 15px;">Buchstaben Breite:</label>
-    <select id="widthSelect" style="padding: 5px; margin-left: 5px;">
-        <option value="default" selected>Default</option>
-        <option value="full">Full</option>
-        <option value="fitted">Fitted</option>
-        <option value="smushR">Smush (R)</option>
-        <option value="smushU">Smush (U)</option>
-    </select>
+    <div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
+        <div class="custom-form-group">
+            <label for="fontSelect">Schriftart:</label>
+            <select id="fontSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
+                <option value="Banner" selected>Banner</option>
+                <option value="Banner3">Banner3</option>
+                <option value="Big">Big</option>
+                <option value="Colossal">Colossal</option>
+                <option value="Doom">Doom</option>
+                <option value="Slant">Slant</option>
+                <option value="Small">Small</option>
+                <option value="Standard">Standard</option>
+            </select>
+        </div>
+        <div class="custom-form-group">
+            <label for="widthSelect">Buchstaben Breite:</label>
+            <select id="widthSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
+                <option value="default" selected>Default</option>
+                <option value="full">Full</option>
+                <option value="fitted">Fitted</option>
+                <option value="smushR">Smush (R)</option>
+                <option value="smushU">Smush (U)</option>
+            </select>
+        </div>
+    </div>
 </div>
 
-<!-- Buttons für Generieren und Test All -->
-<div style="text-align: center; margin-bottom: 20px;">
-    <button onclick="generateASCII()" style="padding: 10px 20px; margin-right: 10px;">Generieren</button>
-    <button onclick="testAllFonts()" style="padding: 10px 20px; margin-right: 10px;">Test All</button>
-    <button onclick="copyToClipboard()" style="padding: 10px 20px;">Kopieren</button>
+<!-- Buttons für Generieren, Test All und Kopieren -->
+<div class="custom-button-container" style="text-align: center;">
+    <button onclick="generateASCII()" class="custom-button generate">Generieren</button>
+    <button onclick="testAllFonts()" class="custom-button copy">Test All</button>
+    <button onclick="copyToClipboard()" class="custom-button remove">Kopieren</button>
 </div>
 
 <!-- Ausgabefeld -->
 <div style="text-align: center; margin: 20px;">
-    <pre id="asciiOutput" style="border: 1px solid #ccc; padding: 20px; background: #f4f4f4; font-family: monospace; font-size: 14px; white-space: pre-wrap; overflow-wrap: break-word;"></pre>
+    <pre id="asciiOutput" class="yaml-output" style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; background-color: #f8f8f8;"></pre>
 </div>
 
 <!-- Lokale figlet.js Bibliothek -->
@@ -124,25 +131,50 @@ console.log(typeof figlet);  // Sollte "object" anzeigen, wenn die Bibliothek ko
 
 <!-- Inline CSS für eine ansprechende Ansicht -->
 <style>
-body {
-    font-family: Arial, sans-serif;
+/* Formulargestaltung */
+.custom-form-group {
+    margin-bottom: 15px;
 }
-textarea, select, button {
-    font-size: 16px;
+.custom-form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
-#asciiOutput {
+
+/* Buttons für Generieren, Test All und Kopieren */
+.custom-button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.custom-button {
+    padding: 10px 15px;
     font-size: 14px;
-    line-height: 1.2;
-    overflow-x: auto;
-    white-space: pre;
-}
-button {
-    background-color: #0073e6;
-    color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    color: #fff;
 }
-button:hover {
-    background-color: #005bb5;
+.custom-button.generate {
+    background-color: #007bff;
+}
+.custom-button.copy {
+    background-color: #17a2b8;
+}
+.custom-button.remove {
+    background-color: #ffc107;
+    color: #000;
+}
+
+/* YAML-Ausgabe Styling */
+#asciiOutput {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f8f8;
 }
 </style>
