@@ -31,6 +31,27 @@ layout: page
                 <option value="Slant">Slant</option>
                 <option value="Small">Small</option>
                 <option value="Standard">Standard</option>
+                <!-- Neue Schriftarten hinzugefügt -->
+                <option value="Avatar">Avatar</option>
+                <option value="Big Money-ne">Big Money-ne</option>
+                <option value="Big Money-nw">Big Money-nw</option>
+                <option value="Big Money-se">Big Money-se</option>
+                <option value="Big Money-sw">Big Money-sw</option>
+                <option value="BlurVision ASCII">BlurVision ASCII</option>
+                <option value="Crawford2">Crawford2</option>
+                <option value="Doh">Doh</option>
+                <option value="Epic">Epic</option>
+                <option value="Fire Font-k">Fire Font-k</option>
+                <option value="Graceful">Graceful</option>
+                <option value="Graffiti">Graffiti</option>
+                <option value="Small Slant">Small Slant</option>
+                <option value="Star Wars">Star Wars</option>
+                <option value="Sub-Zero">Sub-Zero</option>
+                <option value="ANSI Shadow">ANSI Shadow</option>
+                <option value="ANSI Regular">ANSI Regular</option>
+                <option value="Delta Corps Priest 1">Delta Corps Priest 1</option>
+                <option value="Electronic">Electronic</option>
+                <option value="4Max">4Max</option>
             </select>
         </div>
         <div class="custom-form-group">
@@ -49,7 +70,7 @@ layout: page
 <!-- Buttons für Generieren, Test All und Kopieren -->
 <div class="custom-button-container" style="text-align: center;">
     <button onclick="generateASCII()" class="custom-button generate">Generieren</button>
-    <button onclick="testAllFonts()" class="custom-button copy">Test All</button>
+    <button onclick="testAllFonts()" class="custom-button copy">Teste Alle</button>
     <button onclick="copyToClipboard()" class="custom-button remove">Kopieren</button>
 </div>
 
@@ -104,7 +125,13 @@ function generateASCII() {
 
 function testAllFonts() {
     const text = document.getElementById("textInput").value;
-    const fonts = ["Banner", "Banner3", "Big", "Colossal", "Doom", "Slant", "Small", "Standard"];
+    const fonts = [
+        "Banner", "Banner3", "Big", "Colossal", "Doom", "Slant", "Small", "Standard",
+        "Avatar", "Big Money-ne", "Big Money-nw", "Big Money-se", "Big Money-sw",
+        "BlurVision ASCII", "Crawford2", "Doh", "Epic", "Fire Font-k", "Graceful", 
+        "Graffiti", "Small Slant", "Star Wars", "Sub-Zero", "ANSI Shadow", 
+        "ANSI Regular", "Delta Corps Priest 1", "Electronic", "4Max"
+    ];
     let output = "";
 
     fonts.forEach((font) => {
