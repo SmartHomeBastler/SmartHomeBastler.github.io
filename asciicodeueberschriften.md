@@ -1,22 +1,18 @@
 ---
-title: ASCII Art Code Überschriften
-subtitle: Erstelle deine eigenen ASCII Art Überschriften
-description: Um die Überschriften in deinem Code Editor besser aussehen zu lassen, ist der ASCII Art Text generator genau richtig.
-show_sidebar: false
+title: ASCII Art Generator
 layout: page
 ---
 
-<div style="text-align: center;">
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.subtitle }}</p>
+<div style="text-align: center; max-width: 800px; margin: auto;">
+    <p style="font-size: 1.2em;">Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke "Generieren", um den Text anzuzeigen, oder "Test All", um alle Schriftarten auf einmal anzuzeigen.</p>
 </div>
 
-<!-- Eingabefeld und Auswahloptionen -->
-<div style="text-align: center; margin: 20px;">
-    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 80%; max-width: 500px; height: 100px;"></textarea>
-    <br><br>
-    <label for="fontSelect">Schriftart:</label>
-    <select id="fontSelect" style="padding: 5px;">
+<!-- Eingabefeld und Auswahloptionen in einer Zeile -->
+<div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 40%; max-width: 300px; height: 80px; resize: vertical;"></textarea>
+    
+    <label for="fontSelect" style="margin-left: 15px;">Schriftart:</label>
+    <select id="fontSelect" style="padding: 5px; margin-left: 5px;">
         <option value="Banner" selected>Banner</option>
         <option value="Banner3">Banner3</option>
         <option value="Big">Big</option>
@@ -26,33 +22,27 @@ layout: page
         <option value="Small">Small</option>
         <option value="Standard">Standard</option>
     </select>
-    <br><br>
-    <label for="widthSelect">Buchstaben Breite:</label>
-    <select id="widthSelect" style="padding: 5px;">
+    
+    <label for="widthSelect" style="margin-left: 15px;">Buchstaben Breite:</label>
+    <select id="widthSelect" style="padding: 5px; margin-left: 5px;">
         <option value="default" selected>Default</option>
         <option value="full">Full</option>
         <option value="fitted">Fitted</option>
         <option value="smushR">Smush (R)</option>
         <option value="smushU">Smush (U)</option>
     </select>
-    <br><br>
-    <label for="heightSelect">Buchstaben Höhe:</label>
-    <select id="heightSelect" style="padding: 5px;">
-        <option value="default" selected>Default</option>
-        <option value="full">Full</option>
-        <option value="fitted">Fitted</option>
-        <option value="smushR">Smush (R)</option>
-        <option value="smushU">Smush (U)</option>
-    </select>
-    <br><br>
-    <button onclick="generateASCII()" style="margin-left: 10px; padding: 10px 20px;">Generieren</button>
-    <button onclick="testAllFonts()" style="margin-left: 10px; padding: 10px 20px;">Test All</button>
 </div>
 
-<!-- Ausgabefeld und Kopier-Button -->
+<!-- Buttons für Generieren und Test All -->
+<div style="text-align: center; margin-bottom: 20px;">
+    <button onclick="generateASCII()" style="padding: 10px 20px; margin-right: 10px;">Generieren</button>
+    <button onclick="testAllFonts()" style="padding: 10px 20px; margin-right: 10px;">Test All</button>
+    <button onclick="copyToClipboard()" style="padding: 10px 20px;">Kopieren</button>
+</div>
+
+<!-- Ausgabefeld -->
 <div style="text-align: center; margin: 20px;">
-    <pre id="asciiOutput" style="border: 1px solid #ccc; padding: 20px; background: #f4f4f4; text-align: left; white-space: pre-wrap; word-wrap: break-word;"></pre>
-    <button onclick="copyToClipboard()" style="margin-top: 10px; padding: 10px 20px;">Kopieren</button>
+    <pre id="asciiOutput" style="border: 1px solid #ccc; padding: 20px; background: #f4f4f4; font-family: monospace; font-size: 14px; white-space: pre-wrap; overflow-wrap: break-word;"></pre>
 </div>
 
 <!-- Lokale figlet.js Bibliothek -->
@@ -66,13 +56,12 @@ function generateASCII() {
     const text = document.getElementById("textInput").value;
     const font = document.getElementById("fontSelect").value;
     const width = document.getElementById("widthSelect").value;
-    const height = document.getElementById("heightSelect").value;
     const lines = text.split('\n');  // Teilt den Text in Zeilen auf
 
     let asciiArt = "";  // Zum Speichern der generierten ASCII-Art
 
     function generateLine(line, callback) {
-        figlet.text(line, { font: font, horizontalLayout: width, verticalLayout: height }, function(err, result) {
+        figlet.text(line, { font: font, horizontalLayout: width }, function(err, result) {
             if (err) {
                 console.log("Fehler:", err);
                 callback(err);
@@ -139,14 +128,18 @@ textarea, select, button {
     font-size: 16px;
 }
 #asciiOutput {
-    font-family: monospace;
     font-size: 14px;
     line-height: 1.2;
     overflow-x: auto;
-    max-height: 300px;
     white-space: pre;
 }
 button {
     background-color: #0073e6;
     color: white;
-    border:
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #005bb5;
+}
+</style>
