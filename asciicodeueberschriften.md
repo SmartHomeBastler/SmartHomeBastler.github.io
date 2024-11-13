@@ -26,7 +26,27 @@ layout: page
         <option value="Small">Small</option>
         <option value="Standard">Standard</option>
     </select>
+    <br><br>
+    <label for="widthSelect">Buchstaben Breite:</label>
+    <select id="widthSelect" style="padding: 5px;">
+        <option value="default" selected>Default</option>
+        <option value="full">Full</option>
+        <option value="fitted">Fitted</option>
+        <option value="smushR">Smush (R)</option>
+        <option value="smushU">Smush (U)</option>
+    </select>
+    <br><br>
+    <label for="heightSelect">Buchstaben Höhe:</label>
+    <select id="heightSelect" style="padding: 5px;">
+        <option value="default" selected>Default</option>
+        <option value="full">Full</option>
+        <option value="fitted">Fitted</option>
+        <option value="smushR">Smush (R)</option>
+        <option value="smushU">Smush (U)</option>
+    </select>
+    <br><br>
     <button onclick="generateASCII()" style="margin-left: 10px; padding: 10px 20px;">Generieren</button>
+    <button onclick="testAllFonts()" style="margin-left: 10px; padding: 10px 20px;">Test All</button>
 </div>
 
 <!-- Ausgabefeld und Kopier-Button -->
@@ -45,12 +65,14 @@ figlet.defaults.fontPath = "/assets/js/fonts/";  // Setzt den Pfad zu den Schrif
 function generateASCII() {
     const text = document.getElementById("textInput").value;
     const font = document.getElementById("fontSelect").value;
+    const width = document.getElementById("widthSelect").value;
+    const height = document.getElementById("heightSelect").value;
     const lines = text.split('\n');  // Teilt den Text in Zeilen auf
 
     let asciiArt = "";  // Zum Speichern der generierten ASCII-Art
 
     function generateLine(line, callback) {
-        figlet.text(line, { font: font }, function(err, result) {
+        figlet.text(line, { font: font, horizontalLayout: width, verticalLayout: height }, function(err, result) {
             if (err) {
                 console.log("Fehler:", err);
                 callback(err);
@@ -76,6 +98,23 @@ function generateASCII() {
     }
 
     generateAllLines(0);  // Startet die rekursive Generierung
+}
+
+function testAllFonts() {
+    const text = document.getElementById("textInput").value;
+    const fonts = ["Banner", "Banner3", "Big", "Colossal", "Doom", "Slant", "Small", "Standard"];
+    let output = "";
+
+    fonts.forEach((font) => {
+        figlet.text(text, { font: font }, function(err, result) {
+            if (err) {
+                console.log("Fehler:", err);
+                return;
+            }
+            output += `\n--- ${font} ---\n${result}\n`;
+            document.getElementById("asciiOutput").textContent = output;
+        });
+    });
 }
 
 function copyToClipboard() {
@@ -110,10 +149,4 @@ textarea, select, button {
 button {
     background-color: #0073e6;
     color: white;
-    border: none;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #005bb5;
-}
-</style>
+    border:
