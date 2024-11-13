@@ -18,10 +18,13 @@ layout: page
     <label for="fontSelect">Schriftart:</label>
     <select id="fontSelect" style="padding: 5px;">
         <option value="Banner" selected>Banner</option>
+        <option value="Banner3">Banner3</option>
+        <option value="Big">Big</option>
+        <option value="Colossal">Colossal</option>
+        <option value="Doom">Doom</option>
+        <option value="Slant">Slant</option>
+        <option value="Small">Small</option>
         <option value="Standard">Standard</option>
-        <option value="Ghost">Ghost</option>
-        <option value="Block">Block</option>
-        <!-- Weitere Schriftarten können hinzugefügt werden -->
     </select>
     <button onclick="generateASCII()" style="margin-left: 10px; padding: 10px 20px;">Generieren</button>
 </div>
