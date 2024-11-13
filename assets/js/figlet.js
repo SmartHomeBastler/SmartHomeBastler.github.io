@@ -29,7 +29,7 @@ const figlet = (() => {
   const figFonts = {}; // What stores all of the FIGlet font data
   const figDefaults = {
     font: "Standard",
-    fontPath: "./fonts",
+    fontPath: "/assets/js/fonts",
   };
 
   // ---------------------------------------------------------------------
