@@ -13,12 +13,12 @@ layout: page
 
 <!-- Eingabefeld und Auswahloptionen -->
 <div style="text-align: center; margin: 20px;">
-    <input type="text" id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 80%; max-width: 500px;">
+    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 80%; max-width: 500px; height: 100px;"></textarea>
     <br><br>
     <label for="fontSelect">Schriftart:</label>
     <select id="fontSelect" style="padding: 5px;">
+        <option value="Banner" selected>Banner</option>
         <option value="Standard">Standard</option>
-        <option value="Banner">Banner</option>
         <option value="Ghost">Ghost</option>
         <option value="Block">Block</option>
         <!-- Weitere Schriftarten können hinzugefügt werden -->
@@ -37,17 +37,42 @@ layout: page
 
 <!-- JavaScript für die ASCII-Art-Generierung und Kopieren -->
 <script>
+figlet.defaults.fontPath = "/assets/js/fonts/";  // Setzt den Pfad zu den Schriftarten
+
 function generateASCII() {
     const text = document.getElementById("textInput").value;
     const font = document.getElementById("fontSelect").value;
+    const lines = text.split('\n');  // Teilt den Text in Zeilen auf
 
-    figlet.text(text, { font: font }, function(err, result) {
-        if (err) {
-            console.log("Fehler:", err);
-            return;
+    let asciiArt = "";  // Zum Speichern der generierten ASCII-Art
+
+    function generateLine(line, callback) {
+        figlet.text(line, { font: font }, function(err, result) {
+            if (err) {
+                console.log("Fehler:", err);
+                callback(err);
+                return;
+            }
+            asciiArt += result + "\n";  // Füge die generierte Zeile zur ASCII-Art hinzu
+            callback();
+        });
+    }
+
+    function generateAllLines(i) {
+        if (i < lines.length) {
+            generateLine(lines[i], function(err) {
+                if (!err) {
+                    generateAllLines(i + 1);
+                } else {
+                    console.log("Fehler beim Generieren der ASCII-Art");
+                }
+            });
+        } else {
+            document.getElementById("asciiOutput").textContent = asciiArt;
         }
-        document.getElementById("asciiOutput").textContent = result;
-    });
+    }
+
+    generateAllLines(0);  // Startet die rekursive Generierung
 }
 
 function copyToClipboard() {
@@ -68,7 +93,7 @@ console.log(typeof figlet);  // Sollte "object" anzeigen, wenn die Bibliothek ko
 body {
     font-family: Arial, sans-serif;
 }
-input, select, button {
+textarea, select, button {
     font-size: 16px;
 }
 #asciiOutput {
