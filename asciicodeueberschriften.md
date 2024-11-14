@@ -13,7 +13,7 @@ Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII
 Danach kannst du die generierte Überschrift in deinen Code-Editor einfügen.
 
 <!-- Eingabefeld und Auswahloptionen im Formular-Design -->
-<div class="custom-form-group" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
+<div class="custom-form-group" style="display: flex; justify-content: center; align-items: flex-start; gap: 50px;">
     
 <div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
     <div class="custom-form-group">
