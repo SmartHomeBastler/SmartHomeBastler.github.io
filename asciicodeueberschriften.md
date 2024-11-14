@@ -5,17 +5,16 @@ description: Um die Überschriften in deinem Code Editor besser aussehen zu lass
 show_sidebar: false
 layout: page
 ---
+# Code Überschriften Generator
 
-<div style="text-align: center; max-width: 800px; margin: auto;">
-    <p style="font-size: 1.2em; margin-bottom: 20px;">
-        Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke "Generieren", um den Text anzuzeigen, oder "Teste Alle", um den Text in alle Schriftarten auf einmal anzuzeigen.
-    </p>
-</div>
+Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke "Generieren", um den Text anzuzeigen, "Teste Alle", um den Text in alle Schriftarten auf einmal anzuzeigen oder "Kopieren" umd den generierten Text in die Zwischenablage zu kopieren.
+
+Danach kannst du die generierte Überschrift in deinen Code-Editor einfügen.
 
 <!-- Eingabefeld und Auswahloptionen im Formular-Design -->
 <div class="custom-form-group" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
     
-<div style="display: flex; flex-direction: column; gap: 20px; width: 30%;">
+<div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
     <div class="custom-form-group">
         <label for="fontSelect">Schriftart:</label>
         <select id="fontSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
