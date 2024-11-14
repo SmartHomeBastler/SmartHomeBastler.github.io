@@ -1,5 +1,5 @@
 ---
-title: ASCII Art Code Überschriften
+title: Überschriften für den Code Editor
 subtitle: Erstelle deine eigenen ASCII Art Überschriften
 description: Um die Überschriften in deinem Code Editor besser aussehen zu lassen, ist der ASCII Art Text generator genau richtig.
 show_sidebar: false
@@ -8,63 +8,63 @@ layout: page
 
 <div style="text-align: center; max-width: 800px; margin: auto;">
     <p style="font-size: 1.2em; margin-bottom: 20px;">
-        Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke "Generieren", um den Text anzuzeigen, oder "Test All", um alle Schriftarten auf einmal anzuzeigen.
+        Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke "Generieren", um den Text anzuzeigen, oder "Teste Alle", um den Text in alle Schriftarten auf einmal anzuzeigen.
     </p>
 </div>
 
 <!-- Eingabefeld und Auswahloptionen im Formular-Design -->
 <div class="custom-form-group" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
-    <div style="flex-direction: column; width: 60%;">
-        <label for="textInput">Texteingabe:</label>
-        <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
-    </div>
     
-    <div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
-        <div class="custom-form-group">
-            <label for="fontSelect">Schriftart:</label>
-            <select id="fontSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
-                <option value="Banner" selected>Banner</option>
-                <option value="Banner3">Banner3</option>
-                <option value="Big">Big</option>
-                <option value="Colossal">Colossal</option>
-                <option value="Doom">Doom</option>
-                <option value="Slant">Slant</option>
-                <option value="Small">Small</option>
-                <option value="Standard">Standard</option>
-                <!-- Neue Schriftarten hinzugefügt -->
-                <option value="Avatar">Avatar</option>
-                <option value="Big Money-ne">Big Money-ne</option>
-                <option value="Big Money-nw">Big Money-nw</option>
-                <option value="Big Money-se">Big Money-se</option>
-                <option value="Big Money-sw">Big Money-sw</option>
-                <option value="BlurVision ASCII">BlurVision ASCII</option>
-                <option value="Crawford2">Crawford2</option>
-                <option value="Doh">Doh</option>
-                <option value="Epic">Epic</option>
-                <option value="Fire Font-k">Fire Font-k</option>
-                <option value="Graceful">Graceful</option>
-                <option value="Graffiti">Graffiti</option>
-                <option value="Small Slant">Small Slant</option>
-                <option value="Star Wars">Star Wars</option>
-                <option value="Sub-Zero">Sub-Zero</option>
-                <option value="ANSI Shadow">ANSI Shadow</option>
-                <option value="ANSI Regular">ANSI Regular</option>
-                <option value="Delta Corps Priest 1">Delta Corps Priest 1</option>
-                <option value="Electronic">Electronic</option>
-                <option value="4Max">4Max</option>
-            </select>
-        </div>
-        <div class="custom-form-group">
-            <label for="widthSelect">Buchstaben Breite:</label>
-            <select id="widthSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
-                <option value="default" selected>Default</option>
-                <option value="full">Full</option>
-                <option value="fitted">Fitted</option>
-                <option value="smushR">Smush (R)</option>
-                <option value="smushU">Smush (U)</option>
-            </select>
-        </div>
+<div style="flex-direction: column; width: 50%;">
+    <label for="textInput">Texteingabe:</label>
+    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+</div>
+    
+<div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
+    <div class="custom-form-group">
+        <label for="fontSelect">Schriftart:</label>
+        <select id="fontSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
+            <option value="Banner3">Banner3</option>
+            <option value="Banner" selected>Banner</option>
+            <option value="Big">Big</option>
+            <option value="Colossal">Colossal</option>
+            <option value="Doom">Doom</option>
+            <option value="Slant">Slant</option>
+            <option value="Small">Small</option>
+            <option value="Standard">Standard</option>
+            <option value="Avatar">Avatar</option>
+            <option value="Big Money-ne">Big Money-ne</option>
+            <option value="Big Money-nw">Big Money-nw</option>
+            <option value="Big Money-se">Big Money-se</option>
+            <option value="Big Money-sw">Big Money-sw</option>
+            <option value="BlurVision ASCII">BlurVision ASCII</option>
+            <option value="Crawford2">Crawford2</option>
+            <option value="Doh">Doh</option>
+            <option value="Epic">Epic</option>
+            <option value="Fire Font-k">Fire Font-k</option>
+            <option value="Graceful">Graceful</option>
+            <option value="Graffiti">Graffiti</option>
+            <option value="Small Slant">Small Slant</option>
+            <option value="Star Wars">Star Wars</option>
+            <option value="Sub-Zero">Sub-Zero</option>
+            <option value="ANSI Shadow">ANSI Shadow</option>
+            <option value="ANSI Regular">ANSI Regular</option>
+            <option value="Delta Corps Priest 1">Delta Corps Priest 1</option>
+            <option value="Electronic">Electronic</option>
+            <option value="4Max">4Max</option>
+        </select>
     </div>
+    <div class="custom-form-group">
+        <label for="widthSelect">Buchstaben Breite:</label>
+        <select id="widthSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
+            <option value="default" selected>Default</option>
+            <option value="full">Full</option>
+            <option value="fitted">Fitted</option>
+            <option value="smushR">Smush (R)</option>
+            <option value="smushU">Smush (U)</option>
+        </select>
+    </div>
+</div>
 </div>
 
 <!-- Buttons für Generieren, Test All und Kopieren -->
