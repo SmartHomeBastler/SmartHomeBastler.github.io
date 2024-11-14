@@ -5,9 +5,10 @@ description: Um die Überschriften in deinem Code Editor besser aussehen zu lass
 show_sidebar: false
 layout: page
 ---
-# Code Überschriften Generator
 
-Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke "Generieren", um den Text anzuzeigen, "Teste Alle", um den Text in alle Schriftarten auf einmal anzuzeigen oder "Kopieren" umd den generierten Text in die Zwischenablage zu kopieren.
+<h1 class="custom-title">Code Überschriften Generator</h1>
+
+Gib den Text ein, wähle eine Schriftart und die Buchstabenbreite, um eine ASCII-Art-Überschrift zu erstellen. Drücke **Generieren**, um den Text anzuzeigen, **Teste Alle**, um den Text in alle Schriftarten auf einmal anzuzeigen oder **Kopieren** um den generierten Text in die Zwischenablage zu kopieren.
 
 Danach kannst du die generierte Überschrift in deinen Code-Editor einfügen.
 
@@ -160,6 +161,11 @@ console.log(typeof figlet);  // Sollte "object" anzeigen, wenn die Bibliothek ko
 
 <!-- Inline CSS für eine ansprechende Ansicht -->
 <style>
+.custom-title, .custom-subtitle {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+}
 /* Formulargestaltung */
 .custom-form-group {
     margin-bottom: 15px;
