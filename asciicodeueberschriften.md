@@ -15,17 +15,12 @@ layout: page
 <!-- Eingabefeld und Auswahloptionen im Formular-Design -->
 <div class="custom-form-group" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
     
-<div style="flex-direction: column; width: 50%;">
-    <label for="textInput">Texteingabe:</label>
-    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
-</div>
-    
-<div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
+<div style="display: flex; flex-direction: column; gap: 20px; width: 30%;">
     <div class="custom-form-group">
         <label for="fontSelect">Schriftart:</label>
         <select id="fontSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
-            <option value="Banner3">Banner3</option>
-            <option value="Banner" selected>Banner</option>
+            <option value="Banner3" selected>Banner3</option>
+            <option value="Banner">Banner</option>
             <option value="Big">Big</option>
             <option value="Colossal">Colossal</option>
             <option value="Doom">Doom</option>
@@ -57,13 +52,18 @@ layout: page
     <div class="custom-form-group">
         <label for="widthSelect">Buchstaben Breite:</label>
         <select id="widthSelect" style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;">
-            <option value="default" selected>Default</option>
+            <option value="default" selected>Normal</option>
             <option value="full">Full</option>
             <option value="fitted">Fitted</option>
             <option value="smushR">Smush (R)</option>
             <option value="smushU">Smush (U)</option>
         </select>
     </div>
+</div>
+    
+<div style="flex-direction: column; width: 50%;">
+    <label for="textInput">Texteingabe:</label>
+    <textarea id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
 </div>
 </div>
 
