@@ -6,6 +6,8 @@ show_sidebar: false
 layout: page 
 ---
 
+{% include support_note.html %}
+
 <h3>Hier erfolgt die Beschreibung für die Müllerinnerungs Codegeneratoren</h3>
 
 
