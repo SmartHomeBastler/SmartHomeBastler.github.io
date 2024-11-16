@@ -153,8 +153,9 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
     <div class="title-inline">
-        <h4>Müllabholung Heute</h4>
+        <h4 onclick="copyTitleToClipboard(this)">Müllabholung Heute</h4>
         <p>(Überschrift = Sensor Name)</p>
+        <span id="copy-confirmation" style="display: none; margin-left: 10px; color: green;">&#10003;</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
@@ -371,6 +372,11 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         display: flex;
         align-items: center;
         gap: 10px; /* Passt den Abstand zwischen Überschrift und Text an */
+    }
+    #copy-confirmation {
+        font-size: 16px;
+        font-weight: bold;
+        vertical-align: middle;
     }
     .dropdown {
         margin: 20px 0;
@@ -658,7 +664,21 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
     }
-    
+    function copyTitleToClipboard(element) {
+        const textToCopy = element.textContent.trim(); // Text der Überschrift
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            // Bestätigungs-Icon anzeigen
+            const confirmationIcon = document.getElementById("copy-confirmation");
+            confirmationIcon.style.display = "inline";
+            
+            // Nach 2 Sekunden das Icon wieder ausblenden
+            setTimeout(() => {
+                confirmationIcon.style.display = "none";
+            }, 2000);
+        }).catch(err => {
+            console.error("Fehler beim Kopieren in die Zwischenablage:", err);
+        });
+    }
     function createTemplate(day, templateId, outputId) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
