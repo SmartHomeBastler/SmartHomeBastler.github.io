@@ -5,6 +5,15 @@ description: Generiere die Templates für die Waste Collection Schedule Integrat
 show_sidebar: false
 layout: page
 ---
+<div id="password-modal" class="modal">
+    <div class="modal-content">
+        <h2>Passwort Eingabe</h2>
+        <p>Bitte gib das Passwort ein, um fortzufahren:</p>
+        <input type="password" id="password-input" placeholder="Passwort" />
+        <button onclick="checkPassword()">Eingeben</button>
+        <p id="error-message" style="color: red; display: none;">Falsches Passwort, versuche es erneut.</p>
+    </div>
+</div>
 
 <h1 class="custom-title">Müllkalender Code-Generator</h1>
 
@@ -193,28 +202,78 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 <div id="image-list-output"></div>
 
 <style>
+    /* Modal Hintergrund */
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+    }
+
+    /* Modal-Inhalt */
+    .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Eingabefeld */
+    .modal-content input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    /* Button */
+    .modal-content button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .modal-content button:hover {
+        background-color: #45a049;
+    }
+
     /* Titel und Untertitel */
     .custom-title, .custom-subtitle {
         text-align: center;
         font-weight: bold;
         margin-top: 20px;
     }
-    
-/* Wichtiges Hinweis-Container */
-.important-container {
-    background-color: #f39c12;
-    color: #ffffff; /* Setzt die gesamte Textfarbe auf weiß */
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #ff2e00;
-}
+        
+    /* Wichtiges Hinweis-Container */
+    .important-container {
+        background-color: #f39c12;
+        color: #ffffff; /* Setzt die gesamte Textfarbe auf weiß */
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ff2e00;
+    }
 
-.important-container h3,
-.important-container p,
-.important-container strong {
-    color: #ffffff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
-}
+    .important-container h3,
+    .important-container p,
+    .important-container strong {
+        color: #ffffff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+    }
 
 
     
@@ -346,6 +405,23 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 
 
 <script>
+    // Passwortprüfung
+    const correctPassword = "12%Muell29"; // Hier das gewünschte Passwort eintragen
+
+    function checkPassword() {
+        const input = document.getElementById("password-input").value;
+        if (input === correctPassword) {
+            document.getElementById("password-modal").style.display = "none"; // Schließe das Modal
+        } else {
+            document.getElementById("error-message").style.display = "block"; // Zeige Fehlermeldung
+        }
+    }
+
+    // Seite blockieren, bis das Passwort eingegeben wurde
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("password-modal").style.display = "flex";
+    });
+
     document.addEventListener("DOMContentLoaded", function() {
         try {
             const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
