@@ -155,7 +155,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     <div class="title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Heute</h4>
         <p>(Überschrift = Sensor Name)</p>
-        <span id="copy-confirmation" style="display: none; margin-left: 10px; color: green;">&#10003;</span>
+        <span id="copy-confirmation" style="display: none;">&#10003;</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
@@ -363,20 +363,28 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     .copy-button:hover {
         background: #005a9c;
     }
-    .title-inline h4, .title-inline p {
-        line-height: 1;
-        margin: 0;
-        padding: 0;
-    }
     .title-inline {
-        display: flex;
-        align-items: center;
-        gap: 10px; /* Passt den Abstand zwischen Überschrift und Text an */
+        display: flex; /* Elemente nebeneinander anordnen */
+        align-items: center; /* Vertikale Ausrichtung */
+        gap: 10px; /* Abstand zwischen den Elementen */
     }
+
+    .title-inline h4 {
+        margin: 0; /* Entfernt unnötigen Außenabstand */
+    }
+
+    .title-inline p {
+        margin: 0;
+        font-size: 14px; /* Anpassung der Schriftgröße für den Text */
+        color: gray; /* Optionale Farbänderung */
+    }
+
     #copy-confirmation {
         font-size: 16px;
         font-weight: bold;
-        vertical-align: middle;
+        color: green; /* Farbe des Icons */
+        display: inline; /* Sicherstellen, dass es inline angezeigt wird */
+        margin-left: 10px; /* Abstand zur Überschrift */
     }
     .dropdown {
         margin: 20px 0;
