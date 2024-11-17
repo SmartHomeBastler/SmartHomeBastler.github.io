@@ -277,8 +277,8 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 
 <!-- Checkbox für "Tonne blinkend" -->
 <div class="custom-form-group">
-    <input type="checkbox" id="tonneBlinkend" />
-    <label for="tonneBlinkend">Tonne blinkend</label>
+    <input type="checkbox" id="blinkendCheckbox">
+    <label for="blinkendCheckbox">Tonne blinkend</label>
 </div>
 
 <!-- Auswahlliste für "Anzeige Heute" und "Anzeige Morgen" -->
