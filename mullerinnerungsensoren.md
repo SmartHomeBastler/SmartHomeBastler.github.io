@@ -192,8 +192,16 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     </div>
 </div>
 
+<h2 id="step-5" class="custom-title">5. Dashboard Karten</h2>
+
+Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.
+
+
 <button class="custom-button" onclick="createImageList()">Bilder Liste erstellen</button>
 <div id="image-list-output"></div>
+
+PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
+
 
 <style>
     /* Modal Hintergrund */
