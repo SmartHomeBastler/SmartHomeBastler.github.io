@@ -65,7 +65,7 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 
 <button class="custom-button" onclick="checkEntries()">Kalendereinträge in Sensoren umwandeln</button>
 
-<h2 class="custom-title">3. Sensoren Konfiguration</h2>
+<h2 id="step-3" class="custom-title">3. Sensoren Konfiguration</h2>
 
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
 Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
@@ -131,7 +131,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 </div>
 
 <!-- Button to create Templates for both Today and Tomorrow -->
-<h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
+<h2 id="step-4" class="custom-title">4. Helfer Templates erstellen</h2>
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
@@ -527,7 +527,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 
         // Automatisch zum nächsten Abschnitt scrollen
         document.getElementById('step-2').scrollIntoView({ behavior: 'smooth' });
-        
+
         } catch (error) {
             console.error("Error in extractEntries:", error);
         }
@@ -555,6 +555,9 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
             generateSensorTable(selectedEntries);
             document.getElementById("template-header").style.display = "block";
             document.getElementById("code-output").style.display = "block";
+
+            // Automatisch zum nächsten Abschnitt scrollen
+            document.getElementById('step-3').scrollIntoView({ behavior: 'smooth' });
         }
     }
 
@@ -797,6 +800,9 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         };
         f([], arr);
         return result.filter(comb => comb.length > 0);
+
+        // Automatisch zum nächsten Abschnitt scrollen
+        document.getElementById('step-4').scrollIntoView({ behavior: 'smooth' });
     }
 
     function copyCode(elementId) {
