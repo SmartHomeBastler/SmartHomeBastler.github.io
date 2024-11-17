@@ -420,6 +420,14 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+    #step-2,
+    #step-3,
+    #step-4 {
+        position: relative; /* Verhindert unerwartete Layoutänderungen */
+        z-index: auto; /* Keine Überlappung durch andere Elemente */
+        overflow: visible; /* Ermöglicht die Anzeige des Dropdowns */
+    }
+
 </style>
 
 
