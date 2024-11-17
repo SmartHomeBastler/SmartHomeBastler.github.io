@@ -668,9 +668,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         const textMorgenElement = document.getElementById("helper-template-text-morgen");
         textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
-
-        // Automatisch zum nächsten Abschnitt scrollen
-        scrollToStep('step-4');
     }
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
@@ -881,9 +878,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
         sensorSummary.style.display = "block"; // Zusammenfassung einblenden
         sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4CAF50;">${sensorCount === 1 ? "einen Sensor" : `${sensorCount} Sensoren`}</span> angelegt.`;
-
-        // Automatisch zum nächsten Abschnitt scrollen
-        scrollToStep('step-5');
     }
 </script>
 
