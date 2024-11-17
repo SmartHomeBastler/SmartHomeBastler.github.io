@@ -60,34 +60,13 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
 Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im Dropdown Menü.
 
-<!-- Neuer Dropdown -->
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
-        {% assign gallery_images = site.data.gallery_mull_helfer %}
-        <div class="columns is-multiline">
-            {% for gallery in gallery_images %}
-                <div class="column is-12">
-                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                </div>
-                {% for image in gallery.images %}
-                    <div class="column is-3-desktop is-6-tablet">
-                        <div class="card">
-                            <div class="card-image">
-                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
-                            </div>
-                            <div class="card-content">
-                                <div class="content">
-                                    {{ image.description | markdownify }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        </div>
+    <button class="dropdown-toggle" onclick="toggleDropdown()">Klicke hier <span>&#9660;</span></button>
+    <div id="testDropdown" class="dropdown-content" style="display: none; background: white; padding: 10px; border: 1px solid #ccc;">
+        Test Dropdown-Inhalt
     </div>
 </div>
+
 
 Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.
 
@@ -436,13 +415,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             console.error("Error during DOMContentLoaded setup:", error);
         }
     });
-    function scrollToStep(stepId) {
-        const stepElement = document.getElementById(stepId);
-        if (stepElement) {
-            stepElement.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-
     async function extractEntries() {
         try {
             const fileInput = document.getElementById('icsFile');
@@ -513,9 +485,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                 idCounter++;
             });
 
-            // Automatisch zum nächsten Abschnitt scrollen
-            scrollToStep('step-2');
-
         } catch (error) {
             console.error("Error in extractEntries:", error);
         }
@@ -543,9 +512,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             generateSensorTable(selectedEntries);
             document.getElementById("template-header").style.display = "block";
             document.getElementById("code-output").style.display = "block";
-
-            // Automatisch zum nächsten Abschnitt scrollen
-            scrollToStep('step-3');
 
         }
     }
@@ -806,13 +772,14 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
 
     function toggleDropdown() {
-        var dropdownContent = document.getElementById("galleryDropdown");
+        var dropdownContent = document.getElementById("testDropdown");
         if (dropdownContent.style.display === "none") {
             dropdownContent.style.display = "block";
         } else {
             dropdownContent.style.display = "none";
         }
     }
+
 
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
