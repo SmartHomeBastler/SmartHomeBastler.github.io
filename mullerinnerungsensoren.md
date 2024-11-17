@@ -341,11 +341,11 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         margin-left: 10px; /* Abstand zur Überschrift */
         display: none; /* Standardmäßig versteckt */
     }
-    .custom-gallery-dropdown {
+    .dropdown {
         margin: 20px 0;
         text-align: center;
     }
-    .custom-dropdown-toggle {
+    .dropdown-toggle {
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
@@ -359,10 +359,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: inline-block;
     }
-    .custom-dropdown-toggle span {
+    .dropdown-toggle span {
         float: right;
     }
-    .custom-dropdown-content {
+    .dropdown-content {
         padding: 20px;
         background-color: #ffffff;
         border: 1px solid #f39c12;
@@ -763,8 +763,8 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         });
     }
 
-    function toggleCustomGalleryDropdown() {
-        const dropdownContent = document.getElementById("customGalleryDropdown");
+    function toggleDropdown() {
+        var dropdownContent = document.getElementById("galleryDropdown");
         if (dropdownContent.style.display === "none") {
             dropdownContent.style.display = "block";
         } else {
