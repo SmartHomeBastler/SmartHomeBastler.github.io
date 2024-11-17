@@ -684,6 +684,9 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         const textMorgenElement = document.getElementById("helper-template-text-morgen");
         textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
+
+        // Automatisch zum nächsten Abschnitt scrollen
+        document.getElementById('step-4').scrollIntoView({ behavior: 'smooth' });
     }
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
@@ -800,9 +803,6 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         };
         f([], arr);
         return result.filter(comb => comb.length > 0);
-
-        // Automatisch zum nächsten Abschnitt scrollen
-        document.getElementById('step-4').scrollIntoView({ behavior: 'smooth' });
     }
 
     function copyCode(elementId) {
