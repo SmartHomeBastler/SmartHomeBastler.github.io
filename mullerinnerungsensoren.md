@@ -60,9 +60,9 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
 Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
 
-<div class="custom-gallery-dropdown">
-    <button class="custom-dropdown-toggle" onclick="toggleCustomGalleryDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-    <div id="customGalleryDropdown" class="custom-dropdown-content" style="display: none;">
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
