@@ -610,17 +610,27 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
         // Add standard row for "Nächste Abholung"
         const standardRow = document.createElement("tr");
+
+        // Sensor Name
         const standardNameCell = document.createElement("td");
         standardNameCell.textContent = "Nächste Abholung";
         standardRow.appendChild(standardNameCell);
 
+        // Kopiert-Status
+        const standardCopyStatusCell = document.createElement("td");
+        standardCopyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
+        standardCopyStatusCell.style.textAlign = "center";
+        standardRow.appendChild(standardCopyStatusCell);
+
+        // Entity ID
         const standardSensorCell = document.createElement("td");
         standardSensorCell.textContent = "sensor.nachste_abholung";
         standardRow.appendChild(standardSensorCell);
 
-        const standardCopyStatusCell = document.createElement("td");
-        standardCopyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
-        standardRow.appendChild(standardCopyStatusCell);
+        // Farbe (leer für die Standardzeile)
+        const standardColorCell = document.createElement("td");
+        standardColorCell.textContent = "-"; // No color selection for "Nächste Abholung"
+        standardRow.appendChild(standardColorCell);
 
         sensorTableBody.appendChild(standardRow);
 
@@ -637,35 +647,46 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             const sensorRow = document.createElement("tr");
 
             // Sensor Name
-            const sensorNameCell = document.createElement("td");
-            sensorNameCell.textContent = customName;
-            sensorRow.appendChild(sensorNameCell);
+            const customNameCell = document.createElement("td");
+            customNameCell.textContent = customName;
+            customNameCell.style.cursor = "pointer";
+            customNameCell.onclick = () => {
+                copyToClipboard(customNameCell, sensorName, copyStatusCell);
+            };
+            sensorRow.appendChild(customNameCell);
 
-            // Sensor Entity ID
-            const sensorEntityCell = document.createElement("td");
-            sensorEntityCell.textContent = sensorName;
-            sensorRow.appendChild(sensorEntityCell);
-
-            // Kopiert Status
+            // Kopiert-Status
             const copyStatusCell = document.createElement("td");
             copyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
-            copyStatusCell.style.textAlign = "center"; // Optional für zentrierte Anzeige
+            copyStatusCell.style.textAlign = "center";
             sensorRow.appendChild(copyStatusCell);
 
-            // Sensor Name kopierbar machen
-            sensorNameCell.style.cursor = "pointer";
-            sensorNameCell.onclick = () => {
-                copyToClipboard(sensorNameCell, sensorName, copyStatusCell);
-            };
+            // Entity ID
+            const sensorNameCell = document.createElement("td");
+            sensorNameCell.textContent = sensorName;
+            sensorRow.appendChild(sensorNameCell);
+
+            // Farbe Auswahlfeld
+            const colorCell = document.createElement("td");
+            const colorSelect = document.createElement("select");
+            colorSelect.className = "color-select";
+            ["Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun"].forEach(color => {
+                const option = document.createElement("option");
+                option.value = color;
+                option.textContent = color;
+                colorSelect.appendChild(option);
+            });
+            colorCell.appendChild(colorSelect);
+            sensorRow.appendChild(colorCell);
 
             sensorTableBody.appendChild(sensorRow);
         });
 
         sensorTable.style.display = "table";
     }
+
     function copyToClipboard(element, textToCopy, statusCell) {
         navigator.clipboard.writeText(textToCopy).then(() => {
-            // Zeige das Häkchen in der "Kopiert"-Spalte an
             const checkmark = statusCell.querySelector(".copy-checkmark");
             if (checkmark) {
                 checkmark.style.display = "inline";
@@ -679,6 +700,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             console.error("Fehler beim Kopieren:", err);
         });
     }
+
 
     function createTemplates() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
