@@ -35,7 +35,7 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
 <button class="custom-button" onclick="extractEntries(); showStep(2);">Kalendereinträge extrahieren</button>
 </div>
 
-<div id="step-2">
+<div id="step-2" style="display:none;">
 <h2 class="custom-title">2. Kalenderdaten Umwandeln</h2>
 
 Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen. 
@@ -513,9 +513,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                 entryTableBody.appendChild(row);
                 idCounter++;
             });
-
-            // Automatisch zum nächsten Abschnitt scrollen
-            scrollToStep('step-2');
 
         } catch (error) {
             console.error("Error in extractEntries:", error);
