@@ -201,6 +201,13 @@ Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den 
 <button class="custom-button" onclick="createImageList()">Bilder Liste erstellen</button>
 <div id="image-list-output"></div>
 
+
+<div id="sensor-summary" style="display:none; margin-top: 20px; text-align: center;">
+    <p>
+        Du hast <span id="sensor-count" style="font-weight: bold; color: #4CAF50;">0</span> Sensor angelegt.
+    </p>
+</div>
+
 PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
 
@@ -776,10 +783,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
-    
+        
         // Tabelle für die Ausgabe erstellen
         let imageTable = '<table class="custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Bild Vorschau</th></tr></thead><tbody>';
-    
+        
         // Mapping von Farben zu Bilddateinamen
         const colorToImageMap = {
             "Schwarz": "schwarz.png",
@@ -795,13 +802,15 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             "Schwarz-Grün": "schwarz-gruen.png",
             "Schwarz-Braun": "schwarz-braun.png"
         };
-    
+        
         // Zeilen der Tabelle durchlaufen und Bildnamen sowie Bildvorschau zuordnen
+        let sensorCount = 0; // Zähler für die Anzahl der Sensoren
         rows.forEach(row => {
             const sensorName = row.cells[0].textContent.trim();
             const selectedColor = row.cells[2].querySelector("select").value;
             
             if (colorToImageMap[selectedColor]) {
+                sensorCount++; // Zähler inkrementieren
                 const imageName = colorToImageMap[selectedColor];
                 const imagePath = `/img/muell/${imageName}`;
                 
@@ -818,9 +827,9 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                     </tr>`;
             }
         });
-    
+        
         imageTable += '</tbody></table>';
-    
+        
         // Tabelle im HTML anzeigen
         const outputContainer = document.getElementById('image-list-output');
         if (!outputContainer) {
@@ -829,6 +838,16 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             document.body.appendChild(newOutputContainer);
         }
         document.getElementById('image-list-output').innerHTML = imageTable;
+
+        // Sensor-Zusammenfassung anzeigen
+        const sensorSummary = document.getElementById('sensor-summary');
+        const sensorCountElement = document.getElementById('sensor-count');
+        if (sensorCount === 1) {
+            sensorCountElement.textContent = "einen Sensor";
+        } else {
+            sensorCountElement.textContent = `${sensorCount} Sensoren`;
+        }
+        sensorSummary.style.display = "block"; // Zusammenfassung einblenden
 
         // Automatisch zum nächsten Abschnitt scrollen
         scrollToStep('step-5');
