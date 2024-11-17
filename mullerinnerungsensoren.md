@@ -630,7 +630,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         standardNameCell.textContent = "Nächste Abholung";
         standardNameCell.style.cursor = "pointer";
         standardNameCell.onclick = () => {
-            copyToClipboard("Nächste Abholung", "sensor.nachste_abholung", standardCopyStatusCell);
+            copyToClipboard("Nächste Abholung", standardCopyStatusCell); // Name wird kopiert
         };
         standardRow.appendChild(standardNameCell);
 
@@ -669,7 +669,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             customNameCell.textContent = customName;
             customNameCell.style.cursor = "pointer";
             customNameCell.onclick = () => {
-                copyToClipboard(customName, sensorName, copyStatusCell);
+                copyToClipboard(customName, copyStatusCell); // Name wird kopiert
             };
             sensorRow.appendChild(customNameCell);
 
@@ -703,8 +703,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         sensorTable.style.display = "table";
     }
 
-
-    function copyToClipboard(name, textToCopy, statusCell) {
+    function copyToClipboard(textToCopy, statusCell) {
         navigator.clipboard.writeText(textToCopy).then(() => {
             const checkmark = statusCell.querySelector(".copy-checkmark");
             if (checkmark) {
