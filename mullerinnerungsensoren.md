@@ -61,15 +61,31 @@ An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assis
 Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im Dropdown Menü.
 
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown()">Klicke hier <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
     <div id="galleryDropdown" class="dropdown-content" style="display: none;">
-        <p>Statischer Testinhalt</p>
-        {% assign gallery_images = site.data.gallery_mull_helfer %}
+        <pre>
+            {% assign gallery_images = site.data.gallery_mull_helfer %}
+            {{ gallery_images | jsonify }}
+        </pre>
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
                 <div class="column is-12">
                     <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
                 </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             {% endfor %}
         </div>
     </div>
