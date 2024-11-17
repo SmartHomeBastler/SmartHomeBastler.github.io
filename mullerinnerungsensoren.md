@@ -199,14 +199,19 @@ Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den 
 
 
 <button class="custom-button" onclick="createImageList()">Bilder Liste erstellen</button>
-<div id="image-list-output"></div>
 
 
-<div id="sensor-summary" style="display:none; margin-top: 20px; text-align: center;">
+<div id="sensor-summary" style="display:none; margin-top: 20px; text-align: start; font-size: 20px;">
     <p>
         Du hast <span id="sensor-count" style="font-weight: bold; color: #4CAF50;">0</span> Sensor angelegt.
     </p>
 </div>
+
+
+<div id="image-list-output"></div>
+
+
+
 
 PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
