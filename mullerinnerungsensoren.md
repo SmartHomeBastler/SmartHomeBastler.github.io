@@ -164,41 +164,41 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 </div>
 
 <!-- Ausgabe für "Müllabholung Text Heute" -->
-<div id="helper-template-output-heute" style="display:none;">
+<div id="helper-template-output-text-heute" style="display:none;">
     <div class="title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span id="copy-confirmation" style="display: none;">&#10003;</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
-        <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
+        <button class="copy-button" onclick="copyCode('helper-template-text-heute')">Copy</button>
+        <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
     </div>
 </div>
 
 <!-- Output for "Müllabholung Morgen" -->
-<div id="helper-template-output-heute" style="display:none;">
+<div id="helper-template-output-morgen" style="display:none;">
     <div class="title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span id="copy-confirmation" style="display: none;">&#10003;</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
-        <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
+        <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
+        <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
 
 <!-- Ausgabe für "Müllabholung Text Morgen" -->
-<div id="helper-template-output-heute" style="display:none;">
+<div id="helper-template-output-text-morgen" style="display:none;">
     <div class="title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span id="copy-confirmation" style="display: none;">&#10003;</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
-        <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
+        <button class="copy-button" onclick="copyCode('helper-template-text-morgen')">Copy</button>
+        <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
 
