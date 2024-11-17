@@ -42,7 +42,7 @@ layout: page
 
 <p>Beispiel: Bezeichnug `Papier` oder `Gelber` = `Papier Tonne` oder `Gelber Sack`</p>
 
-</p>Nach den Änderungen klicke auf <strong>Kalendereinträge in Sensoren umwandeln</strong></p>
+<p>Nach den Änderungen klicke auf <strong>Kalendereinträge in Sensoren umwandeln</strong></p>
 
 <table class="custom-table" id="entry-table">
     <thead>
@@ -129,7 +129,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </div>
 </div>
 <div id="confirm-step-3" style="text-align: center; margin-top: 20px;">
-    <button class="custom-button" onclick="createTemplates(); showStep(4);">Sensoren angelegt, weiter zu den Templates</button>
+    <button class="custom-button" onclick="showStep(4);">Sensoren angelegt, weiter zu den Templates</button>
 </div>
 </div>
 
