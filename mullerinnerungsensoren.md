@@ -32,11 +32,11 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
 
 <button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
 
-<h2 class="custom-title">2. Kalenderdaten umwandeln</h2>
+<h2 id="step-2" class="custom-title">2. Kalenderdaten umwandeln</h2>
 
 Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen. 
 
-Beispiel: Bezeichnug Papier oder Gelber = Papier Tonne oder Gelber Sack
+Beispiel: Bezeichnug `Papier` oder `Gelber` = `Papier Tonne` oder `Gelber Sack`
 
 Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 
@@ -55,14 +55,14 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 
 <button class="custom-button" onclick="checkEntries()">Kalendereinträge in Sensoren umwandeln</button>
 
-<h2 class="custom-title">3. Sensoren Konfiguration</h2>
+<h2 id="step-3" class="custom-title">3. Sensoren Konfiguration</h2>
 
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
 Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+<div class="custom-gallery-dropdown">
+    <button class="custom-dropdown-toggle" onclick="toggleCustomGalleryDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+    <div id="customGalleryDropdown" class="custom-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -87,6 +87,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
         </div>
     </div>
 </div>
+
 
 Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.
 
@@ -121,7 +122,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 </div>
 
 <!-- Button to create Templates for both Today and Tomorrow -->
-<h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
+<h2 id="step-4" class="custom-title">4. Helfer Templates erstellen</h2>
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
@@ -192,60 +193,18 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     </div>
 </div>
 
+<h2 id="step-5" class="custom-title">5. Dashboard Karten</h2>
+
+Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.
+
+
 <button class="custom-button" onclick="createImageList()">Bilder Liste erstellen</button>
 <div id="image-list-output"></div>
 
+PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
+
+
 <style>
-    /* Modal Hintergrund */
-    .modal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-    }
-
-    /* Modal-Inhalt */
-    .modal-content {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        text-align: center;
-        width: 90%;
-        max-width: 400px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Eingabefeld */
-    .modal-content input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-    }
-
-    /* Button */
-    .modal-content button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .modal-content button:hover {
-        background-color: #45a049;
-    }
-
     /* Titel und Untertitel */
     .custom-title, .custom-subtitle {
         text-align: center;
@@ -373,20 +332,20 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         margin: 0;
         padding: 0;
         font-size: 16px; /* Kleinere Schriftgröße für den Text */
-        line-height: 1.2; /* Passend zur h4 */
+        line-height: 1.2; /* Passend zur `h4` */
     }
 
     .copy-confirmation {
-        font-size: 24px; /* Gleiche Schriftgröße wie h4 */
+        font-size: 24px; /* Gleiche Schriftgröße wie `h4` */
         color: green; /* Bestätigungsfarbe */
         margin-left: 10px; /* Abstand zur Überschrift */
         display: none; /* Standardmäßig versteckt */
     }
-    .dropdown {
+    .custom-gallery-dropdown {
         margin: 20px 0;
         text-align: center;
     }
-    .dropdown-toggle {
+    .custom-dropdown-toggle {
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
@@ -400,10 +359,10 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: inline-block;
     }
-    .dropdown-toggle span {
+    .custom-dropdown-toggle span {
         float: right;
     }
-    .dropdown-content {
+    .custom-dropdown-content {
         padding: 20px;
         background-color: #ffffff;
         border: 1px solid #f39c12;
@@ -411,14 +370,22 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+    #step-2,
+    #step-3,
+    #step-4 {
+        position: relative; /* Verhindert unerwartete Layoutänderungen */
+        z-index: auto; /* Keine Überlappung durch andere Elemente */
+        overflow: visible; /* Ermöglicht die Anzeige des Dropdowns */
+    }
+
 </style>
 
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         try {
-            const nextPickupTemplate = {% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %};
-            const individualPickupTemplate = {% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %};
+            const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
+            const individualPickupTemplate = `{% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
             
             document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
             document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
@@ -427,6 +394,12 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
             console.error("Error during DOMContentLoaded setup:", error);
         }
     });
+    function scrollToStep(stepId) {
+        const stepElement = document.getElementById(stepId);
+        if (stepElement) {
+            stepElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     async function extractEntries() {
         try {
@@ -446,7 +419,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
                     if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
                     icsData = await response.text();
                 } catch (error) {
-                    entryTableBody.innerHTML = <tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>;
+                    entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
                     console.error("Fetch error:", error);
                     return;
                 }
@@ -474,14 +447,14 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.className = "entry-checkbox";
-                checkbox.id = entry-checkbox-${idCounter};
+                checkbox.id = `entry-checkbox-${idCounter}`;
                 checkboxCell.appendChild(checkbox);
                 row.appendChild(checkboxCell);
 
                 // Summary Entry
                 const summaryCell = document.createElement("td");
                 summaryCell.textContent = entry;
-                summaryCell.id = summary-${idCounter};
+                summaryCell.id = `summary-${idCounter}`;
                 row.appendChild(summaryCell);
 
                 // Custom Name Input
@@ -490,13 +463,17 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
                 customNameInput.type = "text";
                 customNameInput.placeholder = "Eigene Bezeichnung";
                 customNameInput.className = "entry-custom-name";
-                customNameInput.id = custom-name-${idCounter};
+                customNameInput.id = `custom-name-${idCounter}`;
                 customNameCell.appendChild(customNameInput);
                 row.appendChild(customNameCell);
 
                 entryTableBody.appendChild(row);
                 idCounter++;
             });
+
+            // Automatisch zum nächsten Abschnitt scrollen
+            scrollToStep('step-2');
+
         } catch (error) {
             console.error("Error in extractEntries:", error);
         }
@@ -524,6 +501,10 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
             generateSensorTable(selectedEntries);
             document.getElementById("template-header").style.display = "block";
             document.getElementById("code-output").style.display = "block";
+
+            // Automatisch zum nächsten Abschnitt scrollen
+            scrollToStep('step-3');
+
         }
     }
 
@@ -551,12 +532,12 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         // Add rows for selected entries
         selectedEntries.forEach((row, index) => {
             const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
-            const sensorName = sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
+            const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
                 return {
                     'ä': 'ae', 'ö': 'oe', 'ü': 'ue',
                     'Ä': 'Ae', 'Ö': 'Oe', 'Ü': 'Ue', 'ß': 'ss'
                 }[match];
-            })};
+            })}`;
 
             const sensorRow = document.createElement("tr");
 
@@ -630,26 +611,29 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         let textHeute, textMorgen;
     
         if (heuteCheckbox) {
-            textHeute = {% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\nDu musst heute keine Tonne rausstellen!\n{% endif %}{% endraw %};
+            textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\nDu musst heute keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
         } else {
-            textHeute = {% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %};
+            textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
         }
     
         if (morgenCheckbox) {
-            textMorgen = {% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\nDu musst morgen keine Tonne rausstellen!\n{% endif %}{% endraw %};
+            textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\nDu musst morgen keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
         } else {
-            textMorgen = {% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %};
+            textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
         }
     
         // Setzen Sie den Text für "Müllabholung Text Heute"
         const textHeuteElement = document.getElementById("helper-template-text-heute");
-        textHeuteElement.innerHTML = <code class="language-yaml">${textHeute}</code>;
+        textHeuteElement.innerHTML = `<code class="language-yaml">${textHeute}</code>`;
         document.getElementById("helper-template-output-text-heute").style.display = "block";
     
         // Setzen Sie den Text für "Müllabholung Text Morgen"
         const textMorgenElement = document.getElementById("helper-template-text-morgen");
-        textMorgenElement.innerHTML = <code class="language-yaml">${textMorgen}</code>;
+        textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
+
+        // Automatisch zum nächsten Abschnitt scrollen
+        scrollToStep('step-4');
     }
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
@@ -699,25 +683,25 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     
         // Setze den Inhalt in das entsprechende <pre> Element
         const templateElement = document.getElementById(templateId);
-        templateElement.innerHTML = <code class="language-yaml">${templateText}</code>;
+        templateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
         document.getElementById(outputId).style.display = "block";
     }    
     
 {% raw %}
     function generateConditionsAsText(assignments, hasSack, conditionDay) {
-        let yaml = {% if ;
+        let yaml = `{% if `;
     
         const combinations = getAllCombinations(assignments);
         combinations.forEach((combination, index) => {
-            const condition = combination.map(a => ${a.customName.toUpperCase()} == "${conditionDay}").join(" and ");
+            const condition = combination.map(a => `${a.customName.toUpperCase()} == "${conditionDay}"`).join(" and ");
             const output = generateOutputText(combination, hasSack);
     
             if (index === 0) {
-                yaml += ${condition} %}\n;
+                yaml += `${condition} %}\n`;
             } else {
-                yaml += {% elif ${condition} %}\n;
+                yaml += `{% elif ${condition} %}\n`;
             }
-            yaml +=     ${output}\n;
+            yaml += `    ${output}\n`;
         });
     
         yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
@@ -778,14 +762,16 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
             console.error("Fehler beim Kopieren des Codes: ", err);
         });
     }
-    function toggleDropdown() {
-        var dropdownContent = document.getElementById("galleryDropdown");
+
+    function toggleCustomGalleryDropdown() {
+        const dropdownContent = document.getElementById("customGalleryDropdown");
         if (dropdownContent.style.display === "none") {
             dropdownContent.style.display = "block";
         } else {
             dropdownContent.style.display = "none";
         }
     }
+
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
@@ -816,10 +802,10 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
             
             if (colorToImageMap[selectedColor]) {
                 const imageName = colorToImageMap[selectedColor];
-                const imagePath = /img/muell/${imageName};
+                const imagePath = `/img/muell/${imageName}`;
                 
                 // Tabellenzeile erstellen
-                imageTable += 
+                imageTable += `
                     <tr>
                         <td>${sensorName}</td>
                         <td>${imageName}</td>
@@ -828,7 +814,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
                                 <img src="${imagePath}" alt="${imageName}" style="width: 50px; height: auto; cursor: pointer;" title="Bild herunterladen">
                             </a>
                         </td>
-                    </tr>;
+                    </tr>`;
             }
         });
     
@@ -844,3 +830,5 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         document.getElementById('image-list-output').innerHTML = imageTable;
     }
 </script>
+
+
