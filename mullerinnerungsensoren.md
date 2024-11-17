@@ -5,6 +5,16 @@ description: Generiere die Templates für die Waste Collection Schedule Integrat
 show_sidebar: false
 layout: page
 ---
+<div id="password-modal" class="modal">
+    <div class="modal-content">
+        <h2>Passwort Eingabe</h2>
+        <p>Bitte gib das Passwort ein, um fortzufahren:</p>
+        <input type="password" id="password-input" placeholder="Passwort" />
+        <button onclick="checkPassword()">Eingeben</button>
+        <p id="error-message" style="color: red; display: none;">Falsches Passwort, versuche es erneut.</p>
+    </div>
+</div>
+
 <h1 class="custom-title">Müllkalender Code-Generator</h1>
 
 <!-- Important Notice -->
@@ -36,7 +46,7 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
 
 Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen. 
 
-Beispiel: Bezeichnug `Papier` oder `Gelber` = `Papier Tonne` oder `Gelber Sack`
+Beispiel: Bezeichnug Papier oder Gelber = Papier Tonne oder Gelber Sack
 
 Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 
@@ -58,23 +68,35 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 <h2 class="custom-title">3. Sensoren Konfiguration</h2>
 
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
-Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im Dropdown Menü.
+Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
 
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
     <div id="galleryDropdown" class="dropdown-content" style="display: none;">
-        <p>Statischer Testinhalt</p>
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
                 <div class="column is-12">
                     <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
                 </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             {% endfor %}
         </div>
     </div>
 </div>
-
 
 Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.
 
@@ -109,7 +131,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 </div>
 
 <!-- Button to create Templates for both Today and Tomorrow -->
-<h2 id="step-4" class="custom-title">4. Helfer Templates erstellen</h2>
+<h3 class="custom-subtitle" id="helper-template-header">Helfer Templates</h3>
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
@@ -180,16 +202,8 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     </div>
 </div>
 
-<h2 id="step-5" class="custom-title">5. Dashboard Karten</h2>
-
-Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.
-
-
 <button class="custom-button" onclick="createImageList()">Bilder Liste erstellen</button>
 <div id="image-list-output"></div>
-
-PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
-
 
 <style>
     /* Modal Hintergrund */
@@ -369,11 +383,11 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         margin: 0;
         padding: 0;
         font-size: 16px; /* Kleinere Schriftgröße für den Text */
-        line-height: 1.2; /* Passend zur `h4` */
+        line-height: 1.2; /* Passend zur h4 */
     }
 
     .copy-confirmation {
-        font-size: 24px; /* Gleiche Schriftgröße wie `h4` */
+        font-size: 24px; /* Gleiche Schriftgröße wie h4 */
         color: green; /* Bestätigungsfarbe */
         margin-left: 10px; /* Abstand zur Überschrift */
         display: none; /* Standardmäßig versteckt */
@@ -411,10 +425,27 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
 
 <script>
+    // Passwortprüfung
+    const correctPassword = "12%Muell29"; // Hier das gewünschte Passwort eintragen
+
+    function checkPassword() {
+        const input = document.getElementById("password-input").value;
+        if (input === correctPassword) {
+            document.getElementById("password-modal").style.display = "none"; // Schließe das Modal
+        } else {
+            document.getElementById("error-message").style.display = "block"; // Zeige Fehlermeldung
+        }
+    }
+
+    // Seite blockieren, bis das Passwort eingegeben wurde
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("password-modal").style.display = "flex";
+    });
+
     document.addEventListener("DOMContentLoaded", function() {
         try {
-            const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
-            const individualPickupTemplate = `{% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
+            const nextPickupTemplate = {% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %};
+            const individualPickupTemplate = {% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %};
             
             document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
             document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
@@ -423,6 +454,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             console.error("Error during DOMContentLoaded setup:", error);
         }
     });
+
     async function extractEntries() {
         try {
             const fileInput = document.getElementById('icsFile');
@@ -441,7 +473,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                     if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
                     icsData = await response.text();
                 } catch (error) {
-                    entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
+                    entryTableBody.innerHTML = <tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>;
                     console.error("Fetch error:", error);
                     return;
                 }
@@ -469,14 +501,14 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.className = "entry-checkbox";
-                checkbox.id = `entry-checkbox-${idCounter}`;
+                checkbox.id = entry-checkbox-${idCounter};
                 checkboxCell.appendChild(checkbox);
                 row.appendChild(checkboxCell);
 
                 // Summary Entry
                 const summaryCell = document.createElement("td");
                 summaryCell.textContent = entry;
-                summaryCell.id = `summary-${idCounter}`;
+                summaryCell.id = summary-${idCounter};
                 row.appendChild(summaryCell);
 
                 // Custom Name Input
@@ -485,14 +517,13 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                 customNameInput.type = "text";
                 customNameInput.placeholder = "Eigene Bezeichnung";
                 customNameInput.className = "entry-custom-name";
-                customNameInput.id = `custom-name-${idCounter}`;
+                customNameInput.id = custom-name-${idCounter};
                 customNameCell.appendChild(customNameInput);
                 row.appendChild(customNameCell);
 
                 entryTableBody.appendChild(row);
                 idCounter++;
             });
-
         } catch (error) {
             console.error("Error in extractEntries:", error);
         }
@@ -520,7 +551,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             generateSensorTable(selectedEntries);
             document.getElementById("template-header").style.display = "block";
             document.getElementById("code-output").style.display = "block";
-
         }
     }
 
@@ -548,12 +578,12 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         // Add rows for selected entries
         selectedEntries.forEach((row, index) => {
             const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
-            const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
+            const sensorName = sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
                 return {
                     'ä': 'ae', 'ö': 'oe', 'ü': 'ue',
                     'Ä': 'Ae', 'Ö': 'Oe', 'Ü': 'Ue', 'ß': 'ss'
                 }[match];
-            })}`;
+            })};
 
             const sensorRow = document.createElement("tr");
 
@@ -627,29 +657,26 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         let textHeute, textMorgen;
     
         if (heuteCheckbox) {
-            textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\nDu musst heute keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
+            textHeute = {% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\nDu musst heute keine Tonne rausstellen!\n{% endif %}{% endraw %};
         } else {
-            textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
+            textHeute = {% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %};
         }
     
         if (morgenCheckbox) {
-            textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\nDu musst morgen keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
+            textMorgen = {% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\nDu musst morgen keine Tonne rausstellen!\n{% endif %}{% endraw %};
         } else {
-            textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
+            textMorgen = {% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %};
         }
     
         // Setzen Sie den Text für "Müllabholung Text Heute"
         const textHeuteElement = document.getElementById("helper-template-text-heute");
-        textHeuteElement.innerHTML = `<code class="language-yaml">${textHeute}</code>`;
+        textHeuteElement.innerHTML = <code class="language-yaml">${textHeute}</code>;
         document.getElementById("helper-template-output-text-heute").style.display = "block";
     
         // Setzen Sie den Text für "Müllabholung Text Morgen"
         const textMorgenElement = document.getElementById("helper-template-text-morgen");
-        textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
+        textMorgenElement.innerHTML = <code class="language-yaml">${textMorgen}</code>;
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
-
-        // Automatisch zum nächsten Abschnitt scrollen
-        scrollToStep('step-4');
     }
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
@@ -699,25 +726,25 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     
         // Setze den Inhalt in das entsprechende <pre> Element
         const templateElement = document.getElementById(templateId);
-        templateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
+        templateElement.innerHTML = <code class="language-yaml">${templateText}</code>;
         document.getElementById(outputId).style.display = "block";
     }    
     
 {% raw %}
     function generateConditionsAsText(assignments, hasSack, conditionDay) {
-        let yaml = `{% if `;
+        let yaml = {% if ;
     
         const combinations = getAllCombinations(assignments);
         combinations.forEach((combination, index) => {
-            const condition = combination.map(a => `${a.customName.toUpperCase()} == "${conditionDay}"`).join(" and ");
+            const condition = combination.map(a => ${a.customName.toUpperCase()} == "${conditionDay}").join(" and ");
             const output = generateOutputText(combination, hasSack);
     
             if (index === 0) {
-                yaml += `${condition} %}\n`;
+                yaml += ${condition} %}\n;
             } else {
-                yaml += `{% elif ${condition} %}\n`;
+                yaml += {% elif ${condition} %}\n;
             }
-            yaml += `    ${output}\n`;
+            yaml +=     ${output}\n;
         });
     
         yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
@@ -778,7 +805,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             console.error("Fehler beim Kopieren des Codes: ", err);
         });
     }
-
     function toggleDropdown() {
         var dropdownContent = document.getElementById("galleryDropdown");
         if (dropdownContent.style.display === "none") {
@@ -787,8 +813,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             dropdownContent.style.display = "none";
         }
     }
-
-
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
@@ -819,10 +843,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             
             if (colorToImageMap[selectedColor]) {
                 const imageName = colorToImageMap[selectedColor];
-                const imagePath = `/img/muell/${imageName}`;
+                const imagePath = /img/muell/${imageName};
                 
                 // Tabellenzeile erstellen
-                imageTable += `
+                imageTable += 
                     <tr>
                         <td>${sensorName}</td>
                         <td>${imageName}</td>
@@ -831,7 +855,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                                 <img src="${imagePath}" alt="${imageName}" style="width: 50px; height: auto; cursor: pointer;" title="Bild herunterladen">
                             </a>
                         </td>
-                    </tr>`;
+                    </tr>;
             }
         });
     
@@ -847,5 +871,3 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         document.getElementById('image-list-output').innerHTML = imageTable;
     }
 </script>
-
-
