@@ -299,15 +299,28 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </select>
 </div>
 
-<!-- Button zum Aktualisieren der Beispielkarte -->
-<div style="text-align: center; margin-top: 15px;">
-    <button id="update-example-card-button" class="custom-button">Beispiel anzeigen</button>
+<div id="dashboard-options" style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <!-- YAML-Ausgabefenster -->
+    <div id="yaml-output-container" style="width: 45%; text-align: left;">
+        <h4 class="custom-title">Generierter YAML-Code</h4>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyYAMLCode()">Copy</button>
+            <pre id="yaml-code-output" class="language-yaml"><code></code></pre>
+        </div>
+    </div>
+
+    <!-- Beispielbild -->
+    <div id="example-card-container" style="width: 45%; text-align: center;">
+        <h4 class="custom-title">Beispielkarte</h4>
+        <img id="example-image" src="" alt="Beispielkarte" style="max-width: 100%; display: none;">
+    </div>
 </div>
 
-<!-- Bereich für das Bild der Beispielkarte -->
-<div id="example-card-container" style="text-align: center; margin-top: 20px;">
-    <img id="example-image" src="" alt="Beispielkarte" style="max-width: 100%; display: none;">
+<!-- Button zur Aktualisierung -->
+<div style="text-align: center; margin-top: 15px;">
+    <button id="update-example-and-code" class="custom-button">Beispiel anzeigen & Code generieren</button>
 </div>
+
 
 
 PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
@@ -1055,9 +1068,65 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         exampleImage.style.display = "block"; // Show the image
     }
 
-    // Event-Listener für den Button
-    document.getElementById("update-example-card-button").addEventListener("click", updateExampleCard);
+    function generateCardYAML() {
+        const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
+        const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value;
+        const blinkendCheckbox = document.getElementById("blinkendCheckbox").checked;
+        const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
+        const sensorCount = sensorTableBody.querySelectorAll("tr").length - 1; // Exclude the header row
 
+        let yaml = "type: custom:button-card\n";
+        yaml += "name: Müllkalender\n";
+
+        if (sensorCount >= 1) {
+            yaml += `sensor_count: ${sensorCount}\n`;
+        }
+
+        yaml += `anzeige: ${anzeigeAuswahl}\n`;
+        yaml += `darstellung: ${darstellungAuswahl}\n`;
+
+        if (blinkendCheckbox) {
+            yaml += "blinkend: true\n";
+        }
+
+        // Add example-specific logic
+        if (darstellungAuswahl === "einzeilig") {
+            yaml += "layout: horizontal\n";
+        } else if (darstellungAuswahl === "mehrzeilig") {
+            yaml += "layout: vertical\n";
+        }
+
+        yaml += "sensors:\n";
+
+        // Generate sensors YAML
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Skip the header
+        rows.forEach((row, index) => {
+            const sensorName = row.cells[2].textContent.trim(); // Entity ID
+            const color = row.cells[3].querySelector("select").value;
+            yaml += `  - name: ${sensorName}\n    color: ${color}\n`;
+        });
+
+        // Output the generated YAML
+        const yamlCodeOutput = document.getElementById("yaml-code-output");
+        yamlCodeOutput.textContent = yaml;
+    }
+
+    function copyYAMLCode() {
+        const yamlCodeOutput = document.getElementById("yaml-code-output");
+        const codeText = yamlCodeOutput.textContent;
+
+        navigator.clipboard.writeText(codeText).then(() => {
+            alert("Code erfolgreich kopiert!");
+        }).catch(err => {
+            console.error("Fehler beim Kopieren des Codes:", err);
+        });
+    }
+
+    // Update both the example card and YAML code
+    document.getElementById("update-example-and-code").addEventListener("click", () => {
+        updateExampleCard();
+        generateCardYAML();
+    });
 
 </script>
 
