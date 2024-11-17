@@ -1069,47 +1069,84 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
 
     function generateCardYAML() {
-        const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
-        const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value;
-        const blinkendCheckbox = document.getElementById("blinkendCheckbox").checked;
-        const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
-        const sensorCount = sensorTableBody.querySelectorAll("tr").length - 1; // Exclude the header row
+        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringt die Header-Reihe
+        const sensorCount = rows.length;
 
-        let yaml = "type: custom:button-card\n";
-        yaml += "name: Müllkalender\n";
+        const blinkend = document.getElementById("blinkendCheckbox").checked;
+        const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value; // "heute" oder "morgen"
+        const darstellung = document.getElementById("darstellungAuswahl").value; // "einzeilig" oder "mehrzeilig"
 
-        if (sensorCount >= 1) {
-            yaml += `sensor_count: ${sensorCount}\n`;
+        let yaml = "";
+
+        // Nur für den Fall, dass 1 Sensor erstellt wurde
+        if (sensorCount === 1 && blinkend && anzeigeAuswahl === "heute") {
+            // Erste Zeile definiert die Anzeige (heute/morgen)
+            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const sensorEntity = rows[0].cells[2].textContent; // Entity ID
+            const imageName = rows[0].cells[3].querySelector("select").value; // Bildname
+
+            yaml += `type: vertical-stack\n`;
+            yaml += `cards:\n`;
+            yaml += `  - type: custom:button-card\n`;
+            yaml += `    entity: ${entityText}\n`;
+            yaml += `    show_icon: false\n`;
+            yaml += `    show_name: false\n`;
+            yaml += `    show_state: true\n`;
+            yaml += `    styles:\n`;
+            yaml += `      state:\n`;
+            yaml += `        - font-size: 1.5em\n`;
+            yaml += `        - font-family: Arial Rounded MT\n`;
+            yaml += `        - color: var(--primary-color)\n`;
+            yaml += `        - white-space: unset\n`;
+            yaml += `        - text-overflow: unset\n`;
+            yaml += `        - word-break: break-word\n`;
+            yaml += `      card:\n`;
+            yaml += `        - background: transparent\n`;
+            yaml += `        - border: none\n`;
+            yaml += `  - type: horizontal-stack\n`;
+            yaml += `    cards:\n`;
+            yaml += `      - type: vertical-stack\n`;
+            yaml += `        cards:\n`;
+            yaml += `          - type: custom:button-card\n`;
+            yaml += `            entity: ${sensorEntity}\n`;
+            yaml += `            show_entity_picture: true\n`;
+            yaml += `            entity_picture: /local/muell/${imageName}.png\n`;
+            yaml += `            size: 100px\n`;
+            yaml += `            show_state: false\n`;
+            yaml += `            show_name: false\n`;
+            yaml += `            styles:\n`;
+            yaml += `              card:\n`;
+            yaml += `                - border: none\n`;
+            yaml += `                - background: transparent\n`;
+            yaml += `            state:\n`;
+            yaml += `              - value: Heute\n`;
+            yaml += `                entity_picture: /local/muell/${imageName}.png\n`;
+            yaml += `                styles:\n`;
+            yaml += `                  entity_picture:\n`;
+            yaml += `                    - animation:\n`;
+            yaml += `                        - blink 1s linear infinite\n`;
+            yaml += `          - type: custom:button-card\n`;
+            yaml += `            entity: ${sensorEntity}\n`;
+            yaml += `            show_name: true\n`;
+            yaml += `            show_icon: false\n`;
+            yaml += `            show_state: true\n`;
+            yaml += `            styles:\n`;
+            yaml += `              name:\n`;
+            yaml += `                - font-family: Arial Rounded MT\n`;
+            yaml += `                - color: var(--primary-color)\n`;
+            yaml += `              state:\n`;
+            yaml += `                - font-family: Arial Rounded MT\n`;
+            yaml += `              card:\n`;
+            yaml += `                - background-color: transparent\n`;
+            yaml += `                - border: none\n`;
+        } else {
+            yaml += `# Anderer YAML-Code für andere Bedingungen\n`;
         }
 
-        yaml += `anzeige: ${anzeigeAuswahl}\n`;
-        yaml += `darstellung: ${darstellungAuswahl}\n`;
-
-        if (blinkendCheckbox) {
-            yaml += "blinkend: true\n";
-        }
-
-        // Add example-specific logic
-        if (darstellungAuswahl === "einzeilig") {
-            yaml += "layout: horizontal\n";
-        } else if (darstellungAuswahl === "mehrzeilig") {
-            yaml += "layout: vertical\n";
-        }
-
-        yaml += "sensors:\n";
-
-        // Generate sensors YAML
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Skip the header
-        rows.forEach((row, index) => {
-            const sensorName = row.cells[2].textContent.trim(); // Entity ID
-            const color = row.cells[3].querySelector("select").value;
-            yaml += `  - name: ${sensorName}\n    color: ${color}\n`;
-        });
-
-        // Output the generated YAML
-        const yamlCodeOutput = document.getElementById("yaml-code-output");
-        yamlCodeOutput.textContent = yaml;
+        return yaml;
     }
+
 
     function copyYAMLCode() {
         const yamlCodeOutput = document.getElementById("yaml-code-output");
