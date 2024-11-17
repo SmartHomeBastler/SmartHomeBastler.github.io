@@ -828,6 +828,9 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             document.body.appendChild(newOutputContainer);
         }
         document.getElementById('image-list-output').innerHTML = imageTable;
+
+        // Automatisch zum nächsten Abschnitt scrollen
+        scrollToStep('step-5');
     }
 </script>
 
