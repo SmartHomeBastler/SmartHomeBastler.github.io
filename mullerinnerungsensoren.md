@@ -372,23 +372,14 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         gap: 10px; /* Abstand zwischen den Elementen */
     }
 
-    .custom-title-inline h4 {
+    .title-inline h4, .title-inline p {
+        line-height: 1;
         margin: 0;
-        font-size: 18px; /* Gleiche Schriftgröße wie `p` */
-        font-weight: normal; /* Schriftstärke angleichen */
-        line-height: 1; /* Gleiche Zeilenhöhe wie `p` */
-        cursor: pointer;
+        padding: 0;
+        font-size: 18px; /* Oder die gewünschte Schriftgröße */
     }
-
-    .custom-title-inline p {
-        margin: 0;
-        font-size: 18px; /* Gleiche Schriftgröße wie `h4` */
-        color: gray; /* Optional: Farbe anpassen */
-        line-height: 1; /* Gleiche Zeilenhöhe wie `h4` */
-    }
-
     .copy-confirmation {
-        font-size: 18px; /* Gleiche Schriftgröße wie `h4` und `p` */
+        font-size: 24px; /* Gleiche Schriftgröße wie `h4` und `p` */
         color: green; /* Bestätigungsfarbe */
         margin-left: 10px; /* Abstand zur Überschrift */
         display: none;
