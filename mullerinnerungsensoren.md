@@ -1144,9 +1144,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `# Anderer YAML-Code für andere Bedingungen\n`;
         }
 
-        return yaml;
+        // Setze den generierten YAML-Code in das `pre`-Tag
+        const yamlOutput = document.getElementById("yaml-code-output");
+        yamlOutput.innerHTML = `<code>${yaml}</code>`;
     }
-
 
     function copyYAMLCode() {
         const yamlCodeOutput = document.getElementById("yaml-code-output");
@@ -1164,6 +1165,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         updateExampleCard();
         generateCardYAML();
     });
+
 
 </script>
 
