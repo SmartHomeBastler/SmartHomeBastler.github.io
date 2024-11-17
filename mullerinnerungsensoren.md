@@ -796,7 +796,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
 
     function toggleDropdown() {
-        var dropdownContent = document.getElementById("testDropdown");
+        var dropdownContent = document.getElementById("galleryDropdown");
         if (dropdownContent.style.display === "none") {
             dropdownContent.style.display = "block";
         } else {
