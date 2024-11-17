@@ -391,6 +391,12 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         cursor: pointer;
         z-index: 10;
     }
+    .copy-checkmark {
+        color: green;
+        font-weight: bold;
+        margin-left: 10px;
+        font-size: 1.2em;
+    }
 
     /* Hover-Effekt für den Copy-Button */
     .copy-button:hover {
@@ -605,14 +611,20 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
         // Add standard row for "Nächste Abholung"
         const standardRow = document.createElement("tr");
+
+        // Sensor Name (with copy functionality)
         const standardNameCell = document.createElement("td");
-        standardNameCell.textContent = "Nächste Abholung";
+        standardNameCell.className = "sensor-name";
+        standardNameCell.onclick = function () { copyToClipboard(this); };
+        standardNameCell.innerHTML = `Nächste Abholung <span class="copy-checkmark" style="display: none;">✔️</span>`;
         standardRow.appendChild(standardNameCell);
 
+        // Sensor Entity ID
         const standardSensorCell = document.createElement("td");
         standardSensorCell.textContent = "sensor.nachste_abholung";
         standardRow.appendChild(standardSensorCell);
 
+        // Sensor Color
         const standardColorCell = document.createElement("td");
         standardColorCell.textContent = "-"; // No color selection for "Nächste Abholung"
         standardRow.appendChild(standardColorCell);
@@ -631,9 +643,11 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
             const sensorRow = document.createElement("tr");
 
-            // Eigene Bezeichnung
+            // Eigene Bezeichnung (with copy functionality)
             const customNameCell = document.createElement("td");
-            customNameCell.textContent = customName;
+            customNameCell.className = "sensor-name";
+            customNameCell.onclick = function () { copyToClipboard(this); };
+            customNameCell.innerHTML = `${customName} <span class="copy-checkmark" style="display: none;">✔️</span>`;
             sensorRow.appendChild(customNameCell);
 
             // Sensorname
@@ -658,6 +672,30 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         });
 
         sensorTable.style.display = "table";
+    }
+    function copyToClipboard(element) {
+        // Hole den Textinhalt des Sensors, entferne das Häkchen
+        const textToCopy = element.textContent.trim().replace("✔️", "");
+
+        // Kopiere den Text in die Zwischenablage
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            // Finde das Häkchen-Element
+            const checkmark = element.querySelector(".copy-checkmark");
+            
+            // Zeige das Häkchen an
+            if (checkmark) {
+                checkmark.style.display = "inline";
+
+                // Blende das Häkchen nach 2 Sekunden wieder aus
+                setTimeout(() => {
+                    checkmark.style.display = "none";
+                }, 2000);
+            }
+        }).catch(err => {
+            console.error("Fehler beim Kopieren:", err);
+        });
+    }
+
     }
     function createTemplates() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
