@@ -15,6 +15,14 @@ layout: page
         Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist. Mit der neuesten Version dieser Integration ist es möglich, die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einzurichten. Im Weiteren Verlauf dieser Code-Generierung, werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
     </p>
 </div>
+<!--
+ █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
+██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
+███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██         ██ 
+██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██         ██ 
+██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██         ██ 
+                                                                               
+-->
 
 <div id="step-1">
 <h2 class="custom-title">1. Kalenderdaten Auslesen</h2>
@@ -32,8 +40,16 @@ layout: page
     <input type="url" id="calendarUrl" class="custom-input" placeholder="https://example.com/kalender.ics" />
 </div>
 
-<button class="custom-button" onclick="extractEntries(); showStep(2);">Kalendereinträge extrahieren</button>
+<button class="custom-button" onclick="extractEntries(); showStep(2);">Kalendereinträge extrahieren!</button>
 </div>
+
+<!--
+ █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████     ██████  
+██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██             ██ 
+███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██         █████  
+██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██        ██      
+██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██        ███████ 
+-->
 
 <div id="step-2" style="display:none;">
 <h2 class="custom-title">2. Kalenderdaten Umwandeln</h2>
@@ -58,9 +74,17 @@ layout: page
 </table>
 
 <div id="confirm-step-2" style="text-align: center; margin-top: 20px;">
-    <button class="custom-button" onclick="checkEntries(); showStep(3);">Kalendereinträge in Sensoren umwandeln</button>
+    <button class="custom-button" onclick="checkEntries(); showStep(3);">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
 </div>
 </div>
+
+<!--
+ █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████     ██████  
+██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██             ██ 
+███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██         █████  
+██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██             ██ 
+██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██        ██████  
+-->
 
 <div id="step-3" style="display:none;">
 <h2 class="custom-title">3. Sensoren Konfiguration</h2>
@@ -129,9 +153,17 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </div>
 </div>
 <div id="confirm-step-3" style="text-align: center; margin-top: 20px;">
-    <button class="custom-button" onclick="showStep(4);">Sensoren angelegt, weiter zu den Templates</button>
+    <button class="custom-button" onclick="showStep(4);">Sensoren angelegt? Weiter zu den Templates!</button>
 </div>
 </div>
+
+<!--
+ █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████     ██   ██ 
+██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ██   ██ 
+███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██        ███████ 
+██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██             ██ 
+██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██             ██ 
+-->
 
 <div id="step-4" style="display:none;">
 <h2 class="custom-title">4. Templates Erstellen</h2>
@@ -204,10 +236,17 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
         <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
-<button class="custom-button" onclick="showStep(5); createImageList();">Templates angelegt, weiter zu den Dashboard-Karten</button>
+<button class="custom-button" onclick="showStep(5); createImageList();">Templates angelegt? Weiter zu den Dashboard-Karten!</button>
 </div>
 
-
+<!--
+ █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████     ███████ 
+██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ██      
+███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██        ███████ 
+██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██             ██ 
+██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██        ███████ 
+                                                                              
+-->
 
 <div id="step-5" style="display:none;">
 <h2 class="custom-title">5. Dashboard Karten</h2>
@@ -236,6 +275,15 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
 </div>
+
+<!--
+ ██████ ███████ ███████ 
+██      ██      ██      
+██      ███████ ███████ 
+██           ██      ██ 
+ ██████ ███████ ███████ 
+                                                                              
+-->
 
 <style>
     /* Titel und Untertitel */
@@ -410,6 +458,14 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
 </style>
 
+<!--
+███████  ██████ ██████  ██ ██████  ████████ ███████ 
+██      ██      ██   ██ ██ ██   ██    ██    ██      
+███████ ██      ██████  ██ ██████     ██    █████   
+     ██ ██      ██   ██ ██ ██         ██    ██      
+███████  ██████ ██   ██ ██ ██         ██    ███████ 
+                                                                              
+-->
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
