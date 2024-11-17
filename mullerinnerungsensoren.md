@@ -42,7 +42,7 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
 
 <button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
 
-<h2 class="custom-title">2. Kalenderdaten umwandeln</h2>
+<h2 id="step-2" class="custom-title">2. Kalenderdaten umwandeln</h2>
 
 Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen. 
 
@@ -524,6 +524,10 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
                 entryTableBody.appendChild(row);
                 idCounter++;
             });
+
+        // Automatisch zum nächsten Abschnitt scrollen
+        document.getElementById('step-2').scrollIntoView({ behavior: 'smooth' });
+        
         } catch (error) {
             console.error("Error in extractEntries:", error);
         }
