@@ -32,7 +32,7 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
 
 <button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
 
-<h2 id="step-2" class="custom-title">2. Kalenderdaten umwandeln</h2>
+<h2 class="custom-title">2. Kalenderdaten umwandeln</h2>
 
 Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen. 
 
@@ -55,14 +55,15 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 
 <button class="custom-button" onclick="checkEntries()">Kalendereinträge in Sensoren umwandeln</button>
 
-<h2 id="step-3" class="custom-title">3. Sensoren Konfiguration</h2>
+<h2 class="custom-title">3. Sensoren Konfiguration</h2>
 
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
-Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
+Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im Dropdown Menü.
 
-<div class="custom-gallery-dropdown">
-    <button class="custom-dropdown-toggle" onclick="toggleCustomGalleryDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-    <div id="customGalleryDropdown" class="custom-dropdown-content" style="display: none;">
+<!-- Neuer Dropdown -->
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -87,7 +88,6 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
         </div>
     </div>
 </div>
-
 
 Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.
 
@@ -391,11 +391,11 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         margin-left: 10px; /* Abstand zur Überschrift */
         display: none; /* Standardmäßig versteckt */
     }
-    .custom-gallery-dropdown {
+    .dropdown {
         margin: 20px 0;
         text-align: center;
     }
-    .custom-dropdown-toggle {
+    .dropdown-toggle {
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
@@ -409,10 +409,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: inline-block;
     }
-    .custom-dropdown-toggle span {
+    .dropdown-toggle span {
         float: right;
     }
-    .custom-dropdown-content {
+    .dropdown-content {
         padding: 20px;
         background-color: #ffffff;
         border: 1px solid #f39c12;
@@ -420,14 +420,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    #step-2,
-    #step-3,
-    #step-4 {
-        position: relative; /* Verhindert unerwartete Layoutänderungen */
-        z-index: auto; /* Keine Überlappung durch andere Elemente */
-        overflow: visible; /* Ermöglicht die Anzeige des Dropdowns */
-    }
-
 </style>
 
 
@@ -813,8 +805,8 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         });
     }
 
-    function toggleCustomGalleryDropdown() {
-        const dropdownContent = document.getElementById("customGalleryDropdown");
+    function toggleDropdown() {
+        var dropdownContent = document.getElementById("galleryDropdown");
         if (dropdownContent.style.display === "none") {
             dropdownContent.style.display = "block";
         } else {
