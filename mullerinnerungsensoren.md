@@ -5,16 +5,6 @@ description: Generiere die Templates für die Waste Collection Schedule Integrat
 show_sidebar: false
 layout: page
 ---
-<div id="password-modal" class="modal">
-    <div class="modal-content">
-        <h2>Passwort Eingabe</h2>
-        <p>Bitte gib das Passwort ein, um fortzufahren:</p>
-        <input type="password" id="password-input" placeholder="Passwort" />
-        <button onclick="checkPassword()">Eingeben</button>
-        <p id="error-message" style="color: red; display: none;">Falsches Passwort, versuche es erneut.</p>
-    </div>
-</div>
-
 <h1 class="custom-title">Müllkalender Code-Generator</h1>
 
 <!-- Important Notice -->
@@ -425,23 +415,6 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 
 
 <script>
-    // Passwortprüfung
-    const correctPassword = "12%Muell29"; // Hier das gewünschte Passwort eintragen
-
-    function checkPassword() {
-        const input = document.getElementById("password-input").value;
-        if (input === correctPassword) {
-            document.getElementById("password-modal").style.display = "none"; // Schließe das Modal
-        } else {
-            document.getElementById("error-message").style.display = "block"; // Zeige Fehlermeldung
-        }
-    }
-
-    // Seite blockieren, bis das Passwort eingegeben wurde
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("password-modal").style.display = "flex";
-    });
-
     document.addEventListener("DOMContentLoaded", function() {
         try {
             const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
