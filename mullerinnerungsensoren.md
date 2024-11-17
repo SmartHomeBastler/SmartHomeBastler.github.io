@@ -397,7 +397,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         margin-left: 10px;
         font-size: 1.2em;
     }
-
     /* Hover-Effekt für den Copy-Button */
     .copy-button:hover {
         background: #005a9c;
@@ -615,7 +614,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         // Sensor Name (with copy functionality)
         const standardNameCell = document.createElement("td");
         standardNameCell.className = "sensor-name";
-        standardNameCell.onclick = function () { copyToClipboard(this); };
+        standardNameCell.onclick = function () { copyToClipboard(this, "sensor.nachste_abholung"); };
         standardNameCell.innerHTML = `Nächste Abholung <span class="copy-checkmark" style="display: none;">✔️</span>`;
         standardRow.appendChild(standardNameCell);
 
@@ -646,7 +645,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             // Eigene Bezeichnung (with copy functionality)
             const customNameCell = document.createElement("td");
             customNameCell.className = "sensor-name";
-            customNameCell.onclick = function () { copyToClipboard(this); };
+            customNameCell.onclick = function () { copyToClipboard(this, sensorName); };
             customNameCell.innerHTML = `${customName} <span class="copy-checkmark" style="display: none;">✔️</span>`;
             sensorRow.appendChild(customNameCell);
 
@@ -673,15 +672,12 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
         sensorTable.style.display = "table";
     }
-    function copyToClipboard(element) {
-        // Hole den Textinhalt des Sensors, entferne das Häkchen
-        const textToCopy = element.textContent.trim().replace("✔️", "");
-
+    function copyToClipboard(element, textToCopy) {
         // Kopiere den Text in die Zwischenablage
         navigator.clipboard.writeText(textToCopy).then(() => {
-            // Finde das Häkchen-Element
+            // Finde das Häkchen-Element innerhalb der Zelle
             const checkmark = element.querySelector(".copy-checkmark");
-            
+
             // Zeige das Häkchen an
             if (checkmark) {
                 checkmark.style.display = "inline";
