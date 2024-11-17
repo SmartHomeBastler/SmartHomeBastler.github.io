@@ -76,6 +76,8 @@ layout: page
 <div id="confirm-step-2" style="text-align: center; margin-top: 20px;">
     <button class="custom-button" onclick="checkEntries(); showStep(3);">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
 </div>
+<!-- Link zurück zu Schritt 1 -->
+    <button class="custom-button" onclick="showStep(1);">Zurück zu Schritt 1</button>
 </div>
 
 <!--
@@ -156,6 +158,8 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 <div id="confirm-step-3" style="text-align: center; margin-top: 20px;">
     <button class="custom-button" onclick="showStep(4);">Sensoren angelegt? Weiter zu den Templates!</button>
 </div>
+<!-- Link zurück zu Schritt 2 -->
+    <button class="custom-button" onclick="showStep(2);">Zurück zu Schritt 2</button>
 </div>
 
 <!--
@@ -238,6 +242,8 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </div>
 </div>
 <button class="custom-button" onclick="showStep(5); createImageList();">Templates angelegt? Weiter zu den Dashboard-Karten!</button>
+<!-- Link zurück zu Schritt 3 -->
+    <button class="custom-button" onclick="showStep(3);">Zurück zu Schritt 3</button>
 </div>
 
 <!--
@@ -271,7 +277,8 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
         Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist. Diese Button Card ist für die korrekte Darstellung der Dashbord-Karte unbedingt notwendig.
     </p>
 </div>
-
+<!-- Link zurück zu Schritt 2 -->
+    <button class="custom-button" onclick="showStep(4);">Zurück zu Schritt 4</button>
 
 PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
@@ -460,6 +467,19 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     opacity: 0.5;
     pointer-events: none;
     }
+    .back-button {
+        background-color: #f39c12;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+    .back-button:hover {
+        background-color: #e67e22;
+    }
 
 </style>
 
@@ -486,23 +506,25 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         }
     });
     function showStep(stepNumber) {
-        // Den gewünschten Abschnitt anzeigen
-        const currentStep = document.getElementById(`step-${stepNumber}`);
-        if (currentStep) {
-            currentStep.style.display = "block"; // Zeigt den aktuellen Step an
-            currentStep.scrollIntoView({ behavior: "smooth" }); // Optional: Scrollt zum aktuellen Abschnitt
-
-            // Markiere vorherige Steps als abgeschlossen
-            for (let i = 1; i < stepNumber; i++) {
-                const prevStep = document.getElementById(`step-${i}`);
-                if (prevStep) {
-                    prevStep.classList.add("completed");
+        // Alle Abschnitte anzeigen, die kleiner oder gleich der aktuellen Schritt-Nummer sind
+        for (let i = 1; i <= 5; i++) {
+            const step = document.getElementById(`step-${i}`);
+            if (step) {
+                if (i <= stepNumber) {
+                    step.style.display = "block"; // Zeigt die vorherigen und den aktuellen Step an
+                    step.classList.remove("completed"); // Entfernt die "abgeschlossen"-Markierung, wenn sie gesetzt war
+                } else {
+                    step.style.display = "none"; // Versteckt die zukünftigen Schritte
                 }
             }
         }
+
+        // Automatisch scrollen, um den ausgewählten Schritt in den Fokus zu bringen
+        const currentStep = document.getElementById(`step-${stepNumber}`);
+        if (currentStep) {
+            currentStep.scrollIntoView({ behavior: "smooth" });
+        }
     }
-
-
     async function extractEntries() {
         try {
             const fileInput = document.getElementById('icsFile');
