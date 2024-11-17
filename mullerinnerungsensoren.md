@@ -436,6 +436,12 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             console.error("Error during DOMContentLoaded setup:", error);
         }
     });
+    function scrollToStep(stepId) {
+        const stepElement = document.getElementById(stepId);
+        if (stepElement) {
+            stepElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     async function extractEntries() {
         try {
@@ -507,8 +513,8 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                 idCounter++;
             });
 
-        // Automatisch zum nächsten Abschnitt scrollen
-        document.getElementById('step-2').scrollIntoView({ behavior: 'smooth' });
+            // Automatisch zum nächsten Abschnitt scrollen
+            scrollToStep('step-2');
 
         } catch (error) {
             console.error("Error in extractEntries:", error);
@@ -539,7 +545,8 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             document.getElementById("code-output").style.display = "block";
 
             // Automatisch zum nächsten Abschnitt scrollen
-            document.getElementById('step-3').scrollIntoView({ behavior: 'smooth' });
+            scrollToStep('step-3');
+
         }
     }
 
@@ -668,7 +675,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
 
         // Automatisch zum nächsten Abschnitt scrollen
-        document.getElementById('step-4').scrollIntoView({ behavior: 'smooth' });
+        scrollToStep('step-4');
     }
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
@@ -797,7 +804,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             console.error("Fehler beim Kopieren des Codes: ", err);
         });
     }
-    
+
     function toggleCustomGalleryDropdown() {
         const dropdownContent = document.getElementById("customGalleryDropdown");
         if (dropdownContent.style.display === "none") {
