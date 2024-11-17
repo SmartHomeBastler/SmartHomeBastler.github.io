@@ -19,7 +19,7 @@ layout: page
 <div id="step-1">
 <h2 class="custom-title">1. Kalenderdaten Auslesen</h2>
 
-Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte deine URL an oder lade die ICS Datei hoch und bestätige mit **Kalendereinträge extrahieren**
+<p>Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte deine URL an oder lade die ICS Datei hoch und bestätige mit <strong>Kalendereinträge extrahieren</strong></p>
 
 <!-- File Upload and URL Input -->
 <div class="custom-form-group">
@@ -38,11 +38,11 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
 <div id="step-2" style="display:none;">
 <h2 class="custom-title">2. Kalenderdaten Umwandeln</h2>
 
-Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen. 
+<p>Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen.</p> 
 
-Beispiel: Bezeichnug `Papier` oder `Gelber` = `Papier Tonne` oder `Gelber Sack`
+<p>Beispiel: Bezeichnug `Papier` oder `Gelber` = `Papier Tonne` oder `Gelber Sack`</p>
 
-Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
+</p>Nach den Änderungen klicke auf <strong>Kalendereinträge in Sensoren umwandeln</strong></p>
 
 <table class="custom-table" id="entry-table">
     <thead>
@@ -65,8 +65,8 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 <div id="step-3" style="display:none;">
 <h2 class="custom-title">3. Sensoren Konfiguration</h2>
 
-An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
-Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
+<p>An diesem Punkt kann die Integration <strong>Waste Collection Schedule</strong> in Home Assistant eingerichtet werden.
+Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.</p>
 
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
@@ -97,7 +97,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 </div>
 
 
-Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.
+<p>Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.</p>
 
 <table class="custom-table" id="sensor-table" style="display:none;">
     <thead>
@@ -212,7 +212,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 <div id="step-5" style="display:none;">
 <h2 class="custom-title">5. Dashboard Karten</h2>
 
-Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.
+<p>Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.</p>
 
 
 <button class="custom-button" onclick="createImageList()">Bilder Liste erstellen</button>
