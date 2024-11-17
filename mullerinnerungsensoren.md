@@ -204,7 +204,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
         <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
-<button class="custom-button" onclick="showStep(5);">Fertigstellen</button>
+<button class="custom-button" onclick="showStep(5); createImageList();">Templates angelegt, weiter zu den Dashboard-Karten</button>
 </div>
 
 
@@ -212,10 +212,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 <div id="step-5" style="display:none;">
 <h2 class="custom-title">5. Dashboard Karten</h2>
 
-<p>Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.</p>
-
-
-<button class="custom-button" onclick="createImageList()">Bilder Liste erstellen</button>
+<p>Hier siehst du eine Zusammenfassung deiner Einstellungen, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.</p>
 
 
 <div id="sensor-summary" style="display:none; margin-top: 20px; text-align: start; font-size: 20px;">
