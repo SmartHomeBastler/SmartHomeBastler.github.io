@@ -76,8 +76,6 @@ layout: page
 <div id="confirm-step-2" style="text-align: center; margin-top: 20px;">
     <button class="custom-button" onclick="checkEntries(); showStep(3);">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
 </div>
-<!-- Link zurück zu Schritt 1 -->
-    <button class="custom-button" onclick="showStep(1);">Zurück zu Schritt 1</button>
 </div>
 
 <!--
@@ -158,8 +156,6 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 <div id="confirm-step-3" style="text-align: center; margin-top: 20px;">
     <button class="custom-button" onclick="showStep(4);">Sensoren angelegt? Weiter zu den Templates!</button>
 </div>
-<!-- Link zurück zu Schritt 2 -->
-    <button class="custom-button" onclick="showStep(2);">Zurück zu Schritt 2</button>
 </div>
 
 <!--
@@ -242,8 +238,6 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </div>
 </div>
 <button class="custom-button" onclick="showStep(5); createImageList();">Templates angelegt? Weiter zu den Dashboard-Karten!</button>
-<!-- Link zurück zu Schritt 3 -->
-    <button class="custom-button" onclick="showStep(3);">Zurück zu Schritt 3</button>
 </div>
 
 <!--
@@ -277,8 +271,6 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
         Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist. Diese Button Card ist für die korrekte Darstellung der Dashbord-Karte unbedingt notwendig.
     </p>
 </div>
-<!-- Link zurück zu Schritt 2 -->
-    <button class="custom-button" onclick="showStep(4);">Zurück zu Schritt 4</button>
 
 PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
