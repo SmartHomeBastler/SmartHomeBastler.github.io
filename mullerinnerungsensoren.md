@@ -210,7 +210,13 @@ Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den 
 
 <div id="image-list-output"></div>
 
-
+<!-- Important Notice -->
+<div class="important-container">
+    <h3>Wichtig!</h3>
+    <p>
+        Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist. Diese Button Card ist für die korrekte Darstellung der Dashbord-Karte unbedingt notwendig.
+    </p>
+</div>
 
 
 PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
