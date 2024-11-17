@@ -60,18 +60,20 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
 Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im Dropdown Menü.
 
-<div id="galleryDropdown" class="dropdown-content" style="display: none;">
-    <p>Statischer Testinhalt</p>
-    {% assign gallery_images = site.data.gallery_mull_helfer %}
-    <div class="columns is-multiline">
-        {% for gallery in gallery_images %}
-            <div class="column is-12">
-                <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-            </div>
-        {% endfor %}
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown()">Klicke hier <span>&#9660;</span></button>
+    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+        <p>Statischer Testinhalt</p>
+        {% assign gallery_images = site.data.gallery_mull_helfer %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
-
 
 
 Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.
