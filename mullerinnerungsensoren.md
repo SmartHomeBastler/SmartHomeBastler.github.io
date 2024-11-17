@@ -372,7 +372,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         gap: 10px; /* Abstand zwischen den Elementen */
     }
 
-    .title-inline h4, .title-inline p {
+    .custom-title-inline h4, .custom-title-inline p {
         line-height: 1;
         margin: 0;
         padding: 0;
