@@ -842,12 +842,16 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         // Sensor-Zusammenfassung anzeigen
         const sensorSummary = document.getElementById('sensor-summary');
         const sensorCountElement = document.getElementById('sensor-count');
+        const summaryText = document.getElementById('summary-text');
+        
         if (sensorCount === 1) {
             sensorCountElement.textContent = "einen Sensor";
         } else {
             sensorCountElement.textContent = `${sensorCount} Sensoren`;
         }
+
         sensorSummary.style.display = "block"; // Zusammenfassung einblenden
+        sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4CAF50;">${sensorCount === 1 ? "einen Sensor" : `${sensorCount} Sensoren`}</span> angelegt.`;
 
         // Automatisch zum nächsten Abschnitt scrollen
         scrollToStep('step-5');
