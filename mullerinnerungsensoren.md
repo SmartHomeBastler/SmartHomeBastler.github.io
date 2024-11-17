@@ -30,9 +30,13 @@ Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte dei
     <input type="url" id="calendarUrl" class="custom-input" placeholder="https://example.com/kalender.ics" />
 </div>
 
-<button class="custom-button" onclick="extractEntries()">Kalendereinträge extrahieren</button>
+<!-- Button zum Freischalten von Schritt 3 -->
+<div id="confirm-step-2" style="display:none; text-align: center; margin-top: 20px;">
+    <button class="custom-button" onclick="checkEntries(); showStep(3);">Kalendereinträge in Sensoren umwandeln</button>
+</div>
 
-<h2 id="step-2" class="custom-title">2. Kalenderdaten umwandeln</h2>
+
+<h2 id="step-2" class="custom-title" style="display:none;">2. Kalenderdaten umwandeln</h2>
 
 Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen. 
 
@@ -55,7 +59,7 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 
 <button class="custom-button" onclick="checkEntries()">Kalendereinträge in Sensoren umwandeln</button>
 
-<h2 id="step-3" class="custom-title">3. Sensoren Konfiguration</h2>
+<h2 id="step-3" class="custom-title" style="display:none;">3. Sensoren Konfiguration</h2>
 
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
 Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
@@ -121,8 +125,12 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     </div>
 </div>
 
-<!-- Button to create Templates for both Today and Tomorrow -->
-<h2 id="step-4" class="custom-title">4. Helfer Templates erstellen</h2>
+<!-- Button zum Freischalten von Schritt 4 -->
+<div id="confirm-step-3" style="display:none; text-align: center; margin-top: 20px;">
+    <button class="custom-button" onclick="showStep(4)">Sensoren angelegt, weiter zu den Templates</button>
+</div>
+
+<h2 id="step-4" class="custom-title" style="display:none;">4. Helfer Templates erstellen</h2>
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
@@ -193,7 +201,12 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     </div>
 </div>
 
-<h2 id="step-5" class="custom-title">5. Dashboard Karten</h2>
+<!-- Button zum Freischalten von Schritt 5 -->
+<div id="confirm-step-4" style="display:none; text-align: center; margin-top: 20px;">
+    <button class="custom-button" onclick="showStep(5)">Templates erstellt, weiter zu den Dashboard-Karten</button>
+</div>
+
+<h2 id="step-5" class="custom-title" style="display:none;">5. Dashboard Karten</h2>
 
 Mit dem Button `Bilder Liste erstellen` wird eine Tabelle generiert, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.
 
@@ -246,6 +259,15 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         color: #ffffff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
 
+    [style*="display: none;"] {
+        display: block !important;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    [style*="display: block;"] {
+        opacity: 1;
+    }
 
     
     /* Hinweise */
@@ -491,10 +513,30 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             });
 
             // Automatisch zum nächsten Abschnitt scrollen
-            scrollToStep('step-2');
+            showStep(2);
 
         } catch (error) {
             console.error("Error in extractEntries:", error);
+        }
+    }
+
+    // Funktion zum Aktivieren des nächsten Abschnitts
+    function showStep(stepNumber) {
+        const currentStep = document.getElementById(`step-${stepNumber}`);
+        const confirmStep = document.getElementById(`confirm-step-${stepNumber}`);
+
+        if (currentStep) {
+            currentStep.style.display = "block"; // Aktiviere den Abschnitt
+        }
+
+        if (confirmStep) {
+            confirmStep.style.display = "none"; // Verstecke den Bestätigungs-Button
+        }
+
+        // Zeige den Bestätigungs-Button für den nächsten Schritt (falls vorhanden)
+        const nextConfirmStep = document.getElementById(`confirm-step-${stepNumber + 1}`);
+        if (nextConfirmStep) {
+            nextConfirmStep.style.display = "block";
         }
     }
 
@@ -522,7 +564,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             document.getElementById("code-output").style.display = "block";
 
             // Automatisch zum nächsten Abschnitt scrollen
-            scrollToStep('step-3');
+            showStep(3);
 
         }
     }
@@ -652,7 +694,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
 
         // Automatisch zum nächsten Abschnitt scrollen
-        scrollToStep('step-4');
+        showStep(4);
     }
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
@@ -865,7 +907,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4CAF50;">${sensorCount === 1 ? "einen Sensor" : `${sensorCount} Sensoren`}</span> angelegt.`;
 
         // Automatisch zum nächsten Abschnitt scrollen
-        scrollToStep('step-5');
+        showStep(5);
     }
 </script>
 
