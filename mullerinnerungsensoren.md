@@ -272,6 +272,41 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </p>
 </div>
 
+<div id="example-section" style="margin-top: 20px;">
+    <h3 class="custom-title">Dashboard Karten Optionen</h3>
+
+    <!-- Checkbox für "Tonne blinkend" -->
+    <div class="custom-form-group">
+        <input type="checkbox" id="tonneBlinkend" />
+        <label for="tonneBlinkend">Tonne blinkend</label>
+    </div>
+
+    <!-- Auswahlliste für "Anzeige Heute" und "Anzeige Morgen" -->
+    <div class="custom-form-group">
+        <label for="anzeigeAuswahl" class="custom-label">Anzeige Auswahl:</label>
+        <select id="anzeigeAuswahl" class="custom-input">
+            <option value="heute">Anzeige Heute</option>
+            <option value="morgen">Anzeige Morgen</option>
+        </select>
+    </div>
+
+    <!-- Auswahlliste für Darstellung -->
+    <div class="custom-form-group">
+        <label for="darstellungAuswahl" class="custom-label">Darstellung:</label>
+        <select id="darstellungAuswahl" class="custom-input" onchange="updateExampleCard();">
+            <option value="einzeilig">Darstellung Einzeilig</option>
+            <option value="mehrzeilig">Darstellung Mehrzeilig</option>
+        </select>
+    </div>
+
+    <!-- Beispielbildanzeige -->
+    <div id="example-image-container" style="text-align: center; margin-top: 20px;">
+        <h4>Beispielkarte</h4>
+        <img id="example-image" src="" alt="Beispielkarte" style="max-width: 100%; height: auto; display: none;" />
+    </div>
+</div>
+
+
 PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
 </div>
@@ -987,6 +1022,39 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         sensorSummary.style.display = "block"; // Zusammenfassung einblenden
         sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4CAF50;">${sensorCount === 1 ? "einen Sensor" : `${sensorCount} Sensoren`}</span> angelegt.`;
     }
+    function updateExampleCard() {
+        const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
+        const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
+        const sensorCount = sensorTableBody.querySelectorAll("tr").length - 1; // Exclude the header row
+
+        let imagePath = "img/muell/";
+
+        if (sensorCount === 1) {
+            imagePath += "exampleCard_1.png";
+        } else if (sensorCount === 2) {
+            imagePath += "exampleCard_2.png";
+        } else if (sensorCount === 3) {
+            imagePath += "exampleCard_3.png";
+        } else if (sensorCount === 4) {
+            if (darstellungAuswahl === "einzeilig") {
+                imagePath += "exampleCard_4_1.png";
+            } else if (darstellungAuswahl === "mehrzeilig") {
+                imagePath += "exampleCard_4_2.png";
+            }
+        } else if (sensorCount === 5) {
+            imagePath += "exampleCard_5.png";
+        } else {
+            imagePath += "exampleCard_6.png";
+        }
+
+        const exampleImage = document.getElementById("example-image");
+        exampleImage.src = imagePath;
+        exampleImage.style.display = "block"; // Show the image
+    }
+
+    // Initial update of the example card
+    document.addEventListener("DOMContentLoaded", updateExampleCard);
+
 </script>
 
 
