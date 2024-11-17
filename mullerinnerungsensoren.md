@@ -406,13 +406,9 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    #step-2,
-    #step-3,
-    #step-4,
-    #step-5 {
-        position: relative; /* Verhindert unerwartete Layoutänderungen */
-        z-index: auto; /* Keine Überlappung durch andere Elemente */
-        overflow: visible; /* Ermöglicht die Anzeige des Dropdowns */
+    .completed {
+    opacity: 0.5;
+    pointer-events: none;
     }
 
 </style>
@@ -432,17 +428,22 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         }
     });
     function showStep(stepNumber) {
-        // Alle Abschnitte ausblenden
-        const steps = document.querySelectorAll('[id^="step-"]');
-        steps.forEach(step => (step.style.display = "none"));
-
-        // Nur den gewünschten Abschnitt anzeigen
+        // Den gewünschten Abschnitt anzeigen
         const currentStep = document.getElementById(`step-${stepNumber}`);
         if (currentStep) {
-            currentStep.style.display = "block";
-            currentStep.scrollIntoView({ behavior: "smooth" }); // Optional: Scrollen zum Abschnitt
+            currentStep.style.display = "block"; // Zeigt den aktuellen Step an
+            currentStep.scrollIntoView({ behavior: "smooth" }); // Optional: Scrollt zum aktuellen Abschnitt
+
+            // Markiere vorherige Steps als abgeschlossen
+            for (let i = 1; i < stepNumber; i++) {
+                const prevStep = document.getElementById(`step-${i}`);
+                if (prevStep) {
+                    prevStep.classList.add("completed");
+                }
+            }
         }
     }
+
 
     async function extractEntries() {
         try {
@@ -541,10 +542,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             generateSensorTable(selectedEntries);
             document.getElementById("template-header").style.display = "block";
             document.getElementById("code-output").style.display = "block";
-
-            // Automatisch zum nächsten Abschnitt scrollen
-            scrollToStep('step-3');
-
         }
     }
 
