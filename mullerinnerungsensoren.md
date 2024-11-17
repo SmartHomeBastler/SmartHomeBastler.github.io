@@ -1027,7 +1027,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
         const sensorCount = sensorTableBody.querySelectorAll("tr").length - 1; // Exclude the header row
 
-        let imagePath = "img/muell/";
+        let imagePath = "/img/muell/";
 
         if (sensorCount === 1) {
             imagePath += "exampleCard_1.png";
