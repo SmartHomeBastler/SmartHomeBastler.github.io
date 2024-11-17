@@ -796,14 +796,19 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             console.error("Fehler beim Kopieren des Codes: ", err);
         });
     }
+    document.querySelector(".dropdown-toggle").addEventListener("click", function (event) {
+        event.stopPropagation(); // Verhindert Konflikte mit anderen Click-Listenern
+        event.preventDefault();  // Unterdrückt unerwünschte Standardaktionen
+        toggleDropdown();        // Führt die gewünschte Funktion aus
+    });
+
     function toggleDropdown() {
-        var dropdownContent = document.getElementById("galleryDropdown");
-        if (dropdownContent.style.display === "none") {
-            dropdownContent.style.display = "block";
-        } else {
-            dropdownContent.style.display = "none";
+        const dropdownContent = document.getElementById("galleryDropdown");
+        if (dropdownContent) {
+            dropdownContent.style.display = dropdownContent.style.display === "none" ? "block" : "none";
         }
     }
+
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
