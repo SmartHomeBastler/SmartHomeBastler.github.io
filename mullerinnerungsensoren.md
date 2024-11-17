@@ -60,9 +60,9 @@ Nach den Änderungen klicke auf **Kalendereinträge in Sensoren umwandeln**
 An diesem Punkt kann die Integration **Waste Collection Schedule** in Home Assistant eingerichtet werden.
 Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+<div class="custom-gallery-dropdown">
+    <button class="custom-dropdown-toggle" onclick="toggleCustomGalleryDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+    <div id="customGalleryDropdown" class="custom-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -87,6 +87,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
         </div>
     </div>
 </div>
+
 
 Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.
 
@@ -390,11 +391,11 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         margin-left: 10px; /* Abstand zur Überschrift */
         display: none; /* Standardmäßig versteckt */
     }
-    .dropdown {
+    .custom-gallery-dropdown {
         margin: 20px 0;
         text-align: center;
     }
-    .dropdown-toggle {
+    .custom-dropdown-toggle {
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
@@ -408,10 +409,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: inline-block;
     }
-    .dropdown-toggle span {
+    .custom-dropdown-toggle span {
         float: right;
     }
-    .dropdown-content {
+    .custom-dropdown-content {
         padding: 20px;
         background-color: #ffffff;
         border: 1px solid #f39c12;
@@ -796,16 +797,13 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             console.error("Fehler beim Kopieren des Codes: ", err);
         });
     }
-    document.querySelector(".dropdown-toggle").addEventListener("click", function (event) {
-        event.stopPropagation(); // Verhindert Konflikte mit anderen Click-Listenern
-        event.preventDefault();  // Unterdrückt unerwünschte Standardaktionen
-        toggleDropdown();        // Führt die gewünschte Funktion aus
-    });
-
-    function toggleDropdown() {
-        const dropdownContent = document.getElementById("galleryDropdown");
-        if (dropdownContent) {
-            dropdownContent.style.display = dropdownContent.style.display === "none" ? "block" : "none";
+    
+    function toggleCustomGalleryDropdown() {
+        const dropdownContent = document.getElementById("customGalleryDropdown");
+        if (dropdownContent.style.display === "none") {
+            dropdownContent.style.display = "block";
+        } else {
+            dropdownContent.style.display = "none";
         }
     }
 
