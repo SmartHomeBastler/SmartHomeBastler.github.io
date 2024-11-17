@@ -374,20 +374,21 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 
     .title-inline h4 {
         margin: 0; /* Entfernt unnötigen Außenabstand */
+        cursor: pointer; /* Zeigt an, dass es klickbar ist */
     }
 
     .title-inline p {
         margin: 0;
-        font-size: 14px; /* Anpassung der Schriftgröße für den Text */
-        color: gray; /* Optionale Farbänderung */
+        font-size: 14px; /* Schriftgröße anpassen */
+        color: gray;
     }
 
-    #copy-confirmation {
+    .copy-confirmation {
         font-size: 24px;
         font-weight: bold;
-        color: green; /* Farbe des Icons */
-        display: inline; /* Sicherstellen, dass es inline angezeigt wird */
+        color: green; /* Bestätigungsfarbe */
         margin-left: 10px; /* Abstand zur Überschrift */
+        display: none; /* Standardmäßig ausgeblendet */
     }
     .dropdown {
         margin: 20px 0;
@@ -678,13 +679,13 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
         navigator.clipboard.writeText(textToCopy).then(() => {
-            // Bestätigungs-Icon anzeigen
-            const confirmationIcon = document.getElementById("copy-confirmation");
-            confirmationIcon.style.display = "inline";
+            // Nur das entsprechende Bestätigungs-Icon anzeigen
+            const confirmationIcon = element.parentElement.querySelector('.copy-confirmation');
+            confirmationIcon.style.display = 'inline';
             
             // Nach 2 Sekunden das Icon wieder ausblenden
             setTimeout(() => {
-                confirmationIcon.style.display = "none";
+                confirmationIcon.style.display = 'none';
             }, 2000);
         }).catch(err => {
             console.error("Fehler beim Kopieren in die Zwischenablage:", err);
