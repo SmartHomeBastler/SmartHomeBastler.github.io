@@ -614,6 +614,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         // Sensor Name
         const standardNameCell = document.createElement("td");
         standardNameCell.textContent = "Nächste Abholung";
+        standardNameCell.style.cursor = "pointer";
+        standardNameCell.onclick = () => {
+            copyToClipboard("Nächste Abholung", "sensor.nachste_abholung", standardCopyStatusCell);
+        };
         standardRow.appendChild(standardNameCell);
 
         // Kopiert-Status
@@ -651,7 +655,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             customNameCell.textContent = customName;
             customNameCell.style.cursor = "pointer";
             customNameCell.onclick = () => {
-                copyToClipboard(customNameCell, sensorName, copyStatusCell);
+                copyToClipboard(customName, sensorName, copyStatusCell);
             };
             sensorRow.appendChild(customNameCell);
 
@@ -685,22 +689,17 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         sensorTable.style.display = "table";
     }
 
-    function copyToClipboard(element, textToCopy, statusCell) {
+
+    function copyToClipboard(name, textToCopy, statusCell) {
         navigator.clipboard.writeText(textToCopy).then(() => {
             const checkmark = statusCell.querySelector(".copy-checkmark");
             if (checkmark) {
-                checkmark.style.display = "inline";
-
-                // Blende das Häkchen nach 2 Sekunden wieder aus
-                setTimeout(() => {
-                    checkmark.style.display = "none";
-                }, 2000);
+                checkmark.style.display = "inline"; // Häkchen dauerhaft anzeigen
             }
         }).catch(err => {
             console.error("Fehler beim Kopieren:", err);
         });
     }
-
 
     function createTemplates() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
@@ -711,7 +710,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         let duplicateColor = false;
     
         rows.forEach(row => {
-            const color = row.cells[2].querySelector("select").value;
+            const color = row.cells[3].querySelector("select").value;
             if (color === "Farbe wählen") {
                 colorNotSelected = true;
             } else {
@@ -790,7 +789,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         rows.forEach(row => {
             const customName = row.cells[0].textContent.trim();
             const sensorName = "states.sensor." + customName.toLowerCase().replace(/\s+/g, "_") + ".state";
-            const color = row.cells[2].querySelector("select").value;
+            const color = row.cells[3].querySelector("select").value;
     
             if (color === "Sack") {
                 hasSack = true;
@@ -929,7 +928,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         let sensorCount = 0; // Zähler für die Anzahl der Sensoren
         rows.forEach(row => {
             const sensorName = row.cells[0].textContent.trim();
-            const selectedColor = row.cells[2].querySelector("select").value;
+            const selectedColor = row.cells[3].querySelector("select").value;
             
             if (colorToImageMap[selectedColor]) {
                 sensorCount++; // Zähler inkrementieren
