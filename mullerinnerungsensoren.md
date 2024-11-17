@@ -155,7 +155,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     <div class="title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span id="copy-confirmation" style="display: none;">&#10003;</span>
+        <span class="copy-confirmation" style="display: none;">&#10003;</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
@@ -168,7 +168,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     <div class="title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span id="copy-confirmation" style="display: none;">&#10003;</span>
+        <span class="copy-confirmation" style="display: none;">&#10003;</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-text-heute')">Copy</button>
@@ -181,7 +181,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     <div class="title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span id="copy-confirmation" style="display: none;">&#10003;</span>
+        <span class="copy-confirmation" style="display: none;">&#10003;</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
@@ -194,7 +194,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     <div class="title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span id="copy-confirmation" style="display: none;">&#10003;</span>
+        <span class="copy-confirmation" style="display: none;">&#10003;</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-text-morgen')">Copy</button>
