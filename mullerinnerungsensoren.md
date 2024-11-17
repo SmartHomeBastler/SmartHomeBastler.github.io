@@ -127,6 +127,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     <thead>
         <tr>
             <th>Sensor Name</th>
+            <th>Kopiert</th>
             <th>Entity ID</th>
             <th>Tonnen Farbe</th>
         </tr>
@@ -308,8 +309,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     .important-container strong {
         color: #ffffff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
-
-
     
     /* Hinweise */
     .note-container {
@@ -393,10 +392,11 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
     .copy-checkmark {
         color: green;
-        font-weight: bold;
-        margin-left: 10px;
         font-size: 1.2em;
+        font-weight: bold;
+        display: none; /* Standardmäßig versteckt */
     }
+
     /* Hover-Effekt für den Copy-Button */
     .copy-button:hover {
         background: #005a9c;
@@ -610,28 +610,22 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
         // Add standard row for "Nächste Abholung"
         const standardRow = document.createElement("tr");
-
-        // Sensor Name (with copy functionality)
         const standardNameCell = document.createElement("td");
-        standardNameCell.className = "sensor-name";
-        standardNameCell.onclick = function () { copyToClipboard(this, "sensor.nachste_abholung"); };
-        standardNameCell.innerHTML = `Nächste Abholung <span class="copy-checkmark" style="display: none;">✔️</span>`;
+        standardNameCell.textContent = "Nächste Abholung";
         standardRow.appendChild(standardNameCell);
 
-        // Sensor Entity ID
         const standardSensorCell = document.createElement("td");
         standardSensorCell.textContent = "sensor.nachste_abholung";
         standardRow.appendChild(standardSensorCell);
 
-        // Sensor Color
-        const standardColorCell = document.createElement("td");
-        standardColorCell.textContent = "-"; // No color selection for "Nächste Abholung"
-        standardRow.appendChild(standardColorCell);
+        const standardCopyStatusCell = document.createElement("td");
+        standardCopyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
+        standardRow.appendChild(standardCopyStatusCell);
 
         sensorTableBody.appendChild(standardRow);
 
         // Add rows for selected entries
-        selectedEntries.forEach((row, index) => {
+        selectedEntries.forEach((row) => {
             const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
             const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
                 return {
@@ -642,43 +636,37 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
             const sensorRow = document.createElement("tr");
 
-            // Eigene Bezeichnung (with copy functionality)
-            const customNameCell = document.createElement("td");
-            customNameCell.className = "sensor-name";
-            customNameCell.onclick = function () { copyToClipboard(this, sensorName); };
-            customNameCell.innerHTML = `${customName} <span class="copy-checkmark" style="display: none;">✔️</span>`;
-            sensorRow.appendChild(customNameCell);
-
-            // Sensorname
+            // Sensor Name
             const sensorNameCell = document.createElement("td");
-            sensorNameCell.textContent = sensorName;
+            sensorNameCell.textContent = customName;
             sensorRow.appendChild(sensorNameCell);
 
-            // Farbe Auswahlfeld
-            const colorCell = document.createElement("td");
-            const colorSelect = document.createElement("select");
-            colorSelect.className = "color-select";
-            ["Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun"].forEach(color => {
-                const option = document.createElement("option");
-                option.value = color;
-                option.textContent = color;
-                colorSelect.appendChild(option);
-            });
-            colorCell.appendChild(colorSelect);
-            sensorRow.appendChild(colorCell);
+            // Sensor Entity ID
+            const sensorEntityCell = document.createElement("td");
+            sensorEntityCell.textContent = sensorName;
+            sensorRow.appendChild(sensorEntityCell);
+
+            // Kopiert Status
+            const copyStatusCell = document.createElement("td");
+            copyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
+            copyStatusCell.style.textAlign = "center"; // Optional für zentrierte Anzeige
+            sensorRow.appendChild(copyStatusCell);
+
+            // Sensor Name kopierbar machen
+            sensorNameCell.style.cursor = "pointer";
+            sensorNameCell.onclick = () => {
+                copyToClipboard(sensorNameCell, sensorName, copyStatusCell);
+            };
 
             sensorTableBody.appendChild(sensorRow);
         });
 
         sensorTable.style.display = "table";
     }
-    function copyToClipboard(element, textToCopy) {
-        // Kopiere den Text in die Zwischenablage
+    function copyToClipboard(element, textToCopy, statusCell) {
         navigator.clipboard.writeText(textToCopy).then(() => {
-            // Finde das Häkchen-Element innerhalb der Zelle
-            const checkmark = element.querySelector(".copy-checkmark");
-
-            // Zeige das Häkchen an
+            // Zeige das Häkchen in der "Kopiert"-Spalte an
+            const checkmark = statusCell.querySelector(".copy-checkmark");
             if (checkmark) {
                 checkmark.style.display = "inline";
 
