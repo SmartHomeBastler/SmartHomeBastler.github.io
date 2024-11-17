@@ -275,35 +275,38 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 <div id="example-section" style="margin-top: 20px;">
     <h3 class="custom-title">Dashboard Karten Optionen</h3>
 
-    <!-- Checkbox für "Tonne blinkend" -->
-    <div class="custom-form-group">
-        <input type="checkbox" id="tonneBlinkend" />
-        <label for="tonneBlinkend">Tonne blinkend</label>
-    </div>
+<!-- Checkbox für "Tonne blinkend" -->
+<div class="custom-form-group">
+    <input type="checkbox" id="tonneBlinkend" />
+    <label for="tonneBlinkend">Tonne blinkend</label>
+</div>
 
-    <!-- Auswahlliste für "Anzeige Heute" und "Anzeige Morgen" -->
-    <div class="custom-form-group">
-        <label for="anzeigeAuswahl" class="custom-label">Anzeige Auswahl:</label>
-        <select id="anzeigeAuswahl" class="custom-input">
-            <option value="heute">Anzeige Heute</option>
-            <option value="morgen">Anzeige Morgen</option>
-        </select>
-    </div>
+<!-- Auswahlliste für "Anzeige Heute" und "Anzeige Morgen" -->
+<div class="custom-form-group">
+    <label for="anzeigeAuswahl" class="custom-label">Anzeige Auswahl:</label>
+    <select id="anzeigeAuswahl" class="custom-input">
+        <option value="heute">Anzeige Heute</option>
+        <option value="morgen">Anzeige Morgen</option>
+    </select>
+</div>
 
-    <!-- Auswahlliste für Darstellung -->
-    <div class="custom-form-group">
-        <label for="darstellungAuswahl" class="custom-label">Darstellung:</label>
-        <select id="darstellungAuswahl" class="custom-input" onchange="updateExampleCard();">
-            <option value="einzeilig">Darstellung Einzeilig</option>
-            <option value="mehrzeilig">Darstellung Mehrzeilig</option>
-        </select>
-    </div>
+<!-- Auswahlliste für Darstellung -->
+<div class="custom-form-group">
+    <label for="darstellungAuswahl" class="custom-label">Darstellung:</label>
+    <select id="darstellungAuswahl" class="custom-input">
+        <option value="einzeilig">Darstellung Einzeilig</option>
+        <option value="mehrzeilig">Darstellung Mehrzeilig</option>
+    </select>
+</div>
 
-    <!-- Beispielbildanzeige -->
-    <div id="example-image-container" style="text-align: center; margin-top: 20px;">
-        <h4>Beispielkarte</h4>
-        <img id="example-image" src="" alt="Beispielkarte" style="max-width: 100%; height: auto; display: none;" />
-    </div>
+<!-- Button zum Aktualisieren der Beispielkarte -->
+<div style="text-align: center; margin-top: 15px;">
+    <button id="update-example-card-button" class="custom-button">Beispiel anzeigen</button>
+</div>
+
+<!-- Bereich für das Bild der Beispielkarte -->
+<div id="example-card-container" style="text-align: center; margin-top: 20px;">
+    <img id="example-image" src="" alt="Beispielkarte" style="max-width: 100%; display: none;">
 </div>
 
 
@@ -1052,8 +1055,9 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         exampleImage.style.display = "block"; // Show the image
     }
 
-    // Initial update of the example card
-    document.addEventListener("DOMContentLoaded", updateExampleCard);
+    // Event-Listener für den Button
+    document.getElementById("update-example-card-button").addEventListener("click", updateExampleCard);
+
 
 </script>
 
