@@ -152,7 +152,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
-    <div class="title-inline">
+    <div class="custom-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span class="copy-confirmation" style="display: none;">&#10003;</span>
@@ -165,7 +165,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 
 <!-- Ausgabe für "Müllabholung Text Heute" -->
 <div id="helper-template-output-text-heute" style="display:none;">
-    <div class="title-inline">
+    <div class="custom-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span class="copy-confirmation" style="display: none;">&#10003;</span>
@@ -178,7 +178,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 
 <!-- Output for "Müllabholung Morgen" -->
 <div id="helper-template-output-morgen" style="display:none;">
-    <div class="title-inline">
+    <div class="custom-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span class="copy-confirmation" style="display: none;">&#10003;</span>
@@ -191,7 +191,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
 
 <!-- Ausgabe für "Müllabholung Text Morgen" -->
 <div id="helper-template-output-text-morgen" style="display:none;">
-    <div class="title-inline">
+    <div class="custom-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span class="copy-confirmation" style="display: none;">&#10003;</span>
@@ -366,13 +366,13 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
     .copy-button:hover {
         background: #005a9c;
     }
-    .title-inline {
+    .custom-title-inline {
         display: flex; /* Elemente nebeneinander anordnen */
         align-items: center; /* Vertikale Ausrichtung */
         gap: 10px; /* Abstand zwischen den Elementen */
     }
 
-    .title-inline h4 {
+    .custom-title-inline h4 {
         margin: 0;
         font-size: 18px; /* Gleiche Schriftgröße wie `p` */
         font-weight: normal; /* Schriftstärke angleichen */
@@ -380,7 +380,7 @@ Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wic
         cursor: pointer;
     }
 
-    .title-inline p {
+    .custom-title-inline p {
         margin: 0;
         font-size: 18px; /* Gleiche Schriftgröße wie `h4` */
         color: gray; /* Optional: Farbe anpassen */
