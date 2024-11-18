@@ -372,12 +372,15 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
     .important-container h3 {
         color: #d12700; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        text-shadow: 1px 1px 3px black;
     }
     .important-container p {
         color: #383838; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        font-family: Arial Black
     }
     .important-container strong {
         color: #d12700; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        text-shadow: 1px 1px 3px black;
     }
     
     /* Hinweise */
