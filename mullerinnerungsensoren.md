@@ -373,7 +373,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     .important-container h3,
     .important-container p,
     .important-container strong {
-        color: #07aaff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #ff2e00; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
     
     /* Hinweise */
@@ -383,6 +383,12 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         border-radius: 8px;
         margin-bottom: 20px;
         border: 1px solid #07aaff;
+    }
+
+    .note-container h3,
+    .note-container p,
+    .note-container strong {
+        color: #07aaff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
 
     /* Formulareingabefelder und Buttons */
