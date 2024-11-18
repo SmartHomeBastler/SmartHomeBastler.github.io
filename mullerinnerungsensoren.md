@@ -373,7 +373,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     .important-container h3,
     .important-container p,
     .important-container strong {
-        color: #ffffff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #07aaff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
     
     /* Hinweise */
