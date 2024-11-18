@@ -1084,7 +1084,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             // Erste Zeile definiert die Anzeige (heute/morgen)
             const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
             const sensorEntity = rows[0].cells[2].textContent; // Entity ID
-            const imageName = rows[0].cells[3].querySelector("select").value; // Bildname
+            const imageName = rows[0].cells[3].querySelector("select").value.toLowerCase(); // Bildname
 
             yaml += `type: vertical-stack\n`;
             yaml += `cards:\n`;
