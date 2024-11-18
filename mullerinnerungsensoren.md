@@ -1113,14 +1113,11 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
         const blinkend = document.getElementById("blinkendCheckbox").checked;
         const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value; // "heute" oder "morgen"
-        const darstellung = document.getElementById("darstellungAuswahl").value; // "einzeilig" oder "mehrzeilig"
-        const selectedFont = getSelectedFont(); // Schriftart auswählen
+        const selectedFont = getSelectedFont(); // Funktion zur Auswahl der Schriftart
 
         let yaml = "";
 
-        // Nur für den Fall, dass 1 Sensor erstellt wurde
-        if (sensorCount === 1 && blinkend) {
-            // Erste Zeile definiert die Anzeige (heute/morgen)
+        if (sensorCount === 1) {
             const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
             const sensorEntity = rows[0].cells[2].textContent; // Entity ID
@@ -1129,14 +1126,14 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `type: vertical-stack\n`;
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
-            yaml += `    entity: ${entityText}\n`; // Dynamisch angepasst
+            yaml += `    entity: ${entityText}\n`;
             yaml += `    show_icon: false\n`;
             yaml += `    show_name: false\n`;
             yaml += `    show_state: true\n`;
             yaml += `    styles:\n`;
             yaml += `      state:\n`;
             yaml += `        - font-size: 1.5em\n`;
-            yaml += `        - font-family: ${selectedFont}\n`; // Dynamische Schriftart
+            yaml += `        - font-family: ${selectedFont}\n`;
             yaml += `        - color: var(--primary-color)\n`;
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
@@ -1159,13 +1156,17 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `              card:\n`;
             yaml += `                - border: none\n`;
             yaml += `                - background: transparent\n`;
-            yaml += `            state:\n`;
-            yaml += `              - value: ${valueText}\n`; // Dynamisch angepasst
-            yaml += `                entity_picture: /local/muell/${imageName}.png\n`;
-            yaml += `                styles:\n`;
-            yaml += `                  entity_picture:\n`;
-            yaml += `                    - animation:\n`;
-            yaml += `                        - blink 1s linear infinite\n`;
+
+            if (blinkend) {
+                yaml += `            state:\n`;
+                yaml += `              - value: ${valueText}\n`;
+                yaml += `                entity_picture: /local/muell/${imageName}.png\n`;
+                yaml += `                styles:\n`;
+                yaml += `                  entity_picture:\n`;
+                yaml += `                    - animation:\n`;
+                yaml += `                        - blink 1s linear infinite\n`;
+            }
+
             yaml += `          - type: custom:button-card\n`;
             yaml += `            entity: ${sensorEntity}\n`;
             yaml += `            show_name: true\n`;
@@ -1173,10 +1174,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `            show_state: true\n`;
             yaml += `            styles:\n`;
             yaml += `              name:\n`;
-            yaml += `                - font-family: ${selectedFont}\n`; // Dynamische Schriftart
+            yaml += `                - font-family: ${selectedFont}\n`;
             yaml += `                - color: var(--primary-color)\n`;
             yaml += `              state:\n`;
-            yaml += `                - font-family: ${selectedFont}\n`; // Dynamische Schriftart
+            yaml += `                - font-family: ${selectedFont}\n`;
             yaml += `              card:\n`;
             yaml += `                - background-color: transparent\n`;
             yaml += `                - border: none\n`;
