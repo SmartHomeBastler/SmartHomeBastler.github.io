@@ -362,7 +362,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         
     /* Wichtiges Hinweis-Container */
     .important-container {
-        background-color: #fa7f7f;
+        background-color: #ff9982;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
@@ -370,13 +370,13 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
 
     .important-container h3 {
-        color: #ff0000; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #d12700; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
     .important-container p {
         color: #383838; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
     .important-container strong {
-        color: #ff0000; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #d12700; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
     
     /* Hinweise */
