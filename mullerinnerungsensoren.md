@@ -1121,7 +1121,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
             const sensorEntity = rows[0].cells[2].textContent; // Entity ID
-            const imageName = rows[0].cells[3].querySelector("select").value.toLowerCase(); // Bildname
+            const imageName = rows[0].cells[1].textContent.trim(); // Bildname direkt aus der zweiten Spalte
 
             yaml += `type: vertical-stack\n`;
             yaml += `cards:\n`;
@@ -1148,7 +1148,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `          - type: custom:button-card\n`;
             yaml += `            entity: ${sensorEntity}\n`;
             yaml += `            show_entity_picture: true\n`;
-            yaml += `            entity_picture: /local/muell/${imageName}.png\n`;
+            yaml += `            entity_picture: /local/muell/${imageName}\n`; // Kein `.png` hinzugefügt
             yaml += `            size: 100px\n`;
             yaml += `            show_state: false\n`;
             yaml += `            show_name: false\n`;
@@ -1160,7 +1160,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             if (blinkend) {
                 yaml += `            state:\n`;
                 yaml += `              - value: ${valueText}\n`;
-                yaml += `                entity_picture: /local/muell/${imageName}.png\n`;
+                yaml += `                entity_picture: /local/muell/${imageName}\n`;
                 yaml += `                styles:\n`;
                 yaml += `                  entity_picture:\n`;
                 yaml += `                    - animation:\n`;
@@ -1189,7 +1189,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         const yamlOutput = document.getElementById("yaml-code-output");
         yamlOutput.innerHTML = `<code>${yaml}</code>`;
     }
-
     function copyYAMLCode() {
         const yamlCodeOutput = document.getElementById("yaml-code-output");
         const codeText = yamlCodeOutput.textContent;
