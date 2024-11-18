@@ -171,6 +171,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
+    <h4>Hinweis 👍</h4> 
     <p>
         Vor der Erstellung der Templates solltest du entscheiden, ob du den Text "Du musst heute keine Tonne rausstellen!" bzw. "Du musst morgen keine Tonne rausstellen!" angezeigt bekommen möchtest oder nicht. Für eine Anzeige dieses Textes, aktiviere die jeweilige Checkbox.
     </p>
