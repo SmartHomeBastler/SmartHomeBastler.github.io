@@ -362,33 +362,40 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         
     /* Wichtiges Hinweis-Container */
     .important-container {
-        background-color: #f39c12;
-        color: #ffffff; /* Setzt die gesamte Textfarbe auf weiß */
+        background-color: #fa7f7f;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
-        border: 1px solid #ff2e00;
+        border: 1px solid #ff0000;
     }
 
-    .important-container h3,
-    .important-container p,
+    .important-container h3 {
+        color: #ff0000; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+    }
+    .important-container p {
+        color: #383838; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+    }
     .important-container strong {
-        color: #ff2e00; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #ff0000; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
     
     /* Hinweise */
     .note-container {
-        background-color: #3bfffd;
+        background-color: #75eaff;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
-        border: 1px solid #07aaff;
+        border: 1px solid #0062ff;
     }
 
-    .note-container h3,
-    .note-container p,
+    .note-container h3 {
+        color: #0062ff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+    }
+    .note-container p {
+        color: #383838; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+    }
     .note-container strong {
-        color: #07aaff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #0062ff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
     }
 
     /* Formulareingabefelder und Buttons */
