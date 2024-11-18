@@ -10,7 +10,7 @@ layout: page
 
 <!-- Important Notice -->
 <div class="important-container">
-    <h3>❗ Wichtig</h3>
+    <h3>❗Wichtig</h3>
     <p>
         Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist. Mit der neuesten Version dieser Integration ist es möglich, die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einzurichten. Im Weiteren Verlauf dieser Code-Generierung, werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
     </p>
@@ -267,7 +267,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 
 <!-- Important Notice -->
 <div class="important-container">
-    <h3>❗ Wichtig</h3>
+    <h3>❗Wichtig</h3>
     <p>
         Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist. Diese Button Card ist für die korrekte Darstellung der Dashbord-Karte unbedingt notwendig.
     </p>
