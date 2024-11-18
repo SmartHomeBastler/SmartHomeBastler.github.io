@@ -983,10 +983,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Standardreihe "Nächste Abholung"
         
         // Tabelle für die Ausgabe erstellen
-        let imageTable = '<table class="custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Bild Vorschau</th></tr></thead><tbody>';
+        let imageTable = '<table class="custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th>Bild Vorschau</th></tr></thead><tbody>';
         
         // Mapping von Farben zu Bilddateinamen
         const colorToImageMap = {
@@ -1007,9 +1007,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         // Zeilen der Tabelle durchlaufen und Bildnamen sowie Bildvorschau zuordnen
         let sensorCount = 0; // Zähler für die Anzahl der Sensoren
         rows.forEach(row => {
-            const sensorName = row.cells[0].textContent.trim();
-            const selectedColor = row.cells[3].querySelector("select").value;
-            
+            const sensorName = row.cells[0].textContent.trim(); // Sensor Name
+            const selectedColor = row.cells[3].querySelector("select").value; // Farbauswahl
+            const entityID = row.cells[2].textContent.trim(); // Entity ID
+
             if (colorToImageMap[selectedColor]) {
                 sensorCount++; // Zähler inkrementieren
                 const imageName = colorToImageMap[selectedColor];
@@ -1020,6 +1021,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
                     <tr>
                         <td>${sensorName}</td>
                         <td>${imageName}</td>
+                        <td>${entityID}</td>
                         <td>
                             <a href="${imagePath}" download="${imageName}">
                                 <img src="${imagePath}" alt="${imageName}" style="width: 50px; height: auto; cursor: pointer;" title="Bild herunterladen">
@@ -1043,7 +1045,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         // Sensor-Zusammenfassung anzeigen
         const sensorSummary = document.getElementById('sensor-summary');
         const sensorCountElement = document.getElementById('sensor-count');
-        const summaryText = document.getElementById('summary-text');
         
         if (sensorCount === 1) {
             sensorCountElement.textContent = "einen Sensor";
@@ -1054,6 +1055,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         sensorSummary.style.display = "block"; // Zusammenfassung einblenden
         sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4CAF50;">${sensorCount === 1 ? "einen Sensor" : `${sensorCount} Sensoren`}</span> angelegt.`;
     }
+
     function updateExampleCard() {
         const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
         const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
@@ -1122,8 +1124,9 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
             // Nimm den ersten Sensor aus der Tabelle
-            const sensorEntity = rows[0].cells[0].textContent.trim(); // Sensor Name
+            const sensorName = rows[0].cells[0].textContent.trim(); // Sensor Name
             const imageName = rows[0].cells[1].textContent.trim(); // Bild Name
+            const sensorEntity = rows[0].cells[2].textContent.trim(); // Entity ID
 
             yaml += `type: vertical-stack\n`;
             yaml += `cards:\n`;
