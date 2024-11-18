@@ -10,7 +10,7 @@ layout: page
 
 <!-- Important Notice -->
 <div class="important-container">
-    <h3>Wichtig!</h3>
+    <h3>❗ Wichtig</h3>
     <p>
         Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist. Mit der neuesten Version dieser Integration ist es möglich, die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einzurichten. Im Weiteren Verlauf dieser Code-Generierung, werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
     </p>
@@ -171,7 +171,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
-    <h4>Hinweis 👍</h4> 
+    <h4>💡 Hinweis</h4> 
     <p>
         Vor der Erstellung der Templates solltest du entscheiden, ob du den Text "Du musst heute keine Tonne rausstellen!" bzw. "Du musst morgen keine Tonne rausstellen!" angezeigt bekommen möchtest oder nicht. Für eine Anzeige dieses Textes, aktiviere die jeweilige Checkbox.
     </p>
@@ -267,7 +267,7 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 
 <!-- Important Notice -->
 <div class="important-container">
-    <h3>Wichtig!</h3>
+    <h3>❗ Wichtig</h3>
     <p>
         Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist. Diese Button Card ist für die korrekte Darstellung der Dashbord-Karte unbedingt notwendig.
     </p>
@@ -380,7 +380,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
     .important-container strong {
         color: #d12700; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
-        text-shadow: 1px 1px 3px black;
+        text-shadow: 1px 1px 2px black;
     }
     
     /* Hinweise */
