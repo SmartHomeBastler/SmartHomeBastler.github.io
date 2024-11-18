@@ -299,6 +299,22 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </select>
 </div>
 
+<div style="margin-top: 20px;">
+    <label for="fontSelection" class="custom-label">Schriftart auswählen:</label>
+    <select id="fontSelection" class="custom-input" onchange="toggleCustomFontInput()">
+        <option value="Arial Rounded MT" selected>Arial Rounded MT (Standard)</option>
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Tahoma">Tahoma</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Custom">Eigene Schriftart</option>
+    </select>
+    <input type="text" id="customFontInput" class="custom-input" style="display: none; margin-top: 10px;" placeholder="Eigene Schriftart eingeben">
+</div>
+
+
 <div id="dashboard-options" style="display: flex; justify-content: space-between; margin-top: 20px;">
     <!-- YAML-Ausgabefenster -->
     <div id="yaml-output-container" style="width: 45%; text-align: left;">
@@ -1068,6 +1084,28 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         exampleImage.style.display = "block"; // Show the image
     }
 
+    function toggleCustomFontInput() {
+        const fontSelection = document.getElementById("fontSelection").value;
+        const customFontInput = document.getElementById("customFontInput");
+
+        if (fontSelection === "Custom") {
+            customFontInput.style.display = "block";
+        } else {
+            customFontInput.style.display = "none";
+        }
+    }
+
+    function getSelectedFont() {
+        const fontSelection = document.getElementById("fontSelection").value;
+        const customFontInput = document.getElementById("customFontInput");
+
+        // Falls "Eigene Schriftart" gewählt wurde, die Eingabe verwenden
+        if (fontSelection === "Custom" && customFontInput.value.trim() !== "") {
+            return customFontInput.value.trim();
+        }
+        return fontSelection;
+    }
+
     function generateCardYAML() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringt die Header-Reihe
@@ -1076,6 +1114,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         const blinkend = document.getElementById("blinkendCheckbox").checked;
         const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value; // "heute" oder "morgen"
         const darstellung = document.getElementById("darstellungAuswahl").value; // "einzeilig" oder "mehrzeilig"
+        const selectedFont = getSelectedFont(); // Schriftart auswählen
 
         let yaml = "";
 
@@ -1097,7 +1136,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `    styles:\n`;
             yaml += `      state:\n`;
             yaml += `        - font-size: 1.5em\n`;
-            yaml += `        - font-family: Arial Rounded MT\n`;
+            yaml += `        - font-family: ${selectedFont}\n`; // Dynamische Schriftart
             yaml += `        - color: var(--primary-color)\n`;
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
@@ -1134,10 +1173,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `            show_state: true\n`;
             yaml += `            styles:\n`;
             yaml += `              name:\n`;
-            yaml += `                - font-family: Arial Rounded MT\n`;
+            yaml += `                - font-family: ${selectedFont}\n`; // Dynamische Schriftart
             yaml += `                - color: var(--primary-color)\n`;
             yaml += `              state:\n`;
-            yaml += `                - font-family: Arial Rounded MT\n`;
+            yaml += `                - font-family: ${selectedFont}\n`; // Dynamische Schriftart
             yaml += `              card:\n`;
             yaml += `                - background-color: transparent\n`;
             yaml += `                - border: none\n`;
