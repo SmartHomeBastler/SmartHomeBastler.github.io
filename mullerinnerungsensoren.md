@@ -1080,16 +1080,17 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         let yaml = "";
 
         // Nur für den Fall, dass 1 Sensor erstellt wurde
-        if (sensorCount === 1 && blinkend && anzeigeAuswahl === "heute") {
+        if (sensorCount === 1 && blinkend) {
             // Erste Zeile definiert die Anzeige (heute/morgen)
             const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
             const sensorEntity = rows[0].cells[2].textContent; // Entity ID
             const imageName = rows[0].cells[3].querySelector("select").value.toLowerCase(); // Bildname
 
             yaml += `type: vertical-stack\n`;
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
-            yaml += `    entity: ${entityText}\n`;
+            yaml += `    entity: ${entityText}\n`; // Dynamisch angepasst
             yaml += `    show_icon: false\n`;
             yaml += `    show_name: false\n`;
             yaml += `    show_state: true\n`;
@@ -1120,7 +1121,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `                - border: none\n`;
             yaml += `                - background: transparent\n`;
             yaml += `            state:\n`;
-            yaml += `              - value: Heute\n`;
+            yaml += `              - value: ${valueText}\n`; // Dynamisch angepasst
             yaml += `                entity_picture: /local/muell/${imageName}.png\n`;
             yaml += `                styles:\n`;
             yaml += `                  entity_picture:\n`;
@@ -1165,8 +1166,6 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         updateExampleCard();
         generateCardYAML();
     });
-
-
 </script>
 
 
