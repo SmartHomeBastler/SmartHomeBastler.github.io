@@ -683,6 +683,12 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             return row.querySelector(".entry-checkbox").checked;
         });
 
+        // Warnung, wenn keine Checkbox ausgewählt wurde
+        if (selectedEntries.length === 0) {
+            alert("Bitte wähle mindestens einen Eintrag aus!");
+            return; // Funktion abbrechen
+        }
+
         let umlautWarning = false;
 
         selectedEntries.forEach(row => {
@@ -700,6 +706,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             document.getElementById("code-output").style.display = "block";
         }
     }
+
 
     function generateSensorTable(selectedEntries) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
