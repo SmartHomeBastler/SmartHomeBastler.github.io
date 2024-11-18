@@ -1589,6 +1589,130 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             });
         }
 
+        else if (sensorCount === 5) {
+            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
+
+            // Sensoren aus der Tabelle entnehmen
+            const sensors = rows.map(row => ({
+                entity: row.cells[2].textContent.trim(),
+                image: row.cells[1].textContent.trim(),
+            }));
+
+            yaml += `type: vertical-stack\n`;
+            yaml += `cards:\n`;
+            yaml += `  - type: custom:button-card\n`;
+            yaml += `    entity: ${entityText}\n`;
+            yaml += `    show_icon: false\n`;
+            yaml += `    show_name: false\n`;
+            yaml += `    show_state: true\n`;
+            yaml += `    style:\n`;
+            yaml += `      top: 10%\n`;
+            yaml += `      left: 50%\n`;
+            yaml += `      width: 100%\n`;
+            yaml += `    styles:\n`;
+            yaml += `      state:\n`;
+            yaml += `        - font-size: 1.5em\n`;
+            yaml += `        - font-family: ${selectedFont}\n`;
+            yaml += `        - color: var(--primary-color)\n`;
+            yaml += `        - white-space: unset\n`;
+            yaml += `        - text-overflow: unset\n`;
+            yaml += `        - word-break: break-word\n`;
+            yaml += `      card:\n`;
+            yaml += `        - background: transparent\n`;
+            yaml += `        - border: none\n`;
+
+            // Erste Zeile der horizontalen Sensoren
+            yaml += `  - type: horizontal-stack\n`;
+            yaml += `    cards:\n`;
+
+            sensors.slice(0, 3).forEach(sensor => {
+                yaml += `      - type: vertical-stack\n`;
+                yaml += `        cards:\n`;
+                yaml += `          - type: custom:button-card\n`;
+                yaml += `            entity: ${sensor.entity}\n`;
+                yaml += `            show_entity_picture: true\n`;
+                yaml += `            entity_picture: /local/muell/${sensor.image}\n`;
+                yaml += `            size: 60%\n`;
+                yaml += `            show_state: false\n`;
+                yaml += `            show_name: false\n`;
+                yaml += `            styles:\n`;
+                yaml += `              card:\n`;
+                yaml += `                - border: none\n`;
+                yaml += `                - background: transparent\n`;
+
+                if (blinkend) {
+                    yaml += `            state:\n`;
+                    yaml += `              - value: ${valueText}\n`;
+                    yaml += `                entity_picture: /local/muell/${sensor.image}\n`;
+                    yaml += `                styles:\n`;
+                    yaml += `                  entity_picture:\n`;
+                    yaml += `                    - animation:\n`;
+                    yaml += `                        - blink 1s linear infinite\n`;
+                }
+
+                yaml += `          - type: custom:button-card\n`;
+                yaml += `            entity: ${sensor.entity}\n`;
+                yaml += `            show_name: true\n`;
+                yaml += `            show_icon: false\n`;
+                yaml += `            show_state: true\n`;
+                yaml += `            styles:\n`;
+                yaml += `              name:\n`;
+                yaml += `                - font-family: ${selectedFont}\n`;
+                yaml += `                - color: var(--primary-color)\n`;
+                yaml += `              state:\n`;
+                yaml += `                - font-family: ${selectedFont}\n`;
+                yaml += `              card:\n`;
+                yaml += `                - background-color: transparent\n`;
+                yaml += `                - border: none\n`;
+            });
+
+            // Zweite Zeile der horizontalen Sensoren
+            yaml += `  - type: horizontal-stack\n`;
+            yaml += `    cards:\n`;
+
+            sensors.slice(3, 5).forEach(sensor => {
+                yaml += `      - type: vertical-stack\n`;
+                yaml += `        cards:\n`;
+                yaml += `          - type: custom:button-card\n`;
+                yaml += `            entity: ${sensor.entity}\n`;
+                yaml += `            show_entity_picture: true\n`;
+                yaml += `            entity_picture: /local/muell/${sensor.image}\n`;
+                yaml += `            size: 50%\n`;
+                yaml += `            show_state: false\n`;
+                yaml += `            show_name: false\n`;
+                yaml += `            styles:\n`;
+                yaml += `              card:\n`;
+                yaml += `                - border: none\n`;
+                yaml += `                - background: transparent\n`;
+
+                if (blinkend) {
+                    yaml += `            state:\n`;
+                    yaml += `              - value: ${valueText}\n`;
+                    yaml += `                entity_picture: /local/muell/${sensor.image}\n`;
+                    yaml += `                styles:\n`;
+                    yaml += `                  entity_picture:\n`;
+                    yaml += `                    - animation:\n`;
+                    yaml += `                        - blink 1s linear infinite\n`;
+                }
+
+                yaml += `          - type: custom:button-card\n`;
+                yaml += `            entity: ${sensor.entity}\n`;
+                yaml += `            show_name: true\n`;
+                yaml += `            show_icon: false\n`;
+                yaml += `            show_state: true\n`;
+                yaml += `            styles:\n`;
+                yaml += `              name:\n`;
+                yaml += `                - font-family: ${selectedFont}\n`;
+                yaml += `                - color: var(--primary-color)\n`;
+                yaml += `              state:\n`;
+                yaml += `                - font-family: ${selectedFont}\n`;
+                yaml += `              card:\n`;
+                yaml += `                - background-color: transparent\n`;
+                yaml += `                - border: none\n`;
+            });
+        }
+        
         // Setze den generierten YAML-Code in das `pre`-Tag
         const yamlOutput = document.getElementById("yaml-code-output");
         yamlOutput.innerHTML = `<code>${yaml}</code>`;
