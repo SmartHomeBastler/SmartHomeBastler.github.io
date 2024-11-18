@@ -1107,8 +1107,8 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
 
     function generateCardYAML() {
-        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringt die Header-Reihe
+        const imageTableBody = document.getElementById('image-list-output').querySelector('tbody'); // Tabelle aus createImageList
+        const rows = Array.from(imageTableBody.querySelectorAll("tr"));
         const sensorCount = rows.length;
 
         const blinkend = document.getElementById("blinkendCheckbox").checked;
@@ -1120,8 +1120,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         if (sensorCount === 1) {
             const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
-            const sensorEntity = rows[0].cells[2].textContent; // Entity ID
-            const imageName = rows[0].cells[1].textContent.trim(); // Bildname direkt aus der zweiten Spalte
+
+            // Nimm den ersten Sensor aus der Tabelle
+            const sensorEntity = rows[0].cells[0].textContent.trim(); // Sensor Name
+            const imageName = rows[0].cells[1].textContent.trim(); // Bild Name
 
             yaml += `type: vertical-stack\n`;
             yaml += `cards:\n`;
@@ -1133,7 +1135,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `    styles:\n`;
             yaml += `      state:\n`;
             yaml += `        - font-size: 1.5em\n`;
-            yaml += `        - font-family: ${selectedFont}\n`;
+            yaml += `        - font-family: ${selectedFont}\n`; // Dynamische Schriftart
             yaml += `        - color: var(--primary-color)\n`;
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
@@ -1148,7 +1150,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `          - type: custom:button-card\n`;
             yaml += `            entity: ${sensorEntity}\n`;
             yaml += `            show_entity_picture: true\n`;
-            yaml += `            entity_picture: /local/muell/${imageName}\n`; // Kein `.png` hinzugefügt
+            yaml += `            entity_picture: /local/muell/${imageName}\n`; // Bildname aus Tabelle
             yaml += `            size: 100px\n`;
             yaml += `            show_state: false\n`;
             yaml += `            show_name: false\n`;
@@ -1174,10 +1176,10 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             yaml += `            show_state: true\n`;
             yaml += `            styles:\n`;
             yaml += `              name:\n`;
-            yaml += `                - font-family: ${selectedFont}\n`;
+            yaml += `                - font-family: ${selectedFont}\n`; // Dynamische Schriftart
             yaml += `                - color: var(--primary-color)\n`;
             yaml += `              state:\n`;
-            yaml += `                - font-family: ${selectedFont}\n`;
+            yaml += `                - font-family: ${selectedFont}\n`; // Dynamische Schriftart
             yaml += `              card:\n`;
             yaml += `                - background-color: transparent\n`;
             yaml += `                - border: none\n`;
@@ -1189,6 +1191,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         const yamlOutput = document.getElementById("yaml-code-output");
         yamlOutput.innerHTML = `<code>${yaml}</code>`;
     }
+
     function copyYAMLCode() {
         const yamlCodeOutput = document.getElementById("yaml-code-output");
         const codeText = yamlCodeOutput.textContent;
