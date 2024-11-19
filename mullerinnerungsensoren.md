@@ -845,23 +845,33 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         let duplicateColor = false;
     
         rows.forEach(row => {
-            const color = row.cells[3].querySelector("select").value;
-            if (color === "Farbe wählen") {
-                colorNotSelected = true;
+            // Suche nach dem Dropdown in der Spalte Tonnen Farbe
+            const selectElement = row.cells[3]?.querySelector("select");
+
+            if (!selectElement) {
+                console.error("Kein Dropdown-Element in der Spalte 'Tonnen Farbe' gefunden!");
+                return; // Überspringe die aktuelle Zeile, wenn kein Dropdown gefunden wurde
+            }
+
+            const color = selectElement.value;
+            console.log(`Ausgewählte Farbe in der Zeile: "${color}"`); // Debugging-Ausgabe
+
+            if (!color || color.trim() === "" || color === "Farbe wählen") {
+                colorNotSelected = true; // Wenn keine Farbe ausgewählt wurde
             } else {
                 if (selectedColors.has(color)) {
-                    duplicateColor = true; // Farbe wurde schon einmal ausgewählt
+                    duplicateColor = true; // Wenn die Farbe doppelt ist
                 } else {
-                    selectedColors.add(color);
+                    selectedColors.add(color); // Farbe zu den ausgewählten hinzufügen
                 }
             }
         });
-    
+
         if (colorNotSelected) {
             alert("Die Farben der Tonne sollten zugeordnet werden!");
             return;
         }
-    
+
         if (duplicateColor) {
             alert("Jede Farbe darf nur einmal ausgewählt werden!");
             return;
