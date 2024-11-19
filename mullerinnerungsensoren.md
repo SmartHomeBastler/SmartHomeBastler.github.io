@@ -455,7 +455,35 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         color: #0062ff;
         text-transform: uppercase;
     }
-
+    .dropdown {
+        margin: 20px 0;
+        text-align: center;
+    }
+    .dropdown-toggle {
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f39c12;
+        color: #ffffff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+    }
+    .dropdown-toggle span {
+        float: right;
+    }
+    .dropdown-content {
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #f39c12;
+        border-radius: 5px;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
     /* Dashboard Optionen Container */
     .dashboard-options {
         display: flex;
