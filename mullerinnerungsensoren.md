@@ -548,7 +548,6 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
 
     /* Beispielkarte Container */
     .example-card-container {
-        background-color: #f9f9f9;
         padding: 0px;
         text-align: center;
     }
