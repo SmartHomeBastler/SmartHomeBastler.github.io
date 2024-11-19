@@ -494,7 +494,7 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
     /* Beispielkarte Container */
     .example-card-container {
         background-color: #f9f9f9;
-        padding: 15px;
+        padding: 0px;
         text-align: center;
     }
 
@@ -505,8 +505,6 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 8px;
-        border: 1px solid #ddd;
         background-color: #ffffff;
         overflow: hidden; /* Verhindert das Überlaufen von Bildern */
     }
