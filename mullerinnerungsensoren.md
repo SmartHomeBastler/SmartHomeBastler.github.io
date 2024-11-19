@@ -8,11 +8,13 @@ layout: page
 
 <h1 class="custom-title">Müllkalender Code-Generator</h1>
 
-<!-- Important Notice -->
+<!-- Wichtiger Hinweis -->
 <div class="important-container">
     <h3>❗Wichtig</h3>
     <p>
-        Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist. Mit der neuesten Version dieser Integration ist es möglich, die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einzurichten. Im Weiteren Verlauf dieser Code-Generierung, werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
+        Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist.<br>
+        Mit der neuesten Version dieser Integration kannst du die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einrichten.<br> 
+        Im weiteren Verlauf dieser Code-Generierung werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
     </p>
 </div>
 <!--
@@ -27,8 +29,10 @@ layout: page
 <div id="step-1">
 <h2 class="custom-title">1. Kalenderdaten Auslesen</h2>
 
-<p>Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte deine URL an oder lade die ICS Datei hoch und bestätige mit<br>
-<strong>Kalendereinträge extrahieren</strong></p>
+<p>
+    Zum Auslesen der verschiedenen Abholungen aus deinem Müllkalender, gib bitte deine URL an oder lade die ICS-Datei hoch und bestätige mit<br>
+    <strong>Kalendereinträge extrahieren</strong>
+</p>
 
 <!-- File Upload and URL Input -->
 <div class="custom-form-group">
@@ -61,13 +65,13 @@ Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 
 <div class="important-container">
     <p>
-        <strong>Achtung!</strong> Deine persönlichen Bezeichnungen dürfen keine Umlaute oder Leerzeichen beinhalten!
+        <strong>Achtung!</strong> Deine persönlichen Bezeichnungen dürfen keine Umlaute oder Leerzeichen enthalten!
     </p>
 </div>
 
 <p>
-    Wähle deine persönliche Bezeichnung so aus, dass weder das Wort <strong>Tonne</strong> noch <strong>Sack</strong> vorkommen, da diese Bezeichnungen vom Codegenerator hinzugefügt werden.<br>
-    So wird zum Beispiel aus der Bezeichnung <strong>Papier</strong> automatisch <strong>Papier Tonne</strong> oder aus <strong>Gelber</strong> automatisch <strong>Gelber Sack</strong>
+    Wähle deine persönliche Bezeichnung so aus, dass weder das Wort <strong>Tonne</strong> noch <strong>Sack</strong> enthalten ist, da diese Bezeichnungen vom Codegenerator hinzugefügt werden.<br>
+    So wird beispielsweise aus der Bezeichnung <strong>Papier</strong> automatisch <strong>Papier Tonne</strong> oder aus <strong>Gelber</strong> automatisch <strong>Gelber Sack</strong>.
 </p>
 
 <p>
@@ -105,7 +109,7 @@ Nach den Änderungen klicke auf<br>
 <h2 class="custom-title">3. Sensoren Konfiguration</h2>
 
 <p>An diesem Punkt kann die Integration <strong>Waste Collection Schedule</strong> in Home Assistant eingerichtet werden.<br>
-Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
+Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
 
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
@@ -137,8 +141,13 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im <strong
 
 
 <p>
-Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden.<br>
-Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.
+    Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden.<br>
+    Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.
+</p>
+
+<p>
+    Mit einem Klick auf den Sensor-Namen wird dieser in die Zwischenablage kopiert.<br>
+    Dadurch wird das Eintragen in Home Assistant als Sensor-Name wesentlich einfacher.
 </p>
 
 <table class="custom-table" id="sensor-table" style="display:none;">
@@ -272,29 +281,29 @@ Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.
 -->
 
 <div id="step-5" style="display:none;">
-<h2 class="custom-title">5. Dashboard Karten</h2>
+<h2 class="custom-title">5. Dashboard-Karten</h2>
 
-<!-- Important Notice -->
 <div class="important-container">
     <h3>❗Wichtig</h3>
     <p>
         Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist.<br>
-        Diese Button Card ist für die korrekte Darstellung der Dashbord-Karte unbedingt notwendig.
+        Diese Button Card ist für die korrekte Darstellung der Dashboard-Karte unbedingt notwendig.
     </p>
 </div>
 
-<p>Hier siehst du eine Zusammenfassung deiner Einstellungen, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt.<br>
-Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.
+<p>
+    Hier siehst du eine Zusammenfassung deiner Einstellungen, welche den Zusammenhang deines Sensor-Namens mit den gewählten Tonnenfarben darstellt.<br>
+    Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.
 </p>
 <p>
-Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespeichert werden.<br>
-<strong>Wichtig ist, dass diese vor dem Erstellen der Dashboardkarten hinzugefügt werden!</strong>
+    Alle Bilder sollten in Home Assistant im Ordner <strong>www/muell</strong> gespeichert werden.<br>
+    <strong>Wichtig ist, dass diese vor dem Erstellen der Dashboard-Karten hinzugefügt werden!</strong>
 </p>
 <div id="image-list-output"></div>
 
 
 <div id="example-section" style="margin-top: 20px;">
-    <h3 class="custom-title">Dashboard Karten Optionen</h3>
+    <h3 class="custom-title">Dashboard-Karten Optionen</h3>
 </div>
 
 <div id="sensor-summary" class="sensor-summary">
@@ -324,13 +333,13 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
 </div>
 
 <p class="description-text">
-    Die Dashboardkarten wurden so konfiguriert, dass sie bis 3 Abholungen/Sensoren einzeilig und ab 5 Abholungen/Sensoren zweizeilig dargestellt werden.<br>
+    Die Dashboard-Karten wurden so konfiguriert, dass sie bis 3 Abholungen/Sensoren einzeilig und ab 5 Abholungen/Sensoren zweizeilig dargestellt werden.<br>
     Für 4 Abholungen/Sensoren kann hier entschieden werden, ob ein- oder mehrzeilig.
 </p>
 
 <!-- Auswahlliste für Darstellung -->
 <div class="custom-form-group">
-    <label for="darstellungAuswahl" class="custom-label">Darstellung:</label>
+    <label for="darstellungAuswahl" class="custom-label">Darstellung bei 4 Abholungen/Sensoren:</label>
     <select id="darstellungAuswahl" class="custom-input">
         <option value="einzeilig">Darstellung Einzeilig</option>
         <option value="mehrzeilig">Darstellung Mehrzeilig</option>
@@ -338,7 +347,7 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
 </div>
 
 <p class="description-text">
-    Hier kann eine Schriftart für die Dashboardkarte gewählt oder eine eigene eingetragen werden.
+    Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.
 </p>
 <div class="font-selection">
     <label for="fontSelection" class="custom-label">Schriftart auswählen:</label>
@@ -386,7 +395,7 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
 
 <h3 class="custom-title">Gutes Gelingen!</h3>
 
-
+{% include support_note.html %}
 
 
 </div>
