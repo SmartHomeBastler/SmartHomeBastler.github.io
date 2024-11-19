@@ -603,7 +603,8 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         border: none;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        margin-top: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
     .custom-button:hover {
         background-color: #45a049;
