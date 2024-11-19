@@ -367,6 +367,18 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <input type="text" id="customFontInput" class="custom-input" style="display: none; margin-top: 10px;" placeholder="Eigene Schriftart eingeben">
 </div>
 
+<!-- Checkbox für "Style anpassen" -->
+<div class="custom-form-group">
+    <input type="checkbox" id="styleUseCheckbox">
+    <label for="styleUseCheckbox">Karten Design anpassen?</label>
+</div>
+
+<!-- Versteckter Container -->
+<div id="styleOptions" style="display: none; margin-top: 10px;">
+    <p>Hier kannst du die Optionen für das Karten Design anpassen:</p>
+    <!-- Weitere Inhalte oder Formulare -->
+</div>
+
 <p class="description-text">
     Wenn alle Einstellungen getroffen wurden, klicke auf <strong>Beispiel anzeigen & Code generieren</strong><br>
     Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generieren.
@@ -1293,6 +1305,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         }
         return fontSelection;
     }
+    // Event Listener für die Checkbox
+    document.getElementById("styleUseCheckbox").addEventListener("change", function () {
+        const styleOptionsDiv = document.getElementById("styleOptions");
+        if (this.checked) {
+            // Zeige den Container, wenn die Checkbox angehakt ist
+            styleOptionsDiv.style.display = "block";
+        } else {
+            // Verstecke den Container, wenn die Checkbox nicht angehakt ist
+            styleOptionsDiv.style.display = "none";
+        }
+    });
 
     function generateCardYAML() {
         const imageTableBody = document.getElementById('image-list-output').querySelector('tbody'); // Tabelle aus createImageList
