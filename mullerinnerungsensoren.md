@@ -460,17 +460,26 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
     .dashboard-options {
         display: flex;
         justify-content: space-between;
+        align-items: flex-start; /* Überschriften werden oben ausgerichtet */
         margin-top: 30px;
         gap: 20px;
     }
 
     /* YAML-Code Container */
-    .yaml-output-container {
+    .yaml-output-container,
+    .example-card-container {
         width: 48%;
         display: flex;
         flex-direction: column;
     }
 
+    /* YAML-Code Header und Container */
+    .yaml-output-container h4,
+    .example-card-container h4 {
+        margin-bottom: 15px; /* Einheitlicher Abstand zur nächsten Sektion */
+    }
+
+    /* YAML-Code */
     .yaml-code-container {
         position: relative;
         background-color: #f9f9f9;
@@ -481,32 +490,18 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         max-height: 400px;
         overflow: auto; /* Ermöglicht Scrollen */
     }
-    .yaml-code-container pre {
-        white-space: pre-wrap; /* Umbrüche bei langen Zeilen */
-        word-wrap: break-word;
-        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-        font-size: 0.95em;
-        line-height: 1.5;
-        color: #333;
-    }
 
-    /* Beispielkarte */
+    /* Beispielkarte Container */
     .example-card-container {
-        width: 48%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        border-radius: 8px;
         padding: 15px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         text-align: center;
     }
 
+    /* Bild im Beispielkarten-Container */
     .example-image-wrapper {
         width: 100%;
-        height: 300px;
+        height: 400px; /* Gleiche Höhe wie das YAML-Fenster */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -515,6 +510,7 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         background-color: #ffffff;
         overflow: hidden; /* Verhindert das Überlaufen von Bildern */
     }
+
     .example-image-wrapper img {
         max-width: 100%;
         max-height: 100%;
