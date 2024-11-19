@@ -1058,7 +1058,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 hasSack = true;
             }
     
-            sensorAssignments.push({ customName, sensorName, color });
+            sensorAssignments.push({ customName, sensorName, templateName, color });
         });
     
         // Generiere das Template für den angegebenen Tag ("Heute" oder "Morgen")
