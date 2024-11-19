@@ -373,7 +373,9 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
     <!-- Beispielbild -->
     <div id="example-card-container" class="example-card-container">
         <h4 class="custom-title">Beispielkarte</h4>
-        <img id="example-image" src="" alt="Beispielkarte" style="max-width: 100%; display: none;">
+        <div class="example-image-wrapper">
+            <img id="example-image" src="" alt="Beispielkarte">
+        </div>
     </div>
 </div>
 
@@ -454,34 +456,69 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         text-transform: uppercase;
     }
 
-    /* YAML und Beispielkarte Container */
+    /* Dashboard Optionen Container */
     .dashboard-options {
         display: flex;
         justify-content: space-between;
         margin-top: 30px;
+        gap: 20px;
     }
 
     /* YAML-Code Container */
+    .yaml-output-container {
+        width: 48%;
+        display: flex;
+        flex-direction: column;
+    }
+
     .yaml-code-container {
         position: relative;
         background-color: #f9f9f9;
         border: 1px solid #ccc;
         border-radius: 8px;
-        padding: 20px;
-        overflow: auto;
-        max-height: 350px;
+        padding: 15px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-height: 400px;
+        overflow: auto; /* Ermöglicht Scrollen */
+    }
+    .yaml-code-container pre {
+        white-space: pre-wrap; /* Umbrüche bei langen Zeilen */
+        word-wrap: break-word;
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #333;
     }
 
     /* Beispielkarte */
     .example-card-container {
-        text-align: center;
+        width: 48%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background-color: #f9f9f9;
         border: 1px solid #ccc;
         border-radius: 8px;
-        padding: 20px;
-        max-height: 350px;
+        padding: 15px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .example-image-wrapper {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background-color: #ffffff;
+        overflow: hidden; /* Verhindert das Überlaufen von Bildern */
+    }
+    .example-image-wrapper img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Skaliert das Bild proportional */
     }
 
     /* Sensor-Zusammenfassung */
@@ -511,6 +548,10 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
     .custom-button {
         background-color: #4CAF50;
         color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
         cursor: pointer;
         transition: background-color 0.3s ease;
         margin-top: 15px;
@@ -562,20 +603,16 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         padding: 8px 12px;
         font-size: 0.85em;
         cursor: pointer;
+        z-index: 10;
     }
     .copy-button:hover {
         background: #005a9c;
     }
 
-    /* Schriftart Auswahl */
-    .font-selection {
-        margin-top: 20px;
-    }
-
     /* Button Container */
     .button-container {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 25px;
     }
 </style>
 
