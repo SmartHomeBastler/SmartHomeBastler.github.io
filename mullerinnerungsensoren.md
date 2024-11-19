@@ -1051,6 +1051,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         rows.forEach(row => {
             const customName = row.cells[0].textContent.trim();
             const sensorName = "states.sensor." + customName.toLowerCase().replace(/\s+/g, "_") + ".state";
+            const templateName = customName.replace(/Gelber/g, "Gelben").replace(/\s+/g, "").replace(/Sack/g, "").replace(/Tonne/g, "")
             const color = row.cells[3].querySelector("select").value;
     
             if (color === "Sack") {
@@ -1103,11 +1104,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     
     function generateOutputText(assignments, hasSack) {
         // Sortiere "Sack"-Einträge an den Anfang
-        const formattedNames = assignments.map(({ customName, color }) => {
+        const formattedNames = assignments.map(({ templateName, color }) => {
             if (hasSack && color === "Sack") {
-                return { text: "den " + customName + " Sack", order: 0 };
+                return { text: "den " + templateName + " Sack", order: 0 };
             }
-            return { text: "die " + customName, order: 1 };
+            return { text: "die " + templateName, order: 1 };
         });
     
         // Sortiere nach der Reihenfolge: Sack zuerst, dann die anderen
