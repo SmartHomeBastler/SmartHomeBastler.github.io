@@ -55,7 +55,8 @@ layout: page
 <h2 class="custom-title">2. Kalenderdaten Umwandeln</h2>
 
 <p>Im nächsten Schritt wähle jene Einträge aus, welche zu deinen Sensoren hinzugefügt werden sollen. 
-Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.  
+Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
+</p>
 
 <div class="important-container">
     <p>
@@ -721,7 +722,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         });
 
         if (umlautWarning) {
-            alert("Umlaute verwendet! Bitte eigene Bezeichnungen kontrollieren oder Kalendereinträge anpassen!");
+            alert("Umlaute entdeckt! Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!");
         } else {
             generateSensorTable(selectedEntries);
             document.getElementById("template-header").style.display = "block";
