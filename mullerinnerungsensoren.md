@@ -592,8 +592,11 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
+        vertical-align: middle;
     }
-
+    .custom-table select {
+        vertical-align: middle;
+    }
     /* Code Container */
     .code-container {
         position: relative;
