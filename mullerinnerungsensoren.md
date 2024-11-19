@@ -546,7 +546,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     /* YAML-Code */
     .yaml-code-container {
         position: relative;
-        background-color: #f9f9f9;
+        background-color: #e9e9e9;
         border: 1px solid #ccc;
         border-radius: 8px;
         padding: 15px;
@@ -597,11 +597,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     .custom-input, .custom-button, select {
         width: 100%;
-        background-color: #d9d9d9;
+        background-color: #e9e9e9;
         padding: 10px;
         margin-top: 5px;
         border-radius: 5px;
-        border: 1px solid #ddd;
+        border: 1px solid #c9c9c9;
     }
     .custom-button {
         background-color: #4CAF50;
@@ -626,7 +626,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-top: 20px;
     }
     .custom-table th, .custom-table td {
-        border: 1px solid #ddd;
+        border: 1px solid #c9c9c9;
         padding: 8px;
         text-align: center;
         vertical-align: middle;
@@ -637,8 +637,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     /* Code Container */
     .code-container {
         position: relative;
-        background-color: #fdfdfd;
-        border: 1px solid #ddd;
+        background-color: #e9e9e9;
+        border: 1px solid #c9c9c9;
         border-radius: 5px;
         padding: 15px;
         margin-top: 5px;
