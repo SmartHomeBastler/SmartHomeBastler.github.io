@@ -720,7 +720,10 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         /* Styling für die Auswahllisten */
     .custom-select-group {
         display: flex;
-        gap: 20px; /* Abstand zwischen den Listen */
+        justify-content: space-between;
+        align-items: flex-start; /* Überschriften werden oben ausgerichtet */
+        margin-top: 30px;
+        gap: 20px;
     }
     #styleOptions {
         border: 1px solid #ccc;
