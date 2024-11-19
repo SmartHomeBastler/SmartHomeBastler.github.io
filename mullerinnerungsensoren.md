@@ -296,15 +296,16 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
 <div id="example-section" style="margin-top: 20px;">
     <h3 class="custom-title">Dashboard Karten Optionen</h3>
 </div>
-<div id="sensor-summary" style="display:none; margin-top: 20px; text-align: start; font-size: 20px;">
+
+<div id="sensor-summary" class="sensor-summary">
     <p>
-        Du hast <span id="sensor-count" style="font-weight: bold; color: #4CAF50;">0</span> Sensor angelegt.
+        Du hast <span id="sensor-count" style="font-weight: bold; color: #4CAF50;">0</span> Sensoren angelegt.
     </p>
 </div>
 
-<p>
-Mit dieser Checkbox kannst du auswählen, ob die Tonne bei Abholung blinken soll.<br>
-Bei der Anzeige Auswahl wird eingestellt, ob der Text und die optioonal blinkende Tonne für heute oder morgen angezeigt werden soll.
+<p class="description-text">
+    Mit dieser Checkbox kannst du auswählen, ob die Tonne bei Abholung blinken soll.<br>
+    Bei der Anzeige Auswahl wird eingestellt, ob der Text und die optional blinkende Tonne für heute oder morgen angezeigt werden soll.
 </p>
 
 <!-- Checkbox für "Tonne blinkend" -->
@@ -322,9 +323,9 @@ Bei der Anzeige Auswahl wird eingestellt, ob der Text und die optioonal blinkend
     </select>
 </div>
 
-<p>
-Die Dashboardkarten wurden so konfiguriert, dass sie bis 3 Abholungen/Sensoren einzeilig und ab 5 Abholungen/Sensoren zweizeilig dargestellt werden.<br>
-Für 4 Abholungen/Sensoren kann hier entschieden werden ob ein- oder mehrzeilig.
+<p class="description-text">
+    Die Dashboardkarten wurden so konfiguriert, dass sie bis 3 Abholungen/Sensoren einzeilig und ab 5 Abholungen/Sensoren zweizeilig dargestellt werden.<br>
+    Für 4 Abholungen/Sensoren kann hier entschieden werden, ob ein- oder mehrzeilig.
 </p>
 
 <!-- Auswahlliste für Darstellung -->
@@ -335,10 +336,11 @@ Für 4 Abholungen/Sensoren kann hier entschieden werden ob ein- oder mehrzeilig.
         <option value="mehrzeilig">Darstellung Mehrzeilig</option>
     </select>
 </div>
-<p>
-Hier kann eine Schriftart für die Dashboardkarte gewählt oder eine eigene eingetragen werden.
+
+<p class="description-text">
+    Hier kann eine Schriftart für die Dashboardkarte gewählt oder eine eigene eingetragen werden.
 </p>
-<div style="margin-top: 20px;">
+<div class="font-selection">
     <label for="fontSelection" class="custom-label">Schriftart auswählen:</label>
     <select id="fontSelection" class="custom-input" onchange="toggleCustomFontInput()">
         <option value="Arial Rounded MT" selected>Arial Rounded MT (Standard)</option>
@@ -353,35 +355,36 @@ Hier kann eine Schriftart für die Dashboardkarte gewählt oder eine eigene eing
     <input type="text" id="customFontInput" class="custom-input" style="display: none; margin-top: 10px;" placeholder="Eigene Schriftart eingeben">
 </div>
 
-<p>
-Wenn alle Einstellungen getroffen wurden, klicke auf <strong>Beispiel anzeigen & Code generieren</strong><br>
-Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generieren.
+<p class="description-text">
+    Wenn alle Einstellungen getroffen wurden, klicke auf <strong>Beispiel anzeigen & Code generieren</strong><br>
+    Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generieren.
 </p>
 
-<div id="dashboard-options" style="display: flex; justify-content: space-between; margin-top: 20px;">
+<div id="dashboard-options" class="dashboard-options">
     <!-- YAML-Ausgabefenster -->
-    <div id="yaml-output-container" style="width: 45%; text-align: left;">
+    <div id="yaml-output-container" class="yaml-output-container">
         <h4 class="custom-title">Generierter YAML-Code</h4>
-        <div class="code-container">
+        <div class="yaml-code-container">
             <button class="copy-button" onclick="copyYAMLCode()">Copy</button>
             <pre id="yaml-code-output" class="language-yaml"><code></code></pre>
         </div>
     </div>
 
     <!-- Beispielbild -->
-    <div id="example-card-container" style="width: 45%; text-align: center;">
+    <div id="example-card-container" class="example-card-container">
         <h4 class="custom-title">Beispielkarte</h4>
         <img id="example-image" src="" alt="Beispielkarte" style="max-width: 100%; display: none;">
     </div>
 </div>
 
 <!-- Button zur Aktualisierung -->
-<div style="text-align: center; margin-top: 15px;">
+<div class="button-container">
     <button id="update-example-and-code" class="custom-button">Beispiel anzeigen & Code generieren</button>
 </div>
 
-
 <h3 class="custom-title">Gutes Gelingen!</h3>
+
+
 
 
 </div>
@@ -402,7 +405,15 @@ Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generie
         font-weight: bold;
         margin-top: 20px;
     }
-        
+
+    /* Beschreibungstext */
+    .description-text {
+        margin: 15px 0;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
+    }
+
     /* Wichtiges Hinweis-Container */
     .important-container {
         background-color: #ff9982;
@@ -411,20 +422,19 @@ Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generie
         margin-bottom: 20px;
         border: 1px solid #ff0000;
     }
-
     .important-container h3 {
-        color: #d12700; 
+        color: #d12700;
         text-shadow: 1px 1px 3px black;
     }
     .important-container p {
-        color: #383838; 
-        font-family: Arial Black
+        color: #383838;
+        font-family: Arial Black;
     }
     .important-container strong {
-        color: #d12700; 
+        color: #d12700;
         text-transform: uppercase;
     }
-    
+
     /* Hinweise */
     .note-container {
         background-color: #75eaff;
@@ -433,21 +443,58 @@ Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generie
         margin-bottom: 20px;
         border: 1px solid #0062ff;
     }
-
     .note-container h3 {
-        color: #0062ff; 
+        color: #0062ff;
     }
     .note-container p {
-        color: #383838; 
+        color: #383838;
     }
     .note-container strong {
         color: #0062ff;
         text-transform: uppercase;
     }
 
+    /* YAML und Beispielkarte Container */
+    .dashboard-options {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    /* YAML-Code Container */
+    .yaml-code-container {
+        position: relative;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        overflow: auto;
+        max-height: 350px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Beispielkarte */
+    .example-card-container {
+        text-align: center;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        max-height: 350px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Sensor-Zusammenfassung */
+    .sensor-summary {
+        margin-top: 15px;
+        font-size: 18px;
+        line-height: 1.5;
+        text-align: left;
+    }
+
     /* Formulareingabefelder und Buttons */
     .custom-form-group {
-        margin-top: 15px;
+        margin-top: 20px;
     }
     .custom-label {
         display: block;
@@ -456,21 +503,22 @@ Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generie
     }
     .custom-input, .custom-button, select {
         width: 100%;
-        padding: 8px;
+        padding: 10px;
         margin-top: 5px;
-        border-radius: 4px;
+        border-radius: 5px;
         border: 1px solid #ddd;
     }
     .custom-button {
         background-color: #4CAF50;
         color: white;
         cursor: pointer;
-        margin-bottom: 20px;
+        transition: background-color 0.3s ease;
+        margin-top: 15px;
     }
     .custom-button:hover {
         background-color: #45a049;
     }
-    
+
     /* Tabellen für Kalender- und Sensorkonfigurationen */
     .custom-table {
         width: 100%;
@@ -482,24 +530,24 @@ Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generie
         padding: 8px;
         text-align: center;
     }
+
+    /* Code Container */
     .code-container {
         position: relative;
-        background-color: #fdfdfd; /* Heller Hintergrund */
+        background-color: #fdfdfd;
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 15px;
         margin-top: 20px;
         margin-bottom: 20px;
-        overflow: auto; /* Ermöglicht Scrollen */
-        max-height: 300px; /* Maximale Höhe auf 300px begrenzt */
+        overflow: auto;
+        max-height: 300px;
     }
-
-    /* Stil für Code-Text */
     .code-container code {
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 0.95em;
         line-height: 1.5;
-        color: #333; /* Dunklere Textfarbe für bessere Lesbarkeit */
+        color: #333;
     }
 
     /* Stil für den Copy-Button */
@@ -508,98 +556,27 @@ Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generie
         top: 10px;
         right: 10px;
         background: #007acc;
-        color: #fff;
+        color: white;
         border: none;
         border-radius: 5px;
-        padding: 5px 10px;
+        padding: 8px 12px;
         font-size: 0.85em;
         cursor: pointer;
-        z-index: 10;
     }
-    .copy-checkmark {
-        color: green;
-        font-size: 1.2em;
-        font-weight: bold;
-        display: none; /* Standardmäßig versteckt */
-    }
-
-    /* Hover-Effekt für den Copy-Button */
     .copy-button:hover {
         background: #005a9c;
     }
-    .custom-title-inline {
-        display: flex; /* Elemente nebeneinander anordnen */
-        align-items: baseline; /* Ausrichtung an der Grundlinie */
-        gap: 10px; /* Abstand zwischen den Elementen */
+
+    /* Schriftart Auswahl */
+    .font-selection {
+        margin-top: 20px;
     }
 
-    .custom-title-inline h4 {
-        margin: 0;
-        padding: 0;
-        font-size: 24px; /* Größere Schriftgröße für die Überschrift */
-        line-height: 1.2; /* Für saubere vertikale Ausrichtung */
-    }
-
-    .custom-title-inline p {
-        margin: 0;
-        padding: 0;
-        font-size: 16px; /* Kleinere Schriftgröße für den Text */
-        line-height: 1.2; /* Passend zur `h4` */
-    }
-
-    .copy-confirmation {
-        font-size: 24px; /* Gleiche Schriftgröße wie `h4` */
-        color: green; /* Bestätigungsfarbe */
-        margin-left: 10px; /* Abstand zur Überschrift */
-        display: none; /* Standardmäßig versteckt */
-    }
-    .dropdown {
-        margin: 20px 0;
+    /* Button Container */
+    .button-container {
         text-align: center;
+        margin-top: 20px;
     }
-    .dropdown-toggle {
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        background-color: #f39c12;
-        color: #ffffff;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: inline-block;
-    }
-    .dropdown-toggle span {
-        float: right;
-    }
-    .dropdown-content {
-        padding: 20px;
-        background-color: #ffffff;
-        border: 1px solid #f39c12;
-        border-radius: 5px;
-        margin-top: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .completed {
-    opacity: 0.5;
-    pointer-events: none;
-    }
-    .back-button {
-        background-color: #f39c12;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        font-size: 14px;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-bottom: 10px;
-    }
-    .back-button:hover {
-        background-color: #e67e22;
-    }
-
 </style>
 
 <!--
