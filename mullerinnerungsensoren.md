@@ -632,8 +632,8 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 15px;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 5px;
+        margin-bottom: 30px;
         overflow: auto;
         max-height: 300px;
     }
