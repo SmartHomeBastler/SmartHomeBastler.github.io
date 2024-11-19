@@ -378,28 +378,26 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <div id="styleOptions" style="display: none; margin-top: 10px;">
     <div class="custom-select-group">
         <!-- Hintergrund -->
-        <div class="custom-input">
+        <div class="backgroundSelect">
             <label class="custom-label" for="backgroundSelect">Hintergrund:</label>
-            <select id="backgroundSelect">
+            <select id="backgroundSelect" class="custom-input">
                 <option value="transparent">Transparent</option>
                 <option value="standard">Standard</option>
             </select>
         </div>
-
         <!-- Rahmen Aussehen -->
-        <div class="custom-input">
+        <div class="borderStyleSelect">
             <label class="custom-label" for="borderStyleSelect">Rahmen Aussehen:</label>
-            <select id="borderStyleSelect">
+            <select id="borderStyleSelect" class="custom-input">
                 <option value="no-border">Keinen Rahmen</option>
                 <option value="standard-border">Standard Rahmen</option>
                 <option value="thick-border">Dicker Rahmen</option>
             </select>
         </div>
-
         <!-- Rahmen Form -->
-        <div class="custom-input">
+        <div class="borderShapeSelect">
             <label class="custom-label" for="borderShapeSelect">Rahmen Form:</label>
-            <select id="borderShapeSelect">
+            <select id="borderShapeSelect" class="custom-input">
                 <option value="square">Eckig</option>
                 <option value="rounded">Abgerundet</option>
             </select>
