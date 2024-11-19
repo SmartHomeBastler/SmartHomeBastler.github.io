@@ -455,6 +455,33 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
         color: #0062ff;
         text-transform: uppercase;
     }
+    .custom-title-inline {
+        display: flex; /* Elemente nebeneinander anordnen */
+        align-items: baseline; /* Ausrichtung an der Grundlinie */
+        gap: 10px; /* Abstand zwischen den Elementen */
+    }
+    
+    .custom-title-inline h4 {
+        margin: 0;
+        padding: 0;
+        font-size: 24px; /* Größere Schriftgröße für die Überschrift */
+        line-height: 1.2; /* Für saubere vertikale Ausrichtung */
+    }
+    
+    .custom-title-inline p {
+        margin: 0;
+        padding: 0;
+        font-size: 16px; /* Kleinere Schriftgröße für den Text */
+        line-height: 1.2; /* Passend zur `h4` */
+    }
+    
+    .copy-confirmation {
+        font-size: 24px; /* Gleiche Schriftgröße wie `h4` */
+        color: green; /* Bestätigungsfarbe */
+        margin-left: 10px; /* Abstand zur Überschrift */
+        display: none; /* Standardmäßig versteckt */
+    }
+ 
     .dropdown {
         margin: 20px 0;
         text-align: center;
