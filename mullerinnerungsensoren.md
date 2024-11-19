@@ -71,7 +71,7 @@ Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 
 <p>
     Wähle deine persönliche Bezeichnung so aus, dass weder das Wort <strong>Tonne</strong> noch <strong>Sack</strong> enthalten ist, da diese Bezeichnungen vom Codegenerator hinzugefügt werden.<br>
-    So wird beispielsweise aus der Bezeichnung <strong>Papier</strong> automatisch <strong>Papier Tonne</strong> oder aus <strong>Gelber</strong> automatisch <strong>Gelber Sack</strong>.
+    So wird beispielsweise aus der Bezeichnung <strong>Papier</strong> automatisch <strong>die Papier Tonne</strong> oder aus <strong>Gelbe</strong> automatisch <strong>der Gelbe Sack</strong> oder <strong>die Gelbe Tonne</strong>, je nachdem welche Tonnen Farbe später gewählt wird.
 </p>
 
 <p>
