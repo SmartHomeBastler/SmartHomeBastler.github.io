@@ -706,14 +706,22 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         let umlautWarning = false;
 
         selectedEntries.forEach(row => {
-            const customName = row.querySelector(".entry-custom-name").value;
+            const customName = row.querySelector(".entry-custom-name").value.trim(); // Eigene Bezeichnung
+            const summaryText = row.querySelector("td:nth-child(2)").textContent.trim(); // Kalendereintrag (SUMMARY)
+
+            // Prüfe auf Umlaute in der eigenen Bezeichnung
             if (umlautPattern.test(customName)) {
+                umlautWarning = true;
+            }
+
+            // Prüfe auf Umlaute im Kalendereintrag, wenn keine eigene Bezeichnung eingetragen wurde
+            if (customName === "" && umlautPattern.test(summaryText)) {
                 umlautWarning = true;
             }
         });
 
         if (umlautWarning) {
-            alert("Umlaute verwendet! Bitte eigene Bezeichnungen kontrollieren!");
+            alert("Umlaute verwendet! Bitte eigene Bezeichnungen kontrollieren oder Kalendereinträge anpassen!");
         } else {
             generateSensorTable(selectedEntries);
             document.getElementById("template-header").style.display = "block";
