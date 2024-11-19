@@ -514,7 +514,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     .dropdown-content {
         padding: 20px;
-        background-color: #f9f9f9;
+        background-color: #ffffff;
         border: 1px solid #f39c12;
         border-radius: 5px;
         margin-top: 10px;
@@ -523,7 +523,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     /* Dashboard Optionen Container */
     .dashboard-options {
         display: flex;
-        background-color: #f9f9f9;
         justify-content: space-between;
         align-items: flex-start; /* Überschriften werden oben ausgerichtet */
         margin-top: 30px;
@@ -598,6 +597,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     .custom-input, .custom-button, select {
         width: 100%;
+        background-color: #f9f9f9;
         padding: 10px;
         margin-top: 5px;
         border-radius: 5px;
