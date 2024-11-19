@@ -168,7 +168,9 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </div>
 </div>
 <div id="confirm-step-3" style="text-align: center; margin-top: 20px;">
-    <button class="custom-button" onclick="showStep(4);">Sensoren angelegt? Weiter zu den Templates!</button>
+    <button class="custom-button" onclick="if (validateColors()) { showStep(4); }">
+        Sensoren angelegt? Weiter zu den Templates!
+    </button>
 </div>
 </div>
 
@@ -836,14 +838,14 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         });
     }
 
-    function createTemplates() {
+    function validateColors() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
-        
+
         let colorNotSelected = false;
         const selectedColors = new Set();
         let duplicateColor = false;
-    
+
         rows.forEach(row => {
             // Suche nach dem Dropdown in der Spalte Tonnen Farbe
             const selectElement = row.cells[3]?.querySelector("select");
@@ -869,46 +871,59 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
         if (colorNotSelected) {
             alert("Die Farben der Tonne sollten zugeordnet werden!");
-            return;
+            return false; // Rückgabe `false`, wenn eine Farbe fehlt
         }
 
         if (duplicateColor) {
             alert("Jede Farbe darf nur einmal ausgewählt werden!");
-            return;
+            return false; // Rückgabe `false`, wenn Farben doppelt sind
         }
-    
-        // Falls keine Fehler vorliegen, fahre mit der Template-Erstellung fort
+
+        return true; // Rückgabe `true`, wenn alles korrekt ist
+    }
+
+    function createTemplates() {
+        // Zugriff auf die Tabelle der Sensoren
+        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
+
+        // Template für "Heute" erstellen
         createTemplate("Heute", "helper-template-heute", "helper-template-output-heute");
+
+        // Template für "Morgen" erstellen
         createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen");
-    
+
         // Prüfen, ob die Checkboxen für "keine"-Anzeige aktiviert sind
         const heuteCheckbox = document.getElementById("keineHeute").checked;
         const morgenCheckbox = document.getElementById("keineMorgen").checked;
-    
+
         let textHeute, textMorgen;
-    
+
+        // Texte für "Heute"
         if (heuteCheckbox) {
             textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\nDu musst heute keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
         } else {
             textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
         }
-    
+
+        // Texte für "Morgen"
         if (morgenCheckbox) {
             textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\nDu musst morgen keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
         } else {
             textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
         }
-    
+
         // Setzen Sie den Text für "Müllabholung Text Heute"
         const textHeuteElement = document.getElementById("helper-template-text-heute");
         textHeuteElement.innerHTML = `<code class="language-yaml">${textHeute}</code>`;
         document.getElementById("helper-template-output-text-heute").style.display = "block";
-    
+
         // Setzen Sie den Text für "Müllabholung Text Morgen"
         const textMorgenElement = document.getElementById("helper-template-text-morgen");
         textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
         document.getElementById("helper-template-output-text-morgen").style.display = "block";
     }
+
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
         navigator.clipboard.writeText(textToCopy).then(() => {
