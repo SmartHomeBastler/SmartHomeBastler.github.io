@@ -1065,7 +1065,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     
         // Setzen der Variablen
         sensorAssignments.forEach(({ customName, sensorName }) => {
-            templateText += "{% set " + customName.toUpperCase().replace(/\s+/g, "_") + " = " + sensorName + " %}\n";
+            templateText += "{% set " + customName.toUpperCase().replace(/\s+/g, "") + " = " + sensorName + " %}\n";
         });
     
         templateText += generateConditionsAsText(sensorAssignments, hasSack, day);
@@ -1084,7 +1084,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     
         const combinations = getAllCombinations(assignments);
         combinations.forEach((combination, index) => {
-            const condition = combination.map(a => `${a.customName.toUpperCase()} == "${conditionDay}"`).join(" and ");
+            const condition = combination.map(a => `${a.customName.toUpperCase().replace(/\s+/g, "")} == "${conditionDay}"`).join(" and ");
             const output = generateOutputText(combination, hasSack);
     
             if (index === 0) {
