@@ -27,7 +27,8 @@ layout: page
 <div id="step-1">
 <h2 class="custom-title">1. Kalenderdaten Auslesen</h2>
 
-<p>Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte deine URL an oder lade die ICS Datei hoch und bestätige mit <strong>Kalendereinträge extrahieren</strong></p>
+<p>Zum Auslesen der verschiedenen Abholungen aus deinem Mülkalender, gib bitte deine URL an oder lade die ICS Datei hoch und bestätige mit<br>
+<strong>Kalendereinträge extrahieren</strong></p>
 
 <!-- File Upload and URL Input -->
 <div class="custom-form-group">
@@ -54,7 +55,7 @@ layout: page
 <div id="step-2" style="display:none;">
 <h2 class="custom-title">2. Kalenderdaten Umwandeln</h2>
 
-<p>Im nächsten Schritt wähle jene Einträge aus, welche zu deinen Sensoren hinzugefügt werden sollen. 
+<p>Im nächsten Schritt wähle jene Einträge aus, welche zu deinen Sensoren hinzugefügt werden sollen.<br> 
 Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 </p>
 
@@ -65,12 +66,12 @@ Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 </div>
 
 <p>
-Wähle deine persönliche Bezeichnug so aus, dass weder das Wort <strong>Tonne</strong> noch <strong>Sack</strong> vorkommen, da diese Bezeichnungen vom Codegenerator hinzugefügt werden.
-So wird zum Beispiel aus der Bezeichnug <strong>Papier</strong> automatisch <strong>Papier Tonne</strong> oder aus <strong>Gelber</strong> automatisch <strong>Gelber Sack</strong>
+    Wähle deine persönliche Bezeichnung so aus, dass weder das Wort <strong>Tonne</strong> noch <strong>Sack</strong> vorkommen, da diese Bezeichnungen vom Codegenerator hinzugefügt werden.<br>
+    So wird zum Beispiel aus der Bezeichnung <strong>Papier</strong> automatisch <strong>Papier Tonne</strong> oder aus <strong>Gelber</strong> automatisch <strong>Gelber Sack</strong>
 </p>
 
 <p>
-Nach den Änderungen klicke auf 
+Nach den Änderungen klicke auf<br>
 <strong>Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</strong>
 </p>
 
@@ -103,8 +104,8 @@ Nach den Änderungen klicke auf
 <div id="step-3" style="display:none;">
 <h2 class="custom-title">3. Sensoren Konfiguration</h2>
 
-<p>An diesem Punkt kann die Integration <strong>Waste Collection Schedule</strong> in Home Assistant eingerichtet werden.
-Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdown Menü.</p>
+<p>An diesem Punkt kann die Integration <strong>Waste Collection Schedule</strong> in Home Assistant eingerichtet werden.<br>
+Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
 
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
@@ -135,7 +136,10 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 </div>
 
 
-<p>Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden. Wichtig ist, dass keine Farbe zweimal verwendet werden darf.</p>
+<p>
+Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden.<br>
+Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.
+</p>
 
 <table class="custom-table" id="sensor-table" style="display:none;">
     <thead>
@@ -189,16 +193,17 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 <div class="note-container">
     <h4>💡 Hinweis</h4> 
     <p>
-        Vor der Erstellung der Templates solltest du entscheiden, ob du den Text "Du musst heute keine Tonne rausstellen!" bzw. "Du musst morgen keine Tonne rausstellen!" angezeigt bekommen möchtest oder nicht. Für eine Anzeige dieses Textes, aktiviere die jeweilige Checkbox.
+        Vor der Erstellung der Templates solltest du entscheiden, ob du den Text <strong>Du musst heute keine Tonne rausstellen!</strong> bzw. <strong>Du musst morgen keine Tonne rausstellen!</strong> angezeigt bekommen möchtest oder nicht.<br>
+        Für eine Anzeige dieses Textes, aktiviere die jeweilige Checkbox ✅.
     </p>
 </div>
 
 <!-- Checkboxen für "keine"-Anzeige -->
 <div class="custom-form-group">
     <input type="checkbox" id="keineHeute" />
-    <label for="keineHeute">Anzeige "keine" für Heute</label><br>
+    <label for="keineHeute">Anzeige Text "keine" für Heute</label><br>
     <input type="checkbox" id="keineMorgen" />
-    <label for="keineMorgen">Anzeige "keine" für Morgen</label>
+    <label for="keineMorgen">Anzeige Text "keine" für Morgen</label>
 </div>
 
 <button class="custom-button" onclick="createTemplates()">Templates erstellen</button>
@@ -269,28 +274,38 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 <div id="step-5" style="display:none;">
 <h2 class="custom-title">5. Dashboard Karten</h2>
 
-<p>Hier siehst du eine Zusammenfassung deiner Einstellungen, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt. Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.</p>
+<!-- Important Notice -->
+<div class="important-container">
+    <h3>❗Wichtig</h3>
+    <p>
+        Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist.<br>
+        Diese Button Card ist für die korrekte Darstellung der Dashbord-Karte unbedingt notwendig.
+    </p>
+</div>
+
+<p>Hier siehst du eine Zusammenfassung deiner Einstellungen, welche den Zusammenhang deines Sensor Namens mit den gewählten Tonnen-Farben darstellt.<br>
+Die Vorschaubilder können mit einem Klick darauf heruntergeladen werden.
+</p>
+<p>
+Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespeichert werden.<br>
+<strong>Wichtig ist, dass diese vor dem Erstellen der Dashboardkarten hinzugefügt werden!</strong>
+</p>
+<div id="image-list-output"></div>
 
 
+<div id="example-section" style="margin-top: 20px;">
+    <h3 class="custom-title">Dashboard Karten Optionen</h3>
+</div>
 <div id="sensor-summary" style="display:none; margin-top: 20px; text-align: start; font-size: 20px;">
     <p>
         Du hast <span id="sensor-count" style="font-weight: bold; color: #4CAF50;">0</span> Sensor angelegt.
     </p>
 </div>
 
-
-<div id="image-list-output"></div>
-
-<!-- Important Notice -->
-<div class="important-container">
-    <h3>❗Wichtig</h3>
-    <p>
-        Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist. Diese Button Card ist für die korrekte Darstellung der Dashbord-Karte unbedingt notwendig.
-    </p>
-</div>
-
-<div id="example-section" style="margin-top: 20px;">
-    <h3 class="custom-title">Dashboard Karten Optionen</h3>
+<p>
+Mit dieser Checkbox kannst du auswählen, ob die Tonne bei Abholung blinken soll.<br>
+Bei der Anzeige Auswahl wird eingestellt, ob der Text und die optioonal blinkende Tonne für heute oder morgen angezeigt werden soll.
+</p>
 
 <!-- Checkbox für "Tonne blinkend" -->
 <div class="custom-form-group">
@@ -307,6 +322,11 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     </select>
 </div>
 
+<p>
+Die Dashboardkarten wurden so konfiguriert, dass sie bis 3 Abholungen/Sensoren einzeilig und ab 5 Abholungen/Sensoren zweizeilig dargestellt werden.<br>
+Für 4 Abholungen/Sensoren kann hier entschieden werden ob ein- oder mehrzeilig.
+</p>
+
 <!-- Auswahlliste für Darstellung -->
 <div class="custom-form-group">
     <label for="darstellungAuswahl" class="custom-label">Darstellung:</label>
@@ -315,7 +335,9 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
         <option value="mehrzeilig">Darstellung Mehrzeilig</option>
     </select>
 </div>
-
+<p>
+Hier kann eine Schriftart für die Dashboardkarte gewählt oder eine eigene eingetragen werden.
+</p>
 <div style="margin-top: 20px;">
     <label for="fontSelection" class="custom-label">Schriftart auswählen:</label>
     <select id="fontSelection" class="custom-input" onchange="toggleCustomFontInput()">
@@ -331,6 +353,10 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
     <input type="text" id="customFontInput" class="custom-input" style="display: none; margin-top: 10px;" placeholder="Eigene Schriftart eingeben">
 </div>
 
+<p>
+Wenn alle Einstellungen getroffen wurden, klicke auf <strong>Beispiel anzeigen & Code generieren</strong><br>
+Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generieren.
+</p>
 
 <div id="dashboard-options" style="display: flex; justify-content: space-between; margin-top: 20px;">
     <!-- YAML-Ausgabefenster -->
@@ -355,8 +381,8 @@ Eine detaillierte Beschreibung wie diese eizurichten sind, findest du im Dropdow
 </div>
 
 
+<h3 class="custom-title">Gutes Gelingen!</h3>
 
-PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
 </div>
 
