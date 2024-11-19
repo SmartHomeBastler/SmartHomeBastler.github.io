@@ -374,10 +374,37 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <label for="styleUseCheckbox">Style ändern</label>
 </div>
 
-<!-- Versteckter Container -->
+<!-- Versteckter Container mit 3 Auswahllisten -->
 <div id="styleOptions" style="display: none; margin-top: 10px;">
-    <p>Hier kannst du die Optionen für das Karten Design anpassen:</p>
-    <!-- Weitere Inhalte oder Formulare -->
+    <div class="custom-select-group">
+        <!-- Hintergrund -->
+        <div class="custom-input">
+            <label class="custom-label" for="backgroundSelect">Hintergrund:</label>
+            <select id="backgroundSelect">
+                <option value="transparent">Transparent</option>
+                <option value="standard">Standard</option>
+            </select>
+        </div>
+
+        <!-- Rahmen Aussehen -->
+        <div class="custom-input">
+            <label class="custom-label" for="borderStyleSelect">Rahmen Aussehen:</label>
+            <select id="borderStyleSelect">
+                <option value="no-border">Keinen Rahmen</option>
+                <option value="standard-border">Standard Rahmen</option>
+                <option value="thick-border">Dicker Rahmen</option>
+            </select>
+        </div>
+
+        <!-- Rahmen Form -->
+        <div class="custom-input">
+            <label class="custom-label" for="borderShapeSelect">Rahmen Form:</label>
+            <select id="borderShapeSelect">
+                <option value="square">Eckig</option>
+                <option value="rounded">Abgerundet</option>
+            </select>
+        </div>
+    </div>
 </div>
 
 <p class="description-text">
@@ -1311,7 +1338,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         const styleOptionsDiv = document.getElementById("styleOptions");
         if (this.checked) {
             // Zeige den Container, wenn die Checkbox angehakt ist
-            styleOptionsDiv.style.display = "block";
+            styleOptionsDiv.style.display = "flex";
         } else {
             // Verstecke den Container, wenn die Checkbox nicht angehakt ist
             styleOptionsDiv.style.display = "none";
