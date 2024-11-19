@@ -369,8 +369,9 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
 <!-- Checkbox für "Style anpassen" -->
 <div class="custom-form-group">
+    <label for="styleUseCheckbox" class="custom-label">Karten Design anpassen?</label>
     <input type="checkbox" id="styleUseCheckbox">
-    <label for="styleUseCheckbox">Karten Design anpassen?</label>
+    <label for="styleUseCheckbox">Style ändern</label>
 </div>
 
 <!-- Versteckter Container -->
