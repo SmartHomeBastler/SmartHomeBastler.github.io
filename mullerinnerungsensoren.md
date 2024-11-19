@@ -359,7 +359,10 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
     Wenn alle Einstellungen getroffen wurden, klicke auf <strong>Beispiel anzeigen & Code generieren</strong><br>
     Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generieren.
 </p>
-
+<!-- Button zur Aktualisierung -->
+<div class="button-container">
+    <button id="update-example-and-code" class="custom-button">Beispiel anzeigen & Code generieren</button>
+</div>
 <div id="dashboard-options" class="dashboard-options">
     <!-- YAML-Ausgabefenster -->
     <div id="yaml-output-container" class="yaml-output-container">
@@ -379,10 +382,7 @@ Alle Bilder sollten in Home Assistant im Order <strong>www/muell</strong> gespei
     </div>
 </div>
 
-<!-- Button zur Aktualisierung -->
-<div class="button-container">
-    <button id="update-example-and-code" class="custom-button">Beispiel anzeigen & Code generieren</button>
-</div>
+
 
 <h3 class="custom-title">Gutes Gelingen!</h3>
 
