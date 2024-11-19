@@ -19,8 +19,10 @@
 #      link: /showcase/
 - name: Beiträge
   link: /blog/
+  dropdown:
+    - name: Eigene Schriftarten
+      link: /dashboard/2023/05/03/eigene-schriftart-in-homeassistant-integrieren/
 - name: Müllerinnerung Tools
-  link: /mullerinnerungsbeschreibung
   dropdown:
     - name: Beschreibung Müllerinnerung Codegenerator
       link: /mullerinnerungsbeschreibung
@@ -29,7 +31,6 @@
     - name: Müllerinnerung Sensoren
       link: /mullerinnerungsensoren
 - name: Floorplan Tools
-  link: /floorplanbeschreibung
   dropdown:
     - name: Beschreibung Floorplan Codegenerator
       link: /floorplanbeschreibung
