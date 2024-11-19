@@ -88,7 +88,7 @@ Nach den Änderungen klicke auf
 </table>
 
 <div id="confirm-step-2" style="text-align: center; margin-top: 20px;">
-    <button class="custom-button" onclick="checkEntries(); showStep(3);">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
+    <button class="custom-button" onclick="handleStepTransition();">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
 </div>
 </div>
 
@@ -701,7 +701,7 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
         // Warnung, wenn keine Checkbox ausgewählt wurde
         if (selectedEntries.length === 0) {
             alert("Bitte wähle mindestens einen Eintrag aus!");
-            return; // Funktion abbrechen
+            return false; // Fehler: keine Auswahl getroffen
         }
 
         let umlautWarning = false;
@@ -723,13 +723,21 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
 
         if (umlautWarning) {
             alert("Umlaute entdeckt! Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!");
-        } else {
-            generateSensorTable(selectedEntries);
-            document.getElementById("template-header").style.display = "block";
-            document.getElementById("code-output").style.display = "block";
+            return false; // Fehler: Umlaute gefunden
+        }
+
+        // Alles in Ordnung
+        generateSensorTable(selectedEntries);
+        document.getElementById("template-header").style.display = "block";
+        document.getElementById("code-output").style.display = "block";
+        return true;
+    }
+    function handleStepTransition() {
+        const isValid = checkEntries(); // Prüft, ob die Eingaben korrekt sind
+        if (isValid) {
+            showStep(3); // Nur wenn keine Fehler vorliegen, wird zu Schritt 3 gewechselt
         }
     }
-
 
     function generateSensorTable(selectedEntries) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
