@@ -1065,7 +1065,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     
         // Setzen der Variablen
         sensorAssignments.forEach(({ customName, sensorName }) => {
-            templateText += "{% set " + customName.toUpperCase() + " = " + sensorName + " %}\n";
+            templateText += "{% set " + customName.toUpperCase().replace(/\s+/g, "_") + " = " + sensorName + " %}\n";
         });
     
         templateText += generateConditionsAsText(sensorAssignments, hasSack, day);
