@@ -597,7 +597,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     .custom-input, .custom-button, select {
         width: 100%;
-        background-color: #f9f9f9;
+        background-color: #d9d9d9;
         padding: 10px;
         margin-top: 5px;
         border-radius: 5px;
