@@ -371,16 +371,16 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
 
     .important-container h3 {
-        color: #d12700; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #d12700; 
         text-shadow: 1px 1px 3px black;
     }
     .important-container p {
-        color: #383838; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #383838; 
         font-family: Arial Black
     }
     .important-container strong {
-        color: #d12700; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
-        text-shadow: 1px 1px 2px black;
+        color: #d12700; 
+        text-transform: uppercase;
     }
     
     /* Hinweise */
@@ -393,13 +393,14 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
     }
 
     .note-container h3 {
-        color: #0062ff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #0062ff; 
     }
     .note-container p {
-        color: #383838; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #383838; 
     }
     .note-container strong {
-        color: #0062ff; /* Stellt sicher, dass auch Überschriften, Absätze und fetter Text in weiß sind */
+        color: #0062ff;
+        text-transform: uppercase;
     }
 
     /* Formulareingabefelder und Buttons */
