@@ -65,13 +65,16 @@ Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 
 <div class="important-container">
     <p>
-        <strong>Achtung!</strong> Deine persönlichen Bezeichnungen dürfen keine Umlaute oder Leerzeichen enthalten!
+        <strong>Achtung!</strong> Deine persönlichen Bezeichnungen dürfen keine Umlaute enthalten und Leerzeichen sollen vermieden werden!
     </p>
 </div>
 
 <p>
-    Wähle deine persönliche Bezeichnung so aus, dass weder das Wort <strong>Tonne</strong> noch <strong>Sack</strong> enthalten ist, da diese Bezeichnungen vom Codegenerator hinzugefügt werden.<br>
-    So wird beispielsweise aus der Bezeichnung <strong>Papier</strong> automatisch <strong>die Papier Tonne</strong> oder aus <strong>Gelbe</strong> automatisch <strong>der Gelbe Sack</strong> oder <strong>die Gelbe Tonne</strong>, je nachdem welche Tonnen Farbe später gewählt wird.
+    Wähle deine Bezeichnung so, dass sie kurz und sinnvoll ist. Es ist nicht notwendig, das Wort <strong>Tonne</strong> in die Bezeichnung aufzunehmen, da dies automatisch vom Codegenerator ergänzt wird. 
+    Beispiel: Aus der Bezeichnung <strong>Papier</strong> wird automatisch <strong>die Papier Tonne</strong>.
+</p>
+<p>
+    Eine Ausnahme bilden <strong>Gelbe Tonne</strong> und <strong>Gelber Sack</strong>, da diese ohne den Zusatz nicht eindeutig wären.
 </p>
 
 <p>
