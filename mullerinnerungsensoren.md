@@ -719,6 +719,18 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         text-align: center;
         margin-top: 25px;
     }
+        /* Styling für die Auswahllisten */
+    .custom-select-group {
+        display: flex;
+        gap: 20px; /* Abstand zwischen den Listen */
+    }
+    #styleOptions {
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+    }
+
 </style>
 
 <!--
