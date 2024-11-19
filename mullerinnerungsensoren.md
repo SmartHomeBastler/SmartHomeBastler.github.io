@@ -54,11 +54,24 @@ layout: page
 <div id="step-2" style="display:none;">
 <h2 class="custom-title">2. Kalenderdaten Umwandeln</h2>
 
-<p>Im nächsten Schritt wähle jene Einträge aus welche zu deinen Sensoren hinzugefügt werden sollen. Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben. Deine persönlichen Bezeichnungen dürfen keine Umlaute beinhalten und sollten sich, für die weiteren Verwendungen, mit der Bezeichnung "Tonne" bzw "Sack" vereinbaren lassen.</p> 
+<p>Im nächsten Schritt wähle jene Einträge aus, welche zu deinen Sensoren hinzugefügt werden sollen. 
+Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.  
 
-<p>Beispiel: Bezeichnug `Papier` oder `Gelber` = `Papier Tonne` oder `Gelber Sack`</p>
+<div class="important-container">
+    <p>
+        <strong>Achtung!</strong> Deine persönlichen Bezeichnungen dürfen keine Umlaute oder Leerzeichen beinhalten!
+    </p>
+</div>
 
-<p>Nach den Änderungen klicke auf <strong>Kalendereinträge in Sensoren umwandeln</strong></p>
+<p>
+Wähle deine persönliche Bezeichnug so aus, dass weder das Wort <strong>Tonne</strong> noch <strong>Sack</strong> vorkommen, da diese Bezeichnungen vom Codegenerator hinzugefügt werden.
+So wird zum Beispiel aus der Bezeichnug <strong>Papier</strong> automatisch <strong>Papier Tonne</strong> oder aus <strong>Gelber</strong> automatisch <strong>Gelber Sack</strong>
+</p>
+
+<p>
+Nach den Änderungen klicke auf 
+<strong>Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</strong>
+</p>
 
 <table class="custom-table" id="entry-table">
     <thead>
@@ -749,8 +762,8 @@ PLATZHALTER AUSWAHLLISTEN UND ZUSAMMENFASSUNGEN
             const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
             const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
                 return {
-                    'ä': 'ae', 'ö': 'oe', 'ü': 'ue',
-                    'Ä': 'Ae', 'Ö': 'Oe', 'Ü': 'Ue', 'ß': 'ss'
+                    'ä': 'a', 'ö': 'o', 'ü': 'u',
+                    'Ä': 'A', 'Ö': 'O', 'Ü': 'U', 'ß': 'ss'
                 }[match];
             })}`;
 
