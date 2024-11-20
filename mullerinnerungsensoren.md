@@ -725,13 +725,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-top: 30px;
         gap: 20px;
     }
-    #styleOptions {
-        border: 1px solid #ccc;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border-radius: 4px;
+    .backgroundSelect,
+    .borderStyleSelect,
+    .borderShapeSelect {
+        width: 30%
     }
-
 </style>
 
 <!--
