@@ -382,24 +382,24 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             <label class="custom-label" for="backgroundSelect">Hintergrund:</label>
             <select id="backgroundSelect" class="custom-input">
                 <option value="transparent">Transparent</option>
-                <option value="standard">Standard</option>
+                <option value=" ">Standard</option>
             </select>
         </div>
         <!-- Rahmen Aussehen -->
         <div class="custom-border-style-select">
             <label class="custom-label" for="borderStyleSelect">Rahmen Aussehen:</label>
             <select id="borderStyleSelect" class="custom-input">
-                <option value="no-border">Keinen Rahmen</option>
-                <option value="standard-border">Standard Rahmen</option>
-                <option value="thick-border">Dicker Rahmen</option>
+                <option value="none">Keinen Rahmen</option>
+                <option value=" ">Standard Rahmen</option>
+                <option value="1px solid">Dicker Rahmen</option>
             </select>
         </div>
         <!-- Rahmen Form -->
         <div class="custom-border-shape-select">
             <label class="custom-label" for="borderShapeSelect">Rahmen Form:</label>
             <select id="borderShapeSelect" class="custom-input">
-                <option value="square">Eckig</option>
-                <option value="rounded">Abgerundet</option>
+                <option value="0px">Eckig</option>
+                <option value="12px">Abgerundet</option>
             </select>
         </div>
     </div>
@@ -725,10 +725,9 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         object-fit: contain; /* Skaliert das Bild proportional */
     }
     .style-options {
-        display: contents;
         justify-content: space-between;
         align-items: flex-start; /* Überschriften werden oben ausgerichtet */
-        margin-top: 30px;
+        margin-top: 20px;
         gap: 20px;
 
     }
@@ -1376,9 +1375,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         const sensorCount = rows.length;
 
         const blinkend = document.getElementById("blinkendCheckbox").checked;
+        const styleUsed = document.getElementById("styleUseCheckbox").checked;
+        const styleUnused = !document.getElementById("styleUseCheckbox").checked;
         const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value; // "heute" oder "morgen",
         const darstellung = document.getElementById("darstellungAuswahl").value; // "einzeilig" oder "mehrzeilig"
         const selectedFont = getSelectedFont(); // Funktion zur Auswahl der Schriftart
+        const StyleHintergrund = document.getElementById("backgroundSelect").value;
+        const StyleRahmenStil = document.getElementById("borderStyleSelect").value;
+        const StyleRahmenEcke = document.getElementById("borderShapeSelect").value;
 
         let yaml = "";
 
@@ -1391,7 +1395,19 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             const sensorEntity = rows[0].cells[2].textContent.trim(); // Entity ID
             const imageName = rows[0].cells[1].textContent.trim(); // Bildname
 
-            yaml += `type: vertical-stack\n`;
+            if (styleUnused) {
+                yaml += `type: vertical-stack\n`; 
+            }
+            if (styleUsed) {
+                yaml += `type: custom:vertical-stack-in-card\n`;
+                yaml += `card_mod:\n`;
+                yaml += `  style: |\n`;
+                yaml += `    ha-card {\n`;
+                yaml += `      background: ${StyleHintergrund};\n`;
+                yaml += `      border: ${StyleRahmenStil};\n`;
+                yaml += `      border-radius: ${StyleRahmenEcke}\n`;
+                yaml += `    }\n`;
+            }
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
             yaml += `    entity: ${entityText}\n`;
