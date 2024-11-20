@@ -8,33 +8,7 @@ layout: page
 
 {% include support_note.html %}
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
-        {% assign gallery_images = site.data.gallery_mull_helfer %}
-        <div class="columns is-multiline">
-            {% for gallery in gallery_images %}
-                <div class="column is-12">
-                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                </div>
-                {% for image in gallery.images %}
-                    <div class="column is-3-desktop is-6-tablet">
-                        <div class="card">
-                            <div class="card-image">
-                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
-                            </div>
-                            <div class="card-content">
-                                <div class="content">
-                                    {{ image.description | markdownify }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        </div>
-    </div>
-</div>
+
 
 <div class="guide-container">
   <h1 class="guide-title">Müllerinnerung Sensoren Codegenerator</h1>
@@ -48,8 +22,7 @@ layout: page
     </p>
     <p>
       <strong>Einträge überprüfen:</strong><br>
-      Die Kalendereinträge werden geladen und angezeigt. Wähle die Einträge aus, die du als Sensor nutzen möchtest, und passe die Bezeichnungen an. 
-      Achte darauf, keine Umlaute oder Leerzeichen zu verwenden.
+      Die Kalendereinträge werden geladen und angezeigt.
     </p>
   </section>
 
@@ -57,6 +30,10 @@ layout: page
     <h2 class="section-title">2. Kalenderdaten umwandeln</h2>
     <p>
       <strong>Einträge prüfen und anpassen:</strong><br>
+      Wähle die Einträge aus, die du als Sensor nutzen möchtest, und passe die Bezeichnungen an. 
+      Achte darauf, keine Umlaute oder Leerzeichen zu verwenden.
+    </p>
+    <p>
       Kontrolliere deine ausgewählten Kalendereinträge und ändere die Bezeichnungen nach deinen Wünschen.
     </p>
     <p>
@@ -69,13 +46,47 @@ layout: page
   <section class="guide-section">
     <h2 class="section-title">3. Sensoren Konfiguration</h2>
     <p>
+      <strong>Integration installieren:</strong><br>
+      Nun sollte die "Waste Collection Schedule" Integration installiert werden.<br>
+      Eine Anleitung, wie genau das funktioniert, findest du im 🔽 Dropdown Menü 🔽
+    </p>
+    <div class="dropdown">
+        <button class="dropdown-toggle" onclick="toggleDropdown()">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+        <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+            {% assign gallery_images = site.data.gallery_mull_helfer %}
+            <div class="columns is-multiline">
+                {% for gallery in gallery_images %}
+                    <div class="column is-12">
+                        <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                    </div>
+                    {% for image in gallery.images %}
+                        <div class="column is-3-desktop is-6-tablet">
+                            <div class="card">
+                                <div class="card-image">
+                                    {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        {{ image.description | markdownify }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <p>
       <strong>Sensoren definieren:</strong><br>
       Die Sensoren werden aus den Kalendereinträgen erstellt. Wähle für jeden Sensor die Farbe der Tonne aus. 
       Beachte: Jede Farbe darf nur einmal verwendet werden.
     </p>
     <p>
       <strong>Kopieroption:</strong><br>
-      Klicke auf den Sensor-Namen, um ihn in die Zwischenablage zu kopieren.
+      Klicke auf den Sensor-Namen, um ihn in die Zwischenablage zu kopieren.<br> 
+      Kopiere dir die Werte Templates und lege die Sensoren in der WCS Integration an.
+      Wenn alle Sensoren angelegt sind, klicke auf <button class="highlight-button">Sensoren angelegt? Weiter zu den Templates!</button>.
     </p>
   </section>
 
@@ -88,8 +99,17 @@ layout: page
     </p>
     <p>
       <strong>Templates generieren:</strong><br>
-      Die Templates für die Müllabholungen werden erstellt. Kopiere die YAML-Templates mithilfe der 
+      Um die Templates zu generieren, klicke auf <button class="highlight-button">Templates erstellen</button>.<br>
+      Die Templates für die Müllabholungen werden erstellt. Kopiere die Überschriften mit einem Klick darauf und die YAML-Templates mithilfe der 
       <button class="highlight-button">Copy</button>-Buttons.
+    </p>
+    <p>
+      <strong>Helfer Templates anlegen</strong><br>
+      Gehe in Home Assistant auf <strong>Einstellungen</strong> - <strong>Geräte&Dienste</strong> - <strong>Helfer</strong><br>
+      Lege dort die 4 Helfer Templates an. Eine detaillierte Beschreibung findest du im 🔽 Dropdown Menü 🔽.
+    </p>
+    <p>
+      Wenn die Templates angelegt sind, klicke auf <button class="highlight-button">Templates angelegt? Weiter zu den Dashboard-Karten</button>.<br>  
     </p>
   </section>
 
@@ -97,7 +117,8 @@ layout: page
     <h2 class="section-title">5. Dashboard-Karten</h2>
     <p>
       <strong>Vorbereitung:</strong><br>
-      Stelle sicher, dass die <strong>"Custom Button Card"</strong> installiert ist und die Tonnenbilder im Ordner <code>www/muell</code> gespeichert sind.
+      Stelle sicher, dass die <strong>"Custom Button Card"</strong> installiert ist und die Tonnenbilder im Ordner <code>www/muell</code> gespeichert sind.<br>
+      Die Bilder der einzelnen Tonnen, kannst du dir mit einem Klick auf das Vorschaubild herunterladen.
     </p>
     <p>
       <strong>Kartenoptionen:</strong><br>
@@ -107,6 +128,11 @@ layout: page
       <strong>Code generieren:</strong><br>
       Klicke auf 
       <button class="highlight-button">Beispiel anzeigen & Code generieren</button>, um den YAML-Code und die Vorschaukarten zu erstellen.
+    </p>
+    <p>
+      <strong>Karte am Dashboard einfügen</strong><br>
+      Kopiere dir den YAML-Code und gehe in Home Assistant auf dein Dashboard.<br>
+      Erstelle eine neue Karte und suche nach <strong>Manuell</strong>. Nun füge den kopierten Code ein und klicke auf Speichern.
     </p>
   </section>
 
