@@ -376,6 +376,13 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
 <!-- Versteckter Container mit 3 Auswahllisten -->
 <div id="styleOptions" class="style-options">
+    <div class="important-container">
+        <h3>❗Wichtig</h3>
+        <p>
+            Wenn der Style geändert wird, muss <strong>card-mod</strong> und <strong>Vertical Stack In Card</strong> in HACS installiert werden.<br>
+            Nur mit diesen Dashboard-Integrationen ist eine Änderung des Hintergrund und des Rahmens möglich.
+        </p>
+    </div>
     <div class="custom-select-group">
         <!-- Hintergrund -->
         <div class="custom-background-select">
