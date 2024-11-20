@@ -391,7 +391,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             <select id="borderStyleSelect" class="custom-input">
                 <option value="none">Keinen Rahmen</option>
                 <option value=" ">Standard Rahmen</option>
-                <option value="1px solid">Dicker Rahmen</option>
+                <option value="1px solid var(--primary-color)">Dicker Rahmen Theme Farbe</option>
             </select>
         </div>
         <!-- Rahmen Form -->
@@ -1482,7 +1482,19 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 image: rows[1].cells[1].textContent.trim(),
             };
 
-            yaml += `type: vertical-stack\n`;
+            if (styleUnused) {
+                yaml += `type: vertical-stack\n`; 
+            }
+            if (styleUsed) {
+                yaml += `type: custom:vertical-stack-in-card\n`;
+                yaml += `card_mod:\n`;
+                yaml += `  style: |\n`;
+                yaml += `    ha-card {\n`;
+                yaml += `      background: ${StyleHintergrund};\n`;
+                yaml += `      border: ${StyleRahmenStil};\n`;
+                yaml += `      border-radius: ${StyleRahmenEcke}\n`;
+                yaml += `    }\n`;
+            }
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
             yaml += `    entity: ${entityText}\n`;
@@ -1598,7 +1610,19 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 image: row.cells[1].textContent.trim(),
             }));
 
-            yaml += `type: vertical-stack\n`;
+            if (styleUnused) {
+                yaml += `type: vertical-stack\n`; 
+            }
+            if (styleUsed) {
+                yaml += `type: custom:vertical-stack-in-card\n`;
+                yaml += `card_mod:\n`;
+                yaml += `  style: |\n`;
+                yaml += `    ha-card {\n`;
+                yaml += `      background: ${StyleHintergrund};\n`;
+                yaml += `      border: ${StyleRahmenStil};\n`;
+                yaml += `      border-radius: ${StyleRahmenEcke}\n`;
+                yaml += `    }\n`;
+            }
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
             yaml += `    entity: ${entityText}\n`;
@@ -1676,7 +1700,19 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 image: row.cells[1].textContent.trim(),
             }));
 
-            yaml += `type: vertical-stack\n`;
+            if (styleUnused) {
+                yaml += `type: vertical-stack\n`; 
+            }
+            if (styleUsed) {
+                yaml += `type: custom:vertical-stack-in-card\n`;
+                yaml += `card_mod:\n`;
+                yaml += `  style: |\n`;
+                yaml += `    ha-card {\n`;
+                yaml += `      background: ${StyleHintergrund};\n`;
+                yaml += `      border: ${StyleRahmenStil};\n`;
+                yaml += `      border-radius: ${StyleRahmenEcke}\n`;
+                yaml += `    }\n`;
+            }
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
             yaml += `    entity: ${entityText}\n`;
@@ -1753,7 +1789,19 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 image: row.cells[1].textContent.trim(),
             }));
 
-            yaml += `type: vertical-stack\n`;
+            if (styleUnused) {
+                yaml += `type: vertical-stack\n`; 
+            }
+            if (styleUsed) {
+                yaml += `type: custom:vertical-stack-in-card\n`;
+                yaml += `card_mod:\n`;
+                yaml += `  style: |\n`;
+                yaml += `    ha-card {\n`;
+                yaml += `      background: ${StyleHintergrund};\n`;
+                yaml += `      border: ${StyleRahmenStil};\n`;
+                yaml += `      border-radius: ${StyleRahmenEcke}\n`;
+                yaml += `    }\n`;
+            }
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
             yaml += `    entity: ${entityText}\n`;
@@ -1877,7 +1925,19 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 image: row.cells[1].textContent.trim(),
             }));
 
-            yaml += `type: vertical-stack\n`;
+            if (styleUnused) {
+                yaml += `type: vertical-stack\n`; 
+            }
+            if (styleUsed) {
+                yaml += `type: custom:vertical-stack-in-card\n`;
+                yaml += `card_mod:\n`;
+                yaml += `  style: |\n`;
+                yaml += `    ha-card {\n`;
+                yaml += `      background: ${StyleHintergrund};\n`;
+                yaml += `      border: ${StyleRahmenStil};\n`;
+                yaml += `      border-radius: ${StyleRahmenEcke}\n`;
+                yaml += `    }\n`;
+            }
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
             yaml += `    entity: ${entityText}\n`;
@@ -2002,7 +2062,19 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 image: row.cells[1].textContent.trim(),
             }));
 
-            yaml += `type: vertical-stack\n`;
+            if (styleUnused) {
+                yaml += `type: vertical-stack\n`; 
+            }
+            if (styleUsed) {
+                yaml += `type: custom:vertical-stack-in-card\n`;
+                yaml += `card_mod:\n`;
+                yaml += `  style: |\n`;
+                yaml += `    ha-card {\n`;
+                yaml += `      background: ${StyleHintergrund};\n`;
+                yaml += `      border: ${StyleRahmenStil};\n`;
+                yaml += `      border-radius: ${StyleRahmenEcke}\n`;
+                yaml += `    }\n`;
+            }
             yaml += `cards:\n`;
             yaml += `  - type: custom:button-card\n`;
             yaml += `    entity: ${entityText}\n`;
