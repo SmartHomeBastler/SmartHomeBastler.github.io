@@ -725,6 +725,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         object-fit: contain; /* Skaliert das Bild proportional */
     }
     .style-options {
+        display: contents;
         justify-content: space-between;
         align-items: flex-start; /* Überschriften werden oben ausgerichtet */
         margin-top: 20px;
