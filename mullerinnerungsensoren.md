@@ -375,7 +375,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 </div>
 
 <!-- Versteckter Container mit 3 Auswahllisten -->
-<div id="styleOptions" style="display: none; margin-top: 10px;">
+<div id="styleOptions" class="style-options">
     <div class="custom-select-group">
         <!-- Hintergrund -->
         <div class="custom-background-select">
@@ -723,6 +723,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         max-width: 100%;
         max-height: 100%;
         object-fit: contain; /* Skaliert das Bild proportional */
+    }
+    .style-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start; /* Überschriften werden oben ausgerichtet */
+        margin-top: 30px;
+        gap: 20px;
+
     }
     .custom-background-select,
     .custom-border-style-select,
