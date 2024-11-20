@@ -725,13 +725,13 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         object-fit: contain; /* Skaliert das Bild proportional */
     }
     .style-options {
-        display: contents;
+        display: none; /* Standardmäßig ausgeblendet */
         justify-content: space-between;
-        align-items: flex-start; /* Überschriften werden oben ausgerichtet */
+        align-items: flex-start;
         margin-top: 20px;
         gap: 20px;
-
     }
+
     .custom-background-select,
     .custom-border-style-select,
     .custom-border-shape-select {
@@ -739,6 +739,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         display: flex;
         flex-direction: column;
     }
+
     .custom-background-select h4,
     .custom-border-style-select h4,
     .custom-border-shape-select h4 {
@@ -1369,6 +1370,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             styleOptionsDiv.style.display = "none";
         }
     });
+
+    // Initialzustand festlegen
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("styleOptions").style.display = "none";
+    });
+
 
     function generateCardYAML() {
         const imageTableBody = document.getElementById('image-list-output').querySelector('tbody'); // Tabelle aus createImageList
