@@ -378,7 +378,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <div id="styleOptions" style="display: none; margin-top: 10px;">
     <div class="custom-select-group">
         <!-- Hintergrund -->
-        <div class="backgroundSelect">
+        <div class="custom-background-select">
             <label class="custom-label" for="backgroundSelect">Hintergrund:</label>
             <select id="backgroundSelect" class="custom-input">
                 <option value="transparent">Transparent</option>
@@ -386,7 +386,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             </select>
         </div>
         <!-- Rahmen Aussehen -->
-        <div class="borderStyleSelect">
+        <div class="custom-border-style-select">
             <label class="custom-label" for="borderStyleSelect">Rahmen Aussehen:</label>
             <select id="borderStyleSelect" class="custom-input">
                 <option value="no-border">Keinen Rahmen</option>
@@ -395,7 +395,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             </select>
         </div>
         <!-- Rahmen Form -->
-        <div class="borderShapeSelect">
+        <div class="custom-border-shape-select">
             <label class="custom-label" for="borderShapeSelect">Rahmen Form:</label>
             <select id="borderShapeSelect" class="custom-input">
                 <option value="square">Eckig</option>
@@ -422,7 +422,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             <pre id="yaml-code-output" class="language-yaml"><code></code></pre>
         </div>
     </div>
-
     <!-- Beispielbild -->
     <div id="example-card-container" class="example-card-container">
         <h4 class="custom-title">Beispielkarte</h4>
@@ -561,63 +560,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    /* Dashboard Optionen Container */
-    .dashboard-options {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start; /* Überschriften werden oben ausgerichtet */
-        margin-top: 30px;
-        gap: 20px;
-    }
-
-    /* YAML-Code Container */
-    .yaml-output-container,
-    .example-card-container {
-        width: 48%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* YAML-Code Header und Container */
-    .yaml-output-container h4,
-    .example-card-container h4 {
-        margin-bottom: 15px; /* Einheitlicher Abstand zur nächsten Sektion */
-    }
-
-    /* YAML-Code */
-    .yaml-code-container {
-        position: relative;
-        background-color: #e9e9e9;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 15px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        max-height: 400px;
-        overflow: auto; /* Ermöglicht Scrollen */
-    }
-
-    /* Beispielkarte Container */
-    .example-card-container {
-        padding: 0px;
-        text-align: center;
-    }
-
-    /* Bild im Beispielkarten-Container */
-    .example-image-wrapper {
-        width: 100%;
-        height: 400px; /* Gleiche Höhe wie das YAML-Fenster */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ffffff;
-        overflow: hidden; /* Verhindert das Überlaufen von Bildern */
-    }
-
-    .example-image-wrapper img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain; /* Skaliert das Bild proportional */
-    }
 
     /* Sensor-Zusammenfassung */
     .sensor-summary {
@@ -725,10 +667,74 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-top: 30px;
         gap: 20px;
     }
-    .backgroundSelect,
-    .borderStyleSelect,
-    .borderShapeSelect {
-        width: 30%
+    /* Dashboard Optionen Container */
+    .dashboard-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start; /* Überschriften werden oben ausgerichtet */
+        margin-top: 30px;
+        gap: 20px;
+    }
+
+    /* YAML-Code Container */
+    .yaml-output-container,
+    .example-card-container {
+        width: 48%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* YAML-Code Header und Container */
+    .yaml-output-container h4,
+    .example-card-container h4 {
+        margin-bottom: 15px; /* Einheitlicher Abstand zur nächsten Sektion */
+    }
+
+    /* YAML-Code */
+    .yaml-code-container {
+        position: relative;
+        background-color: #e9e9e9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-height: 400px;
+        overflow: auto; /* Ermöglicht Scrollen */
+    }
+
+    /* Beispielkarte Container */
+    .example-card-container {
+        padding: 0px;
+        text-align: center;
+    }
+
+    /* Bild im Beispielkarten-Container */
+    .example-image-wrapper {
+        width: 100%;
+        height: 400px; /* Gleiche Höhe wie das YAML-Fenster */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        overflow: hidden; /* Verhindert das Überlaufen von Bildern */
+    }
+
+    .example-image-wrapper img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Skaliert das Bild proportional */
+    }
+    .custom-background-select,
+    .custom-border-style-select,
+    .custom-border-shape-select {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+    }
+    .custom-background-select h4,
+    .custom-border-style-select h4,
+    .custom-border-shape-select h4 {
+        margin-bottom: 15px;
     }
 </style>
 
