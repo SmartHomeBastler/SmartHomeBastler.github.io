@@ -1843,7 +1843,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `            entity: ${sensor.entity}\n`;
                 yaml += `            show_entity_picture: true\n`;
                 yaml += `            entity_picture: /local/muell/${sensor.image}\n`;
-                yaml += `            size: 50%\n`;
+                yaml += `            size: 40%\n`;
                 yaml += `            show_state: false\n`;
                 yaml += `            show_name: false\n`;
                 yaml += `            styles:\n`;
@@ -1888,7 +1888,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `            entity: ${sensor.entity}\n`;
                 yaml += `            show_entity_picture: true\n`;
                 yaml += `            entity_picture: /local/muell/${sensor.image}\n`;
-                yaml += `            size: 50%\n`;
+                yaml += `            size: 40%\n`;
                 yaml += `            show_state: false\n`;
                 yaml += `            show_name: false\n`;
                 yaml += `            styles:\n`;
