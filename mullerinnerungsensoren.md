@@ -1363,7 +1363,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         const styleOptionsDiv = document.getElementById("styleOptions");
         if (this.checked) {
             // Zeige den Container, wenn die Checkbox angehakt ist
-            styleOptionsDiv.style.display = "flex";
+            styleOptionsDiv.style.display = "contents";
         } else {
             // Verstecke den Container, wenn die Checkbox nicht angehakt ist
             styleOptionsDiv.style.display = "none";
