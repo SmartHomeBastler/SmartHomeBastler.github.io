@@ -935,21 +935,18 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         }
     });
     function showStep(stepNumber) {
-        // Den gewünschten Abschnitt anzeigen
-        const currentStep = document.getElementById(step-${stepNumber});
+        // Alle Abschnitte ausblenden
+        const steps = document.querySelectorAll('[id^="step-"]');
+        steps.forEach(step => (step.style.display = "none"));
+    
+        // Nur den gewünschten Abschnitt anzeigen
+        const currentStep = document.getElementById(`step-${stepNumber}`);
         if (currentStep) {
-            currentStep.style.display = "block"; // Zeigt den aktuellen Step an
-            currentStep.scrollIntoView({ behavior: "smooth" }); // Optional: Scrollt zum aktuellen Abschnitt
-
-            // Markiere vorherige Steps als abgeschlossen
-            for (let i = 1; i < stepNumber; i++) {
-                const prevStep = document.getElementById(step-${i});
-                if (prevStep) {
-                    prevStep.classList.add("completed");
-                }
-            }
+            currentStep.style.display = "block";
+            currentStep.scrollIntoView({ behavior: "smooth" }); // Optional: Scrollen zum Abschnitt
         }
     }
+
 
     async function extractEntries() {
         try {
