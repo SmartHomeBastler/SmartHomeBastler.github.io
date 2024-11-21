@@ -271,10 +271,10 @@ layout: page
                 if (index !== -1) {
                     const originalSummary = line.substring(index + 1).trim(); // Inhalt nach dem ersten Doppelpunkt
                     const cleanedSummary = originalSummary.replace(/[0-9.\s]/g, ""); // Entferne Ziffern, Punkte und Leerzeichen
-                    return `${line.substring(0, index + 1)}${cleanedSummary}`; // Kombiniere `SUMMARY` mit dem bereinigten Inhalt
+                    return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY_xyz mit SUMMARY:
                 }
             }
-            return line;
+            return line; // Unveränderte Zeilen zurückgeben
         });
     
         const editedOutput = document.getElementById('edited-output');
