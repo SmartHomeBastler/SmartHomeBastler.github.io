@@ -991,7 +991,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 }
     
                 // Wenn die Zeile mit SUMMARY: beginnt, Einträge verarbeiten
-                if (line.startsWith("SUMMARY:")) {
+                if (line.startsWith("SUMMARY")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
     
