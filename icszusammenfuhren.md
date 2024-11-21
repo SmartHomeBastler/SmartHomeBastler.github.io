@@ -54,54 +54,20 @@ layout: page
     <section class="ics-step">
         <h3>2. Zusammengeführte ICS-Datei bearbeiten</h3>
         <p>
-            Die verarbeiteten Inhalte der ICS-Dateien werden hier angezeigt. Du kannst sie überprüfen und die Daten in die Zwischenablage kopieren.
+            Die verarbeiteten Inhalte der ICS-Dateien werden hier angezeigt. Du kannst sie überprüfen und die Daten in die Zwischenablage kopieren oder bearbeiten.
         </p>
         <textarea id="output" rows="20" readonly></textarea>
         <br>
         <button class="ics-button" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
-    </section>
-    <section class="ics-step">
-        <h3>3. ICS-Datei herunterladen</h3>
-        <p>
-            Nach der Verarbeitung kannst du die zusammengeführte ICS-Datei hier herunterladen:
-        </p>
-        <button class="ics-button" onclick="downloadICSFile()">ICS-Datei herunterladen</button>
-    </section>
-    <section class="ics-step">
-        <h3>2. Zusammengeführte ICS-Datei bearbeiten</h3>
-        <p>
-            Die verarbeiteten Inhalte der ICS-Dateien werden hier angezeigt. Du kannst sie überprüfen und die Daten in die Zwischenablage kopieren.
-        </p>
-        <textarea id="output" rows="20" readonly></textarea>
-        <br>
-        <button class="ics-button" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
-        <button class="ics-button" onclick="editEntries()">Einträge bearbeiten</button>
-    </section>
-    <section class="ics-step" id="edit-section" style="display: none;">
-        <h3>Bearbeite die Einträge</h3>
-        <div id="entry-table-wrapper">
-            <table id="entry-table">
-                <thead>
-                    <tr>
-                        <th>Auswählen</th>
-                        <th>Eintrag</th>
-                        <th>Eigene Bezeichnung</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Einträge werden hier eingefügt -->
-                </tbody>
-            </table>
-        </div>
-        <button class="ics-button" onclick="saveEditedEntries()">Bearbeitete Einträge speichern</button>
+        <button class="ics-button" onclick="editAndDisplayEntries()">Einträge bearbeiten</button>
     </section>
     <section class="ics-step" id="edited-output-section" style="display: none;">
-        <h3>Fertige bearbeitete ICS-Datei</h3>
+        <h3>Bearbeitete ICS-Datei</h3>
         <textarea id="edited-output" rows="20" readonly></textarea>
         <br>
-        <button class="ics-button" onclick="copyEditedToClipboard()">In Zwischenablage kopieren</button>
+        <button class="ics-button" onclick="copyEditedToClipboard()">Bearbeitete Datei kopieren</button>
+        <button class="ics-button" onclick="downloadEditedICSFile()">Bearbeitete Datei herunterladen</button>
     </section>
-
     <footer class="ics-footer">
         <h4>Viel Erfolg! 🎉</h4>
         <p>Mit dem ICS Code Generator kannst du deine Kalender schnell und einfach bearbeiten.</p>
@@ -202,22 +168,6 @@ layout: page
     .ics-footer p {
         color: #777;
     }
-    #entry-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-    }
-    
-    #entry-table th, #entry-table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-    
-    #entry-table th {
-        background-color: #4CAF50;
-        color: white;
-    }
 </style>
 
 <script>
@@ -286,126 +236,57 @@ layout: page
         document.execCommand('copy');
         alert('ICS-Datei in die Zwischenablage kopiert!');
     }
-    function downloadICSFile() {
-        const output = document.getElementById('output').value;
 
-        if (!output) {
-            alert("Keine ICS-Daten verfügbar. Bitte eine Datei hochladen oder von einer URL laden und verarbeiten.");
-            return;
-        }
-
-        const blob = new Blob([output], { type: 'text/calendar' });
-        const url = URL.createObjectURL(blob);
-
-        // Erstelle einen temporären Link
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'zusammengefuehrte_kalender.ics';
-        document.body.appendChild(link);
-
-        // Automatisches Klicken des Links, um den Download zu starten
-        link.click();
-
-        // Temporären Link entfernen
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    }
-    function editEntries() {
+    function editAndDisplayEntries() {
         const icsData = document.getElementById('output').value;
-    
+
         if (!icsData) {
             alert("Keine ICS-Daten verfügbar. Bitte zuerst eine Datei verarbeiten.");
             return;
         }
-    
-        // Rufe extractEntries auf, um die Einträge anzuzeigen
-        extractEntries(icsData);
-    }
-    
-    async function extractEntries(icsData) {
-        const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
-        entryTableBody.innerHTML = "Lade und verarbeite Daten...";
-    
-        try {
-            const summaryEntries = new Set();
-            const lines = icsData.split("\n");
-            for (let line of lines) {
-                if (line.startsWith("SUMMARY")) {
-                    const summaryText = line.split(":").slice(1).join(":").trim();
-                    summaryEntries.add(summaryText);
-                }
+
+        const lines = icsData.split("\n");
+        const editedLines = lines.map(line => {
+            if (line.startsWith("SUMMARY:")) {
+                const originalSummary = line.split(":")[1];
+                const cleanedSummary = originalSummary.replace(/[0-9.\s]/g, ""); // Entferne Ziffern, Punkte und Leerzeichen
+                return `SUMMARY:${cleanedSummary}`;
             }
-    
-            entryTableBody.innerHTML = "";
-            let idCounter = 0;
-            summaryEntries.forEach(entry => {
-                const row = document.createElement("tr");
-    
-                // Checkbox
-                const checkboxCell = document.createElement("td");
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.className = "entry-checkbox";
-                checkbox.id = `entry-checkbox-${idCounter}`;
-                checkboxCell.appendChild(checkbox);
-                row.appendChild(checkboxCell);
-    
-                // Summary Entry
-                const summaryCell = document.createElement("td");
-                summaryCell.textContent = entry;
-                summaryCell.id = `summary-${idCounter}`;
-                row.appendChild(summaryCell);
-    
-                // Custom Name Input
-                const customNameCell = document.createElement("td");
-                const customNameInput = document.createElement("input");
-                customNameInput.type = "text";
-                customNameInput.placeholder = "Eigene Bezeichnung";
-                customNameInput.className = "entry-custom-name";
-                customNameInput.id = `custom-name-${idCounter}`;
-                customNameCell.appendChild(customNameInput);
-                row.appendChild(customNameCell);
-    
-                entryTableBody.appendChild(row);
-                idCounter++;
-            });
-    
-            // Zeige die Bearbeitungssektion
-            document.getElementById('edit-section').style.display = 'block';
-    
-        } catch (error) {
-            console.error("Fehler beim Verarbeiten der ICS-Daten:", error);
-        }
-    }
-    
-    function saveEditedEntries() {
-        const editedEntries = [];
-        const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
-        const rows = entryTableBody.querySelectorAll('tr');
-    
-        rows.forEach(row => {
-            const checkbox = row.querySelector('.entry-checkbox');
-            const summaryCell = row.querySelector('td:nth-child(2)');
-            const customNameInput = row.querySelector('.entry-custom-name');
-    
-            if (checkbox.checked || customNameInput.value.trim()) {
-                editedEntries.push(
-                    customNameInput.value.trim() || summaryCell.textContent
-                );
-            }
+            return line;
         });
-    
-        // Zeige die bearbeitete Datei
+
         const editedOutput = document.getElementById('edited-output');
-        editedOutput.value = editedEntries.map(entry => `SUMMARY:${entry}`).join('\n');
+        editedOutput.value = editedLines.join("\n");
         document.getElementById('edited-output-section').style.display = 'block';
     }
-    
+
     function copyEditedToClipboard() {
         const editedOutput = document.getElementById('edited-output');
         editedOutput.select();
         document.execCommand('copy');
         alert('Bearbeitete ICS-Daten in die Zwischenablage kopiert!');
+    }
+
+    function downloadEditedICSFile() {
+        const editedOutput = document.getElementById('edited-output').value;
+
+        if (!editedOutput) {
+            alert("Keine bearbeiteten ICS-Daten verfügbar.");
+            return;
+        }
+
+        const blob = new Blob([editedOutput], { type: 'text/calendar' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'bearbeitete_kalender.ics';
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     }
 </script>
 
