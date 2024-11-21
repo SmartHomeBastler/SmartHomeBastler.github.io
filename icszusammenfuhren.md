@@ -11,7 +11,6 @@ layout: page
     <p class="ics-description">
         Lade eine oder mehrere ICS-Dateien hoch oder gib die URL einer ICS-Datei an, um sie zu bearbeiten oder zusammenzuführen.
     </p>
-
     <section class="ics-step">
         <h3>1. ICS-Dateien hochladen oder URL verwenden</h3>
         <p>
@@ -23,7 +22,6 @@ layout: page
                 <input type="text" id="ics-url" placeholder="Gib die URL einer ICS-Datei ein">
                 <button class="ics-button" onclick="fetchICSFromURL()">Kalender von URL laden</button>
             </div>
-
             <form class="ics-file-upload">
                 <div class="ics-file-group">
                     <label for="file1">ICS Datei 1 (erforderlich, wenn keine URL):</label>
@@ -53,7 +51,6 @@ layout: page
             </form>
         </div>
     </section>
-
     <section class="ics-step">
         <h3>2. Zusammengeführte ICS-Datei bearbeiten</h3>
         <p>
@@ -63,14 +60,12 @@ layout: page
         <br>
         <button class="ics-button" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
     </section>
-
     <section class="ics-step">
-        <h3>3. ICS-Einträge bearbeiten</h3>
-        <div id="summaryList">
-            <p>
-                Nach der Verarbeitung werden alle Kalendereinträge hier angezeigt. Du kannst die Bezeichnungen anpassen, sofern sie nicht von einer URL geladen wurden.
-            </p>
-        </div>
+        <h3>3. ICS-Datei herunterladen</h3>
+        <p>
+            Nach der Verarbeitung kannst du die zusammengeführte ICS-Datei hier herunterladen:
+        </p>
+        <button class="ics-button" onclick="downloadICSFile()">ICS-Datei herunterladen</button>
     </section>
 
     <footer class="ics-footer">
@@ -240,6 +235,30 @@ layout: page
         output.select();
         document.execCommand('copy');
         alert('ICS-Datei in die Zwischenablage kopiert!');
+    }
+    function downloadICSFile() {
+        const output = document.getElementById('output').value;
+
+        if (!output) {
+            alert("Keine ICS-Daten verfügbar. Bitte eine Datei hochladen oder von einer URL laden und verarbeiten.");
+            return;
+        }
+
+        const blob = new Blob([output], { type: 'text/calendar' });
+        const url = URL.createObjectURL(blob);
+
+        // Erstelle einen temporären Link
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'zusammengefuehrte_kalender.ics';
+        document.body.appendChild(link);
+
+        // Automatisches Klicken des Links, um den Download zu starten
+        link.click();
+
+        // Temporären Link entfernen
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     }
 </script>
 
