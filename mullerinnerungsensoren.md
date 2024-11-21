@@ -1008,10 +1008,30 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     }
                     warningDisplayed = true; // Sicherstellen, dass der Container nur einmal angezeigt wird
                 }
-    
-                if (line.startsWith("SUMMARY:")) {
+                if (line.startsWith("SUMMARY")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
+    
+                    // Überprüfen, ob Ziffern oder Punkte enthalten sind
+                    if (/\d|\./.test(summaryText)) {
+                        invalidEntries.push(summaryText);
+                    }
+                }
+            }
+    
+            // Falls ungültige Einträge gefunden wurden
+            if (invalidEntries.length > 0) {
+                const proceed = await showCustomDecision(
+                    "Ungültige Einträge gefunden",
+                    "Folgende Einträge enthalten Ziffern oder Punkte:",
+                    invalidEntries
+                );
+                if (!proceed) {
+                    showCustomAlert(
+                        "Verarbeitung abgebrochen!",
+                        "Die Verarbeitung wurde wegen ungültiger Einträge abgebrochen. Bitte überprüfe die ICS-Datei."
+                    );
+                    return; // Abbrechen der Verarbeitung
                 }
             }
     
