@@ -946,7 +946,19 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             currentStep.scrollIntoView({ behavior: "smooth" }); // Optional: Scrollen zum Abschnitt
         }
     }
-
+    function showCustomAlert(title, message) {
+        const alertBox = document.getElementById("custom-alert");
+        const alertTitle = document.getElementById("custom-alert-title");
+        const alertMessage = document.getElementById("custom-alert-message");
+    
+        alertTitle.textContent = title;   // Überschrift setzen
+        alertMessage.textContent = message; // Nachricht setzen
+        alertBox.style.display = "flex"; // Fenster anzeigen
+    
+        document.getElementById("close-alert").onclick = function () {
+            alertBox.style.display = "none"; // Fenster schließen
+        };
+    }
 
     async function extractEntries() {
         try {
