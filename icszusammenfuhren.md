@@ -67,6 +67,40 @@ layout: page
         </p>
         <button class="ics-button" onclick="downloadICSFile()">ICS-Datei herunterladen</button>
     </section>
+    <section class="ics-step">
+        <h3>2. Zusammengeführte ICS-Datei bearbeiten</h3>
+        <p>
+            Die verarbeiteten Inhalte der ICS-Dateien werden hier angezeigt. Du kannst sie überprüfen und die Daten in die Zwischenablage kopieren.
+        </p>
+        <textarea id="output" rows="20" readonly></textarea>
+        <br>
+        <button class="ics-button" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
+        <button class="ics-button" onclick="editEntries()">Einträge bearbeiten</button>
+    </section>
+    <section class="ics-step" id="edit-section" style="display: none;">
+        <h3>Bearbeite die Einträge</h3>
+        <div id="entry-table-wrapper">
+            <table id="entry-table">
+                <thead>
+                    <tr>
+                        <th>Auswählen</th>
+                        <th>Eintrag</th>
+                        <th>Eigene Bezeichnung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Einträge werden hier eingefügt -->
+                </tbody>
+            </table>
+        </div>
+        <button class="ics-button" onclick="saveEditedEntries()">Bearbeitete Einträge speichern</button>
+    </section>
+    <section class="ics-step" id="edited-output-section" style="display: none;">
+        <h3>Fertige bearbeitete ICS-Datei</h3>
+        <textarea id="edited-output" rows="20" readonly></textarea>
+        <br>
+        <button class="ics-button" onclick="copyEditedToClipboard()">In Zwischenablage kopieren</button>
+    </section>
 
     <footer class="ics-footer">
         <h4>Viel Erfolg! 🎉</h4>
@@ -168,6 +202,22 @@ layout: page
     .ics-footer p {
         color: #777;
     }
+    #entry-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    
+    #entry-table th, #entry-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    #entry-table th {
+        background-color: #4CAF50;
+        color: white;
+    }
 </style>
 
 <script>
@@ -259,6 +309,103 @@ layout: page
         // Temporären Link entfernen
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
+    }
+    function editEntries() {
+        const icsData = document.getElementById('output').value;
+    
+        if (!icsData) {
+            alert("Keine ICS-Daten verfügbar. Bitte zuerst eine Datei verarbeiten.");
+            return;
+        }
+    
+        // Rufe extractEntries auf, um die Einträge anzuzeigen
+        extractEntries(icsData);
+    }
+    
+    async function extractEntries(icsData) {
+        const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
+        entryTableBody.innerHTML = "Lade und verarbeite Daten...";
+    
+        try {
+            const summaryEntries = new Set();
+            const lines = icsData.split("\n");
+            for (let line of lines) {
+                if (line.startsWith("SUMMARY")) {
+                    const summaryText = line.split(":").slice(1).join(":").trim();
+                    summaryEntries.add(summaryText);
+                }
+            }
+    
+            entryTableBody.innerHTML = "";
+            let idCounter = 0;
+            summaryEntries.forEach(entry => {
+                const row = document.createElement("tr");
+    
+                // Checkbox
+                const checkboxCell = document.createElement("td");
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.className = "entry-checkbox";
+                checkbox.id = `entry-checkbox-${idCounter}`;
+                checkboxCell.appendChild(checkbox);
+                row.appendChild(checkboxCell);
+    
+                // Summary Entry
+                const summaryCell = document.createElement("td");
+                summaryCell.textContent = entry;
+                summaryCell.id = `summary-${idCounter}`;
+                row.appendChild(summaryCell);
+    
+                // Custom Name Input
+                const customNameCell = document.createElement("td");
+                const customNameInput = document.createElement("input");
+                customNameInput.type = "text";
+                customNameInput.placeholder = "Eigene Bezeichnung";
+                customNameInput.className = "entry-custom-name";
+                customNameInput.id = `custom-name-${idCounter}`;
+                customNameCell.appendChild(customNameInput);
+                row.appendChild(customNameCell);
+    
+                entryTableBody.appendChild(row);
+                idCounter++;
+            });
+    
+            // Zeige die Bearbeitungssektion
+            document.getElementById('edit-section').style.display = 'block';
+    
+        } catch (error) {
+            console.error("Fehler beim Verarbeiten der ICS-Daten:", error);
+        }
+    }
+    
+    function saveEditedEntries() {
+        const editedEntries = [];
+        const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
+        const rows = entryTableBody.querySelectorAll('tr');
+    
+        rows.forEach(row => {
+            const checkbox = row.querySelector('.entry-checkbox');
+            const summaryCell = row.querySelector('td:nth-child(2)');
+            const customNameInput = row.querySelector('.entry-custom-name');
+    
+            if (checkbox.checked || customNameInput.value.trim()) {
+                editedEntries.push(
+                    customNameInput.value.trim() || summaryCell.textContent
+                );
+            }
+        });
+    
+        // Zeige die bearbeitete Datei
+        const editedOutput = document.getElementById('edited-output');
+        editedOutput.value = editedEntries.map(entry => `SUMMARY:${entry}`).join('\n');
+        document.getElementById('edited-output-section').style.display = 'block';
+    }
+    
+    function copyEditedToClipboard() {
+        const editedOutput = document.getElementById('edited-output');
+        editedOutput.select();
+        document.execCommand('copy');
+        alert('Bearbeitete ICS-Daten in die Zwischenablage kopiert!');
     }
 </script>
 
