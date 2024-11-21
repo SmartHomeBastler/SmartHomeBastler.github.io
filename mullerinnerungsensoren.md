@@ -952,7 +952,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
                     icsData = await response.text();
                 } catch (error) {
-                    entryTableBody.innerHTML = <tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>;
+                    entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
                     console.error("Fetch error:", error);
                     return;
                 }
