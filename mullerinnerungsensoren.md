@@ -934,19 +934,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             console.error("Error during DOMContentLoaded setup:", error);
         }
     });
-    function showCustomAlert(title, message) {
-        const alertBox = document.getElementById("custom-alert");
-        const alertTitle = document.getElementById("custom-alert-title");
-        const alertMessage = document.getElementById("custom-alert-message");
-
-        alertTitle.textContent = title;   // Überschrift setzen
-        alertMessage.textContent = message; // Nachricht setzen
-        alertBox.style.display = "flex"; // Fenster anzeigen
-
-        document.getElementById("close-alert").onclick = function () {
-            alertBox.style.display = "none"; // Fenster schließen
-        };
-    }
     async function extractEntries() {
         try {
             const fileInput = document.getElementById('icsFile');
@@ -965,7 +952,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
                     icsData = await response.text();
                 } catch (error) {
-                    entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
+                    entryTableBody.innerHTML = <tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>;
                     console.error("Fetch error:", error);
                     return;
                 }
@@ -1016,14 +1003,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.className = "entry-checkbox";
-                checkbox.id = `entry-checkbox-${idCounter}`;
+                checkbox.id = entry-checkbox-${idCounter};
                 checkboxCell.appendChild(checkbox);
                 row.appendChild(checkboxCell);
     
                 // Summary Entry
                 const summaryCell = document.createElement("td");
                 summaryCell.textContent = entry;
-                summaryCell.id = `summary-${idCounter}`;
+                summaryCell.id = summary-${idCounter};
                 row.appendChild(summaryCell);
     
                 // Custom Name Input
@@ -1032,7 +1019,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 customNameInput.type = "text";
                 customNameInput.placeholder = "Eigene Bezeichnung";
                 customNameInput.className = "entry-custom-name";
-                customNameInput.id = `custom-name-${idCounter}`;
+                customNameInput.id = custom-name-${idCounter};
                 customNameCell.appendChild(customNameInput);
                 row.appendChild(customNameCell);
     
@@ -1044,6 +1031,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             console.error("Error in extractEntries:", error);
         }
     }
+
+
     // Funktion zum Anzeigen des benutzerdefinierten Dialogs
     function showCustomDecision(title, message, invalidEntries) {
         return new Promise((resolve) => {
