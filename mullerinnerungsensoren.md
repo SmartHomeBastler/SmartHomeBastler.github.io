@@ -19,6 +19,7 @@ layout: page
 </div>
 <div id="custom-alert" style="display: none;">
     <div id="custom-alert-content">
+        <h4 id="custom-alert-title"></h4>
         <p id="custom-alert-message"></p>
         <button id="close-alert">OK</button>
     </div>
@@ -618,10 +619,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         animation: fadeIn 0.3s ease-in-out;
     }
 
+    #custom-alert-title {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+        font-weight: bold;
+    }
+
     #custom-alert-message {
         margin-bottom: 15px;
         font-size: 16px;
-        color: #333;
+        color: #666;
     }
 
     #close-alert {
@@ -846,12 +854,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             console.error("Error during DOMContentLoaded setup:", error);
         }
     });
-    function showCustomAlert(message) {
+    function showCustomAlert(title, message) {
         const alertBox = document.getElementById("custom-alert");
+        const alertTitle = document.getElementById("custom-alert-title");
         const alertMessage = document.getElementById("custom-alert-message");
 
+        alertTitle.textContent = title;   // Überschrift setzen
         alertMessage.textContent = message; // Nachricht setzen
-        alertBox.style.display = "flex";   // Fenster anzeigen
+        alertBox.style.display = "flex"; // Fenster anzeigen
 
         document.getElementById("close-alert").onclick = function () {
             alertBox.style.display = "none"; // Fenster schließen
@@ -961,7 +971,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         // Warnung, wenn keine Checkbox ausgewählt wurde
         if (selectedEntries.length === 0) {
-            showCustomAlert("Bitte wähle mindestens einen Eintrag aus!");
+            showCustomAlert("Keine Auswahl getroffen!", "Bitte wähle mindestens einen Eintrag aus!");
             return false; // Fehler: keine Auswahl getroffen
         }
 
@@ -983,7 +993,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         });
 
         if (umlautWarning) {
-            showCustomAlert("Umlaute entdeckt! Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!");
+            showCustomAlert("Umlaute entdeckt!", "Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!");
             return false; // Fehler
         }
 
@@ -1129,12 +1139,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         });
 
         if (colorNotSelected) {
-            showCustomAlert("Die Farben der Tonne sollten zugeordnet werden!");
+            showCustomAlert("Keine Tonnen-Farben?", "Die Farben der Tonne sollten zugeordnet werden!");
             return false; // Rückgabe `false`, wenn eine Farbe fehlt
         }
 
         if (duplicateColor) {
-            showCustomAlert("Jede Farbe darf nur einmal ausgewählt werden!");
+            showCustomAlert("Doppelte Farbe erkannt!", "Jede Farbe darf nur einmal ausgewählt werden!");
             return false; // Rückgabe `false`, wenn Farben doppelt sind
         }
 
@@ -1307,11 +1317,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         navigator.clipboard.writeText(codeText)
             .then(() => {
-                showCustomAlert("Code erfolgreich kopiert!"); // Zeigt das benutzerdefinierte Fenster
+                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!"); // Zeigt das benutzerdefinierte Fenster
             })
             .catch(err => {
                 console.error("Fehler beim Kopieren des Codes: ", err);
-                showCustomAlert("Fehler beim Kopieren des Codes."); // Fehlerhinweis
+                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten."); // Fehlerhinweis
             });
     }
 
@@ -2298,11 +2308,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         navigator.clipboard.writeText(codeText)
             .then(() => {
-                showCustomAlert("Code erfolgreich kopiert!"); // Erfolgsnachricht
+                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!"); // Erfolgsnachricht
             })
             .catch(err => {
                 console.error("Fehler beim Kopieren des Codes:", err);
-                showCustomAlert("Fehler beim Kopieren des Codes."); // Fehlermeldung
+                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten."); // Fehlermeldung
             });
     }
 
