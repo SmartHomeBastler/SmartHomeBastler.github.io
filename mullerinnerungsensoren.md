@@ -1018,7 +1018,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 }
             }
     
-            // Extrahierte Einträge in die Tabelle schreiben
+            // Die Verarbeitung wird fortgesetzt, wenn der Benutzer auf "Fortsetzen" klickt
             entryTableBody.innerHTML = "";
             let idCounter = 0;
             summaryEntries.forEach(entry => {
@@ -1057,8 +1057,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             console.error("Error in extractEntries:", error);
         }
     }
-
-
     // Funktion zum Anzeigen des benutzerdefinierten Dialogs
     function showCustomDecision(title, message, invalidEntries) {
         return new Promise((resolve) => {
