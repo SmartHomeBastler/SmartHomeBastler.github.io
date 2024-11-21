@@ -197,20 +197,20 @@ layout: page
             document.getElementById('file5').files[0],
             document.getElementById('file6').files[0],
         ];
-
+    
         const validFiles = files.filter(file => file);
-
+    
         if (validFiles.length === 0) {
             alert("Bitte mindestens eine ICS-Datei hochladen.");
             return;
         }
-
+    
         const readers = validFiles.map(file => {
             const reader = new FileReader();
             reader.readAsText(file);
             return reader;
         });
-
+    
         Promise.all(
             readers.map(
                 reader =>
@@ -222,26 +222,29 @@ layout: page
             const mergedData = results.join("\n");
             const lines = mergedData.split("\n");
             const warningContainer = document.getElementById('warning-container');
-
+    
             let containsInvalidSummary = false;
-
+    
             const processedLines = lines.map((line) => {
-                if (line.startsWith("SUMMARY:")) {
-                    const summary = line.split(":")[1];
-                    if (/\d|\./.test(summary)) { // Prüft auf Ziffern oder Punkte
-                        containsInvalidSummary = true;
+                if (line.startsWith("SUMMARY")) {
+                    const index = line.indexOf(":");
+                    if (index !== -1) {
+                        const summaryContent = line.substring(index + 1).trim(); // Inhalt nach dem ersten Doppelpunkt
+                        if (/\d|\./.test(summaryContent)) { // Prüft auf Ziffern oder Punkte
+                            containsInvalidSummary = true;
+                        }
                     }
                 }
                 return line;
             });
-
+    
             // Zeigt die Warnung an, falls ungültige Einträge gefunden werden
             if (containsInvalidSummary) {
                 warningContainer.style.display = "block";
             } else {
                 warningContainer.style.display = "none";
             }
-
+    
             document.getElementById('output').value = processedLines.join("\n");
         });
     }
@@ -255,22 +258,25 @@ layout: page
 
     function editAndDisplayEntries() {
         const icsData = document.getElementById('output').value;
-
+    
         if (!icsData) {
             alert("Keine ICS-Daten verfügbar. Bitte zuerst eine Datei verarbeiten.");
             return;
         }
-
+    
         const lines = icsData.split("\n");
         const editedLines = lines.map(line => {
-            if (line.startsWith("SUMMARY:")) {
-                const originalSummary = line.split(":")[1];
-                const cleanedSummary = originalSummary.replace(/[0-9.\s]/g, ""); // Entferne Ziffern, Punkte und Leerzeichen
-                return `SUMMARY:${cleanedSummary}`;
+            if (line.startsWith("SUMMARY")) {
+                const index = line.indexOf(":");
+                if (index !== -1) {
+                    const originalSummary = line.substring(index + 1).trim(); // Inhalt nach dem ersten Doppelpunkt
+                    const cleanedSummary = originalSummary.replace(/[0-9.\s]/g, ""); // Entferne Ziffern, Punkte und Leerzeichen
+                    return `${line.substring(0, index + 1)}${cleanedSummary}`; // Kombiniere `SUMMARY` mit dem bereinigten Inhalt
+                }
             }
             return line;
         });
-
+    
         const editedOutput = document.getElementById('edited-output');
         editedOutput.value = editedLines.join("\n");
         document.getElementById('edited-output-section').style.display = 'block';
