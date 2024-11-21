@@ -93,6 +93,82 @@ layout: page
         font-size: 2em;
         margin-bottom: 10px;
     }
+    .ics-subtitle {
+        text-align: center;
+        color: #666;
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+    .ics-description {
+        text-align: center;
+        color: #555;
+        margin-bottom: 20px;
+    }
+    .ics-step {
+        margin-bottom: 20px;
+    }
+    .ics-step h3 {
+        color: #4CAF50;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    .ics-input-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .ics-url-input,
+    .ics-file-upload {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .ics-url-input label,
+    .ics-file-upload label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .ics-url-input input,
+    .ics-file-upload input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .ics-file-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .ics-button {
+        padding: 10px 15px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        align-self: flex-start;
+    }
+    .ics-button:hover {
+        background-color: #45a049;
+    }
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+    .ics-footer {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .ics-footer h4 {
+        color: #333;
+    }
+    .ics-footer p {
+        color: #777;
+    }
     .important-container {
         background-color: #ff9982;
         padding: 15px;
