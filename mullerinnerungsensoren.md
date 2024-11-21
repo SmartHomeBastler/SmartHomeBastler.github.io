@@ -893,9 +893,9 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             const urlInput = document.getElementById('calendarUrl');
             const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
             entryTableBody.innerHTML = "Lade und verarbeite Daten...";
-
+    
             let icsData;
-            
+    
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 icsData = await file.text();
@@ -913,21 +913,43 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 entryTableBody.innerHTML = "<tr><td colspan='3'>Bitte eine ICS-Datei hochladen oder eine URL eingeben.</td></tr>";
                 return;
             }
-
+    
             const summaryEntries = new Set();
+            const invalidEntries = [];
             const lines = icsData.split("\n");
+    
             for (let line of lines) {
                 if (line.startsWith("SUMMARY")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
+    
+                    // Überprüfen, ob Ziffern oder Punkte enthalten sind
+                    if (/\d|\./.test(summaryText)) {
+                        invalidEntries.push(summaryText);
+                    }
                 }
             }
-
+    
+            // Falls ungültige Einträge gefunden wurden, zeige Warnung und frage nach Nutzerentscheidung
+            if (invalidEntries.length > 0) {
+                const proceed = confirm(
+                    `Folgende Einträge enthalten Ziffern oder Punkte:\n\n${invalidEntries.join("\n")}\n\nMöchtest du die Verarbeitung fortsetzen?`
+                );
+                if (!proceed) {
+                    showCustomAlert(
+                        "Verarbeitung abgebrochen!",
+                        "Die Verarbeitung wurde wegen ungültiger Einträge abgebrochen. Bitte überprüfe die ICS-Datei."
+                    );
+                    return; // Abbrechen der Verarbeitung
+                }
+            }
+    
+            // Tabelle zurücksetzen und Einträge anzeigen
             entryTableBody.innerHTML = "";
             let idCounter = 0;
             summaryEntries.forEach(entry => {
                 const row = document.createElement("tr");
-
+    
                 // Checkbox
                 const checkboxCell = document.createElement("td");
                 const checkbox = document.createElement("input");
@@ -936,13 +958,13 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 checkbox.id = `entry-checkbox-${idCounter}`;
                 checkboxCell.appendChild(checkbox);
                 row.appendChild(checkboxCell);
-
+    
                 // Summary Entry
                 const summaryCell = document.createElement("td");
                 summaryCell.textContent = entry;
                 summaryCell.id = `summary-${idCounter}`;
                 row.appendChild(summaryCell);
-
+    
                 // Custom Name Input
                 const customNameCell = document.createElement("td");
                 const customNameInput = document.createElement("input");
@@ -952,11 +974,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 customNameInput.id = `custom-name-${idCounter}`;
                 customNameCell.appendChild(customNameInput);
                 row.appendChild(customNameCell);
-
+    
                 entryTableBody.appendChild(row);
                 idCounter++;
             });
-
+    
         } catch (error) {
             console.error("Error in extractEntries:", error);
         }
