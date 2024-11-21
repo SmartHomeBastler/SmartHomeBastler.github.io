@@ -987,47 +987,37 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             }
     
             const summaryEntries = new Set();
-            const invalidEntries = [];
             const lines = icsData.split("\n");
+    
+            let importantMessageDisplayed = false; // Verhindert mehrfaches Einfügen
     
             for (let line of lines) {
                 // Prüfen, ob die Zeile nicht exakt mit "SUMMARY:" beginnt
-                if (line.startsWith("SUMMARY") && !line.startsWith("SUMMARY:")) {
-                    showCustomAlert(
-                        "Ungültiger Kalendereintrag!",
-                        `Deine ICS Datei sollte um Fehler zu vermeiden bearbeitet werden. Gehe dazu auf die Seite 
-                        <a href="/icszusammenfuhren/" target="_blank">ICS zusammenführen / bearbeiten</a>.`
-                    );
-                    return; // Verarbeitung abbrechen
+                if (line.startsWith("SUMMARY") && !line.startsWith("SUMMARY:") && !importantMessageDisplayed) {
+                    // Wichtig-Container einfügen
+                    const container = document.createElement("div");
+                    container.className = "important-container";
+                    container.innerHTML = `
+                        <h3>❗Wichtig</h3>
+                        <p>
+                            Deine ICS-Datei enthält ungültige Einträge. Diese sollten angepasst werden, um Fehler zu vermeiden. 
+                            Gehe dazu auf die Seite <a href="/icszusammenfuhren/" target="_blank">ICS zusammenführen / bearbeiten</a>.<br>
+                            Die Verarbeitung wird dennoch fortgesetzt, aber überprüfe die Einträge vor dem Erstellen der Codes.
+                        </p>
+                    `;
+                    // Container zum DOM hinzufügen
+                    const parentElement = document.querySelector("body"); // Anpassen, falls ein spezifischer Bereich genutzt werden soll
+                    parentElement.prepend(container);
+                    importantMessageDisplayed = true; // Wichtig-Container nur einmal anzeigen
                 }
     
                 if (line.startsWith("SUMMARY:")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
-    
-                    // Überprüfen, ob Ziffern oder Punkte enthalten sind
-                    if (/\d|\./.test(summaryText)) {
-                        invalidEntries.push(summaryText);
-                    }
                 }
             }
     
-            // Falls ungültige Einträge gefunden wurden
-            if (invalidEntries.length > 0) {
-                const proceed = await showCustomDecision(
-                    "Ungültige Einträge gefunden",
-                    "Folgende Einträge enthalten Ziffern oder Punkte:",
-                    invalidEntries
-                );
-                if (!proceed) {
-                    showCustomAlert(
-                        "Verarbeitung abgebrochen!",
-                        "Die Verarbeitung wurde wegen ungültiger Einträge abgebrochen. Bitte überprüfe die ICS-Datei."
-                    );
-                    return; // Abbrechen der Verarbeitung
-                }
-            }
-    
+            // Einträge in die Tabelle schreiben
             entryTableBody.innerHTML = "";
             let idCounter = 0;
             summaryEntries.forEach(entry => {
@@ -1066,7 +1056,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             console.error("Error in extractEntries:", error);
         }
     }
-    
+
     // Funktion zum Anzeigen des benutzerdefinierten Dialogs
     function showCustomDecision(title, message, invalidEntries) {
         return new Promise((resolve) => {
