@@ -87,7 +87,15 @@ Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
         <strong>Achtung!</strong> Deine persönlichen Bezeichnungen dürfen keine Umlaute enthalten und Leerzeichen sollen vermieden werden!
     </p>
 </div>
-
+    <!-- Warnungscontainer -->
+    <div id="warning-container" class="important-container" style="display: none;">
+        <h3>❗Achtung</h3>
+        <p>
+            Deine ICS-Datei enthält ungültige Einträge. Diese sollten angepasst werden, um Fehler zu vermeiden. 
+            Gehe dazu auf die Seite <a href="/icszusammenfuhren/" target="_blank">ICS zusammenführen / bearbeiten</a>.<br>
+            Die Verarbeitung wird dennoch fortgesetzt, aber überprüfe die Einträge vor dem Erstellen der Codes.
+        </p>
+    </div>
 <p>
     Wähle deine Bezeichnung so, dass sie kurz und sinnvoll ist. Es ist nicht notwendig, das Wort <strong>Tonne</strong> in die Bezeichnung aufzunehmen, da dies automatisch vom Codegenerator ergänzt wird. 
     Beispiel: Aus der Bezeichnung <strong>Papier</strong> wird automatisch <strong>die Papier Tonne</strong>.
@@ -987,56 +995,27 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             }
     
             const summaryEntries = new Set();
-            const invalidEntries = [];
             const lines = icsData.split("\n");
     
-            let warningDisplayed = false; // Kontrollvariable, um das Warnungsfenster nur einmal anzuzeigen
+            let warningDisplayed = false; // Kontrollvariable
     
             for (let line of lines) {
                 if (line.startsWith("SUMMARY") && !line.startsWith("SUMMARY:") && !warningDisplayed) {
-                    // Warnungsfenster einfügen
-                    const container = document.createElement("div");
-                    container.className = "important-container";
-                    container.innerHTML = `
-                        <h3>❗Achtung</h3>
-                        <p>
-                            Deine ICS-Datei enthält ungültige Einträge. Diese sollten angepasst werden, um Fehler zu vermeiden. 
-                            Gehe dazu auf die Seite <a href="/icszusammenfuhren/" target="_blank">ICS zusammenführen / bearbeiten</a>.<br>
-                            Die Verarbeitung wird dennoch fortgesetzt, aber überprüfe die Einträge vor dem Erstellen der Codes.
-                        </p>
-                    `;
-                    const parentElement = document.querySelector("body"); // Füge den Container zum Body hinzu
-                    parentElement.prepend(container);
-                    warningDisplayed = true; // Kontrollvariable setzen
+                    // Warnungscontainer sichtbar machen
+                    const warningContainer = document.getElementById("warning-container");
+                    if (warningContainer) {
+                        warningContainer.style.display = "block";
+                    }
+                    warningDisplayed = true; // Sicherstellen, dass der Container nur einmal angezeigt wird
                 }
     
                 if (line.startsWith("SUMMARY:")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
-    
-                    // Überprüfen, ob Ziffern oder Punkte enthalten sind
-                    if (/\d|\./.test(summaryText)) {
-                        invalidEntries.push(summaryText);
-                    }
                 }
             }
     
-            // Falls ungültige Einträge gefunden wurden
-            if (invalidEntries.length > 0) {
-                const proceed = await showCustomDecision(
-                    "Ungültige Einträge gefunden",
-                    "Folgende Einträge enthalten Ziffern oder Punkte:",
-                    invalidEntries
-                );
-                if (!proceed) {
-                    showCustomAlert(
-                        "Verarbeitung abgebrochen!",
-                        "Die Verarbeitung wurde wegen ungültiger Einträge abgebrochen. Bitte überprüfe die ICS-Datei."
-                    );
-                    return; // Abbrechen der Verarbeitung
-                }
-            }
-    
+            // Einträge in die Tabelle schreiben
             entryTableBody.innerHTML = "";
             let idCounter = 0;
             summaryEntries.forEach(entry => {
