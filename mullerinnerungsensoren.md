@@ -1010,7 +1010,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 // Summary Entry
                 const summaryCell = document.createElement("td");
                 summaryCell.textContent = entry;
-                summaryCell.id = summary-${idCounter};
+                summaryCell.id = `summary-${idCounter}`;
                 row.appendChild(summaryCell);
     
                 // Custom Name Input
@@ -1019,7 +1019,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 customNameInput.type = "text";
                 customNameInput.placeholder = "Eigene Bezeichnung";
                 customNameInput.className = "entry-custom-name";
-                customNameInput.id = custom-name-${idCounter};
+                customNameInput.id = `custom-name-${idCounter}`;
                 customNameCell.appendChild(customNameInput);
                 row.appendChild(customNameCell);
     
