@@ -895,7 +895,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             entryTableBody.innerHTML = "Lade und verarbeite Daten...";
 
             let icsData;
-
+            
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 icsData = await file.text();
@@ -915,35 +915,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             }
 
             const summaryEntries = new Set();
-            const cleanedEntries = new Map(); // Map für Einträge ohne Datum
             const lines = icsData.split("\n");
-
             for (let line of lines) {
                 if (line.startsWith("SUMMARY")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
-
-                    // Bereinige den Eintrag (entferne Datum am Ende)
-                    const cleanedText = summaryText.replace(/\s\d{2}\.\d{2}\.\d{4}$/, "").trim();
-                    if (cleanedEntries.has(cleanedText)) {
-                        cleanedEntries.set(cleanedText, cleanedEntries.get(cleanedText) + 1);
-                    } else {
-                        cleanedEntries.set(cleanedText, 1);
-                    }
                 }
-            }
-
-            // Prüfe auf doppelte Einträge
-            const duplicates = Array.from(cleanedEntries.entries()).filter(([key, count]) => count > 1);
-
-            if (duplicates.length > 0) {
-                showCustomAlert(
-                    "Doppelte Einträge gefunden!",
-                    `Die folgenden Einträge treten mehrfach mit unterschiedlichen Endungen auf: ${duplicates
-                        .map(([key]) => `"${key}"`)
-                        .join(", ")}. Bitte kontrolliere die ICS-Datei.`
-                );
-                return false; // Fehler
             }
 
             entryTableBody.innerHTML = "";
