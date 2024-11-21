@@ -975,27 +975,15 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             }
     
             const summaryEntries = new Set();
-            const invalidEntries = []; // Fehlende Definition hinzugefügt
+            const invalidEntries = [];
             const lines = icsData.split("\n");
     
-            let warningDisplayed = false; // Kontrollvariable
-    
             for (let line of lines) {
-                // Wenn SUMMARY vorhanden, aber nicht exakt SUMMARY:
-                if (line.startsWith("SUMMARY") && !line.startsWith("SUMMARY:") && !warningDisplayed) {
-                    const warningContainer = document.getElementById("warning-container");
-                    if (warningContainer) {
-                        warningContainer.style.display = "block";
-                    }
-                    warningDisplayed = true;
-                }
-    
-                // Wenn die Zeile mit SUMMARY: beginnt, Einträge verarbeiten
                 if (line.startsWith("SUMMARY")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
     
-                    // Überprüfen, ob der Text Ziffern oder Punkte enthält
+                    // Überprüfen, ob Ziffern oder Punkte enthalten sind
                     if (/\d|\./.test(summaryText)) {
                         invalidEntries.push(summaryText);
                     }
@@ -1018,7 +1006,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 }
             }
     
-            // Die Verarbeitung wird fortgesetzt, wenn der Benutzer auf "Fortsetzen" klickt
             entryTableBody.innerHTML = "";
             let idCounter = 0;
             summaryEntries.forEach(entry => {
