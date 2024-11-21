@@ -934,6 +934,23 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             console.error("Error during DOMContentLoaded setup:", error);
         }
     });
+    function showStep(stepNumber) {
+        // Den gewünschten Abschnitt anzeigen
+        const currentStep = document.getElementById(step-${stepNumber});
+        if (currentStep) {
+            currentStep.style.display = "block"; // Zeigt den aktuellen Step an
+            currentStep.scrollIntoView({ behavior: "smooth" }); // Optional: Scrollt zum aktuellen Abschnitt
+
+            // Markiere vorherige Steps als abgeschlossen
+            for (let i = 1; i < stepNumber; i++) {
+                const prevStep = document.getElementById(step-${i});
+                if (prevStep) {
+                    prevStep.classList.add("completed");
+                }
+            }
+        }
+    }
+
     async function extractEntries() {
         try {
             const fileInput = document.getElementById('icsFile');
