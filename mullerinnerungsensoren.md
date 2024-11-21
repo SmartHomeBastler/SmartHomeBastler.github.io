@@ -29,6 +29,9 @@ layout: page
         <h4 id="custom-decision-title"></h4>
         <p id="custom-decision-message"></p>
         <ul id="custom-decision-list"></ul>
+        <p id="custom-decision-question" style="font-weight: bold; margin-top: 10px;">
+            Möchtest du die Verarbeitung fortsetzen?
+        </p>
         <button id="decision-yes">Ja</button>
         <button id="decision-no">Nein</button>
     </div>
@@ -722,6 +725,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     #custom-decision-list li {
         margin: 5px 0;
     }
+    #custom-decision-question {
+        font-size: 1.1em;
+        text-align: center;
+        margin-top: 10px;
+    }
     .custom-label {
         display: block;
         font-weight: bold;
@@ -1058,6 +1066,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             const listElement = document.getElementById('custom-decision-list');
             const yesButton = document.getElementById('decision-yes');
             const noButton = document.getElementById('decision-no');
+            const questionElement = document.getElementById('custom-decision-question');
     
             // Setze Titel und Nachricht
             titleElement.textContent = title;
@@ -1070,6 +1079,9 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 listItem.textContent = entry;
                 listElement.appendChild(listItem);
             });
+    
+            // Setze Frage (kann falls nötig angepasst werden)
+            questionElement.textContent = "Möchtest du die Verarbeitung fortsetzen?";
     
             // Event-Listener für Buttons
             yesButton.onclick = () => {
@@ -1086,7 +1098,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             decisionElement.style.display = 'flex';
         });
     }
-
     function checkEntries() {
         const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
         const umlautPattern = /[äöüÄÖÜß]/;
