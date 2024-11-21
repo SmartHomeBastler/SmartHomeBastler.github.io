@@ -24,6 +24,14 @@ layout: page
         <button id="close-alert">OK</button>
     </div>
 </div>
+<div id="custom-decision" style="display: none;">
+    <div id="custom-decision-content">
+        <h4 id="custom-decision-title"></h4>
+        <p id="custom-decision-message"></p>
+        <button id="decision-yes">Ja</button>
+        <button id="decision-no">Nein</button>
+    </div>
+</div>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
 ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
@@ -658,6 +666,49 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             transform: scale(1);
         }
     }
+    #custom-decision {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    
+    #custom-decision-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    #custom-decision h4 {
+        margin: 0 0 10px;
+    }
+    
+    #custom-decision p {
+        margin: 0 0 20px;
+    }
+    
+    #custom-decision button {
+        margin: 0 5px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    #custom-decision button:hover {
+        background-color: #0056b3;
+    }
     .custom-label {
         display: block;
         font-weight: bold;
@@ -930,9 +981,10 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 }
             }
     
-            // Falls ungültige Einträge gefunden wurden, zeige Warnung und frage nach Nutzerentscheidung
+            // Falls ungültige Einträge gefunden wurden
             if (invalidEntries.length > 0) {
-                const proceed = confirm(
+                const proceed = await showCustomDecision(
+                    "Ungültige Einträge gefunden",
                     `Folgende Einträge enthalten Ziffern oder Punkte:\n\n${invalidEntries.join("\n")}\n\nMöchtest du die Verarbeitung fortsetzen?`
                 );
                 if (!proceed) {
@@ -944,7 +996,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 }
             }
     
-            // Tabelle zurücksetzen und Einträge anzeigen
             entryTableBody.innerHTML = "";
             let idCounter = 0;
             summaryEntries.forEach(entry => {
@@ -982,6 +1033,32 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         } catch (error) {
             console.error("Error in extractEntries:", error);
         }
+    }
+    
+    // Funktion zum Anzeigen des benutzerdefinierten Dialogs
+    function showCustomDecision(title, message) {
+        return new Promise((resolve) => {
+            const decisionElement = document.getElementById('custom-decision');
+            const titleElement = document.getElementById('custom-decision-title');
+            const messageElement = document.getElementById('custom-decision-message');
+            const yesButton = document.getElementById('decision-yes');
+            const noButton = document.getElementById('decision-no');
+    
+            titleElement.textContent = title;
+            messageElement.textContent = message;
+    
+            yesButton.onclick = () => {
+                decisionElement.style.display = 'none';
+                resolve(true);
+            };
+    
+            noButton.onclick = () => {
+                decisionElement.style.display = 'none';
+                resolve(false);
+            };
+    
+            decisionElement.style.display = 'flex';
+        });
     }
 
     function checkEntries() {
