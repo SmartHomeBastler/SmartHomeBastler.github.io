@@ -1009,12 +1009,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     "Folgende Einträge enthalten Ziffern oder Punkte:",
                     invalidEntries
                 );
+                const proceed = await showCustomDecision(
+                    "Ungültige Einträge gefunden",
+                    "Folgende Einträge enthalten Ziffern oder Punkte:",
+                    invalidEntries
+                );
                 if (!proceed) {
                     showCustomAlert(
                         "Verarbeitung abgebrochen!",
                         "Die Verarbeitung wurde wegen ungültiger Einträge abgebrochen. Bitte überprüfe die ICS-Datei."
                     );
-                    return;
+                    return; // Abbrechen der Verarbeitung
                 }
             }
     
