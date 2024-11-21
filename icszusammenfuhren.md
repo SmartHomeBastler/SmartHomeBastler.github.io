@@ -16,41 +16,42 @@ layout: page
         <p>
             Wähle entweder eine <code>.ics</code>-Datei aus oder gib die URL einer Datei an. Du kannst auch mehrere Dateien hochladen, um sie zusammenzuführen.
         </p>
-        <div class="ics-input-section">
-            <div class="ics-url-input">
-                <label for="ics-url">ICS URL (optional):</label>
-                <input type="text" id="ics-url" placeholder="Gib die URL einer ICS-Datei ein">
-                <button class="ics-button" onclick="fetchICSFromURL()">Kalender von URL laden</button>
+        <form class="ics-file-upload">
+            <div class="ics-file-group">
+                <label for="file1">ICS Datei 1 (erforderlich, wenn keine URL):</label>
+                <input type="file" id="file1" accept=".ics">
             </div>
-            <form class="ics-file-upload">
-                <div class="ics-file-group">
-                    <label for="file1">ICS Datei 1 (erforderlich, wenn keine URL):</label>
-                    <input type="file" id="file1" accept=".ics">
-                </div>
-                <div class="ics-file-group">
-                    <label for="file2">ICS Datei 2 (optional):</label>
-                    <input type="file" id="file2" accept=".ics">
-                </div>
-                <div class="ics-file-group">
-                    <label for="file3">ICS Datei 3 (optional):</label>
-                    <input type="file" id="file3" accept=".ics">
-                </div>
-                <div class="ics-file-group">
-                    <label for="file4">ICS Datei 4 (optional):</label>
-                    <input type="file" id="file4" accept=".ics">
-                </div>
-                <div class="ics-file-group">
-                    <label for="file5">ICS Datei 5 (optional):</label>
-                    <input type="file" id="file5" accept=".ics">
-                </div>
-                <div class="ics-file-group">
-                    <label for="file6">ICS Datei 6 (optional):</label>
-                    <input type="file" id="file6" accept=".ics">
-                </div>
-                <button type="button" class="ics-button" onclick="mergeICSFiles()">ICS Datei(en) verarbeiten</button>
-            </form>
-        </div>
+            <div class="ics-file-group">
+                <label for="file2">ICS Datei 2 (optional):</label>
+                <input type="file" id="file2" accept=".ics">
+            </div>
+            <div class="ics-file-group">
+                <label for="file3">ICS Datei 3 (optional):</label>
+                <input type="file" id="file3" accept=".ics">
+            </div>
+            <div class="ics-file-group">
+                <label for="file4">ICS Datei 4 (optional):</label>
+                <input type="file" id="file4" accept=".ics">
+            </div>
+            <div class="ics-file-group">
+                <label for="file5">ICS Datei 5 (optional):</label>
+                <input type="file" id="file5" accept=".ics">
+            </div>
+            <div class="ics-file-group">
+                <label for="file6">ICS Datei 6 (optional):</label>
+                <input type="file" id="file6" accept=".ics">
+            </div>
+            <button type="button" class="ics-button" onclick="mergeICSFiles()">ICS Datei(en) verarbeiten</button>
+        </form>
     </section>
+    <div id="warning-container" style="display: none;">
+        <div class="important-container">
+            <h3>❗ Achtung</h3>
+            <p>
+                Die Bezeichnungen deiner Kalender-Termine beinhalten Ziffern oder Punkte. Eine Bearbeitung dieser Einträge wird empfohlen.
+            </p>
+        </div>
+    </div>
     <section class="ics-step">
         <h3>2. Zusammengeführte ICS-Datei bearbeiten</h3>
         <p>
@@ -92,109 +93,24 @@ layout: page
         font-size: 2em;
         margin-bottom: 10px;
     }
-    .ics-subtitle {
-        text-align: center;
-        color: #666;
-        font-size: 1.4em;
+    .important-container {
+        background-color: #ff9982;
+        padding: 15px;
+        border-radius: 8px;
         margin-bottom: 20px;
+        border: 1px solid #ff0000;
     }
-    .ics-description {
-        text-align: center;
-        color: #555;
-        margin-bottom: 20px;
+    .important-container h3 {
+        color: #d12700;
+        text-shadow: 1px 1px 3px black;
     }
-    .ics-step {
-        margin-bottom: 20px;
-    }
-    .ics-step h3 {
-        color: #4CAF50;
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-    .ics-input-section {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    .ics-url-input,
-    .ics-file-upload {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .ics-url-input label,
-    .ics-file-upload label {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    .ics-url-input input,
-    .ics-file-upload input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-    .ics-file-group {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-    .ics-button {
-        padding: 10px 15px;
-        background-color: #4CAF50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1em;
-        align-self: flex-start;
-    }
-    .ics-button:hover {
-        background-color: #45a049;
-    }
-    textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical;
-    }
-    .ics-footer {
-        text-align: center;
-        margin-top: 20px;
-    }
-    .ics-footer h4 {
-        color: #333;
-    }
-    .ics-footer p {
-        color: #777;
+    .important-container p {
+        color: #383838;
+        font-family: Arial Black;
     }
 </style>
 
 <script>
-    function fetchICSFromURL() {
-        const url = document.getElementById('ics-url').value;
-
-        if (!url) {
-            alert("Bitte eine gültige URL eingeben.");
-            return;
-        }
-
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Netzwerkfehler oder ungültige URL.");
-                }
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('output').value = data;
-            })
-            .catch(error => {
-                console.error("Fehler beim Abrufen der ICS-Datei:", error);
-                alert("Fehler beim Abrufen der ICS-Datei. Überprüfen Sie die URL.");
-            });
-    }
-
     function mergeICSFiles() {
         const files = [
             document.getElementById('file1').files[0],
@@ -226,7 +142,30 @@ layout: page
                     })
             )
         ).then(results => {
-            document.getElementById('output').value = results.join('\n');
+            const mergedData = results.join("\n");
+            const lines = mergedData.split("\n");
+            const warningContainer = document.getElementById('warning-container');
+
+            let containsInvalidSummary = false;
+
+            const processedLines = lines.map((line) => {
+                if (line.startsWith("SUMMARY:")) {
+                    const summary = line.split(":")[1];
+                    if (/\d|\./.test(summary)) { // Prüft auf Ziffern oder Punkte
+                        containsInvalidSummary = true;
+                    }
+                }
+                return line;
+            });
+
+            // Zeigt die Warnung an, falls ungültige Einträge gefunden werden
+            if (containsInvalidSummary) {
+                warningContainer.style.display = "block";
+            } else {
+                warningContainer.style.display = "none";
+            }
+
+            document.getElementById('output').value = processedLines.join("\n");
         });
     }
 
@@ -289,5 +228,3 @@ layout: page
         URL.revokeObjectURL(url);
     }
 </script>
-
-
