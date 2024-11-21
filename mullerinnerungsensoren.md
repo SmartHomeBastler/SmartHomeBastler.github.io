@@ -991,7 +991,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             const lines = icsData.split("\n");
     
             for (let line of lines) {
-                if (line.startsWith("SUMMARY")) {
+                // Prüfen, ob die Zeile nicht exakt mit "SUMMARY:" beginnt
+                if (line.startsWith("SUMMARY") && !line.startsWith("SUMMARY:")) {
+                    showCustomAlert(
+                        "Ungültiger Kalendereintrag!",
+                        `Deine ICS Datei sollte um Fehler zu vermeiden bearbeitet werden. Gehe dazu auf die Seite 
+                        <a href="/icszusammenfuhren/" target="_blank">ICS zusammenführen / bearbeiten</a>.`
+                    );
+                    return; // Verarbeitung abbrechen
+                }
+    
+                if (line.startsWith("SUMMARY:")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
     
