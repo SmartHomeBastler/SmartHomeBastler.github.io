@@ -104,7 +104,12 @@ Nach den Änderungen klicke auf<br>
         <button id="close-alert">OK</button>
     </div>
 </div>
-
+<div id="custom-alert" style="display: none;">
+    <div id="custom-alert-content">
+        <p id="custom-alert-message"></p>
+        <button id="close-alert">OK</button>
+    </div>
+</div>
 </div>
 
 <!--
@@ -602,20 +607,54 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* halbtransparentes Overlay */
+        background-color: rgba(0, 0, 0, 0.6); /* Dunkles Overlay */
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 1000;
+        z-index: 9999;
     }
 
     #custom-alert-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         text-align: center;
-        max-width: 300px;
+        max-width: 400px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    #custom-alert-message {
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    #close-alert {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #close-alert:hover {
+        background-color: #218838;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
     .custom-label {
         display: block;
@@ -917,7 +956,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         // Warnung, wenn keine Checkbox ausgewählt wurde
         if (selectedEntries.length === 0) {
-            alert("Bitte wähle mindestens einen Eintrag aus!");
+            showCustomAlert("Bitte wähle mindestens einen Eintrag aus!");
             return false; // Fehler: keine Auswahl getroffen
         }
 
@@ -939,13 +978,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         });
 
         if (umlautWarning) {
-            const alertBox = document.getElementById("custom-alert");
-            alertBox.style.display = "flex"; // Zeigt das Fenster an
-
-            document.getElementById("close-alert").onclick = function () {
-                alertBox.style.display = "none"; // Schließt das Fenster
-            };
-            return false; // Fehler: Umlaute gefunden
+            showCustomAlert("Umlaute entdeckt! Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!");
+            return false; // Fehler
         }
 
         // Alles in Ordnung
@@ -953,6 +987,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         document.getElementById("template-header").style.display = "block";
         document.getElementById("code-output").style.display = "block";
         return true;
+    }
+    function showCustomAlert(message) {
+        const alertBox = document.getElementById("custom-alert");
+        const alertMessage = document.getElementById("custom-alert-message");
+
+        alertMessage.textContent = message; // Nachricht setzen
+        alertBox.style.display = "flex";   // Fenster anzeigen
+
+        document.getElementById("close-alert").onclick = function () {
+            alertBox.style.display = "none"; // Fenster schließen
+        };
     }
     function handleStepTransition() {
         const isValid = checkEntries(); // Prüft, ob die Eingaben korrekt sind
