@@ -5,7 +5,7 @@ description: Generiere die Templates für die Waste Collection Schedule Integrat
 show_sidebar: false
 layout: page
 ---
-
+<div class="guide-container">
 <h1 class="custom-title">Müllkalender Code-Generator</h1>
 
 <!-- Wichtiger Hinweis -->
@@ -443,7 +443,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <h3 class="custom-title">Gutes Gelingen!</h3>
 
 {% include support_note.html %}
-
+</div>
 
 </div>
 
@@ -457,6 +457,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 -->
 
 <style>
+    .guide-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    margin: auto;
+    }
     /* Titel und Untertitel */
     .custom-title, .custom-subtitle {
         text-align: center;
