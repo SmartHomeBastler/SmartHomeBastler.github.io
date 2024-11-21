@@ -458,12 +458,13 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
 <style>
     .guide-container {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    margin: auto;
+        max-width: 100%;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     /* Titel und Untertitel */
     .custom-title, .custom-subtitle {
