@@ -1003,7 +1003,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.className = "entry-checkbox";
-                checkbox.id = entry-checkbox-${idCounter};
+                checkbox.id = `entry-checkbox-${idCounter}`;
                 checkboxCell.appendChild(checkbox);
                 row.appendChild(checkboxCell);
     
