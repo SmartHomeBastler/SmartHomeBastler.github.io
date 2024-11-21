@@ -947,26 +947,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             alertBox.style.display = "none"; // Fenster schließen
         };
     }
-    function showStep(stepNumber) {
-        // Alle Abschnitte anzeigen, die kleiner oder gleich der aktuellen Schritt-Nummer sind
-        for (let i = 1; i <= 5; i++) {
-            const step = document.getElementById(`step-${i}`);
-            if (step) {
-                if (i <= stepNumber) {
-                    step.style.display = "block"; // Zeigt die vorherigen und den aktuellen Step an
-                    step.classList.remove("completed"); // Entfernt die "abgeschlossen"-Markierung, wenn sie gesetzt war
-                } else {
-                    step.style.display = "none"; // Versteckt die zukünftigen Schritte
-                }
-            }
-        }
-
-        // Automatisch scrollen, um den ausgewählten Schritt in den Fokus zu bringen
-        const currentStep = document.getElementById(`step-${stepNumber}`);
-        if (currentStep) {
-            currentStep.scrollIntoView({ behavior: "smooth" });
-        }
-    }
     async function extractEntries() {
         try {
             const fileInput = document.getElementById('icsFile');
@@ -995,24 +975,27 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             }
     
             const summaryEntries = new Set();
+            const invalidEntries = []; // Fehlende Definition hinzugefügt
             const lines = icsData.split("\n");
     
             let warningDisplayed = false; // Kontrollvariable
     
             for (let line of lines) {
+                // Wenn SUMMARY vorhanden, aber nicht exakt SUMMARY:
                 if (line.startsWith("SUMMARY") && !line.startsWith("SUMMARY:") && !warningDisplayed) {
-                    // Warnungscontainer sichtbar machen
                     const warningContainer = document.getElementById("warning-container");
                     if (warningContainer) {
                         warningContainer.style.display = "block";
                     }
-                    warningDisplayed = true; // Sicherstellen, dass der Container nur einmal angezeigt wird
+                    warningDisplayed = true;
                 }
-                if (line.startsWith("SUMMARY")) {
+    
+                // Wenn die Zeile mit SUMMARY: beginnt, Einträge verarbeiten
+                if (line.startsWith("SUMMARY:")) {
                     const summaryText = line.split(":").slice(1).join(":").trim();
                     summaryEntries.add(summaryText);
     
-                    // Überprüfen, ob Ziffern oder Punkte enthalten sind
+                    // Überprüfen, ob der Text Ziffern oder Punkte enthält
                     if (/\d|\./.test(summaryText)) {
                         invalidEntries.push(summaryText);
                     }
@@ -1031,11 +1014,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                         "Verarbeitung abgebrochen!",
                         "Die Verarbeitung wurde wegen ungültiger Einträge abgebrochen. Bitte überprüfe die ICS-Datei."
                     );
-                    return; // Abbrechen der Verarbeitung
+                    return;
                 }
             }
     
-            // Einträge in die Tabelle schreiben
+            // Extrahierte Einträge in die Tabelle schreiben
             entryTableBody.innerHTML = "";
             let idCounter = 0;
             summaryEntries.forEach(entry => {
