@@ -17,6 +17,12 @@ layout: page
         Im weiteren Verlauf dieser Code-Generierung werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
     </p>
 </div>
+<div id="custom-alert" style="display: none;">
+    <div id="custom-alert-content">
+        <p id="custom-alert-message"></p>
+        <button id="close-alert">OK</button>
+    </div>
+</div>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
 ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
@@ -97,18 +103,6 @@ Nach den Änderungen klicke auf<br>
 
 <div id="confirm-step-2" style="text-align: center; margin-top: 20px;">
     <button class="custom-button" onclick="handleStepTransition();">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
-</div>
-<div id="custom-alert" style="display: none;">
-    <div id="custom-alert-content">
-        <p>Umlaute entdeckt! Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!</p>
-        <button id="close-alert">OK</button>
-    </div>
-</div>
-<div id="custom-alert" style="display: none;">
-    <div id="custom-alert-content">
-        <p id="custom-alert-message"></p>
-        <button id="close-alert">OK</button>
-    </div>
 </div>
 </div>
 
@@ -852,6 +846,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             console.error("Error during DOMContentLoaded setup:", error);
         }
     });
+    function showCustomAlert(message) {
+        const alertBox = document.getElementById("custom-alert");
+        const alertMessage = document.getElementById("custom-alert-message");
+
+        alertMessage.textContent = message; // Nachricht setzen
+        alertBox.style.display = "flex";   // Fenster anzeigen
+
+        document.getElementById("close-alert").onclick = function () {
+            alertBox.style.display = "none"; // Fenster schließen
+        };
+    }
     function showStep(stepNumber) {
         // Alle Abschnitte anzeigen, die kleiner oder gleich der aktuellen Schritt-Nummer sind
         for (let i = 1; i <= 5; i++) {
@@ -987,17 +992,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         document.getElementById("template-header").style.display = "block";
         document.getElementById("code-output").style.display = "block";
         return true;
-    }
-    function showCustomAlert(message) {
-        const alertBox = document.getElementById("custom-alert");
-        const alertMessage = document.getElementById("custom-alert-message");
-
-        alertMessage.textContent = message; // Nachricht setzen
-        alertBox.style.display = "flex";   // Fenster anzeigen
-
-        document.getElementById("close-alert").onclick = function () {
-            alertBox.style.display = "none"; // Fenster schließen
-        };
     }
     function handleStepTransition() {
         const isValid = checkEntries(); // Prüft, ob die Eingaben korrekt sind
@@ -1135,12 +1129,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         });
 
         if (colorNotSelected) {
-            alert("Die Farben der Tonne sollten zugeordnet werden!");
+            showCustomAlert("Die Farben der Tonne sollten zugeordnet werden!");
             return false; // Rückgabe `false`, wenn eine Farbe fehlt
         }
 
         if (duplicateColor) {
-            alert("Jede Farbe darf nur einmal ausgewählt werden!");
+            showCustomAlert("Jede Farbe darf nur einmal ausgewählt werden!");
             return false; // Rückgabe `false`, wenn Farben doppelt sind
         }
 
@@ -1310,12 +1304,15 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     function copyCode(elementId) {
         const codeElement = document.getElementById(elementId);
         const codeText = codeElement.innerText || codeElement.textContent;
-        
-        navigator.clipboard.writeText(codeText).then(() => {
-            alert("Code erfolgreich kopiert!");
-        }).catch(err => {
-            console.error("Fehler beim Kopieren des Codes: ", err);
-        });
+
+        navigator.clipboard.writeText(codeText)
+            .then(() => {
+                showCustomAlert("Code erfolgreich kopiert!"); // Zeigt das benutzerdefinierte Fenster
+            })
+            .catch(err => {
+                console.error("Fehler beim Kopieren des Codes: ", err);
+                showCustomAlert("Fehler beim Kopieren des Codes."); // Fehlerhinweis
+            });
     }
 
     function toggleDropdown() {
@@ -2299,11 +2296,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         const yamlCodeOutput = document.getElementById("yaml-code-output");
         const codeText = yamlCodeOutput.textContent;
 
-        navigator.clipboard.writeText(codeText).then(() => {
-            alert("Code erfolgreich kopiert!");
-        }).catch(err => {
-            console.error("Fehler beim Kopieren des Codes:", err);
-        });
+        navigator.clipboard.writeText(codeText)
+            .then(() => {
+                showCustomAlert("Code erfolgreich kopiert!"); // Erfolgsnachricht
+            })
+            .catch(err => {
+                console.error("Fehler beim Kopieren des Codes:", err);
+                showCustomAlert("Fehler beim Kopieren des Codes."); // Fehlermeldung
+            });
     }
 
     // Update both the example card and YAML code
