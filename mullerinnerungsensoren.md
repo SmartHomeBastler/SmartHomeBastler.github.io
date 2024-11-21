@@ -98,6 +98,13 @@ Nach den Änderungen klicke auf<br>
 <div id="confirm-step-2" style="text-align: center; margin-top: 20px;">
     <button class="custom-button" onclick="handleStepTransition();">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
 </div>
+<div id="custom-alert" style="display: none;">
+    <div id="custom-alert-content">
+        <p>Umlaute entdeckt! Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!</p>
+        <button id="close-alert">OK</button>
+    </div>
+</div>
+
 </div>
 
 <!--
@@ -589,6 +596,27 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .custom-form-group {
         margin-top: 20px;
     }
+    #custom-alert {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* halbtransparentes Overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    #custom-alert-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 300px;
+    }
     .custom-label {
         display: block;
         font-weight: bold;
@@ -911,7 +939,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         });
 
         if (umlautWarning) {
-            alert("Umlaute entdeckt! Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!");
+            const alertBox = document.getElementById("custom-alert");
+            alertBox.style.display = "flex"; // Zeigt das Fenster an
+
+            document.getElementById("close-alert").onclick = function () {
+                alertBox.style.display = "none"; // Schließt das Fenster
+            };
             return false; // Fehler: Umlaute gefunden
         }
 
