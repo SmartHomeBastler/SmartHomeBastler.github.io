@@ -935,17 +935,26 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         }
     });
     function showStep(stepNumber) {
-        // Alle Abschnitte ausblenden
-        const steps = document.querySelectorAll('[id^="step-"]');
-        steps.forEach(step => (step.style.display = "none"));
+        // Alle Abschnitte anzeigen, die kleiner oder gleich der aktuellen Schritt-Nummer sind
+        for (let i = 1; i <= 5; i++) {
+            const step = document.getElementById(`step-${i}`);
+            if (step) {
+                if (i <= stepNumber) {
+                    step.style.display = "block"; // Zeigt die vorherigen und den aktuellen Step an
+                    step.classList.remove("completed"); // Entfernt die "abgeschlossen"-Markierung, wenn sie gesetzt war
+                } else {
+                    step.style.display = "none"; // Versteckt die zukünftigen Schritte
+                }
+            }
+        }
     
-        // Nur den gewünschten Abschnitt anzeigen
+        // Automatisch scrollen, um den ausgewählten Schritt in den Fokus zu bringen
         const currentStep = document.getElementById(`step-${stepNumber}`);
         if (currentStep) {
-            currentStep.style.display = "block";
-            currentStep.scrollIntoView({ behavior: "smooth" }); // Optional: Scrollen zum Abschnitt
+            currentStep.scrollIntoView({ behavior: "smooth" });
         }
     }
+
     function showCustomAlert(title, message) {
         const alertBox = document.getElementById("custom-alert");
         const alertTitle = document.getElementById("custom-alert-title");
