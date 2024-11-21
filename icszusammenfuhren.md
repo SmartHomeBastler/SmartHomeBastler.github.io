@@ -73,6 +73,7 @@ layout: page
         <h4>Viel Erfolg! 🎉</h4>
         <p>Mit dem ICS Code Generator kannst du deine Kalender schnell und einfach bearbeiten.</p>
     </footer>
+    {% include support_note.html %}
 </div>
 
 <style>
