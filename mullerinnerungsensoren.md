@@ -28,6 +28,7 @@ layout: page
     <div id="custom-decision-content">
         <h4 id="custom-decision-title"></h4>
         <p id="custom-decision-message"></p>
+        <ul id="custom-decision-list"></ul>
         <button id="decision-yes">Ja</button>
         <button id="decision-no">Nein</button>
     </div>
@@ -709,6 +710,18 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     #custom-decision button:hover {
         background-color: #0056b3;
     }
+    #custom-decision-list {
+        text-align: left;
+        max-height: 300px;
+        overflow-y: auto;
+        margin: 10px 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    #custom-decision-list li {
+        margin: 5px 0;
+    }
     .custom-label {
         display: block;
         font-weight: bold;
@@ -985,7 +998,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             if (invalidEntries.length > 0) {
                 const proceed = await showCustomDecision(
                     "Ungültige Einträge gefunden",
-                    `Folgende Einträge enthalten Ziffern oder Punkte:\n\n${invalidEntries.join("\n")}\n\nMöchtest du die Verarbeitung fortsetzen?`
+                    "Folgende Einträge enthalten Ziffern oder Punkte:",
+                    invalidEntries
                 );
                 if (!proceed) {
                     showCustomAlert(
@@ -1036,17 +1050,28 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     
     // Funktion zum Anzeigen des benutzerdefinierten Dialogs
-    function showCustomDecision(title, message) {
+    function showCustomDecision(title, message, invalidEntries) {
         return new Promise((resolve) => {
             const decisionElement = document.getElementById('custom-decision');
             const titleElement = document.getElementById('custom-decision-title');
             const messageElement = document.getElementById('custom-decision-message');
+            const listElement = document.getElementById('custom-decision-list');
             const yesButton = document.getElementById('decision-yes');
             const noButton = document.getElementById('decision-no');
     
+            // Setze Titel und Nachricht
             titleElement.textContent = title;
             messageElement.textContent = message;
     
+            // Leere die Liste und füge neue Einträge hinzu
+            listElement.innerHTML = "";
+            invalidEntries.forEach((entry) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = entry;
+                listElement.appendChild(listItem);
+            });
+    
+            // Event-Listener für Buttons
             yesButton.onclick = () => {
                 decisionElement.style.display = 'none';
                 resolve(true);
@@ -1057,6 +1082,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 resolve(false);
             };
     
+            // Dialog anzeigen
             decisionElement.style.display = 'flex';
         });
     }
