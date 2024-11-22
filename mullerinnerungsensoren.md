@@ -615,13 +615,16 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         cursor: pointer;
         background-color: #f39c12;
         color: #ffffff;
-        padding: 10px 15px;
+        padding: 15px 5px; /* Angepasste Abstände */
         border: none;
         border-radius: 5px;
         text-align: center;
-        width: 100%;
+        width: 200px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: inline-block;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg); /* Falls der Text korrekt von unten nach oben laufen soll */
     }
     .dropdown-toggle span {
         float: right;
