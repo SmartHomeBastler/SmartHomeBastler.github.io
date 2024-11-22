@@ -530,7 +530,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         font-weight: bold;
         margin-top: 20px;
     }
-
     /* Beschreibungstext */
     .description-text {
         margin: 15px 0;
@@ -538,7 +537,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         line-height: 1.5;
         color: #333;
     }
-
     /* Wichtiges Hinweis-Container */
     .important-container {
         background-color: #ff9982;
@@ -559,7 +557,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         color: #d12700;
         text-transform: uppercase;
     }
-
     /* Hinweise */
     .note-container {
         background-color: #75eaff;
@@ -582,57 +579,51 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         display: flex; /* Elemente nebeneinander anordnen */
         align-items: baseline; /* Ausrichtung an der Grundlinie */
         gap: 10px; /* Abstand zwischen den Elementen */
-    }
-    
+    }    
     .custom-title-inline h4 {
         margin: 0;
         padding: 0;
         font-size: 24px; /* Größere Schriftgröße für die Überschrift */
         line-height: 1.2; /* Für saubere vertikale Ausrichtung */
-    }
-    
+    }    
     .custom-title-inline p {
         margin: 0;
         padding: 0;
         font-size: 16px; /* Kleinere Schriftgröße für den Text */
         line-height: 1.2; /* Passend zur `h4` */
-    }
-    
+    }    
     .copy-confirmation {
         font-size: 24px; /* Gleiche Schriftgröße wie `h4` */
         color: green; /* Bestätigungsfarbe */
         margin-left: 10px; /* Abstand zur Überschrift */
         display: none; /* Standardmäßig versteckt */
-    }
- 
+    } 
     .dropdown {
         margin: 20px 0;
         text-align: center;
     }
-.dropdown-toggle {
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #f39c12;
-    color: #ffffff;
-    padding: 10px 5px;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: inline-block;
-}
-
-.dropdown-toggle.rotated {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg); /* Text von unten nach oben */
-    padding: 10px 5px;
-    width: 200px;
-    height: auto;
-}
-
+    .dropdown-toggle {
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f39c12;
+        color: #ffffff;
+        padding: 10px 5px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+    }
+    .dropdown-toggle.rotated {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg); /* Text von unten nach oben */
+        padding: 20px 30px;
+        width: 200px;
+        height: auto;
+    }
     .dropdown-toggle span {
         float: right;
     }
@@ -644,7 +635,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-
     /* Sensor-Zusammenfassung */
     .sensor-summary {
         margin-top: 15px;
@@ -652,7 +642,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         line-height: 1.5;
         text-align: left;
     }
-
     /* Formulareingabefelder und Buttons */
     .custom-form-group {
         margin-top: 20px;
@@ -669,7 +658,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         align-items: center;
         z-index: 9999;
     }
-
     #custom-alert-content {
         background-color: #fff;
         padding: 20px 30px;
@@ -679,20 +667,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         max-width: 400px;
         animation: fadeIn 0.3s ease-in-out;
     }
-
     #custom-alert-title {
         margin-bottom: 10px;
         font-size: 18px;
         color: #333;
         font-weight: bold;
     }
-
     #custom-alert-message {
         margin-bottom: 15px;
         font-size: 16px;
         color: #666;
     }
-
     #close-alert {
         background-color: #28a745;
         color: white;
@@ -703,11 +688,9 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-
     #close-alert:hover {
         background-color: #218838;
     }
-
     /* Animation */
     @keyframes fadeIn {
         from {
@@ -730,8 +713,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         justify-content: center;
         align-items: center;
         z-index: 9999;
-    }
-    
+    }    
     #custom-decision-content {
         background: #fff;
         padding: 20px;
@@ -739,16 +721,13 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         text-align: center;
         max-width: 400px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-    
+    }    
     #custom-decision h4 {
         margin: 0 0 10px;
-    }
-    
+    }    
     #custom-decision p {
         margin: 0 0 20px;
-    }
-    
+    }    
     #custom-decision button {
         margin: 0 5px;
         padding: 10px 20px;
@@ -757,8 +736,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         color: white;
         cursor: pointer;
         border-radius: 5px;
-    }
-    
+    }    
     #custom-decision button:hover {
         background-color: #0056b3;
     }
@@ -769,8 +747,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin: 10px 0;
         padding: 0;
         list-style: none;
-    }
-    
+    }    
     #custom-decision-list li {
         margin: 5px 0;
     }
@@ -807,7 +784,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .custom-button:hover {
         background-color: #45a049;
     }
-
     /* Tabellen für Kalender- und Sensorkonfigurationen */
     .custom-table {
         width: 100%;
@@ -841,7 +817,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         line-height: 1.5;
         color: #333;
     }
-
     /* Stil für den Copy-Button */
     .copy-button {
         position: absolute;
@@ -859,13 +834,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .copy-button:hover {
         background: #005a9c;
     }
-
     /* Button Container */
     .button-container {
         text-align: center;
         margin-top: 25px;
-    }
-        /* Styling für die Auswahllisten */
+    }        /* Styling für die Auswahllisten */
     .custom-select-group {
         display: flex;
         justify-content: space-between;
@@ -881,7 +854,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-top: 30px;
         gap: 20px;
     }
-
     /* YAML-Code Container */
     .yaml-output-container,
     .example-card-container {
@@ -889,13 +861,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         display: flex;
         flex-direction: column;
     }
-
     /* YAML-Code Header und Container */
     .yaml-output-container h4,
     .example-card-container h4 {
         margin-bottom: 15px; /* Einheitlicher Abstand zur nächsten Sektion */
     }
-
     /* YAML-Code */
     .yaml-code-container {
         position: relative;
@@ -907,13 +877,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         max-height: 400px;
         overflow: auto; /* Ermöglicht Scrollen */
     }
-
     /* Beispielkarte Container */
     .example-card-container {
         padding: 0px;
         text-align: center;
     }
-
     /* Bild im Beispielkarten-Container */
     .example-image-wrapper {
         width: 100%;
@@ -924,7 +892,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         background-color: #ffffff;
         overflow: hidden; /* Verhindert das Überlaufen von Bildern */
     }
-
     .example-image-wrapper img {
         max-width: 100%;
         max-height: 100%;
@@ -937,7 +904,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-top: 20px;
         gap: 20px;
     }
-
     .custom-background-select,
     .custom-border-style-select,
     .custom-border-shape-select {
@@ -945,7 +911,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         display: flex;
         flex-direction: column;
     }
-
     .custom-background-select h4,
     .custom-border-style-select h4,
     .custom-border-shape-select h4 {
