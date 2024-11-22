@@ -629,7 +629,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     text-orientation: mixed;
     transform: rotate(180deg); /* Text von unten nach oben */
     padding: 10px 5px;
-    width: 25%
+    width: 100px;
+    height: auto;
 }
 
     .dropdown-toggle span {
