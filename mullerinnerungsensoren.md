@@ -615,21 +615,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     cursor: pointer;
     background-color: #f39c12;
     color: #ffffff;
-    padding: 15px 5px;
+    padding: 10px 5px;
     border: none;
     border-radius: 5px;
     text-align: center;
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
-    transition: transform 0.3s ease-in-out; /* Weiche Animation beim Drehen */
 }
 
 .dropdown-toggle.rotated {
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg); /* Text von unten nach oben */
-    padding: 15px 5px;
+    padding: 10px 5px;
+    width: 25%
 }
 
     .dropdown-toggle span {
