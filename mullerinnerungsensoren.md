@@ -539,15 +539,16 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     /* Wichtiges Hinweis-Container */
     .important-container {
-        background-color: rgba(255, 8, 0, 0.6);
+        background-color: rgba(255, 100, 0, 0.3);
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
-        border: 1px solid #ff0000;
+        border: 3px solid #ff0000;
     }
     .important-container h3 {
         color: #d12700;
-        text-shadow: 1px 1px 3px black;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px #ffffff;
     }
     .important-container p {
         color: #383838;
@@ -563,11 +564,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
-        border: 1px solid #0062ff;
+        border: 3px solid #0062ff;
     }
     .note-container h3 {
         color: #0062ff;
-        text-shadow: 1px 1px 3px black;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px #ffffff;
     }
     .note-container p {
         color: #383838;
