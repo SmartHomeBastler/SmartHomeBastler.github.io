@@ -237,6 +237,37 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </p>
 </div>
 
+<p>Eine Beschreibung wie man einen Template-Sensor Helfer in Home Assistant anlegt,findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
+
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown()">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
+    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
 <!-- Checkboxen für "keine"-Anzeige -->
 <div class="custom-form-group">
     <input type="checkbox" id="keineHeute" />
