@@ -629,7 +629,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     text-orientation: mixed;
     transform: rotate(180deg); /* Text von unten nach oben */
     padding: 10px 5px;
-    width: 100px;
+    width: 200px;
     height: auto;
 }
 
