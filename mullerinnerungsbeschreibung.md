@@ -139,6 +139,13 @@ layout: page
   <footer class="guide-footer">
     <h2>Viel Erfolg bei der Einrichtung! 🎉</h2>
   </footer>
+
+<div style="text-align: center;">
+    <a href="https://www.amazon.de/dp/B0CK2FCG1K?tag=smarthomebast-21&amp;linkCode=ogi&amp;th=1&amp;psc=1" target="_blank">
+        <img src="https://m.media-amazon.com/images/I/81eJ9jIot+L._AC_SL1500_.jpg" alt="Raspberry Pi 5 8 GB" style="max-width: 300px;">
+        <p>Raspberry Pi 5 8 GB auf Amazon ansehen</p>
+    </a>
+</div>
 </div>
 
 <style>
