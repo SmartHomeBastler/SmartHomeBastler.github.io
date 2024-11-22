@@ -8,6 +8,56 @@ layout: page
 
 {% include support_note.html %}
 
+<div class="ics-container">
+    <h1 class="ics-header">ICS Code Generator</h1>
+    <p class="ics-intro">
+        Der ICS Code Generator ermöglicht das Hochladen, Bearbeiten und Zusammenführen von ICS-Kalenderdateien.
+    </p>    
+    <!-- Abschnitt: Dateien hochladen -->
+    <section class="ics-section">
+        <h2>1. ICS-Dateien hochladen oder abrufen</h2>
+        <p>
+            Lade bis zu sechs <code>.ics</code>-Dateien hoch oder gib die URL einer Datei an. 
+            Klicke anschließend auf <button class="ics-btn">ICS Datei(en) verarbeiten</button>.
+        </p>
+        <ul>
+            <li>Option 1: Datei direkt vom Computer hochladen.</li>
+            <li>Option 2: URL einer Kalenderdatei angeben.</li>
+            <li>Automatische Prüfung auf problematische Einträge.</li>
+        </ul>
+    </section>
+    <!-- Abschnitt: Datei bearbeiten -->
+    <section class="ics-section">
+        <h2>2. Datei anzeigen und bearbeiten</h2>
+        <p>
+            Nach der Verarbeitung werden die Kalenderdaten in einem Textbereich angezeigt. 
+            Bearbeite sie bei Bedarf und speichere die Änderungen.
+        </p>
+        <ul>
+            <li>Untersuche die Inhalte der Datei.</li>
+            <li>Klicke auf <button class="ics-btn">Einträge bearbeiten</button>, um Ziffern oder Punkte zu entfernen.</li>
+        </ul>
+    </section>
+    <!-- Abschnitt: Exportieren -->
+    <section class="ics-section">
+        <h2>3. Datei exportieren</h2>
+        <p>
+            Nach der Bearbeitung kannst du die Datei herunterladen oder in die Zwischenablage kopieren:
+        </p>
+        <ul>
+            <li>Klicke auf <button class="ics-btn">Bearbeitete Datei kopieren</button>, um den Text zu speichern.</li>
+            <li>Nutze <button class="ics-btn">Bearbeitete Datei herunterladen</button>, um eine neue ICS-Datei zu erstellen.</li>
+        </ul>
+    </section>
+    <!-- Hinweis -->
+    <div class="ics-note">
+        <p><strong>Hinweis:</strong> Problematische Einträge werden hervorgehoben. Überprüfe diese sorgfältig!</p>
+    </div>
+    <!-- Footer -->
+    <footer class="ics-footer">
+        <p>Viel Erfolg bei der Nutzung des ICS Code Generators! 🎉</p>
+    </footer>
+</div>
 
 
 <div class="guide-container">
@@ -169,6 +219,87 @@ layout: page
 </div>
 
 <style>
+    .ics-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+
+    .ics-header {
+        text-align: center;
+        color: #333;
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .ics-intro {
+        text-align: center;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .ics-section {
+        margin-bottom: 30px;
+    }
+
+    .ics-section h2 {
+        color: #4CAF50;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .ics-section ul {
+        margin: 10px 0 0 20px;
+        padding: 0;
+        list-style-type: disc;
+    }
+
+    .ics-section ul li {
+        margin-bottom: 10px;
+    }
+
+    .ics-btn {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    .ics-btn:hover {
+        background-color: #45a049;
+    }
+
+    .ics-note {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #ff9982;
+        border: 1px solid #ff0000;
+        border-radius: 8px;
+    }
+
+    .ics-note p {
+        color: #383838;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .ics-footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #555;
+        font-size: 1.1em;
+    }
+
+
     body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
