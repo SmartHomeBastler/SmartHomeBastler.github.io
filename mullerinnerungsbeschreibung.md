@@ -220,8 +220,8 @@ layout: page
 
 <style>
     .ics-container {
-        max-width: 800px;
-        margin: auto;
+        max-width: 100%;
+        margin-bottom: 100px;
         padding: 20px;
         background-color: #f9f9f9;
         border: 1px solid #ddd;
