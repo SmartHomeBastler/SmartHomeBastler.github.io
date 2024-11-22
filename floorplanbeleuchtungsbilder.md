@@ -6,6 +6,10 @@ show_sidebar: false
 layout: page
 ---
 
+<div class="floorplan-container">
+<h1 class="floorplan-title">Floorplan Beleuchtungsbilder</h1>
+<h2 class="floorplan-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
+
 <h3>Allgemeine Einstellungen</h3>
 <div class="custom-form-group">
     <label for="path-input">Speicherpfad der Floorplan Bilder:</label>
@@ -58,8 +62,32 @@ layout: page
 
 <h3>Generierter YAML-Code:</h3>
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
+</div>
 
 <style>
+    .floorplan-container {
+        max-width: 100%;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .floorplan-title {
+        text-align: center;
+        color: #333;
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+    .floorplan-subtitle {
+        text-align: center;
+        color: #666;
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
     /* Formulargestaltung */
     .custom-form-group {
         margin-bottom: 15px;
