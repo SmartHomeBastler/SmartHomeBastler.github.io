@@ -240,7 +240,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <p>Eine Beschreibung wie man einen Template-Sensor Helfer in Home Assistant anlegt,findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
 
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2')">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
     <div id="galleryDropdown2" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
         <div class="columns is-multiline">
@@ -609,20 +609,29 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin: 20px 0;
         text-align: center;
     }
-    .dropdown-toggle {
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        background-color: #f39c12;
-        color: #ffffff;
-        padding: 15px 5px; /* Angepasste Abstände */
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: inline-block;
-    }
+.dropdown-toggle {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #f39c12;
+    color: #ffffff;
+    padding: 15px 5px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    transition: transform 0.3s ease-in-out; /* Weiche Animation beim Drehen */
+}
+
+.dropdown-toggle.rotated {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg); /* Text von unten nach oben */
+    padding: 15px 5px;
+}
+
     .dropdown-toggle span {
         float: right;
     }
@@ -1503,14 +1512,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             });
     }
 
-    function toggleDropdown(dropdownId) {
-        var dropdownContent = document.getElementById(dropdownId);
-        if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
-            dropdownContent.style.display = "block";
-        } else {
-            dropdownContent.style.display = "none";
-        }
+function toggleDropdown(dropdownId, toggleButton) {
+    var dropdownContent = document.getElementById(dropdownId);
+    if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+        dropdownContent.style.display = "block";
+        toggleButton.classList.add("rotated"); // Klasse hinzufügen
+    } else {
+        dropdownContent.style.display = "none";
+        toggleButton.classList.remove("rotated"); // Klasse entfernen
     }
+}
+
 
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
