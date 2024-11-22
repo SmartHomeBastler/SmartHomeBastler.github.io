@@ -240,8 +240,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <p>Eine Beschreibung wie man einen Template-Sensor Helfer in Home Assistant anlegt,findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
 
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown()">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2')">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
+    <div id="galleryDropdown2" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -1503,9 +1503,9 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             });
     }
 
-    function toggleDropdown() {
-        var dropdownContent = document.getElementById("galleryDropdown");
-        if (dropdownContent.style.display === "none") {
+    function toggleDropdown(dropdownId) {
+        var dropdownContent = document.getElementById(dropdownId);
+        if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
             dropdownContent.style.display = "block";
         } else {
             dropdownContent.style.display = "none";
