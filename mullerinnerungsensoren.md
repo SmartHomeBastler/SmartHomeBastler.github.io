@@ -1481,16 +1481,16 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             });
     }
 
-function toggleDropdown(dropdownId, toggleButton) {
-    var dropdownContent = document.getElementById(dropdownId);
-    if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
-        dropdownContent.style.display = "block";
-        toggleButton.classList.add("rotated"); // Klasse hinzufügen
-    } else {
-        dropdownContent.style.display = "none";
-        toggleButton.classList.remove("rotated"); // Klasse entfernen
+    function toggleDropdown(dropdownId, toggleButton) {
+        var dropdownContent = document.getElementById(dropdownId);
+        if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+            dropdownContent.style.display = "block";
+            toggleButton.classList.add("rotated"); // Klasse hinzufügen
+        } else {
+            dropdownContent.style.display = "none";
+            toggleButton.classList.remove("rotated"); // Klasse entfernen
+        }
     }
-}
 
 
     function createImageList() {
