@@ -619,7 +619,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         border: none;
         border-radius: 5px;
         text-align: center;
-        width: 200px;
+        width: 100%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: inline-block;
     }
