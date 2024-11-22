@@ -142,7 +142,7 @@ Nach den Änderungen klicke auf<br>
 Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
 
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown')">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
     <div id="galleryDropdown" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
