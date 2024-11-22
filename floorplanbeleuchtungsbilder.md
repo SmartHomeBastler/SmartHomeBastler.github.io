@@ -11,8 +11,12 @@ layout: page
 <h2 class="floorplan-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
 
 <h3>Allgemeine Einstellungen</h3>
+
 <div class="custom-form-group">
     <label for="path-input">Speicherpfad der Floorplan Bilder:</label>
+    <p>
+    Der Speicherpfad ist hier mit /local/lovelace/floorplan/ angegeben. Dies ist allerdings nur ein Vorschlag für eine übersichtiliche Struktur. Lege dir die Ordner in deinem www-Ordner (/local/) nach deinen Bedürfnisen an oder verwende den vorgeschlagenen Pfad. Wichtig ist, dass der korrekte Pfad deiner Beleuchtungsbilder hier eingegeben wird.
+    </p>
     <input type="text" id="path-input" value="/local/lovelace/floorplan/" placeholder="/local/lovelace/floorplan/">
 </div>
 <div class="custom-form-group">
