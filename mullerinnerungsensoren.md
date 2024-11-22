@@ -539,7 +539,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     /* Wichtiges Hinweis-Container */
     .important-container {
-        background-color: #ff9982;
+        background-color: rgba(255, 153, 130, 0.5);
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
@@ -559,7 +559,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     /* Hinweise */
     .note-container {
-        background-color: #75eaff;
+        background-color: rgba(117, 234, 255, 0.5);
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
