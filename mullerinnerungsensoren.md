@@ -230,7 +230,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
-    <h4>💡 Hinweis</h4> 
+    <h3>💡 Hinweis</h3> 
     <p>
         Vor der Erstellung der Templates solltest du entscheiden, ob du den Text <strong>Du musst heute keine Tonne rausstellen!</strong> bzw. <strong>Du musst morgen keine Tonne rausstellen!</strong> angezeigt bekommen möchtest oder nicht.<br>
         Für eine Anzeige dieses Textes, aktiviere die jeweilige Checkbox ✅.
@@ -539,7 +539,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     /* Wichtiges Hinweis-Container */
     .important-container {
-        background-color: rgba(255, 153, 130, 0.5);
+        background-color: rgba(255, 8, 0, 0.6);
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
@@ -567,6 +567,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
     .note-container h3 {
         color: #0062ff;
+        text-shadow: 1px 1px 3px black;
     }
     .note-container p {
         color: #383838;
