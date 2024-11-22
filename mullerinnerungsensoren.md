@@ -239,30 +239,35 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
 <p>Eine Beschreibung wie man einen Template-Sensor Helfer in Home Assistant anlegt,findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2')">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
-    <div id="galleryDropdown2" class="dropdown-content" style="display: none;">
-        {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
-        <div class="columns is-multiline">
-            {% for gallery in gallery_images %}
-                <div class="column is-12">
-                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                </div>
-                {% for image in gallery.images %}
-                    <div class="column is-3-desktop is-6-tablet">
-                        <div class="card">
-                            <div class="card-image">
-                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
-                            </div>
-                            <div class="card-content">
-                                <div class="content">
-                                    {{ image.description | markdownify }}
+<div class="sidebar-dropdown-container">
+    <div class="vertical-bar">
+        <span>Home Assistant - Template Sensor Helfer anlegen</span>
+    </div>
+    <div class="dropdown">
+        <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2')">Galerie anzeigen <span>&#9660;</span></button>
+        <div id="galleryDropdown2" class="dropdown-content" style="display: none;">
+            {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
+            <div class="columns is-multiline">
+                {% for gallery in gallery_images %}
+                    <div class="column is-12">
+                        <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                    </div>
+                    {% for image in gallery.images %}
+                        <div class="column is-3-desktop is-6-tablet">
+                            <div class="card">
+                                <div class="card-image">
+                                    {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        {{ image.description | markdownify }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            </div>
         </div>
     </div>
 </div>
@@ -604,28 +609,49 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-left: 10px; /* Abstand zur Überschrift */
         display: none; /* Standardmäßig versteckt */
     }
- 
-    .dropdown {
-        margin: 20px 0;
-        text-align: center;
+    .sidebar-dropdown-container {
+        display: flex;
+        align-items: center;
     }
+
+    .vertical-bar {
+        background-color: #f39c12;
+        color: white;
+        width: 50px;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        padding: 10px 5px;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 5px 0 0 5px;
+    }
+
+    .dropdown {
+        margin-left: 10px;
+        flex-grow: 1;
+        text-align: left;
+    }
+
     .dropdown-toggle {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         cursor: pointer;
         background-color: #f39c12;
         color: #ffffff;
-        padding: 15px 5px; /* Angepasste Abstände */
+        padding: 10px 15px;
         border: none;
         border-radius: 5px;
-        text-align: center;
-        width: 100%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: inline-block;
     }
     .dropdown-toggle span {
         float: right;
     }
+
     .dropdown-content {
         padding: 20px;
         background-color: #ffffff;
@@ -634,6 +660,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
 
     /* Sensor-Zusammenfassung */
     .sensor-summary {
