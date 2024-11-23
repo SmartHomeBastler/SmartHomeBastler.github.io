@@ -26,7 +26,9 @@ layout: page
                 <td>
                     <div class="icon-wrapper">
                         <a href="/img/icons/{{ icon }}.png" download>
-                            <img src="/img/icons/{{ icon }}.png" alt="{{ icon }}" />
+                            <div class="icon-container">
+                                <img src="/img/icons/{{ icon }}.png" alt="{{ icon }}" />
+                            </div>
                         </a>
                         <p>{{ icon | remove: ".png" }}</p>
                     </div>
@@ -88,19 +90,32 @@ layout: page
         border: 1px solid #ddd;
     }
 
-    .icon-wrapper img {
+    .icon-wrapper {
+        text-align: center;
+    }
+
+    .icon-container {
+        background-color: #333;
+        border-radius: 8px;
+        padding: 10px;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .icon-container img {
         width: 100%;
         max-width: 80px;
         height: auto;
-        display: block;
-        margin: 0 auto;
     }
 
     .icon-wrapper p {
         font-size: 0.9em;
-        color: #333;
-        margin-top: 5px;
-        word-break: break-word;
+        color: #fff;
+        background-color: #333;
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0;
+        border-radius: 5px;
     }
 
     .icon-wrapper a {
