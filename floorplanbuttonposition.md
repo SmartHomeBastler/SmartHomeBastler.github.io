@@ -9,7 +9,7 @@ layout: page
     <h1 class="floorplan-main-title">Floorplan Button Positionierung</h1>
     <h2 class="floorplan-main-subtitle">Positioniere deine Buttons für alle Entitäten direkt auf deinem Floorplan</h2>
     <p class="floorplan-main-intro">
-        Mit diesem Tool kannst du durch Eingabe deiner 
+        Mit diesem Tool kannst du durch Eingabe der Angaben zu deinen Entitäten, die Buttons direkt auf deinem Floorplan-Hintergrund positionieren. Nach der Positionierung, generierst du dir den YAML-Code um diesen direkt auf deinem Home Assistant Dashboard Floorplan einzutragen.
     </p>   
     <h3>Bild hochladen</h3>
     <p>Lade ein Bild hoch, fülle die gewünschten Button-Einstellungen aus, und klicke dann auf die Position im Bild, an der der Button platziert werden soll. Für jede Positionierung kannst du unterschiedliche Einstellungen, wie Entität, Icons, und Aktionen (Tap/Hold), angeben. Nachdem du alle gewünschten Buttons gesetzt hast, klicke auf "YAML-Code generieren". Der erstellte YAML-Code wird unten angezeigt und kann kopiert werden, um ihn in dein Home Assistant-Dashboard einzufügen.
