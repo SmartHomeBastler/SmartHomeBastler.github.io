@@ -59,8 +59,13 @@ layout: page
     <label for="background-image-input">Dateiname Hintergrundbild:</label>
     <input type="text" id="background-image-input" placeholder="z.B. hintergrund_nacht.png">
 </div>
+
 <div class="custom-form-group">
     <label for="transparent-image-input">Dateiname 1 Pixel Bild:</label>
+    <p>
+    Da Beleuchtungsbilder für den Entitäts-Zustand "on" erstellt werden muss auch für den Zustand "off" ein Bild zur Verfügung stehen um keinen Fehler des Codes zu generieren. Dieses Bild ist in der Regel ein transparentes Bild mit nur einem Pixel.<br>
+    Dieses sollte am selben Speicherort wie die Beleuchtungsbilder gespeichert sein. Der Namen dieses Bildes muss hier eingetragen werden. 
+    </p>
     <input type="text" id="transparent-image-input" placeholder="z.B. 1x1_transparent.png">
     <p style="margin-top: 10px;">
         Wenn du noch kein transparentes 1 Pixel Bild haben solltest, kannst du es 
