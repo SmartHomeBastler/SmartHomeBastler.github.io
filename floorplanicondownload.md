@@ -9,7 +9,7 @@ layout: page
 <div class="icon-main-container">
     <h1 class="icon-main-title">Floorplan Beleuchtungsbilder</h1>
     <h2 class="icon-main-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
-    <p class="floorplan-intro">
+    <p class="icon-main-intro">
         Wozu sind diese Icons?<br>
         Icons wie diese werden von mir in Home Assistant auf meinem Floorplan verwendet. Sie werden zum Aktivieren / Deaktivieren von Entitäten, zum Navigieren auf andere Dashboard-Seiten oder zur Anzeige von diversen Entitäten-Status benutzt.
     </p>
@@ -51,21 +51,22 @@ layout: page
 
 <style>
     .icon-main-container {
-        max-width: 90%;
-        margin: auto;
+        max-width: 100%;
+        margin-bottom: 100px;
         padding: 20px;
-        background-color: #2c2c2c;
-        color: #eaeaea;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         font-family: Arial, sans-serif;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        line-height: 1.6;
     }
 
     .icon-main-title {
         text-align: center;
+        color: #333;
         font-size: 2em;
-        margin-bottom: 10px;
-        color: #ffffff;
+        margin-bottom: 20px;
     }
 
     .icon-main-subtitle {
@@ -75,9 +76,9 @@ layout: page
         color: #dddddd;
     }
 
-    .floorplan-intro {
+    .icon-main-intro {
         text-align: center;
-        color: #cccccc;
+        color: #555;
         margin-bottom: 20px;
     }
 
@@ -85,11 +86,11 @@ layout: page
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-        background-color: #1e1e1e;
+        background-color: #393939;
     }
 
     .icon-table thead th {
-        background-color: #444;
+        background-color: #f9f9f9;
         color: #fff;
         padding: 10px;
         text-align: center;
