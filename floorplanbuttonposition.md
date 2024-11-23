@@ -22,8 +22,8 @@ layout: page
     </div>
     <!-- Bildcontainer -->
     <div class="floorplan-container" id="container">
-    <img src="floorplan.png" alt="Floorplan" id="floorplan">
-    <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
+        <img src="floorplan.png" alt="Floorplan" id="floorplan">
+        <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
     </div>
     <div class="dropdown">
         <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
@@ -192,6 +192,7 @@ layout: page
         padding: 0;
         background-color: #f9f9f9;
         border-radius: 8px;
+        margin-bottom: 20px;
     }
     img {
         display: block;
@@ -498,5 +499,15 @@ function copyYAML() {
   yamlOutput.select();
   document.execCommand('copy');
   alert('YAML-Code wurde in die Zwischenablage kopiert!');
+}
+function toggleDropdown(dropdownId, toggleButton) {
+    var dropdownContent = document.getElementById(dropdownId);
+    if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+        dropdownContent.style.display = "block";
+        toggleButton.classList.add("rotated"); // Klasse hinzufügen
+    } else {
+        dropdownContent.style.display = "none";
+        toggleButton.classList.remove("rotated"); // Klasse entfernen
+    }
 }
 </script>
