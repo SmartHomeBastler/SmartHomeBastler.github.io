@@ -45,8 +45,11 @@ layout: page
             </tr>
         </tbody>
     </table>
+    <footer class="icon-main-footer">
+        <h2>Viel Freude mit den Icons 🎉</h2>
+    </footer>
+    {% include support_note.html %}
 </div>
-
 <style>
     .icon-main-container {
         max-width: 100%;
@@ -58,34 +61,29 @@ layout: page
         font-family: Arial, sans-serif;
         line-height: 1.6;
     }
-
     .icon-main-title {
         text-align: center;
         color: #333;
         font-size: 2em;
         margin-bottom: 20px;
     }
-
     .icon-main-subtitle {
         text-align: center;
         font-size: 1.4em;
         margin-bottom: 20px;
         color: #555;
     }
-
     .icon-main-intro {
         text-align: center;
         color: #777;
         margin-bottom: 20px;
     }
-
     .icon-table {
         width: 100%;
         background-color: #393939;
         border-collapse: collapse;
         margin-top: 20px;
     }
-
     .icon-table thead th {
         background-color: #f9f9f9;
         color: #fff;
@@ -93,7 +91,6 @@ layout: page
         text-align: center;
         font-size: 1.2em;
     }
-
     .icon-table td {
         text-align: center;
         vertical-align: middle;
@@ -102,7 +99,6 @@ layout: page
         width: 16.66%;
         height: 120px;
     }
-
     .icon-wrapper {
         display: flex;
         flex-direction: column;
@@ -113,13 +109,11 @@ layout: page
         padding: 5px;
         aspect-ratio: 1 / 1;
     }
-
     .icon-wrapper img {
         max-width: 100px;
         height: auto;
         margin-bottom: 10px;
     }
-
     .icon-wrapper p {
         font-size: 0.9em;
         color: #f9f9f9;
@@ -127,12 +121,10 @@ layout: page
         text-align: center;
         word-wrap: break-word;
     }
-
     .icon-wrapper a {
         text-decoration: none;
         color: inherit;
     }
-
     .icon-wrapper a:hover {
         opacity: 0.8;
     }
@@ -147,8 +139,11 @@ layout: page
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Schatten */
         transition: background-color 0.3s ease;
     }
-
     .icon-download-button:hover {
         background-color: #45a049; /* Dunkleres Grün beim Hover */
+    }
+    .icon-main-footer {
+    text-align: center;
+    margin-top: 20px;
     }
 </style>
