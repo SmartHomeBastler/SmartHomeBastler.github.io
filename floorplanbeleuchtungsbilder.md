@@ -17,7 +17,7 @@ layout: page
     Beispiele und Erklärungen für Beleuchtungsbilder findest du im 🔽 Dropdown Menü 🔽.
 </p>
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Beleuchtungsbilder Beispiele<span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Beleuchtungsbilder Beispiele<span>&#9660;</span></button>
     <div id="galleryDropdown" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_beleuchtungsbilder_example %}
         <div class="columns is-multiline">
