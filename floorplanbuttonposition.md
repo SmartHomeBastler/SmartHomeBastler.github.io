@@ -25,6 +25,8 @@ layout: page
         <img src="floorplan.png" alt="Floorplan" id="floorplan">
         <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
     </div>
+    <!-- Formular für zusätzliche Angaben -->
+    <h3>Button-Einstellungen</h3>
     <div class="dropdown">
         <button class="dropdown-toggle" onclick="toggleDropdown('tutorialDropdown', this)">
             Wie positioniere ich die Buttons auf dem Bild?<span>&#9660;</span>
@@ -55,9 +57,7 @@ layout: page
             <p><strong>Hinweis:</strong> Falls dir Fehler unterlaufen, kannst du mit den unteren Buttons Markierungen entfernen oder den YAML-Code löschen.</p>
             <p><strong>Viel Erfolg! 🎉</strong></p>
         </div>
-    </div>
-    <!-- Formular für zusätzliche Angaben -->
-    <h3>Button-Einstellungen</h3>
+    </div>    
     <div class="floorplan-marker-form">
         <div class="floorplan-form-group">
             <label for="marker-entity">Entität (entity):</label>
