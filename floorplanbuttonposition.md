@@ -313,8 +313,7 @@ layout: page
         text-orientation: mixed;
         transform: rotate(180deg); /* Text von unten nach oben */
         padding: 20px 30px;
-        width: 200px;
-        height: auto;
+        width: 100px;
     }
     .dropdown-toggle span {
         float: right;
