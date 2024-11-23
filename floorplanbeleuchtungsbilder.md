@@ -9,13 +9,19 @@ layout: page
 <div class="floorplan-container">
 <h1 class="floorplan-title">Floorplan Beleuchtungsbilder</h1>
 <h2 class="floorplan-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
+<p class="floorplan-intro">
+    Was sind Beleuchtungsbilder?<br>
+    Als Beleuchtungsbilder versteht man jene in Sweet Home 3D oder anderen 3D Planungstools generierte Bilder, welche den Zustand einzelner Beleuchtungs-Entitäten aus Home Assistant auf einzelnen Bildern darstellt. Jedes dieser Entitäts-Bilder zeigt nur den ausgeleuchteten Raum, wohingegen der Rest des Bildes schwarz bleibt. Dies ermöglicht eine anschauliche Visualisierung der Beleuchtung in deinem Smart Home.
+</p>   
 
 <h3>Allgemeine Einstellungen</h3>
-
+<p>
+    Hier kannst du grundlegende Einstellungen vornehmen, wie den Speicherpfad deiner Bilder und den Dateinamen deines Hintergrundbildes. Stelle sicher, dass der Pfad korrekt ist, damit die Bilder in Home Assistant geladen werden können.
+</p>
 <div class="custom-form-group">
     <label for="path-input">Speicherpfad der Floorplan Bilder:</label>
     <p>
-    Der Speicherpfad ist hier mit /local/lovelace/floorplan/ angegeben. Dies ist allerdings nur ein Vorschlag für eine übersichtiliche Struktur. Lege dir die Ordner in deinem www-Ordner (/local/) nach deinen Bedürfnisen an oder verwende den vorgeschlagenen Pfad. Wichtig ist, dass der korrekte Pfad deiner Beleuchtungsbilder hier eingegeben wird.
+    Der Speicherpfad ist hier mit /local/lovelace/floorplan/ angegeben. Dies ist allerdings nur ein Vorschlag für eine übersichtliche Struktur. Lege dir die Ordner in deinem www-Ordner (/local/) nach deinen Bedürfnissen an oder verwende den vorgeschlagenen Pfad. Wichtig ist, dass der korrekte Pfad deiner Beleuchtungsbilder hier eingegeben wird.
     </p>
     <input type="text" id="path-input" value="/local/lovelace/floorplan/" placeholder="/local/lovelace/floorplan/">
 </div>
@@ -29,6 +35,9 @@ layout: page
 </div>
 
 <h3>Entitätsbilder Einstellungen</h3>
+<p>
+    Füge hier die spezifischen Beleuchtungs-Entitäten aus deinem Home Assistant ein. Für jede Entität kannst du ein entsprechendes Beleuchtungsbild und eine Steuerungsoption (z. B. Licht ein/aus, dimmbar) auswählen. Diese Einstellungen werden in den YAML-Code übernommen, der die Bilder mit den Entitäten verknüpft.
+</p>
 <table id="entities-table">
     <thead>
         <tr>
@@ -65,8 +74,12 @@ layout: page
 </div>
 
 <h3>Generierter YAML-Code:</h3>
+<p>
+    Nach dem Ausfüllen der oben stehenden Felder und dem Drücken auf "YAML-Code generieren", erscheint hier der fertige YAML-Code. Dieser kann in deine Home Assistant Konfiguration eingefügt werden, um die Beleuchtungsbilder als interaktive Elemente in deinem Dashboard zu verwenden.
+</p>
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 </div>
+
 
 <style>
     .floorplan-container {
@@ -90,6 +103,11 @@ layout: page
         text-align: center;
         color: #666;
         font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+    .floorplan-intro {
+        text-align: center;
+        color: #555;
         margin-bottom: 20px;
     }
     /* Formulargestaltung */
