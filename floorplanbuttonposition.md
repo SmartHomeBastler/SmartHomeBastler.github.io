@@ -5,12 +5,11 @@ description: Generiere YAML-Code für Home Assistant anhand der Markierungen und
 show_sidebar: false
 layout: page
 ---
-<div class="floorplan-container">
-    <h1 class="floorplan-title">Floorplan Beleuchtungsbilder</h1>
-    <h2 class="floorplan-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
-    <p class="floorplan-intro">
-        Was sind Beleuchtungsbilder?<br>
-        Als Beleuchtungsbilder versteht man jene in Sweet Home 3D oder anderen 3D Planungstools generierte Bilder, welche den Zustand einzelner Beleuchtungs-Entitäten aus Home Assistant auf einzelnen Bildern darstellt. Jedes dieser Entitäts-Bilder zeigt nur den ausgeleuchteten Raum, wohingegen der Rest des Bildes schwarz bleibt. Dies ermöglicht eine anschauliche Visualisierung der Beleuchtung in deinem Smart Home.
+<div class="floorplan-button-container">
+    <h1 class="floorplan-button-title">Floorplan Button Positionierung</h1>
+    <h2 class="floorplan-button-subtitle">Positioniere deine Buttons für alle Entitäten direkt auf deinem Floorplan</h2>
+    <p class="floorplan-button-intro">
+        Mit diesem Tool kannst du durch Eingabe deiner 
     </p>   
 
 <h3>Bild hochladen</h3>
@@ -152,7 +151,7 @@ layout: page
 </div>
 
 <style>
-    .floorplan-container {
+    .floorplan-button-container {
         max-width: 100%;
         margin: auto;
         padding: 20px;
@@ -163,19 +162,19 @@ layout: page
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .floorplan-title {
+    .floorplan-button-title {
         text-align: center;
         color: #333;
         font-size: 2em;
         margin-bottom: 10px;
     }
-    .floorplan-subtitle {
+    .floorplan-button-subtitle {
         text-align: center;
         color: #666;
         font-size: 1.4em;
         margin-bottom: 20px;
     }
-    .floorplan-intro {
+    .floorplan-button-intro {
         text-align: center;
         color: #555;
         margin-bottom: 20px;
@@ -333,6 +332,10 @@ layout: page
         border-radius: 5px;
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .guide-footer {
+    text-align: center;
+    margin-top: 20px;
     }
 </style>
 
