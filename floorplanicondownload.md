@@ -7,8 +7,8 @@ layout: page
 ---
 
 <div class="icon-main-container">
-    <h1 class="icon-main-title">Floorplan Beleuchtungsbilder</h1>
-    <h2 class="icon-main-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
+    <h1 class="icon-main-title">Floorplan Icons Download</h1>
+    <h2 class="icon-main-subtitle">Icons aussuchen und einezln oder alle herunterladen </h2>
     <p class="icon-main-intro">
         Wozu sind diese Icons?<br>
         Icons wie diese werden von mir in Home Assistant auf meinem Floorplan verwendet. Sie werden zum Aktivieren / Deaktivieren von Entitäten, zum Navigieren auf andere Dashboard-Seiten oder zur Anzeige von diversen Entitäten-Status benutzt.
