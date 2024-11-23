@@ -29,12 +29,11 @@ layout: page
 <p>Lade ein Bild hoch, fülle die gewünschten Button-Einstellungen aus, und klicke dann auf die Position im Bild, an der der Button platziert werden soll. Für jede Positionierung kannst du unterschiedliche Einstellungen, wie Entität, Icons, und Aktionen (Tap/Hold), angeben. Nachdem du alle gewünschten Buttons gesetzt hast, klicke auf "YAML-Code generieren". Der erstellte YAML-Code wird unten angezeigt und kann kopiert werden, um ihn in dein Home Assistant-Dashboard einzufügen.</p>
 
 <!-- Bild-Upload -->
-<div class="floorplan-image-upload">
-    <label for="image-upload">Bild hochladen:</label>
-    <input type="file" id="image-upload" accept="image/*">
-</div>
+<div class="custom-form-group">
+    <label for="image-upload" class="custom-label">Bild hochladen:</label>
+    <input type="file" id="image-upload" class="custom-input" accept="image/*">
 <p id="image-dimensions">Bildabmessungen: Noch kein Bild hochgeladen</p>
-
+</div>
 <!-- Bildcontainer -->
 <div class="floorplan-container" id="container">
   <img src="floorplan.png" alt="Floorplan" id="floorplan">
@@ -138,6 +137,22 @@ layout: page
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 
 <style>
+    .custom-form-group {
+        margin-top: 20px;
+    }
+    .custom-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .custom-input, .custom-button, select {
+        width: 100%;
+        background-color: #e9e9e9;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #c9c9c9;
+    }
     .support-note {
         border: 2px solid #f39c12;
         padding: 20px;
