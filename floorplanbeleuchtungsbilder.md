@@ -13,7 +13,37 @@ layout: page
     Was sind Beleuchtungsbilder?<br>
     Als Beleuchtungsbilder versteht man jene in Sweet Home 3D oder anderen 3D Planungstools generierte Bilder, welche den Zustand einzelner Beleuchtungs-Entitäten aus Home Assistant auf einzelnen Bildern darstellt. Jedes dieser Entitäts-Bilder zeigt nur den ausgeleuchteten Raum, wohingegen der Rest des Bildes schwarz bleibt. Dies ermöglicht eine anschauliche Visualisierung der Beleuchtung in deinem Smart Home.
 </p>   
-
+<p>
+    Beispiele und Erklärungen für Beleuchtungsbilder findest du im 🔽 Dropdown Menü 🔽.
+</p>
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Beleuchtungsbilder Beispiele<span>&#9660;</span></button>
+    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_beleuchtungsbilder_example %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<p>
 <h3>Allgemeine Einstellungen</h3>
 <p>
     Hier kannst du grundlegende Einstellungen vornehmen, wie den Speicherpfad deiner Bilder und den Dateinamen deines Hintergrundbildes. Stelle sicher, dass der Pfad korrekt ist, damit die Bilder in Home Assistant geladen werden können.
@@ -207,9 +237,56 @@ layout: page
         border-radius: 5px;
         background-color: #f8f8f8;
     }
+    .dropdown {
+        margin: 20px 0;
+        text-align: center;
+    }
+    .dropdown-toggle {
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f39c12;
+        color: #ffffff;
+        padding: 10px 5px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+    }
+    .dropdown-toggle.rotated {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg); /* Text von unten nach oben */
+        padding: 20px 30px;
+        width: 200px;
+        height: auto;
+    }
+    .dropdown-toggle span {
+        float: right;
+    }
+    .dropdown-content {
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #f39c12;
+        border-radius: 5px;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 </style>
 
 <script>
+function toggleDropdown(dropdownId, toggleButton) {
+    var dropdownContent = document.getElementById(dropdownId);
+    if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+        dropdownContent.style.display = "block";
+        toggleButton.classList.add("rotated"); // Klasse hinzufügen
+    } else {
+        dropdownContent.style.display = "none";
+        toggleButton.classList.remove("rotated"); // Klasse entfernen
+    }
+}
 // Funktion zum Hinzufügen einer neuen Zeile zur Tabelle
 function addRow() {
     const table = document.getElementById('entities-table').getElementsByTagName('tbody')[0];
