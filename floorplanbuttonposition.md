@@ -26,30 +26,34 @@ layout: page
         <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
     </div>
     <div class="dropdown">
-        <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-        <div id="galleryDropdown" class="dropdown-content" style="display: none;">
-            {% assign gallery_images = site.data.gallery_mull_helfer %}
-            <div class="columns is-multiline">
-                {% for gallery in gallery_images %}
-                    <div class="column is-12">
-                        <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                    </div>
-                    {% for image in gallery.images %}
-                        <div class="column is-3-desktop is-6-tablet">
-                            <div class="card">
-                                <div class="card-image">
-                                    {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
-                                </div>
-                                <div class="card-content">
-                                    <div class="content">
-                                        {{ image.description | markdownify }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
+        <button class="dropdown-toggle" onclick="toggleDropdown('tutorialDropdown', this)">
+            Wie positioniere ich die Buttons auf dem Bild?<span>&#9660;</span>
+        </button>
+        <div id="tutorialDropdown" class="dropdown-content" style="display: none; padding: 10px; text-align: left; line-height: 1.5;">
+            <p><strong>Schritt-für-Schritt-Anleitung:</strong></p>
+            <ol>
+                <li>Trage deine Entität ein.</li>
+                <li>Trage den Speicherpfad deiner Icons (Home Assistant) ein.</li>
+                <li>Trage den Namen des Icons ein, welches bei einem Fehler der Entität angezeigt werden soll.</li>
+                <li>Trage den Namen des Icons ein, welches beim Zustand <em>"AN"</em> deiner Entität angezeigt werden soll.</li>
+                <li>Trage den Namen des Icons ein, welches beim Zustand <em>"AUS"</em> deiner Entität angezeigt werden soll.</li>
+                <li>Wähle eine Breite des Buttons auf dem Floorplan, z. B. <em>2</em>.</li>
+                <li>Wähle die Form des Buttons.</li>
+                <li>Wähle eine <em>Tap</em>- und eine <em>Hold Action</em>.</li>
+            </ol>
+            <p>Wenn alles eingetragen und ausgewählt ist, klicke auf das Bild, um die Position des Buttons zu setzen.</p>
+            <p><strong>Für die nächste Entität:</strong></p>
+            <ul>
+                <li>Ändere die Eingaben in den Punkten 1–8, die für die neue Entität gelten.</li>
+                <li>Klicke dann erneut auf das Bild, um die neue Entität zu positionieren.</li>
+            </ul>
+            <p>Fahre so mit all deinen Entitäten fort, bis alle Buttons positioniert sind.</p>
+            <p><strong>Zum Schluss:</strong></p>
+            <ul>
+                <li>Klicke auf <em>YAML-Code generieren</em>, um den Code zu erhalten.</li>
+            </ul>
+            <p><strong>Hinweis:</strong> Falls dir Fehler unterlaufen, kannst du mit den unteren Buttons Markierungen entfernen oder den YAML-Code löschen.</p>
+            <p><strong>Viel Erfolg! 🎉</strong></p>
         </div>
     </div>
     <!-- Formular für zusätzliche Angaben -->
