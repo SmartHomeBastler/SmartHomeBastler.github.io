@@ -62,6 +62,10 @@ layout: page
 <div class="custom-form-group">
     <label for="transparent-image-input">Dateiname 1 Pixel Bild:</label>
     <input type="text" id="transparent-image-input" placeholder="z.B. 1x1_transparent.png">
+    <p style="margin-top: 10px;">
+        Wenn du noch kein transparentes 1 Pixel Bild haben solltest, kannst du es 
+        <a href="/img/floorplan/1x1_transparent.png" download class="download-link">hier herunterladen</a>.
+    </p>
 </div>
 
 <h3>Entitätsbilder Einstellungen</h3>
@@ -156,7 +160,14 @@ layout: page
         border: 1px solid #ddd;
         border-radius: 5px;
     }
-
+    .download-link {
+        color: #007bff;
+        text-decoration: underline;
+    }
+    .download-link:hover {
+        color: #0056b3;
+        text-decoration: none;
+    }
     /* Tabellengestaltung */
     #entities-table {
         width: 100%;
