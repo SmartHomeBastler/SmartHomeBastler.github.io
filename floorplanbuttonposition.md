@@ -5,153 +5,142 @@ description: Generiere YAML-Code für Home Assistant anhand der Markierungen und
 show_sidebar: false
 layout: page
 ---
-<div class="floorplan-button-container">
-    <h1 class="floorplan-button-title">Floorplan Button Positionierung</h1>
-    <h2 class="floorplan-button-subtitle">Positioniere deine Buttons für alle Entitäten direkt auf deinem Floorplan</h2>
-    <p class="floorplan-button-intro">
+<div class="floorplan-main-container">
+    <h1 class="floorplan-main-title">Floorplan Button Positionierung</h1>
+    <h2 class="floorplan-main-subtitle">Positioniere deine Buttons für alle Entitäten direkt auf deinem Floorplan</h2>
+    <p class="floorplan-main-intro">
         Mit diesem Tool kannst du durch Eingabe deiner 
     </p>   
-
-<h3>Bild hochladen</h3>
-<p>Lade ein Bild hoch, fülle die gewünschten Button-Einstellungen aus, und klicke dann auf die Position im Bild, an der der Button platziert werden soll. Für jede Positionierung kannst du unterschiedliche Einstellungen, wie Entität, Icons, und Aktionen (Tap/Hold), angeben. Nachdem du alle gewünschten Buttons gesetzt hast, klicke auf "YAML-Code generieren". Der erstellte YAML-Code wird unten angezeigt und kann kopiert werden, um ihn in dein Home Assistant-Dashboard einzufügen.</p>
-
-<!-- Bild-Upload -->
-<div class="custom-form-group">
-    <label for="image-upload" class="custom-label">Bild hochladen:</label>
-    <input type="file" id="image-upload" class="custom-input" accept="image/*">
-<p id="image-dimensions">Bildabmessungen: Noch kein Bild hochgeladen</p>
-</div>
-<!-- Bildcontainer -->
-<div class="floorplan-container" id="container">
-  <img src="floorplan.png" alt="Floorplan" id="floorplan">
-  <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
-</div>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
-        {% assign gallery_images = site.data.gallery_mull_helfer %}
-        <div class="columns is-multiline">
-            {% for gallery in gallery_images %}
-                <div class="column is-12">
-                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                </div>
-                {% for image in gallery.images %}
-                    <div class="column is-3-desktop is-6-tablet">
-                        <div class="card">
-                            <div class="card-image">
-                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
-                            </div>
-                            <div class="card-content">
-                                <div class="content">
-                                    {{ image.description | markdownify }}
+    <h3>Bild hochladen</h3>
+    <p>Lade ein Bild hoch, fülle die gewünschten Button-Einstellungen aus, und klicke dann auf die Position im Bild, an der der Button platziert werden soll. Für jede Positionierung kannst du unterschiedliche Einstellungen, wie Entität, Icons, und Aktionen (Tap/Hold), angeben. Nachdem du alle gewünschten Buttons gesetzt hast, klicke auf "YAML-Code generieren". Der erstellte YAML-Code wird unten angezeigt und kann kopiert werden, um ihn in dein Home Assistant-Dashboard einzufügen.
+    </p>
+    <!-- Bild-Upload -->
+    <div class="custom-form-group">
+        <label for="image-upload" class="custom-label">Bild hochladen:</label>
+        <input type="file" id="image-upload" class="custom-input" accept="image/*">
+    <p id="image-dimensions">Bildabmessungen: Noch kein Bild hochgeladen</p>
+    </div>
+    <!-- Bildcontainer -->
+    <div class="floorplan-container" id="container">
+    <img src="floorplan.png" alt="Floorplan" id="floorplan">
+    <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
+    </div>
+    <div class="dropdown">
+        <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+        <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+            {% assign gallery_images = site.data.gallery_mull_helfer %}
+            <div class="columns is-multiline">
+                {% for gallery in gallery_images %}
+                    <div class="column is-12">
+                        <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                    </div>
+                    {% for image in gallery.images %}
+                        <div class="column is-3-desktop is-6-tablet">
+                            <div class="card">
+                                <div class="card-image">
+                                    {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        {{ image.description | markdownify }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            </div>
         </div>
     </div>
-</div>
-<!-- Formular für zusätzliche Angaben -->
-<h3>Button-Einstellungen</h3>
-<div class="floorplan-marker-form">
-    <div class="floorplan-form-group">
-        <label for="marker-entity">Entität (entity):</label>
-        <input type="text" id="marker-entity" placeholder="z.B. light.<DEINE-ENTITÄT>">
-    </div>    
-    <div class="floorplan-form-group">
-        <label for="marker-path">Speicherpfad der Icons:</label>
-        <input type="text" id="marker-path" placeholder="/local/lovelace/icon/">
-    </div>    
-    <div class="floorplan-form-group">
-        <label for="marker-default-icon">Icon bei Fehler:</label>
-        <input type="text" id="marker-default-icon" placeholder="<DEIN-FEHLER-BUTTON-BILD>.png">
-    </div>    
-    <div class="floorplan-form-group">
-        <label for="marker-on-icon">Icon im Zustand 'An':</label>
-        <input type="text" id="marker-on-icon" placeholder="<DEIN-AN-BUTTON-BILD>.png">
-    </div>    
-    <div class="floorplan-form-group">
-        <label for="marker-off-icon">Icon im Zustand 'Aus':</label>
-        <input type="text" id="marker-off-icon" placeholder="<DEIN-AUS-BUTTON-BILD>.png">
-    </div>    
-    <div class="floorplan-form-group">
-        <label for="marker-size">Größe des Icons (%):</label>
-        <input type="text" id="marker-size" placeholder="z.B. 2">
-    </div>    
-    <!-- Auswahl für die Form des Markers -->
-    <div class="floorplan-form-group">
-        <label for="marker-shape">Form des Buttons:</label>
-        <select id="marker-shape">
-            <option value="50%">Rund</option>
-            <option value="0%">Eckig</option>
-            <option value="10%">Abgerundet</option>
-        </select>
+    <!-- Formular für zusätzliche Angaben -->
+    <h3>Button-Einstellungen</h3>
+    <div class="floorplan-marker-form">
+        <div class="floorplan-form-group">
+            <label for="marker-entity">Entität (entity):</label>
+            <input type="text" id="marker-entity" placeholder="z.B. light.<DEINE-ENTITÄT>">
+        </div>    
+        <div class="floorplan-form-group">
+            <label for="marker-path">Speicherpfad der Icons:</label>
+            <input type="text" id="marker-path" placeholder="/local/lovelace/icon/">
+        </div>    
+        <div class="floorplan-form-group">
+            <label for="marker-default-icon">Icon bei Fehler:</label>
+            <input type="text" id="marker-default-icon" placeholder="<DEIN-FEHLER-BUTTON-BILD>.png">
+        </div>    
+        <div class="floorplan-form-group">
+            <label for="marker-on-icon">Icon im Zustand 'An':</label>
+            <input type="text" id="marker-on-icon" placeholder="<DEIN-AN-BUTTON-BILD>.png">
+        </div>    
+        <div class="floorplan-form-group">
+            <label for="marker-off-icon">Icon im Zustand 'Aus':</label>
+            <input type="text" id="marker-off-icon" placeholder="<DEIN-AUS-BUTTON-BILD>.png">
+        </div>    
+        <div class="floorplan-form-group">
+            <label for="marker-size">Größe des Icons (%):</label>
+            <input type="text" id="marker-size" placeholder="z.B. 2">
+        </div>    
+        <!-- Auswahl für die Form des Markers -->
+        <div class="floorplan-form-group">
+            <label for="marker-shape">Form des Buttons:</label>
+            <select id="marker-shape">
+                <option value="50%">Rund</option>
+                <option value="0%">Eckig</option>
+                <option value="10%">Abgerundet</option>
+            </select>
+        </div>
     </div>
-</div>
-
-
-<!-- Auswahl für die Tap- und Hold-Action mit jeweiligen Navigationspfaden -->
-<div class="floorplan-form-group-horizontal">
-    <div class="floorplan-form-group">
-        <label for="marker-tap-action">Tap Action:</label>
-        <select id="marker-tap-action" onchange="toggleNavigationPathInput('tap')">
-            <option value="toggle">Umschalten</option>
-            <option value="none">Keine</option>
-            <option value="more-info">Mehr Info</option>
-            <option value="navigate">Navigieren</option>
-            <option value="call-service">Taster</option>
-            <option value="fire-dom-event">Pop-Up</option>
-        </select>
-        <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)" style="display:none; margin-top: 5px;">
+    <!-- Auswahl für die Tap- und Hold-Action mit jeweiligen Navigationspfaden -->
+    <div class="floorplan-form-group-horizontal">
+        <div class="floorplan-form-group">
+            <label for="marker-tap-action">Tap Action:</label>
+            <select id="marker-tap-action" onchange="toggleNavigationPathInput('tap')">
+                <option value="toggle">Umschalten</option>
+                <option value="none">Keine</option>
+                <option value="more-info">Mehr Info</option>
+                <option value="navigate">Navigieren</option>
+                <option value="call-service">Taster</option>
+                <option value="fire-dom-event">Pop-Up</option>
+            </select>
+            <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)" style="display:none; margin-top: 5px;">
+        </div>
+        <div class="floorplan-form-group">
+            <label for="marker-hold-action">Hold Action:</label>
+            <select id="marker-hold-action" onchange="toggleNavigationPathInput('hold')">
+                <option value="more-info" selected>Mehr Info</option>
+                <option value="none">Keine</option>
+                <option value="toggle">Umschalten</option>
+                <option value="navigate">Navigieren</option>
+                <option value="call-service">Taster</option>
+                <option value="fire-dom-event">Pop-Up</option>
+            </select>
+            <input type="text" id="navigation-path-hold" placeholder="Pfad für Navigation (Hold)" style="display:none; margin-top: 5px;">
+        </div>
     </div>
-    <div class="floorplan-form-group">
-        <label for="marker-hold-action">Hold Action:</label>
-        <select id="marker-hold-action" onchange="toggleNavigationPathInput('hold')">
-            <option value="more-info" selected>Mehr Info</option>
-            <option value="none">Keine</option>
-            <option value="toggle">Umschalten</option>
-            <option value="navigate">Navigieren</option>
-            <option value="call-service">Taster</option>
-            <option value="fire-dom-event">Pop-Up</option>
-        </select>
-        <input type="text" id="navigation-path-hold" placeholder="Pfad für Navigation (Hold)" style="display:none; margin-top: 5px;">
+    <!-- Eingabefelder für den Navigationspfad, nur sichtbar, wenn "Navigieren" ausgewählt ist -->
+    <div class="floorplan-form-group" id="navigation-path-group-tap" style="display: none;">
+        <label for="navigation-path-tap">Navigationspfad (Tap):</label>
+        <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)">
     </div>
-</div>
-
-
-<!-- Eingabefelder für den Navigationspfad, nur sichtbar, wenn "Navigieren" ausgewählt ist -->
-<div class="floorplan-form-group" id="navigation-path-group-tap" style="display: none;">
-    <label for="navigation-path-tap">Navigationspfad (Tap):</label>
-    <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)">
-</div>
-<div class="floorplan-form-group" id="navigation-path-group-hold" style="display: none;">
-    <label for="navigation-path-hold">Navigationspfad (Hold):</label>
-    <input type="text" id="navigation-path-hold" placeholder="Pfad für Navigation (Hold)">
-</div>
-
-
-<div class="floorplan-button-container">
-    <button class="floorplan-button floorplan-button-primary" onclick="generateYAML()">YAML-Code generieren</button>
-    <button class="floorplan-button floorplan-button-info" onclick="copyYAML()">YAML-Code kopieren</button>
-    <button class="floorplan-button floorplan-button-warning" onclick="removeMarkers()">Alle Markierungen entfernen</button>
-    <button class="floorplan-button floorplan-button-danger" onclick="clearYAML()">YAML-Code löschen</button>
-</div>
-
-<h3>Generierter YAML-Code:</h3>
-<textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
-
-<footer class="guide-footer">
-<h2>Viel Erfolg bei der Positionierung deiner Buttons! 🎉</h2>
-</footer>
-
-{% include support_note.html %}
-
+    <div class="floorplan-form-group" id="navigation-path-group-hold" style="display: none;">
+        <label for="navigation-path-hold">Navigationspfad (Hold):</label>
+        <input type="text" id="navigation-path-hold" placeholder="Pfad für Navigation (Hold)">
+    </div>
+    <div class="floorplan-button-container">
+        <button class="floorplan-button floorplan-button-primary" onclick="generateYAML()">YAML-Code generieren</button>
+        <button class="floorplan-button floorplan-button-info" onclick="copyYAML()">YAML-Code kopieren</button>
+        <button class="floorplan-button floorplan-button-warning" onclick="removeMarkers()">Alle Markierungen entfernen</button>
+        <button class="floorplan-button floorplan-button-danger" onclick="clearYAML()">YAML-Code löschen</button>
+    </div>
+    <h3>Generierter YAML-Code:</h3>
+    <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
+    <footer class="guide-footer">
+    <h2>Viel Erfolg bei der Positionierung deiner Buttons! 🎉</h2>
+    </footer>
+    {% include support_note.html %}
 </div>
 
 <style>
-    .floorplan-button-container {
+    .floorplan-main-container {
         max-width: 100%;
         margin: auto;
         padding: 20px;
@@ -162,19 +151,19 @@ layout: page
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .floorplan-button-title {
+    .floorplan-main-title {
         text-align: center;
         color: #333;
         font-size: 2em;
         margin-bottom: 10px;
     }
-    .floorplan-button-subtitle {
+    .floorplan-main-subtitle {
         text-align: center;
         color: #666;
         font-size: 1.4em;
         margin-bottom: 20px;
     }
-    .floorplan-button-intro {
+    .floorplan-main-intro {
         text-align: center;
         color: #555;
         margin-bottom: 20px;
