@@ -38,6 +38,8 @@
       link: /floorplanbeleuchtungsbilder
     - name: Floorplan Button Position
       link: /floorplanbuttonposition
+    - name: Floorplan Icons
+      link: /floorplanicondownload
 - name: Code Design
   dropdown:
     - name: ASCII Code
