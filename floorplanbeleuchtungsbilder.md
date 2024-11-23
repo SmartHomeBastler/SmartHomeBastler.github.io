@@ -7,116 +7,111 @@ layout: page
 ---
 
 <div class="floorplan-container">
-<h1 class="floorplan-title">Floorplan Beleuchtungsbilder</h1>
-<h2 class="floorplan-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
-<p class="floorplan-intro">
-    Was sind Beleuchtungsbilder?<br>
-    Als Beleuchtungsbilder versteht man jene in Sweet Home 3D oder anderen 3D Planungstools generierte Bilder, welche den Zustand einzelner Beleuchtungs-Entitäten aus Home Assistant auf einzelnen Bildern darstellt. Jedes dieser Entitäts-Bilder zeigt nur den ausgeleuchteten Raum, wohingegen der Rest des Bildes schwarz bleibt. Dies ermöglicht eine anschauliche Visualisierung der Beleuchtung in deinem Smart Home.
-</p>   
-<p>
-    Beispiele und Erklärungen für Beleuchtungsbilder findest du im 🔽 Dropdown Menü 🔽.
-</p>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Beleuchtungsbilder Beispiele<span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
-        {% assign gallery_images = site.data.gallery_beleuchtungsbilder_example %}
-        <div class="columns is-multiline">
-            {% for gallery in gallery_images %}
-                <div class="column is-12">
-                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                </div>
-                {% for image in gallery.images %}
-                    <div class="column is-3-desktop is-6-tablet">
-                        <div class="card">
-                            <div class="card-image">
-                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
-                            </div>
-                            <div class="card-content">
-                                <div class="content">
-                                    {{ image.description | markdownify }}
+    <h1 class="floorplan-title">Floorplan Beleuchtungsbilder</h1>
+    <h2 class="floorplan-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
+    <p class="floorplan-intro">
+        Was sind Beleuchtungsbilder?<br>
+        Als Beleuchtungsbilder versteht man jene in Sweet Home 3D oder anderen 3D Planungstools generierte Bilder, welche den Zustand einzelner Beleuchtungs-Entitäten aus Home Assistant auf einzelnen Bildern darstellt. Jedes dieser Entitäts-Bilder zeigt nur den ausgeleuchteten Raum, wohingegen der Rest des Bildes schwarz bleibt. Dies ermöglicht eine anschauliche Visualisierung der Beleuchtung in deinem Smart Home.
+    </p>   
+    <p>
+        Beispiele und Erklärungen für Beleuchtungsbilder findest du im 🔽 Dropdown Menü 🔽.
+    </p>
+    <div class="dropdown">
+        <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Beleuchtungsbilder Beispiele<span>&#9660;</span></button>
+        <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+            {% assign gallery_images = site.data.gallery_beleuchtungsbilder_example %}
+            <div class="columns is-multiline">
+                {% for gallery in gallery_images %}
+                    <div class="column is-12">
+                        <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                    </div>
+                    {% for image in gallery.images %}
+                        <div class="column is-3-desktop is-6-tablet">
+                            <div class="card">
+                                <div class="card-image">
+                                    {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        {{ image.description | markdownify }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            </div>
         </div>
     </div>
-</div>
-<p>
-<h3>Allgemeine Einstellungen</h3>
-<p>
-    Hier kannst du grundlegende Einstellungen vornehmen, wie den Speicherpfad deiner Bilder und den Dateinamen deines Hintergrundbildes. Stelle sicher, dass der Pfad korrekt ist, damit die Bilder in Home Assistant geladen werden können.
-</p>
-<div class="custom-form-group">
-    <label for="path-input">Speicherpfad der Floorplan Bilder:</label>
+    <h3>Allgemeine Einstellungen</h3>
     <p>
-    Der Speicherpfad ist hier mit /local/lovelace/floorplan/ angegeben. Dies ist allerdings nur ein Vorschlag für eine übersichtliche Struktur. Lege dir die Ordner in deinem www-Ordner (/local/) nach deinen Bedürfnissen an oder verwende den vorgeschlagenen Pfad. Wichtig ist, dass der korrekte Pfad deiner Beleuchtungsbilder hier eingegeben wird.
+        Hier kannst du grundlegende Einstellungen vornehmen, wie den Speicherpfad deiner Bilder und den Dateinamen deines Hintergrundbildes. Stelle sicher, dass der Pfad korrekt ist, damit die Bilder in Home Assistant geladen werden können.
     </p>
-    <input type="text" id="path-input" value="/local/lovelace/floorplan/" placeholder="/local/lovelace/floorplan/">
-</div>
-<div class="custom-form-group">
-    <label for="background-image-input">Dateiname Hintergrundbild:</label>
-    <input type="text" id="background-image-input" placeholder="z.B. hintergrund_nacht.png">
-</div>
-
-<div class="custom-form-group">
-    <label for="transparent-image-input">Dateiname 1 Pixel Bild:</label>
+    <div class="custom-form-group">
+        <label for="path-input">Speicherpfad der Floorplan Bilder:</label>
+        <p>
+        Der Speicherpfad ist hier mit /local/lovelace/floorplan/ angegeben. Dies ist allerdings nur ein Vorschlag für eine übersichtliche Struktur. Lege dir die Ordner in deinem www-Ordner (/local/) nach deinen Bedürfnissen an oder verwende den vorgeschlagenen Pfad. Wichtig ist, dass der korrekte Pfad deiner Beleuchtungsbilder hier eingegeben wird.
+        </p>
+        <input type="text" id="path-input" value="/local/lovelace/floorplan/" placeholder="/local/lovelace/floorplan/">
+    </div>
+    <div class="custom-form-group">
+        <label for="background-image-input">Dateiname Hintergrundbild:</label>
+        <input type="text" id="background-image-input" placeholder="z.B. hintergrund_nacht.png">
+    </div>
+    <div class="custom-form-group">
+        <label for="transparent-image-input">Dateiname 1 Pixel Bild:</label>
+        <p>
+        Da Beleuchtungsbilder für den Entitäts-Zustand "on" erstellt werden muss auch für den Zustand "off" ein Bild zur Verfügung stehen um keinen Fehler des Codes zu generieren. Dieses Bild ist in der Regel ein transparentes Bild mit nur einem Pixel.<br>
+        Dieses sollte am selben Speicherort wie die Beleuchtungsbilder gespeichert sein. Der Namen dieses Bildes muss hier eingetragen werden. 
+        </p>
+        <input type="text" id="transparent-image-input" placeholder="z.B. 1x1_transparent.png">
+        <p style="margin-top: 10px;">
+            Wenn du noch kein transparentes 1 Pixel Bild haben solltest, kannst du es 
+            <a href="/img/floorplan/1x1_transparent.png" download class="download-link">hier herunterladen</a>.
+        </p>
+    </div>
+    <h3>Entitätsbilder Einstellungen</h3>
     <p>
-    Da Beleuchtungsbilder für den Entitäts-Zustand "on" erstellt werden muss auch für den Zustand "off" ein Bild zur Verfügung stehen um keinen Fehler des Codes zu generieren. Dieses Bild ist in der Regel ein transparentes Bild mit nur einem Pixel.<br>
-    Dieses sollte am selben Speicherort wie die Beleuchtungsbilder gespeichert sein. Der Namen dieses Bildes muss hier eingetragen werden. 
+        Füge hier die spezifischen Beleuchtungs-Entitäten aus deinem Home Assistant ein. Für jede Entität kannst du ein entsprechendes Beleuchtungsbild und eine Steuerungsoption (z. B. Licht ein/aus, dimmbar) auswählen. Diese Einstellungen werden in den YAML-Code übernommen, der die Bilder mit den Entitäten verknüpft.
     </p>
-    <input type="text" id="transparent-image-input" placeholder="z.B. 1x1_transparent.png">
-    <p style="margin-top: 10px;">
-        Wenn du noch kein transparentes 1 Pixel Bild haben solltest, kannst du es 
-        <a href="/img/floorplan/1x1_transparent.png" download class="download-link">hier herunterladen</a>.
+    <table id="entities-table">
+        <thead>
+            <tr>
+                <th>Entität (entity)</th>
+                <th>Dateiname des Entitäts-Bildes</th>
+                <th>Option</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" placeholder="z.B. light.arbeitszimmer_deckenlicht"></td>
+                <td><input type="text" placeholder="z.B. arbeitszimmer_deckenlicht.png"></td>
+                <td>
+                    <select>
+                        <option value="switch">Licht ein-aus</option>
+                        <option value="dimmable">Licht dimmbar</option>
+                        <option value="rgb">Licht RGB</option>
+                        <option value="rgbw">Licht RGBW</option>
+                        <option value="cover">Abdeckungen</option>
+                    </select>
+                </td>
+                <td><button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="action-button add-button" onclick="addRow()">&#x2b;</button>
+    <div class="custom-button-container">
+        <button class="custom-button generate" onclick="generateYAML()">YAML-Code generieren</button>
+        <button class="custom-button copy" onclick="copyYAML()">YAML-Code kopieren</button>
+        <button class="custom-button remove" onclick="clearYAML()">YAML-Code löschen</button>
+        <button class="custom-button clear" onclick="clearInputs()">Eingaben löschen</button>
+    </div>
+    <h3>Generierter YAML-Code:</h3>
+    <p>
+        Nach dem Ausfüllen der oben stehenden Felder und dem Drücken auf "YAML-Code generieren", erscheint hier der fertige YAML-Code. Dieser kann in deine Home Assistant Konfiguration eingefügt werden, um die Beleuchtungsbilder als interaktive Elemente in deinem Dashboard zu verwenden.
     </p>
-</div>
-
-<h3>Entitätsbilder Einstellungen</h3>
-<p>
-    Füge hier die spezifischen Beleuchtungs-Entitäten aus deinem Home Assistant ein. Für jede Entität kannst du ein entsprechendes Beleuchtungsbild und eine Steuerungsoption (z. B. Licht ein/aus, dimmbar) auswählen. Diese Einstellungen werden in den YAML-Code übernommen, der die Bilder mit den Entitäten verknüpft.
-</p>
-<table id="entities-table">
-    <thead>
-        <tr>
-            <th>Entität (entity)</th>
-            <th>Dateiname des Entitäts-Bildes</th>
-            <th>Option</th>
-            <th>Aktionen</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input type="text" placeholder="z.B. light.arbeitszimmer_deckenlicht"></td>
-            <td><input type="text" placeholder="z.B. arbeitszimmer_deckenlicht.png"></td>
-            <td>
-                <select>
-                    <option value="switch">Licht ein-aus</option>
-                    <option value="dimmable">Licht dimmbar</option>
-                    <option value="rgb">Licht RGB</option>
-                    <option value="rgbw">Licht RGBW</option>
-                    <option value="cover">Abdeckungen</option>
-                </select>
-            </td>
-            <td><button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button></td>
-        </tr>
-    </tbody>
-</table>
-<button class="action-button add-button" onclick="addRow()">&#x2b;</button>
-
-<div class="custom-button-container">
-    <button class="custom-button generate" onclick="generateYAML()">YAML-Code generieren</button>
-    <button class="custom-button copy" onclick="copyYAML()">YAML-Code kopieren</button>
-    <button class="custom-button remove" onclick="clearYAML()">YAML-Code löschen</button>
-    <button class="custom-button clear" onclick="clearInputs()">Eingaben löschen</button>
-</div>
-
-<h3>Generierter YAML-Code:</h3>
-<p>
-    Nach dem Ausfüllen der oben stehenden Felder und dem Drücken auf "YAML-Code generieren", erscheint hier der fertige YAML-Code. Dieser kann in deine Home Assistant Konfiguration eingefügt werden, um die Beleuchtungsbilder als interaktive Elemente in deinem Dashboard zu verwenden.
-</p>
-<textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
+    <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 </div>
 
 
