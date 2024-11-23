@@ -148,4 +148,7 @@ layout: page
         text-align: center;
         margin-top: 20px;
     }
+    html {
+        box-sizing: none;
+    }
 </style>
