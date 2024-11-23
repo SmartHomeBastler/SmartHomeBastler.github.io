@@ -52,10 +52,9 @@ layout: page
 <style>
     .icon-main-container {
         max-width: 100%;
-        margin-bottom: 100px;
+        margin: 20px auto;
         padding: 20px;
         background-color: #f9f9f9;
-        border: 1px solid #ddd;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         font-family: Arial, sans-serif;
@@ -73,12 +72,12 @@ layout: page
         text-align: center;
         font-size: 1.4em;
         margin-bottom: 20px;
-        color: #dddddd;
+        color: #555;
     }
 
     .icon-main-intro {
         text-align: center;
-        color: #555;
+        color: #777;
         margin-bottom: 20px;
     }
 
@@ -86,38 +85,50 @@ layout: page
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-        background-color: #393939;
     }
 
     .icon-table thead th {
-        background-color: #f9f9f9;
+        background-color: #393939;
         color: #fff;
-        padding: 10px;
+        padding: 15px;
         text-align: center;
         font-size: 1.2em;
     }
 
     .icon-table td {
         text-align: center;
-        vertical-align: top;
-        padding: 10px;
+        vertical-align: middle;
+        padding: 15px;
         border: 1px solid #444;
+        width: 16.66%;
+        height: 120px;
+    }
+
+    .icon-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
     }
 
     .icon-wrapper img {
-        max-width: 80px;
+        max-width: 60px;
         height: auto;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     .icon-wrapper p {
         font-size: 0.9em;
-        color: #ddd;
+        color: #333;
         margin: 0;
+        text-align: center;
+        word-wrap: break-word;
     }
 
     .icon-wrapper a {
         text-decoration: none;
+        color: inherit;
     }
 
     .icon-wrapper a:hover {
