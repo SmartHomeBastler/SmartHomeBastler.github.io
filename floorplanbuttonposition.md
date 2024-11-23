@@ -5,25 +5,13 @@ description: Generiere YAML-Code für Home Assistant anhand der Markierungen und
 show_sidebar: false
 layout: page
 ---
-
-<div class="support-note">
-    <p>Wenn du Interesse daran hast, mich, meinen Kanal oder meine kreative Arbeit zu unterstützen, freue ich mich über jeglichen Support:</p>
-    
-    <div class="support-links">
-        <a href="https://www.amazon.de/hz/wishlist/ls/3FT7MNGRVOTM3?ref_=wl_share" target="_blank">
-            <img src="/img/amazon_wishlist_logo.png" alt="Amazon Wishlist" class="support-icon">
-            Amazon Wishlist
-        </a>
-        <a href="https://www.buymeacoffee.com/bastler" target="_blank">
-            <img src="/img/buy_me_a_coffee_logo.png" alt="Buy Me a Coffee" class="support-icon">
-            Buy Me a Coffee
-        </a>
-        <a href="https://www.paypal.me/kramlmaxx" target="_blank">
-            <img src="/img/paypal_donate_logo.png" alt="PayPal Donate" class="support-icon">
-            PayPal Donate
-        </a>
-    </div>
-</div>
+<div class="floorplan-container">
+    <h1 class="floorplan-title">Floorplan Beleuchtungsbilder</h1>
+    <h2 class="floorplan-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
+    <p class="floorplan-intro">
+        Was sind Beleuchtungsbilder?<br>
+        Als Beleuchtungsbilder versteht man jene in Sweet Home 3D oder anderen 3D Planungstools generierte Bilder, welche den Zustand einzelner Beleuchtungs-Entitäten aus Home Assistant auf einzelnen Bildern darstellt. Jedes dieser Entitäts-Bilder zeigt nur den ausgeleuchteten Raum, wohingegen der Rest des Bildes schwarz bleibt. Dies ermöglicht eine anschauliche Visualisierung der Beleuchtung in deinem Smart Home.
+    </p>   
 
 <h3>Bild hochladen</h3>
 <p>Lade ein Bild hoch, fülle die gewünschten Button-Einstellungen aus, und klicke dann auf die Position im Bild, an der der Button platziert werden soll. Für jede Positionierung kannst du unterschiedliche Einstellungen, wie Entität, Icons, und Aktionen (Tap/Hold), angeben. Nachdem du alle gewünschten Buttons gesetzt hast, klicke auf "YAML-Code generieren". Der erstellte YAML-Code wird unten angezeigt und kann kopiert werden, um ihn in dein Home Assistant-Dashboard einzufügen.</p>
@@ -39,40 +27,60 @@ layout: page
   <img src="floorplan.png" alt="Floorplan" id="floorplan">
   <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
 </div>
-
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_mull_helfer %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 <!-- Formular für zusätzliche Angaben -->
 <h3>Button-Einstellungen</h3>
 <div class="floorplan-marker-form">
     <div class="floorplan-form-group">
         <label for="marker-entity">Entität (entity):</label>
         <input type="text" id="marker-entity" placeholder="z.B. light.<DEINE-ENTITÄT>">
-    </div>
-    
+    </div>    
     <div class="floorplan-form-group">
         <label for="marker-path">Speicherpfad der Icons:</label>
         <input type="text" id="marker-path" placeholder="/local/lovelace/icon/">
-    </div>
-    
+    </div>    
     <div class="floorplan-form-group">
-        <label for="marker-default-icon">Bild bei Fehler:</label>
+        <label for="marker-default-icon">Icon bei Fehler:</label>
         <input type="text" id="marker-default-icon" placeholder="<DEIN-FEHLER-BUTTON-BILD>.png">
-    </div>
-    
+    </div>    
     <div class="floorplan-form-group">
-        <label for="marker-on-icon">Bild im Zustand 'An':</label>
+        <label for="marker-on-icon">Icon im Zustand 'An':</label>
         <input type="text" id="marker-on-icon" placeholder="<DEIN-AN-BUTTON-BILD>.png">
-    </div>
-    
+    </div>    
     <div class="floorplan-form-group">
-        <label for="marker-off-icon">Bild im Zustand 'Aus':</label>
+        <label for="marker-off-icon">Icon im Zustand 'Aus':</label>
         <input type="text" id="marker-off-icon" placeholder="<DEIN-AUS-BUTTON-BILD>.png">
-    </div>
-    
+    </div>    
     <div class="floorplan-form-group">
         <label for="marker-size">Größe des Icons (%):</label>
         <input type="text" id="marker-size" placeholder="z.B. 2">
-    </div>
-    
+    </div>    
     <!-- Auswahl für die Form des Markers -->
     <div class="floorplan-form-group">
         <label for="marker-shape">Form des Buttons:</label>
@@ -99,7 +107,6 @@ layout: page
         </select>
         <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)" style="display:none; margin-top: 5px;">
     </div>
-
     <div class="floorplan-form-group">
         <label for="marker-hold-action">Hold Action:</label>
         <select id="marker-hold-action" onchange="toggleNavigationPathInput('hold')">
@@ -136,7 +143,43 @@ layout: page
 <h3>Generierter YAML-Code:</h3>
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 
+<footer class="guide-footer">
+<h2>Viel Erfolg bei der Positionierung deiner Buttons! 🎉</h2>
+</footer>
+
+{% include support_note.html %}
+
+</div>
+
 <style>
+    .floorplan-container {
+        max-width: 100%;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .floorplan-title {
+        text-align: center;
+        color: #333;
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+    .floorplan-subtitle {
+        text-align: center;
+        color: #666;
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+    .floorplan-intro {
+        text-align: center;
+        color: #555;
+        margin-bottom: 20px;
+    }
     .custom-form-group {
         margin-top: 20px;
     }
@@ -152,42 +195,6 @@ layout: page
         margin-top: 5px;
         border-radius: 5px;
         border: 1px solid #c9c9c9;
-    }
-    .support-note {
-        border: 2px solid #f39c12;
-        padding: 20px;
-        background-color: #fff3cd;
-        border-radius: 12px;
-        margin-top: 20px;
-        margin-bottom: 30px; /* Adds space below the support section */
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .support-note p {
-        font-size: 18px;
-        margin-bottom: 15px;
-        color: #856404;
-        font-weight: bold;
-    }
-    .support-links {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-    }
-    .support-links a {
-        text-decoration: none;
-        color: #007bff;
-        font-weight: bold;
-        text-align: center;
-    }
-    .support-icon {
-        width: 80px; /* Increased image size */
-        height: auto;
-        margin-bottom: 5px;
-        transition: transform 0.2s;
-    }
-    .support-icon:hover {
-        transform: scale(1.1);
     }
     .floorplan-container {
         position: relative;
@@ -289,6 +296,43 @@ layout: page
     
     .floorplan-form-group-horizontal .floorplan-form-group {
         flex: 1;
+    }
+    .dropdown {
+        margin: 20px 0;
+        text-align: center;
+    }
+    .dropdown-toggle {
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f39c12;
+        color: #ffffff;
+        padding: 10px 5px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+    }
+    .dropdown-toggle.rotated {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg); /* Text von unten nach oben */
+        padding: 20px 30px;
+        width: 200px;
+        height: auto;
+    }
+    .dropdown-toggle span {
+        float: right;
+    }
+    .dropdown-content {
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #f39c12;
+        border-radius: 5px;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 </style>
 
