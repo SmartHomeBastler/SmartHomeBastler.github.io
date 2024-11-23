@@ -97,7 +97,6 @@ layout: page
         padding: 15px;
         border: 1px solid #444;
         width: 16.66%;
-        height: 140px;
     }
     .icon-wrapper {
         display: flex;
@@ -147,8 +146,5 @@ layout: page
     .icon-main-footer {
         text-align: center;
         margin-top: 20px;
-    }
-    html {
-        box-sizing: none;
     }
 </style>
