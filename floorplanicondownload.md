@@ -105,14 +105,16 @@ layout: page
         align-items: center;
         justify-content: center;
         height: 100%;
+        width: 100%;
         border: 1px solid #f9f9f9;
         padding: 5px;
-        aspect-ratio: 1 / 1;
+        position: relative;
     }
     .icon-wrapper img {
         max-width: 100px;
         height: auto;
         margin-bottom: 10px;
+        object-fit: contain;
     }
     .icon-wrapper p {
         font-size: 0.9em;
@@ -143,7 +145,7 @@ layout: page
         background-color: #45a049; /* Dunkleres Grün beim Hover */
     }
     .icon-main-footer {
-    text-align: center;
-    margin-top: 20px;
+        text-align: center;
+        margin-top: 20px;
     }
 </style>
