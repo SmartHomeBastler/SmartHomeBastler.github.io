@@ -97,7 +97,7 @@ layout: page
         padding: 15px;
         border: 1px solid #444;
         width: 16.66%;
-        height: 120px;
+        height: 140px;
     }
     .icon-wrapper {
         display: flex;
@@ -107,7 +107,7 @@ layout: page
         height: 100%;
         width: 100%;
         border: 1px solid #f9f9f9;
-        padding: 5px;
+        padding: 10px;
         position: relative;
     }
     .icon-wrapper img {
