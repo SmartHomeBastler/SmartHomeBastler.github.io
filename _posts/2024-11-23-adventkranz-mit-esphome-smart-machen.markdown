@@ -56,6 +56,10 @@ published: true
     Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batteriekammer führte. In dieses Loch habe ich zwei Drähte mit 0,5 mm (Farbe schwarz und grün) eingeführt und an die Batteriekontakte gelötet.
 </p>
 
+<code>
+{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" %}
+</code>
+
 <div style="text-align: center;">
     <a href="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" target="_blank">
         <img src="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
