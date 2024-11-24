@@ -57,7 +57,7 @@ published: true
 </p>
 
 <code>
-{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" %}
+{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Batteriekammer des Adventkranzes" %}
 </code>
 
 <div style="text-align: center;">
