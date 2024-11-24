@@ -18,18 +18,19 @@ published: true
   📅 Adventskalender herunterladen
 </a>
 
-<script type="module">
-    document.addEventListener("DOMContentLoaded", function () {
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
         var calendarEl = document.getElementById("calendar");
 
-        if (calendarEl) {
-            var calendar = new Calendar(calendarEl, {
+        if (calendarEl) { // Sicherstellen, dass das Kalender-Element existiert
+            var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: "dayGridMonth",
                 locale: "de", // Sprache auf Deutsch setzen
+                plugins: [ 'iCalendar' ], // icalendar Plugin einfügen
                 events: {
-                    url: "https://<dein-benutzername>.github.io/assets/calendar/advent_calendar.ics", // URL zur ICS-Datei
-                    format: "ics", // Format definieren
-                },
+                    url: "/assets/calendar/advent_calendar.ics", // Pfad zur ICS-Datei
+                    format: "ics"
+                }
             });
             calendar.render();
         }
