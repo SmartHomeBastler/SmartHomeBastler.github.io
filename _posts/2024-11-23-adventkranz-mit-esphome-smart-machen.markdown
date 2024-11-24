@@ -8,13 +8,6 @@ image: /img/blog/smarter_Adventkranz/blog-post-smarter-adbentkranz.png
 published: true
 ---
 
-<head>
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.4/index.global.min.js"></script>
-
-</head>
-
 <div style="text-align: center;">
     <img src="/img/blog/smarter_Adventkranz/blog-post-smarter-adbentkranz.png" alt="Titelbild" style="max-width: 60%; height: auto;height: auto; border-radius: 10px; margin-bottom: 30px;">
 </div>
@@ -72,13 +65,13 @@ published: true
 document.addEventListener("DOMContentLoaded", function() {
     var calendarEl = document.getElementById("calendar");
 
-    if (calendarEl) { // Sicherstellen, dass das Kalender-Element existiert
+    if (calendarEl) {
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: "dayGridMonth",
             locale: "de", // Sprache auf Deutsch setzen
-            plugins: [ 'iCalendar' ], // icalendar Plugin einfügen
+            plugins: [ FullCalendar.ICalendar ], // Explizite Nutzung des Plugins
             events: {
-                url: "/assets/calendar/advent_calendar.ics", // Pfad zur ICS-Datei
+                url: "https://<dein-benutzername>.github.io/assets/calendar/advent_calendar.ics", // URL zur ICS-Datei
                 format: "ics"
             }
         });
