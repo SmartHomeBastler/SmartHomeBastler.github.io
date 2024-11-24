@@ -12,27 +12,11 @@ published: true
     <img src="/img/blog/smarter_Adventkranz/blog-post-smarter-adbentkranz.png" alt="Titelbild" style="max-width: 60%; height: auto; border-radius: 10px; margin-bottom: 30px;">
 </div>
 
-<div id="calendar" style="max-width: 900px; margin: auto; margin-top: 20px;"></div>
+
 
 <a href="/assets/calendar/advent_calendar.ics" download="Adventskalender.ics">
   📅 Adventskalender herunterladen
 </a>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
 
-        if (calendarEl) {
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: "dayGridMonth",
-                locale: "de",
-                events: {
-                    url: "/assets/calendar/advent_calendar.ics", // Pfad zur ICS-Datei
-                    format: "ics"
-                }
-            });
-            calendar.render();
-        }
-    });
-</script>
 
