@@ -157,6 +157,7 @@ published: true
 <div class="code-container">
     <button class="copy-button">Copy</button>
     <pre class="line-numbers"><code class="language-yaml">
+        {% raw %}
         {% set ADVENTKAL = states.calendar.advent.state %}
         {%- if ADVENTKAL == 'off' %}
         Kein Advent!
@@ -165,8 +166,10 @@ published: true
         {% else %}
         FEHLER
         {%- endif %}
+        {% endraw %}
     </code></pre>
 </div>
+
 
 <h3>Advent-Kalender Termine</h3>
 
