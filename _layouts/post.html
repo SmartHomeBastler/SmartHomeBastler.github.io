@@ -25,6 +25,18 @@ layout: default
 
 {% if site.disqus.shortname %}
 <div class="my-4">
-    {% include disqus.html %}
+    <div id="disqus_thread" style="display: none;"></div>
+    <button id="load-comments" class="button">Kommentare anzeigen</button>
+
+    <script>
+        document.getElementById('load-comments').addEventListener('click', function () {
+            document.getElementById('disqus_thread').style.display = 'block';
+            var d = document, s = d.createElement('script');
+            s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            this.style.display = 'none'; // Button ausblenden
+        });
+    </script>
 </div>
 {% endif %}
