@@ -43,7 +43,6 @@ Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batterie-
 ## Advent-Kalender Termine
 
 <div style="text-align: center;">
-    <h2>Adventskalender Einstellungen</h2>
     <label for="year-select" style="font-weight: bold; margin-bottom: 10px; display: block;">Jahr auswählen:</label>
     <select id="year-select" class="styled-select">
         <option value="all">Alle Jahre</option>
@@ -199,7 +198,14 @@ Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batterie-
                     return {
                         title: titleMatch ? titleMatch[1] : "Unbekannt",
                         start: startMatch ? `${startMatch[3]}.${startMatch[2]}.${startMatch[1]}` : "Unbekannt",
-                        end: endMatch ? `${endMatch[3]}.${endMatch[2]}.${endMatch[1]}` : null
+                        end: endMatch
+                            ? new Date(`${endMatch[1]}-${endMatch[2]}-${endMatch[3]}`)
+                                .toISOString()
+                                .split("T")[0]
+                                .split("-")
+                                .reverse()
+                                .join(".")
+                            : null
                     };
                 });
 
