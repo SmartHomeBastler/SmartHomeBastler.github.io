@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Adventkranz mit ESPHome smart machen"
-date: 2024-11-24 08:03:24
+date: 2024-11-23 08:03:24
 categories: Dashboard
 description: "Hier zeige ich, wie ich mit ESPHome und einem D1 Mini Microcontroller meinen Adventkranz smart gemacht habe"
 image: /img/blog-post-eigene-schriftarten.png
