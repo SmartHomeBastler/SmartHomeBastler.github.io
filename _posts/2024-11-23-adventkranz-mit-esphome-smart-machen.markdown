@@ -56,28 +56,14 @@ published: true
     Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batteriekammer führte. In dieses Loch habe ich zwei Drähte mit 0,5 mm (Farbe schwarz und grün) eingeführt und an die Batteriekontakte gelötet.
 </p>
 
-<code>
-{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" %}
-</code>
 
-<div style="text-align: center;">
-    <a href="/img/blog/smarter_Adventkranz/Batteriekammer_k.png" target="_blank">
-        <img src="/img/blog/smarter_Adventkranz/Batteriekammer.png" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
-    </a>
-</div>
+{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Batteriekammer_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.png" %}
+
+{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
+
+{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Platine_obern_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Platine_obern.png" %}
 
 
-<div style="text-align: center;">
-    <a href="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" target="_blank">
-        <img src="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
-    </a>
-</div>
-
-<div style="text-align: center;">
-    <a href="/img/blog/smarter_Adventkranz/Platine_obern_k.png" target="_blank">
-        <img src="/img/blog/smarter_Adventkranz/Platine_obern.png" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
-    </a>
-</div>
 
 <h3>ESPHome Programmierung</h3>
 
