@@ -19,9 +19,6 @@ published: true
 </a>
 
 <script type="module">
-    import { Calendar } from "https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js";
-    import { default as iCalendarPlugin } from "https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.4/index.global.min.js";
-
     document.addEventListener("DOMContentLoaded", function () {
         var calendarEl = document.getElementById("calendar");
 
