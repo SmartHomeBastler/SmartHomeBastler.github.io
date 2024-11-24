@@ -86,23 +86,26 @@ published: true
         fetch(icsUrl)
             .then(response => response.text())
             .then(data => {
-                const jcalData = ICAL.parse(data);
-                const comp = new ICAL.Component(jcalData);
-                const vevents = comp.getAllSubcomponents("vevent");
+                // ICS-Datei durchsuchen
+                const eventRegex = /BEGIN:VEVENT[\s\S]*?END:VEVENT/g;
+                const events = data.match(eventRegex) || [];
 
-                // Alle Events speichern
-                allEvents = vevents.map(vevent => {
-                    const event = new ICAL.Event(vevent);
+                // Events extrahieren
+                allEvents = events.map(eventData => {
+                    const titleMatch = eventData.match(/SUMMARY:(.+)/);
+                    const startMatch = eventData.match(/DTSTART(?:;VALUE=DATE)?:(\d{4})(\d{2})(\d{2})/);
+                    const endMatch = eventData.match(/DTEND(?:;VALUE=DATE)?:(\d{4})(\d{2})(\d{2})/);
+
                     return {
-                        title: event.summary,
-                        start: event.startDate.toJSDate().toLocaleDateString("de-DE"),
-                        end: event.endDate ? event.endDate.toJSDate().toLocaleDateString("de-DE") : null
+                        title: titleMatch ? titleMatch[1] : "Unbekannt",
+                        start: startMatch ? `${startMatch[3]}.${startMatch[2]}.${startMatch[1]}` : "Unbekannt",
+                        end: endMatch ? `${endMatch[3]}.${endMatch[2]}.${endMatch[1]}` : null
                     };
                 });
 
                 // Jahre für die Auswahl extrahieren
                 const years = Array.from(new Set(allEvents.map(event => {
-                    return new Date(event.start).getFullYear();
+                    return new Date(event.start.split('.').reverse().join('-')).getFullYear();
                 }))).sort();
 
                 // Dropdown-Menü füllen
