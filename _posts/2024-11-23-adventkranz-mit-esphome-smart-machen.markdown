@@ -8,12 +8,9 @@ image: /img/blog/smarter_Adventkranz/blog-post-smarter-adbentkranz.png
 published: true
 ---
 
+
 <div style="text-align: center;">
-    <h2>Adventskalender Einstellungen</h2>
-    <label for="year-select" style="font-weight: bold; margin-bottom: 10px; display: block;">Jahr auswählen:</label>
-    <select id="year-select" class="styled-select">
-        <option value="all">Alle Jahre</option>
-    </select>
+    <img src="/img/blog/smarter_Adventkranz/blog-post-smarter-adbentkranz.png" alt="Titelbild" style="max-width: 60%; height: auto; border-radius: 10px; margin-bottom: 30px;">
 </div>
 
 
