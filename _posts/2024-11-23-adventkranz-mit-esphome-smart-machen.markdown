@@ -9,38 +9,57 @@ published: true
 ---
 
 
+
+
+
+
 <div style="text-align: center;">
     <img src="/img/blog/smarter_Adventkranz/blog-post-smarter-adbentkranz.png" alt="Titelbild" style="max-width: 60%; height: auto; border-radius: 10px; margin-bottom: 30px;">
 </div>
 
 
-## Einen smarten Adventkranz bauen
+<h2>Einen smarten Adventkranz bauen</h2>
 
-Da meine Frau und ich das Glück haben, bei zwei unglaublich süßen Katern wohnen zu dürfen, ist es leider nicht möglich echte, brennende Kerzen in der Wohnung zu nutzen. Weil wir aber dennoch gerne zur Weihnachtszeit einen Adventkranz aufstellen und dieser natürlich leuchtende Kerzen haben soll, kam mir die Idee einfach einen smarten Adventkranz und diesen voll Automatisiert zu bauen.
+<p>
+    Da meine Frau und ich das Glück haben, bei zwei unglaublich süßen Katern wohnen zu dürfen, ist es leider nicht möglich, echte, brennende Kerzen in der Wohnung zu nutzen. 
+    Da wir dennoch gerne zur Weihnachtszeit einen Adventkranz aufstellen und dieser natürlich leuchtende Kerzen haben soll, kam mir die Idee, einfach einen smarten Adventkranz zu bauen und diesen voll automatisiert zu gestalten.
+</p>
 
-## Schritt 1. Verwendete Komponenten
+<h3>Schritt 1. Verwendete Komponenten</h3>
 
-Was habe ich zum Bau des smarten Adventkranz benötigt.
+<p>Was habe ich zum Bau des smarten Adventkranzes benötigt:</p>
 
-1. einen künstlichen, optisch ansprechenden Kranz
-2. 4 Batteriebetriebene Echtwachs-Kerzen
-3. Einen ESP32 Microkontroller
-4. Ein Netzteil und Micro-USB Kabel
-4. Ein paar Klemmen und Draht
+<ol>
+    <li>Einen künstlichen, optisch ansprechenden Kranz</li>
+    <li>Vier batteriebetriebene Echtwachs-Kerzen</li>
+    <li>Einen ESP32-Mikrocontroller</li>
+    <li>Ein Netzteil und ein Micro-USB-Kabel</li>
+    <li>Ein paar Klemmen und Draht</li>
+</ol>
 
-Die meisten der Komponenten könnt ihr in meinem Amazon-Shop ansehen und gerne kaufen.
-Hier der Link zum Amazon Shop
+<p>
+    Die meisten der Komponenten könnt ihr in meinem 
+    <a href="https://amzn.to/4fK08yu" target="_blank" style="color: white; text-decoration: none;">
+        <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Link zum Shop</button>
+    </a> 
+    ansehen und gerne kaufen.
+</p>
 
-https://amzn.to/4fK08yu
+<h3>Schritt 2. Zusammenbau</h3>
 
-## Schritt 2. Zusammenbau
+<p>
+    Als alle Teile zuhause angekommen waren, habe ich mich daran gemacht, die Kerzen für den Anschluss an den Mikrocontroller vorzubereiten.
+    Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batteriekammer führte. In dieses Loch habe ich zwei Drähte mit 0,5 mm (Farbe schwarz und grün) eingeführt und an die Batteriekontakte gelötet.
+</p>
 
-Als alle Teile zuhause angekommen sind, habe ich mich darangemacht die Kerzen für den Anschluss an den Micokontroller vorzubereiten.
-Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batterie-Kammer führte. In diese Loch habe ich zwei Drähte mit 0,5mm (Farbe schwarz und grün) eingeführt und an die Batteriekontakte gelötet.
+<div style="text-align: center;">
+    <a href="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" target="_blank">
+        <img src="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
+    </a>
+</div>
 
+<h3>Advent-Kalender Termine</h3>
 
-
-## Advent-Kalender Termine
 
 <div style="text-align: center;">
     <label for="year-select" style="font-weight: bold; margin-bottom: 10px; display: block;">Jahr auswählen:</label>
