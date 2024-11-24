@@ -9,12 +9,10 @@ published: true
 ---
 
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.4/index.global.min.js"></script>
+
 </head>
 
 <div style="text-align: center;">
@@ -72,39 +70,19 @@ published: true
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Code für den Copy-Button
-    document.querySelectorAll('.copy-button').forEach((button) => {
-        button.addEventListener('click', () => {
-            const codeBlock = button.nextElementSibling.querySelector('code');
-            const code = codeBlock.innerText;
-            navigator.clipboard.writeText(code).then(() => {
-                button.textContent = 'Copied!';
-                setTimeout(() => {
-                    button.textContent = 'Copy';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
-        });
-    });
+    var calendarEl = document.getElementById("calendar");
 
-    // Code für FullCalendar
-    var calendarEl = document.getElementById('calendar');
     if (calendarEl) { // Sicherstellen, dass das Kalender-Element existiert
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'de', // Sprache auf Deutsch setzen
-            events: '/assets/calendar/advent_calendar.ics', // Pfad zur ICS-Datei
-            eventSourceSuccess: function(content) {
-                console.log("ICS-Datei erfolgreich geladen.");
-                return FullCalendar.parseICal(content); // ICS-Datei parsen
-            },
-            eventSourceFailure: function(error) {
-                console.error("Fehler beim Laden der ICS-Datei: ", error);
+            initialView: "dayGridMonth",
+            locale: "de", // Sprache auf Deutsch setzen
+            plugins: [ 'iCalendar' ], // icalendar Plugin einfügen
+            events: {
+                url: "/assets/calendar/advent_calendar.ics", // Pfad zur ICS-Datei
+                format: "ics"
             }
         });
         calendar.render();
     }
 });
-
 </script>
