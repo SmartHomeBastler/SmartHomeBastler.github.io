@@ -4,7 +4,7 @@ title: "Eigene Schriftart in Home Assistant integrieren"
 date: 2023-05-03 06:58:00
 categories: Dashboard
 description: "Einen Weg, eigene Schriftarten in Home Assistant einzufügen, zeige ich hier."
-image: /img/blog-post-eigene-schriftarten.png
+image: /img/blog/eigene_Schriftart/blog-post-eigene-schriftarten.png
 published: true
 ---
 
@@ -17,7 +17,7 @@ published: true
 </head>
 
 <div style="text-align: center;">
-    <img src="/img/blog-post-eigene-schriftarten.png" alt="Titelbild" style="max-width: 60%; height: auto;height: auto; border-radius: 10px; margin-bottom: 30px;">
+    <img src="/img/blog/eigene_Schriftart/blog-post-eigene-schriftarten.png" alt="Titelbild" style="max-width: 60%; height: auto;height: auto; border-radius: 10px; margin-bottom: 30px;">
 </div>
 
 
@@ -28,7 +28,7 @@ Ich wollte unbedingt für meine Dashboards eine Schriftart zur Auswahl haben, we
 Da ich als "font-family" keine passende Schrift gefunden habe, fügte ich mir eine im Netz gefundene in Home Assistant hinzu.
 Hier die notwendigen Schritte und Codes zum Nachmachen:
 
-![Digitale Uhr](/img/blog-post-eigene-schriftart-digital-uhr.png)
+![Digitale Uhr](/img/blog/eigene_Schriftart/blog-post-eigene-schriftart-digital-uhr.png)
 
 - Lade dir eine Schrift deiner Wahl aus dem Internet z.B von [https://www.1001fonts.com/technology-font.html](https://www.1001fonts.com/technology-font.html)
 
@@ -95,7 +95,7 @@ card_mod:
 
 In meinem Fall sieht das Endergebnis so aus:
 
-![Digitale Uhr 2](/img/blog-post-eigene-schriftart-digital-uhr-2.png)
+![Digitale Uhr 2](/img/blog/eigene_Schriftart/blog-post-eigene-schriftart-digital-uhr-2.png)
 
 <style>
     /* Hintergrundfarbe und Rahmen für den Code-Container */
