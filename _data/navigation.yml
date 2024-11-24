@@ -20,6 +20,8 @@
 - name: Beiträge
   link: /blog/
   dropdown:
+    - name: Smarter Adventkranz
+      link: /dashboard/202411/24/adventkranz-mit-esphome-smart-machen/
     - name: Eigene Schriftarten
       link: /dashboard/2023/05/03/eigene-schriftart-in-homeassistant-integrieren/
 - name: Müllerinnerung Tools
