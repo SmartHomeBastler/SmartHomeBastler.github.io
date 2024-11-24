@@ -227,8 +227,10 @@ Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batterie-
 
         // Event-Listener für die Jahresauswahl
         yearSelect.addEventListener("change", function () {
-            filterEventsByYear(this.value === "Dieses Jahr" ? new Date().getFullYear() : this.value);
+            const selectedYear = this.value === "Dieses Jahr" ? new Date().getFullYear() : this.value;
+            filterEventsByYear(selectedYear);
         });
     });
 </script>
+
 
