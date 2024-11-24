@@ -62,6 +62,112 @@ published: true
     </a>
 </div>
 
+<h3>ESPHome Programmierung</h3>
+
+<div class="code-container">
+    <button class="copy-button">Copy</button>
+    <pre class="line-numbers"><code class="language-yaml">
+        # WICHTIG! Du musst card-mod installiert haben um den Stil der Karte zu ändern!
+
+        esphome:
+        name: adventkranz
+        friendly_name: Adventkranz
+
+        esp32:
+        board: wemos_d1_mini32
+        framework:
+            type: arduino
+
+        # Enable logging
+        logger:
+
+        # Enable Home Assistant API
+        api:
+        encryption:
+            key: "DEIN-ENCRYPTION-KEY"
+
+        ota:
+        - platform: esphome
+            password: "DEIN-OTA-PASSWORT"
+
+        #Web server
+        web_server:
+        port: 80
+
+        # WIFI Einstellungen mit statischer IP
+        wifi:
+        ssid: !secret wifi_ssid
+        password: !secret wifi_password
+        manual_ip:
+            static_ip: 192.168.50.211
+            gateway: 192.168.50.1
+            subnet: 255.255.255.0
+
+        # Enable fallback hotspot (captive portal) in case wifi connection fails
+        ap:
+            ssid: "Adventkranz Fallback Hotspot"
+            password: "DEIN PASSWORT"
+
+        captive_portal:
+
+
+        light:
+        - platform: binary
+            name: "Kerze1"
+            output: light_kerze1
+        - platform: binary
+            name: "Kerze2"
+            output: light_kerze2
+        - platform: binary
+            name: "Kerze3"
+            output: light_kerze3
+        - platform: binary
+            name: "Kerze4"
+            output: light_kerze4
+        - platform: binary
+            name: "Kette"
+            output: light_kette
+
+        output:
+        - id: light_kerze1
+            platform: gpio
+            pin: GPIO12
+        - id: light_kerze2
+            platform: gpio
+            pin: GPIO14
+        - id: light_kerze3
+            platform: gpio
+            pin: GPIO33
+        - id: light_kerze4
+            platform: gpio
+            pin: GPIO32
+        - id: light_kette
+            platform: gpio
+            pin: GPIO27
+    </code></pre>
+</div>
+
+<h3>Helfer Template anlegen</h3>
+
+<p>
+    Name: Advent<br>
+    Icon: mdi:pine-tree-variant-outline
+</p>
+
+<div class="code-container">
+    <button class="copy-button">Copy</button>
+    <pre class="line-numbers"><code class="language-yaml">
+        {% set ADVENTKAL = states.calendar.advent.state %}
+        {%- if ADVENTKAL == 'off' %}
+        Kein Advent!
+        {%- elif ADVENTKAL == 'on' %}
+        {{ states.calendar.advent.attributes.message }}
+        {% else %}
+        FEHLER
+        {%- endif %}
+    </code></pre>
+</div>
+
 <h3>Advent-Kalender Termine</h3>
 
 
@@ -148,6 +254,43 @@ published: true
 
     .download-button:hover {
         background-color: #0056b3;
+    }
+    .code-container {
+        position: relative;
+        background-color: #fdfdfd; /* Heller Hintergrund */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    /* Stil für Code-Text */
+    .code-container code {
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #333; /* Dunklere Textfarbe für bessere Lesbarkeit */
+    }
+
+    /* Stil für den Copy-Button */
+    .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #007acc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 0.85em;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    /* Hover-Effekt für den Copy-Button */
+    .copy-button:hover {
+        background: #005a9c;
     }
 </style>
 
