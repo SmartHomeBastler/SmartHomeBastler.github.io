@@ -57,12 +57,25 @@ published: true
 </p>
 
 <code>
-{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Batteriekammer des Adventkranzes" %}
+{% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" %}
 </code>
 
 <div style="text-align: center;">
-    <a href="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" target="_blank">
-        <img src="/img/blog/smarter_Adventkranz/Batteriekammer.JPEG" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
+    <a href="/img/blog/smarter_Adventkranz/Batteriekammer_k.png" target="_blank">
+        <img src="/img/blog/smarter_Adventkranz/Batteriekammer.png" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
+    </a>
+</div>
+
+
+<div style="text-align: center;">
+    <a href="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" target="_blank">
+        <img src="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
+    </a>
+</div>
+
+<div style="text-align: center;">
+    <a href="/img/blog/smarter_Adventkranz/Platine_obern_k.png" target="_blank">
+        <img src="/img/blog/smarter_Adventkranz/Platine_obern.png" alt="Batteriekammer des Adventkranzes" style="max-width: 60%; border-radius: 10px; margin-top: 20px;">
     </a>
 </div>
 
