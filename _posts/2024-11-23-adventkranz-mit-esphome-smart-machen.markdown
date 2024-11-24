@@ -19,20 +19,26 @@ published: true
 </a>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
+document.addEventListener("DOMContentLoaded", function () {
+    var calendarEl = document.getElementById("calendar");
 
-        if (calendarEl) {
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: "dayGridMonth",
-                locale: "de",
-                events: {
-                    url: "/assets/calendar/advent_calendar.ics", // Pfad zur ICS-Datei
-                    format: "ics"
+    if (calendarEl) {
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: "dayGridMonth",
+            locale: "de",
+            events: {
+                url: "/assets/calendar/advent_calendar.ics", // Pfad zur ICS-Datei
+                format: "ics"
+            },
+            loading: function (isLoading) {
+                if (!isLoading) {
+                    console.log("Alle Events geladen.");
                 }
-            });
-            calendar.render();
-        }
-    });
+            }
+        });
+        calendar.render();
+    }
+});
+
 </script>
 
