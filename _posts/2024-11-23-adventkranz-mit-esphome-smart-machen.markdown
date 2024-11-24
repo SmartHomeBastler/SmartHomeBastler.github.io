@@ -9,22 +9,89 @@ published: true
 ---
 
 <div style="text-align: center;">
-    <img src="/img/blog/smarter_Adventkranz/blog-post-smarter-adbentkranz.png" alt="Titelbild" style="max-width: 60%; height: auto; border-radius: 10px; margin-bottom: 30px;">
-</div>
-
-<!-- Dropdown-Menü für die Jahresauswahl -->
-<div style="margin-bottom: 20px; text-align: center;">
-    <label for="year-select">Jahr auswählen: </label>
-    <select id="year-select">
+    <h2>Adventskalender Einstellungen</h2>
+    <label for="year-select" style="font-weight: bold; margin-bottom: 10px; display: block;">Jahr auswählen:</label>
+    <select id="year-select" class="styled-select">
         <option value="all">Alle Jahre</option>
     </select>
 </div>
 
-<div id="event-table" style="margin: 20px 0;"></div>
+<div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
 
-<a href="/assets/calendar/advent_calendar.ics" download="Adventskalender.ics">
+<a href="/assets/calendar/advent_calendar.ics" download="Adventskalender.ics" class="download-button">
   📅 Adventskalender herunterladen
 </a>
+
+<style>
+    /* Allgemeines Styling für Dropdown-Menü */
+    .styled-select {
+        width: 200px;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+        cursor: pointer;
+    }
+
+    /* Tabellencontainer */
+    .styled-table-container {
+        margin: auto;
+        width: 80%;
+    }
+
+    /* Tabellenstyling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        margin: 20px 0;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 10px;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+        border-bottom: 2px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    td {
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Download-Button */
+    .download-button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        font-size: 14px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .download-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
