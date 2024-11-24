@@ -19,18 +19,16 @@ published: true
 </a>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        window.ICAL = ical; // Fix für das erwartete ICAL-Objekt
-
+    document.addEventListener("DOMContentLoaded", function () {
         var calendarEl = document.getElementById("calendar");
 
         if (calendarEl) {
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: "dayGridMonth",
-                locale: "de", // Sprache auf Deutsch setzen
+                locale: "de",
                 events: {
                     url: "/assets/calendar/advent_calendar.ics", // Pfad zur ICS-Datei
-                    format: "ics" // Format der Datei definieren
+                    format: "ics"
                 }
             });
             calendar.render();
