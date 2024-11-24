@@ -14,8 +14,16 @@ published: true
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
 </head>
 
+
+<div id="calendar" style="max-width: 900px; margin: auto; margin-top: 20px;"></div>
+
+<a href="/assets/calendar/advent_calendar.ics" download="Adventskalender.ics">
+  📅 Adventskalender herunterladen
+</a>
 
 
 
@@ -62,6 +70,7 @@ published: true
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+    // Code für den Copy-Button
     document.querySelectorAll('.copy-button').forEach((button) => {
         button.addEventListener('click', () => {
             const codeBlock = button.nextElementSibling.querySelector('code');
@@ -76,5 +85,19 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     });
+
+    // Code für FullCalendar
+    var calendarEl = document.getElementById('calendar');
+    if (calendarEl) { // Sicherstellen, dass das Kalender-Element existiert
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'de', // Sprache auf Deutsch setzen
+            events: '/assets/calendar/advent_calendar.ics', // Pfad zur ICS-Datei
+            eventSourceSuccess: function(content) {
+                return FullCalendar.parseICal(content); // ICS-Datei parsen
+            }
+        });
+        calendar.render();
+    }
 });
 </script>
