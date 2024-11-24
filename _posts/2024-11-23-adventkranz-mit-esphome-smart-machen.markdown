@@ -9,14 +9,14 @@ published: true
 ---
 
 <head>
-    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern (helles Theme) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
 </head>
+
 
 
 <div id="calendar" style="max-width: 900px; margin: auto; margin-top: 20px;"></div>
@@ -94,10 +94,15 @@ document.addEventListener("DOMContentLoaded", function() {
             locale: 'de', // Sprache auf Deutsch setzen
             events: '/assets/calendar/advent_calendar.ics', // Pfad zur ICS-Datei
             eventSourceSuccess: function(content) {
+                console.log("ICS-Datei erfolgreich geladen.");
                 return FullCalendar.parseICal(content); // ICS-Datei parsen
+            },
+            eventSourceFailure: function(error) {
+                console.error("Fehler beim Laden der ICS-Datei: ", error);
             }
         });
         calendar.render();
     }
 });
+
 </script>
