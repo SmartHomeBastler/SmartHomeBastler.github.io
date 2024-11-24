@@ -265,7 +265,8 @@ FEHLER
         border-radius: 5px;
         padding: 15px;
         margin-bottom: 20px;
-        overflow: hidden;
+        overflow: auto; /* Scrollbar hinzufügen */
+        max-height: 300px; /* Maximale Höhe festlegen */
     }
 
     /* Stil für Code-Text */
