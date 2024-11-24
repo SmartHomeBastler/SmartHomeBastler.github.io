@@ -8,9 +8,13 @@ image: /img/blog/smarter_Adventkranz/blog-post-smarter-adbentkranz.png
 published: true
 ---
 
-
-
-
+<head>
+    <!-- Einbindung von Prism.js für Syntaxhervorhebung und Zeilennummern (helles Theme) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+</head>
 
 
 <div style="text-align: center;">
@@ -38,12 +42,12 @@ published: true
 </ol>
 
 <p>
-    Die meisten der Komponenten könnt ihr in meinem 
-    <a href="https://amzn.to/4fK08yu" target="_blank" style="color: white; text-decoration: none;">
-        <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Link zum Shop</button>
-    </a> 
-    ansehen und gerne kaufen.
+    Die meisten der Komponenten könnt ihr in meinem Amazon Shop ansehen und gerne kaufen.
 </p>
+
+<a href="https://amzn.to/4fK08yu" target="_blank" style="color: white; text-decoration: none;">
+<button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Link zum Shop</button>
+</a>
 
 <h3>Schritt 2. Zusammenbau</h3>
 
