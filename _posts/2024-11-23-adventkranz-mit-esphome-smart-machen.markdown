@@ -16,10 +16,37 @@ published: true
     </select>
 </div>
 
+
+## Einen smarten Adventkranz bauen
+
+Da meine Frau und ich das Glück haben, bei zwei unglaublich süßen Katern wohnen zu dürfen, ist es leider nicht möglich echte, brennende Kerzen in der Wohnung zu nutzen. Weil wir aber dennoch gerne zur Weihnachtszeit einen Adventkranz aufstellen und dieser natürlich leuchtende Kerzen haben soll, kam mir die Idee einfach einen smarten Adventkranz und diesen voll Automatisiert zu bauen.
+
+## Schritt 1. Verwendete Komponenten
+
+Was habe ich zum Bau des smarten Adventkranz benötigt.
+
+1. einen künstlichen, optisch ansprechenden Kranz
+2. 4 Batteriebetriebene Echtwachs-Kerzen
+3. Einen ESP32 Microkontroller
+4. Ein Netzteil und Micro-USB Kabel
+4. Ein paar Klemmen und Draht
+
+Die meisten der Komponenten könnt ihr in meinem Amazon-Shop ansehen und gerne kaufen.
+Hier der Link zum Amazon Shop
+
+https://amzn.to/4fK08yu
+
+## Schritt 2. Zusammenbau
+
+Als alle Teile zuhause angekommen sind, habe ich mich darangemacht die Kerzen für den Anschluss an den Micokontroller vorzubereiten.
+Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batterie-Kammer führte. In diese Loch habe ich zwei Drähte mit 0,5mm (Farbe schwarz und grün) eingeführt und an die Batteriekontakte gelötet.
+
+
+
 <div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
 
-<a href="/assets/calendar/advent_calendar.ics" download="Adventskalender.ics" class="download-button">
-  📅 Adventskalender herunterladen
+<a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics" class="download-button">
+  📅 Advent-Kalender ICS herunterladen
 </a>
 
 <style>
