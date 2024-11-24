@@ -56,12 +56,20 @@ published: true
     Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batteriekammer führte. In dieses Loch habe ich zwei Drähte mit 0,5 mm (Farbe schwarz und grün) eingeführt und an die Batteriekontakte gelötet.
 </p>
 
-
+<div class="columns">
+<div class="column is-6">
 {% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Batteriekammer_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.png" %}
+</div>
 
+<div class="columns">
+<div class="column is-6">
 {% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
+</div>
 
+<div class="columns">
+<div class="column is-6">
 {% include image-modal.html ratio="is-16by9" link="/img/blog/smarter_Adventkranz/Platine_obern_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Platine_obern.png" %}
+</div>
 
 
 
