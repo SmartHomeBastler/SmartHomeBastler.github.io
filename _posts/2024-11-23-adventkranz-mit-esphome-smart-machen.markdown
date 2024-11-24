@@ -71,15 +71,11 @@ published: true
 
         // Funktion zum Filtern der Events nach Jahr
         function filterEventsByYear(year) {
-            if (year === "all") {
-                createTable(allEvents); // Alle Events anzeigen
-            } else {
-                const filteredEvents = allEvents.filter(event => {
-                    const eventYear = new Date(event.start).getFullYear();
-                    return eventYear === parseInt(year, 10);
-                });
-                createTable(filteredEvents);
-            }
+            const filteredEvents = allEvents.filter(event => {
+                const eventYear = new Date(event.start.split('.').reverse().join('-')).getFullYear();
+                return year === "all" || eventYear === parseInt(year, 10);
+            });
+            createTable(filteredEvents);
         }
 
         // ICS-Datei laden und Events extrahieren
@@ -103,27 +99,29 @@ published: true
                     };
                 });
 
-                // Jahre für die Auswahl extrahieren
-                const years = Array.from(new Set(allEvents.map(event => {
-                    return new Date(event.start.split('.').reverse().join('-')).getFullYear();
-                }))).sort();
+                // Dropdown mit "Dieses Jahr" und den nächsten 10 Jahren füllen
+                const currentYear = new Date().getFullYear();
+                const years = Array.from({ length: 11 }, (_, i) => currentYear + i);
+                years.unshift("Dieses Jahr"); // "Dieses Jahr" als ersten Eintrag hinzufügen
 
                 // Dropdown-Menü füllen
                 years.forEach(year => {
                     const option = document.createElement("option");
-                    option.value = year;
+                    option.value = year === "Dieses Jahr" ? currentYear : year;
                     option.textContent = year;
+                    if (year === "Dieses Jahr") option.selected = true; // "Dieses Jahr" als Standardwert
                     yearSelect.appendChild(option);
                 });
 
-                // Initiale Tabelle mit allen Events erstellen
-                createTable(allEvents);
+                // Tabelle basierend auf dem aktuellen Jahr anzeigen
+                filterEventsByYear(currentYear);
             })
             .catch(error => console.error("Fehler beim Laden der ICS-Datei:", error));
 
         // Event-Listener für die Jahresauswahl
         yearSelect.addEventListener("change", function () {
-            filterEventsByYear(this.value);
+            filterEventsByYear(this.value === "Dieses Jahr" ? new Date().getFullYear() : this.value);
         });
     });
 </script>
+
