@@ -46,11 +46,15 @@ Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batterie-
 ## Advent-Kalender Termine
 
 <div style="text-align: center;">
+    <h2>Adventskalender Einstellungen</h2>
     <label for="year-select" style="font-weight: bold; margin-bottom: 10px; display: block;">Jahr auswählen:</label>
     <select id="year-select" class="styled-select">
         <option value="all">Alle Jahre</option>
     </select>
 </div>
+
+<div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
+
 
 <div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
 
