@@ -1405,12 +1405,16 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 {% raw %}
     function generateConditionsAsText(assignments, hasSack, conditionDay) {
         let yaml = `{% if `;
-    
-        const combinations = getAllCombinations(assignments);
+
+        // Hole alle Kombinationen und sortiere sie nach Länge (absteigend)
+        const combinations = getAllCombinations(assignments).sort((a, b) => b.length - a.length);
+
         combinations.forEach((combination, index) => {
-            const condition = combination.map(a => `${a.customName.toUpperCase().replace(/\s+/g, "")} == "${conditionDay}"`).join(" and ");
+            const condition = combination
+                .map(a => `${a.customName.toUpperCase().replace(/\s+/g, "")} == "${conditionDay}"`)
+                .join(" and ");
             const output = generateOutputText(combination, hasSack);
-    
+
             if (index === 0) {
                 yaml += `${condition} %}\n`;
             } else {
@@ -1418,9 +1422,9 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             }
             yaml += `    ${output}\n`;
         });
-    
+
         yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
-    
+
         return yaml;
     }
 {% endraw %}
