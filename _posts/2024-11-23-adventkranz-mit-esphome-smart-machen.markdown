@@ -36,6 +36,7 @@ published: true
 <ol>
     <li>Einen künstlichen, optisch ansprechenden Kranz</li>
     <li>Vier batteriebetriebene Echtwachs-Kerzen</li>
+    <li>Eine batteriebetriebene Lichterkette (1m)</li>
     <li>Einen ESP32-Mikrocontroller</li>
     <li>Ein Netzteil und ein Micro-USB-Kabel</li>
     <li>Ein paar Klemmen und Draht</li>
@@ -53,7 +54,7 @@ published: true
 
 <p>
     Als alle Teile zuhause angekommen waren, habe ich mich daran gemacht, die Kerzen für den Anschluss an den Mikrocontroller vorzubereiten.
-    Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batteriekammer führte. In dieses Loch habe ich zwei Drähte mit 0,5 mm (Farbe schwarz und grün) eingeführt und an die Batteriekontakte gelötet.
+    Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batteriekammer führte. In dieses Loch habe ich zwei Drähte mit 0,5 mm (Farbe schwarz und grün) eingeführt und um die Kerze nicht auseinandernehmen zu müssen, habe ich die Drähte einfach an die Batteriekontakte gelötet. Den Schalter der Kerze habe ich bei allen fix auf <strong>"on"</strong> gelassen. Die einmetrige Lichterkette habe ich von der Batteriebox getrennt und die Adern des Kabels für den Anschluss an den Microcontroller vorbereitet.
 </p>
 
 <div class="columns is-centered">
@@ -69,7 +70,7 @@ published: true
     Dieses Schema und das Pinout des Microcontrollers könnt ihr euch hier ansehen und bei Bedarf als PDF herunterladen. Um die Kerzen nicht immmer vom Microcontroller abklemmen zu müssen, habe ich mir Klemmen mit Stecker besorgt und diese dann, für mich übersichtlich, auf der Platine angeordnet.<br> 
     Verdrahtet habe ich die Platine mit 0,5mm² Drähten in verschiedenen Farben. Der Microcontroller selbst, ist nicht fix auf die Platine gelötet, sondern auch mit Steckleisten versehen um ihn bei Bedarf ohne Umstände tauschen zu können.
 </p>
-D:\SmartHomeBastler\8_Github\SmartHomeBastler.github.io\img\blog\smarter_Adventkranz\
+
 <div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
@@ -91,27 +92,19 @@ D:\SmartHomeBastler\8_Github\SmartHomeBastler.github.io\img\blog\smarter_Adventk
 </div>
 </div>
 
-<div class="columns is-centered">
-<div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine.png" %}
-</div>
-</div>
+<h3>Schritt 4. ESPHome Programmierung</h3>
 
-<div class="columns is-centered">
-<div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1.png" %}
-</div>
-</div>
+<p>
+    Als nächstes ging es um die Programmierung. Ich habe den Microcontroller mit einem Mikro-USB-Kabel für Datenübertragung an meinen Arbeits-PC angeschlossen. Dann habe ich Home Assistant in meinem Google Chrome Browser geöffnet, da ich festgestellt habe, das es bei anderen Browsern vermehrt Probleme mit den USB-Treibern bei der Installation von ESP Modulen gibt. In Home Assistant habe ich dann in ESPHome ein neuse Gerät eingebunden und dieses mit folgendem Code konfiguriert.
+</p>
+<p>
+    Eine kurze Beschreibung wie man in ESPHome ein Gerät hinzufügt, findest du im ⬇️ Dropdown ⬇️
+</p>
 
-
-
-<h3>ESPHome Programmierung</h3>
 
 <div class="code-container">
     <button class="copy-button">Copy</button>
     <pre class="line-numbers"><code class="language-yaml">
-# WICHTIG! Du musst card-mod installiert haben um den Stil der Karte zu ändern!
-
 esphome:
 name: adventkranz
 friendly_name: Adventkranz
@@ -133,7 +126,7 @@ ota:
 - platform: esphome
     password: "DEIN-OTA-PASSWORT"
 
-#Web server
+#Web server für "VISIT"
 web_server:
 port: 80
 
@@ -142,8 +135,8 @@ wifi:
 ssid: !secret wifi_ssid
 password: !secret wifi_password
 manual_ip:
-    static_ip: 192.168.50.211
-    gateway: 192.168.50.1
+    static_ip: 192.168.50.211 # Ich nutze grundsätzlich statische IP´s
+    gateway: 192.168.50.1     # Änder diese Einträge für dich passend um!
     subnet: 255.255.255.0
 
 # Enable fallback hotspot (captive portal) in case wifi connection fails
@@ -152,7 +145,6 @@ ap:
     password: "DEIN PASSWORT"
 
 captive_portal:
-
 
 light:
 - platform: binary
@@ -190,7 +182,61 @@ output:
     </code></pre>
 </div>
 
-<h3>Helfer Template anlegen</h3>
+<p>
+    Nachdem der Microcontroller mit dem Programm konfiguriert wurde, ging es an das Testen.<br>
+    Ich habe die Kerzen und die Lichterkette angeschlossen, den Microcontroller über ein Micro-USB-Kabel mit Strom versorgt und dann im Browser die VISIT-Seite geöffnet. Hier kann mann alle konfigurierten Schalter betätigen und so die Funktion kontrollieren.
+</p>
+
+<h3>Schritt 5. Kalender einrichten</h3>
+
+<p>
+    Da ich den Adventkranz vollautomatisch betreiben möchte, habe ich mir einen Kalender mit den Advent-Tagen erstellt. Bei uns bleibt der Weihnachtsbaum und auch der Adventkranz bis zum 6.Jänner stehen.<br>
+    Aus diesem Grund hat dieser Kalender folgende Einträge:
+</p>
+
+<ol>
+    <li><strong>1.Advent</strong>: Jählich ab dem 1. Adventsonnstag</li>
+    <li><strong>2.Advent</strong>: Jählich ab dem 2. Adventsonnstag</li>
+    <li><strong>3.Advent</strong>: Jählich ab dem 3. Adventsonnstag</li>
+    <li><strong>4.Advent</strong>: Jählich ab dem 4. Adventsonnstag</li>
+    <li><strong>XMAS</strong>: Jählich ab dem 24.Dezember bis zum 6.Jänner</li>
+</ol>
+
+<p>
+Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen und ihn wenn du möchtest herunterladen.
+</p>
+
+<div style="text-align: center;">
+    <label for="year-select" style="font-weight: bold; margin-bottom: 10px; display: block;">Jahr auswählen:</label>
+    <select id="year-select" class="styled-select">
+        <option value="all">Alle Jahre</option>
+    </select>
+</div>
+
+<div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
+
+
+<div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
+
+<a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics" class="download-button">
+  📅 Advent-Kalender ICS herunterladen
+</a>
+
+<p>
+    Diesen Kalender habe ich in Home Assistant eingerichtet, um ihn für Automatisierungen und Templates zu nutzen.<br>
+    Wenn du wissen möchtest, wie man auf einfachem Weg in Home Assistant einen Kalender einrichtet, sieh in den ⬇️ Dropdown ⬇️
+</p>
+
+<h3>Schritt 6. Helfer Template anlegen</h3>
+
+<p>
+Um eine Anzeige in Home Assistant zu haben, welcher Status des Kalenders gerade zutrifft, habe ich ein Template angelegt, welches einen Sensor erstellt.
+</p>
+<p>
+Auch hierzu findest du eine Beschreibung im ⬇️ Dropdown ⬇️
+</p>
+
+<h4>Template für den Helfer:</h4>
 
 <p>
     Name: Advent<br>
@@ -213,25 +259,27 @@ FEHLER
     </code></pre>
 </div>
 
+<h3>Schritt 7. Automatisierung</h3>
 
-<h3>Advent-Kalender Termine</h3>
+<p>
+    Die Automatisierung war der letzte Schritt. 
+</p>
 
 
-<div style="text-align: center;">
-    <label for="year-select" style="font-weight: bold; margin-bottom: 10px; display: block;">Jahr auswählen:</label>
-    <select id="year-select" class="styled-select">
-        <option value="all">Alle Jahre</option>
-    </select>
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine.png" %}
+</div>
 </div>
 
-<div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1.png" %}
+</div>
+</div>
 
 
-<div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
 
-<a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics" class="download-button">
-  📅 Advent-Kalender ICS herunterladen
-</a>
 
 <style>
     /* Allgemeines Styling für Dropdown-Menü */
