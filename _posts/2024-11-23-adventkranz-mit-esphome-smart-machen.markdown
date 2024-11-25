@@ -56,33 +56,35 @@ published: true
     Dazu habe ich seitlich ein kleines Loch gebohrt, welches direkt in die Batteriekammer führte. In dieses Loch habe ich zwei Drähte mit 0,5 mm (Farbe schwarz und grün) eingeführt und an die Batteriekontakte gelötet.
 </p>
 
-<div class="columns">
-<div class="column is-3">
+<div class="columns is-centered">
+<div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Batteriekammer_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.png" %}
 </div>
 </div>
 
-<div class="columns">
-<div class="column is-3">
+<div class="columns is-centered">
+<div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
+</div>
+<div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout.png" %}
 </div>
 </div>
 
-<div class="columns">
-<div class="column is-3">
+<div class="columns is-centered">
+<div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Platine_obern_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Platine_obern.png" %}
 </div>
 </div>
 
-<div class="columns">
-<div class="column is-3">
+<div class="columns is-centered">
+<div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine.png" %}
 </div>
 </div>
 
-<div class="columns">
-<div class="column is-3">
+<div class="columns is-centered">
+<div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1.png" %}
 </div>
 </div>
@@ -267,7 +269,28 @@ FEHLER
     td {
         border-bottom: 1px solid #ddd;
     }
+    /* Zentrieren der gesamten Bildreihe */
+    .columns.is-centered {
+        justify-content: center;
+    }
 
+    /* Bildcontainer anpassen */
+    .column img {
+        display: block;
+        margin: auto;
+        max-width: 100%;
+    }
+
+    /* Abstand zwischen nebeneinander liegenden Bildern */
+    .columns .column {
+        padding: 10px;
+    }
+
+    /* Schatten um das Bild hinzufügen */
+    .column figure {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
     /* Download-Button */
     .download-button {
         display: inline-block;
