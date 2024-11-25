@@ -49,7 +49,7 @@ published: true
 <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Link zum Shop</button>
 </a>
 
-<h3>Schritt 2. Zusammenbau</h3>
+<h3>Schritt 2. Kerzen verdrahten</h3>
 
 <p>
     Als alle Teile zuhause angekommen waren, habe ich mich daran gemacht, die Kerzen für den Anschluss an den Mikrocontroller vorzubereiten.
@@ -62,12 +62,26 @@ published: true
 </div>
 </div>
 
+<h3>Schritt 3. Platine löten</h3>
+
+<p>
+    Um auch in der Zukunft noch zu wissen, wie ich den Microcontroller verdrahtet habe, zeichnete ich mir ein Schema in <strong>fritzing</strong>.<br> 
+    Dieses Schema und das Pinout des Microcontrollers könnt ihr euch hier ansehen und bei Bedarf als PDF herunterladen. Um die Kerzen nicht immmer vom Microcontroller abklemmen zu müssen, habe ich mir Klemmen mit Stecker besorgt und diese dann, für mich übersichtlich, auf der Platine angeordnet.<br> 
+    Verdrahtet habe ich die Platine mit 0,5mm² Drähten in verschiedenen Farben. Der Microcontroller selbst, ist nicht fix auf die Platine gelötet, sondern auch mit Steckleisten versehen um ihn bei Bedarf ohne Umstände tauschen zu können.
+</p>
+D:\SmartHomeBastler\8_Github\SmartHomeBastler.github.io\img\blog\smarter_Adventkranz\
 <div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
+<a href="/img/blog/smarter_Adventkranz/Smarter_Adventkranz_Anschluss.pdf" download="Smarter_Adventkranz_Anschluss.pdf" class="download-button">
+  📈 Anschlussplan
+</a>
 </div>
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout.png" %}
+<a href="/img/blog/smarter_Adventkranz/D1_Mini_ESP32_-_pinout.pdf" download="D1_Mini_ESP32_-_pinout.pdf" class="download-button">
+  📈 ESP32 Pinout
+</a>
 </div>
 </div>
 
