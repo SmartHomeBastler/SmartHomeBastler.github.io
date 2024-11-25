@@ -57,20 +57,33 @@ published: true
 </p>
 
 <div class="columns">
-<div class="column is-6">
+<div class="column is-9">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Batteriekammer_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.png" %}
 </div>
 </div>
 
 <div class="columns">
-<div class="column is-6">
+<div class="column is-9">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout.png" %}
 </div>
 </div>
 
 <div class="columns">
-<div class="column is-6">
+<div class="column is-9">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Platine_obern_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Platine_obern.png" %}
+</div>
+</div>
+
+<div class="columns">
+<div class="column is-9">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine.png" %}
+</div>
+</div>
+
+<div class="columns">
+<div class="column is-9">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1.png" %}
 </div>
 </div>
 
