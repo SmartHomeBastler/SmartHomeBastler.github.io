@@ -104,7 +104,7 @@ published: true
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
     <div id="galleryDropdown" class="dropdown-content" style="display: none;">
-        {% assign gallery_images = site.data.gallery_esp_new_device.yml %}
+        {% assign gallery_images = site.data.gallery_esp_new_device %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
                 <div class="column is-12">
