@@ -101,6 +101,33 @@ published: true
     Eine kurze Beschreibung wie man in ESPHome ein Gerät hinzufügt, findest du im ⬇️ Dropdown ⬇️
 </p>
 
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
+    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_esp_new_device.yml %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 <div class="code-container">
     <button class="copy-button">Copy</button>
@@ -407,6 +434,43 @@ FEHLER
     /* Hover-Effekt für den Copy-Button */
     .copy-button:hover {
         background: #005a9c;
+    }
+    .dropdown {
+        margin: 20px 0;
+        text-align: center;
+    }
+    .dropdown-toggle {
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f39c12;
+        color: #ffffff;
+        padding: 10px 5px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+    }
+    .dropdown-toggle.rotated {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg); /* Text von unten nach oben */
+        padding: 20px 30px;
+        width: 200px;
+        height: auto;
+    }
+    .dropdown-toggle span {
+        float: right;
+    }
+    .dropdown-content {
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #f39c12;
+        border-radius: 5px;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 </style>
 
