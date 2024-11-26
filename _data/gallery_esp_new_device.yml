@@ -1,4 +1,4 @@
-- title: Home Assistant - ESP Neues Gerät anlegen
+- title: Home Assistant - ESP - Neues Gerät anlegen,
   images:
     - link: /img/HA-Buttons/ESP_Anfang_Neu_k.png
       large_link: /img/HA-Buttons/ESP_Anfang_Neu.png
@@ -24,6 +24,9 @@
 
         Verbinde den Microcontroller mit einem Daten-USB-Kabel mit deinem PC. Danach klicke auf `CONNECT`
       ratio: is-3by2
+
+- title: Programmierung und Installation
+  images:
     - link: /img/HA-Buttons/ESP_Verbindung_auswaehlen_k.png
       large_link: /img/HA-Buttons/ESP_Verbindung_auswaehlen.png
       alt: ESP Verbindung
@@ -32,9 +35,6 @@
 
         Wähle nun den Microcontroller aus der Portliste aus und bestätige mit `Verbinden`
       ratio: is-3by2
-
-- title: ESP Programmierung und Installation
-  images:
     - link: /img/HA-Buttons/ESP_Code_Grundeinstellungen_k.png
       large_link: /img/HA-Buttons/ESP_Code_Grundeinstellungen.png
       alt: ESP Code
