@@ -293,6 +293,19 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
     </div>
 </div>
 
+<p>
+    In Home Assistant sieht der eingerichtete Kalender so aus:
+</p>
+
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Advent_Kalender_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Advent_Kalender.png" %}
+</div>
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Advent_Kalender_2_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Advent_Kalender_2.png" %}
+</div>
+</div>
+
 <h3>Schritt 6. Helfer Template anlegen</h3>
 
 <p>
@@ -353,6 +366,16 @@ FEHLER
     </code></pre>
 </div>
 
+<p>
+    Der installierte Sensor <strong>sensor.advent</strong> inkl. Labels zur einfacheren Sortierung kann hier angesehen werden:
+</p>
+
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Helfer_Sensor_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Helfer_Sensor_1.png" %}
+</div>
+</div>
+
 <h3>Schritt 7. Automatisierung</h3>
 
 <p>
@@ -396,6 +419,16 @@ Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
             {% endfor %}
         </div>
     </div>
+</div>
+
+<p>
+    Der fertig installierte Helfer <strong>input_boolean.adventkranz</strong> inkl. Labels zur einfacheren Sortierung ist hier anzusehen:
+</p>
+
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Helfer_Schalter_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Helfer_Schalter_1.png" %}
+</div>
 </div>
 
 <p>
