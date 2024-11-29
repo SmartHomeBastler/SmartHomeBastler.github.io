@@ -255,7 +255,7 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
 </p>
 
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Neuen lokalen Kalender einrichten <span>&#9660;</span></button>
     <div id="galleryDropdown2" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_kalender_erstellen %}
         <div class="columns is-multiline">
@@ -292,7 +292,7 @@ Auch hierzu findest du eine Beschreibung im ⬇️ Dropdown ⬇️
 </p>
 
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Template-Sensor Helfer einrichten <span>&#9660;</span></button>
     <div id="galleryDropdown3" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
         <div class="columns is-multiline">
@@ -352,7 +352,7 @@ FEHLER
 Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
 </p>
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">Helfer-Schalter einrichten <span>&#9660;</span></button>
     <div id="galleryDropdown4" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_schalter %}
         <div class="columns is-multiline">
