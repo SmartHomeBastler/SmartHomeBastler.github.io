@@ -133,12 +133,12 @@ published: true
     <button class="copy-button">Copy</button>
     <pre class="line-numbers"><code class="language-yaml">
 esphome:
-name: adventkranz
-friendly_name: Adventkranz
+  name: adventkranz
+  friendly_name: Adventkranz
 
 esp32:
-board: wemos_d1_mini32
-framework:
+  board: wemos_d1_mini32
+  framework:
     type: arduino
 
 # Enable logging
@@ -146,66 +146,66 @@ logger:
 
 # Enable Home Assistant API
 api:
-encryption:
+  encryption:
     key: "DEIN-ENCRYPTION-KEY"
 
 ota:
-- platform: esphome
+  - platform: esphome
     password: "DEIN-OTA-PASSWORT"
 
 #Web server für "VISIT"
 web_server:
-port: 80
+  port: 80
 
 # WIFI Einstellungen mit statischer IP
 wifi:
-ssid: !secret wifi_ssid
-password: !secret wifi_password
-manual_ip:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
     static_ip: 192.168.50.211 # Ich nutze grundsätzlich statische IP´s
     gateway: 192.168.50.1     # Änder diese Einträge für dich passend um!
     subnet: 255.255.255.0
 
 # Enable fallback hotspot (captive portal) in case wifi connection fails
 ap:
-    ssid: "Adventkranz Fallback Hotspot"
-    password: "DEIN PASSWORT"
+  ssid: "Adventkranz Fallback Hotspot"
+  password: "DEIN PASSWORT"
 
 captive_portal:
 
 light:
-- platform: binary
+  - platform: binary
     name: "Kerze1"
     output: light_kerze1
-- platform: binary
+  - platform: binary
     name: "Kerze2"
     output: light_kerze2
-- platform: binary
+  - platform: binary
     name: "Kerze3"
     output: light_kerze3
-- platform: binary
+  - platform: binary
     name: "Kerze4"
     output: light_kerze4
-- platform: binary
+  - platform: binary
     name: "Kette"
     output: light_kette
 
 output:
-- id: light_kerze1
+  - id: light_kerze1
+    platform: gpio
+    pin: GPIO0
+  - id: light_kerze2
     platform: gpio
     pin: GPIO12
-- id: light_kerze2
-    platform: gpio
-    pin: GPIO14
-- id: light_kerze3
+  - id: light_kerze3
     platform: gpio
     pin: GPIO33
-- id: light_kerze4
+  - id: light_kerze4
     platform: gpio
-    pin: GPIO32
-- id: light_kette
+    pin: GPIO14
+  - id: light_kette
     platform: gpio
-    pin: GPIO27
+    pin: GPIO25
     </code></pre>
 </div>
 
