@@ -24,11 +24,12 @@
 
         Wähle die Option `Template für einen Sensor erstellen`, um einen Template-Sensor für deinen Anwendungsfall zu definieren.
       ratio: is-3by2
-    - link: /img/HA-Buttons/Template_Helfer_angelegt_Mullerinnerung_k.png
-      large_link: /img/HA-Buttons/Template_Helfer_angelegt_Mullerinnerung.png
+    - link: /img/HA-Buttons/Template_Helfer_anlegen_k.png
+      large_link: /img/HA-Buttons/Template_Helfer_anlegen.png
       alt: Sensor Template einrichten
       description: |-
-        ### 4. Sensor Template: Müllabholung Heute
+        ### 4. Sensor Template einrichten
 
-        Füge einen Namen für den Sensor ein, wie z.B. `Müllabholung Heute`. Im Feld `Zustandstemplate` kannst du die Bedingungen mit Jinja2 definieren.
+        Füge einen individuellen Namen für den Sensor ein. Im Feld `Zustandstemplate` kannst du die Bedingungen mit Jinja2 definieren.
+        Bei Bedarf kannst du eine Maßeinheit, Geräteklasse, Zustandsklasse und ein Gerät wählen. Eine Vorschau des erstellten Sensors wird unten angezeigt.
       ratio: is-3by2
