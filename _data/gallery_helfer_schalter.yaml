@@ -17,7 +17,7 @@
         Wähle in der Liste den Eintrag `Schalter` aus, um einen neuen Input-Boolean Schalter anzulegen.
       ratio: is-3by2
     - link: /img/HA-Buttons/Schalter_Helfer_erstellem_k.png
-      large_link: /img/HA-Buttons/Schalter_Helfer_erstellem_k.png
+      large_link: /img/HA-Buttons/Schalter_Helfer_erstellem.png
       alt: Schalter einrichten
       description: |-
         ### 3. Schalter einrichten
