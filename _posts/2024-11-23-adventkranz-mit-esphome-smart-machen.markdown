@@ -321,10 +321,10 @@ Auch hierzu findest du eine Beschreibung im ⬇️ Dropdown ⬇️
 
 <h4>Template für den Helfer:</h4>
 
-<p>
-    Name: Advent<br>
-    Icon: mdi:pine-tree-variant-outline
-</p>
+<ul>
+    <li><strong>Name</strong>: Advent</li>
+    <li><strong>Icon</strong>: mdi:pine-tree-variant-outline</li>
+</ul>
 
 <div class="code-container">
     <button class="copy-button">Copy</button>
@@ -386,6 +386,143 @@ Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
         </div>
     </div>
 </div>
+
+<p>
+    Mit den Entitäten des ESP, des Kalender-Templates und des Schalters, konnte ich dann folgende Automatisierung anlegen.
+</p>
+
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+  <h2 style="text-align: center; color: #444;">Was macht nun diese Automatisierung?</h2>
+  <p style="line-height: 1.6; color: #555;">
+    Diese Automatisierung steuert den Adventskranz entsprechend des aktuellen Adventsstatus. 
+  </p>
+  <ul style="line-height: 1.6; color: #555;">
+    <li>
+      <strong>Wenn der Schalter "Adventskranz" eingeschaltet wird:</strong>
+      <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
+        <li>Es wird geprüft, welche Adventwoche gerade ist.</li>
+        <li>Je nach Woche werden 1 bis 4 Kerzen eingeschaltet.</li>
+        <li>Die Lichterkette wird immer eingeschaltet.</li>
+      </ul>
+    </li>
+    <li style="margin-top: 15px;">
+      <strong>Wenn der Schalter "Adventskranz" ausgeschaltet wird:</strong>
+      <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
+        <li>Alle Kerzen und die Lichterkette werden ausgeschaltet.</li>
+      </ul>
+    </li>
+  </ul>
+  <p style="margin-top: 20px; text-align: center; color: #777;">
+    Diese Automatisierung sorgt für eine stimmungsvolle Beleuchtung während der Adventszeit.
+  </p>
+</div>
+
+
+
+<div class="code-container">
+    <button class="copy-button">Copy</button>
+    <pre class="line-numbers"><code class="language-yaml">
+alias: Adventskranz Automatisierung
+description: Steuert den Adventskranz entsprechend des aktuellen Adventsstatus
+triggers:
+  - entity_id: input_boolean.adventkranz
+    to: "on"
+    trigger: state
+  - entity_id: input_boolean.adventkranz
+    to: "off"
+    trigger: state
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.adventkranz
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.advent
+                    state: 1.Advent
+                sequence:
+                  - target:
+                      entity_id:
+                        - light.adventkranz_kerze1
+                        - light.adventkranz_kette
+                    action: light.turn_on
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.advent
+                    state: 2.Advent
+                sequence:
+                  - target:
+                      entity_id:
+                        - light.adventkranz_kerze1
+                        - light.adventkranz_kerze2
+                        - light.adventkranz_kette
+                    action: light.turn_on
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.advent
+                    state: 3.Advent
+                sequence:
+                  - target:
+                      entity_id:
+                        - light.adventkranz_kerze1
+                        - light.adventkranz_kerze2
+                        - light.adventkranz_kerze3
+                        - light.adventkranz_kette
+                    action: light.turn_on
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.advent
+                    state: 4.Advent
+                sequence:
+                  - target:
+                      entity_id:
+                        - light.adventkranz_kerze1
+                        - light.adventkranz_kerze2
+                        - light.adventkranz_kerze3
+                        - light.adventkranz_kerze4
+                        - light.adventkranz_kette
+                    action: light.turn_on
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.advent
+                    state: XMAS
+                sequence:
+                  - target:
+                      entity_id:
+                        - light.adventkranz_kerze1
+                        - light.adventkranz_kerze2
+                        - light.adventkranz_kerze3
+                        - light.adventkranz_kerze4
+                        - light.adventkranz_kette
+                    action: light.turn_on
+                    data: {}
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.adventkranz
+            state: "off"
+        sequence:
+          - target:
+              entity_id:
+                - light.adventkranz_kerze1
+                - light.adventkranz_kerze2
+                - light.adventkranz_kerze3
+                - light.adventkranz_kerze4
+                - light.adventkranz_kette
+            action: light.turn_off
+            data: {}
+mode: single
+
+    </code></pre>
+</div>
+
 
 <div class="columns is-centered">
 <div class="column is-5">
