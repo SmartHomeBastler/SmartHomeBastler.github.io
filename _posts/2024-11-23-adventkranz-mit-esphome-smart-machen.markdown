@@ -221,13 +221,13 @@ output:
     Aus diesem Grund hat dieser Kalender folgende Einträge:
 </p>
 
-<ol>
+<ul>
     <li><strong>1.Advent</strong>: Jählich ab dem 1. Adventsonnstag</li>
     <li><strong>2.Advent</strong>: Jählich ab dem 2. Adventsonnstag</li>
     <li><strong>3.Advent</strong>: Jählich ab dem 3. Adventsonnstag</li>
     <li><strong>4.Advent</strong>: Jählich ab dem 4. Adventsonnstag</li>
     <li><strong>XMAS</strong>: Jählich ab dem 24.Dezember bis zum 6.Jänner</li>
-</ol>
+</ul>
 
 <p>
 Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen und ihn wenn du möchtest herunterladen.
@@ -345,16 +345,16 @@ FEHLER
 <h3>Schritt 7. Automatisierung</h3>
 
 <p>
-    Die Automatisierung war der letzte Schritt. Ich wollte einen Schalter, welcher den Adventkranz ein und ais schaltet. Welche und wieviele der Kerzen dabei eingeschaltet werden, übernimmt die Automatisierung.
+    Die Automatisierung war der letzte Schritt. Ich wollte einen Schalter, welcher den Adventkranz ein und aus schaltet. Welche und wieviele der Kerzen dabei eingeschaltet werden, übernimmt die Automatisierung.
 </p>
 
 <p>
-Zuerst der Schalter. Dieser ist ein Input-Boolean und ich habe dien bei den Helfern angelegt. 
+Zuerst der Schalter. Dieser ist ein Input-Boolean und ich habe diesen bei den Helfern angelegt. 
 </p>
-<ol>
+<ul>
     <li><strong>Name</strong>: Adventkranz</li>
     <li><strong>Icon</strong>: mdi:candle</li>
-</ol>
+</ul>
 
 <p>
 Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
@@ -391,9 +391,6 @@ Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine.png" %}
 </div>
-</div>
-
-<div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1.png" %}
 </div>
