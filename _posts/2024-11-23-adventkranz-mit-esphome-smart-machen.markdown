@@ -345,8 +345,16 @@ FEHLER
 <h3>Schritt 7. Automatisierung</h3>
 
 <p>
-    Die Automatisierung war der letzte Schritt. 
+    Die Automatisierung war der letzte Schritt. Ich wollte einen Schalter, welcher den Adventkranz ein und ais schaltet. Welche und wieviele der Kerzen dabei eingeschaltet werden, übernimmt die Automatisierung.
 </p>
+
+<p>
+Zuerst der Schalter. Dieser ist ein Input-Boolean und ich habe dien bei den Helfern angelegt. 
+</p>
+<ol>
+    <li><strong>Name</strong>: Adventkranz</li>
+    <li><strong>Icon</strong>: mdi:candle</li>
+</ol>
 
 <p>
 Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
