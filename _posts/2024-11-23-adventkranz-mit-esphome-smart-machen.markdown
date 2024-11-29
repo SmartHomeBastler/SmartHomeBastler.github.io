@@ -438,11 +438,11 @@ Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
   <h2 style="text-align: center; color: #444;">Was macht nun diese Automatisierung?</h2>
   <p style="line-height: 1.6; color: #555;">
-    Diese Automatisierung steuert den Adventskranz entsprechend des aktuellen Adventsstatus. 
+    Diese Automatisierung steuert den Adventkranz entsprechend des aktuellen Adventsstatus. 
   </p>
   <ul style="line-height: 1.6; color: #555;">
     <li>
-      <strong>Wenn der Schalter "Adventskranz" eingeschaltet wird:</strong>
+      <strong>Wenn der Schalter "Adventkranz" eingeschaltet wird:</strong>
       <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
         <li>Es wird geprüft, welche Adventwoche gerade ist.</li>
         <li>Je nach Woche werden 1 bis 4 Kerzen eingeschaltet.</li>
@@ -450,7 +450,7 @@ Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
       </ul>
     </li>
     <li style="margin-top: 15px;">
-      <strong>Wenn der Schalter "Adventskranz" ausgeschaltet wird:</strong>
+      <strong>Wenn der Schalter "Adventkranz" ausgeschaltet wird:</strong>
       <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
         <li>Alle Kerzen und die Lichterkette werden ausgeschaltet.</li>
       </ul>
@@ -466,8 +466,8 @@ Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
 <div class="code-container">
     <button class="copy-button">Copy</button>
     <pre class="line-numbers"><code class="language-yaml">
-alias: Adventskranz Automatisierung
-description: Steuert den Adventskranz entsprechend des aktuellen Adventsstatus
+alias: Adventkranz Automatisierung
+description: Steuert den Adventkranz entsprechend des aktuellen Adventsstatus
 triggers:
   - entity_id: input_boolean.adventkranz
     to: "on"
