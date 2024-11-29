@@ -254,6 +254,34 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
     Wenn du wissen möchtest, wie man auf einfachem Weg in Home Assistant einen Kalender einrichtet, sieh in den ⬇️ Dropdown ⬇️
 </p>
 
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
+    <div id="galleryDropdown2" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_kalender_erstellen %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 <h3>Schritt 6. Helfer Template anlegen</h3>
 
 <p>
@@ -262,6 +290,34 @@ Um eine Anzeige in Home Assistant zu haben, welcher Status des Kalenders gerade 
 <p>
 Auch hierzu findest du eine Beschreibung im ⬇️ Dropdown ⬇️
 </p>
+
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
+    <div id="galleryDropdown3" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 <h4>Template für den Helfer:</h4>
 
@@ -292,6 +348,36 @@ FEHLER
     Die Automatisierung war der letzte Schritt. 
 </p>
 
+<p>
+Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
+</p>
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
+    <div id="galleryDropdown4" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_helfer_schalter %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 <div class="columns is-centered">
 <div class="column is-5">
