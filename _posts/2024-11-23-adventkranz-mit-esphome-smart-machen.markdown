@@ -130,6 +130,7 @@ published: true
 </div>
 
 <div class="code-container">
+    <h4>ESP-Code:</h4>
     <button class="copy-button">Copy</button>
     <pre class="line-numbers"><code class="language-yaml">
 esphome:
