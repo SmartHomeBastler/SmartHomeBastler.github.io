@@ -215,6 +215,16 @@ output:
     Ich habe die Kerzen und die Lichterkette angeschlossen, den Microcontroller über ein Micro-USB-Kabel mit Strom versorgt und dann im Browser die VISIT-Seite geöffnet. Hier kann mann alle konfigurierten Schalter betätigen und so die Funktion kontrollieren.
 </p>
 
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Visit_Button_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Visit_Button.png" %}
+</div>
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Visit_testen_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Visit_testen.png" %}
+</div>
+</div>
+
+
 <h3>Schritt 5. Kalender einrichten</h3>
 
 <p>
