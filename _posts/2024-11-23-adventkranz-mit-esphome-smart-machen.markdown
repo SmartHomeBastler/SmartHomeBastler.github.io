@@ -59,7 +59,13 @@ published: true
 
 <div class="columns is-centered">
 <div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Batteriekammer_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Batteriekammer.png" %}
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Batteriekammer_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Batteriekammer.png" %}
+</div>
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Kerze_Draht_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Kerze_Draht.png" %}
+</div>
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Kerze_Klemme_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Kerze_Klemme.png" %}
 </div>
 </div>
 
@@ -88,7 +94,13 @@ published: true
 
 <div class="columns is-centered">
 <div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Platine_obern_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Platine_obern.png" %}
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_oben_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_oben.png" %}
+</div>
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_Klemmen_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_Klemmen.png" %}
+</div>
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_unten_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_unten.png" %}
 </div>
 </div>
 
@@ -464,6 +476,7 @@ Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
 
 
 <div class="code-container">
+    <h4>Die Automatisierung im YAML-Code</h4>
     <button class="copy-button">Copy</button>
     <pre class="line-numbers"><code class="language-yaml">
 alias: Adventkranz Automatisierung
@@ -567,17 +580,31 @@ mode: single
     </code></pre>
 </div>
 
+<p>
+    Nach der Installation der Automatisierung ging es an den Zusammenbau des Adventkranzes und an das Testen.
+    <br>
+    In den Etwicklerwerkzeugen ist es sehr einfach, für kurze Zeit die Kalenderdaten nach eigenen Bedürfnissen zu setzen. Ich habe bei Zustand <strong>on</strong> und bei <strong>message: 4.Advent</strong> eingetragen und dann auf <strong>ZUSTAND SETZEN</strong> geklickt. Dann auf meinem neu erstelltem Dashboard die Funktionen gestestet.<br>
+    Alles funktionierte zur vollsten Zufriedenheit.
+</p>
 
 <div class="columns is-centered">
 <div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine.png" %}
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_2_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_2.png" %}
+</div>
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Advent_Kalender_Test_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Advent_Kalender_Test_1.png" %}
+</div>
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Dashboard_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Dashboard.png" %}
 </div>
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_fertig_1.png" %}
 </div>
 </div>
 
-
+  <footer class="blog-footer">
+    <h2>Viel Spaß und Erfolg beim Nachbasteln 🎉</h2>
+  </footer>
 
 
 <style>
@@ -743,6 +770,10 @@ mode: single
         border-radius: 5px;
         margin-top: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .blog-footer {
+    text-align: center;
+    margin-top: 20px;
     }
 </style>
 
