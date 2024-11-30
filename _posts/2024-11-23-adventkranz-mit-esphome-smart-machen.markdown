@@ -99,6 +99,9 @@ published: true
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_Klemmen_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_Klemmen.png" %}
 </div>
+</div>
+
+<div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_unten_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_unten.png" %}
 </div>
@@ -594,6 +597,8 @@ mode: single
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Advent_Kalender_Test_1_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Advent_Kalender_Test_1.png" %}
 </div>
+</div>
+<div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Dashboard_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Dashboard.png" %}
 </div>
