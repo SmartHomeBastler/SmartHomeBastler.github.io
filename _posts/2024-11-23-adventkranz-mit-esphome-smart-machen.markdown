@@ -108,18 +108,28 @@ published: true
 </div>
 
 <div class="columns is-centered">
-<div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_oben_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_oben.png" %}
-</div>
-<div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_Klemmen_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_Klemmen.png" %}
-</div>
-</div>
-
-<div class="columns is-centered">
-<div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_unten_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Platine_unten.png" %}
-</div>
+{% assign gallery_images = site.data.gallery_adventkranz_platine %}
+    <div class="columns is-multiline">
+        {% for gallery in gallery_images %}
+            <div class="column is-12">
+                <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+            </div>
+            {% for image in gallery.images %}
+                <div class="column is-3-desktop is-6-tablet">
+                    <div class="card">
+                        <div class="card-image">
+                            {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                {{ image.description | markdownify }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 
 <h3>Schritt 4. ESPHome Programmierung</h3>
