@@ -58,15 +58,7 @@ published: true
 </p>
 
 <div class="columns is-centered">
-<div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Batteriekammer_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Batteriekammer.png" %}
-</div>
-<div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Kerze_Draht_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Kerze_Draht.png" %}
-</div>
-<div class="column is-5">
-{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Adventkranz_Kerze_Klemme_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Adventkranz_Kerze_Klemme.png" %}
-</div>
+{% assign gallery_images = site.data.gallery_adventkranz_kerze %}
 </div>
 
 <h3>Schritt 3. Platine löten</h3>
