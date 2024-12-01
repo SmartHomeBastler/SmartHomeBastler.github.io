@@ -59,7 +59,30 @@ published: true
 
 <div class="columns is-centered">
 {% assign gallery_images = site.data.gallery_adventkranz_kerze %}
+    <div class="columns is-multiline">
+        {% for gallery in gallery_images %}
+            <div class="column is-12">
+                <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+            </div>
+            {% for image in gallery.images %}
+                <div class="column is-3-desktop is-6-tablet">
+                    <div class="card">
+                        <div class="card-image">
+                            {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                {{ image.description | markdownify }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 </div>
+
+
 
 <h3>Schritt 3. Platine löten</h3>
 
