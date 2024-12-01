@@ -645,6 +645,81 @@ mode: single
   </footer>
 
 
+<h3>8. Zusätzliche Templates</h3>
+
+<p>
+    Aufmerksamen Lesern wird es nicht entgangen sein, dass auf dem Dashboard noch zusätzliche Sensoren die Adventzeit betreffend angeführt waren.<br>
+    Hierbei handelt es sich um einen simplen Adventkalender und eine Anzeige für die Tage bis zum Heiligen Abend.
+</p>
+
+<p>
+    Auch diese Templates könnt ihr hier kopieren und bei euch einfügen.
+</p>
+
+<h4>Template Adventkalender:</h4>
+
+<ul>
+    <li><strong>Name</strong>: Adventkalender</li>
+    <li><strong>Icon</strong>: mdi:window-closed-variant</li>
+</ul>
+
+<div class="code-container">
+    <h4>Template-Helfer Adventkalender</h4>
+    <button class="copy-button">Copy</button>
+    <pre class="line-numbers"><code class="language-yaml">
+{% raw %}
+{% set ADVENTMONAT = (12) %}
+{% set HEILIGABEND = (12, 24) %}
+{% set ADVENTTAG = (now().month, now().day) %}
+{% if ADVENTTAG >= (12, 1) and ADVENTTAG <= HEILIGABEND %}
+{{ now().day }}
+{% else%}
+kein
+{% endif %}
+{% endraw %}
+    </code></pre>
+</div>
+
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Helfer_Template_Adventkalender_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Helfer_Template_Adventkalender.png" %}
+</div>
+</div>
+
+<h4>Template Tage bis Heiligabend:</h4>
+
+<ul>
+    <li><strong>Name</strong>: Adventtage bis XMAS</li>
+    <li><strong>Icon</strong>: mdi:calendar-check-outline</li>
+</ul>
+
+<div class="code-container">
+    <h4>Template-Helfer Tage bis XMAS</h4>
+    <button class="copy-button">Copy</button>
+    <pre class="line-numbers"><code class="language-yaml">
+{% raw %}
+{% set ADVENTMONAT = (12) %}
+{% set HEILIGABEND = (12, 24) %}
+{% set ADVENTTAG = (now().month, now().day) %}
+{% if ADVENTTAG >= (12, 1) and ADVENTTAG <= HEILIGABEND and ADVENTMONAT == now().month and (24 - now().day) >= 2 %}
+Es sind noch {{ 24 - now().day }} Tage bis Heligabend!
+{% elif ADVENTTAG >= (12, 1) and ADVENTTAG <= HEILIGABEND and ADVENTMONAT == now().month and (24 - now().day) == 1 %}
+Nur noch 1 Tag bis Heiligabend!
+{% elif ADVENTTAG >= (12, 1) and ADVENTTAG <= HEILIGABEND and ADVENTMONAT == now().month and (24 - now().day) == 0 %}
+Heute ist Heilgabend! Fröhliche Weihnachten!
+{% else%}
+
+{% endif %}
+{% endraw %}
+    </code></pre>
+</div>
+
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Helfer_Template_Tage-bis-XMAS_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Helfer_Template_Tage-bis-XMAS.png" %}
+</div>
+</div>
+
 <style>
     /* Allgemeines Styling für Dropdown-Menü */
     .styled-select {
