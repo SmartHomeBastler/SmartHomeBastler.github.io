@@ -51,7 +51,7 @@ layout: default
 <div class="tags my-4">
     <strong>Tags:</strong>
     {% for tag in page.tags %}
-    <a href="/tags/{{ tag | slugify }}/" class="tag">#{{ tag }}</a>
+    <a href="/tags/{{ tag | slugify }}/" class="tag is-primary">#{{ tag }}</a>
     {% endfor %}
 </div>
 
