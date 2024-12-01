@@ -1,5 +1,4 @@
-- title: Home Assistant - Template Sensor Helfer anlegen
-  images:
+- images:
     - link: /img/HA-Buttons/Ablauf_Kalender_erstellen_k.png
       large_link: /img/HA-Buttons/Ablauf_Kalender_erstellen.png
       alt: Ablauf Kalender erstellen
