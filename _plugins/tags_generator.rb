@@ -20,7 +20,9 @@ module Jekyll
       if site.layouts.key? 'tag'
         dir = 'tags'
         site.tags.each_key do |tag|
-          site.pages << TagPage.new(site, site.source, File.join(dir, tag.slugify), tag)
+          # Verwende Jekyll::Utils.slugify anstelle von tag.slugify
+          slug = Jekyll::Utils.slugify(tag)
+          site.pages << TagPage.new(site, site.source, File.join(dir, slug), tag)
         end
       end
     end
