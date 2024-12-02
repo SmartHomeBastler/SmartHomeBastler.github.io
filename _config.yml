@@ -33,7 +33,6 @@ plugins:
   - jekyll-seo-tag
   - kramdown-parser-gfm
   - jekyll-redirect-from
-  - jekyll-tags
 
 exclude:
   - Gemfile
