@@ -33,6 +33,7 @@ plugins:
   - jekyll-seo-tag
   - kramdown-parser-gfm
   - jekyll-redirect-from
+  - jekyll-tagging
 
 exclude:
   - Gemfile
@@ -43,6 +44,9 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+
+tagging:
+  permalink_style: pretty
 
 livereload: true
 
