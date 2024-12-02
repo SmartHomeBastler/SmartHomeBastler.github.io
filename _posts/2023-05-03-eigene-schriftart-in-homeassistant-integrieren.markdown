@@ -3,6 +3,7 @@ layout: post
 title: "Eigene Schriftart in Home Assistant integrieren"
 date: 2023-05-03 06:58:00
 categories: Dashboard
+tags: [Eigene Schriftart, Font, Home Assistant, StudioCodeServer]
 description: "Einen Weg, eigene Schriftarten in Home Assistant einzufügen, zeige ich hier."
 image: /img/blog/eigene_Schriftart/blog-post-eigene-schriftarten.png
 published: true
