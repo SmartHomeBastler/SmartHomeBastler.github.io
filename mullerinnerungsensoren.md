@@ -426,11 +426,10 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <label for="dateUseCheckbox">Datum anzeigen</label>
 </div>
 
-<p class="description-text">
-    Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.
-</p>
+
 <div class="font-selection">
     <label for="fontSelection" class="custom-label">Schriftart auswählen:</label>
+    <p class="description-text">Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.</p>
     <select id="fontSelection" class="custom-input" onchange="toggleCustomFontInput()">
         <option value="Arial Rounded MT" selected>Arial Rounded MT (Standard)</option>
         <option value="Arial">Arial</option>
@@ -1679,6 +1678,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         const sensorCount = rows.length;
 
         const blinkend = document.getElementById("blinkendCheckbox").checked;
+        const dateUsed = document.getElementById("dateUseCheckbox").checked;
         const styleUsed = document.getElementById("styleUseCheckbox").checked;
         const styleUnused = !document.getElementById("styleUseCheckbox").checked;
         const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value; // "heute" oder "morgen",
@@ -1753,6 +1753,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `                  entity_picture:\n`;
                 yaml += `                    - animation:\n`;
                 yaml += `                        - blink 1s linear infinite\n`;
+            }
+
+            if (dateUsed) {
+                yaml += `          - type: custom:button-card\n`;
+                yaml += `            entity: ${sensorEntity}_datum\n`;
+                yaml += `            show_name: false\n`;
+                yaml += `            show_icon: false\n`;
+                yaml += `            show_state: true\n`;
+                yaml += `            styles:\n`;
+                yaml += `              state:\n`;
+                yaml += `                - font-family: ${selectedFont}\n`;
+                yaml += `              card:\n`;
+                yaml += `                - background-color: transparent\n`;
+                yaml += `                - border: none\n`;
+                yaml += `                - margin-bottom: "-1em"\n`;
             }
 
             yaml += `          - type: custom:button-card\n`;
@@ -1848,6 +1863,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `                        - blink 1s linear infinite\n`;
             }
 
+            if (dateUsed) {
+                yaml += `          - type: custom:button-card\n`;
+                yaml += `            entity: ${sensor1Entity}_datum\n`;
+                yaml += `            show_name: false\n`;
+                yaml += `            show_icon: false\n`;
+                yaml += `            show_state: true\n`;
+                yaml += `            styles:\n`;
+                yaml += `              state:\n`;
+                yaml += `                - font-family: ${selectedFont}\n`;
+                yaml += `              card:\n`;
+                yaml += `                - background-color: transparent\n`;
+                yaml += `                - border: none\n`;
+                yaml += `                - margin-bottom: "-1em"\n`;
+            }
+
             yaml += `          - type: custom:button-card\n`;
             yaml += `            entity: ${sensor1.entity}\n`;
             yaml += `            show_name: true\n`;
@@ -1886,6 +1916,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `                  entity_picture:\n`;
                 yaml += `                    - animation:\n`;
                 yaml += `                        - blink 1s linear infinite\n`;
+            }
+
+            if (dateUsed) {
+                yaml += `          - type: custom:button-card\n`;
+                yaml += `            entity: ${sensor2Entity}_datum\n`;
+                yaml += `            show_name: false\n`;
+                yaml += `            show_icon: false\n`;
+                yaml += `            show_state: true\n`;
+                yaml += `            styles:\n`;
+                yaml += `              state:\n`;
+                yaml += `                - font-family: ${selectedFont}\n`;
+                yaml += `              card:\n`;
+                yaml += `                - background-color: transparent\n`;
+                yaml += `                - border: none\n`;
+                yaml += `                - margin-bottom: "-1em"\n`;
             }
 
             yaml += `          - type: custom:button-card\n`;
@@ -1976,6 +2021,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     yaml += `                        - blink 1s linear infinite\n`;
                 }
 
+                if (dateUsed) {
+                    yaml += `          - type: custom:button-card\n`;
+                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            show_name: false\n`;
+                    yaml += `            show_icon: false\n`;
+                    yaml += `            show_state: true\n`;
+                    yaml += `            styles:\n`;
+                    yaml += `              state:\n`;
+                    yaml += `                - font-family: ${selectedFont}\n`;
+                    yaml += `              card:\n`;
+                    yaml += `                - background-color: transparent\n`;
+                    yaml += `                - border: none\n`;
+                    yaml += `                - margin-bottom: "-1em"\n`;
+                }
+
                 yaml += `          - type: custom:button-card\n`;
                 yaml += `            entity: ${sensor.entity}\n`;
                 yaml += `            show_name: true\n`;
@@ -2064,6 +2124,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     yaml += `                  entity_picture:\n`;
                     yaml += `                    - animation:\n`;
                     yaml += `                        - blink 1s linear infinite\n`;
+                }
+
+                if (dateUsed) {
+                    yaml += `          - type: custom:button-card\n`;
+                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            show_name: false\n`;
+                    yaml += `            show_icon: false\n`;
+                    yaml += `            show_state: true\n`;
+                    yaml += `            styles:\n`;
+                    yaml += `              state:\n`;
+                    yaml += `                - font-family: ${selectedFont}\n`;
+                    yaml += `              card:\n`;
+                    yaml += `                - background-color: transparent\n`;
+                    yaml += `                - border: none\n`;
+                    yaml += `                - margin-bottom: "-1em"\n`;
                 }
 
                 yaml += `          - type: custom:button-card\n`;
@@ -2157,6 +2232,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     yaml += `                        - blink 1s linear infinite\n`;
                 }
 
+                if (dateUsed) {
+                    yaml += `          - type: custom:button-card\n`;
+                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            show_name: false\n`;
+                    yaml += `            show_icon: false\n`;
+                    yaml += `            show_state: true\n`;
+                    yaml += `            styles:\n`;
+                    yaml += `              state:\n`;
+                    yaml += `                - font-family: ${selectedFont}\n`;
+                    yaml += `              card:\n`;
+                    yaml += `                - background-color: transparent\n`;
+                    yaml += `                - border: none\n`;
+                    yaml += `                - margin-bottom: "-1em"\n`;
+                }
+
                 yaml += `          - type: custom:button-card\n`;
                 yaml += `            entity: ${sensor.entity}\n`;
                 yaml += `            show_name: true\n`;
@@ -2200,6 +2290,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     yaml += `                  entity_picture:\n`;
                     yaml += `                    - animation:\n`;
                     yaml += `                        - blink 1s linear infinite\n`;
+                }
+
+                if (dateUsed) {
+                    yaml += `          - type: custom:button-card\n`;
+                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            show_name: false\n`;
+                    yaml += `            show_icon: false\n`;
+                    yaml += `            show_state: true\n`;
+                    yaml += `            styles:\n`;
+                    yaml += `              state:\n`;
+                    yaml += `                - font-family: ${selectedFont}\n`;
+                    yaml += `              card:\n`;
+                    yaml += `                - background-color: transparent\n`;
+                    yaml += `                - border: none\n`;
+                    yaml += `                - margin-bottom: "-1em"\n`;
                 }
 
                 yaml += `          - type: custom:button-card\n`;
@@ -2293,6 +2398,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     yaml += `                        - blink 1s linear infinite\n`;
                 }
 
+                if (dateUsed) {
+                    yaml += `          - type: custom:button-card\n`;
+                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            show_name: false\n`;
+                    yaml += `            show_icon: false\n`;
+                    yaml += `            show_state: true\n`;
+                    yaml += `            styles:\n`;
+                    yaml += `              state:\n`;
+                    yaml += `                - font-family: ${selectedFont}\n`;
+                    yaml += `              card:\n`;
+                    yaml += `                - background-color: transparent\n`;
+                    yaml += `                - border: none\n`;
+                    yaml += `                - margin-bottom: "-1em"\n`;
+                }
+
                 yaml += `          - type: custom:button-card\n`;
                 yaml += `            entity: ${sensor.entity}\n`;
                 yaml += `            show_name: true\n`;
@@ -2336,6 +2456,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     yaml += `                  entity_picture:\n`;
                     yaml += `                    - animation:\n`;
                     yaml += `                        - blink 1s linear infinite\n`;
+                }
+
+                if (dateUsed) {
+                    yaml += `          - type: custom:button-card\n`;
+                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            show_name: false\n`;
+                    yaml += `            show_icon: false\n`;
+                    yaml += `            show_state: true\n`;
+                    yaml += `            styles:\n`;
+                    yaml += `              state:\n`;
+                    yaml += `                - font-family: ${selectedFont}\n`;
+                    yaml += `              card:\n`;
+                    yaml += `                - background-color: transparent\n`;
+                    yaml += `                - border: none\n`;
+                    yaml += `                - margin-bottom: "-1em"\n`;
                 }
 
                 yaml += `          - type: custom:button-card\n`;
@@ -2430,6 +2565,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     yaml += `                        - blink 1s linear infinite\n`;
                 }
 
+                if (dateUsed) {
+                    yaml += `          - type: custom:button-card\n`;
+                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            show_name: false\n`;
+                    yaml += `            show_icon: false\n`;
+                    yaml += `            show_state: true\n`;
+                    yaml += `            styles:\n`;
+                    yaml += `              state:\n`;
+                    yaml += `                - font-family: ${selectedFont}\n`;
+                    yaml += `              card:\n`;
+                    yaml += `                - background-color: transparent\n`;
+                    yaml += `                - border: none\n`;
+                    yaml += `                - margin-bottom: "-1em"\n`;
+                }
+
                 yaml += `          - type: custom:button-card\n`;
                 yaml += `            entity: ${sensor.entity}\n`;
                 yaml += `            show_name: true\n`;
@@ -2473,6 +2623,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     yaml += `                  entity_picture:\n`;
                     yaml += `                    - animation:\n`;
                     yaml += `                        - blink 1s linear infinite\n`;
+                }
+
+                if (dateUsed) {
+                    yaml += `          - type: custom:button-card\n`;
+                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            show_name: false\n`;
+                    yaml += `            show_icon: false\n`;
+                    yaml += `            show_state: true\n`;
+                    yaml += `            styles:\n`;
+                    yaml += `              state:\n`;
+                    yaml += `                - font-family: ${selectedFont}\n`;
+                    yaml += `              card:\n`;
+                    yaml += `                - background-color: transparent\n`;
+                    yaml += `                - border: none\n`;
+                    yaml += `                - margin-bottom: "-1em"\n`;
                 }
 
                 yaml += `          - type: custom:button-card\n`;
