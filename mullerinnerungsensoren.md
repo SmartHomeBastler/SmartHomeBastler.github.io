@@ -1865,7 +1865,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
             if (dateUsed) {
                 yaml += `          - type: custom:button-card\n`;
-                yaml += `            entity: ${sensor1Entity}_datum\n`;
+                yaml += `            entity: ${sensor1.entity}_datum\n`;
                 yaml += `            show_name: false\n`;
                 yaml += `            show_icon: false\n`;
                 yaml += `            show_state: true\n`;
@@ -1920,7 +1920,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
             if (dateUsed) {
                 yaml += `          - type: custom:button-card\n`;
-                yaml += `            entity: ${sensor2Entity}_datum\n`;
+                yaml += `            entity: ${sensor2.entity}_datum\n`;
                 yaml += `            show_name: false\n`;
                 yaml += `            show_icon: false\n`;
                 yaml += `            show_state: true\n`;
