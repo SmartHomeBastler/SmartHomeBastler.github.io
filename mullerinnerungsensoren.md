@@ -2023,7 +2023,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 if (dateUsed) {
                     yaml += `          - type: custom:button-card\n`;
-                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            entity: ${sensor.entity}_datum\n`;
                     yaml += `            show_name: false\n`;
                     yaml += `            show_icon: false\n`;
                     yaml += `            show_state: true\n`;
@@ -2128,7 +2128,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 if (dateUsed) {
                     yaml += `          - type: custom:button-card\n`;
-                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            entity: ${sensor.entity}_datum\n`;
                     yaml += `            show_name: false\n`;
                     yaml += `            show_icon: false\n`;
                     yaml += `            show_state: true\n`;
@@ -2234,7 +2234,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 if (dateUsed) {
                     yaml += `          - type: custom:button-card\n`;
-                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            entity: ${sensor.entity}_datum\n`;
                     yaml += `            show_name: false\n`;
                     yaml += `            show_icon: false\n`;
                     yaml += `            show_state: true\n`;
@@ -2294,7 +2294,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 if (dateUsed) {
                     yaml += `          - type: custom:button-card\n`;
-                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            entity: ${sensor.entity}_datum\n`;
                     yaml += `            show_name: false\n`;
                     yaml += `            show_icon: false\n`;
                     yaml += `            show_state: true\n`;
@@ -2400,7 +2400,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 if (dateUsed) {
                     yaml += `          - type: custom:button-card\n`;
-                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            entity: ${sensor.entity}_datum\n`;
                     yaml += `            show_name: false\n`;
                     yaml += `            show_icon: false\n`;
                     yaml += `            show_state: true\n`;
@@ -2460,7 +2460,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 if (dateUsed) {
                     yaml += `          - type: custom:button-card\n`;
-                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            entity: ${sensor.entity}_datum\n`;
                     yaml += `            show_name: false\n`;
                     yaml += `            show_icon: false\n`;
                     yaml += `            show_state: true\n`;
@@ -2567,7 +2567,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 if (dateUsed) {
                     yaml += `          - type: custom:button-card\n`;
-                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            entity: ${sensor.entity}_datum\n`;
                     yaml += `            show_name: false\n`;
                     yaml += `            show_icon: false\n`;
                     yaml += `            show_state: true\n`;
@@ -2627,7 +2627,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 if (dateUsed) {
                     yaml += `          - type: custom:button-card\n`;
-                    yaml += `            entity: ${sensorEntity}_datum\n`;
+                    yaml += `            entity: ${sensor.entity}_datum\n`;
                     yaml += `            show_name: false\n`;
                     yaml += `            show_icon: false\n`;
                     yaml += `            show_state: true\n`;
