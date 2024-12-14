@@ -204,11 +204,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
         <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
     </div>
-
     <h4>Werte Template einzelne Abholungen</h4>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
         <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
+    </div>
+    <h4>Werte Template Datum einzelne Abholungen</h4>
+    <p>Wenn du das Datum der einzelnen Abholung benötigst, kannst du dir diesen Sensor ebenfalls anlegen.<br>
+    Nutze dazu den Sensor Namen mit dem Zusatz <strong>Datum</strong> und dieses Werte Template</p>
+    <div class="code-container">
+        <button class="copy-button" onclick="copyCode('date-pickup-template')">Copy</button>
+        <pre id="date-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 </div>
 <div id="confirm-step-3" style="text-align: center; margin-top: 20px;">
@@ -936,9 +942,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         try {
             const nextPickupTemplate = `{% raw %}{{ value.types | join(", ") }}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
             const individualPickupTemplate = `{% raw %}{% if value.daysTo == 0 %} Heute{% elif value.daysTo == 1 %} Morgen{% else %} in {{ value.daysTo }} Tagen{% endif %}{% endraw %}`;
+            const datePickupTemplate = `{% raw %}{{value.date.strftime("%d.%m.%Y")}}{% endraw %}`;
             
             document.getElementById("next-pickup-template").textContent = nextPickupTemplate;
             document.getElementById("individual-pickup-template").textContent = individualPickupTemplate;
+            document.getElementById("date-pickup-template").textContent = datePickupTemplate;
 
         } catch (error) {
             console.error("Error during DOMContentLoaded setup:", error);
