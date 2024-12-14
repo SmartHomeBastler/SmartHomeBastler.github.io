@@ -123,6 +123,11 @@ Nach den Änderungen klicke auf<br>
     </tbody>
 </table>
 
+<p>
+Es kommt häufig vor, dass Kalendereinträge nicht nur die einfachen Namen sonder mit zusätzlichem Text versehen sind.<br>
+In solch einem Fall, kann im nächsten Schritt die eigene Bezeichnung auch als Alias in der Waste Collection Schedule angelegt werden.
+</p>
+
 <div id="confirm-step-2" style="text-align: center; margin-top: 20px;">
     <button class="custom-button" onclick="handleStepTransition();">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
 </div>
@@ -412,6 +417,13 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <option value="einzeilig">Darstellung Einzeilig</option>
         <option value="mehrzeilig">Darstellung Mehrzeilig</option>
     </select>
+</div>
+
+<!-- Checkbox für "Datum anzeigen" -->
+<div class="custom-form-group">
+    <label for="dateUseCheckbox" class="custom-label">Datum der Abholung anzeigen?</label>
+    <input type="checkbox" id="dateUseCheckbox">
+    <label for="dateUseCheckbox">Datum anzeigen</label>
 </div>
 
 <p class="description-text">
@@ -1621,6 +1633,17 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             customFontInput.style.display = "none";
         }
     }
+    // Event Listener für die Checkbox
+    document.getElementById("dateUseCheckbox").addEventListener("change", function () {
+        const dateOptionsDiv = document.getElementById("dateOptions");
+        if (this.checked) {
+            // Zeige den Container, wenn die Checkbox angehakt ist
+            dateOptionsDiv.date.display = "contents";
+        } else {
+            // Verstecke den Container, wenn die Checkbox nicht angehakt ist
+            dateOptionsDiv.date.display = "none";
+        }
+    });
 
     function getSelectedFont() {
         const fontSelection = document.getElementById("fontSelection").value;
