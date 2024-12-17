@@ -1752,7 +1752,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             yaml += `              card:\n`;
             yaml += `                - border: none\n`;
             yaml += `                - background: transparent\n`;
-            yaml += `                - padding-bottom: 1em 0 0 0\n`;
+            yaml += `                - padding: 1em 0 0 0\n`;
 
             if (blinkend) {
                 yaml += `            state:\n`;
@@ -1793,7 +1793,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             yaml += `              card:\n`;
             yaml += `                - background-color: transparent\n`;
             yaml += `                - border: none\n`;
-            yaml += `                - padding-bottom: 0 0 1em 0\n`;
+            yaml += `                - padding: 0 0 1em 0\n`;
         }
 
         // Für den Fall, dass 2 Sensoren erstellt wurden
@@ -1863,7 +1863,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             yaml += `              card:\n`;
             yaml += `                - border: none\n`;
             yaml += `                - background: transparent\n`;
-            yaml += `                - padding-bottom: 1em 0 0 0\n`;
+            yaml += `                - padding: 1em 0 0 0\n`;
 
             if (blinkend) {
                 yaml += `            state:\n`;
@@ -1920,7 +1920,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             yaml += `              card:\n`;
             yaml += `                - border: none\n`;
             yaml += `                - background: transparent\n`;
-            yaml += `                - padding-bottom: 1em 0 0 0\n`;
+            yaml += `                - padding: 1em 0 0 0\n`;
 
             if (blinkend) {
                 yaml += `            state:\n`;
@@ -2026,7 +2026,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `              card:\n`;
                 yaml += `                - border: none\n`;
                 yaml += `                - background: transparent\n`;
-                yaml += `                - padding-bottom: 1em 0 0 0\n`;
+                yaml += `                - padding: 1em 0 0 0\n`;
 
                 if (blinkend) {
                     yaml += `            state:\n`;
@@ -2134,7 +2134,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `              card:\n`;
                 yaml += `                - border: none\n`;
                 yaml += `                - background: transparent\n`;
-                yaml += `                - padding-bottom: 1em 0 0 0\n`;
+                yaml += `                - padding: 1em 0 0 0\n`;
 
                 if (blinkend) {
                     yaml += `            state:\n`;
@@ -2243,7 +2243,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `              card:\n`;
                 yaml += `                - border: none\n`;
                 yaml += `                - background: transparent\n`;
-                yaml += `                - padding-bottom: 1em 0 0 0\n`;
+                yaml += `                - padding: 1em 0 0 0\n`;
 
                 if (blinkend) {
                     yaml += `            state:\n`;
@@ -2305,7 +2305,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `              card:\n`;
                 yaml += `                - border: none\n`;
                 yaml += `                - background: transparent\n`;
-                yaml += `                - padding-bottom: 1em 0 0 0\n`;
+                yaml += `                - padding: 1em 0 0 0\n`;
 
                 if (blinkend) {
                     yaml += `            state:\n`;
@@ -2414,7 +2414,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `              card:\n`;
                 yaml += `                - border: none\n`;
                 yaml += `                - background: transparent\n`;
-                yaml += `                - padding-bottom: 1em 0 0 0\n`;
+                yaml += `                - padding: 1em 0 0 0\n`;
 
                 if (blinkend) {
                     yaml += `            state:\n`;
@@ -2476,7 +2476,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `              card:\n`;
                 yaml += `                - border: none\n`;
                 yaml += `                - background: transparent\n`;
-                yaml += `                - padding-bottom: 1em 0 0 0\n`;
+                yaml += `                - padding: 1em 0 0 0\n`;
 
                 if (blinkend) {
                     yaml += `            state:\n`;
@@ -2586,7 +2586,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `              card:\n`;
                 yaml += `                - border: none\n`;
                 yaml += `                - background: transparent\n`;
-                yaml += `                - padding-bottom: 1em 0 0 0\n`;
+                yaml += `                - padding: 1em 0 0 0\n`;
 
                 if (blinkend) {
                     yaml += `            state:\n`;
@@ -2648,7 +2648,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 yaml += `              card:\n`;
                 yaml += `                - border: none\n`;
                 yaml += `                - background: transparent\n`;
-                yaml += `                - padding-bottom: 1em 0 0 0\n`;
+                yaml += `                - padding: 1em 0 0 0\n`;
 
                 if (blinkend) {
                     yaml += `            state:\n`;
