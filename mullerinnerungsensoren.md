@@ -426,6 +426,13 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <label for="dateUseCheckbox">Datum anzeigen</label>
 </div>
 
+<p class="description-text">
+    Das Datum der Abholung kann auf der Karte nur ausgewählt werden, wenn der/die Sensor/Sensoren für diese Entität in der Waste Collection Schedule eingerichtet wurde/wurden.<br>
+    Die Entität dieses Sensors soll demnach aus dem Sensor Namen der Abholung und dem Zusatz <strong>Datum</strong> bestehen.<br>
+    <strong>Beispiel: "Restabfall Datum" = "sensor.restabfall_datum"</strong>
+</p>
+
+<br>
 
 <div class="font-selection">
     <label for="fontSelection" class="custom-label">Schriftart auswählen:</label>
