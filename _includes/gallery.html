@@ -4,11 +4,9 @@
 <div class="columns is-multiline">
     <div class="column is-12">
         <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-        {% if gallery.description %}
-        <div class="description is-3 has-text-centered">
-            {{ gallery.description }}
+        <div class="description">
+            Testeintrag
         </div>
-        {% endif %}
     </div>
     {% for image in gallery.images %}
     <div class="column is-3-desktop is-6-tablet">
