@@ -5,7 +5,7 @@
     <div class="column is-12">
         <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
         {% if gallery.description %}
-        <p class="content is-3 has-text-centered">{{ gallery.description }}</p>
+        <div class="content">{{ gallery.description| markdownify }}</div>
         {% endif %}
     </div>
     {% for image in gallery.images %}
