@@ -1,5 +1,5 @@
 - title: Waste Collection Schedule Integration - Kalender einrichten
-  description: |-
+  subtitle: |-
     Dieser Abschnitt erklärt Schritt für Schritt, wie die Waste Collection Schedule eingerichtet wird.
   images:
     - link: /img/muell/WCS_Integration_1_k.png
@@ -39,7 +39,7 @@
       ratio: is-3by2
 
 - title: Waste Collection Schedule Integration - Alias-Namen
-  description: |-
+  subtitle: |-
     Wenn die Kalendereinträge deines Abfallentsorgers mit zusätzlichen Bezeichnungen wie beispielsweise `Restabfall (zum angegebenen Datum)` ausgegeben werden,
     können diese Bezeichnungen mithilfe folgender Anleitung angepasst werden.
   images:
@@ -60,7 +60,7 @@
         In der Überschrift siehst du, um welchen Eintrag es sich handelt. Vergib eine eigene Bezeichnung, wähle optional ein Icon und klicke danach auf OK.
 
 - title: Waste Collection Schedule Integration - Sensoren einrichten
-  description: |-
+  subtitle: |-
     In diesem Abschnitt wird erklärt, wie man einzelne Sensoren direkt in der Integration einrichtet.
   images:
     - link: /img/muell/WCS_Integration_5_k.png
