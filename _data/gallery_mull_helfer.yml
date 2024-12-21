@@ -40,8 +40,8 @@
 
 - title: Waste Collection Schedule Integration - Alias-Namen
   subtitle: |-
-    Wenn die Kalendereinträge deines Abfallentsorgers mit zusätzlichen Bezeichnungen wie beispielsweise `Restabfall (zum angegebenen Datum)` ausgegeben werden,
-    können diese Bezeichnungen mithilfe folgender Anleitung angepasst werden.
+    Wenn die Kalendereinträge deines Abfallentsorgers mit zusätzlichen Bezeichnungen wie 
+    beispielsweise `Restabfall (zum angegebenen Datum)` ausgegeben werden, können diese Bezeichnungen mithilfe folgender Anleitung angepasst werden.
   images:
     - link: /img/muell/WCS_Integration_10_k.png
       large_link: /img/muell/WCS_Integration_10.png
