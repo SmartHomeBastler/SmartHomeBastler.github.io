@@ -6,7 +6,7 @@
         <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
     </div>
     <div class="column is-12">
-        {{ gallery.subtitle | markdownify }}
+        {{ gallery.subtitle }}
     </div>
     {% for image in gallery.images %}
     <div class="column is-3-desktop is-6-tablet">
