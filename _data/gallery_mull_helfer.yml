@@ -34,7 +34,7 @@
       description: |-
         ### 4. Sensoren oder keine Sensoren?
 
-        Wenn du die Namen deiner Einträge anpassen möchtest, setze einen Haken bei "Mülltyp-Anpassungsmenü", 
+        Wenn du die Namen deiner Einträge (Alias-Namen) anpassen möchtest, setze einen Haken bei "Mülltyp-Anpassungsmenü", 
         um Sensoren anzulegen. Hake zusätzlich "Sensoren-Konfiguration anzeigen" an. Danach klicke auf SPEICHERN.
       ratio: is-3by2
 
@@ -100,4 +100,27 @@
         Wähle auch hier unten die einzelne Abfallart deines Sensors aus dem Auswahlmenü aus.
         Um weitere Sensoren anzulegen, setze den Haken bei "Weitere Sensoren hinzufügen", klicke auf SPEICHERN und wiederhole Schritt 7 und 8, bis alle Sensoren angelegt sind.
         Beim letzten Sensor lasse den Haken bei "Weitere Sensoren hinzufügen" weg, um die Einrichtung abzuschließen.
+      ratio: is-3by2
+
+- title: Waste Collection Schedule Integration - Datum Sensoren einrichten
+  subtitle: |-
+    Wenn du das exakte Datum für die nächste Abholung der einzelnen Mülltypen ausgegeben haben möchtest,  
+    können diese Sensoren ebenfalls in der Integration `Waste Collection Schedule` angelegt werden. Hier erfährst du wie.
+  images:
+    - link: /img/muell/WCS_Integration_12_k.png
+      large_link: /img/muell/WCS_Integration_12.png
+      alt: WCS Sensoren einrichten
+      description: |-
+        ### 11. Sensor "Abfallart Datum" anlegen
+
+        Trage den Namen deiner Abfallart `(z.B. Restabfall)` mit dem Zusatz `Datum` ein und wähle bei Detailsformat `Abfallarten` aus.
+      ratio: is-3by2
+    - link: /img/muell/WCS_Integration_13_k.png
+      large_link: /img/muell/WCS_Integration_13.png
+      alt: WCS Sensoren einrichten
+      description: |-
+        ### 12. Sensor "Abfallart Datum" anlegen
+
+        Trage das `Werte Template Datum einzelne Abholungen` bei `Werte Template` ein und wähle die zugehörige Abfallart bei `Typen` aus.  
+        Wenn Alias Namen verwendet werden, ist dieser einzutragen. Bei bedarf `Weitere Sensoren hinzufügen wählen und Speichern drücken.
       ratio: is-3by2
