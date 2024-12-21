@@ -109,6 +109,9 @@ layout: page
                     <div class="column is-12">
                         <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
                     </div>
+                    <div class="column is-12">
+                        <p class="subtitle has-text-centered">{{ gallery.subtitle | markdownify }}</p>
+                    </div>
                     {% for image in gallery.images %}
                         <div class="column is-3-desktop is-6-tablet">
                             <div class="card">
