@@ -110,7 +110,7 @@ layout: page
                         <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
                     </div>
                     <div class="column is-12" style="font-size: 1.2rem; font-weight: 400;">
-                        {{ gallery.subtitle }}
+                        {{ gallery.subtitle | markdownify }}
                     </div>
                     {% for image in gallery.images %}
                         <div class="column is-3-desktop is-6-tablet">
