@@ -263,7 +263,9 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 <div class="column is-12">
                     <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
                 </div>
+                <div>
                 {% include youtube.html video="3fhL_K4o3Dg" %}
+                </div>
                 {% for image in gallery.images %}
                     <div class="column is-3-desktop is-6-tablet">
                         <div class="card">
