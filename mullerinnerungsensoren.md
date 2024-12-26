@@ -263,15 +263,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 <div class="column is-12">
                     <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
                 </div>
-                <figure class="image is-16by9">
-                    <iframe
-                        class="has-ratio"
-                        src="https://www.youtube.com/embed/3fhL_K4o3Dg?start=0&showinfo=0"
-                        frameborder="0"
-                        allowfullscreen
-                    >
-                    </iframe>
-                </figure>
+                {% include youtube.html video="3fhL_K4o3Dg" %}
                 {% for image in gallery.images %}
                     <div class="column is-3-desktop is-6-tablet">
                         <div class="card">
