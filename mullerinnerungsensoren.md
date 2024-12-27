@@ -998,7 +998,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     });
     function showStep(stepNumber) {
         // Alle Abschnitte anzeigen, die kleiner oder gleich der aktuellen Schritt-Nummer sind
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 6; i++) {
             const step = document.getElementById(`step-${i}`);
             if (step) {
                 if (i <= stepNumber) {
