@@ -503,6 +503,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     Wenn alle Einstellungen getroffen wurden, klicke auf <strong>Beispiel anzeigen & Code generieren</strong><br>
     Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generieren.
 </p>
+
+
 <!-- Button zur Aktualisierung -->
 <div class="button-container">
     <button id="update-example-and-code" class="custom-button">Beispiel anzeigen & Code generieren</button>
@@ -524,6 +526,26 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         </div>
     </div>
 </div>
+
+
+<!--
+ █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██████  
+██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ██       
+███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██        ███████  
+██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██        ██    ██ 
+██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██         ██████  
+                                                                                    
+-->
+
+<div id="step-6" style="display:none;">
+<h2 class="custom-title">6. Pop-Up-Karte</h2>
+
+<p>
+    Hier generierst du dein Pop-Up, passend zu deinen angelegten Sensoren.
+</p>
+
+</div>
+
 
 
 
@@ -2720,6 +2742,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     document.getElementById("update-example-and-code").addEventListener("click", () => {
         updateExampleCard();
         generateCardYAML();
+        showStep(6);
     });
 </script>
 
