@@ -589,7 +589,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     Diese beiden Helfer tragen die Bezeichnungen <strong>Müllerinnerung Taster</strong> und <strong>Müllerinnerung Zeitplan</strong>. Sie müssen mit genau diesen Namen angelegt werden, um die Funktionalität des Pop-Ups sicherzustellen.
 </p>
 <p>
- Wie man einen Helfer-Taster anlegt, findest du in folgendem Dropdown ⬇️ Dropdown ⬇️
+ Wie man die notwendigen Helfer anlegt, findest du in den folgenden ⬇️ Dropdowns ⬇️
 </p>
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Taster einrichten <span>&#9660;</span></button>
