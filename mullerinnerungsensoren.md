@@ -545,15 +545,25 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <br>
 <h2 class="custom-title">6. Pop-Up-Karte</h2>
 
+<br>
+
 <p>
-    Hier generierst du dein Pop-Up, passend zu deinen angelegten Sensoren.
+    Zur Anzeige eines Pop-Up auf deinem Home Assistant Dashboard sind mehrere Schritte notwendig:
 </p>
+<ul>
+    <li>Herunterladen und Speichern des Hintergrund-Bilds</li>
+    <li>Erstellung des YAML-Codes für die Pop-Up Karte</li>
+    <li>Speichern der Pop-Up Karte auf jedem notwendigen Dashboard</li>
+    <li>Einrichtung der Browser ID via Browser_Mod</li>
+    <li>Anlegen einer Helfer-Taste und eines Helfer-Zeitplans</li>
+    <li>Einrichtung der Automatisierung für das Pop-Up</li>
+</ul>
 
 <div class="two-column-container">
     <!-- Linke Spalte -->
     <div class="left-column">
         <p>
-            Für das Pop-Up ist ein Hintergrundbild notwendig. Dieses kannst du dir hier herunterladen und in Home Assistant in deinen <strong>"muell"</strong>-Ordner speichern.
+            Für das Pop-Up ist ein Hintergrundbild notwendig. Dieses kannst du dir hier mit einem Klick auf das Bild herunterladen und in Home Assistant in deinen <strong>"muell"</strong>-Ordner speichern.
             Achte darauf, das Bild vor dem ersten Erstellen der Dashboard-Karte abzuspeichern, da ansonsten durch den Home Assistant Cache längere Zeit Fehler angezeigt werden können.
         </p>
     </div>
