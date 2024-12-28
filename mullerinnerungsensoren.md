@@ -563,7 +563,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         </div>
     </div>
     <!-- Beispielbild -->
-    <div id="example-popup-container" class="example-card-container">
+    <div id="example-popup-container" class="example-card-container" style="display: none;">
         <h4 class="custom-title">Pop-Up Beispiel</h4>
         <div class="example-image-wrapper">
             <img id="example-popup" src="/img/muell/popupCard_example.png" alt="Pop-Up Beispiel">
@@ -2892,8 +2892,13 @@ function copyPopupCode() {
 
 // Update both the example card and YAML code
 document.getElementById("popup-code").addEventListener("click", () => {
-    generatePopupYAML();
+    generatePopupYAML(); // YAML generieren
+
+    // Beispielbild anzeigen
+    const exampleContainer = document.getElementById("example-popup-container");
+    exampleContainer.style.display = "block";
 });
+
 
 </script>
 
