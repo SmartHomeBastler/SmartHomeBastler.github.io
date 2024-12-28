@@ -544,6 +544,18 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     Hier generierst du dein Pop-Up, passend zu deinen angelegten Sensoren.
 </p>
 
+<div class="button-container">
+    <button id="popup-code" class="custom-button">Pop-Up erstellen</button>
+</div>
+
+<div id="popup-output-container" class="yaml-output-container">
+    <h4 class="custom-title">Generierter Pop-Up-Code</h4>
+    <div class="yaml-code-container">
+        <button class="copy-button" onclick="copyPopupCode()">Copy</button>
+        <pre id="popup-code-output" class="language-yaml"><code></code></pre>
+    </div>
+</div>
+
 </div>
 
 
@@ -1710,16 +1722,16 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         const rows = Array.from(imageTableBody.querySelectorAll("tr"));
         const sensorCount = rows.length;
 
-        const blinkend = document.getElementById("blinkendCheckbox").checked;
-        const dateUsed = document.getElementById("dateUseCheckbox").checked;
-        const styleUsed = document.getElementById("styleUseCheckbox").checked;
-        const styleUnused = !document.getElementById("styleUseCheckbox").checked;
-        const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value; // "heute" oder "morgen",
-        const darstellung = document.getElementById("darstellungAuswahl").value; // "einzeilig" oder "mehrzeilig"
-        const selectedFont = getSelectedFont(); // Funktion zur Auswahl der Schriftart
-        const StyleHintergrund = document.getElementById("backgroundSelect").value;
-        const StyleRahmenStil = document.getElementById("borderStyleSelect").value;
-        const StyleRahmenEcke = document.getElementById("borderShapeSelect").value;
+        const blinkend = document.getElementById("blinkendCheckbox").checked; // blinkende Tonne?
+        const dateUsed = document.getElementById("dateUseCheckbox").checked; // Datum angezeigt?
+        const styleUsed = document.getElementById("styleUseCheckbox").checked; // Style geändert
+        const styleUnused = !document.getElementById("styleUseCheckbox").checked; // Style nicht geändert
+        const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value; // Anzeige "heute" oder "morgen",
+        const darstellung = document.getElementById("darstellungAuswahl").value; // Karte einzeilig oder mehrzeilig
+        const selectedFont = getSelectedFont(); // Ausgewählte Schriftart
+        const StyleHintergrund = document.getElementById("backgroundSelect").value; // Gewählter Hintergrund
+        const StyleRahmenStil = document.getElementById("borderStyleSelect").value; // Gewählter Rahmen
+        const StyleRahmenEcke = document.getElementById("borderShapeSelect").value; // Gewählte Rahmen Form
 
         let yaml = "";
 
@@ -2744,6 +2756,127 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         generateCardYAML();
         showStep(6);
     });
+
+function generatePopupYAML() {
+    const imageTableBody = document.getElementById('image-list-output').querySelector('tbody');
+    const rows = Array.from(imageTableBody.querySelectorAll("tr"));
+    const sensorCount = rows.length;
+
+    const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value;
+    const selectedFont = getSelectedFont();
+    const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+
+    // Dynamisches Sammeln der Sensordaten
+    const sensors = rows.map((row, index) => ({
+        entity: row.cells[2]?.textContent.trim() || "",
+        image: row.cells[1]?.textContent.trim() || "",
+        index: index + 1 // 1-basiert
+    }));
+
+    let yaml = "";
+
+    yaml += `type: custom:popup-card\n`;
+    yaml += `dismissable: true\n`;
+    yaml += `size: normal\n`;
+    yaml += `entity: input_button.mullerinnerung\n`;
+    yaml += `style: |-\n`;
+    yaml += `  --popup-max-width: 1500px;\n`;
+    yaml += `  --popup-min-width: 1000px;\n`;
+    yaml += `title: Nicht vergessen!\n`;
+    yaml += `card:\n`;
+    yaml += `  type: picture-elements\n`;
+    yaml += `  elements:\n`;
+
+    // Titelbereich
+    yaml += `    - type: custom:button-card\n`;
+    yaml += `      entity: ${entityText}\n`;
+    yaml += `      show_icon: false\n`;
+    yaml += `      show_name: false\n`;
+    yaml += `      show_state: true\n`;
+    yaml += `      styles:\n`;
+    yaml += `        card:\n`;
+    yaml += `          - background: transparent\n`;
+    yaml += `          - border: none\n`;
+    yaml += `        state:\n`;
+    yaml += `          - font-size: 2em\n`;
+    yaml += `          - font-family: ${selectedFont}\n`;
+    yaml += `          - color: var(--primary-color)\n`;
+    yaml += `      style:\n`;
+    yaml += `        left: 50%\n`;
+    yaml += `        top: 13%\n`;
+    yaml += `        width: 90%\n`;
+
+    // Dynamisches Hinzufügen der Sensoren
+    sensors.forEach(sensor => {
+        if (sensor.entity && sensor.image) {
+            yaml += `    - type: custom:button-card\n`;
+            yaml += `      entity: ${sensor.entity}\n`;
+            yaml += `      show_icon: false\n`;
+            yaml += `      show_name: false\n`;
+            yaml += `      show_state: false\n`;
+            yaml += `      show_entity_picture: true\n`;
+            yaml += `      size: 100%\n`;
+            yaml += `      state:\n`;
+            yaml += `        - value: ${anzeigeAuswahl}\n`;
+            yaml += `          entity_picture: /local/muell/${sensor.image}\n`;
+            yaml += `      styles:\n`;
+            yaml += `        card:\n`;
+            yaml += `          - background: transparent\n`;
+            yaml += `          - border: none\n`;
+
+            // Dynamische Positionierung basierend auf dem Index
+            let position = getPositionByIndex(sensor.index); // Funktion zur Berechnung der Position
+            yaml += `      style:\n`;
+            yaml += `        left: ${position.left}%\n`;
+            yaml += `        top: ${position.top}%\n`;
+            yaml += `        width: ${position.width}%\n`;
+        }
+    });
+
+    yaml += `  image: /local/muell/popup_background.png\n`;
+    yaml += `grid_options:\n`;
+    yaml += `  columns: 24\n`;
+    yaml += `  rows: auto\n`;
+
+    console.log(yaml);
+}
+
+// Funktion zur Berechnung der Position basierend auf dem Index
+function getPositionByIndex(index) {
+    const positions = {
+        1: { left: 42, top: 79, width: 23 },
+        2: { left: 72, top: 79, width: 23 },
+        3: { left: 27, top: 75, width: 22 },
+        4: { left: 57, top: 75, width: 22 },
+        5: { left: 12, top: 79, width: 23 },
+        6: { left: 87, top: 75, width: 22 }
+    };
+    return positions[index] || { left: 50, top: 50, width: 20 }; // Standardposition
+}
+        // Setze den generierten YAML-Code in das `pre`-Tag
+        const popupOutput = document.getElementById("popup-code-output");
+        popupOutput.innerHTML = `<code>${yaml}</code>`;
+    }
+
+    function popupYAMLCode() {
+        const popupCodeOutput = document.getElementById("popup-code-output");
+        const codeText = popupCodeOutput.textContent;
+
+        navigator.clipboard.writeText(codeText)
+            .then(() => {
+                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!"); // Erfolgsnachricht
+            })
+            .catch(err => {
+                console.error("Fehler beim Kopieren des Codes:", err);
+                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten."); // Fehlermeldung
+            });
+    }
+
+    // Update both the example card and YAML code
+    document.getElementById("popup-code").addEventListener("click", () => {
+        generatePopupYAML();
+    });
+
 </script>
 
 
