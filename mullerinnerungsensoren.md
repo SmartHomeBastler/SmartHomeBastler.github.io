@@ -2856,7 +2856,7 @@ function getPositionByIndex(index) {
     return positions[index] || { left: 50, top: 50, width: 20 }; // Standardposition
 }
 
-function popupYAMLCode() {
+function copyPopupCode() {
     const popupCodeOutput = document.getElementById("popup-code-output");
     const codeText = popupCodeOutput.textContent;
 
