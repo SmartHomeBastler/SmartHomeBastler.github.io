@@ -2765,6 +2765,7 @@ function generatePopupYAML() {
     const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value;
     const selectedFont = getSelectedFont();
     const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+    const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
     // Dynamisches Sammeln der Sensordaten
     const sensors = rows.map((row, index) => ({
@@ -2801,6 +2802,10 @@ function generatePopupYAML() {
     yaml += `          - font-size: 2em\n`;
     yaml += `          - font-family: ${selectedFont}\n`;
     yaml += `          - color: var(--primary-color)\n`;
+    yaml += `          - white-space: unset\n`;
+    yaml += `          - text-overflow: unset\n`;
+    yaml += `          - word-break: break-word\n`;
+    yaml += `          - text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px grey\n`;
     yaml += `      style:\n`;
     yaml += `        left: 50%\n`;
     yaml += `        top: 13%\n`;
@@ -2817,7 +2822,7 @@ function generatePopupYAML() {
             yaml += `      show_entity_picture: true\n`;
             yaml += `      size: 100%\n`;
             yaml += `      state:\n`;
-            yaml += `        - value: ${anzeigeAuswahl}\n`;
+            yaml += `        - value: ${valueText}\n`;
             yaml += `          entity_picture: /local/muell/${sensor.image}\n`;
             yaml += `      styles:\n`;
             yaml += `        card:\n`;
