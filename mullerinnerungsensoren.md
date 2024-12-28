@@ -559,7 +559,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <li>Einrichtung der Automatisierung für das Pop-Up</li>
 </ul>
 
-<div id="popup-background-section" style="margin-top: 60px 0 30px;">
+<div id="popup-background-section" style="margin: 60px 0 30px;">
     <h3 class="custom-title">6.1 Hintergrund-Bild</h3>
 </div>
 
@@ -581,7 +581,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 </div>
 
 
-<div id="popup-helper-section" style="margin-top: 60px 0 30px;">
+<div id="popup-helper-section" style="margin: 60px 0 30px;">
     <h3 class="custom-title">6.2 Helfer anlegen</h3>
 </div>
 <p>
@@ -617,7 +617,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 </table>
 
 
-<div id="popup-code-section" style="margin-top: 60px 0 30px;">
+<div id="popup-code-section" style="margin: 60px 0 30px;">
     <h3 class="custom-title">6.2 Pop-Up Code erstellen</h3>
 </div>
 
