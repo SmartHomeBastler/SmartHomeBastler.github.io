@@ -16,8 +16,8 @@
 
         Wähle in der Liste den Eintrag `Taste` aus, um einen neuen Input-Button Taster anzulegen.
       ratio: is-3by2
-    - link: /img/HA-Buttons/Taster_Helfer_erstellem_k.png
-      large_link: /img/HA-Buttons/Taster_Helfer_erstellem.png
+    - link: /img/HA-Buttons/Taster_Helfer_erstellen_k.png
+      large_link: /img/HA-Buttons/Taster_Helfer_erstellen.png
       alt: Taster einrichten
       description: |-
         ### 3. Taster einrichten
