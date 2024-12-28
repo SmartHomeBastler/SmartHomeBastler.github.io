@@ -1064,7 +1064,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         display: flex;
         justify-content: space-between;
         align-items: flex-start; /* Überschriften werden oben ausgerichtet */
-        margin-top: 30px;
+        margin: 50px 0;
         gap: 20px;
     }
     /* YAML-Code Container */
