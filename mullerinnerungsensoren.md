@@ -509,6 +509,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <div class="button-container">
     <button id="update-example-and-code" class="custom-button">Beispiel anzeigen & Code generieren</button>
 </div>
+
+
+</div>
+
+<!--
+ █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██████  
+██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ██       
+███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██        ███████  
+██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██        ██    ██ 
+██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██         ██████  
+                                                                                    
+-->
+
+<div id="step-6" style="display:none;">
+
 <div id="dashboard-options" class="dashboard-options">
     <!-- YAML-Ausgabefenster -->
     <div id="yaml-output-container" class="yaml-output-container">
@@ -527,17 +542,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </div>
 </div>
 
-
-<!--
- █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██████  
-██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ██       
-███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██        ███████  
-██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██        ██    ██ 
-██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██         ██████  
-                                                                                    
--->
-
-<div id="step-6" style="display:none;">
+<br>
 <h2 class="custom-title">6. Pop-Up-Karte</h2>
 
 <p>
@@ -548,11 +553,21 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <button id="popup-code" class="custom-button">Pop-Up erstellen</button>
 </div>
 
-<div id="popup-output-container" class="yaml-output-container">
-    <h4 class="custom-title">Generierter Pop-Up-Code</h4>
-    <div class="yaml-code-container">
-        <button class="copy-button" onclick="copyPopupCode()">Copy</button>
-        <pre id="popup-code-output" class="language-yaml"><code></code></pre>
+<div id="popup-options" class="dashboard-options">
+    <!-- YAML-Ausgabefenster -->
+    <div id="popup-output-container" class="yaml-output-container">
+        <h4 class="custom-title">Generierter Pop-Up-Code</h4>
+        <div class="yaml-code-container">
+            <button class="copy-button" onclick="copyPopupCode()">Copy</button>
+            <pre id="popup-code-output" class="language-yaml"><code></code></pre>
+        </div>
+    </div>
+    <!-- Beispielbild -->
+    <div id="example-popup-container" class="example-card-container">
+        <h4 class="custom-title">Pop-Up Beispiel</h4>
+        <div class="example-image-wrapper">
+            <img id="example-popup" src="/img/muell/popupCard_example.png" alt="Pop-Up Beispiel">
+        </div>
     </div>
 </div>
 
