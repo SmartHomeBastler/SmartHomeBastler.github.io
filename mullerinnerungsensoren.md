@@ -559,6 +559,10 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <li>Einrichtung der Automatisierung für das Pop-Up</li>
 </ul>
 
+<div id="popup-background-section" style="margin-top: 20px;">
+    <h3 class="custom-title">6.1 Hintergrund-Bild</h3>
+</div>
+
 <div class="two-column-container">
     <!-- Linke Spalte -->
     <div class="left-column">
@@ -576,6 +580,41 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </div>
 </div>
 
+<h3 class="custom-title">Helfer-Tabelle</h3>
+<p>
+    Klicke auf den Namen eines Helfers, um ihn in die Zwischenablage zu kopieren. Nach dem Kopieren wird ein ✔️ angezeigt.
+</p>
+
+<table class="custom-table" id="helper-table">
+    <thead>
+        <tr>
+            <th>Helfer Name</th>
+            <th>Status</th>
+            <th>Helfer Entity-ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="copyable" data-helper="Müllerinnerung Taster">Müllerinnerung Taster</td>
+            <td class="status" id="status-taster">❌</td>
+            <td>input_button.mullerinnerung_taster</td>
+        </tr>
+        <tr>
+            <td class="copyable" data-helper="Müllerinnerung Zeitplan">Müllerinnerung Zeitplan</td>
+            <td class="status" id="status-zeitplan">❌</td>
+            <td>schedule.mullerinnerung_zeitplan</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div id="popup-code-section" style="margin-top: 20px;">
+    <h3 class="custom-title">6.2 Pop-Up Code erstellen</h3>
+</div>
+
+<p>
+    Mit einem Klick auf <strong>Pop-Up erstellen</strong> wird der Code für das Pop-Up nach deinen zuvor gewählten Einstellungen und Angaben erstellt. 
+</p>
 
 <div class="button-container">
     <button id="popup-code" class="custom-button">Pop-Up erstellen</button>
@@ -598,6 +637,10 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         </div>
     </div>
 </div>
+
+<p>
+    Kopiere den Code, gehe auf dein Home Assistant Dashboard, füge eine neu Karte hinzu und wähle <strong>Manuell</strong>. Nun füge den Code ein und klicke auf Speichern. 
+</p>
 
 </div>
 
@@ -2823,6 +2866,40 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         showStep(6);
     });
 
+
+
+//   █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██████   //
+//  ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ██        //
+//  ███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██        ███████   //
+//  ██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██        ██    ██  //
+//  ██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██         ██████   //
+                                                                                    
+
+
+// Funktion zum Kopieren in die Zwischenablage
+function copyToClipboard(helperName, statusId) {
+    navigator.clipboard.writeText(helperName)
+        .then(() => {
+            // Erfolgreich kopiert, ändere den Status auf ✔️
+            const statusElement = document.getElementById(statusId);
+            statusElement.textContent = "✔️";
+        })
+        .catch(err => {
+            console.error("Fehler beim Kopieren:", err);
+        });
+}
+
+// Eventlistener für die Helfernamen
+document.querySelectorAll(".copyable").forEach(element => {
+    element.addEventListener("click", () => {
+        const helperName = element.getAttribute("data-helper"); // Name des Helfers
+        const statusId = element.nextElementSibling.id; // ID des Status-Felds
+        copyToClipboard(helperName, statusId);
+    });
+});
+
+
+
 function generatePopupYAML() {
     const imageTableBody = document.getElementById('image-list-output').querySelector('tbody');
     const rows = Array.from(imageTableBody.querySelectorAll("tr"));
@@ -2845,7 +2922,7 @@ function generatePopupYAML() {
     yaml += `type: custom:popup-card\n`;
     yaml += `dismissable: true\n`;
     yaml += `size: normal\n`;
-    yaml += `entity: input_button.mullerinnerung\n`;
+    yaml += `entity: input_button.mullerinnerung_taster\n`;
     yaml += `style: |-\n`;
     yaml += `  --popup-max-width: 1500px;\n`;
     yaml += `  --popup-min-width: 1000px;\n`;
