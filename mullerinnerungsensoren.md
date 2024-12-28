@@ -2846,12 +2846,12 @@ function generatePopupYAML() {
 // Funktion zur Berechnung der Position basierend auf dem Index
 function getPositionByIndex(index) {
     const positions = {
-        1: { left: 42, top: 79, width: 23 },
-        2: { left: 72, top: 79, width: 23 },
         3: { left: 27, top: 75, width: 22 },
         4: { left: 57, top: 75, width: 22 },
+        6: { left: 87, top: 75, width: 22 },
         5: { left: 12, top: 79, width: 23 },
-        6: { left: 87, top: 75, width: 22 }
+        1: { left: 42, top: 79, width: 23 },
+        2: { left: 72, top: 79, width: 23 }
     };
     return positions[index] || { left: 50, top: 50, width: 20 }; // Standardposition
 }
