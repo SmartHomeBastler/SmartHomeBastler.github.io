@@ -588,6 +588,37 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     Für das Öffnen des Pop-Ups ist ein Helfer-Taster erforderlich, und für die Automatisierung wird ein Helfer-Zeitplan benötigt.<br>
     Diese beiden Helfer tragen die Bezeichnungen <strong>Müllerinnerung Taster</strong> und <strong>Müllerinnerung Zeitplan</strong>. Sie müssen mit genau diesen Namen angelegt werden, um die Funktionalität des Pop-Ups sicherzustellen.
 </p>
+<p>
+ Wie man einen Helfer-Taster anlegt, findest du in folgendem Dropdown ⬇️ Dropdown ⬇️
+</p>
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Schalter einrichten <span>&#9660;</span></button>
+    <div id="galleryDropdown3" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_helfer_taster %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 <br>
 <p>
     Klicke auf den Namen eines Helfers in der Tabelle, um ihn in die Zwischenablage zu kopieren. Nach dem Kopieren wird ein ✔️ angezeigt.<br>
