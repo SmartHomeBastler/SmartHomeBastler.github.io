@@ -549,6 +549,24 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     Hier generierst du dein Pop-Up, passend zu deinen angelegten Sensoren.
 </p>
 
+<div class="two-column-container">
+    <!-- Linke Spalte -->
+    <div class="left-column">
+        <p>
+            Für das Pop-Up ist ein Hintergrundbild notwendig. Dieses kannst du dir hier herunterladen und in Home Assistant in deinen <strong>"muell"</strong>-Ordner speichern.
+            Achte darauf, das Bild vor dem ersten Erstellen der Dashboard-Karte abzuspeichern, da ansonsten durch den Home Assistant Cache längere Zeit Fehler angezeigt werden können.
+        </p>
+    </div>
+
+    <!-- Rechte Spalte -->
+    <div class="right-column">
+        <a href="/img/muell/popup_background.png" download>
+            <img src="/img/muell/popup_background.png" alt="Hintergrundbild für Pop-Up" style="max-width: 300px;">
+        </a>
+    </div>
+</div>
+
+
 <div class="button-container">
     <button id="popup-code" class="custom-button">Pop-Up erstellen</button>
 </div>
@@ -997,6 +1015,29 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .custom-border-shape-select h4 {
         margin-bottom: 15px;
     }
+
+    .two-column-container {
+        display: flex;
+        gap: 20px; /* Abstand zwischen den Spalten */
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .left-column {
+        flex: 1; /* Linke Spalte nimmt den restlichen Platz ein */
+    }
+
+    .right-column {
+        flex-shrink: 0; /* Rechte Spalte bleibt in ihrer festen Größe */
+        text-align: center;
+    }
+
+    .right-column img {
+        max-width: 300px; /* Maximale Breite für das Bild */
+        height: auto; /* Bildverhältnis beibehalten */
+        cursor: pointer; /* Zeigt den Download-Link an */
+    }
+
 </style>
 
 <!--
