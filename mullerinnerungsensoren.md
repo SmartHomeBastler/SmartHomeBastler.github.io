@@ -651,11 +651,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     Kopiere den Code, gehe auf dein Home Assistant Dashboard, füge eine neu Karte hinzu und wähle <strong>Manuell</strong>. Nun füge den Code ein und klicke auf Speichern. 
 </p>
 
-</div>
-
-
-
-
 <h3 class="custom-title">Gutes Gelingen!</h3>
 
 {% include support_note.html %}
