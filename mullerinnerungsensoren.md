@@ -552,14 +552,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 </p>
 <ul>
     <li>Herunterladen und Speichern des Hintergrund-Bilds</li>
+    <li>Anlegen einer Helfer-Taste und eines Helfer-Zeitplans</li>
     <li>Erstellung des YAML-Codes für die Pop-Up Karte</li>
     <li>Speichern der Pop-Up Karte auf jedem notwendigen Dashboard</li>
     <li>Einrichtung der Browser ID via Browser_Mod</li>
-    <li>Anlegen einer Helfer-Taste und eines Helfer-Zeitplans</li>
     <li>Einrichtung der Automatisierung für das Pop-Up</li>
 </ul>
 
-<div id="popup-background-section" style="margin-top: 20px;">
+<div id="popup-background-section" style="margin-top: 60px 0 30px;">
     <h3 class="custom-title">6.1 Hintergrund-Bild</h3>
 </div>
 
@@ -580,16 +580,25 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </div>
 </div>
 
-<h3 class="custom-title">Helfer-Tabelle</h3>
+
+<div id="popup-helper-section" style="margin-top: 60px 0 30px;">
+    <h3 class="custom-title">6.2 Helfer anlegen</h3>
+</div>
 <p>
-    Klicke auf den Namen eines Helfers, um ihn in die Zwischenablage zu kopieren. Nach dem Kopieren wird ein ✔️ angezeigt.
+    Für das Öffnen des Pop-Ups ist ein Helfer-Taster erforderlich, und für die Automatisierung wird ein Helfer-Zeitplan benötigt.<br>
+    Diese beiden Helfer tragen die Bezeichnungen <strong>Müllerinnerung Taster</strong> und <strong>Müllerinnerung Zeitplan</strong>. Sie müssen mit genau diesen Namen angelegt werden, um die Funktionalität des Pop-Ups sicherzustellen.
+</p>
+<br>
+<p>
+    Klicke auf den Namen eines Helfers in der Tabelle, um ihn in die Zwischenablage zu kopieren. Nach dem Kopieren wird ein ✔️ angezeigt.<br>
+    Lege diese Helfer in Home Assistant an und fahre anschließend mit dem nächsten Schritt fort.
 </p>
 
 <table class="custom-table" id="helper-table">
     <thead>
         <tr>
             <th>Helfer Name</th>
-            <th>Status</th>
+            <th>Name kopiert</th>
             <th>Helfer Entity-ID</th>
         </tr>
     </thead>
@@ -608,7 +617,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 </table>
 
 
-<div id="popup-code-section" style="margin-top: 20px;">
+<div id="popup-code-section" style="margin-top: 60px 0 30px;">
     <h3 class="custom-title">6.2 Pop-Up Code erstellen</h3>
 </div>
 
