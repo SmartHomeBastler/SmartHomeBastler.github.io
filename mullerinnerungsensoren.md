@@ -592,7 +592,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
  Wie man einen Helfer-Taster anlegt, findest du in folgendem Dropdown ⬇️ Dropdown ⬇️
 </p>
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Schalter einrichten <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Taster einrichten <span>&#9660;</span></button>
     <div id="galleryDropdown3" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_taster %}
         <div class="columns is-multiline">
@@ -618,7 +618,33 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         </div>
     </div>
 </div>
-
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">Helfer-Zeitplan einrichten <span>&#9660;</span></button>
+    <div id="galleryDropdown4" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_helfer_zeitplan %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 <br>
 <p>
     Klicke auf den Namen eines Helfers in der Tabelle, um ihn in die Zwischenablage zu kopieren. Nach dem Kopieren wird ein ✔️ angezeigt.<br>
@@ -786,7 +812,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         display: none; /* Standardmäßig versteckt */
     } 
     .dropdown {
-        margin: 20px 0;
+        margin: 0 0 20px;
         text-align: center;
     }
     .dropdown-toggle {
