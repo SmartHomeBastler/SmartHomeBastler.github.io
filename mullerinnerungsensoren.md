@@ -2838,7 +2838,9 @@ function generatePopupYAML() {
     yaml += `  columns: 24\n`;
     yaml += `  rows: auto\n`;
 
-    console.log(yaml);
+    // Setze den generierten YAML-Code in das `pre`-Tag
+    const popupOutput = document.getElementById("popup-code-output");
+    popupOutput.innerHTML = `<code>${yaml}</code>`;
 }
 
 // Funktion zur Berechnung der Position basierend auf dem Index
@@ -2853,29 +2855,25 @@ function getPositionByIndex(index) {
     };
     return positions[index] || { left: 50, top: 50, width: 20 }; // Standardposition
 }
-        // Setze den generierten YAML-Code in das `pre`-Tag
-        const popupOutput = document.getElementById("popup-code-output");
-        popupOutput.innerHTML = `<code>${yaml}</code>`;
-    }
 
-    function popupYAMLCode() {
-        const popupCodeOutput = document.getElementById("popup-code-output");
-        const codeText = popupCodeOutput.textContent;
+function popupYAMLCode() {
+    const popupCodeOutput = document.getElementById("popup-code-output");
+    const codeText = popupCodeOutput.textContent;
 
-        navigator.clipboard.writeText(codeText)
-            .then(() => {
-                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!"); // Erfolgsnachricht
-            })
-            .catch(err => {
-                console.error("Fehler beim Kopieren des Codes:", err);
-                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten."); // Fehlermeldung
-            });
-    }
+    navigator.clipboard.writeText(codeText)
+        .then(() => {
+            showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!"); // Erfolgsnachricht
+        })
+        .catch(err => {
+            console.error("Fehler beim Kopieren des Codes:", err);
+            showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten."); // Fehlermeldung
+        });
+}
 
-    // Update both the example card and YAML code
-    document.getElementById("popup-code").addEventListener("click", () => {
-        generatePopupYAML();
-    });
+// Update both the example card and YAML code
+document.getElementById("popup-code").addEventListener("click", () => {
+    generatePopupYAML();
+});
 
 </script>
 
