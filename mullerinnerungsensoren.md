@@ -715,9 +715,30 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 </div>
 
 <p>
-    Den generierten Code kannst du mit <strong>Copy</strong> in die Zwischenablage kopieren.
+    Der kopierte Pop-Up Code wird nun auf jedes Dashboard gespeichert auf welchem es agezeigt werden soll.<br>
+    Dazu füge entweder eine neue Karte, einen neuen Abschnitt oder eine neue Zeile in einen Stapel hinzu und suche dann nach <strong>Manuell</strong>. <br>
+    Füge hier den kopierten Code ein und bestätige mit <strong>Speichern</strong> bzw. <strong>Fertig</strong>.
+</p>
+<br>
+<p>
+    Bedenke, dass das Pop-Up nur angezeigt wird wenn der More-Info Dialog des Müllerinnerung Taster aufgerufen wird.<br>
+    Um das zu erreichen, ist eine Browser ID sowie eine Automatisierung notwendig. 
 </p>
 
+<div id="popup-code-section" style="margin: 60px 0 30px;">
+    <h3 class="custom-title">6.5 Browser ID einrichten</h3>
+</div>
+
+<p>
+    Mit Browser Mod und dessen Browser ID ist es möglich, Aktionen auf Dashboards von registrierten Browsern auszuführen.<br>
+    In diesem Fall geht es um das Öffnen eines Pop-Ups.<br>
+
+    Nicht vergessen, jeden Browser zu registrieren auf welchem das Pop-Up angezeigt werden soll.
+</p>
+<br>
+<p>
+    Wie man Browser Mod und die Browser ID einrichtet, erfährst du im ⬇️ Dropdown ⬇️
+</p>
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown5', this)">Browser Mod und Browser ID einrichten <span>&#9660;</span></button>
     <div id="galleryDropdown5" class="dropdown-content" style="display: none;">
@@ -750,7 +771,34 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </div>
 </div>
 
+<div id="popup-code-section" style="margin: 60px 0 30px;">
+    <h3 class="custom-title">6.6 Pop-Up Automatisierung</h3>
+</div>
 
+<p>
+    Um das Pop-Up automatisch bzw. über einen Tastendruck des Helfer-Taster zu öffnen, wird eine Automatisierung angelegt.
+</p>
+<br>
+<p>
+    Zur einfachen Einrichtung dieser Automatisierung habe ich ein Blueprint erstellt. Dieses kann mit einem Klick auf das Blueprint in der Tabelle herunter geladen und in Home Assistant installiert werden.
+</p>
+
+<table class="custom-table" id="blueprint-table">
+    <thead>
+        <tr>
+            <th>Blueprint</th>
+            <th>Blueprint kopiert</th>
+            <th>Beschreibung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="copyable" data-helper="https://gist.github.com/MaxxKra/3dbc1164e0d037bda67911fccead5f36">Blueprint Pop-Up öffnen</td>
+            <td class="status" id="status-blueprint">❌</td>
+            <td>Ein Blueprint für die Automatisierung zum Öffnen eines Pop-Ups</td>
+        </tr>
+    </tbody>
+</table>
 <h3 class="custom-title">Gutes Gelingen!</h3>
 
 {% include support_note.html %}
