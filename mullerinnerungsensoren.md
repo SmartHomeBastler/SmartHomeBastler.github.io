@@ -718,6 +718,39 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     Den generierten Code kannst du mit <strong>Copy</strong> in die Zwischenablage kopieren.
 </p>
 
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown5', this)">Browser Mod und Browser ID einrichten <span>&#9660;</span></button>
+    <div id="galleryDropdown5" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_browser_mod_id %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                <div class="column is-12" style="font-size: 1.2rem; font-weight: 400;">
+                    {{ gallery.subtitle | markdownify }}
+                    {% include youtube.html video="_GxgMv0LSLI" %}
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
 <h3 class="custom-title">Gutes Gelingen!</h3>
 
 {% include support_note.html %}
