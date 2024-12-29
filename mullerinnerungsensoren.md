@@ -799,7 +799,50 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         </tr>
     </tbody>
 </table>
-<h3 class="custom-title">Gutes Gelingen!</h3>
+<p>
+    Wie man das Blueprint installiert und die Automatisierung einrichtet, siehst du im ⬇️ Dropdown ⬇️
+</p>
+<div class="dropdown">
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown6', this)">Blueprint Installation und Einrichtung <span>&#9660;</span></button>
+    <div id="galleryDropdown6" class="dropdown-content" style="display: none;">
+        {% assign gallery_images = site.data.gallery_blueprint_popup %}
+        <div class="columns is-multiline">
+            {% for gallery in gallery_images %}
+                <div class="column is-12">
+                    <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+                </div>
+                <div class="column is-12" style="font-size: 1.2rem; font-weight: 400;">
+                    {{ gallery.subtitle | markdownify }}
+                </div>
+                {% for image in gallery.images %}
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ image.description | markdownify }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<p>
+    Nach der Installation der Automatisierung sollte das Pop-Up auf deinen gewählten Dashboards durch den eingerichteten Zeitplan automatisch geöffnet werden.
+</p>
+<br>
+<p>
+    Ich hoffe dieser Codegenerator konnte dir bei der Einrichtung deiner Müllerinnerung helfen.<br>
+    Über Feedback und Unterstützung würde ich mich auf jeden Fall freuen.
+</p>
+<br>
+<h3 class="custom-title">Danke und gutes Gelingen!</h3>
 
 {% include support_note.html %}
 </div>
