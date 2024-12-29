@@ -677,7 +677,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
 
 <div id="popup-code-section" style="margin: 60px 0 30px;">
-    <h3 class="custom-title">6.2 Pop-Up Code erstellen</h3>
+    <h3 class="custom-title">6.3 Pop-Up Code erstellen</h3>
 </div>
 
 <p>
@@ -687,6 +687,10 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <div class="button-container">
     <button id="popup-code" class="custom-button">Pop-Up erstellen</button>
 </div>
+
+<p>
+    Den generierten Code kannst du mit <strong>Copy</strong> in die Zwischenablage kopieren.
+</p>
 
 <div id="popup-options" class="dashboard-options">
     <!-- YAML-Ausgabefenster -->
@@ -706,8 +710,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </div>
 </div>
 
+<div id="popup-code-section" style="margin: 60px 0 30px;">
+    <h3 class="custom-title">6.4 Pop-Up auf Dashboard speichern</h3>
+</div>
+
 <p>
-    Kopiere den Code, gehe auf dein Home Assistant Dashboard, füge eine neu Karte hinzu und wähle <strong>Manuell</strong>. Nun füge den Code ein und klicke auf Speichern. 
+    Den generierten Code kannst du mit <strong>Copy</strong> in die Zwischenablage kopieren.
 </p>
 
 <h3 class="custom-title">Gutes Gelingen!</h3>
