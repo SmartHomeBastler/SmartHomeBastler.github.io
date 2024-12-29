@@ -833,6 +833,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                 </div>
                 <div class="column is-12" style="font-size: 1.2rem; font-weight: 400;">
                     {{ gallery.subtitle | markdownify }}
+                    {% include youtube.html video="WP8SMkcWKlM" %}
                 </div>
                 {% for image in gallery.images %}
                     <div class="column is-3-desktop is-6-tablet">
