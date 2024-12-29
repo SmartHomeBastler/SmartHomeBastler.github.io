@@ -800,6 +800,23 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </tbody>
 </table>
 <br>
+<table class="custom-table" id="automation-table">
+    <thead>
+        <tr>
+            <th>Automatisierung Name</th>
+            <th>Name kopiert</th>
+            <th>Entity ID Automatisierung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="copyable" data-helper="Müllerinnerung Pop-Up">Müllerinnerung Pop-Up</td>
+            <td class="status" id="status-blueprint">❌</td>
+            <td>automation.mullerinnerung_pop_up</td>
+        </tr>
+    </tbody>
+</table>
+<br>
 <p>
     Wie man das Blueprint installiert und die Automatisierung einrichtet, siehst du im ⬇️ Dropdown ⬇️
 </p>
