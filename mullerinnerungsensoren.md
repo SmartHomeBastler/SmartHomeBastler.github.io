@@ -813,7 +813,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <tbody>
         <tr>
             <td class="copyable" data-helper="Müllerinnerung Pop-Up">Müllerinnerung Pop-Up</td>
-            <td class="status" id="status-blueprint">❌</td>
+            <td class="status" id="status-automation">❌</td>
             <td>automation.mullerinnerung_pop_up</td>
         </tr>
     </tbody>
