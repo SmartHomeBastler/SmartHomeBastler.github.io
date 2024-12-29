@@ -799,6 +799,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         </tr>
     </tbody>
 </table>
+<br>
 <p>
     Wie man das Blueprint installiert und die Automatisierung einrichtet, siehst du im ⬇️ Dropdown ⬇️
 </p>
@@ -832,15 +833,15 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         </div>
     </div>
 </div>
-
+<br>
 <p>
     Nach der Installation der Automatisierung sollte das Pop-Up auf deinen gewählten Dashboards durch den eingerichteten Zeitplan automatisch geöffnet werden.
 </p>
 <br>
-<p>
+<h4 class="custom-title">
     Ich hoffe dieser Codegenerator konnte dir bei der Einrichtung deiner Müllerinnerung helfen.<br>
     Über Feedback und Unterstützung würde ich mich auf jeden Fall freuen.
-</p>
+</h4>
 <br>
 <h3 class="custom-title">Danke und gutes Gelingen!</h3>
 
