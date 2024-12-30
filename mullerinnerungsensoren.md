@@ -1569,7 +1569,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         standardNameCell.textContent = "Nächste Abholung";
         standardNameCell.style.cursor = "pointer";
         standardNameCell.onclick = () => {
-            copyToClipboard("Nächste Abholung", standardCopyStatusCell); // Name wird kopiert
+            copyToClipboards("Nächste Abholung", standardCopyStatusCell); // Name wird kopiert
         };
         standardRow.appendChild(standardNameCell);
 
@@ -1608,7 +1608,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             customNameCell.textContent = customName;
             customNameCell.style.cursor = "pointer";
             customNameCell.onclick = () => {
-                copyToClipboard(customName, copyStatusCell); // Name wird kopiert
+                copyToClipboards(customName, copyStatusCell); // Name wird kopiert
             };
             sensorRow.appendChild(customNameCell);
 
@@ -1642,7 +1642,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         sensorTable.style.display = "table";
     }
 
-    function copyToClipboard(textToCopy, statusCell) {
+    function copyToClipboards(textToCopy, statusCell) {
         navigator.clipboard.writeText(textToCopy).then(() => {
             const checkmark = statusCell.querySelector(".copy-checkmark");
             if (checkmark) {
