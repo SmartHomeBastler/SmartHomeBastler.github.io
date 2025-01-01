@@ -1706,7 +1706,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             customNameCell.textContent = `${customName} Datum`;
             customNameCell.style.cursor = "pointer";
             customNameCell.onclick = () => {
-                toggleCopyStatus(standardCopyStatusCell);
+                toggleCopyStatus(copyStatusCell); // Richtige Zelle für den Status
                 copyToClipboards(`${customName} Datum`, copyStatusCell); // Name wird kopiert
             };
             sensorRow.appendChild(customNameCell);
@@ -1727,8 +1727,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         dateSensorTable.style.display = "table";
     }
-
-
 
     function copyToClipboards(textToCopy, statusCell) {
         navigator.clipboard.writeText(textToCopy).then(() => {
