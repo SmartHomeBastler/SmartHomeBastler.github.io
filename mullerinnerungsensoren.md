@@ -1607,7 +1607,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         // Kopiert-Status
         const standardCopyStatusCell = document.createElement("td");
-        standardCopyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
+        standardCopyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>';
         standardCopyStatusCell.style.textAlign = "center";
         standardRow.appendChild(standardCopyStatusCell);
 
@@ -1711,7 +1711,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
             // Kopiert-Status
             const copyStatusCell = document.createElement("td");
-            copyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
+            copyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>';
             copyStatusCell.style.textAlign = "center";
             sensorRow.appendChild(copyStatusCell);
 
