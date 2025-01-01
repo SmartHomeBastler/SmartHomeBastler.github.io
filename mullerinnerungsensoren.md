@@ -189,6 +189,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     Dadurch wird das Eintragen in Home Assistant als Sensor-Name wesentlich einfacher.
 </p>
 
+<h3 class="custom-subtitle" id="sensor-header" style="display:none;">Anzulegende Sensoren</h3>
+
 <table class="custom-table" id="sensor-table" style="display:none;">
     <thead>
         <tr>
@@ -203,22 +205,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </tbody>
 </table>
 
-<table class="custom-table" id="date-sensor-table" style="display: none;">
-    <thead>
-        <tr>
-            <th>Sensor Name</th>
-            <th>Kopiert</th>
-            <th>Entity ID</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Dynamically populated rows will go here -->    
-    </tbody>
-</table>
-
-
-<!-- Code Output for Templates in a Code Block with Copy Button -->
-<h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates</h3>
+<h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates Sensoren</h3>
 
 <div id="code-output-next" style="display:none;">
     <h4>Werte Template Nächste Abholung</h4>
@@ -233,11 +220,29 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </div>
 </div>
 
+<h3 class="custom-subtitle" id="date-sensor-header" style="display:none;">Optionale Datum Sensoren</h3>
+
+<p>
+    Wenn du das Datum der einzelnen Abholung benötigst, kannst du dir diesen Sensor ebenfalls anlegen.<br>
+    Nutze dazu den Sensor Namen mit dem Zusatz <strong>Datum</strong>, kopiere ihn mit einem Klick aus der Liste 
+    und lege diesen Sensor zusammen mit dem <strong>Werte Template Datum einzelne Abholungen</strong> in der Waste Collection Schedule an.
+</p>
+
+<table class="custom-table" id="date-sensor-table" style="display: none;">
+    <thead>
+        <tr>
+            <th>Sensor Name</th>
+            <th>Kopiert</th>
+            <th>Entity ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dynamically populated rows will go here -->    
+    </tbody>
+</table>
 
 <div id="code-output-date" style="display:none;">
     <h4>Werte Template Datum einzelne Abholungen</h4>
-    <p>Wenn du das Datum der einzelnen Abholung benötigst, kannst du dir diesen Sensor ebenfalls anlegen.<br>
-    Nutze dazu den Sensor Namen mit dem Zusatz <strong>Datum</strong> und dieses Werte Template</p>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('date-pickup-template')">Copy</button>
         <pre id="date-pickup-template" class="language-yaml"><code></code></pre>
@@ -1570,6 +1575,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         generateSensorTable(selectedEntries);
         generateDateSensorTable(selectedEntries);
         document.getElementById("template-header").style.display = "block";
+        document.getElementById("sensor-header").style.display = "block";
+        document.getElementById("date-sensor-header").style.display = "block";
         document.getElementById("code-output-next").style.display = "block";
         document.getElementById('code-output-date').style.display = 'block';
         return true;
