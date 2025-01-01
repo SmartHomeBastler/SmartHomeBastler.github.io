@@ -680,7 +680,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <h3 class="custom-title">6.3 Pop-Up Code erstellen</h3>
 </div>
 
-<h4>Soll das Pop-Up für die Abholung Morgen erinnern, muss im vorherigen Abschnitt des Codegenerators unter <strong>Anzeige Auswahl</strong> - <strong>Anzeige Morgen</strong> gewählt werden!!</h4>
+<div class="note-container">
+    <h3>💡 Hinweis</h3> 
+    <p>
+        Soll das Pop-Up für die Abholung Morgen erinnern, muss im vorherigen Abschnitt des Codegenerators unter <strong>Anzeige Auswahl</strong> - <strong>Anzeige Morgen</strong> gewählt werden!!
+    </p>
+</div>
 <br>
 <p>
     Mit einem Klick auf <strong>Pop-Up erstellen</strong> wird der Code für das Pop-Up nach deinen zuvor gewählten Einstellungen und Angaben erstellt. 
