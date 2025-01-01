@@ -1601,6 +1601,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         standardNameCell.textContent = "Nächste Abholung";
         standardNameCell.style.cursor = "pointer";
         standardNameCell.onclick = () => {
+            toggleCopyStatus(standardCopyStatusCell);
             copyToClipboards("Nächste Abholung", standardCopyStatusCell); // Name wird kopiert
         };
         standardRow.appendChild(standardNameCell);
@@ -1705,6 +1706,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             customNameCell.textContent = `${customName} Datum`;
             customNameCell.style.cursor = "pointer";
             customNameCell.onclick = () => {
+                toggleCopyStatus(standardCopyStatusCell);
                 copyToClipboards(`${customName} Datum`, copyStatusCell); // Name wird kopiert
             };
             sensorRow.appendChild(customNameCell);
