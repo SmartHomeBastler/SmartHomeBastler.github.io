@@ -203,6 +203,20 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </tbody>
 </table>
 
+<table class="custom-table" id="date-sensor-table" style="display: none;">
+    <thead>
+        <tr>
+            <th>Sensor Name</th>
+            <th>Kopiert</th>
+            <th>Entity ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dynamically populated rows will go here -->    
+    </tbody>
+</table>
+
+
 <!-- Code Output for Templates in a Code Block with Copy Button -->
 <h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates</h3>
 
@@ -1550,6 +1564,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         // Alles in Ordnung
         generateSensorTable(selectedEntries);
+        generateDateSensorTable(selectedEntries);
         document.getElementById("template-header").style.display = "block";
         document.getElementById("code-output").style.display = "block";
         return true;
@@ -1646,6 +1661,51 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         sensorTable.style.display = "table";
     }
+
+    function generateDateSensorTable(selectedEntries) {
+        const dateSensorTableBody = document.getElementById('date-sensor-table').querySelector('tbody');
+        const dateSensorTable = document.getElementById('date-sensor-table');
+        dateSensorTableBody.innerHTML = "";
+
+        // Add rows for selected entries
+        selectedEntries.forEach((row) => {
+            const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
+            const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
+                return {
+                    'ä': 'a', 'ö': 'o', 'ü': 'u',
+                    'Ä': 'A', 'Ö': 'O', 'Ü': 'U', 'ß': 'ss'
+                }[match];
+            })}_datum`;
+
+            const sensorRow = document.createElement("tr");
+
+            // Sensor Name
+            const customNameCell = document.createElement("td");
+            customNameCell.textContent = `${customName} Datum`;
+            customNameCell.style.cursor = "pointer";
+            customNameCell.onclick = () => {
+                copyToClipboards(`${customName} Datum`, copyStatusCell); // Name wird kopiert
+            };
+            sensorRow.appendChild(customNameCell);
+
+            // Kopiert-Status
+            const copyStatusCell = document.createElement("td");
+            copyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
+            copyStatusCell.style.textAlign = "center";
+            sensorRow.appendChild(copyStatusCell);
+
+            // Entity ID
+            const sensorNameCell = document.createElement("td");
+            sensorNameCell.textContent = sensorName;
+            sensorRow.appendChild(sensorNameCell);
+
+            dateSensorTableBody.appendChild(sensorRow);
+        });
+
+        dateSensorTable.style.display = "table";
+    }
+
+
 
     function copyToClipboards(textToCopy, statusCell) {
         navigator.clipboard.writeText(textToCopy).then(() => {
