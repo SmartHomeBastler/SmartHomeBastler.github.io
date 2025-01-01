@@ -1640,13 +1640,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
             customNameCell.textContent = customName;
             customNameCell.style.cursor = "pointer";
             customNameCell.onclick = () => {
-                copyToClipboards(customName, copyStatusCell); // Name wird kopiert
+                toggleCopyStatus(copyStatusCell); // Status ändern
+                copyToClipboards(customName, copyStatusCell); // Name kopieren
             };
             sensorRow.appendChild(customNameCell);
 
             // Kopiert-Status
             const copyStatusCell = document.createElement("td");
-            copyStatusCell.innerHTML = '<span class="copy-checkmark" style="display: none;">✔️</span>';
+            copyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>'; // Standardmäßig ❌
             copyStatusCell.style.textAlign = "center";
             sensorRow.appendChild(copyStatusCell);
 
@@ -1672,6 +1673,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         });
 
         sensorTable.style.display = "table";
+    }
+
+    // Funktion zum Umschalten des Kopierstatus
+    function toggleCopyStatus(statusCell) {
+        const checkmark = statusCell.querySelector(".copy-checkmark");
+        if (checkmark) {
+            checkmark.textContent = checkmark.textContent === "❌" ? "✔️" : "❌"; // Umschalten zwischen ❌ und ✔️
+        }
     }
 
     function generateDateSensorTable(selectedEntries) {
