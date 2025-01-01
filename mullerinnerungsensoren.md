@@ -220,7 +220,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <!-- Code Output for Templates in a Code Block with Copy Button -->
 <h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates</h3>
 
-<div id="code-output" style="display:none;">
+<div id="code-output-next" style="display:none;">
     <h4>Werte Template Nächste Abholung</h4>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
@@ -231,6 +231,10 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
         <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
     </div>
+</div>
+
+
+<div id="code-output-date" style="display:none;">
     <h4>Werte Template Datum einzelne Abholungen</h4>
     <p>Wenn du das Datum der einzelnen Abholung benötigst, kannst du dir diesen Sensor ebenfalls anlegen.<br>
     Nutze dazu den Sensor Namen mit dem Zusatz <strong>Datum</strong> und dieses Werte Template</p>
@@ -1566,7 +1570,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         generateSensorTable(selectedEntries);
         generateDateSensorTable(selectedEntries);
         document.getElementById("template-header").style.display = "block";
-        document.getElementById("code-output").style.display = "block";
+        document.getElementById("code-output-next").style.display = "block";
+        document.getElementById('code-output-date').style.display = 'block';
         return true;
     }
     function handleStepTransition() {
