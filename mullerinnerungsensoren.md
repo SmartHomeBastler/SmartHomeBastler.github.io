@@ -1399,7 +1399,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         text-align: center;
     }
     .styled-list-start {
-        list-style: none; /* Entfernt die Standard-Aufzählungspunkte */
         counter-reset: list-counter; /* Initialisiert den Zähler */
         padding-left: 0; /* Entfernt Einrückung */
         margin: 20px 0; /* Abstand zur Umgebung */
