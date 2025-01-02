@@ -1421,21 +1421,18 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
     .styled-list-start li::before {
         content: counter(list-counter); /* Fügt die Nummerierung hinzu */
-        position: relative;
-        margin-right: 15px; /* Abstand zwischen Nummer und Text */
+        position: absolute;
+        left: 10px; /* Platzierung der Nummer links */
+        top: 50%; /* Vertikale Ausrichtung */
+        transform: translateY(-50%);
         font-weight: bold;
-        color: #007acc; /* Farbe der Nummer */
+        color: #007acc; /* Gleiche Farbe wie die Linie */
         font-size: 1.2em;
-        background-color: #e6f3ff; /* Blauer Hintergrund hinter der Nummer */
-        padding: 10px 15px;
-        border-radius: 50%; /* Rundes Design nur für die Nummerierung */
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten nur hinter der Nummer */
+        background-color: #e6f3ff; /* Heller Hintergrund für die Nummer */
+        padding: 5px 5px;
+        border-radius: 50%; /* Rundes Design für die Nummerierung */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Nummer */
         text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 40px; /* Einheitliche Größe */
-        height: 40px; /* Einheitliche Größe */
     }
 
 </style>
