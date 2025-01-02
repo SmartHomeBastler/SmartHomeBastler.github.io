@@ -552,7 +552,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div id="yaml-output-container" class="yaml-output-container">
         <h4 class="custom-title">Generierter YAML-Code</h4>
         <div class="yaml-code-container">
-            <button class="copy-button" onclick="copyYAMLCode()">Kopieren</button>
+            <button class="copy-button" onclick="copyCode('yaml-code-output', this)">Kopieren</button>
             <pre id="yaml-code-output" class="language-yaml"><code></code></pre>
         </div>
     </div>
@@ -727,7 +727,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div id="popup-output-container" class="yaml-output-container">
         <h4 class="custom-title">Generierter Pop-Up-Code</h4>
         <div class="yaml-code-container">
-            <button class="copy-button" onclick="copyPopupCode()">Kopieren</button>
+            <button class="copy-button" onclick="copyCode('popup-code-output, this)">Kopieren</button>
             <pre id="popup-code-output" class="language-yaml"><code></code></pre>
         </div>
     </div>
@@ -3161,27 +3161,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         yamlOutput.innerHTML = `<code>${yaml}</code>`;
     }
 
-    function copyYAMLCode() {
-        const yamlCodeOutput = document.getElementById("yaml-code-output");
-        const codeText = yamlCodeOutput.textContent;
-
-        navigator.clipboard.writeText(codeText)
-            .then(() => {
-                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
-
-                // Button-Text und Stil dauerhaft ändern
-                button.classList.add('copied'); // Füge die CSS-Klasse hinzu
-                button.innerHTML = "Kopiert ✔️";       // Ändere den Button-Inhalt auf das Symbol
-                button.style.backgroundColor = "#72dd8b"; // Grüner Hintergrund
-                button.style.color = "white";             // Weiße Schrift
-                
-            })
-            .catch(err => {
-                console.error("Fehler beim Kopieren des Codes:", err);
-                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten."); // Fehlermeldung
-            });
-    }
-
     // Update both the example card and YAML code
     document.getElementById("update-example-and-code").addEventListener("click", () => {
         updateExampleCard();
@@ -3325,27 +3304,6 @@ function getPositionByIndex(index) {
         6: { left: 72, top: 79, width: 23 }
     };
     return positions[index] || { left: 50, top: 50, width: 20 }; // Standardposition
-}
-
-function copyPopupCode() {
-    const popupCodeOutput = document.getElementById("popup-code-output");
-    const codeText = popupCodeOutput.textContent;
-
-    navigator.clipboard.writeText(codeText)
-        .then(() => {
-            showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
-
-            // Button-Text und Stil dauerhaft ändern
-            button.classList.add('copied'); // Füge die CSS-Klasse hinzu
-            button.innerHTML = "Kopiert ✔️";       // Ändere den Button-Inhalt auf das Symbol
-            button.style.backgroundColor = "#72dd8b"; // Grüner Hintergrund
-            button.style.color = "white";             // Weiße Schrift
-            
-        })
-        .catch(err => {
-            console.error("Fehler beim Kopieren des Codes:", err);
-            showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten."); // Fehlermeldung
-        });
 }
 
 // Update both the example card and YAML code
