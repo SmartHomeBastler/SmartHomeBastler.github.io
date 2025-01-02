@@ -900,9 +900,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <br>
 <h3 class="custom-title">Danke und gutes Gelingen!</h3>
 
-{% include support_note.html %}
 </div>
-
+{% include support_note.html %}
 </div>
 
 <!--
