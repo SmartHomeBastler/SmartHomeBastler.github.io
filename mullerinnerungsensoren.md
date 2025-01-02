@@ -22,6 +22,25 @@ layout: page
         Ebenfalls ist zu beachten, dass derzeit nur ICS Dateien und ICS-URLs für den Codegenerator genutzt werden können.
     </p>
 </div>
+<div id="custom-alert" style="display: none;">
+    <div id="custom-alert-content">
+        <h4 id="custom-alert-title"></h4>
+        <p id="custom-alert-message"></p>
+        <button id="close-alert">OK</button>
+    </div>
+</div>
+<div id="custom-decision" style="display: none;">
+    <div id="custom-decision-content">
+        <h4 id="custom-decision-title"></h4>
+        <p id="custom-decision-message"></p>
+        <ul id="custom-decision-list"></ul>
+        <p id="custom-decision-question" style="font-weight: bold; margin-top: 10px;">
+            Möchtest du die Verarbeitung fortsetzen?
+        </p>
+        <button id="decision-yes">Ja</button>
+        <button id="decision-no">Nein</button>
+    </div>
+</div>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
 ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
@@ -1028,6 +1047,116 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .custom-form-group {
         margin-top: 20px;
     }
+    #custom-alert {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* Dunkles Overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    #custom-alert-content {
+        background-color: #fff;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 400px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    #custom-alert-title {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+        font-weight: bold;
+    }
+    #custom-alert-message {
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #666;
+    }
+    #close-alert {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    #close-alert:hover {
+        background-color: #218838;
+    }
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    #custom-decision {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }    
+    #custom-decision-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }    
+    #custom-decision h4 {
+        margin: 0 0 10px;
+    }    
+    #custom-decision p {
+        margin: 0 0 20px;
+    }    
+    #custom-decision button {
+        margin: 0 5px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }    
+    #custom-decision button:hover {
+        background-color: #0056b3;
+    }
+    #custom-decision-list {
+        text-align: left;
+        max-height: 300px;
+        overflow-y: auto;
+        margin: 10px 0;
+        padding: 0;
+        list-style: none;
+    }    
+    #custom-decision-list li {
+        margin: 5px 0;
+    }
+    #custom-decision-question {
+        font-size: 1.1em;
+        text-align: center;
+        margin-top: 10px;
+    }
     .custom-label {
         display: block;
         font-weight: bold;
@@ -1264,6 +1393,20 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         }
     }
 
+    function showCustomAlert(title, message) {
+        const alertBox = document.getElementById("custom-alert");
+        const alertTitle = document.getElementById("custom-alert-title");
+        const alertMessage = document.getElementById("custom-alert-message");
+    
+        alertTitle.textContent = title;   // Überschrift setzen
+        alertMessage.textContent = message; // Nachricht setzen
+        alertBox.style.display = "flex"; // Fenster anzeigen
+    
+        document.getElementById("close-alert").onclick = function () {
+            alertBox.style.display = "none"; // Fenster schließen
+        };
+    }
+
 async function extractEntries() {
     try {
         const fileInput = document.getElementById('icsFile');
@@ -1359,6 +1502,50 @@ async function extractEntries() {
         console.error("Error in extractEntries:", error);
     }
 }
+
+
+
+    // Funktion zum Anzeigen des benutzerdefinierten Dialogs
+    function showCustomDecision(title, message, invalidEntries) {
+        return new Promise((resolve) => {
+            const decisionElement = document.getElementById('custom-decision');
+            const titleElement = document.getElementById('custom-decision-title');
+            const messageElement = document.getElementById('custom-decision-message');
+            const listElement = document.getElementById('custom-decision-list');
+            const yesButton = document.getElementById('decision-yes');
+            const noButton = document.getElementById('decision-no');
+            const questionElement = document.getElementById('custom-decision-question');
+    
+            // Setze Titel und Nachricht
+            titleElement.textContent = title;
+            messageElement.textContent = message;
+    
+            // Leere die Liste und füge neue Einträge hinzu
+            listElement.innerHTML = "";
+            invalidEntries.forEach((entry) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = entry;
+                listElement.appendChild(listItem);
+            });
+    
+            // Setze Frage (kann falls nötig angepasst werden)
+            questionElement.textContent = "Möchtest du die Verarbeitung fortsetzen?";
+    
+            // Event-Listener für Buttons
+            yesButton.onclick = () => {
+                decisionElement.style.display = 'none';
+                resolve(true);
+            };
+    
+            noButton.onclick = () => {
+                decisionElement.style.display = 'none';
+                resolve(false);
+            };
+    
+            // Dialog anzeigen
+            decisionElement.style.display = 'flex';
+        });
+    }
     function checkEntries() {
         const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
         const umlautPattern = /[äöüÄÖÜß]/;
