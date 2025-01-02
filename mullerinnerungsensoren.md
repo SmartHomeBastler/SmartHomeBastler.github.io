@@ -583,7 +583,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <br>
 
 <h4>Zur Anzeige eines Pop-Up auf deinem Home Assistant Dashboard sind mehrere Schritte notwendig:</h4>
-</p>
+
 <ul class="styled-list">
     <li>Herunterladen und Speichern des Hintergrund-Bilds</li>
     <li>Anlegen einer Helfer-Taste und eines Helfer-Zeitplans</li>
