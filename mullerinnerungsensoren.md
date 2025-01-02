@@ -320,7 +320,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <label for="keineMorgen">Anzeige Text "keine" für Morgen</label>
 </div>
 
-<button class="custom-button" onclick="showStep(51); createTemplates()">Templates erstellen</button>
+<button class="custom-button" onclick="showStep(5); createTemplates()">Templates erstellen</button>
 
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
@@ -374,8 +374,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </div>
 </div>
 </div>
-<div id="step-51" style="display:none;">
-<button class="custom-button" onclick="showStep(5); createImageList();">Templates angelegt? Weiter zu den Dashboard-Karten!</button>
+<div id="step-5" style="display:none;">
+<button class="custom-button" onclick="showStep(6); createImageList();">Templates angelegt? Weiter zu den Dashboard-Karten!</button>
 </div>
 
 <!--
@@ -387,7 +387,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                                                                               
 -->
 
-<div id="step-5" style="display:none;">
+<div id="step-6" style="display:none;">
 <h2 class="custom-title">5. Dashboard-Karten</h2>
 
 <div class="important-container">
@@ -552,7 +552,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                                                                                     
 -->
 
-<div id="step-6" style="display:none;">
+<div id="step-7" style="display:none;">
 
 <div id="dashboard-options" class="dashboard-options">
     <!-- YAML-Ausgabefenster -->
@@ -1376,7 +1376,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     });
     function showStep(stepNumber) {
         // Alle Abschnitte anzeigen, die kleiner oder gleich der aktuellen Schritt-Nummer sind
-        for (let i = 1; i <= 6; i++) {
+        for (let i = 1; i <= 7; i++) {
             const step = document.getElementById(`step-${i}`);
             if (step) {
                 if (i <= stepNumber) {
@@ -3171,7 +3171,7 @@ async function extractEntries() {
     document.getElementById("update-example-and-code").addEventListener("click", () => {
         updateExampleCard();
         generateCardYAML();
-        showStep(6);
+        showStep(7);
     });
 
 
