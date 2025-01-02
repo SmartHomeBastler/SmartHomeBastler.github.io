@@ -91,15 +91,14 @@ Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
         <strong>Achtung!</strong> Deine persönlichen Bezeichnungen dürfen keine Umlaute enthalten und Leerzeichen sollen vermieden werden!
     </p>
 </div>
-    <!-- Warnungscontainer -->
-    <div id="warning-container" class="important-container" style="display: none;">
-        <h3>❗Achtung</h3>
-        <p>
-            Deine ICS-Datei enthält ungültige Einträge. Diese sollten angepasst werden, um Fehler zu vermeiden. 
-            Gehe dazu auf die Seite <a href="/icszusammenfuhren/" target="_blank">ICS zusammenführen / bearbeiten</a>.<br>
-            Die Verarbeitung wird dennoch fortgesetzt, aber überprüfe die Einträge vor dem Erstellen der Codes.
-        </p>
-    </div>
+<!-- Warnungscontainer -->
+<div id="warning-container" class="important-container" style="display: none;">
+    <h3>❗Achtung</h3>
+    <p>
+        Deine Kalender enthält ungültige Einträge. Diese Einträge sollten unbedingt angepasst werden, um Fehler zu vermeiden.<br>
+        Du solltest diese hier über die <strong>Eigenen Bezeichnungen</strong> und in der Waste Collection Schedule gleichermaßen über die <strong>Mülltypen (Alias-Namen)</strong> ändern. 
+    </p>
+</div>
 <p>
     Wähle deine Bezeichnung so, dass sie kurz und sinnvoll ist. Es ist nicht notwendig, das Wort <strong>Tonne</strong> in die Bezeichnung aufzunehmen, da dies automatisch vom Codegenerator ergänzt wird. 
     Beispiel: Aus der Bezeichnung <strong>Papier</strong> wird automatisch <strong>die Papier Tonne</strong>.
@@ -1450,18 +1449,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     
             // Falls ungültige Einträge gefunden wurden
             if (invalidEntries.length > 0) {
-                const proceed = await showCustomDecision(
-                    "Ungültige Einträge gefunden",
-                    "Folgende Einträge enthalten Ziffern oder Punkte:",
-                    invalidEntries
-                );
-                if (!proceed) {
-                    showCustomAlert(
-                        "Verarbeitung abgebrochen!",
-                        "Die Verarbeitung wurde wegen ungültiger Einträge abgebrochen. Bitte überprüfe die ICS-Datei."
-                    );
-                    return; // Abbrechen der Verarbeitung
-                }
+                // Zeige den Warnungscontainer
+                const warningContainer = document.getElementById("warning-container");
+                warningContainer.style.display = "block"; // Container einblenden
+                
+                entryTableBody.innerHTML = ""; // Leere Tabelle, da Warnung angezeigt wird
+                return; // Verarbeitung stoppen
             }
     
             entryTableBody.innerHTML = "";
