@@ -86,7 +86,7 @@ layout: page
 Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 </p>
 
-<div id="umlaut-warning-container" class="important-container">
+<div id="umlaut-warning-container" class="important-container" style="display: block;">
     <h3>❗Achtung</h3>
     <p>
         Deine persönlichen Bezeichnungen dürfen keine Umlaute enthalten und Leerzeichen sollen vermieden werden!
@@ -103,12 +103,13 @@ Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 </div>
 <p>
     Wähle deine Bezeichnung so, dass sie kurz und sinnvoll ist. Es ist nicht notwendig, das Wort <strong>Tonne</strong> in die Bezeichnung aufzunehmen, da dies automatisch vom Codegenerator ergänzt wird. 
+</p>
+<p>
     Beispiel: Aus der Bezeichnung <strong>Papier</strong> wird automatisch <strong>die Papier Tonne</strong>.
 </p>
 <p>
     Eine Ausnahme bilden <strong>Gelbe Tonne</strong> und <strong>Gelber Sack</strong>, da diese ohne den Zusatz nicht eindeutig wären.
 </p>
-
 <p>
 Nach den Änderungen klicke auf<br>
 <strong>Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</strong>
@@ -1452,7 +1453,9 @@ async function extractEntries() {
         // Zeige den Warnungscontainer bei ungültigen Einträgen
         if (invalidEntries.length > 0) {
             const warningContainer = document.getElementById("warning-container");
+            const umlautWarningContainer = document.getElementById("umlaut-warning-container");
             warningContainer.style.display = "block"; // Container einblenden
+            umlautWarningContainer.style.display = "none"; // Umlaut-Warnung ausblenden
         }
     
         entryTableBody.innerHTML = "";
