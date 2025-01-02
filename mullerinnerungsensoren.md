@@ -325,7 +325,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
+        <button class="copy-button" onclick="handleCopyButtonClick(this, 'helper-template-heute')">Copy</button>
         <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -1230,6 +1230,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .copy-button:hover {
         background: #005a9c;
     }
+    .copy-button.copied {
+        background: #28a745; /* Grüner Hintergrund */
+        color: white;       /* Weiße Schrift */
+        content: '✔️';      /* Symbol */
+        padding: 8px 12px;
+    }
     /* Button Container */
     .button-container {
         text-align: center;
@@ -1839,6 +1845,22 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         });
     }
 
+    function handleCopyButtonClick(button, targetId) {
+        const textToCopy = document.getElementById(targetId).textContent.trim(); // Text aus dem Code-Container
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            // Button-Text und Stil ändern
+            button.classList.add('copied'); // Füge die CSS-Klasse hinzu
+            button.innerHTML = "✔️";       // Ändere den Button-Inhalt auf das Symbol
+            
+            // Nach 2 Sekunden zurücksetzen
+            setTimeout(() => {
+                button.classList.remove('copied'); // Entferne die CSS-Klasse
+                button.innerHTML = "Copy";        // Setze den Text zurück
+            }, 2000);
+        }).catch(err => {
+            console.error("Fehler beim Kopieren:", err);
+        });
+    }
 
     function createTemplate(day, templateId, outputId) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
