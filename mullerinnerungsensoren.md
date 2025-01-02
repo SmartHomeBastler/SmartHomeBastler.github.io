@@ -3167,7 +3167,14 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
         navigator.clipboard.writeText(codeText)
             .then(() => {
-                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!"); // Erfolgsnachricht
+                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
+
+                // Button-Text und Stil dauerhaft ändern
+                button.classList.add('copied'); // Füge die CSS-Klasse hinzu
+                button.innerHTML = "Kopiert ✔️";       // Ändere den Button-Inhalt auf das Symbol
+                button.style.backgroundColor = "#72dd8b"; // Grüner Hintergrund
+                button.style.color = "white";             // Weiße Schrift
+                
             })
             .catch(err => {
                 console.error("Fehler beim Kopieren des Codes:", err);
@@ -3326,7 +3333,14 @@ function copyPopupCode() {
 
     navigator.clipboard.writeText(codeText)
         .then(() => {
-            showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!"); // Erfolgsnachricht
+            showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
+
+            // Button-Text und Stil dauerhaft ändern
+            button.classList.add('copied'); // Füge die CSS-Klasse hinzu
+            button.innerHTML = "Kopiert ✔️";       // Ändere den Button-Inhalt auf das Symbol
+            button.style.backgroundColor = "#72dd8b"; // Grüner Hintergrund
+            button.style.color = "white";             // Weiße Schrift
+            
         })
         .catch(err => {
             console.error("Fehler beim Kopieren des Codes:", err);
