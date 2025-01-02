@@ -22,7 +22,25 @@ layout: page
         Ebenfalls ist zu beachten, dass derzeit nur ICS Dateien und ICS-URLs für den Codegenerator genutzt werden können.
     </p>
 </div>
-<br>
+<div id="custom-alert" style="display: none;">
+    <div id="custom-alert-content">
+        <h4 id="custom-alert-title"></h4>
+        <p id="custom-alert-message"></p>
+        <button id="close-alert">OK</button>
+    </div>
+</div>
+<div id="custom-decision" style="display: none;">
+    <div id="custom-decision-content">
+        <h4 id="custom-decision-title"></h4>
+        <p id="custom-decision-message"></p>
+        <ul id="custom-decision-list"></ul>
+        <p id="custom-decision-question" style="font-weight: bold; margin-top: 10px;">
+            Möchtest du die Verarbeitung fortsetzen?
+        </p>
+        <button id="decision-yes">Ja</button>
+        <button id="decision-no">Nein</button>
+    </div>
+</div>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
 ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
