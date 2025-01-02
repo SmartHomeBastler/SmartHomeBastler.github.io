@@ -582,8 +582,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
 <br>
 
-<p>
-    Zur Anzeige eines Pop-Up auf deinem Home Assistant Dashboard sind mehrere Schritte notwendig:
+<h4>Zur Anzeige eines Pop-Up auf deinem Home Assistant Dashboard sind mehrere Schritte notwendig:</h4>
 </p>
 <ul class="styled-list">
     <li>Herunterladen und Speichern des Hintergrund-Bilds</li>
@@ -1361,16 +1360,16 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .styled-list li {
         counter-increment: list-counter; /* Erhöht den Zähler */
         position: relative;
-        margin: 15px 0; /* Abstand zwischen den Einträgen */
-        padding-left: 50px; /* Platz für die Nummerierung und Linie */
-        font-size: 1.1em;
+        margin: 10px 30; /* Abstand zwischen den Einträgen */
+        font-size: 1em;
         line-height: 1.6;
         color: #333; /* Dunkler Text */
         background-color: #fff; /* Neutraler Hintergrund */
         border-left: 3px solid #007acc; /* Farbliche Linie am linken Rand */
         border-radius: 6px; /* Leicht abgerundete Kanten */
-        padding: 10px 15px;
+        padding: 10px 60px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leichter Schatten für visuelle Tiefe */
+        width: 55%;
     }
 
     .styled-list li::before {
