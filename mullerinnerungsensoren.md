@@ -18,12 +18,11 @@ layout: page
     <p>
         Bevor du startest stelle sicher, dass die hier angeführten Hinweise vorhanden / eingerichtet sind!
     </p>
-    <br>
     <p>
         Ebenfalls ist zu beachten, dass derzeit nur ICS Dateien und ICS-URLs für den Codegenerator genutzt werden können.
     </p>
 </div>
-
+<br>
 <h4>Was muss vor der Bearbeitung mit dem Code-Generator vorbereitet werden:</h4>
 
 <ul class="styled-list-start">
@@ -50,7 +49,7 @@ layout: page
         <button id="decision-no">Nein</button>
     </div>
 </div>
-
+<br>
 <button class="custom-button" onclick="showStep(1);">Hinweise gelesen! Vorbereitungen getroffen! Bereit zu starten!</button>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
