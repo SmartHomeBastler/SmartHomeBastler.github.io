@@ -17,33 +17,18 @@ layout: page
         Mit der neuesten Version dieser Integration kannst du die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einrichten.<br> 
         Im weiteren Verlauf dieser Code-Generierung werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
     </p>
+    <br>
+    <p>
+        Ebenfalls ist zu beachten, dass derzeit nur ICS Dateien und ICS-URLs für den Codegenerator genutzt werden können.
+    </p>
 </div>
-<div id="custom-alert" style="display: none;">
-    <div id="custom-alert-content">
-        <h4 id="custom-alert-title"></h4>
-        <p id="custom-alert-message"></p>
-        <button id="close-alert">OK</button>
-    </div>
-</div>
-<div id="custom-decision" style="display: none;">
-    <div id="custom-decision-content">
-        <h4 id="custom-decision-title"></h4>
-        <p id="custom-decision-message"></p>
-        <ul id="custom-decision-list"></ul>
-        <p id="custom-decision-question" style="font-weight: bold; margin-top: 10px;">
-            Möchtest du die Verarbeitung fortsetzen?
-        </p>
-        <button id="decision-yes">Ja</button>
-        <button id="decision-no">Nein</button>
-    </div>
-</div>
+<br>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
 ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
 ███████ ██████  ███████ ██      ███████ ██ ██  ██ ██    ██       ██         ██ 
 ██   ██ ██   ██      ██ ██      ██   ██ ██  ██ ██ ██    ██       ██         ██ 
 ██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██         ██ 
-                                                                               
 -->
 
 <div id="step-1">
@@ -51,7 +36,7 @@ layout: page
 
 <p>
     Zum Auslesen der verschiedenen Abholungen aus deinem Müllkalender, gib bitte deine URL an oder lade die ICS-Datei hoch und bestätige mit<br>
-    <strong>Kalendereinträge extrahieren</strong>
+    <strong>Kalendereinträge extrahieren</strong>.
 </p>
 
 <!-- File Upload and URL Input -->
