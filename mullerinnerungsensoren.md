@@ -572,6 +572,11 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     </div>
 </div>
 
+<h4>Besteht noch Interesse an einer Dashboard Pop-Up Erinnerung?</h4><br>
+<button class="custom-button" onclick="showStep(8);">Ja! Weiter zu der Pop-Up Karte</button>
+</div>
+
+<div id="step-8" style="display:none;">
 <br>
 <h2 class="custom-title">6. Pop-Up-Karte</h2>
 
@@ -1375,7 +1380,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     });
     function showStep(stepNumber) {
         // Alle Abschnitte anzeigen, die kleiner oder gleich der aktuellen Schritt-Nummer sind
-        for (let i = 1; i <= 7; i++) {
+        for (let i = 1; i <= 8; i++) {
             const step = document.getElementById(`step-${i}`);
             if (step) {
                 if (i <= stepNumber) {
