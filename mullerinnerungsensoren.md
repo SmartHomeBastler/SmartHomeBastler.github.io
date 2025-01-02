@@ -210,12 +210,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <div id="code-output-next" style="display:none;">
     <h4>Werte Template Nächste Abholung</h4>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('next-pickup-template')">Copy</button>
+        <button class="copy-button" onclick="copyCode('next-pickup-template', this)">Copy</button>
         <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
     </div>
     <h4>Werte Template einzelne Abholungen</h4>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('individual-pickup-template')">Copy</button>
+        <button class="copy-button" onclick="copyCode('individual-pickup-template', this)">Copy</button>
         <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -244,7 +244,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <div id="code-output-date" style="display:none;">
     <h4>Werte Template Datum einzelne Abholungen</h4>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('date-pickup-template')">Copy</button>
+        <button class="copy-button" onclick="copyCode('date-pickup-template', this)">Copy</button>
         <pre id="date-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -325,7 +325,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="handleCopyButtonClick(this, 'helper-template-heute')">Copy</button>
+        <button class="copy-button" onclick="copyCode('helper-template-heute', this)">Copy</button>
         <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -338,7 +338,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-text-heute')">Copy</button>
+        <button class="copy-button" onclick="copyCode('helper-template-text-heute', this)">Copy</button>
         <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -351,7 +351,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
+        <button class="copy-button" onclick="copyCode('helper-template-morgen', this)">Copy</button>
         <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -364,7 +364,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-text-morgen')">Copy</button>
+        <button class="copy-button" onclick="copyCode('helper-template-text-morgen', this)">Copy</button>
         <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -1231,7 +1231,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         background: #005a9c;
     }
     .copy-button.copied {
-        background: #28a745; /* Grüner Hintergrund */
+        background:rgb(114, 221, 139); /* Grüner Hintergrund */
         color: white;       /* Weiße Schrift */
         content: '✔️';      /* Symbol */
         padding: 8px 12px;
@@ -1845,23 +1845,6 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         });
     }
 
-    function handleCopyButtonClick(button, targetId) {
-        const textToCopy = document.getElementById(targetId).textContent.trim(); // Text aus dem Code-Container
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            // Button-Text und Stil ändern
-            button.classList.add('copied'); // Füge die CSS-Klasse hinzu
-            button.innerHTML = "✔️";       // Ändere den Button-Inhalt auf das Symbol
-            
-            // Nach 2 Sekunden zurücksetzen
-            setTimeout(() => {
-                button.classList.remove('copied'); // Entferne die CSS-Klasse
-                button.innerHTML = "Copy";        // Setze den Text zurück
-            }, 2000);
-        }).catch(err => {
-            console.error("Fehler beim Kopieren:", err);
-        });
-    }
-
     function createTemplate(day, templateId, outputId) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
@@ -1969,19 +1952,30 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         return result.filter(comb => comb.length > 0);
     }
 
-    function copyCode(elementId) {
+    function copyCode(elementId, button) {
         const codeElement = document.getElementById(elementId);
         const codeText = codeElement.innerText || codeElement.textContent;
 
         navigator.clipboard.writeText(codeText)
             .then(() => {
-                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!"); // Zeigt das benutzerdefinierte Fenster
+                // Zeigt das benutzerdefinierte Fenster
+                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
+
+                // Button-Text und Stil dauerhaft ändern
+                button.classList.add('copied'); // Füge die CSS-Klasse hinzu
+                button.innerHTML = "✔️";       // Ändere den Button-Inhalt auf das Symbol
+                button.style.backgroundColor = "#28a745"; // Grüner Hintergrund
+                button.style.color = "white";             // Weiße Schrift
+                
+                // Optional: Deaktiviere den Button, damit er nicht erneut geklickt werden kann
+                button.disabled = true;
             })
             .catch(err => {
                 console.error("Fehler beim Kopieren des Codes: ", err);
-                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten."); // Fehlerhinweis
+                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
             });
     }
+
 
     function toggleDropdown(dropdownId, toggleButton) {
         var dropdownContent = document.getElementById(dropdownId);
