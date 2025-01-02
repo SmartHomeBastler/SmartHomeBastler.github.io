@@ -1404,97 +1404,100 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         };
     }
 
-    async function extractEntries() {
-        try {
-            const fileInput = document.getElementById('icsFile');
-            const urlInput = document.getElementById('calendarUrl');
-            const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
-            entryTableBody.innerHTML = "Lade und verarbeite Daten...";
+async function extractEntries() {
+    try {
+        const fileInput = document.getElementById('icsFile');
+        const urlInput = document.getElementById('calendarUrl');
+        const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
+        entryTableBody.innerHTML = "Lade und verarbeite Daten...";
     
-            let icsData;
+        let icsData;
     
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                icsData = await file.text();
-            } else if (urlInput.value) {
-                try {
-                    const response = await fetch(urlInput.value);
-                    if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
-                    icsData = await response.text();
-                } catch (error) {
-                    entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
-                    console.error("Fetch error:", error);
-                    return;
-                }
-            } else {
-                entryTableBody.innerHTML = "<tr><td colspan='3'>Bitte eine ICS-Datei hochladen oder eine URL eingeben.</td></tr>";
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            icsData = await file.text();
+        } else if (urlInput.value) {
+            try {
+                const response = await fetch(urlInput.value);
+                if (!response.ok) throw new Error("ICS-Datei konnte nicht geladen werden.");
+                icsData = await response.text();
+            } catch (error) {
+                entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der ICS-Datei: ${error.message}</td></tr>`;
+                console.error("Fetch error:", error);
                 return;
             }
+        } else {
+            entryTableBody.innerHTML = "<tr><td colspan='3'>Bitte eine ICS-Datei hochladen oder eine URL eingeben.</td></tr>";
+            return;
+        }
     
-            const summaryEntries = new Set();
-            const invalidEntries = [];
-            const lines = icsData.split("\n");
+        const summaryEntries = new Set();
+        const invalidEntries = [];
+        const lines = icsData.split("\n");
     
-            for (let line of lines) {
-                if (line.startsWith("SUMMARY")) {
-                    const summaryText = line.split(":").slice(1).join(":").trim();
-                    summaryEntries.add(summaryText);
+        for (let line of lines) {
+            if (line.startsWith("SUMMARY")) {
+                const summaryText = line.split(":").slice(1).join(":").trim();
+                summaryEntries.add(summaryText);
     
-                    // Überprüfen, ob Ziffern oder Punkte enthalten sind
-                    if (/\d|\.|[äöüßÄÖÜ]/.test(summaryText)) {
-                        invalidEntries.push(summaryText);
-                    }
+                // Überprüfen, ob Ziffern, Punkte oder unerlaubte Zeichen enthalten sind
+                if (/\d|\.|[äöüßÄÖÜ]/.test(summaryText)) {
+                    invalidEntries.push(summaryText);
                 }
             }
-    
-            // Falls ungültige Einträge gefunden wurden
-            if (invalidEntries.length > 0) {
-                // Zeige den Warnungscontainer
-                const warningContainer = document.getElementById("warning-container");
-                warningContainer.style.display = "block"; // Container einblenden
-                
-                entryTableBody.innerHTML = ""; // Leere Tabelle, da Warnung angezeigt wird
-                return; // Verarbeitung stoppen
-            }
-    
-            entryTableBody.innerHTML = "";
-            let idCounter = 0;
-            summaryEntries.forEach(entry => {
-                const row = document.createElement("tr");
-    
-                // Checkbox
-                const checkboxCell = document.createElement("td");
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.className = "entry-checkbox";
-                checkbox.id = `entry-checkbox-${idCounter}`;
-                checkboxCell.appendChild(checkbox);
-                row.appendChild(checkboxCell);
-    
-                // Summary Entry
-                const summaryCell = document.createElement("td");
-                summaryCell.textContent = entry;
-                summaryCell.id = `summary-${idCounter}`;
-                row.appendChild(summaryCell);
-    
-                // Custom Name Input
-                const customNameCell = document.createElement("td");
-                const customNameInput = document.createElement("input");
-                customNameInput.type = "text";
-                customNameInput.placeholder = "Eigene Bezeichnung";
-                customNameInput.className = "entry-custom-name";
-                customNameInput.id = `custom-name-${idCounter}`;
-                customNameCell.appendChild(customNameInput);
-                row.appendChild(customNameCell);
-    
-                entryTableBody.appendChild(row);
-                idCounter++;
-            });
-    
-        } catch (error) {
-            console.error("Error in extractEntries:", error);
         }
+    
+        // Zeige den Warnungscontainer bei ungültigen Einträgen
+        if (invalidEntries.length > 0) {
+            const warningContainer = document.getElementById("warning-container");
+            warningContainer.style.display = "block"; // Container einblenden
+        }
+    
+        entryTableBody.innerHTML = "";
+        let idCounter = 0;
+        summaryEntries.forEach(entry => {
+            const row = document.createElement("tr");
+    
+            // Checkbox
+            const checkboxCell = document.createElement("td");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.className = "entry-checkbox";
+            checkbox.id = `entry-checkbox-${idCounter}`;
+            checkboxCell.appendChild(checkbox);
+            row.appendChild(checkboxCell);
+    
+            // Summary Entry
+            const summaryCell = document.createElement("td");
+            summaryCell.textContent = entry;
+            summaryCell.id = `summary-${idCounter}`;
+            
+            // Markiere ungültige Einträge
+            if (invalidEntries.includes(entry)) {
+                summaryCell.style.color = "red"; // Färbe ungültige Einträge rot
+                summaryCell.title = "Ungültiger Eintrag - bitte anpassen"; // Tooltip
+            }
+            row.appendChild(summaryCell);
+    
+            // Custom Name Input
+            const customNameCell = document.createElement("td");
+            const customNameInput = document.createElement("input");
+            customNameInput.type = "text";
+            customNameInput.placeholder = "Eigene Bezeichnung";
+            customNameInput.className = "entry-custom-name";
+            customNameInput.id = `custom-name-${idCounter}`;
+            customNameCell.appendChild(customNameInput);
+            row.appendChild(customNameCell);
+    
+            entryTableBody.appendChild(row);
+            idCounter++;
+        });
+    
+    } catch (error) {
+        console.error("Error in extractEntries:", error);
     }
+}
+
 
 
     // Funktion zum Anzeigen des benutzerdefinierten Dialogs
