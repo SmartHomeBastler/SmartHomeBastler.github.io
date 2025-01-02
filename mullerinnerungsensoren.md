@@ -1371,7 +1371,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .styled-list li {
         counter-increment: list-counter; /* Erhöht den Zähler */
         position: relative;
-        margin: 10px 30; /* Abstand zwischen den Einträgen */
+        margin: 10px 30px; /* Abstand zwischen den Einträgen */
         font-size: 1em;
         line-height: 1.6;
         color: #333; /* Dunkler Text */
@@ -1407,7 +1407,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     .styled-list-start li {
         counter-increment: list-counter; /* Erhöht den Zähler */
         position: relative;
-        margin: 10px 30; /* Abstand zwischen den Einträgen */
+        margin: 10px 30px; /* Abstand zwischen den Einträgen */
         font-size: 1em;
         line-height: 1.6;
         color: #333; /* Dunkler Text */
@@ -1420,6 +1420,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     }
 
     .styled-list-start li::before {
+        content: counter(list-counter); /* Fügt die Nummerierung hinzu */
         position: absolute;
         left: 10px; /* Platzierung der Nummer links */
         top: 50%; /* Vertikale Ausrichtung */
