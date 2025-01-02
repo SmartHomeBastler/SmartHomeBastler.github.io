@@ -1355,31 +1355,38 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         list-style: none; /* Entfernt die Standard-Aufzählungspunkte */
         counter-reset: list-counter; /* Initialisiert den Zähler */
         padding-left: 0; /* Entfernt Einrückung */
+        margin: 20px 0; /* Abstand zur Umgebung */
     }
 
     .styled-list li {
         counter-increment: list-counter; /* Erhöht den Zähler */
         position: relative;
-        margin: 10px 0;
-        padding-left: 30px; /* Platz für die Nummerierung */
+        margin: 15px 0; /* Abstand zwischen den Einträgen */
+        padding-left: 50px; /* Platz für die Nummerierung und Linie */
         font-size: 1.1em;
         line-height: 1.6;
         color: #333; /* Dunkler Text */
-        background-color: #f9f9f9; /* Heller Hintergrund */
-        border-left: 4px solid #007acc; /* Farbliche Linie am linken Rand */
-        padding: 10px;
-        border-radius: 4px;
+        background-color: #fff; /* Neutraler Hintergrund */
+        border-left: 3px solid #007acc; /* Farbliche Linie am linken Rand */
+        border-radius: 6px; /* Leicht abgerundete Kanten */
+        padding: 10px 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leichter Schatten für visuelle Tiefe */
     }
 
     .styled-list li::before {
         content: "6." counter(list-counter); /* Fügt "6." + die Zählernummer hinzu */
         position: absolute;
-        left: 0;
-        top: 50%;
+        left: 10px; /* Platzierung der Nummer links */
+        top: 50%; /* Vertikale Ausrichtung */
         transform: translateY(-50%);
         font-weight: bold;
         color: #007acc; /* Gleiche Farbe wie die Linie */
         font-size: 1.2em;
+        background-color: #e6f3ff; /* Heller Hintergrund für die Nummer */
+        padding: 5px 10px;
+        border-radius: 50%; /* Rundes Design für die Nummerierung */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Nummer */
+        text-align: center;
     }
 
 </style>
