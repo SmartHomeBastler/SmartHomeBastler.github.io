@@ -1442,7 +1442,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
                     summaryEntries.add(summaryText);
     
                     // Überprüfen, ob Ziffern oder Punkte enthalten sind
-                    if (/\d|\./.test(summaryText)) {
+                    if (/\d|\.|[äöüßÄÖÜ]/.test(summaryText)) {
                         invalidEntries.push(summaryText);
                     }
                 }
