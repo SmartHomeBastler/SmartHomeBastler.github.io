@@ -7,7 +7,7 @@ show_sidebar: false
 layout: page
 ---
 <div class="guide-container">
-<h1 class="custom-title">Müllkalender Code-Generator</h1>
+<h1 class="custom-title">Müllerinnerung Code-Generator</h1>
 
 <!-- Wichtiger Hinweis -->
 <div class="important-container">
@@ -41,6 +41,8 @@ layout: page
         <button id="decision-no">Nein</button>
     </div>
 </div>
+
+<button class="custom-button" onclick="showStep(1);">Hinweise gelesen! Bereit zu starten!</button>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
 ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
@@ -49,7 +51,7 @@ layout: page
 ██   ██ ██████  ███████  ██████ ██   ██ ██   ████ ██    ██       ██         ██ 
 -->
 
-<div id="step-1">
+<div id="step-1" style="display:none;">
 <h2 class="custom-title">1. Kalenderdaten Auslesen</h2>
 
 <p>
