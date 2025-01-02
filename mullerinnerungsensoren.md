@@ -8,20 +8,29 @@ layout: page
 ---
 <div class="guide-container">
 <h1 class="custom-title">Müllerinnerung Code-Generator</h1>
-
+<br>
+<p>
+    Mit diesem Code-Generator hast du die Möglichkeit, deine Müllerinnerung vom Anlegen des Kalenders über das Einrichten der Sensoren und Templates bis hin zur Dashboard- und Pop-Up- Karte durchzuführen.
+</p>
 <!-- Wichtiger Hinweis -->
 <div class="important-container">
     <h3>❗Wichtig</h3>
     <p>
-        Vor dem Erstellen der Codes stelle sicher, dass die Integration <strong>"Waste Collection Schedule"</strong> in HACS heruntergeladen und installiert ist.<br>
-        Mit der neuesten Version dieser Integration kannst du die Sensoren usw. direkt in Home Assistant unter Geräte & Dienste einrichten.<br> 
-        Im weiteren Verlauf dieser Code-Generierung werden alle notwendigen Angaben für diese Integration für dich bereitgestellt.
+        Bevor du startest stelle sicher, dass die hier angeführten Hinweise vorhanden / eingerichtet sind!
     </p>
     <br>
     <p>
         Ebenfalls ist zu beachten, dass derzeit nur ICS Dateien und ICS-URLs für den Codegenerator genutzt werden können.
     </p>
 </div>
+
+<h4>Was muss vor der Bearbeitung mit dem Code-Generator vorbereitet werden:</h4>
+
+<ul class="styled-list-start">
+    <li>Herunterladen und installieren der <strong>Waste Collection Schedule</strong> in HACS</li>
+    <li>Anlegen eines <strong>muell</strong> Ordners im <strong>config/www/</strong> Ordner</li>
+    <li>Bereitstellung einer ICS Datei oder URL</li>
+</ul>
 <div id="custom-alert" style="display: none;">
     <div id="custom-alert-content">
         <h4 id="custom-alert-title"></h4>
@@ -42,7 +51,7 @@ layout: page
     </div>
 </div>
 
-<button class="custom-button" onclick="showStep(1);">Hinweise gelesen! Bereit zu starten!</button>
+<button class="custom-button" onclick="showStep(1);">Hinweise gelesen! Vorbereitungen getroffen! Bereit zu starten!</button>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
 ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
@@ -1376,6 +1385,42 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
     .styled-list li::before {
         content: "6." counter(list-counter); /* Fügt "6." + die Zählernummer hinzu */
+        position: absolute;
+        left: 10px; /* Platzierung der Nummer links */
+        top: 50%; /* Vertikale Ausrichtung */
+        transform: translateY(-50%);
+        font-weight: bold;
+        color: #007acc; /* Gleiche Farbe wie die Linie */
+        font-size: 1.2em;
+        background-color: #e6f3ff; /* Heller Hintergrund für die Nummer */
+        padding: 5px 10px;
+        border-radius: 50%; /* Rundes Design für die Nummerierung */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Nummer */
+        text-align: center;
+    }
+    .styled-list-start {
+        list-style: none; /* Entfernt die Standard-Aufzählungspunkte */
+        counter-reset: list-counter; /* Initialisiert den Zähler */
+        padding-left: 0; /* Entfernt Einrückung */
+        margin: 20px 0; /* Abstand zur Umgebung */
+    }
+
+    .styled-list-start li {
+        counter-increment: list-counter; /* Erhöht den Zähler */
+        position: relative;
+        margin: 10px 30; /* Abstand zwischen den Einträgen */
+        font-size: 1em;
+        line-height: 1.6;
+        color: #333; /* Dunkler Text */
+        background-color: #fff; /* Neutraler Hintergrund */
+        border-left: 3px solid #007acc; /* Farbliche Linie am linken Rand */
+        border-radius: 6px; /* Leicht abgerundete Kanten */
+        padding: 10px 60px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leichter Schatten für visuelle Tiefe */
+        width: 55%;
+    }
+
+    .styled-list-start li::before {
         position: absolute;
         left: 10px; /* Platzierung der Nummer links */
         top: 50%; /* Vertikale Ausrichtung */
