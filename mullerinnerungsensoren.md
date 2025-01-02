@@ -320,7 +320,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <label for="keineMorgen">Anzeige Text "keine" für Morgen</label>
 </div>
 
-<button class="custom-button" onclick="createTemplates()">Templates erstellen</button>
+<button class="custom-button" onclick="showStep(51); createTemplates()">Templates erstellen</button>
 
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
@@ -373,6 +373,8 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
+</div>
+<div id="step-51" style="display:none;">
 <button class="custom-button" onclick="showStep(5); createImageList();">Templates angelegt? Weiter zu den Dashboard-Karten!</button>
 </div>
 
