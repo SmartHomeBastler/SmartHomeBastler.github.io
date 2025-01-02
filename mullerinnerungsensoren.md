@@ -210,12 +210,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <div id="code-output-next" style="display:none;">
     <h4>Werte Template Nächste Abholung</h4>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('next-pickup-template', this)">Copy</button>
+        <button class="copy-button" onclick="copyCode('next-pickup-template', this)">Kopieren</button>
         <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
     </div>
     <h4>Werte Template einzelne Abholungen</h4>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('individual-pickup-template', this)">Copy</button>
+        <button class="copy-button" onclick="copyCode('individual-pickup-template', this)">Kopieren</button>
         <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -244,7 +244,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 <div id="code-output-date" style="display:none;">
     <h4>Werte Template Datum einzelne Abholungen</h4>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('date-pickup-template', this)">Copy</button>
+        <button class="copy-button" onclick="copyCode('date-pickup-template', this)">Kopieren</button>
         <pre id="date-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -325,7 +325,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-heute', this)">Copy</button>
+        <button class="copy-button" onclick="copyCode('helper-template-heute', this)">Kopieren</button>
         <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -338,7 +338,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-text-heute', this)">Copy</button>
+        <button class="copy-button" onclick="copyCode('helper-template-text-heute', this)">Kopieren</button>
         <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -351,7 +351,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-morgen', this)">Copy</button>
+        <button class="copy-button" onclick="copyCode('helper-template-morgen', this)">Kopieren</button>
         <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -364,7 +364,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-text-morgen', this)">Copy</button>
+        <button class="copy-button" onclick="copyCode('helper-template-text-morgen', this)">Kopieren</button>
         <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
@@ -552,7 +552,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div id="yaml-output-container" class="yaml-output-container">
         <h4 class="custom-title">Generierter YAML-Code</h4>
         <div class="yaml-code-container">
-            <button class="copy-button" onclick="copyYAMLCode()">Copy</button>
+            <button class="copy-button" onclick="copyYAMLCode()">Kopieren</button>
             <pre id="yaml-code-output" class="language-yaml"><code></code></pre>
         </div>
     </div>
@@ -719,7 +719,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 </div>
 
 <p>
-    Den generierten Code kannst du mit <strong>Copy</strong> in die Zwischenablage kopieren.
+    Den generierten Code kannst du mit <strong>Kopieren</strong> in die Zwischenablage kopieren.
 </p>
 
 <div id="popup-options" class="dashboard-options">
@@ -727,7 +727,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div id="popup-output-container" class="yaml-output-container">
         <h4 class="custom-title">Generierter Pop-Up-Code</h4>
         <div class="yaml-code-container">
-            <button class="copy-button" onclick="copyPopupCode()">Copy</button>
+            <button class="copy-button" onclick="copyPopupCode()">Kopieren</button>
             <pre id="popup-code-output" class="language-yaml"><code></code></pre>
         </div>
     </div>
@@ -1231,7 +1231,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         background: #005a9c;
     }
     .copy-button.copied {
-        background:rgb(114, 221, 139); /* Grüner Hintergrund */
+        background: #72dd8b; /* Grüner Hintergrund */
         color: white;       /* Weiße Schrift */
         content: '✔️';      /* Symbol */
         padding: 8px 12px;
@@ -1963,12 +1963,10 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 
                 // Button-Text und Stil dauerhaft ändern
                 button.classList.add('copied'); // Füge die CSS-Klasse hinzu
-                button.innerHTML = "✔️";       // Ändere den Button-Inhalt auf das Symbol
-                button.style.backgroundColor = "#28a745"; // Grüner Hintergrund
+                button.innerHTML = "Kopiert ✔️";       // Ändere den Button-Inhalt auf das Symbol
+                button.style.backgroundColor = "#72dd8b"; // Grüner Hintergrund
                 button.style.color = "white";             // Weiße Schrift
                 
-                // Optional: Deaktiviere den Button, damit er nicht erneut geklickt werden kann
-                button.disabled = true;
             })
             .catch(err => {
                 console.error("Fehler beim Kopieren des Codes: ", err);
