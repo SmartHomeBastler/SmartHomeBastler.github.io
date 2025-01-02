@@ -86,17 +86,19 @@ layout: page
 Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 </p>
 
-<div class="important-container">
+<div id="umlaut-warning-container" class="important-container">
+    <h3>❗Achtung</h3>
     <p>
-        <strong>Achtung!</strong> Deine persönlichen Bezeichnungen dürfen keine Umlaute enthalten und Leerzeichen sollen vermieden werden!
+        Deine persönlichen Bezeichnungen dürfen keine Umlaute enthalten und Leerzeichen sollen vermieden werden!
     </p>
 </div>
 <!-- Warnungscontainer -->
 <div id="warning-container" class="important-container" style="display: none;">
     <h3>❗Achtung</h3>
     <p>
-        Deine Kalender enthält ungültige Einträge. Diese Einträge sollten unbedingt angepasst werden, um Fehler zu vermeiden.<br>
-        Du solltest diese hier über die <strong>Eigenen Bezeichnungen</strong> und in der Waste Collection Schedule gleichermaßen über die <strong>Mülltypen (Alias-Namen)</strong> ändern. 
+        Deine Kalender enthält ungültige Einträge wie z.B. <strong>Ä, Ö, Ü, Leerzeichen oder Sonderzeichen </strong>.<br>
+        Diese Einträge sollten unbedingt ohne diese Zeichen angepasst werden, um Fehler zu vermeiden.<br>
+        Am Besten korrigierst du diese hier über die <strong>Eigenen Bezeichnungen</strong> und in der Waste Collection Schedule gleichermaßen über die <strong>Mülltypen (Alias-Namen)</strong>. 
     </p>
 </div>
 <p>
