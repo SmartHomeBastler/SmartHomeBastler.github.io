@@ -322,7 +322,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div class="custom-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span class="copy-confirmation" style="display: none;">&#10003;</span>
+        <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-heute')">Copy</button>
@@ -335,7 +335,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div class="custom-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span class="copy-confirmation" style="display: none;">&#10003;</span>
+        <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-text-heute')">Copy</button>
@@ -348,7 +348,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div class="custom-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span class="copy-confirmation" style="display: none;">&#10003;</span>
+        <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-morgen')">Copy</button>
@@ -361,7 +361,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div class="custom-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span class="copy-confirmation" style="display: none;">&#10003;</span>
+        <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
     <div class="code-container">
         <button class="copy-button" onclick="copyCode('helper-template-text-morgen')">Copy</button>
@@ -1828,18 +1828,18 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
         navigator.clipboard.writeText(textToCopy).then(() => {
-            // Nur das entsprechende Bestätigungs-Icon anzeigen
+            // Suche nach dem Symbol in der gleichen Zeile wie die Überschrift
             const confirmationIcon = element.parentElement.querySelector('.copy-confirmation');
-            confirmationIcon.style.display = 'inline';
-            
-            // Nach 2 Sekunden das Icon wieder ausblenden
-            setTimeout(() => {
-                confirmationIcon.style.display = 'none';
-            }, 2000);
+            if (confirmationIcon) {
+                // Umschalten zwischen ❌ und ✔️
+                confirmationIcon.textContent = "✔️";
+            }
         }).catch(err => {
             console.error("Fehler beim Kopieren in die Zwischenablage:", err);
         });
     }
+
+
     function createTemplate(day, templateId, outputId) {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
