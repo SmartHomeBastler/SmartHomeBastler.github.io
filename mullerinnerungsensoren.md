@@ -727,7 +727,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
     <div id="popup-output-container" class="yaml-output-container">
         <h4 class="custom-title">Generierter Pop-Up-Code</h4>
         <div class="yaml-code-container">
-            <button class="copy-button" onclick="copyCode('popup-code-output, this)">Kopieren</button>
+            <button class="copy-button" onclick="copyCode('popup-code-output', this)">Kopieren</button>
             <pre id="popup-code-output" class="language-yaml"><code></code></pre>
         </div>
     </div>
