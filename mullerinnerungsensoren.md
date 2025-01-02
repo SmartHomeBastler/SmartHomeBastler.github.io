@@ -1429,7 +1429,7 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         color: #007acc; /* Gleiche Farbe wie die Linie */
         font-size: 1.2em;
         background-color: #e6f3ff; /* Heller Hintergrund für die Nummer */
-        padding: 5px 5px;
+        padding: 5px 15px;
         border-radius: 50%; /* Rundes Design für die Nummerierung */
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Nummer */
         text-align: center;
