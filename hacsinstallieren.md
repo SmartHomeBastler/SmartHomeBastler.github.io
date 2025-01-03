@@ -56,7 +56,28 @@ layout: page
 <br>
 <br>
 <p>
-    Im Fenster auf der geöffneten Seite, gib die IP-Adresse deines Home Assistant Systems gefolgt von <strong>:8123</strong> ein und klicke auf <strong>Save</strong>.<br>
+    Im Fenster auf der geöffneten Seite, gib die IP-Adresse deines Home Assistant Systems gefolgt von <strong>:8123</strong> ein und klicke auf <strong>Save</strong>.
+</p>
+<p>
+    Danach kontrolliere nocheinmal die IP-Adresse und bestätige mit <strong>Open link</strong>
+</p>
+<p>
+    Es öffnet sich dein Home Assistant und hier erscheint ein Fenster mit der Frage <strong>"Bist du sicher?"</strong>. Diese kannst du mit <strong>OK</strong> beantworten.
+</p>
+<p>
+    Nun wird das "Get HACS" Addon angezeigt. Hier auf <strong>INSTALLIEREN</strong> klicken und nach der Installation "Beim Booten starten" einschalten. Das Addon starten und im Protokoll auf die Fertigstellungsmeldung warten.<br>
+    Danach Home Assistant neu starten.
+</p>
+<p>
+    Nach dem Neustart gehe auf <strong>Einstellungen - Geräte & Dienste</strong> und klicke rechts unten auf <strong>Integration hinzufügen</strong>. Suche nach HACS, wähle es aus, bestätige im folgendem Fenster die angeführten Hinweise und beände mit einem Klick auf <strong>OK</strong>.
+</p>
+<p>
+    Nun kopiere dir den angeführten Schlüssel (key) und öffne den Link. Log dich mit deinem Github Account ein, fügen den Schlüssel ein, klicke auf <strong>Continue</strong> und danach auf <strong>Authorize hacs</strong>.
+</p>
+
+<p>
+    Zurück auf Home Assistant ist der Home Assistant Community Store fertig installiert und eingerichtet.<br>
+    Wenn in der Seitenleiste das Symbol fehlen sollte, kann es mit einem Refresh des Browsers behoben werden.
 </p>
 
 <h1 class="custom-title">HACS in Home Assistant Core oder Container installieren</h1>
@@ -76,6 +97,13 @@ layout: page
 </ul>
 <br>
 
+<p>
+    Als Terminal kann ich nur den <strong>Advanced SSH & Web Terminal</strong> in den Addons empfehlen. Um diesen zu installieren, stelle zunächst sicher ob in deinem Profil <strong>Erweiterter Modus</strong> aktiviert ist und gehe dann auf <strong>Einstellungen - Add-ons<strong> und suche im <strong>ADD-ON STORE</strong> nach Advanced SSH & Web Terminal. Folge der Installation anhand der Dokumentation.
+</p>
+<p>
+    Nach der Installation öffne das Terminal und kopiere dir den hier angeführten Befehl zur Installation von HACS.
+</p>
+
 <div id="hacs-installation-code" style="display: block;">
     <h4>Installationsbefehl für das Terminal</h4>
     <div class="code-container">
@@ -83,7 +111,11 @@ layout: page
         <code id="code-block">wget -O - https://get.hacs.xyz | bash -</code>
     </div>
 </div>
-
+<br>
+<p>
+    Der kopierte Code kann im Terminal mit der Tastenkombination <strong>STRG+SHIFT+V</strong> eingefügt werden.<br>
+    Danach mit <strong>ENTER</strong> bestätigen und die Installation beginnt.
+</p>
 
 </div>
 
