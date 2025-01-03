@@ -41,11 +41,6 @@ layout: page
 </p>
 </div>
 
-
-
-
-
-
 <style>
     .guide-container {
         max-width: 100%;
