@@ -207,7 +207,7 @@ In solch einem Fall, kann im nächsten Schritt die eigene Bezeichnung auch als A
     <li><strong>Sensor einzelne Abholung</strong> - Sensoren für jeden einzelnen Mülltyp mit "heute", "morgen" oder "in Tragen"</li>
     <li><strong>Sensor Datum</strong> - Sensoren welche das Datum der nächsten Abholung einzelner Mülltypen ausgibt</li>
 </ul>
-
+<br>
 <p>
     Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden.<br>
     Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.
