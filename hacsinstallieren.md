@@ -29,11 +29,12 @@ layout: page
 </p>
 <button class="custom-button" onclick="window.open('https://github.com', '_blank');">Link zu Github</button>
 <br>
+<br>
 <p>
     Nachdem der Github Account eingerichtet ist, klicke auf folgenden Link um die Installation von HACS zu starten
 </p>
+<button class="custom-button" onclick="window.open('https://my.home-assistant.io/redirect/_change/?redirect=supervisor_addon%2F%3Faddon%3Dcb646a50_get%26repository_url%3Dhttps%253A%252F%252Fgithub.com%252Fhacs%252Faddons', '_blank');">Link zur HACS Installation</button>
 <br>
-<button class="custom-button" onclick="window.open('https://my.home-assistant.io/redirect/_change/?redirect=supervisor_addon%2F%3Faddon%3Dcb646a50_get%26repository_url%3Dhttps%253A%252F%252Fgithub.com%252Fhacs%252Faddons', '_blank');">Link zu Github</button>
 <br>
 <p>
     Im Fenster auf der geöffneten Seite, gib die IP-Adresse deines Home Assistant Systems gefolgt von <strong>:8123</strong> ein und klicke auf <strong>Save</strong>.<br>
