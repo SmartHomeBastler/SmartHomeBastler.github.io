@@ -118,6 +118,9 @@ layout: page
     Danach mit <strong>ENTER</strong> bestätigen und die Installation beginnt.
 </p>
 <p>
+    Nach der Installation muss Home Assistant neu gestartet werden.
+</p>
+<p>
     Die restliche Installation wird wie zuvor beschrieben durchgeführt.
 </p>
 <h4 class="custom-title">
