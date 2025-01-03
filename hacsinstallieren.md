@@ -8,6 +8,7 @@ layout: page
 ---
 
 <div class="guide-container">
+
 <div id="custom-alert" style="display: none;">
     <div id="custom-alert-content">
         <h4 id="custom-alert-title"></h4>
@@ -98,7 +99,7 @@ layout: page
 <br>
 
 <p>
-    Als Terminal kann ich nur den <strong>Advanced SSH & Web Terminal</strong> in den Addons empfehlen. Um diesen zu installieren, stelle zunächst sicher ob in deinem Profil <strong>Erweiterter Modus</strong> aktiviert ist und gehe dann auf <strong>Einstellungen - Add-ons<strong> und suche im <strong>ADD-ON STORE</strong> nach Advanced SSH & Web Terminal. Folge der Installation anhand der Dokumentation.
+    Als Terminal kann ich nur den <strong>Advanced SSH & Web Terminal</strong> in den Addons empfehlen. Um diesen zu installieren, stelle zunächst sicher ob in deinem Profil <strong>Erweiterter Modus</strong> aktiviert ist und gehe dann auf <strong>Einstellungen - Add-ons</strong> und suche im <strong>ADD-ON STORE</strong> nach Advanced SSH & Web Terminal. Folge der Installation anhand der Dokumentation.
 </p>
 <p>
     Nach der Installation öffne das Terminal und kopiere dir den hier angeführten Befehl zur Installation von HACS.
