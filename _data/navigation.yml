@@ -45,7 +45,7 @@
 - name: Kurzanleitungen
   dropdown:
     - name: HACS installieren
-      link: /hacs_installieren
+      link: /hacsinstallieren
 - name: Code Design
   dropdown:
     - name: ASCII Code
