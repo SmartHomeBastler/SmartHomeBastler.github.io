@@ -8,7 +8,26 @@ layout: page
 ---
 
 <div class="guide-container">
-<h1 class="custom-title">HACS installieren</h1>
+<div id="custom-alert" style="display: none;">
+    <div id="custom-alert-content">
+        <h4 id="custom-alert-title"></h4>
+        <p id="custom-alert-message"></p>
+        <button id="close-alert">OK</button>
+    </div>
+</div>
+<div id="custom-decision" style="display: none;">
+    <div id="custom-decision-content">
+        <h4 id="custom-decision-title"></h4>
+        <p id="custom-decision-message"></p>
+        <ul id="custom-decision-list"></ul>
+        <p id="custom-decision-question" style="font-weight: bold; margin-top: 10px;">
+            Möchtest du die Verarbeitung fortsetzen?
+        </p>
+        <button id="decision-yes">Ja</button>
+        <button id="decision-no">Nein</button>
+    </div>
+</div>
+<h1 class="custom-title">HACS in Home Assistant OS installieren</h1>
 <br>
 <p>
     Wenn du Home Assistant als OS, also als Betriebssystem installiert hast, kann der Home Assistant Community Store (HACS) relativ einfach installiert werden.
@@ -38,9 +57,37 @@ layout: page
 <br>
 <p>
     Im Fenster auf der geöffneten Seite, gib die IP-Adresse deines Home Assistant Systems gefolgt von <strong>:8123</strong> ein und klicke auf <strong>Save</strong>.<br>
-    
 </p>
+
+<h1 class="custom-title">HACS in Home Assistant Core oder Container installieren</h1>
+<br>
+<p>
+    Wenn du Home Assistant als Core oder Container Version installiert hast, kann der Home Assistant Community Store (HACS) auf folgende Weise installiert werden.
+</p>
+<br>
+<h4>Was wird dafür benötigt:</h4>
+
+<ul class="styled-list-start">
+    <li>Zugriff auf dein Home Assistant als Administrator</li>
+    <li>Die IP Adresse deines Home Assistant Systems</li>
+    <li>Ein Github Account</li>
+    <li>Ein in den Addons installierter und funktionstüchtiges Terminal</li>
+    <li>Einen HACS Installationsbefehl</li>
+</ul>
+<br>
+
+<div id="hacs-installation-code" style="display: block;">
+    <h4>Installationsbefehl für das Terminal</h4>
+    <div class="code-container">
+        <button class="copy-button" onclick="copyCode('code-block', this);">Kopieren</button>
+        <code id="code-block">wget -O - https://get.hacs.xyz | bash -</code>
+    </div>
 </div>
+
+
+</div>
+
+
 
 <style>
     .guide-container {
@@ -64,6 +111,116 @@ layout: page
         font-size: 16px;
         line-height: 1.5;
         color: #333;
+    }
+    #custom-alert {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* Dunkles Overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    #custom-alert-content {
+        background-color: #fff;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 400px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    #custom-alert-title {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+        font-weight: bold;
+    }
+    #custom-alert-message {
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #666;
+    }
+    #close-alert {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    #close-alert:hover {
+        background-color: #218838;
+    }
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    #custom-decision {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }    
+    #custom-decision-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }    
+    #custom-decision h4 {
+        margin: 0 0 10px;
+    }    
+    #custom-decision p {
+        margin: 0 0 20px;
+    }    
+    #custom-decision button {
+        margin: 0 5px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }    
+    #custom-decision button:hover {
+        background-color: #0056b3;
+    }
+    #custom-decision-list {
+        text-align: left;
+        max-height: 300px;
+        overflow-y: auto;
+        margin: 10px 0;
+        padding: 0;
+        list-style: none;
+    }    
+    #custom-decision-list li {
+        margin: 5px 0;
+    }
+    #custom-decision-question {
+        font-size: 1.1em;
+        text-align: center;
+        margin-top: 10px;
     }
     .custom-title-inline {
         display: flex; /* Elemente nebeneinander anordnen */
@@ -257,3 +414,21 @@ layout: page
     }
 
 </style>
+
+<script>
+    function copyCode(elementId, button) {
+        const codeElement = document.getElementById(elementId);
+        const codeText = codeElement.innerText || codeElement.textContent;
+
+        navigator.clipboard.writeText(codeText)
+            .then(() => {
+                // Ändert den Button-Text und Stil
+                button.classList.add('copied');
+                button.textContent = "Kopiert ✔️";
+            })
+            .catch(err => {
+                console.error("Fehler beim Kopieren des Codes: ", err);
+                alert("Beim Kopieren des Codes ist ein Fehler aufgetreten.");
+            });
+    }
+</script>
