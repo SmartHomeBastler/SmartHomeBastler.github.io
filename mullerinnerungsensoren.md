@@ -1424,7 +1424,7 @@ Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im <strong
         border-radius: 6px; /* Leicht abgerundete Kanten */
         padding: 10px 60px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leichter Schatten für visuelle Tiefe */
-        width: 55%;
+        width: 90%;
     }
 
     .styled-list-start li::before {
