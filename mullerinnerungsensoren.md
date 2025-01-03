@@ -159,8 +159,14 @@ In solch einem Fall, kann im nächsten Schritt die eigene Bezeichnung auch als A
 <div id="step-3" style="display:none;">
 <h2 class="custom-title">3. Sensoren Konfiguration</h2>
 
-<p>An diesem Punkt kann die bereits installierte Integration <strong>Waste Collection Schedule</strong> in Home Assistant - Geräte & Dienste eingerichtet werden.<br>
-Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
+<p>
+    Wenn du eine ICS Datei verwendest, sollte an diesem Punkt diese Datei in deinem <strong>www/muell/</strong> Ordner abgelegt werden.
+</p>
+
+<p>
+    Nun kann die bereits installierte Integration <strong>Waste Collection Schedule</strong> in Home Assistant - Geräte & Dienste eingerichtet werden.<br>
+    Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong>
+</p>
 
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
@@ -192,7 +198,7 @@ Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im <strong
         </div>
     </div>
 </div>
-<h4>Was kann in der Waste Collection Schedule angelegt werden:</h4>
+<h4>Was kann in der Waste Collection Schedule Integration eingerichtet werden:</h4>
 
 <ul class="styled-list-start">
     <li><strong>Kalender</strong> - Anlegen deines Abfallkalenders mittels ICS, URL oder Abfall App</li>
