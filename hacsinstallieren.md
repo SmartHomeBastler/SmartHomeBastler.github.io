@@ -30,6 +30,8 @@ layout: page
 </div>
 <h1 class="custom-title">HACS in Home Assistant OS installieren</h1>
 <br>
+
+{% include youtube.html video="j54-l1iPa6g" %}
 <p>
     Wenn du Home Assistant als OS, also als Betriebssystem installiert hast, kann der Home Assistant Community Store (HACS) relativ einfach installiert werden.
 </p>
