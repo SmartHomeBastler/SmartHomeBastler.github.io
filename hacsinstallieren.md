@@ -117,7 +117,17 @@ layout: page
     Der kopierte Code kann im Terminal mit der Tastenkombination <strong>STRG+SHIFT+V</strong> eingefügt werden.<br>
     Danach mit <strong>ENTER</strong> bestätigen und die Installation beginnt.
 </p>
+<p>
+    Die restliche Installation wird wie zuvor beschrieben durchgeführt.
+</p>
+<h4 class="custom-title">
+    Ich hoffe diese Kurzanleitung konnte dir bei der Einrichtung helfen.<br>
+    Über Feedback und Unterstützung würde ich mich auf jeden Fall freuen.
+</h4>
+<br>
+<h3 class="custom-title">Danke und gutes Gelingen!</h3>
 
+{% include support_note.html %}
 </div>
 
 
