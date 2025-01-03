@@ -159,8 +159,8 @@ In solch einem Fall, kann im nächsten Schritt die eigene Bezeichnung auch als A
 <div id="step-3" style="display:none;">
 <h2 class="custom-title">3. Sensoren Konfiguration</h2>
 
-<p>An diesem Punkt kann die Integration <strong>Waste Collection Schedule</strong> in Home Assistant eingerichtet werden.<br>
-Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
+<p>An diesem Punkt kann die bereits installierte Integration <strong>Waste Collection Schedule</strong> in Home Assistant - Geräte & Dienste eingerichtet werden.<br>
+Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
 
 <div class="dropdown">
     <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
@@ -192,7 +192,15 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
         </div>
     </div>
 </div>
+<h4>Was kann in der Waste Collection Schedule angelegt werden:</h4>
 
+<ul class="styled-list-start">
+    <li><strong>Kalender</strong> - Anlegen deines Abfallkalenders mittels ICS, URL oder Abfall App</li>
+    <li><strong>Mülltypen</strong> - Änderung der Bezeichnungen deiner einzelnen Abholungen (Alias Namen)</li>
+    <li><strong>Sensor Nächste Abholung</strong> - Ein Sensor welche die nächste Abholung als Status ausgibt</li>
+    <li><strong>Sensor einzelne Abholung</strong> - Sensoren für jeden einzelnen Mülltyp mit "heute", "morgen" oder "in Tragen"</li>
+    <li><strong>Sensor Datum</strong> - Sensoren welche das Datum der nächsten Abholung einzelner Mülltypen ausgibt</li>
+</ul>
 
 <p>
     Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden.<br>
@@ -200,11 +208,12 @@ Eine detaillierte Beschreibung wie diese einzurichten sind, findest du im <stron
 </p>
 
 <p>
-    Mit einem Klick auf den Sensor-Namen wird dieser in die Zwischenablage kopiert.<br>
-    Dadurch wird das Eintragen in Home Assistant als Sensor-Name wesentlich einfacher.
+    Mit einem Klick auf den Sensor-Namen in der Tabelle wird dieser in die Zwischenablage kopiert.<br>
+    Kopierte Einträge werden mit einem ✔️ gekennzeichnet.<br>
+    Dann den Sensor-Namen zusammen mit dem Werte-Template in die Waste Collection Schedule eintragen.
 </p>
 
-<h3 class="custom-subtitle" id="sensor-header" style="display:none;">Anzulegende Sensoren</h3>
+<h3 class="custom-subtitle" id="sensor-header" style="display:none;">Anzulegende Sensoren und Mülltypen</h3>
 
 <table class="custom-table" id="sensor-table" style="display:none;">
     <thead>
