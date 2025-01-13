@@ -4,7 +4,6 @@ source "https://rubygems.org"
 
 gem "jekyll", "~> 4.3.0"
 gem "jekyll-sass-converter", "~> 2.1"
-gem "github-pages", "~> 232", group: :jekyll_plugins
 
 # Zusätzliche Plugins (werden automatisch von github-pages unterstützt, hier zur Übersicht)
 group :jekyll_plugins do
