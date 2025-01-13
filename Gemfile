@@ -2,7 +2,8 @@
 
 source "https://rubygems.org"
 
-# GitHub Pages Gem, das die kompatiblen Abhängigkeiten definiert
+gem "jekyll", "~> 4.3.0"
+gem "jekyll-sass-converter", "~> 2.1"
 gem "github-pages", "~> 232", group: :jekyll_plugins
 
 # Zusätzliche Plugins (werden automatisch von github-pages unterstützt, hier zur Übersicht)
