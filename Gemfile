@@ -13,6 +13,3 @@ group :jekyll_plugins do
     gem "jekyll-seo-tag"
     gem "jekyll-redirect-from"
 end
-
-# Entfernt: Direkte Abhängigkeit zu jekyll und jekyll-sass-converter,
-# da github-pages diese Gems bereits in kompatiblen Versionen bereitstellt.
