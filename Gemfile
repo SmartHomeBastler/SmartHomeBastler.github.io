@@ -2,9 +2,10 @@
 
 source "https://rubygems.org"
 
+# GitHub Pages Gem, das die kompatiblen Abhängigkeiten definiert
 gem "github-pages", "~> 232", group: :jekyll_plugins
-gem "jekyll", "~> 3.10.0" # Jekyll als direkte Abhängigkeit
 
+# Zusätzliche Plugins (werden automatisch von github-pages unterstützt, hier zur Übersicht)
 group :jekyll_plugins do
     gem "jekyll-feed", "~> 0.6"
     gem "jekyll-sitemap"
@@ -13,5 +14,5 @@ group :jekyll_plugins do
     gem "jekyll-redirect-from"
 end
 
-# SCSS-Kompatibilität
-gem "jekyll-sass-converter", "~> 2.1" # Neuere Version für besseren Support
+# Entfernt: Direkte Abhängigkeit zu jekyll und jekyll-sass-converter,
+# da github-pages diese Gems bereits in kompatiblen Versionen bereitstellt.
