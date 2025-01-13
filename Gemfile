@@ -7,7 +7,7 @@ gem "jekyll", "~> 4.3.0"
 gem "jekyll-sass-converter", "~> 2.2.0"
 
 group :jekyll_plugins do
-    gem "jekyll-feed", "~> 0.6"
+    gem "jekyll-feed"
     gem "jekyll-sitemap"
     gem "jekyll-paginate"
     gem "jekyll-seo-tag"
