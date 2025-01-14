@@ -172,6 +172,11 @@ layout: page
     }
 </style>
 
+<div class="shb-form-group-30">
+    <label for="file-id-1" class="custom-label">Eine Datei hochladen</label>
+    <input type="file" id="file-id-1" accept=".ics" />
+</div>
+
 <div class="shb-form-group-full">
     <label for="select-id-2">Auswahl:</label>
     <select id="select-id-2">  <!-- Füge  onchange="updateScript2()" hinzu für Script -->
@@ -218,7 +223,6 @@ layout: page
         color: #ffffff;
     }
 </style>
-
 
 <div class="shb-button-container">
     <button class="shb-button shb-button-blue">Button Blau</button> <!-- Füge  onclick="updateScript2()" hinzu für Script -->
@@ -267,7 +271,7 @@ layout: page
     .shb-list-start {
         counter-reset: list-counter;
         padding-left: 0;
-        margin: 20px 0;
+        margin: 30px 0 !important;
         margin-inline-start: 0.5em !important;
     }
     .shb-list-start li strong {
