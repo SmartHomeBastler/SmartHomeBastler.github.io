@@ -507,15 +507,13 @@ function showSHBcustomAlert(title, message) {
         margin-top: 5px;
         margin-bottom: 30px;
         overflow: auto;
-        max-height: 300px;
     }
     #yaml-output {
-        width: 100%;
-        margin-top: 20px;
+        width: 100% !important;
         padding: 10px;
         border: 1px solid #ddd;
         border-radius: 5px;
-        background-color: #9fb9fb;
+        background-color: #1a1a1a;
         font-size: 0.95em;
         line-height: 1.5;
         color: #d1d1d1;
