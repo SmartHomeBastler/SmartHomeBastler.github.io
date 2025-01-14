@@ -270,7 +270,7 @@ layout: page
         margin: 20px 0;
     }
     .shb-list-start li strong {
-        color: #2266ff;
+        color: #9fb9fb;
         text-transform: uppercase;
     }
     .shb-list-start li {
@@ -297,7 +297,7 @@ layout: page
         top: 50%;
         transform: translateY(-50%);
         font-weight: bold;
-        color: #9fb9fb;
+        color: #2266ff;
         font-size: 1.2em;
         background-color: #ffffff;
         border: 3px solid #9fb9fb;
