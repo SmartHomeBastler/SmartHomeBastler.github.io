@@ -210,7 +210,16 @@ layout: page
     }
 </style>
 
-<label class="shb-button-container">Drücke den gewählten Button:</label>
+<label class="shb-label">Drücke den gewählten Button:</label>
+<style>
+    .shb-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #ffffff;
+    }
+</style>
+
+
 <div class="shb-button-container">
     <button class="shb-button shb-button-blue">Button Blau</button> <!-- Füge  onclick="updateScript2()" hinzu für Script -->
     <button class="shb-button shb-button-green">Button Grün</button>
@@ -222,11 +231,6 @@ layout: page
         display: flex;
         gap: 10px;
         margin: 20px 0;
-    }
-    .shb-button-container label {
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #ffffff;
     }
     .shb-button {
         padding: 10px 15px;
