@@ -134,5 +134,66 @@ layout: page
     }
 </style>
 
+<div class="shb-form-group-30">
+    <label for="select-id-1">Auswahl:</label>
+    <select id="select-id-1" onchange="updateScript1()">
+        <option value="Eins">Eins</option>
+        <option value="Zwei">Zwei</option>
+        <option value="Drei">Drei</option>
+        <option value="Vier">Vier</option>
+    </select>
+</div>
+<style>
+    .shb-form-group-30, .shb-form-group-30-full {
+        display: flex;
+        flex-direction: column;
+    }
+    .shb-form-group-30 label, .shb-form-group-30-full label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .shb-form-group-30 input, .shb-form-group-30 select {
+        padding: 8px;
+        color: #000000;
+        background-color: #9fb9fb;
+        max-width: 30%;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="shb-form-group-full">
+    <label for="select-id-2">Auswahl:</label>
+    <select id="select-id-2" onchange="updateScript2()">
+        <option value="Eins">Eins</option>
+        <option value="Zwei">Zwei</option>
+        <option value="Drei">Drei</option>
+        <option value="Vier">Vier</option>
+    </select>
+</div>
+<style>
+    .shb-form-group-full {
+        display: flex;
+        flex-direction: column;
+    }
+    .shb-form-group-full label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .shb-form-group-full input, .shb-form-group-full select {
+        padding: 8px;
+        color: #000000;
+        background-color: #9fb9fb;
+        max-width: 100%;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+</style>
+
+
 </div>
 </div>
