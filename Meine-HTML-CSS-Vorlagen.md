@@ -85,16 +85,16 @@ layout: page
 </div>
 <style>
     .important-container {
-        background-color: rgb(255, 255, 255);
+        background-color: #ffffff;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
-        border: 8px solid rgb(255, 0, 0);
+        border: 8px solid #ff0000;
     }
     .important-container h3 {
         color: #d12700;
         font-weight: bold;
-        text-shadow: 0 0 1px rgb(0, 0, 0);
+        text-shadow: 0 0 1px #000000;
     }
     .important-container p {
         color: #383838;
@@ -114,7 +114,7 @@ layout: page
 </div>
 <style>
     .note-container {
-        background-color: rgb(255, 255, 255);
+        background-color: #ffffff;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
@@ -123,7 +123,7 @@ layout: page
     .note-container h3 {
         color: #0062ff;
         font-weight: bold;
-        text-shadow: 0 0 1px rgb(0, 0, 0);
+        text-shadow: 0 0 1px #000000;
     }
     .note-container p {
         color: #383838;
@@ -152,6 +152,7 @@ layout: page
     .shb-form-group-30 label, .shb-form-group-30-full label {
         font-weight: bold;
         margin-bottom: 5px;
+        color: #ffffff;
     }
     .shb-form-group-30 input, .shb-form-group-30 select {
         padding: 8px;
@@ -189,6 +190,7 @@ layout: page
     .shb-form-group-full label {
         font-weight: bold;
         margin-bottom: 5px;
+        color: #ffffff;
     }
     .shb-form-group-full input, .shb-form-group-full select {
         padding: 8px;
