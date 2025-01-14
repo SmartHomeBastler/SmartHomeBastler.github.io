@@ -230,7 +230,7 @@ layout: page
     .shb-button-container {
         display: flex;
         gap: 10px;
-        margin: 20px 0;
+        margin: 5px 0 20px 0;
     }
     .shb-button {
         padding: 10px 15px;
