@@ -77,7 +77,7 @@ layout: page
     }
 </style>
 
-<div class="important-container" style="display: none;">
+<div class="important-container">
     <h3>❗Achtung</h3>
     <p>
         Hier folgt eine Warnung mit <strong>hervorgehobenem</strong> Text!
