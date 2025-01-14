@@ -530,12 +530,12 @@ elements:
     }
     #yaml-output {
         width: 100% !important;
-        padding: 10px;
+        padding: 15px;
         border: 1px solid #ddd;
         border-radius: 5px;
         background-color: #1a1a1a;
-        font-size: 0.95em;
-        line-height: 1.5;
+        font-size: 1em;
+        line-height: 1.4;
         color: #d1d1d1;
         font-family: monospace;
     }
