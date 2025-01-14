@@ -165,7 +165,7 @@ layout: page
         font-size: 14px;
     }
     .shb-form-group-30 select:focus {
-        background-color:rgb(187, 207, 255);
+        background-color: rgb(187, 207, 255);
         border: 2px solid #0048ff;
         box-shadow: 0 4px 10px #7199ff;
         outline: none;
@@ -270,7 +270,7 @@ layout: page
         margin: 20px 0;
     }
     .shb-list-start li strong {
-        color: #1598b3;
+        color: #9fb9fb;
     }
     .shb-list-start li {
         counter-increment: list-counter;
@@ -280,10 +280,10 @@ layout: page
         line-height: 1.6;
         color: #ffffff;
         background-color: #4b4b4b;
-        border-left: 3px solid #1598b3;
-        border-top: 1px solid #1598b3;
-        border-right: 1px solid #1598b3;
-        border-bottom: 1px solid #1598b3;
+        border-left: 3px solid #9fb9fb;
+        border-top: 1px solid #9fb9fb;
+        border-right: 1px solid #9fb9fb;
+        border-bottom: 1px solid #9fb9fb;
         border-radius: 6px;
         padding: 10px 60px;
         box-shadow: 0 2px 5px #ffffff10;
@@ -296,10 +296,10 @@ layout: page
         top: 50%;
         transform: translateY(-50%);
         font-weight: bold;
-        color: #1598b3;
+        color: #9fb9fb;
         font-size: 1.2em;
         background-color: #ffffff;
-        border: 3px solid #1598b3;
+        border: 3px solid #9fb9fb;
         padding: 5px 15px;
         border-radius: 50%;
         box-shadow: 0 1px 3px #000000;
