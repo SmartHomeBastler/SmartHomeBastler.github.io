@@ -147,6 +147,7 @@ layout: page
     .shb-form-group-30, .shb-form-group-30-full {
         display: flex;
         flex-direction: column;
+        margin: 20px 0;
     }
     .shb-form-group-30 label, .shb-form-group-30-full label {
         font-weight: bold;
@@ -159,6 +160,16 @@ layout: page
         max-width: 30%;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    .shb-form-group-30 content {
+        color: #000000;
+        background-color:#c4c4c4;
+        max-width: 30%;
+        border: 1px solid #ffffff;
+        box-shadow: 0px 8px 16px 0px #00000050;
+        z-index: 1;
         border-radius: 5px;
         font-size: 14px;
     }
@@ -177,6 +188,7 @@ layout: page
     .shb-form-group-full {
         display: flex;
         flex-direction: column;
+        margin: 20px 0;
     }
     .shb-form-group-full label {
         font-weight: bold;
