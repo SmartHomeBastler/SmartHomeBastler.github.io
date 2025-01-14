@@ -256,5 +256,55 @@ layout: page
         color: #fff;
     }
 </style>
+
+
+<ul class="shb-list-start">
+    <li>Erster Punkt mit <strong>hervorgehobenem Text</strong></li>
+    <li>Zweiter Punkt mit <strong>hervorgehobenem Text</strong></li>
+    <li>Dritter Punkt mit <strong>hervorgehobenem Text</strong></li>
+</ul>
+<style>
+    .shb-list-start {
+        counter-reset: list-counter;
+        padding-left: 0;
+        margin: 20px 0;
+    }
+    .shb-list-start li strong {
+        color: #1598b3;
+    }
+    .shb-list-start li {
+        counter-increment: list-counter;
+        position: relative;
+        margin: 10px 30px;
+        font-size: 1em;
+        line-height: 1.6;
+        color: #ffffff;
+        background-color: #4b4b4b;
+        border-left: 3px solid #1598b3;
+        border-top: 1px solid #1598b3;
+        border-right: 1px solid #1598b3;
+        border-bottom: 1px solid #1598b3;
+        border-radius: 6px;
+        padding: 10px 60px;
+        box-shadow: 0 2px 5px #ffffff10;
+        width: 90%;
+    }
+    .shb-list-start li::before {
+        content: counter(list-counter);
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+        color: #1598b3;
+        font-size: 1.2em;
+        background-color: #ffffff;
+        border: 3px solid #1598b3;
+        padding: 5px 15px;
+        border-radius: 50%;
+        box-shadow: 0 1px 3px #000000;
+        text-align: center;
+    }
+</style>
 </div>
 </div>
