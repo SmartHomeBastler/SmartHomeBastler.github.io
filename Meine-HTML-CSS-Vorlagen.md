@@ -493,34 +493,27 @@ function showSHBcustomAlert(title, message) {
     <textarea id="yaml-output" rows="20" cols="80" readonly>
 # Test Eintrag
 {%- raw %}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}{% endraw -%}
+type: picture-elements
+image: /local/lovelace/floorplan/hintergrund_nacht_org.png
+elements:
+  - type: image
+    entity: light.arbeitszimmer_deckenlicht
+    image: /local/lovelace/floorplan/1x1_transparent.png
+    state_image:
+      "on": /local/lovelace/floorplan/arbeitszimmer_deckenlicht.png
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    style:
+      opacity: 1
+
+      mix-blend-mode: lighten
+      pointer-events: none
+      left: 50%
+      top: 50%
+      width: 100%
+{% endraw -%}
     </textarea>
 </div>
 <style>
