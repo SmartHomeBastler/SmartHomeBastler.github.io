@@ -268,6 +268,7 @@ layout: page
         counter-reset: list-counter;
         padding-left: 0;
         margin: 20px 0;
+        margin-inline-start: 0.5em !important;
     }
     .shb-list-start li strong {
         color: #9fb9fb;
