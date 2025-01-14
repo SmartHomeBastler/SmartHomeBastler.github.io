@@ -339,5 +339,154 @@ layout: page
         text-align: center;
     }
 </style>
+
+<div class="shb-code-container">
+    <button class="copy-code-button" onclick="copyCode('code-output', this)">Kopieren</button>
+    <pre id="code-output">
+        <code>
+{%- raw %}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}{% endraw -%}
+        </code>
+    </pre>
+</div>
+<style>
+    .shb-code-container {
+        position: relative;
+        background-color: #9fb9fb;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        padding: 15px;
+        margin-top: 5px;
+        margin-bottom: 30px;
+        overflow: auto;
+        max-height: 300px;
+    }
+    .shb-code-container code {
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #d1d1d1;
+    }
+    .copy-code-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #007acc;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+        font-size: 0.85em;
+        cursor: pointer;
+        z-index: 10;
+    }
+    .copy-code-button:hover {
+        background: #005a9c;
+    }
+    .copy-code-button.copied {
+        background: #72dd8b;
+        color: white;
+        content: '✔️';
+        padding: 8px 12px;
+    }
+</style>
+<script>
+    function copyCode(elementId, button) {
+        const codeElement = document.getElementById(elementId);
+        const codeText = codeElement.innerText || codeElement.textContent;
+        navigator.clipboard.writeText(codeText)
+            .then(() => {
+                showSHBcustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
+                button.classList.add('copied');
+                button.textContent = "Kopiert ✔️";
+            })
+            .catch(err => {
+                console.error("Fehler beim Kopieren des Codes: ", err);
+                showSHBcustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
+            });
+    }
+</script>
+
+<div id="shb-custom-alert" style="display: none;">
+    <div id="shb-custom-alert-content">
+        <h4 id="shb-custom-alert-title"></h4>
+        <p id="shb-custom-alert-message"></p>
+        <button id="shb-close-alert">OK</button>
+    </div>
+</div>
+<style>
+    #shb-custom-alert {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* Dunkles Overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    #shb-custom-alert-content {
+        background-color: #fff;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 400px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    #shb-custom-alert-title {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+        font-weight: bold;
+    }
+    #shb-custom-alert-message {
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #666;
+    }
+    #shb-close-alert {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    #shb-close-alert:hover {
+        background-color: #218838;
+    }
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>
+<script>
+function showSHBcustomAlert(title, message) {
+    const alertBox = document.getElementById("shb-custom-alert");
+    const alertTitle = document.getElementById("shb-custom-alert-title");
+    const alertMessage = document.getElementById("shb-custom-alert-message");
+    alertTitle.textContent = title;
+    alertMessage.textContent = message;
+    alertBox.style.display = "flex";
+    document.getElementById("shb-close-alert").onclick = function () {
+        alertBox.style.display = "none";
+    };
+}
+</script>
+
 </div>
 </div>
