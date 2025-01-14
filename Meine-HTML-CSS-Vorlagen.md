@@ -27,7 +27,20 @@ layout: page
         text-align: center;
         font-weight: bold;
         margin-top: 20px;
-        font-size: 2.5em
+        font-size: 2.5em;
+        color: #1598b3;
+    }
+</style>
+
+<p class="shb-main-description">
+    Main Description Text here
+</p>
+<style>
+    .shb-main-description, shb-main-description p {
+        text-align: center;
+        font-size: 1em;
+        color: #d1d1d1;
+        padding: 10px 0;
     }
 </style>
 
