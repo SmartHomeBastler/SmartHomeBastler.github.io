@@ -298,20 +298,20 @@ layout: page
 
 
 <div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-blue" >Entitäten-Liste aktualisieren</button>
+    <button class="shb-button-30 shb-button-30-blue" >Button Blau</button>
 </div>
 <div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-green" >Entitäten-Liste aktualisieren</button>
+    <button class="shb-button-30 shb-button-30-green" >Button Grün</button>
 </div>
 <div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-yellow" >Entitäten-Liste aktualisieren</button>
+    <button class="shb-button-30 shb-button-30-yellow" >Button Gelb</button>
 </div>
 <div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-red" >Entitäten-Liste aktualisieren</button>
+    <button class="shb-button-30 shb-button-30-red" >Button Rot</button>
 </div>
 <style>
     .shb-button-30 {
-        padding: 10px 15px;
+        padding: 10px 0;
         font-size: 14px;
         border: none;
         border-radius: 5px;
