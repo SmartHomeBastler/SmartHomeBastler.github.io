@@ -107,7 +107,7 @@ layout: page
     <textarea id="uploaded-entity-list" rows="10" cols="80" readonly></textarea>
 </div>
 
-<div class="shb-form-group-30">
+<div class="shb-button">
     <button class="shb-button shb-button-green" onclick="updateEntityDropdown()">Entitäten-Liste aktualisieren</button>
 </div>
 </section>
