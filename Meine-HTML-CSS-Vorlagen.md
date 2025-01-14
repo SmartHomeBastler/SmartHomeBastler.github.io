@@ -164,10 +164,10 @@ layout: page
         font-size: 14px;
     }
     .shb-form-group-30 select:focus {
-        background-color: #c4c4c4; /* Neue Hintergrundfarbe */
-        border: 2px solid #000000; /* Neuer Rahmen */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Neuer Schatten */
-        outline: none; /* Entfernt den Standard-Fokus-Rahmen */
+        background-color:rgb(187, 207, 255);
+        border: 2px solid #0048ff;
+        box-shadow: 0 4px 10px #7199ff;
+        outline: none;
     }
 </style>
 
@@ -201,10 +201,10 @@ layout: page
         font-size: 14px;
     }
     .shb-form-group-full select:focus {
-        background-color: #c4c4c4; /* Neue Hintergrundfarbe */
-        border: 2px solid #000000; /* Neuer Rahmen */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Neuer Schatten */
-        outline: none; /* Entfernt den Standard-Fokus-Rahmen */
+        background-color:rgb(187, 207, 255);
+        border: 2px solid #0048ff;
+        box-shadow: 0 4px 10px #7199ff;
+        outline: none;
     }
 </style>
 
