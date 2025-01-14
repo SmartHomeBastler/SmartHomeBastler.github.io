@@ -147,6 +147,7 @@ layout: page
     .shb-form-group-30, .shb-form-group-30-full {
         display: flex;
         flex-direction: column;
+        gap: 10px; /* Abstand zwischen den Checkbox-Gruppen */
         margin: 20px 0;
     }
     .shb-form-group-30 label, .shb-form-group-30-full label {
@@ -183,11 +184,26 @@ layout: page
 </div>
 
 <div class="shb-form-group-30">
-    <input type="checkbox" id="checkbox-id-1" />
-    <label for="checkbox-id-1">Text für Checkbox 1</label><br>
-    <input type="checkbox" id="checkbox-id-2" />
-    <label for="checkbox-id-2">Text für Checkbox 2</label>
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="checkbox-id-1" />
+        <label for="checkbox-id-1">Text für Checkbox 1</label>
+    </div>
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="checkbox-id-2" />
+        <label for="checkbox-id-2">Text für Checkbox 2</label>
+    </div>
 </div>
+<style>
+    .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .shb-form-group-30 input[type="checkbox"] {
+        transform: scale(1.5); /* Größe der Checkbox anpassen */
+        margin: 0; /* Standardabstände entfernen */
+    }
+</style>
 
 <div class="shb-form-group-full">
     <label for="select-id-2">Auswahl:</label>
