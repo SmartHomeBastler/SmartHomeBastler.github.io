@@ -173,8 +173,20 @@ layout: page
 </style>
 
 <div class="shb-form-group-30">
-    <label for="file-id-1" class="custom-label">Eine Datei hochladen</label>
+    <label for="file-id-1">Eine Datei hochladen</label>
     <input type="file" id="file-id-1" accept=".ics" />
+</div>
+
+<div class="shb-form-group-30">
+    <label for="input-id-1">Einen Text eingeben</label>
+    <input type="url" id="input-id-1" placeholder="Das ist der Platzhalter" />
+</div>
+
+<div class="shb-form-group-30">
+    <input type="checkbox" id="checkbox-id-1" />
+    <label for="checkbox-id-1">Text für Checkbox 1</label><br>
+    <input type="checkbox" id="checkbox-id-2" />
+    <label for="checkbox-id-2">Text für Checkbox 2</label>
 </div>
 
 <div class="shb-form-group-full">
