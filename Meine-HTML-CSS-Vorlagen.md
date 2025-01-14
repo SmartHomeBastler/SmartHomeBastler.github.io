@@ -212,6 +212,7 @@ layout: page
 
 
 <div class="shb-button-container">
+    <label>Drücke den gewählten Button:</label>
     <button class="shb-button shb-button-blue">Button Blau</button>
     <button class="shb-button shb-button-green">Button Grün</button>
     <button class="shb-button shb-button-yellow">Button Gelb</button>
@@ -222,6 +223,11 @@ layout: page
         display: flex;
         gap: 10px;
         margin: 20px 0;
+    }
+    .shb-button-container label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #ffffff;
     }
     .shb-button {
         padding: 10px 15px;
