@@ -136,7 +136,7 @@ layout: page
 
 <div class="shb-form-group-30">
     <label for="select-id-1">Auswahl:</label>
-    <select id="select-id-1" onchange="updateScript1()">
+    <select id="select-id-1"">  <!-- Füge  onchange="updateScript1()" hinzu für Script -->
         <option value="Eins">Eins</option>
         <option value="Zwei">Zwei</option>
         <option value="Drei">Drei</option>
@@ -174,7 +174,7 @@ layout: page
 
 <div class="shb-form-group-full">
     <label for="select-id-2">Auswahl:</label>
-    <select id="select-id-2" onchange="updateScript2()">
+    <select id="select-id-2">  <!-- Füge  onchange="updateScript2()" hinzu für Script -->
         <option value="Eins">Eins</option>
         <option value="Zwei">Zwei</option>
         <option value="Drei">Drei</option>
@@ -212,8 +212,8 @@ layout: page
 
 
 <div class="shb-button-container">
-    <label>Drücke den gewählten Button:</label>
-    <button class="shb-button shb-button-blue">Button Blau</button>
+    <label>Drücke den gewählten Button:</label><br>
+    <button class="shb-button shb-button-blue">Button Blau</button> <!-- Füge  onclick="updateScript2()" hinzu für Script -->
     <button class="shb-button shb-button-green">Button Grün</button>
     <button class="shb-button shb-button-yellow">Button Gelb</button>
     <button class="shb-button shb-button-red">Button Rot</button>
