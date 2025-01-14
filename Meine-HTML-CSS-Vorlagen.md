@@ -29,7 +29,7 @@ layout: page
         margin: 10px 0  !important;
         font-size: 2.5em !important;
         color: #1598b3 !important;
-        shadow: #ebecf0;
+        text-shadow: 1px 1px #ebecf0;
     }
 </style>
 
