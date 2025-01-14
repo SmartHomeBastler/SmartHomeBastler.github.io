@@ -289,6 +289,53 @@ layout: page
 </style>
 
 
+<div class="shb-button-30">
+    <button class="shb-button-30 shb-button-30-blue" >Entitäten-Liste aktualisieren</button>
+</div>
+<div class="shb-button-30">
+    <button class="shb-button-30 shb-button-30-green" >Entitäten-Liste aktualisieren</button>
+</div>
+<div class="shb-button-30">
+    <button class="shb-button-30 shb-button-30-yellow" >Entitäten-Liste aktualisieren</button>
+</div>
+<div class="shb-button-30">
+    <button class="shb-button-30 shb-button-30-red" >Entitäten-Liste aktualisieren</button>
+</div>
+<style>
+    .shb-button-30 {
+        padding: 10px 0px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        min-width: 30%;
+    }
+    .shb-button-30-blue {
+        background-color: #007bff;
+        color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+    }
+    .shb-button-30-green {
+        background-color: #17b83a;
+        color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+    }
+    .shb-button-30-yellow {
+        background-color: #ffc107;
+        color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+    }
+    .shb-button-30-red {
+        background-color: #dc3545;
+        color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+    }
+</style>
+
 <ul class="shb-list-start">
     <li>Erster Punkt mit <strong>hervorgehobenem Text</strong></li>
     <li>Zweiter Punkt mit <strong>hervorgehobenem Text</strong></li>
