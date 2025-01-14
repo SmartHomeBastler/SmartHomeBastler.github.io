@@ -55,18 +55,22 @@ layout: page
     }
 </style>
 
-<h2 class="shb-section-title-center">Section Title Center</h2>
+<h2 class="shb-section-title-center">Section Title Center H2</h2>
+<h3 class="shb-section-title-center">Section Title Center H3</h3>
+<h4 class="shb-section-title-center">Section Title Center H4</h4>
 <style>
-    .shb-section-title-center, .shb-section-title-center h2 {
+    .shb-section-title-center, .shb-section-title-center h2, .shb-section-title-center h3, .shb-section-title-center h4 {
         text-align: center;
         font-weight: bold;
         margin-top: 20px;
     }
 </style>
 
-<h2 class="shb-section-title-left">Section Title Left</h2>
+<h2 class="shb-section-title-left">Section Title Left H2</h2>
+<h3 class="shb-section-title-left">Section Title Left H3</h3>
+<h4 class="shb-section-title-left">Section Title Left H4</h4>
 <style>
-    .shb-section-title-left, .shb-section-title-left h2 {
+    .shb-section-title-left, .shb-section-title-left h2, .shb-section-title-left h3, .shb-section-title-left h4 {
         font-weight: bold;
         margin-top: 20px;
     }
