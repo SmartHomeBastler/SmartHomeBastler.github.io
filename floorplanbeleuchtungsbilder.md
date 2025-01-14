@@ -231,7 +231,10 @@ layout: page
     Nach dem Ausfüllen der oben stehenden Felder und dem Drücken auf <strong>YAML-Code generieren</strong>, erscheint hier der fertige YAML-Code. Dieser wird mit einem Klick auf <strong>YAML-Code kopieren</strong> in die Zwischenablage kopiert und kann in deine Home Assistant Dashboard Konfiguration eingefügt werden, um die Grundlage deines Floorplans zu bilden. Mit <strong>YAML-Code löschen</strong> wird der erstellte Code gelöscht, mit <strong>Eingaben löschen werden alle bisherigen Eingaben inkl. Bilderpfad, transparentem Pixel und Hintergrundbild entfernt.</strong>
 </p>
 
-<textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
+<div class="shb-text-output">
+    <button class="copy-code-button" onclick="copyCode('yaml-output', this)">Kopieren</button>
+    <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
+</div>
 </section>
 
 <footer class="guide-footer">
@@ -647,17 +650,26 @@ layout: page
     .custom-button.clear {
         background-color: #dc3545;
     }
-
-    /* YAML-Ausgabe Styling */
+    .shb-text-output {
+        position: relative;
+        background-color: #9fb9fb;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        padding: 15px;
+        margin-top: 5px;
+        margin-bottom: 30px;
+        overflow: auto;
+    }
     #yaml-output {
-        width: 100%;
-        margin-top: 20px;
-        padding: 10px;
-        font-size: 14px;
+        width: 100% !important;
+        padding: 15px;
         border: 1px solid #ddd;
         border-radius: 5px;
-        background-color: #5d5d5d;
-        color: #efefef;
+        background-color: #1a1a1a;
+        font-size: 1em;
+        line-height: 1.4;
+        color: #d1d1d1;
         font-family: monospace;
     }
 
