@@ -91,15 +91,23 @@ layout: page
     </pre>
 </div>
 
+<h4 class="shb-section-title-left">Section Title Left H4</h4>
+<p>
+    Um das Auswählen deiner Entitäten für die Codegenerierung einfacher zu gestalten, sind hier alle Entitäten für deine Beleuchtungsbilder einzugeben oder hochzuladen. Mit einem Klick auf <strong>Entitäten-Liste aktualisieren</strong> werden diese Entitäten in den Entität Dropdown der nachfolgenden Tabelle geladen.
+</p>
+<div class="shb-form-group-30">
+    <label for="entity-list-upload">Datei auswählen</label>
+    <input type="file" id="entity-list-upload" accept=".txt,.csv" onchange="loadEntityList(event)"/>
+</div>
+<div class="shb-text-output" id="entity-preview" style="display: none;">
+    <textarea id="entity-list-text" rows="5" cols="80" placeholder="Entitäten manuell eingeben (eine pro Zeile)"></textarea>
+</div>
+<div class="shb-text-output" id="entity-preview" style="display: none;">
+    <h4>Hochgeladene Entitäten</h4>
+    <textarea id="uploaded-entity-list" rows="10" cols="80" readonly></textarea>
+</div>
+
 <div class="floorplan-form-group">
-    <label for="entity-list-upload">Entitäten-Liste hochladen oder einfügen:</label>
-    <p>Um das Auswählen deiner Entitäten für die Codegenerierung einfacher zu gestalten, sind hier alle Entitäten für deine Beleuchtungsbilder einzugeben oder hochzuladen. Mit einem Klick auf <strong>Entitäten-Liste aktualisieren</strong> werden diese Entitäten in den Entität Dropdown der nachfolgenden Tabelle geladen.</p>
-    <input type="file" id="entity-list-upload" accept=".txt,.csv" onchange="loadEntityList(event)" style="margin-bottom: 10px;">
-    <textarea class="textarea-list" id="entity-list-text" placeholder="Entitäten manuell eingeben (eine pro Zeile)" rows="5;"></textarea>
-        <div class="entity-preview-container" id="entity-preview" style="display: none; margin-top: 20px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
-            <h4>Hochgeladene Entitäten</h4>
-            <textarea id="uploaded-entity-list" rows="10" style="width: 100%;" readonly></textarea>
-        </div>
     <button class="custom-button generate" onclick="updateEntityDropdown()">Entitäten-Liste aktualisieren</button>
 </div>
 </section>
@@ -357,6 +365,36 @@ layout: page
     .note-container strong {
         color: #0062ff;
         text-transform: uppercase;
+    }
+    .shb-form-group-30, .shb-form-group-30-full {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Abstand zwischen den Checkbox-Gruppen */
+        margin: 20px 0;
+    }
+    .shb-form-group-30 label, .shb-form-group-30-full label {
+        font-weight: bold;
+        color: #ffffff;
+    }
+    .shb-form-group-30 input, .shb-form-group-30 select {
+        padding: 8px;
+        color: #000000;
+        background-color: #9fb9fb;
+        max-width: 30%;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    .shb-form-group-30 select:focus {
+        background-color: rgb(187, 207, 255);
+        border: 2px solid #0048ff;
+        box-shadow: 0 4px 10px #7199ff;
+        outline: none;
+    }
+    .shb-section-title-left, .shb-section-title-left h2, .shb-section-title-left h3, .shb-section-title-left h4 {
+        font-weight: bold !important;
+        margin: 20px 0 !important;
     }
     #preview-entities img {
         position: absolute;
