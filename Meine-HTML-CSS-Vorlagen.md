@@ -211,5 +211,41 @@ layout: page
 </style>
 
 
+<div class="shb-button-container">
+    <button class="shb-button shb-button-blue">Button Blau</button>
+    <button class="shb-button shb-button-green">Button Grün</button>
+    <button class="shb-button shb-button-yellow">Button Gelb</button>
+    <button class="shb-button shb-button-red">Button Rot</button>
+</div>
+<style>
+    .shb-button-container {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+    }
+    .shb-button {
+        padding: 10px 15px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .shb-button-blue {
+        background-color: #007bff;
+        color: #fff;
+    }
+    .shb-button-green {
+        background-color: #17b83a;
+        color: #fff;
+    }
+    .shb-button-yellow {
+        background-color: #ffc107;
+        color: #fff;
+    }
+    .shb-button-red {
+        background-color: #dc3545;
+        color: #fff;
+    }
+</style>
 </div>
 </div>
