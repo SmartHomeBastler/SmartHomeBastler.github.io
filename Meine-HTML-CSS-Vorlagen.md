@@ -492,14 +492,17 @@ function showSHBcustomAlert(title, message) {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-dark.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-twig.min.js"></script>
 
 <div class="shb-text-output">
     <pre class="line-numbers">
-        <code class="language-yaml"># Test Eintrag
-        {%- raw %}
-        {%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-        {{ light_entities | join('\n') }}{% endraw -%}</code>
+        <code class="language-twig">
+# Test Eintrag
+{%- raw %}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- endraw -%}
+        </code>
     </pre>
 </div>
 
@@ -526,54 +529,8 @@ function showSHBcustomAlert(title, message) {
         font-family: monospace;
         overflow: auto;
     }
-    /* Hintergrund und allgemeiner Text */
-    pre[class*="language-"] {
-        background: #282c34; /* Dunkler Hintergrund */
-        color: #abb2bf;     /* Allgemeiner Text */
-    }
-
-    /* Kommentare */
-    .token.comment,
-    .token.prolog,
-    .token.doctype,
-    .token.cdata {
-        color: #5c6370; /* Grau */
-        font-style: italic;
-    }
-
-    /* Strings */
-    .token.string {
-        color: #98c379; /* Grün */
-    }
-
-    /* Zahlen */
-    .token.number,
-    .token.boolean,
-    .token.constant,
-    .token.symbol {
-        color: #d19a66; /* Orange */
-    }
-
-    /* Funktionen */
-    .token.function {
-        color: #61afef; /* Blau */
-    }
-
-    /* Keywords */
-    .token.keyword {
-        color: #c678dd; /* Lila */
-    }
-
-    /* Variablen */
-    .token.variable {
-        color: #e06c75; /* Rot */
-    }
-
-    /* Operatoren */
-    .token.operator {
-        color: #56b6c2; /* Türkis */
-    }
 </style>
+
 
 
 </div>
