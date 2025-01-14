@@ -495,12 +495,10 @@ function showSHBcustomAlert(title, message) {
 
 <div class="shb-text-output">
     <pre class="line-numbers">
-        <code class="language-yaml">
-# Test Eintrag
-{%- raw %}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}{% endraw -%}
-        </code>
+        <code class="language-yaml"># Test Eintrag
+        {%- raw %}
+        {%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+        {{ light_entities | join('\n') }}{% endraw -%}</code>
     </pre>
 </div>
 
