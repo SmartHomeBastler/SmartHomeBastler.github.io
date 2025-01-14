@@ -264,7 +264,7 @@ layout: page
         margin: 5px 0 20px 0;
     }
     .shb-button {
-        padding: 10px 0;
+        padding: 10px 15;
         font-size: 14px;
         border: none;
         border-radius: 5px;
@@ -273,18 +273,26 @@ layout: page
     .shb-button-blue {
         background-color: #007bff;
         color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
     }
     .shb-button-green {
         background-color: #17b83a;
         color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
     }
     .shb-button-yellow {
         background-color: #ffc107;
         color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
     }
     .shb-button-red {
         background-color: #dc3545;
         color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
     }
 </style>
 
@@ -303,7 +311,7 @@ layout: page
 </div>
 <style>
     .shb-button-30 {
-        padding: 10px 0px;
+        padding: 10px 15px;
         font-size: 14px;
         border: none;
         border-radius: 5px;
