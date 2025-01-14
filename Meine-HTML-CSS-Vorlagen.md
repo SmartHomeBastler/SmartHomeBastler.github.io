@@ -493,6 +493,32 @@ function showSHBcustomAlert(title, message) {
 # Test Eintrag
 {%- raw %}
 {%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
 {{ light_entities | join('\n') }}{% endraw -%}
     </textarea>
 </div>
