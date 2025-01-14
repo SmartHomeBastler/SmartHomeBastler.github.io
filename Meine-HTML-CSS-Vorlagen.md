@@ -152,7 +152,6 @@ layout: page
     }
     .shb-form-group-30 label, .shb-form-group-30-full label {
         font-weight: bold;
-        margin-bottom: 5px;
         color: #ffffff;
     }
     .shb-form-group-30 input, .shb-form-group-30 select {
