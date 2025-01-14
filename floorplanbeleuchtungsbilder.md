@@ -91,7 +91,7 @@ layout: page
     </pre>
 </div>
 
-<h4 class="shb-section-title-left">Section Title Left H4</h4>
+<h4 class="shb-section-title-left">Entitäten Liste erstellen</h4>
 <p>
     Um das Auswählen deiner Entitäten für die Codegenerierung einfacher zu gestalten, sind hier alle Entitäten für deine Beleuchtungsbilder einzugeben oder hochzuladen. Mit einem Klick auf <strong>Entitäten-Liste aktualisieren</strong> werden diese Entitäten in den Entität Dropdown der nachfolgenden Tabelle geladen.
 </p>
@@ -699,7 +699,7 @@ layout: page
         margin-bottom: 30px;
         overflow: auto;
     }
-    #yaml-output {
+    #yaml-output, #entity-list-text, #uploaded-entity-list {
         width: 100% !important;
         padding: 15px;
         border: 1px solid #ddd;
