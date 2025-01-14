@@ -488,41 +488,21 @@ function showSHBcustomAlert(title, message) {
 }
 </script>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-dark.min.css" rel="stylesheet" />
+
 <div class="shb-text-output">
-    <button class="copy-code-button" onclick="copyCode('yaml-output', this)">Kopieren</button>
-    <textarea id="yaml-output" rows="20" cols="80" readonly>
-# Test Eintrag
-{%- raw %}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}
-{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-{{ light_entities | join('\n') }}{% endraw -%}
-    </textarea>
+    <pre class="line-numbers">
+        <code class="language-yaml"># Test Eintrag
+        {%- raw %}
+        {%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+        {{ light_entities | join('\n') }}{% endraw -%}</code>
+    </pre>
 </div>
+
 <style>
     .shb-text-output {
         position: relative;
@@ -535,18 +515,66 @@ function showSHBcustomAlert(title, message) {
         margin-bottom: 30px;
         overflow: auto;
     }
-    #yaml-output {
-        width: 100% !important;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
+    pre {
+        margin: 0;
         background-color: #1a1a1a;
+        padding: 10px;
+        border-radius: 5px;
+        color: #d1d1d1;
         font-size: 0.95em;
         line-height: 1.5;
-        color: #d1d1d1;
         font-family: monospace;
+        overflow: auto;
+    }
+    /* Hintergrund und allgemeiner Text */
+    pre[class*="language-"] {
+        background: #282c34; /* Dunkler Hintergrund */
+        color: #abb2bf;     /* Allgemeiner Text */
+    }
+
+    /* Kommentare */
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+        color: #5c6370; /* Grau */
+        font-style: italic;
+    }
+
+    /* Strings */
+    .token.string {
+        color: #98c379; /* Grün */
+    }
+
+    /* Zahlen */
+    .token.number,
+    .token.boolean,
+    .token.constant,
+    .token.symbol {
+        color: #d19a66; /* Orange */
+    }
+
+    /* Funktionen */
+    .token.function {
+        color: #61afef; /* Blau */
+    }
+
+    /* Keywords */
+    .token.keyword {
+        color: #c678dd; /* Lila */
+    }
+
+    /* Variablen */
+    .token.variable {
+        color: #e06c75; /* Rot */
+    }
+
+    /* Operatoren */
+    .token.operator {
+        color: #56b6c2; /* Türkis */
     }
 </style>
+
 
 </div>
 </div>
