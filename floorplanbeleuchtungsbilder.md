@@ -676,8 +676,10 @@ layout: page
         min-width: 30%;
     }
     .shb-button-30-blue {
-        background-color: #9fb9fb;
-        color: #000000;
+        background-color: #007bff;
+        color: #fff;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
     }
     .custom-button {
         padding: 10px 15px;
