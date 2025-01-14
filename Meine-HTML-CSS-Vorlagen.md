@@ -270,7 +270,8 @@ layout: page
         margin: 20px 0;
     }
     .shb-list-start li strong {
-        color: #9fb9fb;
+        color: #2266ff;
+        text-transform: uppercase;
     }
     .shb-list-start li {
         counter-increment: list-counter;
