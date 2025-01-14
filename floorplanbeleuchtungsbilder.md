@@ -99,7 +99,7 @@ layout: page
     <label for="entity-list-upload">Datei auswählen</label>
     <input type="file" id="entity-list-upload" accept=".txt,.csv" onchange="loadEntityList(event)"/>
 </div>
-<div class="shb-text-output" id="entity-preview" style="display: none;">
+<div class="shb-text-output" id="entity-preview;">
     <textarea id="entity-list-text" rows="5" cols="80" placeholder="Entitäten manuell eingeben (eine pro Zeile)"></textarea>
 </div>
 <div class="shb-text-output" id="entity-preview" style="display: none;">
