@@ -557,13 +557,14 @@ elements:
         text-align: center;
         font-size: 1.2em !important;
         color: #ebecf0 !important;
-        padding: 10px 0 !important;
+        padding-top: 15px !important;
     }
     .shb-footer h2 {
         font-size: 1.75em !important;
         font-weight: bold !important;
         color: #1598b3 !important;
         text-shadow: 1px 1px #ebecf0;
+        margin: 0 !important;
     }
 </style>
 
