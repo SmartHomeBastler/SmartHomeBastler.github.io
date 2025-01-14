@@ -37,7 +37,7 @@ layout: page
     Main Description Text here
 </p>
 <style>
-    .shb-main-description, shb-main-description p {
+    .shb-main-description, .shb-main-description p {
         text-align: center;
         font-size: 1.2em !important;
         color: #ebecf0 !important;
@@ -542,4 +542,31 @@ elements:
 </style>
 
 </div>
+
+<footer class="shb-footer">
+    <p>Ich hoffe dir hat dieses Tool geholfen. Über Support und Feedback würde ich mich wirklich freuen.</p>
+    <h2>Viel Erfolg bei der Einrichtung deines Floorplans! 🎉</h2>
+</footer>
+
+<style>
+    .shb-footer {
+    text-align: center;
+    margin-top: 20px;
+    }
+    .shb-footer p {
+        text-align: center;
+        font-size: 1.2em !important;
+        color: #ebecf0 !important;
+        padding: 10px 0 !important;
+    }
+    .shb-footer h2 {
+        font-size: 1.75em !important;
+        font-weight: bold !important;
+        color: #1598b3 !important;
+        text-shadow: 1px 1px #ebecf0;
+    }
+</style>
+
+{% include support_note.html %}
+
 </div>
