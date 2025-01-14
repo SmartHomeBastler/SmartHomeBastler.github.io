@@ -489,6 +489,7 @@ function showSHBcustomAlert(title, message) {
 </script>
 
 <div class="shb-text-output">
+    <button class="copy-code-button" onclick="copyCode('yaml-output', this)">Kopieren</button>
     <textarea id="yaml-output" rows="20" cols="80" readonly>
 # Test Eintrag
 {%- raw %}
