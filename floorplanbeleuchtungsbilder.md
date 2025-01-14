@@ -107,8 +107,8 @@ layout: page
     <textarea id="uploaded-entity-list" rows="10" cols="80" readonly></textarea>
 </div>
 
-<div class="floorplan-form-group">
-    <button class="custom-button generate" onclick="updateEntityDropdown()">Entitäten-Liste aktualisieren</button>
+<div class="shb-form-group-30">
+    <button class="shb-button shb-button-green" onclick="updateEntityDropdown()">Entitäten-Liste aktualisieren</button>
 </div>
 </section>
 
@@ -666,6 +666,17 @@ layout: page
         display: flex;
         gap: 10px;
         margin-top: 20px;
+    }
+    .shb-button {
+        padding: 10px 15px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .shb-button-blue {
+        background-color: #007bff;
+        color: #fff;
     }
     .custom-button {
         padding: 10px 15px;
