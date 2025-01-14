@@ -490,10 +490,10 @@ function showSHBcustomAlert(title, message) {
 
 <div class="shb-text-output">
     <textarea id="yaml-output" rows="20" cols="80" readonly>
-        # Test Eintrag
-        {%- raw %}
-        {%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-        {{ light_entities | join('\n') }}{% endraw -%}
+# Test Eintrag
+{%- raw %}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}{% endraw -%}
     </textarea>
 </div>
 <style>
@@ -513,11 +513,12 @@ function showSHBcustomAlert(title, message) {
         width: 100%;
         margin-top: 20px;
         padding: 10px;
-        font-size: 14px;
         border: 1px solid #ddd;
         border-radius: 5px;
-        background-color: #5d5d5d;
-        color: #efefef;
+        background-color: #9fb9fb;
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #d1d1d1;
         font-family: monospace;
     }
 </style>
