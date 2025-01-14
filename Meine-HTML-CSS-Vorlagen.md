@@ -489,14 +489,13 @@ function showSHBcustomAlert(title, message) {
 </script>
 
 <div class="shb-text-output">
-    <pre class="line-numbers">
-        <code class="language-yaml"># Test Eintrag
-        {%- raw %}
-        {%- set light_entities = states.light | map(attribute='entity_id') | list -%}
-        {{ light_entities | join('\n') }}{% endraw -%}</code>
-    </pre>
+    <textarea id="yaml-output" rows="20" cols="80" readonly>
+# Test Eintrag
+{%- raw %}
+{%- set light_entities = states.light | map(attribute='entity_id') | list -%}
+{{ light_entities | join('\n') }}{% endraw -%}
+    </textarea>
 </div>
-
 <style>
     .shb-text-output {
         position: relative;
@@ -509,19 +508,17 @@ function showSHBcustomAlert(title, message) {
         margin-bottom: 30px;
         overflow: auto;
     }
-    pre {
-        margin: 0;
-        background-color: #1a1a1a;
+    #yaml-output {
+        width: 100% !important;
         padding: 10px;
+        border: 1px solid #ddd;
         border-radius: 5px;
-        color: #d1d1d1;
+        background-color: #1a1a1a;
         font-size: 0.95em;
         line-height: 1.5;
+        color: #d1d1d1;
         font-family: monospace;
-        overflow: auto;
     }
-</style>
-
 </style>
 
 </div>
