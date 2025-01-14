@@ -264,7 +264,7 @@ layout: page
         margin: 5px 0 20px 0;
     }
     .shb-button {
-        padding: 10px 15px;
+        padding: 10px 0;
         font-size: 14px;
         border: none;
         border-radius: 5px;

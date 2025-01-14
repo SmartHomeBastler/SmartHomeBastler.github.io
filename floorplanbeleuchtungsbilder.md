@@ -107,8 +107,8 @@ layout: page
     <textarea id="uploaded-entity-list" rows="10" cols="80" readonly></textarea>
 </div>
 
-<div class="shb-button">
-    <button class="shb-button shb-button-green" onclick="updateEntityDropdown()">Entitäten-Liste aktualisieren</button>
+<div class="shb-button-30">
+    <button class="shb-button-30 shb-button-30-blue" onclick="updateEntityDropdown()">Entitäten-Liste aktualisieren</button>
 </div>
 </section>
 
@@ -667,16 +667,17 @@ layout: page
         gap: 10px;
         margin-top: 20px;
     }
-    .shb-button {
-        padding: 10px 15px;
+    .shb-button-30 {
+        padding: 10px 0px;
         font-size: 14px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        min-width: 30%;
     }
-    .shb-button-blue {
-        background-color: #007bff;
-        color: #fff;
+    .shb-button-30-blue {
+        background-color: #9fb9fb;
+        color: #000000;
     }
     .custom-button {
         padding: 10px 15px;
