@@ -275,24 +275,40 @@ layout: page
         color: #fff;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
     .shb-button-green {
         background-color: #17b83a;
         color: #fff;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
     .shb-button-yellow {
         background-color: #ffc107;
         color: #fff;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
     .shb-button-red {
         background-color: #dc3545;
         color: #fff;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
 </style>
 
@@ -323,24 +339,40 @@ layout: page
         color: #fff;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
     .shb-button-30-green {
         background-color: #17b83a;
         color: #fff;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
     .shb-button-30-yellow {
         background-color: #ffc107;
         color: #fff;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
     .shb-button-30-red {
         background-color: #dc3545;
         color: #fff;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
+        font-weight: bold;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
 </style>
 
