@@ -127,6 +127,7 @@ layout: page
     }
     .note-container p {
         color: #383838;
+        font-family: Arial Black;
     }
     .note-container strong {
         color: #0062ff;
@@ -157,7 +158,7 @@ layout: page
     .shb-form-group-30 input, .shb-form-group-30 select {
         padding: 8px;
         color: #000000;
-        background-color: #9fb9fb;
+        background-color: #1ab5d5;
         max-width: 30%;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
@@ -227,7 +228,7 @@ layout: page
     .shb-form-group-full input, .shb-form-group-full select {
         padding: 8px;
         color: #000000;
-        background-color: #9fb9fb;
+        background-color: #1ab5d5;
         max-width: 100%;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
@@ -381,7 +382,7 @@ layout: page
         margin-inline-start: 0.5em !important;
     }
     .shb-list-start li strong {
-        color: #9fb9fb;
+        color: #1ab5d5;
         text-transform: uppercase;
     }
     .shb-list-start li {
@@ -392,10 +393,10 @@ layout: page
         line-height: 1.6;
         color: #ffffff;
         background-color: #4b4b4b;
-        border-left: 3px solid #9fb9fb;
-        border-top: 1px solid #9fb9fb;
-        border-right: 1px solid #9fb9fb;
-        border-bottom: 1px solid #9fb9fb;
+        border-left: 3px solid #1ab5d5;
+        border-top: 1px solid #1ab5d5;
+        border-right: 1px solid #1ab5d5;
+        border-bottom: 1px solid #1ab5d5;
         border-radius: 6px;
         padding: 10px 60px;
         box-shadow: 0 2px 5px #ffffff10;
@@ -411,7 +412,7 @@ layout: page
         color: #2266ff;
         font-size: 1.2em;
         background-color: #ffffff;
-        border: 3px solid #9fb9fb;
+        border: 3px solid #1ab5d5;
         padding: 5px 15px;
         border-radius: 50%;
         box-shadow: 0 1px 3px #000000;
@@ -432,7 +433,7 @@ layout: page
 <style>
     .shb-code-container {
         position: relative;
-        background-color: #9fb9fb;
+        background-color: #1ab5d5;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         border-radius: 5px;
@@ -598,7 +599,7 @@ elements:
 <style>
     .shb-text-output {
         position: relative;
-        background-color: #9fb9fb;
+        background-color: #1ab5d5;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         border-radius: 5px;
