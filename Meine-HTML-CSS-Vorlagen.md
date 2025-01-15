@@ -265,7 +265,7 @@ layout: page
     }
     .shb-button {
         padding: 10px 15px;
-        font-size: 14px;
+        font-size: 1.1em;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -276,7 +276,6 @@ layout: page
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         font-weight: bold;
-        font-size: 1.5em;
         text-transform: uppercase;
         text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
@@ -286,7 +285,6 @@ layout: page
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         font-weight: bold;
-        font-size: 1.5em;
         text-transform: uppercase;
         text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
@@ -296,7 +294,6 @@ layout: page
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         font-weight: bold;
-        font-size: 1.5em;
         text-transform: uppercase;
         text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
@@ -306,7 +303,6 @@ layout: page
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         font-weight: bold;
-        font-size: 1.5em;
         text-transform: uppercase;
         text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
@@ -328,7 +324,7 @@ layout: page
 <style>
     .shb-button-30 {
         padding: 10px 0;
-        font-size: 14px;
+        font-size: 1.1em;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -340,7 +336,6 @@ layout: page
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         font-weight: bold;
-        font-size: 1.5em;
         text-transform: uppercase;
         text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
@@ -350,7 +345,6 @@ layout: page
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         font-weight: bold;
-        font-size: 1.5em;
         text-transform: uppercase;
         text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
@@ -360,7 +354,6 @@ layout: page
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         font-weight: bold;
-        font-size: 1.5em;
         text-transform: uppercase;
         text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
@@ -370,7 +363,6 @@ layout: page
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
         font-weight: bold;
-        font-size: 1.5em;
         text-transform: uppercase;
         text-shadow: 0 0 2px #000000, 0 0 5px #000000;
     }
