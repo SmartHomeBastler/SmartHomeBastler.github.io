@@ -13,9 +13,17 @@
     cursor: pointer;
     border: 1px solid #ffffff;
     box-shadow: 0 2px 5px #ffffff;
-    transition: opacity 0.3s, visibility 0.3s;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 }
 
 .scroll-to-top:hover {
-    background-color: darken(#1598b3, 10%); // SCSS-Funktion für dunklere Farbe
+    background-color: darken(#1598b3, 10%);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 15px;
+        right: 15px;
+    }
 }
