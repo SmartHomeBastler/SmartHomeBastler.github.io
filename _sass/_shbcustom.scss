@@ -5,7 +5,7 @@
     bottom: 20px;
     right: 20px;
     z-index: 1000;
-    background-color: $primary-color; // Beispiel: Verwendung einer SCSS-Variable aus dem Theme
+    background-color: #1598b3; // Beispiel: Verwendung einer SCSS-Variable aus dem Theme
     color: white;
     border: none;
     border-radius: 50%;
@@ -17,5 +17,5 @@
 }
 
 .scroll-to-top:hover {
-    background-color: darken($primary-color, 10%); // SCSS-Funktion für dunklere Farbe
+    background-color: darken(#1598b3, 10%); // SCSS-Funktion für dunklere Farbe
 }
