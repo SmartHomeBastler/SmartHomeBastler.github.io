@@ -9,60 +9,20 @@ layout: page
 <div class="shb-main-container">
 
 <h1 class="shb-main-title">SHB Main Title</h1>
-<style>
-    .shb-main-title, .shb-main-title h1 {
-        text-align: center;
-        font-weight: bold !important;
-        margin: 10px 0  !important;
-        font-size: 2.5em !important;
-        color: #1598b3 !important;
-        text-shadow: 1px 1px #ebecf0;
-    }
-</style>
 
 <p class="shb-main-description">
     Main Description Text here
 </p>
-<style>
-    .shb-main-description, .shb-main-description p {
-        text-align: center;
-        font-size: 1.2em !important;
-        color: #ebecf0 !important;
-        padding: 10px 0 !important;
-    }
-</style>
 
 <div class="content-section">
-<style>
-    .content-section {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #252525;
-        border: 1px solid #444;
-        border-radius: 8px;
-    }
-</style>
 
 <h2 class="shb-section-title-center">Section Title Center H2</h2>
 <h3 class="shb-section-title-center">Section Title Center H3</h3>
 <h4 class="shb-section-title-center">Section Title Center H4</h4>
-<style>
-    .shb-section-title-center, .shb-section-title-center h2, .shb-section-title-center h3, .shb-section-title-center h4 {
-        text-align: center;
-        font-weight: bold !important;
-        margin: 20px 0 !important;
-    }
-</style>
 
 <h2 class="shb-section-title-left">Section Title Left H2</h2>
 <h3 class="shb-section-title-left">Section Title Left H3</h3>
 <h4 class="shb-section-title-left">Section Title Left H4</h4>
-<style>
-    .shb-section-title-left, .shb-section-title-left h2, .shb-section-title-left h3, .shb-section-title-left h4 {
-        font-weight: bold !important;
-        margin: 20px 0 !important;
-    }
-</style>
 
 <div class="important-container">
     <h3>❗Achtung</h3>
@@ -70,28 +30,6 @@ layout: page
         Hier folgt eine Warnung mit <strong>hervorgehobenem</strong> Text!
     </p>
 </div>
-<style>
-    .important-container {
-        background-color: #ffffff;
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 8px solid #ff0000;
-    }
-    .important-container h3 {
-        color: #d12700;
-        font-weight: bold;
-        text-shadow: 0 0 1px #000000;
-    }
-    .important-container p {
-        color: #383838;
-        font-family: Arial Black;
-    }
-    .important-container strong {
-        color:rgb(255, 0, 0);
-        text-transform: uppercase;
-    }
-</style>
 
 <div class="note-container">
     <h3>💡 Hinweis</h3> 
@@ -99,28 +37,6 @@ layout: page
         Hier folgt ein Hinweis mit <strong>hervorgehobenem</strong> Text!
     </p>
 </div>
-<style>
-    .note-container {
-        background-color: #ffffff;
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 8px solid #0062ff;
-    }
-    .note-container h3 {
-        color: #0062ff;
-        font-weight: bold;
-        text-shadow: 0 0 1px #000000;
-    }
-    .note-container p {
-        color: #383838;
-        font-family: Arial Black;
-    }
-    .note-container strong {
-        color: #0062ff;
-        text-transform: uppercase;
-    }
-</style>
 
 <div class="shb-form-group-30">
     <label for="select-id-1">Auswahl:</label>
@@ -131,48 +47,6 @@ layout: page
         <option value="Vier">Vier</option>
     </select>
 </div>
-<style>
-    .shb-form-group-30, .shb-form-group-30-full {
-        display: flex;
-        flex-direction: column;
-        gap: 10px; /* Abstand zwischen den Checkbox-Gruppen */
-        margin: 20px 0;
-    }
-    .shb-form-group-30 label, .shb-form-group-30-full label {
-        font-weight: bold;
-        color: #ffffff;
-    }
-    .shb-form-group-30 input, .shb-form-group-30 select {
-        padding: 8px;
-        color: #000000;
-        background-color: #1ab5d5;
-        max-width: 30%;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-    .shb-form-group-30 select:focus {
-        background-color: #37c4e1;
-        border: 2px solid #0048ff;
-        box-shadow: 0 4px 10px #7199ff;
-        outline: none;
-    }
-    /* Stile für die Optionen */
-    .shb-form-group-30 select option {
-        background-color: #99eafb;
-    }
-    /* Jede zweite Zeile heller */
-    .shb-form-group-30 select option:nth-child(even) {
-        background-color: #b4f2ff
-    }
-    .shb-form-group-30 input:focus {
-        background-color: #99eafb;
-        border: 2px solid #0048ff;
-        box-shadow: 0 4px 10px #7199ff;
-        outline: none;
-    }
-</style>
 
 <div class="shb-form-group-30">
     <label for="file-id-1">Eine Datei hochladen</label>
@@ -194,17 +68,6 @@ layout: page
         <label for="checkbox-id-2">Text für Checkbox 2</label>
     </div>
 </div>
-<style>
-    .checkbox-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .shb-form-group-30 input[type="checkbox"] {
-        transform: scale(1.5); /* Größe der Checkbox anpassen */
-        margin: 0; /* Standardabstände entfernen */
-    }
-</style>
 
 <label class="shb-label">Drücke den gewählten Button:</label>
 
@@ -333,26 +196,6 @@ elements:
     <p>Ich hoffe dir hat dieses Tool geholfen. Über Support und Feedback würde ich mich wirklich freuen.</p>
     <h2>Viel Erfolg bei der Einrichtung deines Floorplans! 🎉</h2>
 </footer>
-
-<style>
-    .shb-footer {
-    text-align: center;
-    margin-top: 20px;
-    }
-    .shb-footer p {
-        text-align: center;
-        font-size: 1.2em !important;
-        color: #ebecf0 !important;
-        padding-top: 15px !important;
-    }
-    .shb-footer h2 {
-        font-size: 1.75em !important;
-        font-weight: bold !important;
-        color: #1598b3 !important;
-        text-shadow: 1px 1px #ebecf0;
-        margin: 0 !important;
-    }
-</style>
 
 {% include support_note.html %}
 
