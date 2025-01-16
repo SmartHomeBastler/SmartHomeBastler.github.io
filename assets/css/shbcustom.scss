@@ -40,6 +40,304 @@
     box-shadow: 0 4px 4px 6px #1598b380;
 }
 
+/* LABLE */
+.shb-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+/* BUTTON */
+.shb-button-container {
+    display: flex;
+    gap: 10px;
+    margin: 5px 0 20px 0;
+}
+
+.shb-button {
+    padding: 10px 15px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shb-button-blue {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+}
+
+.shb-button-green {
+    background-color: #17b83a;
+    color: #fff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+}
+
+.shb-button-yellow {
+    background-color: #ffc107;
+    color: #fff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+}
+
+.shb-button-red {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+}
+
+/* BUTTON 30% */
+.shb-button-30 {
+    padding: 10px 0;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 30%;
+}
+
+.shb-button-30-blue {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+}
+
+.shb-button-30-green {
+    background-color: #17b83a;
+    color: #fff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+}
+
+.shb-button-30-yellow {
+    background-color: #ffc107;
+    color: #fff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+}
+
+.shb-button-30-red {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+}
+
+/* LISTE */
+.shb-list-start {
+    counter-reset: list-counter;
+    padding-left: 0;
+    margin: 30px 0 !important;
+    margin-inline-start: 0.5em !important;
+}
+
+.shb-list-start li strong {
+    color: #1ab5d5;
+    text-transform: uppercase;
+}
+
+.shb-list-start li {
+    counter-increment: list-counter;
+    position: relative;
+    margin: 10px 30px;
+    font-size: 1em;
+    line-height: 1.6;
+    color: #ffffff;
+    background-color: #4b4b4b;
+    border-left: 3px solid #1ab5d5;
+    border-top: 1px solid #1ab5d5;
+    border-right: 1px solid #1ab5d5;
+    border-bottom: 1px solid #1ab5d5;
+    border-radius: 6px;
+    padding: 10px 60px;
+    box-shadow: 0 2px 5px #ffffff10;
+    width: 90%;
+}
+
+.shb-list-start li::before {
+    content: counter(list-counter);
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: #2266ff;
+    font-size: 1.2em;
+    background-color: #ffffff;
+    border: 3px solid #1ab5d5;
+    padding: 5px 15px;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px #000000;
+    text-align: center;
+}
+
+/* CODE CONTAINER */
+.shb-code-container {
+    position: relative;
+    background-color: #1ab5d5;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    overflow: auto;
+    max-height: 300px;
+}
+
+.shb-code-container code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #d1d1d1;
+}
+
+.copy-code-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 0.85em;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.copy-code-button:hover {
+    background: #005a9c;
+}
+
+.copy-code-button.copied {
+    background: #72dd8b;
+    color: white;
+    content: '✔️';
+    padding: 8px 12px;
+}
+
+/* ALERT */
+#shb-custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Dunkles Overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#shb-custom-alert-content {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+#shb-custom-alert-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+
+#shb-custom-alert-message {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #666;
+}
+
+#shb-close-alert {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#shb-close-alert:hover {
+    background-color: #218838;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* TEXT OUTPUT */
+.shb-text-output {
+    position: relative;
+    background-color: #1ab5d5;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 5px #ffffff;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    overflow: auto;
+}
+
+#yaml-output {
+    width: 100% !important;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    font-size: 1em;
+    line-height: 1.4;
+    color: #d1d1d1;
+    font-family: monospace;
+}
+
+/* DROPDOWN */
 .shb-dropdown {
     margin: 0 0 20px;
     text-align: center;
@@ -67,7 +365,6 @@
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
-    /* Text von unten nach oben */
     padding: 20px 30px;
     min-width: 6%;
     max-width: 7%;
@@ -81,9 +378,7 @@
 .shb-dropdown-toggle.rotated span {
     transform: rotate(270deg);
     transition: transform 0.3s ease;
-    /* Für eine flüssige Animation */
     display: inline-block;
-    /* Nötig für transform */
 }
 
 .shb-dropdown-content {
