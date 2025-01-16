@@ -136,9 +136,11 @@ published: true
     Eine kurze Beschreibung wie man in ESPHome ein Gerät hinzufügt, findest du im ⬇️ Dropdown ⬇️
 </p>
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">ESPHome - Neues Gerät einrichten <span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown', this)">
+        ESPHome - Neues Gerät einrichten<span>⬇️</span>
+    </button>
+    <div id="galleryDropdown" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_esp_new_device %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -299,9 +301,11 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
     Wenn du wissen möchtest, wie man auf einfachem Weg in Home Assistant einen Kalender einrichtet, sieh in den ⬇️ Dropdown ⬇️
 </p>
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Neuen lokalen Kalender einrichten <span>&#9660;</span></button>
-    <div id="galleryDropdown2" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown2', this)">
+        Neuen lokalen Kalender einrichten<span>⬇️</span>
+    </button>
+    <div id="galleryDropdown2" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_kalender_erstellen %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -349,9 +353,12 @@ Um eine Anzeige in Home Assistant zu haben, welcher Status des Kalenders gerade 
 Auch hierzu findest du eine Beschreibung im ⬇️ Dropdown ⬇️
 </p>
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Template-Sensor Helfer einrichten <span>&#9660;</span></button>
-    <div id="galleryDropdown3" class="dropdown-content" style="display: none;">
+
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown3', this)">
+        Template-Sensor Helfer einrichten<span>⬇️</span>
+    </button>
+    <div id="galleryDropdown3" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -426,9 +433,11 @@ Zuerst der Schalter. Dieser ist ein Input-Boolean und ich habe diesen bei den He
 <p>
 Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
 </p>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">Helfer-Schalter einrichten <span>&#9660;</span></button>
-    <div id="galleryDropdown4" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown4', this)">
+        Helfer-Schalter einrichten<span>⬇️</span>
+    </button>
+    <div id="galleryDropdown4" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_schalter %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -830,43 +839,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
         content: '✔️';      /* Symbol */
         padding: 8px 12px;
     }
-    .dropdown {
-        margin: 0 0 20px;
-        text-align: center;
-    }
-    .dropdown-toggle {
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        background-color: #f39c12;
-        color: #ffffff;
-        padding: 10px 5px;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: inline-block;
-    }
-    .dropdown-toggle.rotated {
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: rotate(180deg); /* Text von unten nach oben */
-        padding: 20px 30px;
-        width: 200px;
-        height: auto;
-    }
-    .dropdown-toggle span {
-        float: right;
-    }
-    .dropdown-content {
-        padding: 20px;
-        background-color: #1a1a1a;
-        border: 1px solid #f39c12;
-        border-radius: 5px;
-        margin-top: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
     .blog-footer {
     text-align: center;
     margin-top: 20px;
@@ -1078,16 +1050,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
             filterEventsByYear(selectedYear);
         });
     });
-    function toggleDropdown(dropdownId, toggleButton) {
-        var dropdownContent = document.getElementById(dropdownId);
-        if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
-            dropdownContent.style.display = "block";
-            toggleButton.classList.add("rotated"); // Klasse hinzufügen
-        } else {
-            dropdownContent.style.display = "none";
-            toggleButton.classList.remove("rotated"); // Klasse entfernen
-        }
-    }
     function showCustomAlert(title, message) {
         const alertBox = document.getElementById("custom-alert");
         const alertTitle = document.getElementById("custom-alert-title");
