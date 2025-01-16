@@ -86,15 +86,19 @@ published: true
 <div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
-<a href="/img/blog/smarter_Adventkranz/Smarter_Adventkranz_Anschluss.pdf" download="Smarter_Adventkranz_Anschluss.pdf" class="shb-button-30 shb-button-30-blue">
-  📈 Anschlussplan
-</a>
+    <div class="shb-button-30">
+        <a href="/img/blog/smarter_Adventkranz/Smarter_Adventkranz_Anschluss.pdf" download="Smarter_Adventkranz_Anschluss.pdf">
+        <button class="shb-button-30 shb-button-30-blue" >📈 Anschlussplan</button>
+        </a>
+    </div>
 </div>
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout.png" %}
-<a href="/img/blog/smarter_Adventkranz/D1_Mini_ESP32_-_pinout.pdf" download="D1_Mini_ESP32_-_pinout.pdf" class="shb-button-30 shb-button-30-blue">
-  📈 ESP32 Pinout
-</a>
+    <div class="shb-button-30">
+        <a href="/img/blog/smarter_Adventkranz/D1_Mini_ESP32_-_pinout.pdf" download="D1_Mini_ESP32_-_pinout.pdf">
+        <button class="shb-button-30 shb-button-30-blue" >📈 ESP32 Pinout</button>
+        </a>
+    </div>
 </div>
 </div>
 
