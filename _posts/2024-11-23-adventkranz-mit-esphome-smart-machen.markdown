@@ -747,7 +747,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
         margin: auto;
         width: 80%;
     }
-    /* Tabellenstyling */
     .shb-styled-table {
         width: 100%;
         border: 4px solid #1ab5d5;
@@ -756,7 +755,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
         text-align: left;
         margin: 20px 0;
     }
-    /* Tabellenkopf */
     .shb-styled-table thead th {
         background-color: #1ab5d5;
         color: #000000 !important;
@@ -764,7 +762,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
         font-weight: bold;
         text-transform: uppercase;
     }
-    /* Tabellenzellen */
     .shb-styled-table tbody tr:nth-child(odd) {
         background-color: #b8f3ff;
     }
@@ -775,7 +772,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
         color: #000000 !important;
         padding: 10px;
     }
-    /* Hervorhebung bei Hover */
     .shb-styled-table tbody tr:hover {
         background-color: #cfe0f5;
         transition: background-color 0.3s ease;
