@@ -199,6 +199,58 @@ layout: page
         </thead>
         <tbody>
             <tr>
+                <!-- Dropdown mit den Vorlagen-Stilen -->
+                <td>
+                    <div class="shb-form-group">
+                        <label for="select-entity-1" class="visually-hidden">Entität auswählen:</label>
+                        <select id="select-entity-1" style="width: 30%;" onchange="updateScript1()">
+                            <option value="">Bitte auswählen...</option>
+                        </select>
+                    </div>
+                </td>
+
+                <!-- Datei-Upload mit den Vorlagen-Stilen -->
+                <td>
+                    <div class="shb-form-group">
+                        <label for="file-upload-1" class="visually-hidden">Bild auswählen:</label>
+                        <input type="file" id="file-upload-1" accept="image/*" style="width: 30%;" onchange="handleFileUpload(this)">
+                    </div>
+                </td>
+
+                <!-- Option Dropdown -->
+                <td>
+                    <select style="width: 30%;">
+                        <option value="switch">Licht ein-aus</option>
+                        <option value="dimmable">Licht dimmbar</option>
+                        <option value="rgb">Licht RGB</option>
+                        <option value="rgbw">Licht RGBW</option>
+                        <option value="cover">Abdeckungen</option>
+                    </select>
+                </td>
+
+                <!-- Aktionen -->
+                <td>
+                    <button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="addRow()">Zeile hinzufügen</button>
+</div>
+
+
+<div class="shb-styled-table-container">
+    <table id="entities-table" class="shb-styled-table">
+        <thead>
+            <tr>
+                <th>Entität (entity)</th>
+                <th>Bild auswählen</th>
+                <th>Option</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
                 <td>
                     <select class="shb-form-group select">
                         <option value="">Bitte auswählen...</option>
@@ -566,14 +618,14 @@ function copyCode(elementId, button) {
 
     navigator.clipboard.writeText(codeText)
         .then(() => {
-            showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
+            showSHBcustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
 
             button.classList.add('copied');
             button.textContent = "Kopiert ✔️";
         })
         .catch(err => {
             console.error("Fehler beim Kopieren des Codes: ", err);
-            showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
+            showSHBcustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
         });
 }
 
@@ -629,7 +681,7 @@ function updateEntityDropdown() {
     });
 
     // Zeige Erfolgsmeldung
-    showCustomAlert("ERFOLG!", "Die Entitäten-Liste wurde erfolgreich aktualisiert!");
+    showSHBcustomAlert("ERFOLG!", "Die Entitäten-Liste wurde erfolgreich aktualisiert!");
 
     // Leere das Vorschaulisten-Fenster nach Aktualisierung
     const previewContainer = document.getElementById("entity-preview");
@@ -804,7 +856,7 @@ function removeRow(button) {
 function clearYAML() {
     document.getElementById('yaml-output').value = '';
 
-    showCustomAlert('Hinweis', 'Deine YAML-Configuration wurde gelöscht!');
+    showSHBcustomAlert('Hinweis', 'Deine YAML-Configuration wurde gelöscht!');
 }
 
 // Funktion zum Löschen der Eingabefelder, Entfernen der Vorschau und Anzeigen eines Alerts
@@ -848,7 +900,7 @@ function clearInputs() {
     previewEntities.innerHTML = '';
 
     // Benachrichtigung anzeigen
-    showCustomAlert('Hinweis', 'Alle Eingaben wurden gelöscht und müssen neu getroffen werden.');
+    showSHBcustomAlert('Hinweis', 'Alle Eingaben wurden gelöscht und müssen neu getroffen werden.');
 }
 
 // Funktion zum Generieren des YAML-Codes
@@ -862,7 +914,7 @@ function generateYAML() {
     let yaml = '';
 
     if (!path || !backgroundImage || !transparentImage) {
-        showCustomAlert('Achtung','Bitte alle allgemeinen Felder ausfüllen!');
+        showSHBcustomAlert('Achtung','Bitte alle allgemeinen Felder ausfüllen!');
         return;
     }
 
@@ -1014,6 +1066,6 @@ function copyYAML() {
     const yamlOutput = document.getElementById('yaml-output');
     yamlOutput.select();
     document.execCommand('copy');
-    showCustomAlert('Super','Dein fertiger YAML-Code wurde in die Zwischenablage kopiert!');
+    showSHBcustomAlert('Super','Dein fertiger YAML-Code wurde in die Zwischenablage kopiert!');
 }
 </script>
