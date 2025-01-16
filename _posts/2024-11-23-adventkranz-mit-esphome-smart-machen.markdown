@@ -37,7 +37,7 @@ published: true
 
 <div class="shb-button">
     <a href="https://amzn.to/4fK08yu" target="_blank" style="color: white; text-decoration: none;">
-    <button class="shb-button shb-button-blue" >Link zum Shop</button>
+    <button class="shb-button shb-button-blue" style="width: 30%">Link zum Shop</button>
     </a>
 </div>
 
@@ -280,7 +280,7 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
 <div class="shb-form-group-container">
     <div class="shb-form-group">
         <label for="year-select">Jahr auswählen:</label>
-        <select id="year-select">
+        <select id="year-select" style="width: 30%">
             <option value="all">Alle Jahre</option>
         </select>
     </div>
