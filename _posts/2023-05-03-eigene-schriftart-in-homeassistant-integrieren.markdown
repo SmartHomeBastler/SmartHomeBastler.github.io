@@ -102,7 +102,6 @@ card_mod:
     </div>
 </div>
 <footer class="shb-footer">
-    <p>Ich hoffe dieser Beitrag war hilfreich. Über Support und Feedback würde ich mich wirklich freuen.</p>
     <h2>Viel Erfolg bei der Einbindung eigener Schriftarten 🎉</h2>
 </footer>
 
