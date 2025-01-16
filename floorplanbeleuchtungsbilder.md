@@ -199,27 +199,21 @@ layout: page
         </thead>
         <tbody>
             <tr>
-                <!-- Dropdown mit den Vorlagen-Stilen -->
                 <td>
                     <div class="shb-form-group">
-                        <label for="select-entity-1" class="visually-hidden">Entität auswählen:</label>
-                        <select id="select-entity-1" style="width: 30%;" onchange="updateScript1()">
+                        <select style="width: 100%;">
                             <option value="">Bitte auswählen...</option>
                         </select>
                     </div>
                 </td>
-
-                <!-- Datei-Upload mit den Vorlagen-Stilen -->
                 <td>
                     <div class="shb-form-group">
                         <label for="file-upload-1" class="visually-hidden">Bild auswählen:</label>
-                        <input type="file" id="file-upload-1" accept="image/*" style="width: 30%;" onchange="handleFileUpload(this)">
+                        <input type="file" id="file-upload-1" accept="image/*" style="width: 100%;" onchange="handleFileUpload(this)">
                     </div>
                 </td>
-
-                <!-- Option Dropdown -->
                 <td>
-                    <select style="width: 30%;">
+                    <select style="width: 100%;">
                         <option value="switch">Licht ein-aus</option>
                         <option value="dimmable">Licht dimmbar</option>
                         <option value="rgb">Licht RGB</option>
@@ -227,8 +221,6 @@ layout: page
                         <option value="cover">Abdeckungen</option>
                     </select>
                 </td>
-
-                <!-- Aktionen -->
                 <td>
                     <button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button>
                 </td>
@@ -236,43 +228,6 @@ layout: page
         </tbody>
     </table>
     <button onclick="addRow()">Zeile hinzufügen</button>
-</div>
-
-
-<div class="shb-styled-table-container">
-    <table id="entities-table" class="shb-styled-table">
-        <thead>
-            <tr>
-                <th>Entität (entity)</th>
-                <th>Bild auswählen</th>
-                <th>Option</th>
-                <th>Aktionen</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <select class="shb-form-group select">
-                        <option value="">Bitte auswählen...</option>
-                    </select>
-                </td>
-                <td>
-                    <button class="file-upload-button" onclick="triggerFileInput(this)">Datei auswählen</button>
-                    <input type="file" class="file-upload" accept="image/*" style="display: none;" onchange="handleFileUpload(this)">
-                </td>
-                <td>
-                    <select>
-                        <option value="switch">Licht ein-aus</option>
-                        <option value="dimmable">Licht dimmbar</option>
-                        <option value="rgb">Licht RGB</option>
-                        <option value="rgbw">Licht RGBW</option>
-                        <option value="cover">Abdeckungen</option>
-                    </select>
-                </td>
-                <td><button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button></td>
-            </tr>
-        </tbody>
-    </table>
 </div>
 
 <button class="action-button add-button" onclick="addRow()">&#x2b;</button>
