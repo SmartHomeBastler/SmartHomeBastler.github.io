@@ -160,8 +160,7 @@ layout: page
     }
     /* Stile für die Optionen */
     .shb-form-group-30 select option {
-        background-color: #1ab5d5; /* Gleich wie geschlossener Zustand */
-        color: #ffffff;
+        background-color: #1ab5d5;
     }
     /* Jede zweite Zeile heller */
     .shb-form-group-30 select option:nth-child(even) {
