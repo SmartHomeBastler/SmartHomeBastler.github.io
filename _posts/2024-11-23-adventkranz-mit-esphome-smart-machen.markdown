@@ -711,12 +711,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
 </div>
 </div>
 <style>
-    .post-content {
-        max-width: 100%;
-        margin: auto;
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-    }
     /* Allgemeines Styling für Dropdown-Menü */
     .styled-select {
         width: 200px;
