@@ -186,41 +186,41 @@ layout: page
 <p>
     Die von dir getroffenen Einstellungen und Namen der hochgeladenen Bilder werden automatisch in den YAML-Code übernommen und deine Bilder in der Vorschau angezeigt.
 </p>
-
-<table id="entities-table" class="shb-styled-table">
-    <thead>
-        <tr>
-            <th>Entität (entity)</th>
-            <th>Bild auswählen</th>
-            <th>Option</th>
-            <th>Aktionen</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <select class="shb-form-group select">
-                    <option value="">Bitte auswählen...</option>
-                </select>
-            </td>
-            <td>
-                <button class="file-upload-button" onclick="triggerFileInput(this)">Datei auswählen</button>
-                <input type="file" class="file-upload" accept="image/*" style="display: none;" onchange="handleFileUpload(this)">
-            </td>
-            <td>
-                <select>
-                    <option value="switch">Licht ein-aus</option>
-                    <option value="dimmable">Licht dimmbar</option>
-                    <option value="rgb">Licht RGB</option>
-                    <option value="rgbw">Licht RGBW</option>
-                    <option value="cover">Abdeckungen</option>
-                </select>
-            </td>
-            <td><button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button></td>
-        </tr>
-    </tbody>
-</table>
-
+<div id="entities-table" class="shb-styled-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Entität (entity)</th>
+                <th>Bild auswählen</th>
+                <th>Option</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select class="shb-form-group select">
+                        <option value="">Bitte auswählen...</option>
+                    </select>
+                </td>
+                <td>
+                    <button class="file-upload-button" onclick="triggerFileInput(this)">Datei auswählen</button>
+                    <input type="file" class="file-upload" accept="image/*" style="display: none;" onchange="handleFileUpload(this)">
+                </td>
+                <td>
+                    <select>
+                        <option value="switch">Licht ein-aus</option>
+                        <option value="dimmable">Licht dimmbar</option>
+                        <option value="rgb">Licht RGB</option>
+                        <option value="rgbw">Licht RGBW</option>
+                        <option value="cover">Abdeckungen</option>
+                    </select>
+                </td>
+                <td><button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <button class="action-button add-button" onclick="addRow()">&#x2b;</button>
 <br>
 <h3 id="preview-heading" style="display: none;">Vorschau:</h3>
