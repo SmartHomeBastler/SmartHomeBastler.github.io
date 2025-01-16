@@ -72,7 +72,7 @@ layout: page
 <label class="shb-label">Drücke den gewählten Button:</label>
 
 <div class="shb-button-container">
-    <button class="shb-button shb-button-blue">Button Blau</button> <!-- Füge  onclick="updateScript2()" hinzu für Script -->
+    <button class="shb-button shb-button-blue" style="width: 20%">Button Blau</button> <!-- Füge  onclick="updateScript2()" hinzu für Script -->
     <button class="shb-button shb-button-green" style="width: 20%">Button Grün</button>
     <button class="shb-button shb-button-yellow" style="width: 20%">Button Gelb</button>
     <button class="shb-button shb-button-red" style="width: 20%">Button Rot</button>

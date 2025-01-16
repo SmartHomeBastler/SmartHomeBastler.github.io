@@ -35,9 +35,9 @@ published: true
     Die meisten der Komponenten könnt ihr in meinem Amazon Shop ansehen und gerne kaufen.
 </p>
 
-<div class="shb-button-30">
+<div class="shb-button">
     <a href="https://amzn.to/4fK08yu" target="_blank" style="color: white; text-decoration: none;">
-    <button class="shb-button-30 shb-button-30-blue" >Link zum Shop</button>
+    <button class="shb-button shb-button-blue" >Link zum Shop</button>
     </a>
 </div>
 
@@ -86,17 +86,17 @@ published: true
 <div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
-    <div class="shb-button-30">
+    <div class="shb-button">
         <a href="/img/blog/smarter_Adventkranz/Smarter_Adventkranz_Anschluss.pdf" download="Smarter_Adventkranz_Anschluss.pdf">
-        <button class="shb-button-30 shb-button-30-blue" style="width: 100%">📈 Anschlussplan</button>
+        <button class="shb-button shb-button-blue" style="width: 100%">📈 Anschlussplan</button>
         </a>
     </div>
 </div>
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout.png" %}
-    <div class="shb-button-30">
+    <div class="shb-button">
         <a href="/img/blog/smarter_Adventkranz/D1_Mini_ESP32_-_pinout.pdf" download="D1_Mini_ESP32_-_pinout.pdf">
-        <button class="shb-button-30 shb-button-30-blue" style="width: 100%">📈 ESP32 Pinout</button>
+        <button class="shb-button shb-button-blue" style="width: 100%">📈 ESP32 Pinout</button>
         </a>
     </div>
 </div>
@@ -277,8 +277,8 @@ output:
 Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen und ihn wenn du möchtest herunterladen.
 </p>
 
-<div class="shb-form-group-30-container">
-    <div class="shb-form-group-30">
+<div class="shb-form-group-container">
+    <div class="shb-form-group">
         <label for="year-select">Jahr auswählen:</label>
         <select id="year-select">
             <option value="all">Alle Jahre</option>
@@ -290,7 +290,7 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
 
 <div style="text-align: center;">
      <a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics">
-    <button class="shb-button-30 shb-button-30-blue">📅 Advent-Kalender ICS herunterladen</button>
+    <button class="shb-button shb-button-blue">📅 Advent-Kalender ICS herunterladen</button>
     </a>
 </div>
 
