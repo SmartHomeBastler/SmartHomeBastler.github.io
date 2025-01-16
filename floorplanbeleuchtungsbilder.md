@@ -6,21 +6,21 @@ show_sidebar: false
 layout: page
 ---
 
-<div class="guide-container">
+<div class="shb-main-container">
 
-<div id="custom-alert" style="display: none;">
-    <div id="custom-alert-content">
-        <h4 id="custom-alert-title"></h4>
-        <p id="custom-alert-message"></p>
-        <button id="close-alert">OK</button>
+<div id="shb-custom-alert" style="display: none;">
+    <div id="shb-custom-alert-content">
+        <h4 id="shb-custom-alert-title"></h4>
+        <p id="shb-custom-alert-message"></p>
+        <button id="shb-close-alert">OK</button>
     </div>
 </div>
 <section class="content-section">
-<h1 class="floorplan-title">Floorplan Beleuchtungsbilder</h1>
+<h1 class="shb-main-title">Floorplan Beleuchtungsbilder</h1>
 
-<h2 class="floorplan-subtitle">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
+<h2 class="shb-section-title-center">Erstelle die YAML-Codes für deine Beleuchtungsbilder</h2>
 
-<p class="floorplan-intro">
+<p class="shb-main-description">
     Was sind Beleuchtungsbilder?<br>
     Als Beleuchtungsbilder versteht man jene in Sweet Home 3D oder anderen 3D Planungstools generierte Bilder, welche den Zustand einzelner Beleuchtungs-Entitäten aus Home Assistant auf einzelnen Bildern darstellt. 
     Jedes dieser Entitäts-Bilder zeigt nur den ausgeleuchteten Raum, wohingegen der Rest des Bildes schwarz bleibt.<br>
@@ -73,9 +73,9 @@ layout: page
     Diese kannst du kopieren und entweder direkt hier einfügen oder eine .csv oder .txt Datei erstellen und diese hier einfügen
 </p>
 
-<div class="floorplan-form-group">
-    <label for="domain-select">Wähle eine Domain:</label>
-    <select id="domain-select" onchange="updateTemplateCode()">
+<div class="shb-form-group">
+    <label for="domain-select">Auswahl:</label>
+    <select id="domain-select" style="width: 30%;" onchange="updateTemplateCode()">
         <option value="light">light</option>
         <option value="switch">switch</option>
         <option value="input_boolean">input_boolean</option>
@@ -83,8 +83,8 @@ layout: page
     </select>
 </div>
 
-<div class="code-container">
-    <button class="copy-button" onclick="copyCode('template-output', this)">Code kopieren</button>
+<div class="shb-code-container">
+    <button class="copy-code-button" onclick="copyCode('template-output', this)">Code kopieren</button>
     <pre id="template-output">
         <code>
 {%- raw %}
@@ -98,10 +98,11 @@ layout: page
 <p>
     Um das Auswählen deiner Entitäten für die Codegenerierung einfacher zu gestalten, sind hier alle Entitäten für deine Beleuchtungsbilder einzugeben oder hochzuladen. Mit einem Klick auf <strong>Entitäten-Liste aktualisieren</strong> werden diese Entitäten in den Entität Dropdown der nachfolgenden Tabelle geladen.
 </p>
-<div class="shb-form-group-30">
+<div class="shb-form-group">
     <label for="entity-list-upload">Datei auswählen</label>
-    <input type="file" id="entity-list-upload" accept=".txt,.csv" onchange="loadEntityList(event)"/>
+    <input type="file" id="entity-list-upload" accept=".txt,.csv" onchange="loadEntityList(event)" style="width: 30%"/>
 </div>
+
 <div class="shb-text-output" id="entity-preview;">
     <textarea id="entity-list-text" rows="5" cols="80" placeholder="Entitäten manuell eingeben (eine pro Zeile)"></textarea>
 </div>
@@ -110,8 +111,8 @@ layout: page
     <textarea id="uploaded-entity-list" rows="10" cols="80" readonly></textarea>
 </div>
 
-<div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-blue" onclick="updateEntityDropdown()">Entitäten-Liste aktualisieren</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-blue" onclick="updateEntityDropdown()" style="width: 30%">Entitäten-Liste aktualisieren</button>
 </div>
 </section>
 
@@ -124,9 +125,10 @@ layout: page
 <p>
     Der Speicherpfad ist hier mit /local/lovelace/floorplan/ angegeben. Dies ist allerdings nur ein Vorschlag für eine übersichtliche Struktur. Lege dir die Ordner in deinem www-Ordner (/local/) nach deinen Bedürfnissen an oder verwende den vorgeschlagenen Pfad. Wichtig ist, dass der korrekte Pfad deiner Beleuchtungsbilder hier eingegeben wird.
 </p>
-<div class="floorplan-form-group">
+
+<div class="shb-form-group">
     <label for="path-input">Speicherpfad der Floorplan Bilder:</label>
-    <input type="text" id="path-input" value="/local/lovelace/floorplan/" placeholder="/local/lovelace/floorplan/">
+    <input type="text" id="path-input" value="/local/lovelace/floorplan/" placeholder="/local/lovelace/floorplan/" style="width: 30%">
 </div>
 <br>
 <p>
@@ -135,9 +137,9 @@ layout: page
     Der Dateiname ist hier mit <strong>1x1_transparent.png</strong> voreingestellt. Dieser kann natürlich geändert werden. 
 </p>
 <br>
-<div class="floorplan-form-group">
+<div class="shb-form-group">
     <label for="transparent-image-input">Dateiname 1 Pixel Bild:</label>
-    <input type="text" id="transparent-image-input" placeholder="1x1_transparent.png">
+    <input type="text" id="transparent-image-input" placeholder="1x1_transparent.png" style="width: 30%">
     <p style="margin-top: 10px;">
         Wenn du noch kein transparentes 1 Pixel Bild haben solltest, kannst du es 
         <a href="/img/floorplan/1x1_transparent.png" download class="download-link">hier herunterladen</a>.
@@ -153,9 +155,9 @@ layout: page
     Dieses Hintergrundbild definiert die Größe deines Floorplans und muss das gleiche Format und die gleichen Abmessungen wie die Beleuchtungsbilder haben.<br>
     Eine Vorschau deines Hintergrundbilds wird nach dem Hochladen unten angezeigt.
 </p>
-<div class="floorplan-form-group">
+<div class="shb-form-group">
     <label for="background-upload">Hintergrundbild hochladen:</label>
-    <button class="file-upload-button" onclick="triggerBackgroundUpload()">Datei auswählen</button>
+    <button class="shb-button shb-button-blue" onclick="triggerBackgroundUpload()">Datei auswählen</button>
     <input type="file" id="background-upload" accept="image/*" onchange="handleBackgroundImageUpload()" style="display: none;">
     <span id="background-image-display" class="file-name-display">Kein Bild ausgewählt</span>
 </div>
@@ -185,7 +187,7 @@ layout: page
     Die von dir getroffenen Einstellungen und Namen der hochgeladenen Bilder werden automatisch in den YAML-Code übernommen und deine Bilder in der Vorschau angezeigt.
 </p>
 
-<table id="entities-table">
+<table id="entities-table" class="shb-styled-table">
     <thead>
         <tr>
             <th>Entität (entity)</th>
@@ -197,7 +199,7 @@ layout: page
     <tbody>
         <tr>
             <td>
-                <select class="entity-dropdown">
+                <select class="shb-form-group select">
                     <option value="">Bitte auswählen...</option>
                 </select>
             </td>
@@ -248,7 +250,7 @@ layout: page
 </div>
 </section>
 
-<footer class="guide-footer">
+<footer class="shb-footer">
     <h2>Viel Erfolg bei der Einrichtung deines Floorplans! 🎉</h2>
 </footer>
 
@@ -260,49 +262,6 @@ layout: page
 
 
 <style>
-    .guide-container {
-        max-width: 100%;
-        margin: auto;
-        padding: 20px;
-        background-color: #1a1a1a;
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        border: 1px solid #1598b3;
-        border-radius: 8px;
-        box-shadow: 0 4px 4px 6px #1598b380;
-    }
-
-    .content-section {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #252525;
-        border: 1px solid #444;
-        border-radius: 8px;
-    }
-
-    .content-section h2 {
-        color: #1598b3;
-        font-size: 1.75em;
-        margin-bottom: 10px;
-    }
-
-    .content h1 {
-        color: #1598b3
-    }
-
-    .content-section ul {
-        margin: 10px 0 0 20px;
-        padding: 0;
-        list-style-type: disc;
-    }
-
-    .content-section ul li {
-        margin-bottom: 10px;
-    }
-
-    .guide-footer {
-        text-align: center;
-    }
     .blend-preview {
         margin-top: 20px;
         padding: 10px;
@@ -327,47 +286,6 @@ layout: page
         height: auto;
         position: relative;
         z-index: 1;
-    }
-    /* Wichtiges Hinweis-Container */
-    .important-container {
-        background-color: rgb(255, 255, 255);
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 8px solid rgb(255, 0, 0);
-    }
-    .important-container h3 {
-        color: #d12700;
-        font-weight: bold;
-        text-shadow: 0 0 1px rgb(0, 0, 0);
-    }
-    .important-container p {
-        color: #383838;
-        font-family: Arial Black;
-    }
-    .important-container strong {
-        color:rgb(255, 0, 0);
-        text-transform: uppercase;
-    }
-    /* Hinweise */
-    .note-container {
-        background-color: rgb(255, 255, 255);
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 8px solid #0062ff;
-    }
-    .note-container h3 {
-        color: #0062ff;
-        font-weight: bold;
-        text-shadow: 0 0 1px rgb(0, 0, 0);
-    }
-    .note-container p {
-        color: #383838;
-    }
-    .note-container strong {
-        color: #0062ff;
-        text-transform: uppercase;
     }
     #preview-entities img {
         position: absolute;
@@ -460,62 +378,6 @@ layout: page
         content: '✔️';      /* Symbol */
         padding: 8px 12px;
     }
-    #custom-alert {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6); /* Dunkles Overlay */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    }
-    #custom-alert-content {
-        background-color: #fff;
-        padding: 20px 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        max-width: 400px;
-        animation: fadeIn 0.3s ease-in-out;
-    }
-    #custom-alert-title {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #333;
-        font-weight: bold;
-    }
-    #custom-alert-message {
-        margin-bottom: 15px;
-        font-size: 16px;
-        color: #666;
-    }
-    #close-alert {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    #close-alert:hover {
-        background-color: #218838;
-    }
-    /* Animation */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
     .floorplan-container {
         max-width: 100%;
         margin: auto;
@@ -587,33 +449,6 @@ layout: page
         color: #0056b3;
         text-decoration: none;
     }
-    /* Tabellengestaltung */
-    #entities-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
-        margin-bottom: 20px;
-    }
-    #entities-table th, #entities-table td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-    #entities-table th {
-        background-color: #9fb9fb;
-        font-weight: bold;
-        color: #000000;
-    }
-    #entities-table td input, #entities-table td select {
-        padding: 8px;
-        color: #000000;
-        background-color: #9fb9fb;
-        width: 100%;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        font-size: 14px;
-    }
     /* Buttons für Zeilen hinzufügen und entfernen */
     .action-button {
         font-size: 20px;
@@ -640,7 +475,7 @@ layout: page
         gap: 10px;
         margin-top: 20px;
     }
-    .shb-button-30 {
+    .shb-button {
         padding: 10px 0px;
         font-size: 14px;
         border: none;
@@ -648,7 +483,7 @@ layout: page
         cursor: pointer;
         min-width: 30%;
     }
-    .shb-button-30-blue {
+    .shb-button-blue {
         background-color: #007bff;
         color: #fff;
         border: 1px solid #ffffff;
@@ -738,21 +573,6 @@ function copyCode(elementId, button) {
             console.error("Fehler beim Kopieren des Codes: ", err);
             showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
         });
-}
-
-
-function showCustomAlert(title, message) {
-    const alertBox = document.getElementById("custom-alert");
-    const alertTitle = document.getElementById("custom-alert-title");
-    const alertMessage = document.getElementById("custom-alert-message");
-
-    alertTitle.textContent = title;
-    alertMessage.textContent = message;
-    alertBox.style.display = "flex";
-
-    document.getElementById("close-alert").onclick = function () {
-        alertBox.style.display = "none";
-    };
 }
 
 let entityList = [];
