@@ -369,36 +369,6 @@ layout: page
         color: #0062ff;
         text-transform: uppercase;
     }
-    .shb-form-group-30, .shb-form-group-30-full {
-        display: flex;
-        flex-direction: column;
-        gap: 10px; /* Abstand zwischen den Checkbox-Gruppen */
-        margin: 20px 0;
-    }
-    .shb-form-group-30 label, .shb-form-group-30-full label {
-        font-weight: bold;
-        color: #ffffff;
-    }
-    .shb-form-group-30 input, .shb-form-group-30 select {
-        padding: 8px;
-        color: #000000;
-        background-color: #9fb9fb;
-        max-width: 30%;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-    .shb-form-group-30 select:focus {
-        background-color: rgb(187, 207, 255);
-        border: 2px solid #0048ff;
-        box-shadow: 0 4px 10px #7199ff;
-        outline: none;
-    }
-    .shb-section-title-left, .shb-section-title-left h2, .shb-section-title-left h3, .shb-section-title-left h4 {
-        font-weight: bold !important;
-        margin: 20px 0 !important;
-    }
     #preview-entities img {
         position: absolute;
         top: 0;
@@ -728,47 +698,6 @@ layout: page
         font-family: monospace;
     }
 
-    .dropdown {
-        margin: 20px 0;
-        text-align: center;
-    }
-
-    .dropdown-toggle {
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        background-color: #f39c12;
-        color: #ffffff;
-        padding: 10px 5px;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: inline-block;
-    }
-
-    .dropdown-toggle.rotated {
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: rotate(180deg); /* Text von unten nach oben */
-        padding: 20px 30px;
-        width: 200px;
-        height: auto;
-    }
-
-    .dropdown-toggle span {
-        float: right;
-    }
-
-    .dropdown-content {
-        padding: 20px;
-        background-color: #1a1a1a;
-        border: 1px solid #f39c12;
-        border-radius: 5px;
-        margin-top: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
     .guide-footer {
     text-align: center;
     margin-top: 20px;
