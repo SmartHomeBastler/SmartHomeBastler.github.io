@@ -132,10 +132,20 @@ layout: page
     </select>
 </div>
 <style>
-    .shb-form-group-30 select {
+    .shb-form-group-30, .shb-form-group-30-full {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Abstand zwischen den Checkbox-Gruppen */
+        margin: 20px 0;
+    }
+    .shb-form-group-30 label, .shb-form-group-30-full label {
+        font-weight: bold;
+        color: #ffffff;
+    }
+    .shb-form-group-30 input, .shb-form-group-30 select {
         padding: 8px;
         color: #000000;
-        background-color: #1ab5d5; /* Grundfarbe */
+        background-color: #1ab5d5;
         max-width: 30%;
         border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
@@ -147,15 +157,6 @@ layout: page
         border: 2px solid #0048ff;
         box-shadow: 0 4px 10px #7199ff;
         outline: none;
-    }
-    /* Stile für die Optionen */
-    .shb-form-group-30 select option {
-        background-color: #1ab5d5; /* Gleich wie geschlossener Zustand */
-        color: #ffffff;
-    }
-    /* Jede zweite Zeile heller */
-    .shb-form-group-30 select option:nth-child(even) {
-        background-color: #33c2e5; /* 30% heller als #1ab5d5 */
     }
 </style>
 
@@ -189,6 +190,7 @@ layout: page
         transform: scale(1.5); /* Größe der Checkbox anpassen */
         margin: 0; /* Standardabstände entfernen */
     }
+</style>
 
 <label class="shb-label">Drücke den gewählten Button:</label>
 
