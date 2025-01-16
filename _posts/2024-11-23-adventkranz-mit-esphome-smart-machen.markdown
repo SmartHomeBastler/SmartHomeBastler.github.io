@@ -288,7 +288,7 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
 
 <div style="text-align: center;">
      <a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics">
-    <button class="shb-button-30 shb-button-30-blue" style="width: 100%">📅 Advent-Kalender ICS herunterladen</button>
+    <button class="shb-button-30 shb-button-30-blue">📅 Advent-Kalender ICS herunterladen</button>
     </a>
 </div>
 
