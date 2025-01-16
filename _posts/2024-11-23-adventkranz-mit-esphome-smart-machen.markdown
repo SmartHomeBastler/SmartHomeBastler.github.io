@@ -390,8 +390,8 @@ Auch hierzu findest du eine Beschreibung im ⬇️ Dropdown ⬇️
     <li><strong>Name</strong>: Advent</li>
     <li><strong>Icon</strong>: mdi:pine-tree-variant-outline</li>
 </ul>
-<div class="code-container">
-    <button class="copy-button" onclick="copyCode('code-yaml-calendar', this)">Kopieren</button>
+<div class="shb-code-container">
+    <button class="copy-code-button" onclick="copyCode('code-yaml-calendar', this)">Kopieren</button>
     <pre id="code-yaml-calendar" class="language-yaml"><code>
 {% raw %}
 {% set ADVENTKAL = states.calendar.advent.state %}
@@ -505,9 +505,9 @@ Wie man einen Helfer-Schalter anlegt, findest du im ⬇️ Dropdown ⬇️
 
 
 
-<div class="code-container">
+<div class="shb-code-container">
     <h4>Die Automatisierung im YAML-Code</h4>
-    <button class="copy-button" onclick="copyCode('code-yaml-automation', this)">Kopieren</button>
+    <button class="copy-code-button" onclick="copyCode('code-yaml-automation', this)">Kopieren</button>
     <pre id="code-yaml-automation" class="language-yaml"><code>
 alias: Adventskranz Automatisierung
 description: Steuert den Adventskranz entsprechend des aktuellen Adventsstatus
@@ -642,7 +642,7 @@ mode: single
     </div>
 </div>
 
-  <footer class="blog-footer">
+  <footer class="shb-footer">
     <h2>Viel Spaß und Erfolg beim Nachbasteln 🎉</h2>
   </footer>
 
@@ -665,9 +665,9 @@ mode: single
     <li><strong>Icon</strong>: mdi:window-closed-variant</li>
 </ul>
 
-<div class="code-container">
+<div class="shb-code-container">
     <h4>Template-Helfer Adventkalender</h4>
-    <button class="copy-button" onclick="copyCode('code-yaml-advent', this)">Kopieren</button>
+    <button class="copy-code-button" onclick="copyCode('code-yaml-advent', this)">Kopieren</button>
     <pre id="code-yaml-advent" class="language-yaml"><code>
 {% raw %}
 {% set ADVENTMONAT = (12) %}
@@ -695,9 +695,9 @@ kein
     <li><strong>Icon</strong>: mdi:calendar-check-outline</li>
 </ul>
 
-<div class="code-container">
+<div class="shb-code-container">
     <h4>Template-Helfer Tage bis XMAS</h4>
-    <button class="copy-button" onclick="copyCode('code-yaml-adventdays', this)">Kopieren</button>
+    <button class="copy-code-button" onclick="copyCode('code-yaml-adventdays', this)">Kopieren</button>
     <pre id="code-yaml-adventdays" class="language-yaml"><code>
 {% raw %}
 {% set ADVENTMONAT = (12) %}
@@ -721,179 +721,15 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/Helfer_Template_Tage-bis-XMAS_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/Helfer_Template_Tage-bis-XMAS.png" %}
 </div>
 </div>
-<div id="custom-alert" style="display: none;">
-    <div id="custom-alert-content">
-        <h4 id="custom-alert-title"></h4>
-        <p id="custom-alert-message"></p>
-        <button id="close-alert">OK</button>
+<div id="shb-custom-alert" style="display: none;">
+    <div id="shb-custom-alert-content">
+        <h4 id="shb-custom-alert-title"></h4>
+        <p id="shb-custom-alert-message"></p>
+        <button id="shb-close-alert">OK</button>
     </div>
 </div>
 </div>
 <style>
-    /* Allgemeines Styling für Dropdown-Menü */
-    .styled-select {
-        width: 200px;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        text-align: center;
-        background-color: #f9f9f9;
-        cursor: pointer;
-    }
-    /* Tabellencontainer */
-    .shb-styled-table-container {
-        margin: auto;
-        width: 80%;
-    }
-    .shb-styled-table {
-        width: 100%;
-        border: 4px solid #1ab5d5;
-        border-collapse: collapse;
-        font-family: Arial, sans-serif;
-        text-align: left;
-        margin: 20px 0;
-    }
-    .shb-styled-table thead th {
-        background-color: #1ab5d5;
-        color: #000000 !important;
-        padding: 5px 10px;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    .shb-styled-table tbody tr:nth-child(odd) {
-        background-color: #b8f3ff;
-    }
-    .shb-styled-table tbody tr:nth-child(even) {
-        background-color: #97ecfd;
-    }
-    .shb-styled-table tbody td {
-        color: #000000 !important;
-        padding: 10px;
-    }
-    .shb-styled-table tbody tr:hover {
-        background-color: #cfe0f5;
-        transition: background-color 0.3s ease;
-    }
-    /* Download-Button */
-    .download-button {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-top: 20px;
-        font-size: 14px;
-        text-decoration: none;
-        color: #fff;
-        background-color: #007bff;
-        border-radius: 5px;
-        text-align: center;
-        cursor: pointer;
-    }
-    .download-button:hover {
-        background-color: #0056b3;
-    }
-    /* Code Container */
-    .code-container {
-        position: relative;
-        background-color: #9fb9fb;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        padding: 15px;
-        margin-top: 5px;
-        margin-bottom: 30px;
-        overflow: auto;
-        max-height: 300px;
-    }
-    .code-container code {
-        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-        font-size: 0.95em;
-        line-height: 1.5;
-        color: #d1d1d1;
-    }
-    /* Stil für den Copy-Button */
-    .copy-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #007acc;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 8px 12px;
-        font-size: 0.85em;
-        cursor: pointer;
-        z-index: 10;
-    }
-    .copy-button:hover {
-        background: #005a9c;
-    }
-    .copy-button.copied {
-        background: #72dd8b; /* Grüner Hintergrund */
-        color: white;       /* Weiße Schrift */
-        content: '✔️';      /* Symbol */
-        padding: 8px 12px;
-    }
-    .blog-footer {
-    text-align: center;
-    margin-top: 20px;
-    }
-    #custom-alert {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6); /* Dunkles Overlay */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    }
-    #custom-alert-content {
-        background-color: #fff;
-        padding: 20px 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        max-width: 400px;
-        animation: fadeIn 0.3s ease-in-out;
-    }
-    #custom-alert-title {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #333;
-        font-weight: bold;
-    }
-    #custom-alert-message {
-        margin-bottom: 15px;
-        font-size: 16px;
-        color: #666;
-    }
-    #close-alert {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    #close-alert:hover {
-        background-color: #218838;
-    }
-    /* Animation */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
     .advent-container {
         font-family: Arial, sans-serif;
         max-width: 600px;
@@ -935,7 +771,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
     .advent-container strong {
         color: #fff; /* Helle Farbe für hervorgehobenen Text */
     }
-
 </style>
 
 
@@ -1045,19 +880,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
             filterEventsByYear(selectedYear);
         });
     });
-    function showCustomAlert(title, message) {
-        const alertBox = document.getElementById("custom-alert");
-        const alertTitle = document.getElementById("custom-alert-title");
-        const alertMessage = document.getElementById("custom-alert-message");
-    
-        alertTitle.textContent = title;   // Überschrift setzen
-        alertMessage.textContent = message; // Nachricht setzen
-        alertBox.style.display = "flex"; // Fenster anzeigen
-    
-        document.getElementById("close-alert").onclick = function () {
-            alertBox.style.display = "none"; // Fenster schließen
-        };
-    }
 </script>
 
 
