@@ -166,6 +166,12 @@ layout: page
     .shb-form-group-30 select option:nth-child(even) {
         background-color: #b4f2ff
     }
+    .shb-form-group-30 input:focus {
+        background-color: #99eafb;
+        border: 2px solid #0048ff;
+        box-shadow: 0 4px 10px #7199ff;
+        outline: none;
+    }
 </style>
 
 <div class="shb-form-group-30">
