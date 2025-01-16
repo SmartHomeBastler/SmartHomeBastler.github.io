@@ -165,8 +165,8 @@ published: true
         </div>
     </div>
 </div>
-<div class="code-container">
-    <button class="copy-button" onclick="copyCode('code-yaml-esp', this)">Kopieren</button>
+<div class="shb-code-container">
+    <button class="copy-code-button" onclick="copyCode('code-yaml-esp', this)">Kopieren</button>
     <pre id="code-yaml-esp" class="language-yaml"><code>
 esphome:
   name: adventskranz
