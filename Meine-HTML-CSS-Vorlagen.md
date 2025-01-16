@@ -610,7 +610,7 @@ elements:
 
 
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleshbdropdown('testdropdown', this)">
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('testdropdown', this)">
         Was mache ich, wenn ich keine ICS Datei oder URL habe? <span>&#9660;</span>
     </button>
     <div id="testdropdown" class="shb-dropdown-content" style="display: none;">
@@ -703,7 +703,7 @@ elements:
     }
 </style>
 <script>
-    function toggleshbDropdown(dropdownId, toggleButton) {
+    function toggleSHBdropdown(dropdownId, toggleButton) {
         var dropdownContent = document.getElementById(dropdownId);
         if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
             dropdownContent.style.display = "block";
