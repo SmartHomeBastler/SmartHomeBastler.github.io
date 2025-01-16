@@ -608,6 +608,113 @@ elements:
     }
 </style>
 
+
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleshbdropdown('testdropdown', this)">
+        Was mache ich, wenn ich keine ICS Datei oder URL habe? <span>&#9660;</span>
+    </button>
+    <div id="testdropdown" class="shb-dropdown-content" style="display: none;">
+        <div class="shb-dropdown-youtube">
+            {% include youtube.html video="r4koAf8UnwQ" %}
+        </div>
+        <h3><strong>Verwendung des Codegenerators ohne ICS Datei oder URL</strong></h3>
+        <p>
+            Wenn du keine ICS Datei oder eine URL zur Einrichtung deines Kalenders in der <strong>Waste Collection Schedule</strong> hast, kannst du den Codegenerator mit einem kleinen Trick trotzdem nutzen.
+        </p>
+        <p>
+            Da in der neuen <strong>Waste Collection Schedule</strong> Integration, die Namen der einzelnen Abholungen frei vergeben werden können, kannst du dir zur Nutzung des Codegenartors eine Helfer-ICS Datei anlegen.
+        </p>
+        <ol>
+            <li>Gehe im Menü <strong>Müllerinnerung Tools</strong> auf <strong>ICS zusammenführen / erstellen</strong></li>
+            <li>Wähle die Checkbox <strong>Eigen ICS erstellen</strong></li>
+            <li>Trage einen frei gewählten Kalendernamen ein</li>
+            <li>Trage einen Eventnamen ein, welcher einem deiner Mülltypen / Abholungen entspricht (z.B. Restabfall)</li>
+            <li>Wähle ein Eventdatum (dieses hat keine Relevanz im Codegenerator)</li>
+            <li>Klicke auf <strong>Event hinzufügen</strong></li>
+        </ol>
+        <p>
+            Es wird ein Kalender mit deinem Kalendernamen und deinem Eventnamen erstellt.<br>
+            Für jede weitere deiner Abholungen (unterschidliche Mülltypen) trage einen neuen Eventnamen und ein Datum ein und bestätige immer mit <strong>Event hinzufügen</strong>
+        </p>
+        <p>
+            Wenn deine Einträge für jeweils einen deiner Mülltypen abgeschlossen sind, klicke auf <strong>Erstellten Kalender herunterladen.</strong>
+        </p>
+        <p>
+            Nun kannst du diesen heruntergeladenen Kalender für den Codegenerator verwenden.
+        </p>
+        <p>
+            <strong>Hinweis:</strong> Verwende für deine Eventnamen (Mülltypen) keine Umlaute und vermeide Leerzeichen. Nimm nur die Allgemeine Bezichnung deiner Mülltypen ohne den Zusatz "Tonne", ausnahme z.B. Gelber Sack oder Gelbe Tonne. 
+        </p>
+        <p>
+            <strong>Viel Erfolg! 🎉</strong>
+        </p>
+    </div>
+</div> 
+
+
+<style>
+    .shb-dropdown {
+        margin: 0 0 20px;
+        text-align: center;
+        display: flex;
+    }
+    .shb-dropdown-toggle {
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f39c12;
+        color: #ffffff;
+        padding: 10px 5px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        min-width: 50%;
+        max-width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+        display: inline-block;
+    }
+    .shb-dropdown-toggle.rotated {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg); /* Text von unten nach oben */
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
+        padding: 20px 30px;
+        min-width: 6%;
+        max-width: 7%;
+        height: auto;
+    }
+    .shb-dropdown-toggle span {
+        float: right;
+    }
+    .shb-dropdown-content {
+        padding: 20px;
+        text-align: left;
+        line-height: 1.5;
+        background-color: #1a1a1a;
+        border: 1px solid #f39c12;
+        border-radius: 5px;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .shb-dropdown-youtube {
+        margin: 0 auto;
+        max-width: 60%;
+    }
+</style>
+<script>
+    function toggleshbDropdown(dropdownId, toggleButton) {
+        var dropdownContent = document.getElementById(dropdownId);
+        if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+            dropdownContent.style.display = "block";
+            toggleButton.classList.add("rotated"); // Klasse hinzufügen
+        } else {
+            dropdownContent.style.display = "none";
+            toggleButton.classList.remove("rotated"); // Klasse entfernen
+        }
+    }
+</script>
+
 </div>
 
 <footer class="shb-footer">
