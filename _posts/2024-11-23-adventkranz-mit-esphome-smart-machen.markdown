@@ -41,10 +41,6 @@ published: true
     </a>
 </div>
 
-<a href="https://amzn.to/4fK08yu" target="_blank" style="color: white; text-decoration: none;">
-<button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Link zum Shop</button>
-</a>
-
 <h3>Schritt 2. Kerzen verdrahten</h3>
 
 <p>
@@ -90,13 +86,13 @@ published: true
 <div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
-<a href="/img/blog/smarter_Adventkranz/Smarter_Adventkranz_Anschluss.pdf" download="Smarter_Adventkranz_Anschluss.pdf" class="download-button">
+<a href="/img/blog/smarter_Adventkranz/Smarter_Adventkranz_Anschluss.pdf" download="Smarter_Adventkranz_Anschluss.pdf" class="shb-button-30 shb-button-30-blue">
   📈 Anschlussplan
 </a>
 </div>
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout.png" %}
-<a href="/img/blog/smarter_Adventkranz/D1_Mini_ESP32_-_pinout.pdf" download="D1_Mini_ESP32_-_pinout.pdf" class="download-button">
+<a href="/img/blog/smarter_Adventkranz/D1_Mini_ESP32_-_pinout.pdf" download="D1_Mini_ESP32_-_pinout.pdf" class="shb-button-30 shb-button-30-blue">
   📈 ESP32 Pinout
 </a>
 </div>
@@ -286,7 +282,7 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
 
 <div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
 
-<a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics" class="download-button">
+<a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics" class="shb-button-30 shb-button-30-blue">
   📅 Advent-Kalender ICS herunterladen
 </a>
 
