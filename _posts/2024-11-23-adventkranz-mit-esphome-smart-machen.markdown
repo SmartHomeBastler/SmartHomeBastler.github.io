@@ -35,6 +35,12 @@ published: true
     Die meisten der Komponenten könnt ihr in meinem Amazon Shop ansehen und gerne kaufen.
 </p>
 
+<div class="shb-button-30">
+    <a href="https://amzn.to/4fK08yu" target="_blank" style="color: white; text-decoration: none;">
+    <button class="shb-button-30 shb-button-30-blue" >Link zum Shop</button>
+    </a>
+</div>
+
 <a href="https://amzn.to/4fK08yu" target="_blank" style="color: white; text-decoration: none;">
 <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Link zum Shop</button>
 </a>
