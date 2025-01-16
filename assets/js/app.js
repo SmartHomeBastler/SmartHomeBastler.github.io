@@ -19,3 +19,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+function toggleSHBdropdown(dropdownId, toggleButton) {
+    var dropdownContent = document.getElementById(dropdownId);
+    if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+        dropdownContent.style.display = "block";
+        toggleButton.classList.add("rotated"); // Klasse hinzufügen
+    } else {
+        dropdownContent.style.display = "none";
+        toggleButton.classList.remove("rotated"); // Klasse entfernen
+    }
+}
