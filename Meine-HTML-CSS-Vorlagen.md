@@ -153,7 +153,7 @@ layout: page
         font-size: 14px;
     }
     .shb-form-group-30 select:focus {
-        background-color: #1ab5d5;
+        background-color: #37c4e1;
         border: 2px solid #0048ff;
         box-shadow: 0 4px 10px #7199ff;
         outline: none;
