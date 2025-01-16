@@ -664,14 +664,14 @@ elements:
         cursor: pointer;
         background-color: #f39c12;
         color: #ffffff;
+        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
         padding: 10px 5px;
-        border: none;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
         border-radius: 5px;
         text-align: center;
         min-width: 50%;
         max-width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-shadow: 0 0 2px #000000, 0 0 5px #000000;
         display: inline-block;
     }
     .shb-dropdown-toggle.rotated {
@@ -692,10 +692,10 @@ elements:
         text-align: left;
         line-height: 1.5;
         background-color: #1a1a1a;
-        border: 1px solid #f39c12;
         border-radius: 5px;
         margin-top: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
     }
     .shb-dropdown-youtube {
         margin: 0 auto;
