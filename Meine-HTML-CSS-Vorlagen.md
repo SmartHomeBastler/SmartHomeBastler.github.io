@@ -160,7 +160,7 @@ layout: page
     }
     /* Stile für die Optionen */
     .shb-form-group-30 select option {
-        background-color: #1ab5d5;
+        background-color: #99eafb;
     }
     /* Jede zweite Zeile heller */
     .shb-form-group-30 select option:nth-child(even) {
