@@ -277,7 +277,7 @@ output:
 Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen und ihn wenn du möchtest herunterladen.
 </p>
 
-<div class="shb-form-group-30 style="text-align: center;">
+<div class="shb-form-group-30" style="text-align: center;">
     <label for="year-select" >Jahr auswählen:</label>
     <select id="year-select" >
         <option value="all">Alle Jahre</option>
