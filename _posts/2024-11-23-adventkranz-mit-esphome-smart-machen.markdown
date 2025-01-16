@@ -88,7 +88,7 @@ published: true
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP_Verdrahtung.png" %}
     <div class="shb-button-30">
         <a href="/img/blog/smarter_Adventkranz/Smarter_Adventkranz_Anschluss.pdf" download="Smarter_Adventkranz_Anschluss.pdf">
-        <button class="shb-button-30 shb-button-30-blue" >📈 Anschlussplan</button>
+        <button class="shb-button-30 shb-button-30-blue" style="width: 100%">📈 Anschlussplan</button>
         </a>
     </div>
 </div>
@@ -96,7 +96,7 @@ published: true
 {% include image-modal.html ratio="is-4by3" link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout_k.png" alt="Example image" large_link="/img/blog/smarter_Adventkranz/ESP32_D1-Mini_Pinout.png" %}
     <div class="shb-button-30">
         <a href="/img/blog/smarter_Adventkranz/D1_Mini_ESP32_-_pinout.pdf" download="D1_Mini_ESP32_-_pinout.pdf">
-        <button class="shb-button-30 shb-button-30-blue" >📈 ESP32 Pinout</button>
+        <button class="shb-button-30 shb-button-30-blue" style="width: 100%">📈 ESP32 Pinout</button>
         </a>
     </div>
 </div>
@@ -286,9 +286,11 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
 
 <div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
 
-<a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics" class="shb-button-30 shb-button-30-blue">
-  📅 Advent-Kalender ICS herunterladen
-</a>
+<div style="text-align: center;">
+     <a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics">
+    <button class="shb-button-30 shb-button-30-blue" style="width: 100%">📅 Advent-Kalender ICS herunterladen</button>
+    </a>
+</div>
 
 <p>
     Diesen Kalender habe ich in Home Assistant eingerichtet, um ihn für Automatisierungen und Templates zu nutzen.<br>
