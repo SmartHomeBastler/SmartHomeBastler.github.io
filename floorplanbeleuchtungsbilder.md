@@ -187,7 +187,7 @@ layout: page
     Die von dir getroffenen Einstellungen und Namen der hochgeladenen Bilder werden automatisch in den YAML-Code übernommen und deine Bilder in der Vorschau angezeigt.
 </p>
 
-<div class="shb-styled-table-container">
+<div class="shb-styled-table-container" style="width: 100%;">
     <table id="entities-table" class="shb-styled-table">
         <thead>
             <tr>
@@ -201,25 +201,26 @@ layout: page
             <tr>
                 <td>
                     <div class="shb-form-group">
-                        <select style="width: 100%;">
+                        <select class="entity-dropdown" style="width: 100%;">
                             <option value="">Bitte auswählen...</option>
                         </select>
                     </div>
                 </td>
                 <td>
                     <div class="shb-form-group">
-                        <label for="file-upload-1" class="visually-hidden">Bild auswählen:</label>
-                        <input type="file" id="file-upload-1" accept="image/*" style="width: 100%;" onchange="handleFileUpload(this)">
+                        <input type="file" class="file-upload" accept="image/*" style="width: 100%;" onchange="handleFileUpload(this)">
                     </div>
                 </td>
                 <td>
-                    <select style="width: 100%;">
-                        <option value="switch">Licht ein-aus</option>
-                        <option value="dimmable">Licht dimmbar</option>
-                        <option value="rgb">Licht RGB</option>
-                        <option value="rgbw">Licht RGBW</option>
-                        <option value="cover">Abdeckungen</option>
-                    </select>
+                    <div class="shb-form-group">
+                        <select style="width: 100%;">
+                            <option value="switch">Licht ein-aus</option>
+                            <option value="dimmable">Licht dimmbar</option>
+                            <option value="rgb">Licht RGB</option>
+                            <option value="rgbw">Licht RGBW</option>
+                            <option value="cover">Abdeckungen</option>
+                        </select>
+                    </div>
                 </td>
                 <td>
                     <button class="action-button remove-button" onclick="removeRow(this)">&#x2212;</button>
@@ -612,21 +613,11 @@ function loadEntityList(event) {
 }
 
 // Funktion zum Aktualisieren der Dropdown-Liste mit Entitäten
-function updateEntityDropdown() {
-    // Manuell eingegebene Entitäten
-    const textareaContent = document.getElementById('entity-list-text').value;
-    const manualEntities = textareaContent
-        .split('\n')
-        .map(item => item.trim())
-        .filter(item => item); // Entfernt leere Einträge
-
-    // Kombiniere hochgeladene und manuell eingegebene Entitäten
-    entityList = [...new Set([...entityList, ...manualEntities])];
-
-    // Aktualisiere alle Dropdown-Menüs in der Tabelle
+function updateEntityDropdown(entityList) {
+    // Alle Dropdowns in der Tabelle aktualisieren
     const dropdowns = document.querySelectorAll('.entity-dropdown');
     dropdowns.forEach(dropdown => {
-        dropdown.innerHTML = '<option value="">Bitte auswählen...</option>'; // Dropdown zurücksetzen
+        dropdown.innerHTML = '<option value="">Bitte auswählen...</option>'; // Zurücksetzen
         entityList.forEach(entity => {
             const option = document.createElement('option');
             option.value = entity;
@@ -635,7 +626,7 @@ function updateEntityDropdown() {
         });
     });
 
-    // Zeige Erfolgsmeldung
+    // Zeige Erfolgsmeldung (optional)
     showSHBcustomAlert("ERFOLG!", "Die Entitäten-Liste wurde erfolgreich aktualisiert!");
 
     // Leere das Vorschaulisten-Fenster nach Aktualisierung
@@ -665,17 +656,13 @@ function triggerFileInput(button) {
 // Verarbeite den Dateiupload und aktualisiere den Dateinamen
 function handleFileUpload(input) {
     const file = input.files[0];
-    const fileButton = input.previousElementSibling; // Button "Datei auswählen"
-
     if (file) {
-        fileButton.textContent = file.name; // Zeige den Dateinamen im Button
-        input.dataset.filename = file.name; // Speichere den Dateinamen für die Vorschau und YAML-Generierung
+        input.dataset.filename = file.name; // Speichere den Dateinamen
     } else {
-        fileButton.textContent = 'Datei auswählen';
-        input.dataset.filename = ''; // Falls kein Bild ausgewählt ist
+        input.dataset.filename = ''; // Leere den gespeicherten Dateinamen
     }
 
-    // Aktualisiere die Vorschau
+    // Vorschau aktualisieren
     updatePreview();
 }
 
@@ -773,38 +760,37 @@ function updatePreview() {
 
 // Funktion zum Hinzufügen einer neuen Zeile zur Tabelle
 function addRow() {
-    const table = document.getElementById('entities-table').getElementsByTagName('tbody')[0];
+    const table = document.querySelector('#entities-table tbody');
     const newRow = table.rows[0].cloneNode(true);
 
-    // Leere alle Eingabefelder in der neuen Zeile
-    newRow.querySelectorAll('input').forEach(input => {
-        input.value = ''; // Eingabefeld leeren
-        if (input.classList.contains('file-upload')) {
-            input.dataset.filename = ''; // dataset.filename zurücksetzen
-        }
+    // Leere alle Eingabefelder und Dropdowns in der neuen Zeile
+    newRow.querySelectorAll('input[type="file"]').forEach(input => {
+        input.value = ''; // Datei-Upload zurücksetzen
+        input.dataset.filename = ''; // Gespeicherter Dateiname zurücksetzen
     });
 
     newRow.querySelectorAll('select').forEach(select => {
         select.value = ''; // Dropdown zurücksetzen
     });
 
-    const fileButton = newRow.querySelector('.file-upload-button');
-    if (fileButton) fileButton.textContent = 'Datei auswählen';
-
     table.appendChild(newRow);
 
-    // Aktualisiere die Vorschau
+    // Vorschau aktualisieren
     updatePreview();
 }
 
 
 // Funktion zum Entfernen einer Zeile aus der Tabelle
 function removeRow(button) {
-    const row = button.parentNode.parentNode;
+    const row = button.closest('tr');
     const table = row.parentNode;
+
     if (table.rows.length > 1) {
         row.remove();
     }
+
+    // Vorschau aktualisieren
+    updatePreview();
 }
 
 // Funktion zum Leeren des YAML-Code-Feldes
