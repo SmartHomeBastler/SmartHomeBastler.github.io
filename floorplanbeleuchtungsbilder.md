@@ -186,8 +186,9 @@ layout: page
 <p>
     Die von dir getroffenen Einstellungen und Namen der hochgeladenen Bilder werden automatisch in den YAML-Code übernommen und deine Bilder in der Vorschau angezeigt.
 </p>
-<div id="entities-table" class="shb-styled-table">
-    <table>
+
+<div class="shb-styled-table-container">
+    <table id="entities-table" class="shb-styled-table">
         <thead>
             <tr>
                 <th>Entität (entity)</th>
@@ -221,6 +222,7 @@ layout: page
         </tbody>
     </table>
 </div>
+
 <button class="action-button add-button" onclick="addRow()">&#x2b;</button>
 <br>
 <h3 id="preview-heading" style="display: none;">Vorschau:</h3>
