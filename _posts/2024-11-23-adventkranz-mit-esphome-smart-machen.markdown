@@ -282,7 +282,7 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
 <div class="shb-form-group-container">
     <div class="shb-form-group">
         <label for="year-select">Jahr auswählen:</label>
-        <select id="year-select" style="width: 30%">
+        <select id="year-select">
             <option value="all">Alle Jahre</option>
         </select>
     </div>
@@ -1062,28 +1062,6 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
         document.getElementById("close-alert").onclick = function () {
             alertBox.style.display = "none"; // Fenster schließen
         };
-    }
-
-    function copyCode(elementId, button) {
-        const codeElement = document.getElementById(elementId);
-        const codeText = codeElement.innerText || codeElement.textContent;
-
-        navigator.clipboard.writeText(codeText)
-            .then(() => {
-                // Zeigt das benutzerdefinierte Fenster
-                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
-
-                // Button-Text und Stil dauerhaft ändern
-                button.classList.add('copied'); // Füge die CSS-Klasse hinzu
-                button.innerHTML = "Kopiert ✔️";       // Ändere den Button-Inhalt auf das Symbol
-                button.style.backgroundColor = "#72dd8b"; // Grüner Hintergrund
-                button.style.color = "white";             // Weiße Schrift
-                
-            })
-            .catch(err => {
-                console.error("Fehler beim Kopieren des Codes: ", err);
-                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
-            });
     }
 </script>
 
