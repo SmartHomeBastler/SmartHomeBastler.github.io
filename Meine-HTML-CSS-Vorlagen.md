@@ -611,7 +611,7 @@ elements:
 
 <div class="shb-dropdown">
     <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('testdropdown', this)">
-        <span>⬇️</span>Was mache ich, wenn ich keine ICS Datei oder URL habe?<span>⬇️</span>
+        Was mache ich, wenn ich keine ICS Datei oder URL habe?<span>⬇️</span>
     </button>
     <div id="testdropdown" class="shb-dropdown-content" style="display: none;">
         <div class="shb-dropdown-youtube">
@@ -685,6 +685,11 @@ elements:
     }
     .shb-dropdown-toggle span {
         float: right;
+    }
+    .shb-dropdown-toggle.rotated span {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease; /* Für eine flüssige Animation */
+        display: inline-block; /* Nötig für transform */
     }
     .shb-dropdown-content {
         padding: 20px;
