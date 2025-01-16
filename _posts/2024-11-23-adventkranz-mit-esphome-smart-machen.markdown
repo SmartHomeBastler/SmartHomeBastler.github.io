@@ -9,7 +9,7 @@ image: /img/blog/smarter_Adventkranz/blog-post-smarter-adventskranz.png
 published: true
 ---
 
-<div class="shb-main-container">
+<div class="post-content">
 <p>
     Da meine Frau und ich das Glück haben, bei zwei unglaublich süßen Katern wohnen zu dürfen, ist es leider nicht möglich, echte, brennende Kerzen in der Wohnung zu nutzen.
 </p>
