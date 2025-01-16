@@ -153,10 +153,19 @@ layout: page
         font-size: 14px;
     }
     .shb-form-group-30 select:focus {
-        background-color: rgb(187, 207, 255);
+        background-color: #1ab5d5;
         border: 2px solid #0048ff;
         box-shadow: 0 4px 10px #7199ff;
         outline: none;
+    }
+    /* Stile für die Optionen */
+    .shb-form-group-30 select option {
+        background-color: #1ab5d5; /* Gleich wie geschlossener Zustand */
+        color: #ffffff;
+    }
+    /* Jede zweite Zeile heller */
+    .shb-form-group-30 select option:nth-child(even) {
+        background-color: #b4f2ff
     }
 </style>
 
