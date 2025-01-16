@@ -288,7 +288,7 @@ Du kannst dir hier die Einträge der nächsten 10 Jahre des Kalenders ansehen un
     </div>
 </div>
 
-<div id="event-table" class="styled-table-container" style="margin-top: 20px;"></div>
+<div id="event-table" class="shb-styled-table-container" style="margin-top: 20px;"></div>
 
 <div style="text-align: center;">
      <a href="/assets/calendar/advent_calendar.ics" download="Advent_Kalender.ics">
@@ -743,42 +743,41 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
         cursor: pointer;
     }
     /* Tabellencontainer */
-    .styled-table-container {
+    .shb-styled-table-container {
         margin: auto;
         width: 80%;
     }
     /* Tabellenstyling */
-    .styled-table {
+    .shb-styled-table {
         width: 100%;
+        border: 4px solid #1ab5d5;
         border-collapse: collapse;
         font-family: Arial, sans-serif;
         text-align: left;
         margin: 20px 0;
     }
     /* Tabellenkopf */
-    .styled-table thead th {
-        background-color:#007bff;
-        color: #333; /* Dunkle Schrift */
-        padding: 10px;
+    .shb-styled-table thead th {
+        background-color: #1ab5d5;
+        color: #000000 !important;
+        padding: 5px 10px;
         font-weight: bold;
         text-transform: uppercase;
-        border-bottom: 2px solid #a4c8e1; /* Graublauer Rand */
     }
     /* Tabellenzellen */
-    .styled-table tbody tr:nth-child(odd) {
-        background-color: #f0f7ff; /* Helles Blau */
+    .shb-styled-table tbody tr:nth-child(odd) {
+        background-color: #b8f3ff;
     }
-    .styled-table tbody tr:nth-child(even) {
-        background-color: #e6eef7; /* Graublau */
+    .shb-styled-table tbody tr:nth-child(even) {
+        background-color: #97ecfd;
     }
-    .styled-table tbody td {
-        color: #333; /* Dunkle Schrift */
+    .shb-styled-table tbody td {
+        color: #000000 !important;
         padding: 10px;
-        border-bottom: 1px solid #a4c8e1; /* Graublauer Rand */
     }
     /* Hervorhebung bei Hover */
-    .styled-table tbody tr:hover {
-        background-color: #cfe0f5; /* Intensiveres Blau */
+    .shb-styled-table tbody tr:hover {
+        background-color: #cfe0f5;
         transition: background-color 0.3s ease;
     }
     /* Download-Button */
@@ -956,7 +955,7 @@ Heute ist Heilgabend! Fröhliche Weihnachten!
         function createTable(events) {
             eventTableContainer.innerHTML = ""; // Tabelle leeren
             const table = document.createElement("table");
-            table.classList.add("styled-table"); // Klasse hinzufügen
+            table.classList.add("shb-styled-table"); // Klasse hinzufügen
             table.style.width = "100%";
             table.setAttribute("border", "1");
 
