@@ -38,9 +38,9 @@ layout: page
     </p>
 </div>
 
-<div class="shb-form-group-30">
+<div class="shb-form-group">
     <label for="select-id-1">Auswahl:</label>
-    <select id="select-id-1">  <!-- Füge  onchange="updateScript1()" hinzu für Script -->
+    <select id="select-id-1" style="width: 30%;">  <!-- Füge  onchange="updateScript1()" hinzu für Script -->
         <option value="Eins">Eins</option>
         <option value="Zwei">Zwei</option>
         <option value="Drei">Drei</option>
@@ -48,17 +48,17 @@ layout: page
     </select>
 </div>
 
-<div class="shb-form-group-30">
+<div class="shb-form-group">
     <label for="file-id-1">Eine Datei hochladen</label>
-    <input type="file" id="file-id-1" accept=".ics" />
+    <input type="file" id="file-id-1" accept=".ics" style="width: 30%" />
 </div>
 
-<div class="shb-form-group-30">
+<div class="shb-form-group">
     <label for="input-id-1">Einen Text eingeben</label>
-    <input type="url" id="input-id-1" placeholder="Das ist der Platzhalter" />
+    <input type="url" id="input-id-1" placeholder="Das ist der Platzhalter" style="width: 30%" />
 </div>
 
-<div class="shb-form-group-30">
+<div class="shb-form-group">
     <div class="checkbox-wrapper">
         <input type="checkbox" id="checkbox-id-1" />
         <label for="checkbox-id-1">Text für Checkbox 1</label>
@@ -73,22 +73,22 @@ layout: page
 
 <div class="shb-button-container">
     <button class="shb-button shb-button-blue">Button Blau</button> <!-- Füge  onclick="updateScript2()" hinzu für Script -->
-    <button class="shb-button shb-button-green">Button Grün</button>
-    <button class="shb-button shb-button-yellow">Button Gelb</button>
-    <button class="shb-button shb-button-red">Button Rot</button>
+    <button class="shb-button shb-button-green" style="width: 20%">Button Grün</button>
+    <button class="shb-button shb-button-yellow" style="width: 20%">Button Gelb</button>
+    <button class="shb-button shb-button-red" style="width: 20%">Button Rot</button>
 </div>
 
-<div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-blue" >Button Blau</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-blue" style="width: 30%" >Button Blau</button>
 </div>
-<div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-green" >Button Grün</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-green" style="width: 30%" >Button Grün</button>
 </div>
-<div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-yellow" >Button Gelb</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-yellow" style="width: 30%" >Button Gelb</button>
 </div>
-<div class="shb-button-30">
-    <button class="shb-button-30 shb-button-30-red" >Button Rot</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-red" style="width: 30%" >Button Rot</button>
 </div>
 
 <ul class="shb-list-start">

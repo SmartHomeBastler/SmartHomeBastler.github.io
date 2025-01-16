@@ -147,14 +147,13 @@
 }
 
 /* INPUT UND SELECT */
-.shb-form-group-30-container {
+.shb-form-group-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.shb-form-group-30,
-.shb-form-group-30-full {
+.shb-form-group {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -162,14 +161,13 @@
     margin: 20px 0;
 }
 
-.shb-form-group-30 label,
-.shb-form-group-30-full label {
+.shb-form-group label {
     font-weight: bold;
     color: #ffffff;
 }
 
-.shb-form-group-30 input,
-.shb-form-group-30 select {
+.shb-form-group input,
+.shb-form-group select {
     padding: 8px;
     color: #000000;
     background-color: #1ab5d5;
@@ -179,7 +177,7 @@
     font-size: 14px;
 }
 
-.shb-form-group-30 select:focus {
+.shb-form-group select:focus {
     background-color: #37c4e1;
     border: 2px solid #0048ff;
     box-shadow: 0 4px 10px #7199ff;
@@ -187,16 +185,16 @@
 }
 
 /* Stile für die Optionen */
-.shb-form-group-30 select option {
+.shb-form-group select option {
     background-color: #99eafb;
 }
 
 /* Jede zweite Zeile heller */
-.shb-form-group-30 select option:nth-child(even) {
+.shb-form-group select option:nth-child(even) {
     background-color: #b4f2ff
 }
 
-.shb-form-group-30 input:focus {
+.shb-form-group input:focus {
     background-color: #99eafb;
     border: 2px solid #0048ff;
     box-shadow: 0 4px 10px #7199ff;
@@ -210,7 +208,7 @@
     gap: 10px;
 }
 
-.shb-form-group-30 input[type="checkbox"] {
+.shb-form-group input[type="checkbox"] {
     transform: scale(1.5);
     /* Größe der Checkbox anpassen */
     margin: 0;
@@ -277,72 +275,6 @@
 }
 
 .shb-button-red {
-    background-color: #dc3545;
-    font-size: 1.1em;
-    padding: 10px;
-    margin: 5px 0;
-    color: #fff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px #ffffff;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
-    cursor: pointer;
-}
-
-/* BUTTON 30% */
-.shb-button-30 {
-    min-width: 30%;
-    max-width: 100%;
-}
-
-.shb-button-30-blue {
-    background-color: #007bff;
-    font-size: 1.1em;
-    padding: 10px;
-    margin: 5px 0;
-    color: #fff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px #ffffff;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
-    cursor: pointer;
-}
-
-.shb-button-30-green {
-    background-color: #17b83a;
-    font-size: 1.1em;
-    padding: 10px;
-    margin: 5px 0;
-    color: #fff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px #ffffff;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
-    cursor: pointer;
-}
-
-.shb-button-30-yellow {
-    background-color: #ffc107;
-    font-size: 1.1em;
-    padding: 10px;
-    margin: 5px 0;
-    color: #fff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px #ffffff;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 0 0 2px #000000, 0 0 5px #000000;
-    cursor: pointer;
-}
-
-.shb-button-30-red {
     background-color: #dc3545;
     font-size: 1.1em;
     padding: 10px;
