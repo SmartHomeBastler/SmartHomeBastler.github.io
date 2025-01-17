@@ -157,7 +157,7 @@ layout: page
     </div>    
     <div class="shb-form-group" style="margin: 0">
         <label for="icon-dropdown">Icon im Zustand 'An':</label>
-        <div class="shb-form-group">
+        <div class="custom-dropdown">
             <button id="on-icon-button" class="custom-dropdown-button" onclick="toggleIconDropdown()">Bitte auswählen...</button>
             <div class="custom-dropdown-content" id="icon-dropdown">
                 <!-- Dynamisch generierte Icons -->
