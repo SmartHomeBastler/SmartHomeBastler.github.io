@@ -104,11 +104,11 @@ layout: page
 </div>
 
 <div class="shb-text-output" id="entity-preview;">
-    <textarea id="entity-list-text" rows="5" cols="80" placeholder="Entitäten manuell eingeben (eine pro Zeile)"></textarea>
+    <textarea class=shb-text-code-output" id="entity-list-text" rows="5" cols="80" placeholder="Entitäten manuell eingeben (eine pro Zeile)"></textarea>
 </div>
 <div class="shb-text-output" id="entity-preview" style="display: none;">
     <h4>Hochgeladene Entitäten</h4>
-    <textarea id="uploaded-entity-list" rows="10" cols="80" readonly></textarea>
+    <textarea class="shb-text-code-output" id="uploaded-entity-list" rows="10" cols="80" readonly></textarea>
 </div>
 
 <div class="shb-button">
@@ -255,7 +255,7 @@ layout: page
 
 <div class="shb-text-output">
     <button class="copy-code-button" onclick="copyCode('yaml-output', this)">Kopieren</button>
-    <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
+    <textarea class="shb-text-code-output" id="yaml-output" rows="20" cols="80" readonly></textarea>
 </div>
 </section>
 
