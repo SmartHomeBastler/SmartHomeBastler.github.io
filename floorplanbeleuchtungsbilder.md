@@ -379,23 +379,6 @@ function updateTemplateCode() {
 // Initialer Template-Code für die Standardauswahl "light"
 updateTemplateCode();
 
-function copyCode(elementId, button) {
-    const codeElement = document.getElementById(elementId);
-    const codeText = codeElement.innerText || codeElement.textContent;
-
-    navigator.clipboard.writeText(codeText)
-        .then(() => {
-            showSHBcustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
-
-            button.classList.add('copied');
-            button.textContent = "Kopiert ✔️";
-        })
-        .catch(err => {
-            console.error("Fehler beim Kopieren des Codes: ", err);
-            showSHBcustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
-        });
-}
-
 let entityList = [];
 
 // Funktion zum Hochladen der Entitäten-Liste aus einer Datei
