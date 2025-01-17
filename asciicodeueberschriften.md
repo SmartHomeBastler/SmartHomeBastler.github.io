@@ -6,6 +6,13 @@ show_sidebar: false
 layout: page
 ---
 <div class="shb-main-container">
+<div id="shb-custom-alert" style="display: none;">
+    <div id="shb-custom-alert-content">
+        <h4 id="shb-custom-alert-title"></h4>
+        <p id="shb-custom-alert-message"></p>
+        <button id="shb-close-alert">OK</button>
+    </div>
+</div>
 <h1 class="shb-main-title">Code Überschriften Generator</h1>
 
 <p class="shb-main-description">
@@ -159,7 +166,7 @@ function testAllFonts() {
 function copyToClipboard() {
     const asciiOutput = document.getElementById("asciiOutput").textContent;
     navigator.clipboard.writeText(asciiOutput).then(() => {
-        alert("Text kopiert!");
+        showSHBcustomAlert('Perfekt!, Der ACSII Text wurde kopiert!");
     }).catch(err => {
         console.log("Kopierfehler:", err);
     });
