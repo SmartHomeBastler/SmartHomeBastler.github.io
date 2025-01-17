@@ -613,7 +613,7 @@ function loadEntityList(event) {
 }
 
 // Funktion zum Aktualisieren der Dropdown-Liste mit Entitäten
-function updateEntityDropdown(entityList) {
+function updateEntityDropdown() {
     // Manuell eingegebene Entitäten
     const textareaContent = document.getElementById('entity-list-text').value;
     const manualEntities = textareaContent
