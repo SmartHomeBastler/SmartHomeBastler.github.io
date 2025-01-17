@@ -245,11 +245,11 @@ layout: page
             <th>Position</th>
             <th>Entität</th>
             <th>Icon-Pfad</th>
-            <th>Fehler-Icon</th>
-            <th>An-Icon</th>
-            <th>Aus-Icon</th>
-            <th>Größe (%)</th>
-            <th>Form</th>
+            <th style="text-align: center">Fehler-Icon</th>
+            <th style="text-align: center">An-Icon</th>
+            <th style="text-align: center">Aus-Icon</th>
+            <th style="text-align: center">Größe (%)</th>
+            <th style="text-align: center">Form</th>
         </tr>
     </thead>
     <tbody>
@@ -993,8 +993,8 @@ function updatePositionTable(marker) {
         <td>${defaultIconHTML}</td>
         <td>${onIconHTML}</td>
         <td>${offIconHTML}</td>
-        <td>${marker.size}</td>
-        <td>${marker.shape === "50%" ? "Rund" : marker.shape === "0%" ? "Eckig" : "Abgerundet"}</td>
+        <td style="text-align: center">${marker.size}</td>
+        <td style="text-align: center">${marker.shape === "50%" ? "Rund" : marker.shape === "0%" ? "Eckig" : "Abgerundet"}</td>
     `;
 
     tableBody.appendChild(row);
