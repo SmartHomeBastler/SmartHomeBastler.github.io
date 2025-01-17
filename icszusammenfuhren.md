@@ -13,14 +13,14 @@ layout: page
     </p>
     <h2 class="shb-section-title-center">Was möchtest du machen?</h2>
     <div class="shb-center-container">
-    <div class="shb-form-group">
+    <div class="shb-form-group" style="flex-direction: row; gap: 50px;">
         <div class="checkbox-wrapper">
             <input type="checkbox" id="mergeICSCheckbox" onchange="toggleSections()">
-            <label for="mergeICSCheckbox">Mehrere ICS zusammenführen</label>
+            <label for="mergeICSCheckbox" style="font-size: 1.4em; color: #1ab5d5;">Mehrere ICS zusammenführen</label>
         </div>
         <div class="checkbox-wrapper">
             <input type="checkbox" id="createICSCheckbox" onchange="toggleSections()">
-            <label for="createICSCheckbox">Eigene ICS erstellen</label>
+            <label for="createICSCheckbox" style="font-size: 1.4em; color: #1ab5d5;">Eigene ICS erstellen</label>
         </div>
     </div>
     </div>    
