@@ -16,11 +16,11 @@ layout: page
     <div class="shb-form-group" style="flex-direction: row; gap: 50px;">
         <div class="checkbox-wrapper">
             <input type="checkbox" id="mergeICSCheckbox" onchange="toggleSections()">
-            <label for="mergeICSCheckbox" style="font-size: 1.4em; color: #1ab5d5;">Mehrere ICS zusammenführen</label>
+            <label for="mergeICSCheckbox" style="margin-left: 5px; font-size: 1.2em; color: #1ab5d5;">Mehrere ICS zusammenführen</label>
         </div>
         <div class="checkbox-wrapper">
             <input type="checkbox" id="createICSCheckbox" onchange="toggleSections()">
-            <label for="createICSCheckbox" style="font-size: 1.4em; color: #1ab5d5;">Eigene ICS erstellen</label>
+            <label for="createICSCheckbox" style="margin-left: 5px; font-size: 1.2em; color: #1ab5d5;">Eigene ICS erstellen</label>
         </div>
     </div>
     </div>    
