@@ -144,18 +144,18 @@ layout: page
 </div>    
 
 <div class="shb-grid-cont-2">
-    <div class="shb-form-group">
+    <div class="shb-form-group" style="margin: 10px 0">
         <label for="marker-entity">Entität (entity):</label>
         <select id="marker-entity">
             <option value="">Bitte auswählen...</option>
             <!-- Dynamisch hinzugefügte Optionen -->
         </select>
     </div>  
-    <div class="shb-form-group">
+    <div class="shb-form-group" style="margin: 10px 0">
         <label for="marker-path">Speicherpfad der Icons:</label>
         <input type="text" id="marker-path" placeholder="/local/lovelace/icon/">
     </div>    
-    <div class="shb-form-group" style="margin: 0">
+    <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="icon-dropdown">Icon im Zustand 'An':</label>
         <div class="custom-dropdown">
             <button id="on-icon-button" class="custom-dropdown-button" onclick="toggleIconDropdown()">Bitte auswählen...</button>
@@ -166,7 +166,7 @@ layout: page
         <input type="text" id="custom-on-icon" placeholder="Eigenen Namen eingeben" style="margin-top: 10px; width: 100%;">
         <input type="hidden" id="selected-icon" name="selected-icon">
     </div>
-    <div class="shb-form-group" style="margin: 0">
+    <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="off-icon-dropdown">Icon im Zustand 'Aus':</label>
         <div class="custom-dropdown">
             <button id="off-icon-button" class="custom-dropdown-button" onclick="toggleOffIconDropdown()">Bitte auswählen...</button>
@@ -177,16 +177,16 @@ layout: page
         <input type="text" id="custom-off-icon" placeholder="Eigenen Namen eingeben" style="margin-top: 10px; width: 100%;">
         <input type="hidden" id="selected-off-icon" name="selected-off-icon">
     </div>
-    <div class="shb-form-group" style="margin: 0">
+    <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="marker-default-icon">Icon bei Fehler:</label>
         <input type="text" id="marker-default-icon" value="fehler.png">
     </div>        
-    <div class="shb-form-group" style="margin: 0">
+    <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="marker-size">Größe des Icons (%):</label>
         <input type="text" id="marker-size" value="2">
     </div>    
     <!-- Auswahl für die Form des Markers -->
-    <div class="shb-form-group" style="margin: 0">
+    <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="marker-shape">Form des Buttons:</label>
         <select id="marker-shape">
             <option value="50%">Rund</option>
@@ -198,7 +198,7 @@ layout: page
 
 <!-- Auswahl für die Tap- und Hold-Action mit jeweiligen Navigationspfaden -->
 <div class="shb-grid-cont-2">
-    <div class="shb-form-group" style="margin: 0">
+    <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="marker-tap-action">Tap Action:</label>
         <select id="marker-tap-action" onchange="toggleNavigationPathInput('tap')">
             <option value="toggle">Umschalten</option>
@@ -210,7 +210,7 @@ layout: page
         </select>
         <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)" style="display:none; margin-top: 5px;">
     </div>
-    <div class="shb-form-group" style="margin: 0">
+    <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="marker-hold-action">Hold Action:</label>
         <select id="marker-hold-action" onchange="toggleNavigationPathInput('hold')">
             <option value="more-info" selected>Mehr Info</option>
@@ -225,12 +225,12 @@ layout: page
 </div>
 
 <!-- Eingabefelder für den Navigationspfad, nur sichtbar, wenn "Navigieren" ausgewählt ist -->
-<div class="shb-form-group" id="navigation-path-group-tap" style="display: none; margin: 0;">
+<div class="shb-form-group" id="navigation-path-group-tap" style="display: none; margin: 0 0 10px 0;">
     <label for="navigation-path-tap">Navigationspfad (Tap):</label>
     <input type="text" id="navigation-path-tap" placeholder="Pfad für Navigation (Tap)">
 </div>
 
-<div class="shb-form-group" id="navigation-path-group-hold" style="display: none; margin: 0;">
+<div class="shb-form-group" id="navigation-path-group-hold" style="display: none; margin: 0 0 10px 0;">
     <label for="navigation-path-hold">Navigationspfad (Hold):</label>
     <input type="text" id="navigation-path-hold" placeholder="Pfad für Navigation (Hold)">
 </div>
