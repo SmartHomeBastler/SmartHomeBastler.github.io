@@ -259,11 +259,11 @@ layout: page
 </section>
 
 <section class="content-section">
-<div class="floorplan-button-container">
-    <button class="floorplan-button floorplan-button-primary" onclick="generateYAML()">YAML-Code generieren</button>
-    <button class="floorplan-button floorplan-button-info" onclick="copyYAML()">YAML-Code kopieren</button>
-    <button class="floorplan-button floorplan-button-warning" onclick="removeMarkers()">Alle Markierungen entfernen</button>
-    <button class="floorplan-button floorplan-button-danger" onclick="clearYAML()">YAML-Code löschen</button>
+<div class="shb-button-container">
+    <button class="shb-button shb-button-blue" style="min-width: 22%" onclick="generateYAML()">YAML-Code generieren</button>
+    <button class="shb-button shb-button-green" style="min-width: 22%" onclick="copyYAML()">YAML-Code kopieren</button>
+    <button class="shb-button shb-button-yellow" style="min-width: 22%" onclick="removeMarkers()">Alle Markierungen entfernen</button>
+    <button class="shb-button shb-button-red" style="min-width: 22%" onclick="clearYAML()">YAML-Code löschen</button>
 </div>
 
 <h3>Generierter YAML-Code:</h3>
