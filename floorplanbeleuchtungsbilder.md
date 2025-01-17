@@ -242,10 +242,10 @@ layout: page
 <section class="content-section">
 
 <div class="shb-button-container">
-    <button class="shb-button shb-button-blue" style="width: 20%" onclick="generateYAML()">YAML-Code generieren</button>
-    <button class="shb-button shb-button-green" style="width: 20%" onclick="copyYAML()">YAML-Code kopieren</button>
-    <button class="shb-button shb-button-yellow" style="width: 20%" onclick="clearYAML()">YAML-Code löschen</button>
-    <button class="shb-button shb-button-red" style="width: 20%" onclick="clearInputs()">Eingaben löschen</button>
+    <button class="shb-button shb-button-blue" style="min-width: 22%" onclick="generateYAML()">YAML-Code generieren</button>
+    <button class="shb-button shb-button-green" style="min-width: 22%" onclick="copyYAML()">YAML-Code kopieren</button>
+    <button class="shb-button shb-button-yellow" style="min-width: 22%" onclick="clearYAML()">YAML-Code löschen</button>
+    <button class="shb-button shb-button-red" style="min-width: 22%" onclick="clearInputs()">Eingaben löschen</button>
 </div>
 
 <h3>Generierter YAML-Code:</h3>
