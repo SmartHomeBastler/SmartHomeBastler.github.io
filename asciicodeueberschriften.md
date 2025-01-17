@@ -63,15 +63,16 @@ layout: page
         </select>
     </div>
 </div>
-    
-<div class="shb-text-output" style="flex-direction: column; width: 50%;">
-    <label for="textInput">Texteingabe:</label>
-    <textarea class="shb-text-code-outputt" id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+<div class="shb-form-group"style="flex-direction: column; width: 50%;">
+    <label for="textInput">Texteingabe:</label>    
+    <div class="shb-text-output" >
+        <textarea class="shb-text-code-outputt" id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+    </div>
 </div>
 </div>
 
 <!-- Buttons für Generieren, Test All und Kopieren -->
-<div class="shb-button-container" style="text-align: center;">
+<div class="shb-button-container" style="text-align: center; display: block;">
     <button onclick="generateASCII()" class="shb-button shb-button-blue" style="width: 20%">Generieren</button>
     <button onclick="testAllFonts()" class="shb-button shb-button-yellow" style="width: 20%">Teste Alle</button>
     <button onclick="copyToClipboard()" class="shb-button shb-button-red" style="width: 20%">Kopieren</button>
