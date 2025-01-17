@@ -166,7 +166,7 @@ function testAllFonts() {
 function copyToClipboard() {
     const asciiOutput = document.getElementById("asciiOutput").textContent;
     navigator.clipboard.writeText(asciiOutput).then(() => {
-        showSHBcustomAlert('Perfekt!, Der ACSII Text wurde kopiert!");
+        showSHBcustomAlert('Perfekt!', 'Der ACSII Text wurde kopiert!');
     }).catch(err => {
         console.log("Kopierfehler:", err);
     });
