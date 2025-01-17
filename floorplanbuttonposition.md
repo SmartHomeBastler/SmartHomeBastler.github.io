@@ -110,7 +110,7 @@ layout: page
 </div>
 <div class="shb-dropdown">
     <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('tutorialDropdown', this)">
-        Wie positioniere ich die Buttons auf dem Bild?<span>&#9660;</span>
+        Wie positioniere ich die Buttons auf dem Bild?<span>⬇️</span>
     </button>
     <div id="tutorialDropdown" class="shb-dropdown-content" style="display: none;">
         <p><strong>Schritt-für-Schritt-Anleitung:</strong></p>
