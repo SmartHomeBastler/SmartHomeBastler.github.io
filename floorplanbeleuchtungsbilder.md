@@ -614,6 +614,16 @@ function loadEntityList(event) {
 
 // Funktion zum Aktualisieren der Dropdown-Liste mit Entitäten
 function updateEntityDropdown(entityList) {
+    // Manuell eingegebene Entitäten
+    const textareaContent = document.getElementById('entity-list-text').value;
+    const manualEntities = textareaContent
+        .split('\n')
+        .map(item => item.trim())
+        .filter(item => item); // Entfernt leere Einträge
+
+    // Kombiniere hochgeladene und manuell eingegebene Entitäten
+    entityList = [...new Set([...entityList, ...manualEntities])];
+
     // Alle Dropdowns in der Tabelle aktualisieren
     const dropdowns = document.querySelectorAll('.entity-dropdown');
     dropdowns.forEach(dropdown => {
@@ -634,17 +644,6 @@ function updateEntityDropdown(entityList) {
     const previewTextarea = document.getElementById("uploaded-entity-list");
     previewTextarea.value = ""; // Vorschauliste leeren
     previewContainer.style.display = "none"; // Verstecke die Vorschau
-}
-
-function toggleDropdown(dropdownId, toggleButton) {
-    var dropdownContent = document.getElementById(dropdownId);
-    if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
-        dropdownContent.style.display = "block";
-        toggleButton.classList.add("rotated"); // Klasse hinzufügen
-    } else {
-        dropdownContent.style.display = "none";
-        toggleButton.classList.remove("rotated"); // Klasse entfernen
-    }
 }
 
 // Trigger den versteckten Datei-Upload-Input
