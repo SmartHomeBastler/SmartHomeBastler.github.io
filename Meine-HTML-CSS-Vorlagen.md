@@ -190,6 +190,48 @@ elements:
     </div>
 </div> 
 
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 50px;
+    }
+    .slider-container {
+        margin: 20px;
+    }
+    .value-display {
+        font-size: 1.5em;
+        margin-top: 10px;
+    }
+</style>
+
+<h1>Slider mit Wertanzeige</h1>
+<div class="slider-container">
+    <input type="range" id="slider" min="0" max="100" value="50">
+    <div class="value-display">
+        Wert: <span id="sliderValue">50</span>
+    </div>
+</div>
+
+<script>
+    // Referenzen für den Slider und die Anzeige
+    const slider = document.getElementById('slider');
+    const sliderValue = document.getElementById('sliderValue');
+
+    // Event Listener für Änderungen des Sliders
+    slider.addEventListener('input', () => {
+        sliderValue.textContent = slider.value;
+    });
+</script>
+
+
+
+
 </div>
 
 <footer class="shb-footer">
