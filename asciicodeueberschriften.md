@@ -25,7 +25,7 @@ layout: page
 <!-- Eingabefeld und Auswahloptionen im Formular-Design -->
 <div class="shb-center-container" style="gap: 50px;">
     <div style="display: flex; flex-direction: column; width: 20%;">
-        <div class="shb-form-group" style="gap: 0; margin: 0 0 5px 0;">
+        <div class="shb-form-group" style="gap: 0; margin: 0 0 15px 0;">
             <label for="fontSelect">Schriftart:</label>
             <select id="fontSelect" style="width: 100%;">
                 <option value="Banner3" selected>Banner3</option>
@@ -58,7 +58,7 @@ layout: page
                 <option value="4Max">4Max</option>
             </select>
         </div>
-        <div class="shb-form-group" style="gap: 0; margin: 0 0 5px 0;">
+        <div class="shb-form-group" style="gap: 0; margin: 0 0 15px 0;">
             <label for="widthSelect">Buchstaben Breite:</label>
             <select id="widthSelect" style="width: 100%;">
                 <option value="default" selected>Normal</option>
