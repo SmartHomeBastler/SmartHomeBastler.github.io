@@ -62,7 +62,7 @@ layout: page
             </select>
         </div>
     </div>
-    <div class="shb-form-group"style="flex-direction: column; width: 50%;">
+    <div class="shb-form-group" style="flex-direction: column; width: 50%;">
         <label for="textInput">Texteingabe:</label>    
         <div class="shb-text-output" >
             <textarea class="shb-text-code-outputt" id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
