@@ -297,9 +297,9 @@ layout: page
         position: relative;
         display: inline-block;
         margin-top: 20px;
-        border: 2px solid #ffffff;
+        border: 1px solid #ffffff;
         box-shadow: 0 2px 5px #ffffff;
-        padding: 5px;
+        padding: 0;
         background-color: #f9f9f9;
         margin-bottom: 20px;
     }
