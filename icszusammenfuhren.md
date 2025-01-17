@@ -24,35 +24,35 @@ layout: page
         </div>
     </div>
     </div>    
-    <section class="ics-step" id="merge-section" style="display: none;">
-        <h3>ICS-Dateien hochladen oder URL verwenden</h3>
+    <section class="content-section" id="merge-section" style="display: none;">
+        <h3 class="shb-section-title-center">ICS-Dateien hochladen, auslesen oder zusammenführen</h3>
         <p>
             Wähle entweder eine oder mehrere <code>.ics</code>-Dateien aus um sie auszulesen bzw. zusammenzuführen.
         </p>
         <form class="ics-file-upload">
-            <div class="ics-file-group">
+            <div class="shb-form-group">
                 <label for="file1">ICS Datei 1 (erforderlich):</label>
-                <input type="file" id="file1" accept=".ics">
+                <input type="file" id="file1" accept=".ics" style="width: 30%">
             </div>
-            <div class="ics-file-group">
+            <div class="shb-form-group">
                 <label for="file2">ICS Datei 2 (optional):</label>
-                <input type="file" id="file2" accept=".ics">
+                <input type="file" id="file2" accept=".ics" style="width: 30%">
             </div>
-            <div class="ics-file-group">
+            <div class="shb-form-group">
                 <label for="file3">ICS Datei 3 (optional):</label>
-                <input type="file" id="file3" accept=".ics">
+                <input type="file" id="file3" accept=".ics" style="width: 30%">
             </div>
-            <div class="ics-file-group">
+            <div class="shb-form-group">
                 <label for="file4">ICS Datei 4 (optional):</label>
-                <input type="file" id="file4" accept=".ics">
+                <input type="file" id="file4" accept=".ics" style="width: 30%">
             </div>
-            <div class="ics-file-group">
+            <div class="shb-form-group">
                 <label for="file5">ICS Datei 5 (optional):</label>
-                <input type="file" id="file5" accept=".ics">
+                <input type="file" id="file5" accept=".ics" style="width: 30%">
             </div>
             <div class="ics-file-group">
                 <label for="file6">ICS Datei 6 (optional):</label>
-                <input type="file" id="file6" accept=".ics">
+                <input type="file" id="file6" accept=".ics" style="width: 30%">
             </div>
             <button type="button" class="ics-button" onclick="mergeICSFiles()">ICS Datei(en) verarbeiten</button>
         </form>
@@ -65,7 +65,7 @@ layout: page
             </p>
         </div>
     </div>
-    <section class="ics-step" id="edit-section" style="display: none;">
+    <section class="content-section" id="edit-section" style="display: none;">
         <h3>Zusammengeführte ICS-Datei</h3>
         <p>
             Die verarbeiteten Inhalte der ICS-Dateien werden hier angezeigt. Du kannst sie überprüfen und die Daten in die Zwischenablage kopieren oder bearbeiten.
