@@ -157,9 +157,9 @@ layout: page
     </div>    
     <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="icon-dropdown">Icon im Zustand 'An':</label>
-        <div class="custom-dropdown">
-            <button id="on-icon-button" class="custom-dropdown-button" onclick="toggleIconDropdown()">Bitte auswählen...</button>
-            <div class="custom-dropdown-content" id="icon-dropdown">
+        <div class="shb-img-dropdown">
+            <button id="on-icon-button" class="shb-img-dropdown-button" onclick="toggleIconDropdown()">Bitte auswählen...</button>
+            <div class="shb-img-dropdown-content" id="icon-dropdown">
                 <!-- Dynamisch generierte Icons -->
             </div>
         </div>
@@ -168,9 +168,9 @@ layout: page
     </div>
     <div class="shb-form-group" style="margin: 0 0 10px 0">
         <label for="off-icon-dropdown">Icon im Zustand 'Aus':</label>
-        <div class="custom-dropdown">
-            <button id="off-icon-button" class="custom-dropdown-button" onclick="toggleOffIconDropdown()">Bitte auswählen...</button>
-            <div class="custom-dropdown-content" id="off-icon-dropdown">
+        <div class="shb-img-dropdown">
+            <button id="off-icon-button" class="shb-img-dropdown-button" onclick="toggleOffIconDropdown()">Bitte auswählen...</button>
+            <div class="shb-img-dropdown-content" id="off-icon-dropdown">
                 <!-- Dynamisch generierte Icons -->
             </div>
         </div>
@@ -291,83 +291,6 @@ layout: page
     .content-section ul li {
         margin-bottom: 10px;
     }
-    .entity-preview-container {
-        background-color: #9fb9fb;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 15px;
-        margin: 10px 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .entity-preview-container h4 {
-        margin-bottom: 10px;
-        color: #333;
-        font-size: 16px;
-        font-weight: bold;
-    }
-    .custom-input, select {
-        padding: 8px;
-        color: #000000;
-        background-color: #9fb9fb;
-        max-width: 100%;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-    .custom-button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        font-size: 16px;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .custom-button:hover {
-        background-color: #45a049;
-    }
-
-    .floorplan-main-container {
-        max-width: 100%;
-        margin: auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .floorplan-main-title {
-        text-align: center;
-        color: #333;
-        font-size: 2em;
-        margin-bottom: 10px;
-    }
-    .floorplan-main-subtitle {
-        text-align: center;
-        color: #666;
-        font-size: 1.4em;
-        margin-bottom: 20px;
-    }
-    .floorplan-main-intro {
-        text-align: center;
-        color: #555;
-        margin-bottom: 20px;
-    }
-    .custom-form-group {
-        margin-top: 20px;
-    }
-    .custom-label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
     .floorplan-container {
         position: relative;
         display: inline-block;
@@ -411,134 +334,6 @@ layout: page
         gap: 10px;
         margin-top: 20px;
     }
-    .floorplan-form-group, .floorplan-form-group-full {
-        display: flex;
-        flex-direction: column;
-    }
-    .floorplan-form-group label, .floorplan-form-group-full label {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    .floorplan-form-group input, .floorplan-form-group select {
-        padding: 8px;
-        color: #000000;
-        background-color: #9fb9fb;
-        max-width: 30%;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-    .floorplan-form-group-full input, .floorplan-form-group-full select {
-        padding: 8px;
-        color: #000000;
-        background-color: #9fb9fb;
-        max-width: 100%;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-    .floorplan-button-container {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-    }
-    .floorplan-button {
-        padding: 10px 15px;
-        font-size: 14px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .floorplan-button-primary {
-        background-color: #007bff;
-        color: #fff;
-    }
-    .floorplan-button-info {
-        background-color: #17a2b8;
-        color: #fff;
-    }
-    .floorplan-button-warning {
-        background-color: #ffc107;
-        color: #fff;
-    }
-    .floorplan-button-danger {
-        background-color: #dc3545;
-        color: #fff;
-    }
-    .textarea-list {
-        width:100%;
-        background-color: #c3c3c3;
-        color: #000000;
-        font-size: 0.9em;
-        font-weight: bold;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-    #yaml-output {
-        width: 100%;
-        margin-top: 20px;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #f8f8f8;
-    }
-    .floorplan-form-group-horizontal {
-        display: flex;
-        gap: 10px;
-    }
-    
-    .floorplan-form-group-horizontal .floorplan-form-group {
-        flex: 1;
-    }
-
-    .dropdown {
-        margin: 20px 0;
-        text-align: center;
-    }
-
-    .dropdown-toggle {
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        background-color: #f39c12;
-        color: #ffffff;
-        padding: 10px 5px;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: inline-block;
-    }
-
-    .dropdown-toggle.rotated {
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: rotate(180deg); /* Text von unten nach oben */
-        padding: 20px 30px;
-        width: 8%;
-        height: auto;
-    }
-
-    .dropdown-toggle span {
-        float: right;
-    }
-
-    .dropdown-content {
-        padding: 20px;
-        background-color: #1a1a1a;
-        border: 1px solid #f39c12;
-        border-radius: 5px;
-        margin-top: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .guide-footer {
-    text-align: center;
-    margin-top: 20px;
-    }
     #marker-on-icon option {
         padding: 10px;
         display: flex;
@@ -551,13 +346,13 @@ layout: page
         margin-right: 10px;
         vertical-align: middle;
     }
-    .custom-dropdown {
+    .shb-img-dropdown {
         position: relative;
         display: inline-block;
         width: 100%;
     }
 
-    .custom-dropdown-button {
+    .shb-img-dropdown-button {
         background-color: #1ab5d5;
         color: #000000;
         padding: 10px;
@@ -569,14 +364,14 @@ layout: page
         cursor: pointer;
     }
 
-    .custom-dropdown-button::after {
+    .shb-img-dropdown-button::after {
         content: "▼";
         float: right;
         margin-right: 10px;
         color: #000000;
     }
 
-    .custom-dropdown-content {
+    .shb-img-dropdown-content {
         display: none;
         position: absolute;
         background-color: #6b6b6b;
@@ -589,7 +384,7 @@ layout: page
         width: 100%;
     }
 
-    .custom-dropdown-content div {
+    .shb-img-dropdown-content div {
         padding: 10px;
         display: flex;
         align-items: center;
@@ -598,11 +393,11 @@ layout: page
         color: #fff;
     }
 
-    .custom-dropdown-content div:hover {
+    .shb-img-dropdown-content div:hover {
         background-color: #555;
     }
 
-    .custom-dropdown-content img {
+    .shb-img-dropdown-content img {
         width: 30px;
         height: 30px;
         margin-right: 10px;
