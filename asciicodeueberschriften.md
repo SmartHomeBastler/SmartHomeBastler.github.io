@@ -68,6 +68,17 @@ layout: page
                 <option value="smushU">Smush (U)</option>
             </select>
         </div>
+        <div class="shb-form-group">
+            <label for="languageSelect">Programmiersprache:</label>
+            <select id="languageSelect" style="width: 100%;">
+                <option value="none" selected>Keine</option>
+                <option value="yaml">YAML</option>
+                <option value="html">HTML</option>
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+                <option value="bash">Bash</option>
+            </select>
+        </div>
     </div>
     <div class="shb-form-group" style="flex-direction: column; width: 50%;">
         <label for="textInput">Texteingabe:</label>    
@@ -107,25 +118,47 @@ function generateASCII() {
     const text = document.getElementById("textInput").value;
     const font = document.getElementById("fontSelect").value;
     const width = document.getElementById("widthSelect").value;
-    const lines = text.split('\n');  // Teilt den Text in Zeilen auf
+    const language = document.getElementById("languageSelect").value;
+    const lines = text.split('\n');
 
-    let asciiArt = "";  // Zum Speichern der generierten ASCII-Art
+    let asciiArt = "";
+
+    function wrapWithComment(content) {
+        switch (language) {
+            case "yaml":
+                return `# ${content}`;
+            case "html":
+                return `<!-- ${content} -->`;
+            case "python":
+                return `# ${content}`;
+            case "javascript":
+                return `// ${content}`;
+            case "bash":
+                return `# ${content}`;
+            default:
+                return content;
+        }
+    }
 
     function generateLine(line, callback) {
-        figlet.text(line, { font: font, horizontalLayout: width }, function(err, result) {
+        figlet.text(line, { font: font, horizontalLayout: width }, function (err, result) {
             if (err) {
                 console.log("Fehler:", err);
                 callback(err);
                 return;
             }
-            asciiArt += result + "\n";  // Füge die generierte Zeile zur ASCII-Art hinzu
+            const wrappedResult = result
+                .split('\n')
+                .map(wrapWithComment)
+                .join('\n');
+            asciiArt += wrappedResult + "\n";
             callback();
         });
     }
 
     function generateAllLines(i) {
         if (i < lines.length) {
-            generateLine(lines[i], function(err) {
+            generateLine(lines[i], function (err) {
                 if (!err) {
                     generateAllLines(i + 1);
                 } else {
@@ -137,8 +170,9 @@ function generateASCII() {
         }
     }
 
-    generateAllLines(0);  // Startet die rekursive Generierung
+    generateAllLines(0);
 }
+
 
 function testAllFonts() {
     const text = document.getElementById("textInput").value;
