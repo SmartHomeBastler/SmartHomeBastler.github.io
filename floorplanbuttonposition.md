@@ -692,14 +692,14 @@ function copyCode(elementId, button) {
 
     navigator.clipboard.writeText(codeText)
         .then(() => {
-            showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
+            showSHBcustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
 
             button.classList.add('copied');
             button.textContent = "Kopiert ✔️";
         })
         .catch(err => {
             console.error("Fehler beim Kopieren des Codes: ", err);
-            showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
+            showSHBcustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
         });
 }
 
@@ -754,7 +754,7 @@ function updateEntityDropdown() {
     });
 
     // Zeige Erfolgsmeldung
-    showCustomAlert("ERFOLG!", "Die Entitäten-Liste wurde erfolgreich aktualisiert!");
+    showSHBcustomAlert("ERFOLG!", "Die Entitäten-Liste wurde erfolgreich aktualisiert!");
 
     // Leere das Vorschaulisten-Fenster nach Aktualisierung
     const previewContainer = document.getElementById("entity-preview");
@@ -1127,7 +1127,7 @@ function generateYAML() {
 function copyYAML() {
   yamlOutput.select();
   document.execCommand('copy');
-  showCustomAlert('Super!', 'Dein YAML-Code wurde in die Zwischenablage kopiert!');
+  showSHBcustomAlert('Super!', 'Dein YAML-Code wurde in die Zwischenablage kopiert!');
 }
 function toggleDropdown(dropdownId, toggleButton) {
     var dropdownContent = document.getElementById(dropdownId);
