@@ -808,7 +808,7 @@ imageUpload.addEventListener('change', (event) => {
       img.onload = function() {
         container.style.display = "block"; // Zeige den Container an
         container.style.width = `${img.width}px`;
-        container.style.height = `${img.height}px`;
+        container.style.height = `${img.height + 5}px`;
         removeMarkers();
 
         imageDimensions.textContent = `Bildabmessungen: Breite ${img.width}px, Höhe ${img.height}px`;
