@@ -5,22 +5,22 @@ description: Generiere YAML-Code für Home Assistant anhand der Markierungen und
 show_sidebar: false
 layout: page
 ---
-<div class="guide-container">
+<div class="shb-main-container">
 
-<div id="custom-alert" style="display: none;">
-    <div id="custom-alert-content">
-        <h4 id="custom-alert-title"></h4>
-        <p id="custom-alert-message"></p>
-        <button id="close-alert">OK</button>
+<div id="shb-custom-alert" style="display: none;">
+    <div id="shb-custom-alert-content">
+        <h4 id="shb-custom-alert-title"></h4>
+        <p id="shb-custom-alert-message"></p>
+        <button id="shb-close-alert">OK</button>
     </div>
 </div>
 <section class="content-section">
 
-<h1 class="floorplan-main-title">Floorplan Button Positionierung</h1>
+<h1 class="shb-main-title">Floorplan Button Positionierung</h1>
 
-<h2 class="floorplan-main-subtitle">Positioniere deine Buttons für alle Entitäten direkt auf deinem Floorplan</h2>
+<h2 class="shb-section-title-center">Positioniere deine Buttons für alle Entitäten direkt auf deinem Floorplan</h2>
 
-<p class="floorplan-main-intro">
+<p class="shb-main-description">
     Mit diesem Tool kannst du durch Eingabe der Angaben zu deinen Entitäten, die Buttons direkt auf deinem Floorplan-Hintergrund positionieren. Nach der Positionierung, generierst du dir den YAML-Code um diesen direkt auf deinem Home Assistant Dashboard Floorplan einzutragen.
 </p>
 
@@ -33,9 +33,9 @@ layout: page
     Diese kannst du kopieren und entweder direkt hier einfügen oder eine .csv oder .txt Datei erstellen und diese hier einfügen
 </p>
 
-<div class="floorplan-form-group">
-    <label for="domain-select">Wähle eine Domain:</label>
-    <select id="domain-select" onchange="updateTemplateCode()">
+<div class="shb-form-group">
+    <label for="domain-select">Auswahl:</label>
+    <select id="domain-select" style="width: 30%;" onchange="updateTemplateCode()">
         <option value="light">light</option>
         <option value="switch">switch</option>
         <option value="input_boolean">input_boolean</option>
@@ -43,8 +43,8 @@ layout: page
     </select>
 </div>
 
-<div class="code-container">
-    <button class="copy-button" onclick="copyCode('template-output', this)">Code kopieren</button>
+<div class="shb-code-container">
+    <button class="copy-code-button" onclick="copyCode('template-output', this)">Code kopieren</button>
     <pre id="template-output">
         <code>
 {%- raw %}
@@ -54,15 +54,25 @@ layout: page
     </pre>
 </div>
 
-<div class="floorplan-form-group">
-    <label for="entity-list-upload">Entitäten-Liste hochladen oder einfügen:</label>
-    <input type="file" id="entity-list-upload" accept=".txt,.csv" onchange="loadEntityList(event)" style="margin-bottom: 10px;">
-    <textarea class="textarea-list" id="entity-list-text" placeholder="Entitäten manuell eingeben (eine pro Zeile)" rows="5" style="width: 100%;"></textarea>
-        <div class="entity-preview-container" id="entity-preview" style="display: none; margin-top: 20px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
-            <h4>Hochgeladene Entitäten</h4>
-            <textarea id="uploaded-entity-list" rows="10" style="width: 100%;" readonly></textarea>
-        </div>
-    <button class="custom-button" onclick="updateEntityDropdown()">Entitäten-Liste aktualisieren</button>
+<h4 class="shb-section-title-left">Entitäten Liste erstellen</h4>
+<p>
+    Um das Auswählen deiner Entitäten für die Codegenerierung einfacher zu gestalten, sind hier alle Entitäten für deine Beleuchtungsbilder einzugeben oder hochzuladen. Mit einem Klick auf <strong>Entitäten-Liste aktualisieren</strong> werden diese Entitäten in den Entität Dropdown der nachfolgenden Tabelle geladen.
+</p>
+<div class="shb-form-group">
+    <label for="entity-list-upload">Datei auswählen</label>
+    <input type="file" id="entity-list-upload" accept=".txt,.csv" onchange="loadEntityList(event)" style="width: 30%"/>
+</div>
+
+<div class="shb-text-output" id="entity-preview;">
+    <textarea class="shb-text-code-output" id="entity-list-text" rows="5" cols="80" placeholder="Entitäten manuell eingeben (eine pro Zeile)"></textarea>
+</div>
+<div class="shb-text-output" id="entity-preview" style="display: none;">
+    <h4>Hochgeladene Entitäten</h4>
+    <textarea class="shb-text-code-output" id="uploaded-entity-list" rows="10" cols="80" readonly></textarea>
+</div>
+
+<div class="shb-button">
+    <button class="shb-button shb-button-blue" onclick="updateEntityDropdown()" style="width: 30%">Entitäten-Liste aktualisieren</button>
 </div>
 </section>
 
@@ -75,9 +85,9 @@ layout: page
 </p>
 
 <!-- Bild-Upload -->
-<div class="floorplan-form-group">
-    <label for="image-upload" class="custom-label">Bild hochladen:</label>
-    <input type="file" id="image-upload" class="custom-input" accept="image/*">
+<div class="shb-form-group">
+    <label for="image-upload">Bild hochladen:</label>
+    <input type="file" id="image-upload" accept="image/*" style="width: 30%;">
 <p id="image-dimensions">Bildabmessungen: Noch kein Bild hochgeladen</p>
 </div>
 
@@ -98,11 +108,11 @@ layout: page
         Diese Integration ist unbedingt vorab zu installieren!
     </p>
 </div>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('tutorialDropdown', this)">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('tutorialDropdown', this)">
         Wie positioniere ich die Buttons auf dem Bild?<span>&#9660;</span>
     </button>
-    <div id="tutorialDropdown" class="dropdown-content" style="display: none; padding: 10px; text-align: left; line-height: 1.5;">
+    <div id="tutorialDropdown" class="shb-dropdown-content" style="display: none;">
         <p><strong>Schritt-für-Schritt-Anleitung:</strong></p>
         <ol>
             <li>Wähle eine Entität aus der Liste aus</li>
