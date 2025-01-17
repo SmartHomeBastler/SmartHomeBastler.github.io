@@ -12,6 +12,7 @@ layout: page
         Lade eine oder mehrere ICS-Dateien hoch um sie auszulesen oder zusammenzuführen, oder erstelle dir eine ICS Datei nach eigenen Angaben und lade sie herunter.
     </p>
     <h2 class="shb-section-title-center">Was möchtest du machen?</h2>
+    <div class="shb-center-container">
     <div class="shb-form-group">
         <div class="checkbox-wrapper">
             <input type="checkbox" id="mergeICSCheckbox" />
@@ -21,6 +22,7 @@ layout: page
             <input type="checkbox" id="createICSCheckbox" />
             <label for="checkbox-id-2">Eigene ICS erstellen</label>
         </div>
+    </div>
     </div>    
     <section class="ics-step" id="merge-section" style="display: none;">
         <h3>ICS-Dateien hochladen oder URL verwenden</h3>
