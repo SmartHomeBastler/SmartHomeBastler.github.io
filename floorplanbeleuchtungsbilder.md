@@ -155,10 +155,7 @@ layout: page
     Dieses Hintergrundbild definiert die Größe deines Floorplans und muss das gleiche Format und die gleichen Abmessungen wie die Beleuchtungsbilder haben.<br>
     Eine Vorschau deines Hintergrundbilds wird nach dem Hochladen unten angezeigt.
 </p>
-<div class="shb-form-group">
-    <label for="file-id-1">Eine Datei hochladen</label>
-    <input type="file" id="file-id-1" accept=".ics" style="width: 30%" />
-</div>
+
 <div class="shb-form-group">
     <label for="background-upload">Hintergrundbild hochladen:</label>
     <input type="file" id="background-upload" accept="image/*" onchange="handleBackgroundImageUpload()" style="width: 30%;">
