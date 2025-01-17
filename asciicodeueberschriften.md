@@ -77,7 +77,7 @@ layout: page
 </div>
 
 <!-- Ausgabefeld -->
-<div style="text-align: center; margin: 20px;">
+<div style="text-align: center; margin: 20px; line-height: 1.2">
     <pre id="asciiOutput" class="yaml-output" style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px;"></pre>
 </div>
 
