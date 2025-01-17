@@ -200,19 +200,19 @@ layout: page
         <tbody>
             <tr>
                 <td>
-                    <div class="shb-form-group">
+                    <div class="shb-form-group" style="margin: 0">
                         <select class="entity-dropdown" style="width: 100%;">
                             <option value="">Bitte auswählen...</option>
                         </select>
                     </div>
                 </td>
                 <td>
-                    <div class="shb-form-group">
+                    <div class="shb-form-group" style="margin: 0">
                         <input type="file" class="file-upload" accept="image/*" style="width: 100%;" onchange="handleFileUpload(this)">
                     </div>
                 </td>
                 <td>
-                    <div class="shb-form-group">
+                    <div class="shb-form-group" style="margin: 0">
                         <select style="width: 100%;">
                             <option value="switch">Licht ein-aus</option>
                             <option value="dimmable">Licht dimmbar</option>
@@ -240,12 +240,12 @@ layout: page
 </div>
 </section>
 <section class="content-section">
-<br>
-<div class="custom-button-container">
-    <button class="custom-button generate" onclick="generateYAML()">YAML-Code generieren</button>
-    <button class="custom-button copy" onclick="copyYAML()">YAML-Code kopieren</button>
-    <button class="custom-button remove" onclick="clearYAML()">YAML-Code löschen</button>
-    <button class="custom-button clear" onclick="clearInputs()">Eingaben löschen</button>
+
+<div class="shb-button-container">
+    <button class="shb-button shb-button-blue" style="width: 20%" onclick="generateYAML()">YAML-Code generieren</button>
+    <button class="shb-button shb-button-green" style="width: 20%" onclick="copyYAML()">YAML-Code kopieren</button>
+    <button class="shb-button shb-button-yellow" style="width: 20%" onclick="clearYAML()">YAML-Code löschen</button>
+    <button class="shb-button shb-button-red" style="width: 20%" onclick="clearInputs()">Eingaben löschen</button>
 </div>
 
 <h3>Generierter YAML-Code:</h3>
@@ -326,130 +326,8 @@ layout: page
         font-size: 14px;
         cursor: pointer;
     }
-
     .file-upload-button:hover {
         background-color: #0056b3;
-    }
-
-    .entity-preview-container {
-        background-color: #9fb9fb;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 15px;
-        margin: 10px 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .entity-preview-container h4 {
-        margin-bottom: 10px;
-        color: #333;
-        font-size: 16px;
-        font-weight: bold;
-    }
-    /* Code Container */
-    .code-container {
-        position: relative;
-        background-color: #9fb9fb;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        padding: 15px;
-        margin-top: 5px;
-        margin-bottom: 30px;
-        overflow: auto;
-        max-height: 300px;
-    }
-    .code-container code {
-        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-        font-size: 0.95em;
-        line-height: 1.5;
-        color: #d1d1d1;
-    }
-    /* Stil für den Copy-Button */
-    .copy-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #007acc;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 8px 12px;
-        font-size: 0.85em;
-        cursor: pointer;
-        z-index: 10;
-    }
-    .copy-button:hover {
-        background: #005a9c;
-    }
-    .copy-button.copied {
-        background: #72dd8b; /* Grüner Hintergrund */
-        color: white;       /* Weiße Schrift */
-        content: '✔️';      /* Symbol */
-        padding: 8px 12px;
-    }
-    .floorplan-container {
-        max-width: 100%;
-        margin: auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .floorplan-title {
-        text-align: center;
-        color: #333;
-        font-size: 2em;
-        margin-bottom: 10px;
-    }
-    .floorplan-subtitle {
-        text-align: center;
-        color: #666;
-        font-size: 1.4em;
-        margin-bottom: 20px;
-    }
-    .floorplan-intro {
-        text-align: center;
-        color: #d1d1d1;
-        margin-bottom: 20px;
-    }
-    .floorplan-form-group {
-        display: flex;
-        flex-direction: column;
-    }
-    .floorplan-form-group label {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    .floorplan-form-group input, .floorplan-form-group select {
-        padding: 8px;
-        color: #000000;
-        background-color: #9fb9fb;
-        max-width: 30%;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-    .floorplan-form-group-horizontal {
-        display: flex;
-        gap: 10px;
-    }
-    
-    .floorplan-form-group-horizontal .floorplan-form-group {
-        flex: 1;
-    }
-    .textarea-list {
-        width:100%;
-        background-color: #c3c3c3;
-        color: #000000;
-        font-size: 0.9em;
-        font-weight: bold;
-        padding: 10px;
-        margin-bottom: 10px;
     }
     .download-link {
         color: #007bff;
