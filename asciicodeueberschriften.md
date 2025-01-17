@@ -17,60 +17,58 @@ layout: page
 </p>
 <!-- Eingabefeld und Auswahloptionen im Formular-Design -->
 <div class="shb-center-container" style="gap: 50px;">
-    
-<div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
-    <div class="shb-form-group">
-        <label for="fontSelect">Schriftart:</label>
-        <select id="fontSelect" style="width: 100%;">
-            <option value="Banner3" selected>Banner3</option>
-            <option value="Banner">Banner</option>
-            <option value="Big">Big</option>
-            <option value="Colossal">Colossal</option>
-            <option value="Doom">Doom</option>
-            <option value="Slant">Slant</option>
-            <option value="Small">Small</option>
-            <option value="Standard">Standard</option>
-            <option value="Avatar">Avatar</option>
-            <option value="Big Money-ne">Big Money-ne</option>
-            <option value="Big Money-nw">Big Money-nw</option>
-            <option value="Big Money-se">Big Money-se</option>
-            <option value="Big Money-sw">Big Money-sw</option>
-            <option value="BlurVision ASCII">BlurVision ASCII</option>
-            <option value="Crawford2">Crawford2</option>
-            <option value="Doh">Doh</option>
-            <option value="Epic">Epic</option>
-            <option value="Fire Font-k">Fire Font-k</option>
-            <option value="Graceful">Graceful</option>
-            <option value="Graffiti">Graffiti</option>
-            <option value="Small Slant">Small Slant</option>
-            <option value="Star Wars">Star Wars</option>
-            <option value="Sub-Zero">Sub-Zero</option>
-            <option value="ANSI Shadow">ANSI Shadow</option>
-            <option value="ANSI Regular">ANSI Regular</option>
-            <option value="Delta Corps Priest 1">Delta Corps Priest 1</option>
-            <option value="Electronic">Electronic</option>
-            <option value="4Max">4Max</option>
-        </select>
+    <div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
+        <div class="shb-form-group">
+            <label for="fontSelect">Schriftart:</label>
+            <select id="fontSelect" style="width: 100%;">
+                <option value="Banner3" selected>Banner3</option>
+                <option value="Banner">Banner</option>
+                <option value="Big">Big</option>
+                <option value="Colossal">Colossal</option>
+                <option value="Doom">Doom</option>
+                <option value="Slant">Slant</option>
+                <option value="Small">Small</option>
+                <option value="Standard">Standard</option>
+                <option value="Avatar">Avatar</option>
+                <option value="Big Money-ne">Big Money-ne</option>
+                <option value="Big Money-nw">Big Money-nw</option>
+                <option value="Big Money-se">Big Money-se</option>
+                <option value="Big Money-sw">Big Money-sw</option>
+                <option value="BlurVision ASCII">BlurVision ASCII</option>
+                <option value="Crawford2">Crawford2</option>
+                <option value="Doh">Doh</option>
+                <option value="Epic">Epic</option>
+                <option value="Fire Font-k">Fire Font-k</option>
+                <option value="Graceful">Graceful</option>
+                <option value="Graffiti">Graffiti</option>
+                <option value="Small Slant">Small Slant</option>
+                <option value="Star Wars">Star Wars</option>
+                <option value="Sub-Zero">Sub-Zero</option>
+                <option value="ANSI Shadow">ANSI Shadow</option>
+                <option value="ANSI Regular">ANSI Regular</option>
+                <option value="Delta Corps Priest 1">Delta Corps Priest 1</option>
+                <option value="Electronic">Electronic</option>
+                <option value="4Max">4Max</option>
+            </select>
+        </div>
+        <div class="shb-form-group">
+            <label for="widthSelect">Buchstaben Breite:</label>
+            <select id="widthSelect" style="width: 100%;">
+                <option value="default" selected>Normal</option>
+                <option value="full">Full</option>
+                <option value="fitted">Fitted</option>
+                <option value="smushR">Smush (R)</option>
+                <option value="smushU">Smush (U)</option>
+            </select>
+        </div>
     </div>
-    <div class="shb-form-group">
-        <label for="widthSelect">Buchstaben Breite:</label>
-        <select id="widthSelect" style="width: 100%;">
-            <option value="default" selected>Normal</option>
-            <option value="full">Full</option>
-            <option value="fitted">Fitted</option>
-            <option value="smushR">Smush (R)</option>
-            <option value="smushU">Smush (U)</option>
-        </select>
+    <div class="shb-form-group"style="flex-direction: column; width: 50%;">
+        <label for="textInput">Texteingabe:</label>    
+        <div class="shb-text-output" >
+            <textarea class="shb-text-code-outputt" id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+        </div>
     </div>
 </div>
-<div class="shb-form-group"style="flex-direction: column; width: 50%;">
-    <label for="textInput">Texteingabe:</label>    
-    <div class="shb-text-output" >
-        <textarea class="shb-text-code-outputt" id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 120px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
-    </div>
-</div>
-</div>
-
 <!-- Buttons für Generieren, Test All und Kopieren -->
 <div class="shb-button-container" style="text-align: center; display: block;">
     <button onclick="generateASCII()" class="shb-button shb-button-blue" style="width: 20%">Generieren</button>
