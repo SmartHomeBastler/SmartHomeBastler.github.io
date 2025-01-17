@@ -555,10 +555,11 @@ layout: page
     }
 
     .custom-dropdown-button {
-        background-color: #e9e9e9;
+        background-color: #1ab5d5;
         color: #000000;
         padding: 10px;
-        border: 1px solid #ddd;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
         border-radius: 5px;
         width: 100%;
         text-align: left;
@@ -576,9 +577,9 @@ layout: page
         display: none;
         position: absolute;
         background-color: #6b6b6b;
-        border: 1px solid #ddd;
+        border: 1px solid #ffffff;
         border-radius: 5px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 5px #ffffff;
         max-height: 200px;
         overflow-y: auto;
         z-index: 1000;
