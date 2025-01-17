@@ -228,7 +228,6 @@ layout: page
             </tr>
         </tbody>
     </table>
-    <button onclick="addRow()">Zeile hinzufügen</button>
 </div>
 
 <button class="action-button add-button" onclick="addRow()">&#x2b;</button>
