@@ -990,9 +990,9 @@ function updatePositionTable(marker) {
         <td>left: ${marker.x}%, top: ${marker.y}%</td>
         <td>${marker.entity}</td>
         <td>${marker.path}</td>
-        <td>${defaultIconHTML}</td>
-        <td>${onIconHTML}</td>
-        <td>${offIconHTML}</td>
+        <td style="text-align: center">${defaultIconHTML}</td>
+        <td style="text-align: center">${onIconHTML}</td>
+        <td style="text-align: center">${offIconHTML}</td>
         <td style="text-align: center">${marker.size}</td>
         <td style="text-align: center">${marker.shape === "50%" ? "Rund" : marker.shape === "0%" ? "Eckig" : "Abgerundet"}</td>
     `;
