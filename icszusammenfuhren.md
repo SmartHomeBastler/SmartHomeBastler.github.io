@@ -29,33 +29,33 @@ layout: page
         <p>
             Wähle entweder eine oder mehrere <code>.ics</code>-Dateien aus um sie auszulesen bzw. zusammenzuführen.
         </p>
-        <form class="ics-file-upload">
-            <div class="shb-form-group">
-                <label for="file1">ICS Datei 1 (erforderlich):</label>
-                <input type="file" id="file1" accept=".ics" style="width: 30%">
-            </div>
-            <div class="shb-form-group">
-                <label for="file2">ICS Datei 2 (optional):</label>
-                <input type="file" id="file2" accept=".ics" style="width: 30%">
-            </div>
-            <div class="shb-form-group">
-                <label for="file3">ICS Datei 3 (optional):</label>
-                <input type="file" id="file3" accept=".ics" style="width: 30%">
-            </div>
-            <div class="shb-form-group">
-                <label for="file4">ICS Datei 4 (optional):</label>
-                <input type="file" id="file4" accept=".ics" style="width: 30%">
-            </div>
-            <div class="shb-form-group">
-                <label for="file5">ICS Datei 5 (optional):</label>
-                <input type="file" id="file5" accept=".ics" style="width: 30%">
-            </div>
-            <div class="ics-file-group">
-                <label for="file6">ICS Datei 6 (optional):</label>
-                <input type="file" id="file6" accept=".ics" style="width: 30%">
-            </div>
-            <button type="button" class="ics-button" onclick="mergeICSFiles()">ICS Datei(en) verarbeiten</button>
-        </form>
+        <div class="shb-form-group">
+            <label for="file1">ICS Datei 1 (erforderlich):</label>
+            <input type="file" id="file1" accept=".ics" style="width: 30%">
+        </div>
+        <div class="shb-form-group">
+            <label for="file2">ICS Datei 2 (optional):</label>
+            <input type="file" id="file2" accept=".ics" style="width: 30%">
+        </div>
+        <div class="shb-form-group">
+            <label for="file3">ICS Datei 3 (optional):</label>
+            <input type="file" id="file3" accept=".ics" style="width: 30%">
+        </div>
+        <div class="shb-form-group">
+            <label for="file4">ICS Datei 4 (optional):</label>
+            <input type="file" id="file4" accept=".ics" style="width: 30%">
+        </div>
+        <div class="shb-form-group">
+            <label for="file5">ICS Datei 5 (optional):</label>
+            <input type="file" id="file5" accept=".ics" style="width: 30%">
+        </div>
+        <div class="shb-form-group">
+            <label for="file6">ICS Datei 6 (optional):</label>
+            <input type="file" id="file6" accept=".ics" style="width: 30%">
+        </div>
+        <div class="shb-button">
+            <button class="shb-button shb-button-blue" style="width: 30%" onclick="mergeICSFiles()">ICS Datei(en) verarbeiten</button>
+        </div>
     </section>
     <div id="warning-container" style="display: none;">
         <div class="important-container">
@@ -66,14 +66,20 @@ layout: page
         </div>
     </div>
     <section class="content-section" id="edit-section" style="display: none;">
-        <h3>Zusammengeführte ICS-Datei</h3>
+        <h3 class="shb-section-title-center">Zusammengeführte ICS-Datei</h3>
         <p>
             Die verarbeiteten Inhalte der ICS-Dateien werden hier angezeigt. Du kannst sie überprüfen und die Daten in die Zwischenablage kopieren oder bearbeiten.
         </p>
-        <textarea id="output" rows="20" readonly></textarea>
+    <div class="shb-text-output">
+        <textarea class="shb-text-code-output" id="output" rows="20" cols="80" readonly>
+    </div>
         <br>
-        <button class="ics-button" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
-        <button class="ics-button" onclick="editAndDisplayEntries()">Einträge bearbeiten</button>
+    <div class="shb-center-container">
+    <div class="shb-button-container">
+        <button class="shb-button shb-button-yellow" style="width: 20%" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
+        <button class="shb-button shb-button-blue" style="width: 20%" onclick="editAndDisplayEntries()">Einträge bearbeiten</button>
+    </div>
+    </div>
     </section>
     <section class="ics-step" id="edited-output-section" style="display: none;">
         <h3>Bearbeitete ICS-Datei</h3>
