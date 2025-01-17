@@ -270,7 +270,7 @@ layout: page
 <textarea id="yaml-output" rows="20" cols="80" readonly></textarea>
 </section>
 
-<footer class="guide-footer">
+<footer class="shb-footer">
     <h2>Viel Erfolg bei der Positionierung deiner Buttons! 🎉</h2>
 </footer>
 
@@ -279,36 +279,6 @@ layout: page
 </div>
 
 <style>
-    .guide-container {
-        max-width: 100%;
-        margin: auto;
-        padding: 20px;
-        background-color: #1a1a1a;
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        border: 1px solid #1598b3;
-        border-radius: 8px;
-        box-shadow: 0 4px 4px 6px #1598b380;
-    }
-
-    .content-section {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #252525;
-        border: 1px solid #444;
-        border-radius: 8px;
-    }
-
-    .content-section h2 {
-        color: #1598b3;
-        font-size: 1.75em;
-        margin-bottom: 10px;
-    }
-
-    .content h1 {
-        color: #1598b3
-    }
-
     .content-section ul {
         margin: 10px 0 0 20px;
         padding: 0;
@@ -317,51 +287,6 @@ layout: page
 
     .content-section ul li {
         margin-bottom: 10px;
-    }
-
-    .guide-footer {
-        text-align: center;
-    }
-    /* Wichtiges Hinweis-Container */
-    .important-container {
-        background-color: rgb(255, 255, 255);
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 8px solid rgb(255, 0, 0);
-    }
-    .important-container h3 {
-        color: #d12700;
-        font-weight: bold;
-        text-shadow: 0 0 1px rgb(0, 0, 0);
-    }
-    .important-container p {
-        color: #383838;
-        font-family: Arial Black;
-    }
-    .important-container strong {
-        color:rgb(255, 0, 0);
-        text-transform: uppercase;
-    }
-    /* Hinweise */
-    .note-container {
-        background-color: rgb(255, 255, 255);
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 8px solid #0062ff;
-    }
-    .note-container h3 {
-        color: #0062ff;
-        font-weight: bold;
-        text-shadow: 0 0 1px rgb(0, 0, 0);
-    }
-    .note-container p {
-        color: #383838;
-    }
-    .note-container strong {
-        color: #0062ff;
-        text-transform: uppercase;
     }
     .entity-preview-container {
         background-color: #9fb9fb;
@@ -377,108 +302,6 @@ layout: page
         color: #333;
         font-size: 16px;
         font-weight: bold;
-    }
-
-    .code-container {
-        position: relative;
-        background-color: #9fb9fb;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        padding: 15px;
-        margin-top: 5px;
-        margin-bottom: 30px;
-        overflow: auto;
-        max-height: 300px;
-    }
-
-    .code-container code {
-        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-        font-size: 0.95em;
-        line-height: 1.5;
-        color: #d1d1d1;
-        white-space: pre-wrap;
-    }
-
-    .copy-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #007acc;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 8px 12px;
-        font-size: 0.85em;
-        cursor: pointer;
-        z-index: 10;
-        transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .copy-button:hover {
-        background: #005a9c;
-    }
-    .copy-button.copied {
-        background: #72dd8b; /* Grüner Hintergrund */
-        color: white;       /* Weiße Schrift */
-        content: '✔️';      /* Symbol */
-        padding: 8px 12px;
-    }
-    #custom-alert {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6); /* Dunkles Overlay */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    }
-    #custom-alert-content {
-        background-color: #fff;
-        padding: 20px 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        max-width: 400px;
-        animation: fadeIn 0.3s ease-in-out;
-    }
-    #custom-alert-title {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #333;
-        font-weight: bold;
-    }
-    #custom-alert-message {
-        margin-bottom: 15px;
-        font-size: 16px;
-        color: #666;
-    }
-    #close-alert {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    #close-alert:hover {
-        background-color: #218838;
-    }
-    /* Animation */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
     }
     .custom-input, select {
         padding: 8px;
@@ -878,20 +701,6 @@ function copyCode(elementId, button) {
             console.error("Fehler beim Kopieren des Codes: ", err);
             showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
         });
-}
-
-function showCustomAlert(title, message) {
-    const alertBox = document.getElementById("custom-alert");
-    const alertTitle = document.getElementById("custom-alert-title");
-    const alertMessage = document.getElementById("custom-alert-message");
-
-    alertTitle.textContent = title;
-    alertMessage.textContent = message;
-    alertBox.style.display = "flex";
-
-    document.getElementById("close-alert").onclick = function () {
-        alertBox.style.display = "none";
-    };
 }
 
 let entityList = [];
