@@ -24,8 +24,8 @@ layout: page
 </p>
 <!-- Eingabefeld und Auswahloptionen im Formular-Design -->
 <div class="shb-center-container" style="gap: 50px;">
-    <div style="display: flex; flex-direction: column; gap: 10px; width: 30%;">
-        <div class="shb-form-group">
+    <div style="display: flex; flex-direction: column; width: 20%;">
+        <div class="shb-form-group" style="gap: 0; margin: 0 0 5px 0;">
             <label for="fontSelect">Schriftart:</label>
             <select id="fontSelect" style="width: 100%;">
                 <option value="Banner3" selected>Banner3</option>
@@ -58,7 +58,7 @@ layout: page
                 <option value="4Max">4Max</option>
             </select>
         </div>
-        <div class="shb-form-group">
+        <div class="shb-form-group" style="gap: 0; margin: 0 0 5px 0;">
             <label for="widthSelect">Buchstaben Breite:</label>
             <select id="widthSelect" style="width: 100%;">
                 <option value="default" selected>Normal</option>
@@ -68,12 +68,13 @@ layout: page
                 <option value="smushU">Smush (U)</option>
             </select>
         </div>
-        <div class="shb-form-group">
+        <div class="shb-form-group" style="gap: 0; margin: 0 0 15px 0;">
             <label for="languageSelect">Programmiersprache:</label>
             <select id="languageSelect" style="width: 100%;">
                 <option value="none" selected>Keine</option>
                 <option value="yaml">YAML</option>
                 <option value="html">HTML</option>
+                <option value="css">CSS</option>
                 <option value="python">Python</option>
                 <option value="javascript">JavaScript</option>
                 <option value="bash">Bash</option>
@@ -88,7 +89,7 @@ layout: page
     </div>
 </div>
 <!-- Buttons für Generieren, Test All und Kopieren -->
-<div class="shb-button-container" style="text-align: center; display: block;">
+<div class="shb-button-container" style="text-align: center; display: block; gap: 20px;">
     <button onclick="generateASCII()" class="shb-button shb-button-blue" style="width: 20%">Generieren</button>
     <button onclick="testAllFonts()" class="shb-button shb-button-yellow" style="width: 20%">Teste Alle</button>
     <button onclick="copyToClipboard()" class="shb-button shb-button-red" style="width: 20%">Kopieren</button>
@@ -126,15 +127,17 @@ function generateASCII() {
     function wrapWithComment(content) {
         switch (language) {
             case "yaml":
-                return `# ${content}`;
+                return `#    ${content}    #`;
             case "html":
-                return `<!-- ${content} -->`;
-            case "python":
-                return `# ${content}`;
+                return `<!--    ${content}    -->`;
+            case "css":
+                return `/*    ${content}    */`;
             case "javascript":
-                return `// ${content}`;
+                return `//    ${content}    //`;
+            case "python":
+                return `#     ${content}    #`;
             case "bash":
-                return `# ${content}`;
+                return `#    ${content}    #`;
             default:
                 return content;
         }
