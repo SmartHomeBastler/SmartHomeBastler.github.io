@@ -104,7 +104,7 @@ layout: page
 </div>
 
 <div class="shb-text-output" id="entity-preview;">
-    <textarea class=shb-text-code-output" id="entity-list-text" rows="5" cols="80" placeholder="Entitäten manuell eingeben (eine pro Zeile)"></textarea>
+    <textarea class="shb-text-code-output" id="entity-list-text" rows="5" cols="80" placeholder="Entitäten manuell eingeben (eine pro Zeile)"></textarea>
 </div>
 <div class="shb-text-output" id="entity-preview" style="display: none;">
     <h4>Hochgeladene Entitäten</h4>
