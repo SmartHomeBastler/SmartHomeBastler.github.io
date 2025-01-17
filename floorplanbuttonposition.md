@@ -92,9 +92,11 @@ layout: page
 </div>
 
 <!-- Bildcontainer -->
-<div class="floorplan-container" id="container" style="display: none;">
-    <img src="" alt="Floorplan" id="floorplan">
-    <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
+<div class="shb-center-container">
+    <div class="floorplan-container" id="container" style="display: none;">
+        <img src="" alt="Floorplan" id="floorplan">
+        <div class="floorplan-coords" id="coords">left: 0%, top: 0%</div>
+    </div>
 </div>
 </section>
 
@@ -295,10 +297,10 @@ layout: page
         position: relative;
         display: inline-block;
         margin-top: 20px;
-        border: 1px solid #ddd;
-        padding: 0;
+        border: 2px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        padding: 5px;
         background-color: #f9f9f9;
-        border-radius: 8px;
         margin-bottom: 20px;
     }
     img {
@@ -808,7 +810,7 @@ imageUpload.addEventListener('change', (event) => {
       img.onload = function() {
         container.style.display = "block"; // Zeige den Container an
         container.style.width = `${img.width}px`;
-        container.style.height = `${img.height + 5}px`;
+        container.style.height = `${img.height}px`;
         removeMarkers();
 
         imageDimensions.textContent = `Bildabmessungen: Breite ${img.width}px, Höhe ${img.height}px`;
