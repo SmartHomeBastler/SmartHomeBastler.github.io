@@ -15,12 +15,12 @@ layout: page
     <div class="shb-center-container">
     <div class="shb-form-group">
         <div class="checkbox-wrapper">
-            <input type="checkbox" id="mergeICSCheckbox" />
-            <label for="checkbox-id-1">Mehrere ICS zusammenführen</label>
+            <input type="checkbox" id="mergeICSCheckbox" onchange="toggleSections()">
+            <label for="mergeICSCheckbox">Mehrere ICS zusammenführen</label>
         </div>
         <div class="checkbox-wrapper">
-            <input type="checkbox" id="createICSCheckbox" />
-            <label for="checkbox-id-2">Eigene ICS erstellen</label>
+            <input type="checkbox" id="createICSCheckbox" onchange="toggleSections()">
+            <label for="createICSCheckbox">Eigene ICS erstellen</label>
         </div>
     </div>
     </div>    
