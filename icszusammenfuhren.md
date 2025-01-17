@@ -72,6 +72,7 @@ layout: page
         </p>
     <div class="shb-text-output">
         <textarea class="shb-text-code-output" id="output" rows="20" cols="80" readonly>
+        </textarea>
     </div>
         <br>
     <div class="shb-center-container">
