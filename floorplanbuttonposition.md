@@ -144,18 +144,18 @@ layout: page
 </div>    
 
 <div class="floorplan-marker-form">
-    <div class="floorplan-form-group-full">
+    <div class="shb-form-group">
         <label for="marker-entity">Entität (entity):</label>
         <select id="marker-entity">
             <option value="">Bitte auswählen...</option>
             <!-- Dynamisch hinzugefügte Optionen -->
         </select>
     </div>  
-    <div class="floorplan-form-group-full">
+    <div class="shb-form-group">
         <label for="marker-path">Speicherpfad der Icons:</label>
         <input type="text" id="marker-path" placeholder="/local/lovelace/icon/">
     </div>    
-    <div class="floorplan-form-group-full">
+    <div class="shb-form-group">
         <label for="icon-dropdown">Icon im Zustand 'An':</label>
         <div class="custom-dropdown">
             <button id="on-icon-button" class="custom-dropdown-button" onclick="toggleIconDropdown()">Bitte auswählen...</button>
@@ -166,7 +166,7 @@ layout: page
         <input type="text" id="custom-on-icon" placeholder="Eigenen Namen eingeben" style="margin-top: 10px; width: 100%;">
         <input type="hidden" id="selected-icon" name="selected-icon">
     </div>
-    <div class="floorplan-form-group-full">
+    <div class="shb-form-group">
         <label for="off-icon-dropdown">Icon im Zustand 'Aus':</label>
         <div class="custom-dropdown">
             <button id="off-icon-button" class="custom-dropdown-button" onclick="toggleOffIconDropdown()">Bitte auswählen...</button>
@@ -177,16 +177,16 @@ layout: page
         <input type="text" id="custom-off-icon" placeholder="Eigenen Namen eingeben" style="margin-top: 10px; width: 100%;">
         <input type="hidden" id="selected-off-icon" name="selected-off-icon">
     </div>
-    <div class="floorplan-form-group-full">
+    <div class="shb-form-group">
         <label for="marker-default-icon">Icon bei Fehler:</label>
         <input type="text" id="marker-default-icon" value="fehler.png">
     </div>        
-    <div class="floorplan-form-group-full">
+    <div class="shb-form-group">
         <label for="marker-size">Größe des Icons (%):</label>
         <input type="text" id="marker-size" value="2">
     </div>    
     <!-- Auswahl für die Form des Markers -->
-    <div class="floorplan-form-group-full">
+    <div class="shb-form-group">
         <label for="marker-shape">Form des Buttons:</label>
         <select id="marker-shape">
             <option value="50%">Rund</option>
