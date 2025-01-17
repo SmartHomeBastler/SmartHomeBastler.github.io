@@ -72,16 +72,16 @@ layout: page
             <label for="languageSelect">Programmiersprache:</label>
             <select id="languageSelect" style="width: 100%;">
                 <option value="none" selected>Keine</option>
-                <option value="yaml">YAML</option>
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
-                <option value="python">Python</option>
-                <option value="javascript">JavaScript</option>
-                <option value="bash">Bash</option>
+                <option value="yaml">YAML <strong>&#35;</strong></option>
+                <option value="html">HTML <strong>&#60;&#33;--</strong></option>
+                <option value="css">CSS <strong>&#47;&#42;</strong></option>
+                <option value="python">Python <strong>&#35;</strong></option>
+                <option value="javascript">JavaScript <strong>&#47;&#47;</strong></option>
+                <option value="bash">Bash <strong>&#35;</strong></option>
             </select>
         </div>
     </div>
-    <div class="shb-form-group" style="flex-direction: column; width: 50%; gap: 0;">
+    <div class="shb-form-group" style="flex-direction: column; width: 50%; gap: 0; margin: 0;">
         <label for="textInput">Texteingabe:</label>    
         <div class="shb-text-output" style="margin: 0 0 15px 0;">
             <textarea class="shb-text-code-outputt" id="textInput" placeholder="Gib hier deinen Text ein" style="padding: 10px; width: 100%; height: 160px; resize: vertical; border: 1px solid #ddd; border-radius: 5px;"></textarea>
