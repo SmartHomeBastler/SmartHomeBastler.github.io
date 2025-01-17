@@ -74,11 +74,10 @@ layout: page
         <textarea class="shb-text-code-output" id="output" rows="20" cols="80" readonly>
         </textarea>
     </div>
-        <br>
     <div class="shb-center-container">
     <div class="shb-button-container">
-        <button class="shb-button shb-button-yellow" style="width: 20%" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
-        <button class="shb-button shb-button-blue" style="width: 20%" onclick="editAndDisplayEntries()">Einträge bearbeiten</button>
+        <button class="shb-button shb-button-yellow" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
+        <button class="shb-button shb-button-blue" onclick="editAndDisplayEntries()">Einträge bearbeiten</button>
     </div>
     </div>
     </section>
