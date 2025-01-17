@@ -151,13 +151,13 @@ layout: page
             <!-- Dynamisch hinzugefügte Optionen -->
         </select>
     </div>  
-    <div class="shb-form-group" style="margin: 0">
+    <div class="shb-form-group">
         <label for="marker-path">Speicherpfad der Icons:</label>
         <input type="text" id="marker-path" placeholder="/local/lovelace/icon/">
     </div>    
     <div class="shb-form-group" style="margin: 0">
         <label for="icon-dropdown">Icon im Zustand 'An':</label>
-        <div class="custom-dropdown">
+        <div class="shb-form-group">
             <button id="on-icon-button" class="custom-dropdown-button" onclick="toggleIconDropdown()">Bitte auswählen...</button>
             <div class="custom-dropdown-content" id="icon-dropdown">
                 <!-- Dynamisch generierte Icons -->
