@@ -5,21 +5,23 @@ description: Lade ICS-Dateien hoch oder rufe sie von einer URL ab, um sie zu bea
 show_sidebar: false
 layout: page
 ---
-<div class="ics-guide">
-    <h1 class="ics-title" style="color: #1598b3; font-size: 2.5em;">ICS Code Generator</h1>
-    <h2 class="ics-subtitle">ICS-Dateien zum Bearbeiten hochladen oder eigene erstellen</h2>
-    <p class="ics-description">
+<div class="shb-main-container">
+    <h1 class="shb-main-title">ICS Code Generator</h1>
+    <h2 class="shb-section-title-center">ICS-Dateien zum Bearbeiten hochladen oder eigene erstellen</h2>
+    <p class="shb-main-description">
         Lade eine oder mehrere ICS-Dateien hoch um sie auszulesen oder zusammenzuführen, oder erstelle dir eine ICS Datei nach eigenen Angaben und lade sie herunter.
     </p>
-    <h2 class="ics-subtitle">Was möchtest du machen?</h2>
-    <div class="ics-options">
-        <label>
-            <input type="checkbox" id="mergeICSCheckbox" onchange="toggleSections()"> Mehrere ICS zusammenführen
-        </label>
-        <label>
-            <input type="checkbox" id="createICSCheckbox" onchange="toggleSections()"> Eigene ICS erstellen
-        </label>
-    </div>
+    <h2 class="shb-section-title-center">Was möchtest du machen?</h2>
+    <div class="shb-form-group">
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="mergeICSCheckbox" />
+            <label for="checkbox-id-1">Mehrere ICS zusammenführen</label>
+        </div>
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="createICSCheckbox" />
+            <label for="checkbox-id-2">Eigene ICS erstellen</label>
+        </div>
+    </div>    
     <section class="ics-step" id="merge-section" style="display: none;">
         <h3>ICS-Dateien hochladen oder URL verwenden</h3>
         <p>
