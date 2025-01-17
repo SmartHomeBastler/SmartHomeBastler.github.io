@@ -269,6 +269,7 @@ layout: page
 <h3>Generierter YAML-Code:</h3>
 <div class="shb-text-output">
     <textarea class="shb-text-code-output" id="yaml-output" rows="20" cols="80" readonly>
+    </textarea>
 </div>
 </section>
 
