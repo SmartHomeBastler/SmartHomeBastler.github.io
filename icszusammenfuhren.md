@@ -262,12 +262,13 @@ layout: page
     border-left: none;
 }
 
+/* Differenzierung der Zeilenfarben */
 .shb-error-table tbody tr:nth-child(odd) {
-    background-color: #fff5cc; /* Helles Gelb für ungerade Zeilen */
+    background-color: #fffdf0 !important; /* Sehr helles Gelb für ungerade Zeilen */
 }
 
 .shb-error-table tbody tr:nth-child(even) {
-    background-color: #ffeb99; /* Dunkleres Gelb für gerade Zeilen */
+    background-color: #fff7cc !important; /* Dunkleres Gelb für gerade Zeilen */
 }
 
 .shb-error-table tbody td {
@@ -276,30 +277,28 @@ layout: page
     border-left: 2px solid #1ab5d5;
 }
 
-/* Blaue Spalte für fehlerhaften SUMMARY */
+/* Farben für die Spalten */
 .shb-error-table tbody td.summary-cell {
-    background-color: #b8f3ff; /* Helles Blau */
+    background-color: rgba(184, 243, 255, 0.6); /* Helles Blau mit Transparenz */
     color: #000000;
     font-weight: bold;
 }
 
-/* Rote Spalte für Fehlerbeschreibung */
 .shb-error-table tbody td.error-cell {
-    background-color: #ffcccc; /* Helles Rot */
+    background-color: rgba(255, 204, 204, 0.6); /* Helles Rot mit Transparenz */
     color: #990000;
     font-weight: bold;
 }
 
-/* Gelbe Spalte für Nach Bearbeitung */
 .shb-error-table tbody td.action-cell {
-    background-color: #fff7cc; /* Helles Gelb */
+    background-color: rgba(255, 247, 204, 0.6); /* Helles Gelb mit Transparenz */
     color: #665500;
     font-weight: bold;
 }
 
-/* Hover-Effekt */
+/* Hover-Effekt bleibt erhalten */
 .shb-error-table tbody tr:hover {
-    background-color: #e6f7ff; /* Leichtes Blau beim Hover */
+    background-color: #e6f7ff !important; /* Leichtes Blau beim Hover */
     transition: background-color 0.3s ease;
 }
 
@@ -486,11 +485,9 @@ function editAndDisplayEntries() {
             const index = line.indexOf(":");
             if (index !== -1) {
                 const originalSummary = line.substring(index + 1).trim();
-                console.log("Original SUMMARY:", originalSummary); // Debugging
 
                 // Entferne alles ab dem ersten Sonderzeichen
                 let cleanedSummary = originalSummary.replace(/[^a-zA-ZäöüÄÖÜß\s]+.*/, "").trim();
-                console.log("Nach Sonderzeichen-Entfernung:", cleanedSummary); // Debugging
 
                 // Ersetze Umlaute
                 cleanedSummary = cleanedSummary
@@ -501,11 +498,9 @@ function editAndDisplayEntries() {
                     .replace(/Ä/g, "Ae")
                     .replace(/Ö/g, "Oe")
                     .replace(/Ü/g, "Ue");
-                console.log("Nach Umlaut-Ersetzung:", cleanedSummary); // Debugging
 
                 // Entferne Ziffern, Punkte und Leerzeichen
                 cleanedSummary = cleanedSummary.replace(/[0-9.\s]/g, "").trim();
-                console.log("Finaler bereinigter SUMMARY:", cleanedSummary); // Debugging
 
                 return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY mit bereinigtem Wert
             }
