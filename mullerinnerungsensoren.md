@@ -91,25 +91,26 @@ layout: page
 -->
 
 <div class="content-section" id="step-1" style="display:none;">
-<h2 class="custom-title">1. Kalenderdaten Auslesen</h2>
+<h2 class="shb-section-title-left">1. Kalenderdaten Auslesen</h2>
 
 <p>
     Zum Auslesen der verschiedenen Abholungen aus deinem Müllkalender, gib bitte deine URL an oder lade die ICS-Datei hoch und bestätige mit<br>
     <strong>Kalendereinträge extrahieren</strong>.
 </p>
 
-<!-- File Upload and URL Input -->
-<div class="custom-form-group">
-    <label for="icsFile" class="custom-label">ICS-Datei hochladen</label>
-    <input type="file" id="icsFile" class="custom-input" accept=".ics" />
+<div class="shb-form-group">
+    <label for="icsFile">ICS-Datei hochladen</label>
+    <input type="file" id="icsFile" style="width: 30%" accept=".ics" />
 </div>
 
-<div class="custom-form-group">
-    <label for="calendarUrl" class="custom-label">oder ICS-URL eingeben</label>
-    <input type="url" id="calendarUrl" class="custom-input" placeholder="https://example.com/kalender.ics" />
+<div class="shb-form-group">
+    <label for="calendarUrl">oder ICS-URL eingeben</label>
+    <input type="url" id="calendarUrl" style="width: 30%" placeholder="https://example.com/kalender.ics" />
 </div>
 
-<button class="custom-button" onclick="extractEntries(); showStep(2);">Kalendereinträge extrahieren!</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-main" style="margin-bottom: 30px;" onclick="extractEntries(); showStep(2);">👇  Kalendereinträge extrahieren!  👇</button>
+</div>
 </div>
 
 <!--
@@ -121,10 +122,10 @@ layout: page
 -->
 
 <div class="content-section" id="step-2" style="display:none;">
-<h2 class="custom-title">2. Kalenderdaten Umwandeln</h2>
+<h2 class="shb-section-title-left">2. Kalenderdaten Umwandeln</h2>
 
-<p>Im nächsten Schritt wähle jene Einträge aus, welche zu deinen Sensoren hinzugefügt werden sollen.<br> 
-Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
+<p>
+    Im nächsten Schritt wähle jene Einträge aus, welche zu deinen Sensoren hinzugefügt werden sollen.<br> Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 </p>
 
 <div id="umlaut-warning-container" class="important-container" style="display: none;">
@@ -164,7 +165,8 @@ Nach den Änderungen klicke auf<br>
 <strong>Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</strong>
 </p>
 
-<table class="custom-table" id="entry-table">
+<div class="shb-styled-table-container">
+<table class="shb-styled-table" id="entry-table">
     <thead>
         <tr>
             <th>Auswählen</th>
@@ -176,14 +178,15 @@ Nach den Änderungen klicke auf<br>
         <!-- Dynamically populated rows will go here -->
     </tbody>
 </table>
+</div>
 
 <p>
-Es kommt häufig vor, dass Kalendereinträge nicht nur die einfachen Namen sonder mit zusätzlichem Text versehen sind.<br>
-In solch einem Fall, kann im nächsten Schritt die eigene Bezeichnung auch als Alias in der Waste Collection Schedule angelegt werden.
+    Es kommt häufig vor, dass Kalendereinträge nicht nur die einfachen Namen sonder mit zusätzlichem Text versehen sind.<br>
+    In solch einem Fall, kann im nächsten Schritt die eigene Bezeichnung auch als Alias in der Waste Collection Schedule angelegt werden.
 </p>
 
-<div id="confirm-step-2" style="text-align: center; margin-top: 20px;">
-    <button class="custom-button" onclick="handleStepTransition();">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
+<div class="shb-button" id="confirm-step-2">
+    <button class="shb-button shb-button-main" style="margin-bottom: 30px;" onclick="handleStepTransition();">👇  Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!  👇</button>
 </div>
 </div>
 
