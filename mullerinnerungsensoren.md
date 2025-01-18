@@ -6,10 +6,10 @@ tags: [Home Assistant, Abfallerinnerung, Müllerinnerung, Waste Collection Sched
 show_sidebar: false
 layout: page
 ---
-<div class="guide-container">
-<h1 class="custom-title">Müllerinnerung Code-Generator</h1>
+<div class="shb-main-container">
+<h1 class="shb-main-title">Müllerinnerung Code-Generator</h1>
 <br>
-<p>
+<p class="shb-main-description">
     Mit diesem Code-Generator hast du die Möglichkeit, deine Müllerinnerung vom Anlegen des Kalenders über das Einrichten der Sensoren und Templates bis hin zur Dashboard- und Pop-Up- Karte durchzuführen.
 </p>
 <!-- Wichtiger Hinweis -->
@@ -23,20 +23,20 @@ layout: page
     </p>
 </div>
 <br>
-<h4>Was muss vor der Bearbeitung mit dem Code-Generator vorbereitet werden:</h4>
+<h4 class="shb-section-title-left">Was muss vor der Bearbeitung mit dem Code-Generator vorbereitet werden:</h4>
 
-<ul class="styled-list-start">
+<ul class="shb-list-start">
     <li>Herunterladen und installieren der <strong>Waste Collection Schedule</strong> in HACS</li>
     <li>Anlegen eines <strong>muell</strong> Ordners im <strong>config/www/</strong> Ordner</li>
     <li>Bereitstellung einer ICS Datei oder URL</li>
 </ul>
 <br>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('noISCdropdown', this)">
-        Was mache ich, wenn ich keine ICS Datei oder URL habe? <span>&#9660;</span>
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('noISCdropdown', this)">
+        Was mache ich, wenn ich keine ICS Datei oder URL habe? <span>⬇️</span>
     </button>
-    <div id="noISCdropdown" class="dropdown-content" style="display: none; padding: 10px; text-align: left; line-height: 1.5;">
-        <div style="margin: 0 auto; max-width: 60%;">
+    <div id="noISCdropdown" class="shb-dropdown-content" style="display: none;">
+        <div class="shb-dropdown-youtube">
             {% include youtube.html video="r4koAf8UnwQ" %}
         </div>
         <h3><strong>Verwendung des Codegenerators ohne ICS Datei oder URL</strong></h3>
@@ -73,27 +73,17 @@ layout: page
     </div>
 </div> 
 
-<div id="custom-alert" style="display: none;">
-    <div id="custom-alert-content">
-        <h4 id="custom-alert-title"></h4>
-        <p id="custom-alert-message"></p>
-        <button id="close-alert">OK</button>
-    </div>
-</div>
-<div id="custom-decision" style="display: none;">
-    <div id="custom-decision-content">
-        <h4 id="custom-decision-title"></h4>
-        <p id="custom-decision-message"></p>
-        <ul id="custom-decision-list"></ul>
-        <p id="custom-decision-question" style="font-weight: bold; margin-top: 10px;">
-            Möchtest du die Verarbeitung fortsetzen?
-        </p>
-        <button id="decision-yes">Ja</button>
-        <button id="decision-no">Nein</button>
+<div id="shb-custom-alert" style="display: none;">
+    <div id="shb-custom-alert-content">
+        <h4 id="shb-custom-alert-title"></h4>
+        <p id="shb-custom-alert-message"></p>
+        <button id="shb-close-alert">OK</button>
     </div>
 </div>
 <br>
-<button class="custom-button" onclick="showStep(1);">Hinweise gelesen! Vorbereitungen getroffen! Bereit zu starten!</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-blue" style="width: 30%" onclick="showStep(1);">Hinweise gelesen! Vorbereitungen getroffen! Bereit zu starten!</button>
+</div>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
 ██   ██ ██   ██ ██      ██      ██   ██ ████   ██ ██    ██       ██        ███ 
@@ -1595,20 +1585,6 @@ In solch einem Fall, kann im nächsten Schritt die eigene Bezeichnung auch als A
         }
     }
 
-    function showCustomAlert(title, message) {
-        const alertBox = document.getElementById("custom-alert");
-        const alertTitle = document.getElementById("custom-alert-title");
-        const alertMessage = document.getElementById("custom-alert-message");
-    
-        alertTitle.textContent = title;   // Überschrift setzen
-        alertMessage.textContent = message; // Nachricht setzen
-        alertBox.style.display = "flex"; // Fenster anzeigen
-    
-        document.getElementById("close-alert").onclick = function () {
-            alertBox.style.display = "none"; // Fenster schließen
-        };
-    }
-
 async function extractEntries() {
     try {
         const fileInput = document.getElementById('icsFile');
@@ -1720,49 +1696,6 @@ async function extractEntries() {
     }
 }
 
-
-
-    // Funktion zum Anzeigen des benutzerdefinierten Dialogs
-    function showCustomDecision(title, message, invalidEntries) {
-        return new Promise((resolve) => {
-            const decisionElement = document.getElementById('custom-decision');
-            const titleElement = document.getElementById('custom-decision-title');
-            const messageElement = document.getElementById('custom-decision-message');
-            const listElement = document.getElementById('custom-decision-list');
-            const yesButton = document.getElementById('decision-yes');
-            const noButton = document.getElementById('decision-no');
-            const questionElement = document.getElementById('custom-decision-question');
-    
-            // Setze Titel und Nachricht
-            titleElement.textContent = title;
-            messageElement.textContent = message;
-    
-            // Leere die Liste und füge neue Einträge hinzu
-            listElement.innerHTML = "";
-            invalidEntries.forEach((entry) => {
-                const listItem = document.createElement('li');
-                listItem.textContent = entry;
-                listElement.appendChild(listItem);
-            });
-    
-            // Setze Frage (kann falls nötig angepasst werden)
-            questionElement.textContent = "Möchtest du die Verarbeitung fortsetzen?";
-    
-            // Event-Listener für Buttons
-            yesButton.onclick = () => {
-                decisionElement.style.display = 'none';
-                resolve(true);
-            };
-    
-            noButton.onclick = () => {
-                decisionElement.style.display = 'none';
-                resolve(false);
-            };
-    
-            // Dialog anzeigen
-            decisionElement.style.display = 'flex';
-        });
-    }
     function checkEntries() {
         const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
         const umlautPattern = /[äöüÄÖÜß]/;
@@ -1772,7 +1705,7 @@ async function extractEntries() {
 
         // Warnung, wenn keine Checkbox ausgewählt wurde
         if (selectedEntries.length === 0) {
-            showCustomAlert("Keine Auswahl getroffen!", "Bitte wähle mindestens einen Eintrag aus!");
+            showSHBcustomAlert("Keine Auswahl getroffen!", "Bitte wähle mindestens einen Eintrag aus!");
             return false; // Fehler: keine Auswahl getroffen
         }
 
@@ -1794,7 +1727,7 @@ async function extractEntries() {
         });
 
         if (umlautWarning) {
-            showCustomAlert("Umlaute entdeckt!", "Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!");
+            showSHBcustomAlert("Umlaute entdeckt!", "Bitte eigene Kalendereinträge kontrollieren und eigene Bezeichnungen anpassen!");
             return false; // Fehler
         }
 
@@ -1998,12 +1931,12 @@ async function extractEntries() {
         });
 
         if (colorNotSelected) {
-            showCustomAlert("Keine Tonnen-Farben?", "Die Farben der Tonne sollten zugeordnet werden!");
+            showSHBcustomAlert("Keine Tonnen-Farben?", "Die Farben der Tonne sollten zugeordnet werden!");
             return false; // Rückgabe `false`, wenn eine Farbe fehlt
         }
 
         if (duplicateColor) {
-            showCustomAlert("Doppelte Farbe erkannt!", "Jede Farbe darf nur einmal ausgewählt werden!");
+            showSHBcustomAlert("Doppelte Farbe erkannt!", "Jede Farbe darf nur einmal ausgewählt werden!");
             return false; // Rückgabe `false`, wenn Farben doppelt sind
         }
 
@@ -2180,7 +2113,7 @@ async function extractEntries() {
         navigator.clipboard.writeText(codeText)
             .then(() => {
                 // Zeigt das benutzerdefinierte Fenster
-                showCustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
+                showSHBcustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
 
                 // Button-Text und Stil dauerhaft ändern
                 button.classList.add('copied'); // Füge die CSS-Klasse hinzu
@@ -2191,7 +2124,7 @@ async function extractEntries() {
             })
             .catch(err => {
                 console.error("Fehler beim Kopieren des Codes: ", err);
-                showCustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
+                showSHBcustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
             });
     }
 
