@@ -80,10 +80,6 @@ layout: page
     </div>
 </div>
 
-<div id="error-table-container" class="shb-styled-table-container" style="display: none;">
-    <!-- Tabelle wird hier dynamisch eingefügt -->
-</div>
-
 <div class="shb-button">
     <button class="shb-button shb-button-blue" style="width: 30%" onclick="mergeICSFiles()">ICS Datei(en) verarbeiten</button>
 </div>
@@ -101,11 +97,21 @@ layout: page
 
 <h3 class="shb-section-title-center">Zusammengeführte ICS-Datei</h3>
 <p>
-    Die verarbeiteten Inhalte der ICS-Dateien werden hier angezeigt. Du kannst sie überprüfen und die Daten in die Zwischenablage kopieren oder bearbeiten.
+    Die ausgelesenen und zusammengeführten Inhalte der ICS-Dateien werden hier angezeigt.<br>
+    Du kannst sie über die Buttons in die Zwischenablage kopieren oder den kombinierten Kalender herunterladen.
 </p>
-
+<p>
+    Wenn fehlerhafte Einträge vorhanden sind, werden diese in der Tabelle darunter angezeigt.
+</p>
+<p>
+    Mit einem Klick auf <strong>Einträge bearbeiten</strong> werden sämtliche fehlerhaften Einträge korrigiert und in einem neuen Ausgabefenster angezeigt.
+</p>
 <div class="shb-text-output">
     <textarea class="shb-text-code-output" id="output" rows="20" cols="80" readonly></textarea>
+</div>
+
+<div id="error-table-container" class="shb-styled-table-container" style="display: none;">
+    <!-- Tabelle wird hier dynamisch eingefügt -->
 </div>
 
 <div class="shb-center-container">
@@ -121,7 +127,12 @@ layout: page
 <section class="content-section" id="edited-output-section" style="display: none;">
 
 <h3 class="shb-section-title-center">Bearbeitete ICS-Datei</h3>
-
+<p>
+    Hier wird deine bearbeitete ICS-Datei angezeigt.
+</p>
+<p>
+    Du kannst sie nun in die Zwischenablage kopieren oder herunterladen.
+</p>
 <div class="shb-text-output">
     <textarea class="shb-text-code-output" id="edited-output" rows="20" readonly></textarea>
 </div>
@@ -226,7 +237,7 @@ layout: page
 /* Fehler-Tabelle spezifisch */
 .shb-error-table-container {
     margin: auto;
-    width: 80%;
+    width: 100%;
 }
 
 .shb-error-table {
