@@ -424,11 +424,10 @@ function editAndDisplayEntries() {
                     .replace(/Ä/g, "Ae")
                     .replace(/Ö/g, "Oe")
                     .replace(/Ü/g, "Ue");
-
                 console.log("Nach Umlaut-Ersetzung:", cleanedSummary); // Debugging
 
-                // Entferne Ziffern und Punkte
-                cleanedSummary = cleanedSummary.replace(/[0-9.]/g, "").trim();
+                // Entferne Ziffern, Punkte und Leerzeichen
+                cleanedSummary = cleanedSummary.replace(/[0-9.\s]/g, "").trim();
                 console.log("Finaler bereinigter SUMMARY:", cleanedSummary); // Debugging
 
                 return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY mit bereinigtem Wert
@@ -441,10 +440,6 @@ function editAndDisplayEntries() {
     editedOutput.value = editedLines.join("\n");
     document.getElementById('edited-output-section').style.display = 'block';
 }
-
-
-
-
 
     function copyEditedToClipboard() {
         const editedOutput = document.getElementById('edited-output');
