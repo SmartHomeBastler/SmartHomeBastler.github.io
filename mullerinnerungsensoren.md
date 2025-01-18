@@ -211,7 +211,7 @@ Nach den Änderungen klicke auf<br>
 </p>
 
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>⬇️</span></button>
     <div id="galleryDropdown" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
@@ -351,7 +351,7 @@ Nach den Änderungen klicke auf<br>
 </p>
 
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Home Assistant - Template Sensor Helfer anlegen <span>⬇️</span></button>
     <div id="galleryDropdown2" class="shb-dropdown-content" style="display: none;">
         <div class="shb-dropdown-youtube">
             {% include youtube.html video="3fhL_K4o3Dg" %}
@@ -397,7 +397,7 @@ Nach den Änderungen klicke auf<br>
 <div class="shb-button">
     <button class="shb-button shb-button-main" onclick="showStep(5); createTemplates()">👇  Templates erstellen  👇</button>
 </div>
-
+<br>
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
     <div class="shb-title-inline">
@@ -704,7 +704,7 @@ Nach den Änderungen klicke auf<br>
  Wie man die notwendigen Helfer anlegt, findest du in den folgenden ⬇️ Dropdowns ⬇️
 </p>
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Taster einrichten <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Taster einrichten <span>⬇️</span></button>
     <div id="galleryDropdown3" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_taster %}
         <div class="columns is-multiline">
@@ -734,7 +734,7 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">Helfer-Zeitplan einrichten <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">Helfer-Zeitplan einrichten <span>⬇️</span></button>
     <div id="galleryDropdown4" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_zeitplan %}
         <div class="columns is-multiline">
@@ -863,7 +863,7 @@ Nach den Änderungen klicke auf<br>
     Wie man Browser Mod und die Browser ID einrichtet, erfährst du im ⬇️ Dropdown ⬇️
 </p>
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown5', this)">Browser Mod und Browser ID einrichten <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown5', this)">Browser Mod und Browser ID einrichten <span>⬇️</span></button>
     <div id="galleryDropdown5" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_browser_mod_id %}
         <div class="columns is-multiline">
@@ -946,7 +946,7 @@ Nach den Änderungen klicke auf<br>
     Wie man das Blueprint installiert und die Automatisierung einrichtet, siehst du im ⬇️ Dropdown ⬇️
 </p>
 <div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown6', this)">Blueprint Installation und Einrichtung <span>&#9660;</span></button>
+    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown6', this)">Blueprint Installation und Einrichtung <span>⬇️</span></button>
     <div id="galleryDropdown6" class="dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_blueprint_popup %}
         <div class="columns is-multiline">
