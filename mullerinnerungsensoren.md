@@ -1722,7 +1722,7 @@ async function extractEntries() {
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.className = "shb-custom-checkbox";
-            checkbox.id = `entry-checkbox-${idCounter}`;
+            checkbox.id = `shb-custom-checkbox-${idCounter}`;
             checkboxCell.appendChild(checkbox);
             row.appendChild(checkboxCell);
     
@@ -1761,7 +1761,7 @@ async function extractEntries() {
         const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
         const umlautPattern = /[äöüÄÖÜß]/;
         const selectedEntries = Array.from(entryTableBody.querySelectorAll("tr")).filter(row => {
-            return row.querySelector(".entry-checkbox").checked;
+            return row.querySelector(".shb-custom-checkbox").checked;
         });
 
         // Warnung, wenn keine Checkbox ausgewählt wurde
