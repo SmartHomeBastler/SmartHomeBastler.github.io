@@ -1773,7 +1773,7 @@ async function extractEntries() {
         let umlautWarning = false;
 
         selectedEntries.forEach(row => {
-            const customName = row.querySelector(".entry-custom-name").value.trim(); // Eigene Bezeichnung
+            const customName = row.querySelector(".shb-custom-input").value.trim(); // Eigene Bezeichnung
             const summaryText = row.querySelector("td:nth-child(2)").textContent.trim(); // Kalendereintrag (SUMMARY)
 
             // Prüfe auf Umlaute in der eigenen Bezeichnung
@@ -1847,7 +1847,7 @@ async function extractEntries() {
 
         // Add rows for selected entries
         selectedEntries.forEach((row) => {
-            const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
+            const customName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent;
             const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
                 return {
                     'ä': 'a', 'ö': 'o', 'ü': 'u',
@@ -1912,7 +1912,7 @@ async function extractEntries() {
 
         // Add rows for selected entries
         selectedEntries.forEach((row) => {
-            const customName = row.querySelector(".entry-custom-name").value || row.querySelector("td:nth-child(2)").textContent;
+            const customName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent;
             const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
                 return {
                     'ä': 'a', 'ö': 'o', 'ü': 'u',
