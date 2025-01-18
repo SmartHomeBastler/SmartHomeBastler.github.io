@@ -222,6 +222,76 @@ layout: page
     border: 1px solid #ffffff;
     font-size: 14px;
 }
+
+/* Fehler-Tabelle spezifisch */
+.shb-error-table-container {
+    margin: auto;
+    width: 80%;
+}
+
+.shb-error-table {
+    width: 100%;
+    border: 4px solid #1ab5d5;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.shb-error-table thead th {
+    background-color: #1ab5d5; /* Kopfzeile bleibt blau */
+    color: #000000 !important;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-left: 2px solid #000000 !important;
+}
+
+.shb-error-table thead th:first-child {
+    border-left: none;
+}
+
+.shb-error-table tbody tr:nth-child(odd) {
+    background-color: #fff5cc; /* Helles Gelb für ungerade Zeilen */
+}
+
+.shb-error-table tbody tr:nth-child(even) {
+    background-color: #ffeb99; /* Dunkleres Gelb für gerade Zeilen */
+}
+
+.shb-error-table tbody td {
+    padding: 10px;
+    vertical-align: middle;
+    border-left: 2px solid #1ab5d5;
+}
+
+/* Blaue Spalte für fehlerhaften SUMMARY */
+.shb-error-table tbody td.summary-cell {
+    background-color: #b8f3ff; /* Helles Blau */
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Rote Spalte für Fehlerbeschreibung */
+.shb-error-table tbody td.error-cell {
+    background-color: #ffcccc; /* Helles Rot */
+    color: #990000;
+    font-weight: bold;
+}
+
+/* Gelbe Spalte für Nach Bearbeitung */
+.shb-error-table tbody td.action-cell {
+    background-color: #fff7cc; /* Helles Gelb */
+    color: #665500;
+    font-weight: bold;
+}
+
+/* Hover-Effekt */
+.shb-error-table tbody tr:hover {
+    background-color: #e6f7ff; /* Leichtes Blau beim Hover */
+    transition: background-color 0.3s ease;
+}
+
 </style>
 
 <script>
@@ -327,14 +397,12 @@ function mergeICSFiles() {
     });
 }
 
-
-
 function displayErrorTable(errorList) {
     const container = document.getElementById('error-table-container');
     container.innerHTML = ''; // Vorherigen Inhalt löschen
 
     if (errorList.length > 0) {
-        const tableHTML = `<table class="shb-styled-table">
+        const tableHTML = `<table class="shb-error-table">
             <thead>
                 <tr>
                     <th>Fehlerhafter SUMMARY</th>
@@ -347,9 +415,9 @@ function displayErrorTable(errorList) {
                     .map(
                         error =>
                             `<tr>
-                                <td>${error.summary}</td>
-                                <td>${error.error}</td>
-                                <td>${error.action}</td>
+                                <td class="summary-cell">${error.summary}</td>
+                                <td class="error-cell">${error.error}</td>
+                                <td class="action-cell">${error.action}</td>
                             </tr>`
                     )
                     .join('')}
@@ -362,8 +430,6 @@ function displayErrorTable(errorList) {
         container.style.display = "none"; // Keine Fehler -> Tabelle ausblenden
     }
 }
-
-
 
     function copyToClipboard() {
         const output = document.getElementById('output');
