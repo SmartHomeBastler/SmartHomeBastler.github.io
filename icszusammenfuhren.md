@@ -314,39 +314,40 @@ layout: page
     }
 
     function displayErrorTable(errorList) {
-        const existingContainer = document.getElementById('error-table-container');
-        if (existingContainer) {
-            existingContainer.remove(); // Entfernt alte Fehlerliste, falls vorhanden
+        console.log("Error List to display:", errorList); // Debugging
+        const container = document.getElementById('error-table-container');
+
+        if (!container) {
+            console.error("Container for error table not found!");
+            return;
         }
 
-        const errorTableContainer = document.createElement('div');
-        errorTableContainer.id = 'error-table-container';
-        errorTableContainer.className = 'shb-styled-table-container'; // Nutzt deinen vorhandenen Container-Stil
-
-        const tableHTML = `<table class="shb-styled-table">
-            <thead>
-                <tr>
-                    <th>Datei</th>
-                    <th>Fehler</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${errorList
-                    .map(error => `<tr><td>${error.file}</td><td>${error.error}</td></tr>`)
-                    .join('')}
-            </tbody>
-        </table>`;
-
-        errorTableContainer.innerHTML = tableHTML;
-        document.body.appendChild(errorTableContainer);
+        container.innerHTML = ''; // Vorherigen Inhalt löschen
 
         if (errorList.length > 0) {
-            errorTableContainer.style.display = "block";
+            const tableHTML = `<table class="shb-styled-table">
+                <thead>
+                    <tr>
+                        <th>Datei</th>
+                        <th>Fehler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${errorList
+                        .map(error => `<tr><td>${error.file}</td><td>${error.error}</td></tr>`)
+                        .join('')}
+                </tbody>
+            </table>`;
+
+            console.log("Generated Table HTML:", tableHTML); // Debugging
+
+            container.innerHTML = tableHTML;
+            container.style.display = "block"; // Tabelle sichtbar machen
         } else {
-            errorTableContainer.style.display = "none";
+            container.style.display = "none"; // Keine Fehler -> Tabelle ausblenden
+            console.log("No errors to display, hiding table."); // Debugging
         }
     }
-
 
     function copyToClipboard() {
         const output = document.getElementById('output');
