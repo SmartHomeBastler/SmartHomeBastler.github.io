@@ -112,7 +112,7 @@ layout: page
     <textarea class="shb-text-code-output" id="output" rows="20" cols="80" readonly></textarea>
 </div>
 
-<div id="error-table-container" class="shb-styled-table-container" style="display: none;">
+<div id="error-table-container" class="shb-error-table-container" style="display: none;">
     <!-- Tabelle wird hier dynamisch eingefügt -->
 </div>
 
