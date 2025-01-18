@@ -411,8 +411,11 @@ function editAndDisplayEntries() {
                 const originalSummary = line.substring(index + 1).trim();
                 console.log("Original SUMMARY:", originalSummary); // Debugging
 
-                // Entferne Inhalte zwischen allen Arten von Klammern (rund, eckig, geschweift, spitz)
-                let cleanedSummary = originalSummary.replace(/\\(.*?\\)|\\[.*?\\]|\\{.*?\\}|<.*?>/g, "");
+                // Entferne Inhalte zwischen allen Arten von Klammern
+                let cleanedSummary = originalSummary.replace(/\\([^)]*\\)/g, ""); // Runde Klammern
+                cleanedSummary = cleanedSummary.replace(/\\[[^\\]]*\\]/g, ""); // Eckige Klammern
+                cleanedSummary = cleanedSummary.replace(/\\{[^\\}]*\\}/g, ""); // Geschweifte Klammern
+                cleanedSummary = cleanedSummary.replace(/<[^>]*>/g, ""); // Spitzklammern
                 console.log("Nach Klammern-Entfernung:", cleanedSummary); // Debugging
 
                 // Entferne Sonderzeichen
@@ -445,6 +448,7 @@ function editAndDisplayEntries() {
     editedOutput.value = editedLines.join("\n");
     document.getElementById('edited-output-section').style.display = 'block';
 }
+
 
 
 
