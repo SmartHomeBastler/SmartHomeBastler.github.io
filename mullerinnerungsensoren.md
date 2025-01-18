@@ -22,7 +22,6 @@ layout: page
         Ebenfalls ist zu beachten, dass derzeit nur ICS Dateien und ICS-URLs für den Codegenerator genutzt werden können.
     </p>
 </div>
-<br>
 <h4 class="shb-section-title-left">Was muss vor der Bearbeitung mit dem Code-Generator vorbereitet werden:</h4>
 
 <ul class="shb-list-start">
@@ -30,7 +29,6 @@ layout: page
     <li>Anlegen eines <strong>muell</strong> Ordners im <strong>config/www/</strong> Ordner</li>
     <li>Bereitstellung einer ICS Datei oder URL</li>
 </ul>
-<br>
 <div class="shb-dropdown">
     <button class="shb-dropdown-toggle" onclick="toggleDropdown('noISCdropdown', this)">
         Was mache ich, wenn ich keine ICS Datei oder URL habe? <span>⬇️</span>
@@ -1577,11 +1575,17 @@ In solch einem Fall, kann im nächsten Schritt die eigene Bezeichnung auch als A
                 }
             }
         }
-    
+
         // Automatisch scrollen, um den ausgewählten Schritt in den Fokus zu bringen
         const currentStep = document.getElementById(`step-${stepNumber}`);
         if (currentStep) {
-            currentStep.scrollIntoView({ behavior: "smooth" });
+            // Höhe der fixierten Navbar
+            const navbarHeight = document.querySelector('.navbar').offsetHeight || 0;
+
+            // Scrollen unter Berücksichtigung der Navbar-Höhe
+            const offsetTop = currentStep.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+            window.scrollTo({ top: offsetTop, behavior: "smooth" });
         }
     }
 
