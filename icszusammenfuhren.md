@@ -282,87 +282,87 @@ function mergeICSFiles() {
         const mergedData = results.join("\n");
         const lines = mergedData.split("\n");
 
-        // Fehlerliste als Map für deduplizierte Einträge
         const errorMap = new Map();
 
         lines.forEach((line, index) => {
-            console.log("Zeile:", index + 1, "Inhalt:", line);
             if (line.startsWith("SUMMARY")) {
                 const contentIndex = line.indexOf(":");
                 if (contentIndex !== -1) {
                     const summaryContent = line.substring(contentIndex + 1).trim();
-                    console.log("Erkannter SUMMARY:", summaryContent);
 
-                    // Fehlerüberprüfung
                     const errors = [];
                     if (/[äöüÄÖÜß]/.test(summaryContent)) {
-                        errors.push("Umlaut entdeckt");
+                        errors.push({ type: "Umlaut entdeckt", action: "Umlaut wird geändert" });
                     }
                     if (/[()\\/]/.test(summaryContent)) {
-                        errors.push("Sonderzeichen entdeckt");
+                        errors.push({ type: "Sonderzeichen entdeckt", action: "Sonderzeichen und nachfolgender Text wird entfernt" });
                     }
                     if (/[0-9]/.test(summaryContent)) {
-                        errors.push("Ziffer entdeckt");
+                        errors.push({ type: "Ziffer entdeckt", action: "Ziffer wird entfernt" });
                     }
-                    // Prüft explizit auf Leerzeichen innerhalb des Inhalts
                     if (summaryContent.includes(" ")) {
-                        errors.push("Leerzeichen entdeckt");
+                        errors.push({ type: "Leerzeichen entdeckt", action: "Leerzeichen wird entfernt" });
                     }
 
                     if (errors.length > 0) {
-                        const errorDescription = errors.join(", ");
-                        console.log("Gefundene Fehler für SUMMARY:", summaryContent, "->", errorDescription);
-                        // Nur eindeutige Einträge in die Map aufnehmen
+                        const errorDescription = errors.map(e => e.type).join(", ");
+                        const actions = errors.map(e => e.action).join(", ");
                         if (!errorMap.has(summaryContent)) {
-                            errorMap.set(summaryContent, errorDescription);
-                            console.log("Aktuelle Fehler-Map:", Array.from(errorMap.entries()));
+                            errorMap.set(summaryContent, { errorDescription, actions });
                         }
                     }
                 }
             }
         });
 
-        // Fehlerliste aus Map generieren
-        const errorList = Array.from(errorMap.entries()).map(([summary, error]) => ({
+        const errorList = Array.from(errorMap.entries()).map(([summary, { errorDescription, actions }]) => ({
             summary,
-            error,
+            error: errorDescription,
+            action: actions,
         }));
-        console.log("Endgültige Fehlerliste:", errorList);
 
-        // Zeigt die Fehler in der Tabelle an
         displayErrorTable(errorList);
 
-        // ICS-Inhalte anzeigen
         document.getElementById('output').value = lines.join("\n");
     });
 }
 
 
-    function displayErrorTable(errorList) {
-        const container = document.getElementById('error-table-container');
-        container.innerHTML = ''; // Vorherigen Inhalt löschen
 
-        if (errorList.length > 0) {
-            const tableHTML = `<table class="shb-styled-table">
-                <thead>
-                    <tr>
-                        <th>Fehlerhafter SUMMARY</th>
-                        <th>Fehlerbeschreibung</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${errorList
-                        .map(error => `<tr><td>${error.summary}</td><td>${error.error}</td></tr>`)
-                        .join('')}
-                </tbody>
-            </table>`;
+function displayErrorTable(errorList) {
+    const container = document.getElementById('error-table-container');
+    container.innerHTML = ''; // Vorherigen Inhalt löschen
 
-            container.innerHTML = tableHTML;
-            container.style.display = "block"; // Tabelle sichtbar machen
-        } else {
-            container.style.display = "none"; // Keine Fehler -> Tabelle ausblenden
-        }
+    if (errorList.length > 0) {
+        const tableHTML = `<table class="shb-styled-table">
+            <thead>
+                <tr>
+                    <th>Fehlerhafter SUMMARY</th>
+                    <th>Fehlerbeschreibung</th>
+                    <th>Nach Bearbeitung</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${errorList
+                    .map(
+                        error =>
+                            `<tr>
+                                <td>${error.summary}</td>
+                                <td>${error.error}</td>
+                                <td>${error.action}</td>
+                            </tr>`
+                    )
+                    .join('')}
+            </tbody>
+        </table>`;
+
+        container.innerHTML = tableHTML;
+        container.style.display = "block"; // Tabelle sichtbar machen
+    } else {
+        container.style.display = "none"; // Keine Fehler -> Tabelle ausblenden
     }
+}
+
 
 
     function copyToClipboard() {
