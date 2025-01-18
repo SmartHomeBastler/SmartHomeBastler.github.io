@@ -1747,6 +1747,7 @@ async function extractEntries() {
     
             // Checkbox
             const checkboxCell = document.createElement("td");
+            checkboxCell.setAttribute("style", "text-align: center;");
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.className = "shb-custom-checkbox";
