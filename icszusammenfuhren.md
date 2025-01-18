@@ -111,6 +111,7 @@ layout: page
 <div class="shb-center-container">
 <div class="shb-button-container">
     <button class="shb-button shb-button-yellow" onclick="copyToClipboard()">In Zwischenablage kopieren</button>
+    <button class="shb-button shb-button-green" onclick="downloadMergedICSFile()">Zusammengeführte Datei herunterladen</button>
     <button class="shb-button shb-button-blue" onclick="editAndDisplayEntries()">Einträge bearbeiten</button>
 </div>
 </div>
@@ -369,6 +370,28 @@ function mergeICSFiles() {
         output.select();
         document.execCommand('copy');
         showSHBcustomAlert('Super!', 'Die ICS-Datei wurde in die Zwischenablage kopiert!');
+    }
+
+    function downloadMergedICSFile() {
+        const mergedOutput = document.getElementById('output').value;
+
+        if (!mergedOutput) {
+            showSHBcustomAlert('Oh Jeh!', 'Es ist keine zusammengeführte ICS-Datei verfügbar.');
+            return;
+        }
+
+        const blob = new Blob([mergedOutput], { type: 'text/calendar' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'kombinierter_kalender.ics';
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     }
 
 function editAndDisplayEntries() {
