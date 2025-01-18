@@ -387,13 +387,16 @@ function mergeICSFiles() {
                 if (index !== -1) {
                     const originalSummary = line.substring(index + 1).trim();
 
-                    // Entferne Texte zwischen Sonderzeichen und die Sonderzeichen selbst
-                    let cleanedSummary = originalSummary.replace(/\\([^\\)]+\\)/g, ""); // Entferne Inhalte zwischen runden Klammern
-                    cleanedSummary = cleanedSummary.replace(/\[.*?\]/g, ""); // Entferne Inhalte zwischen eckigen Klammern
-                    cleanedSummary = cleanedSummary.replace(/[{}<>]/g, ""); // Entferne geschweifte und spitze Klammern
-                    cleanedSummary = cleanedSummary.replace(/[!@#$%^&*(),.?":{}|<>]/g, ""); // Entferne Sonderzeichen
-                    
-                    // Ersetze Umlaute durch ihre Entsprechungen
+                    // Entferne Inhalte zwischen Klammern (rund, eckig, geschweift, spitz)
+                    let cleanedSummary = originalSummary.replace(/\\(.*?\\)/g, ""); // Entferne Inhalte zwischen runden Klammern
+                    cleanedSummary = cleanedSummary.replace(/\\[.*?\\]/g, ""); // Entferne Inhalte zwischen eckigen Klammern
+                    cleanedSummary = cleanedSummary.replace(/\\{.*?\\}/g, ""); // Entferne Inhalte zwischen geschweiften Klammern
+                    cleanedSummary = cleanedSummary.replace(/<.*?>/g, ""); // Entferne Inhalte zwischen spitzen Klammern
+
+                    // Entferne alle Sonderzeichen
+                    cleanedSummary = cleanedSummary.replace(/[!@#$%^&*(),.?":{}|<>]/g, "");
+
+                    // Ersetze Umlaute
                     cleanedSummary = cleanedSummary
                         .replace(/ä/g, "ae")
                         .replace(/ö/g, "oe")
@@ -406,7 +409,7 @@ function mergeICSFiles() {
                     // Entferne Ziffern, Punkte und Leerzeichen
                     cleanedSummary = cleanedSummary.replace(/[0-9.\s]/g, "");
 
-                    return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY_xyz mit bereinigtem SUMMARY
+                    return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY mit bereinigtem Wert
                 }
             }
             return line; // Unveränderte Zeilen zurückgeben
