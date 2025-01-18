@@ -166,7 +166,7 @@ Nach den Änderungen klicke auf<br>
 </p>
 
 <div class="shb-styled-table-container">
-<table class="shb-styled-table" id="entry-table">
+<table class="shb-custom-table" id="entry-table">
     <thead>
         <tr>
             <th>Auswählen</th>
@@ -1298,21 +1298,75 @@ Nach den Änderungen klicke auf<br>
     .custom-button:hover {
         background-color: #45a049;
     }
-    /* Tabellen für Kalender- und Sensorkonfigurationen */
-    .custom-table {
+    /* Container für die angepasste Tabelle */
+    .shb-custom-table-container {
+        margin: auto;
+        width: 80%;
+    }
+
+    /* Tabelle */
+    .shb-custom-table {
         width: 100%;
+        border: 2px solid #1a73e8;
         border-collapse: collapse;
-        margin-top: 20px;
+        font-family: Arial, sans-serif;
+        text-align: left;
+        margin: 20px 0;
     }
-    .custom-table th, .custom-table td {
-        border: 1px solid #c9c9c9;
-        padding: 8px;
-        text-align: center;
+
+    /* Kopfzeile */
+    .shb-custom-table thead th {
+        background-color: #1a73e8;
+        color: #ffffff;
+        padding: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: 1px solid #000;
+    }
+
+    /* Alternierende Zeilenfarben im Tabellenkörper */
+    .shb-custom-table tbody tr:nth-child(odd) {
+        background-color: #e3f2fd;
+    }
+
+    .shb-custom-table tbody tr:nth-child(even) {
+        background-color: #bbdefb;
+    }
+
+    /* Zellenstile */
+    .shb-custom-table tbody td {
+        padding: 10px;
         vertical-align: middle;
+        border: 1px solid #1a73e8;
     }
-    .custom-table select {
-        vertical-align: middle;
+
+    /* Hover-Effekt */
+    .shb-custom-table tbody tr:hover {
+        background-color: #90caf9;
+        transition: background-color 0.3s ease;
     }
+
+    /* Checkbox-Stil */
+    .shb-custom-checkbox {
+        transform: scale(1.4);
+        margin: 0;
+    }
+
+    /* Input-Felder in der Tabelle */
+    .shb-custom-input {
+        padding: 5px;
+        border: 1px solid #1a73e8;
+        border-radius: 3px;
+        width: 90%;
+        box-sizing: border-box;
+    }
+
+    /* Placeholder-Stil für Input-Felder */
+    .shb-custom-input::placeholder {
+        color: #757575;
+        font-style: italic;
+    }
+
     /* Code Container */
     .code-container {
         position: relative;
@@ -1667,7 +1721,7 @@ async function extractEntries() {
             const checkboxCell = document.createElement("td");
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
-            checkbox.className = "entry-checkbox";
+            checkbox.className = "shb-custom-checkbox";
             checkbox.id = `entry-checkbox-${idCounter}`;
             checkboxCell.appendChild(checkbox);
             row.appendChild(checkboxCell);
@@ -1689,7 +1743,7 @@ async function extractEntries() {
             const customNameInput = document.createElement("input");
             customNameInput.type = "text";
             customNameInput.placeholder = "Eigene Bezeichnung";
-            customNameInput.className = "entry-custom-name";
+            customNameInput.className = "shb-custom-input";
             customNameInput.id = `custom-name-${idCounter}`;
             customNameCell.appendChild(customNameInput);
             row.appendChild(customNameCell);
