@@ -150,11 +150,6 @@ layout: page
 </p>
 
 <div class="shb-form-group">
-    <label for="file-id-1">Eine Datei hochladen</label>
-    <input type="file" id="calendarName" accept=".ics" style="width: 30%" />
-</div>
-
-<div class="shb-form-group">
     <label for="calendarName">Kalendername:</label>
     <input type="text" id="calendarName" placeholder="z.B. Mein Kalender" style="width: 30%">
 </div>
