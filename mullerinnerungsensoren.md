@@ -263,7 +263,7 @@ Nach den Änderungen klicke auf<br>
 
 <h3 class="custom-subtitle" id="sensor-header" style="display:none;">Anzulegende Sensoren und Mülltypen</h3>
 
-<table class="custom-table" id="sensor-table" style="display:none;">
+<table class="shb-custom-table" id="sensor-table" style="display:none;">
     <thead>
         <tr>
             <th>Sensor Name</th>
@@ -300,7 +300,7 @@ Nach den Änderungen klicke auf<br>
     und lege diesen Sensor zusammen mit dem <strong>Werte Template Datum einzelne Abholungen</strong> in der Waste Collection Schedule an.
 </p>
 
-<table class="custom-table" id="date-sensor-table" style="display: none;">
+<table class="shb-custom-table" id="date-sensor-table" style="display: none;">
     <thead>
         <tr>
             <th>Sensor Name</th>
@@ -760,7 +760,7 @@ Nach den Änderungen klicke auf<br>
     Lege diese Helfer in Home Assistant an und fahre anschließend mit dem nächsten Schritt fort.
 </p>
 
-<table class="custom-table" id="helper-table">
+<table class="shb-custom-table" id="helper-table">
     <thead>
         <tr>
             <th>Helfer Name</th>
@@ -899,7 +899,7 @@ Nach den Änderungen klicke auf<br>
     Zur einfachen Einrichtung dieser Automatisierung habe ich ein Blueprint erstellt. Dieses kann mit einem Klick auf das Blueprint in der Tabelle herunter geladen und in Home Assistant installiert werden.
 </p>
 
-<table class="custom-table" id="blueprint-table">
+<table class="shb-custom-table" id="blueprint-table">
     <thead>
         <tr>
             <th>Blueprint</th>
@@ -916,7 +916,7 @@ Nach den Änderungen klicke auf<br>
     </tbody>
 </table>
 <br>
-<table class="custom-table" id="automation-table">
+<table class="shb-custom-table" id="automation-table">
     <thead>
         <tr>
             <th>Automatisierung Name</th>
@@ -2207,7 +2207,7 @@ async function extractEntries() {
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Standardreihe "Nächste Abholung"
         
         // Tabelle für die Ausgabe erstellen
-        let imageTable = '<table class="custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th>Bild Vorschau</th></tr></thead><tbody>';
+        let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th>Bild Vorschau</th></tr></thead><tbody>';
         
         // Mapping von Farben zu Bilddateinamen
         const colorToImageMap = {
