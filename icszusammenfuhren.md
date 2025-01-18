@@ -240,91 +240,94 @@ layout: page
         }
     }
 
-    function mergeICSFiles() {
-        const files = [
-            document.getElementById('file1').files[0],
-            document.getElementById('file2').files[0],
-            document.getElementById('file3').files[0],
-            document.getElementById('file4').files[0],
-            document.getElementById('file5').files[0],
-            document.getElementById('file6').files[0],
-        ];
+function mergeICSFiles() {
+    const files = [
+        document.getElementById('file1').files[0],
+        document.getElementById('file2').files[0],
+        document.getElementById('file3').files[0],
+        document.getElementById('file4').files[0],
+        document.getElementById('file5').files[0],
+        document.getElementById('file6').files[0],
+    ];
 
-        const validFiles = files.filter(file => file);
+    const validFiles = files.filter(file => file);
 
-        if (validFiles.length === 0) {
-            alert("Bitte mindestens eine ICS-Datei hochladen.");
-            return;
-        }
+    if (validFiles.length === 0) {
+        alert("Bitte mindestens eine ICS-Datei hochladen.");
+        return;
+    }
 
-        const readers = validFiles.map(file => {
-            const reader = new FileReader();
-            reader.readAsText(file);
-            return reader;
-        });
+    const readers = validFiles.map(file => {
+        const reader = new FileReader();
+        reader.readAsText(file);
+        return reader;
+    });
 
-        Promise.all(
-            readers.map(
-                reader =>
-                    new Promise(resolve => {
-                        reader.onload = () => resolve(reader.result);
-                    })
-            )
-        ).then(results => {
-            const mergedData = results.join("\\n");
-            const lines = mergedData.split("\\n");
+    Promise.all(
+        readers.map(
+            reader =>
+                new Promise(resolve => {
+                    reader.onload = () => resolve(reader.result);
+                })
+        )
+    ).then(results => {
+        const mergedData = results.join("\n");
+        const lines = mergedData.split("\n");
 
-            // Fehlerliste als Map für deduplizierte Einträge
-            const errorMap = new Map();
+        // Fehlerliste als Map für deduplizierte Einträge
+        const errorMap = new Map();
 
-            lines.forEach((line, index) => {
-                if (line.startsWith("SUMMARY")) {
-                    const contentIndex = line.indexOf(":");
-                    if (contentIndex !== -1) {
-                        const summaryContent = line.substring(contentIndex + 1).trim();
+        lines.forEach((line, index) => {
+            console.log("Zeile:", index + 1, "Inhalt:", line);
+            if (line.startsWith("SUMMARY")) {
+                const contentIndex = line.indexOf(":");
+                if (contentIndex !== -1) {
+                    const summaryContent = line.substring(contentIndex + 1).trim();
+                    console.log("Erkannter SUMMARY:", summaryContent);
 
-                        // Fehlerüberprüfung
-                        if (/[äöüÄÖÜß]/.test(summaryContent)) {
-                            errorMap.set(
-                                summaryContent,
-                                "Umlaut entdeckt"
-                            );
-                        }
-                        if (/[()\\/]/.test(summaryContent)) {
-                            errorMap.set(
-                                summaryContent,
-                                "Sonderzeichen entdeckt"
-                            );
-                        }
-                        if (/[0-9]/.test(summaryContent)) {
-                            errorMap.set(
-                                summaryContent,
-                                "Ziffer entdeckt"
-                            );
-                        }
-                        if (/\\s/.test(summaryContent)) {
-                            errorMap.set(
-                                summaryContent,
-                                "Leerzeichen entdeckt"
-                            );
+                    // Fehlerüberprüfung
+                    const errors = [];
+                    if (/[äöüÄÖÜß]/.test(summaryContent)) {
+                        errors.push("Umlaut entdeckt");
+                    }
+                    if (/[()\\/]/.test(summaryContent)) {
+                        errors.push("Sonderzeichen entdeckt");
+                    }
+                    if (/[0-9]/.test(summaryContent)) {
+                        errors.push("Ziffer entdeckt");
+                    }
+                    if (/\\s/.test(summaryContent)) {
+                        errors.push("Leerzeichen entdeckt");
+                    }
+
+                    if (errors.length > 0) {
+                        const errorDescription = errors.join(", ");
+                        console.log("Gefundene Fehler für SUMMARY:", summaryContent, "->", errorDescription);
+                        // Nur eindeutige Einträge in die Map aufnehmen
+                        if (!errorMap.has(summaryContent)) {
+                            errorMap.set(summaryContent, errorDescription);
+                            console.log("Aktuelle Fehler-Map:", Array.from(errorMap.entries()));
                         }
                     }
                 }
-            });
-
-            // Fehlerliste aus Map generieren
-            const errorList = Array.from(errorMap.entries()).map(([content, error]) => ({
-                summary: content,
-                error,
-            }));
-
-            // Zeigt die Fehler in der Tabelle an
-            displayErrorTable(errorList);
-
-            // ICS-Inhalte anzeigen
-            document.getElementById('output').value = lines.join("\\n");
+            }
         });
-    }
+
+        // Fehlerliste aus Map generieren
+        const errorList = Array.from(errorMap.entries()).map(([summary, error]) => ({
+            summary,
+            error,
+        }));
+        console.log("Endgültige Fehlerliste:", errorList);
+
+        // Zeigt die Fehler in der Tabelle an
+        displayErrorTable(errorList);
+
+        // ICS-Inhalte anzeigen
+        document.getElementById('output').value = lines.join("\n");
+    });
+}
+
 
     function displayErrorTable(errorList) {
         const container = document.getElementById('error-table-container');
