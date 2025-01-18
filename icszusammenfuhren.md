@@ -373,25 +373,45 @@ function mergeICSFiles() {
 
     function editAndDisplayEntries() {
         const icsData = document.getElementById('output').value;
-    
+
         if (!icsData) {
             showSHBcustomAlert('Sorry!', 'Keine ICS-Daten verfügbar. Bitte zuerst eine Datei verarbeiten.');
             return;
         }
-    
+
         const lines = icsData.split("\n");
+
         const editedLines = lines.map(line => {
             if (line.startsWith("SUMMARY")) {
                 const index = line.indexOf(":");
                 if (index !== -1) {
-                    const originalSummary = line.substring(index + 1).trim(); // Inhalt nach dem ersten Doppelpunkt
-                    const cleanedSummary = originalSummary.replace(/[0-9.\s]/g, ""); // Entferne Ziffern, Punkte und Leerzeichen
-                    return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY_xyz mit SUMMARY:
+                    const originalSummary = line.substring(index + 1).trim();
+
+                    // Entferne Texte zwischen Sonderzeichen und die Sonderzeichen selbst
+                    let cleanedSummary = originalSummary.replace(/\\([^\\)]+\\)/g, ""); // Entferne Inhalte zwischen runden Klammern
+                    cleanedSummary = cleanedSummary.replace(/\[.*?\]/g, ""); // Entferne Inhalte zwischen eckigen Klammern
+                    cleanedSummary = cleanedSummary.replace(/[{}<>]/g, ""); // Entferne geschweifte und spitze Klammern
+                    cleanedSummary = cleanedSummary.replace(/[!@#$%^&*(),.?":{}|<>]/g, ""); // Entferne Sonderzeichen
+                    
+                    // Ersetze Umlaute durch ihre Entsprechungen
+                    cleanedSummary = cleanedSummary
+                        .replace(/ä/g, "ae")
+                        .replace(/ö/g, "oe")
+                        .replace(/ü/g, "ue")
+                        .replace(/ß/g, "ss")
+                        .replace(/Ä/g, "Ae")
+                        .replace(/Ö/g, "Oe")
+                        .replace(/Ü/g, "Ue");
+
+                    // Entferne Ziffern, Punkte und Leerzeichen
+                    cleanedSummary = cleanedSummary.replace(/[0-9.\s]/g, "");
+
+                    return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY_xyz mit bereinigtem SUMMARY
                 }
             }
             return line; // Unveränderte Zeilen zurückgeben
         });
-    
+
         const editedOutput = document.getElementById('edited-output');
         editedOutput.value = editedLines.join("\n");
         document.getElementById('edited-output-section').style.display = 'block';
