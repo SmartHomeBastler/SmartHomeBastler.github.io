@@ -409,12 +409,15 @@ function editAndDisplayEntries() {
             const index = line.indexOf(":");
             if (index !== -1) {
                 const originalSummary = line.substring(index + 1).trim();
+                console.log("Original SUMMARY:", originalSummary); // Debugging
 
                 // Entferne Inhalte zwischen allen Arten von Klammern (rund, eckig, geschweift, spitz)
                 let cleanedSummary = originalSummary.replace(/\\(.*?\\)|\\[.*?\\]|\\{.*?\\}|<.*?>/g, "");
+                console.log("Nach Klammern-Entfernung:", cleanedSummary); // Debugging
 
                 // Entferne Sonderzeichen
                 cleanedSummary = cleanedSummary.replace(/[!@#$%^&*(),.?":{}|<>]/g, "");
+                console.log("Nach Sonderzeichen-Entfernung:", cleanedSummary); // Debugging
 
                 // Ersetze Umlaute
                 cleanedSummary = cleanedSummary
@@ -426,8 +429,11 @@ function editAndDisplayEntries() {
                     .replace(/Ö/g, "Oe")
                     .replace(/Ü/g, "Ue");
 
+                console.log("Nach Umlaut-Ersetzung:", cleanedSummary); // Debugging
+
                 // Entferne Ziffern, Punkte und Leerzeichen
                 cleanedSummary = cleanedSummary.replace(/[0-9.\s]/g, "");
+                console.log("Finaler bereinigter SUMMARY:", cleanedSummary); // Debugging
 
                 return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY mit bereinigtem Wert
             }
@@ -439,6 +445,7 @@ function editAndDisplayEntries() {
     editedOutput.value = editedLines.join("\n");
     document.getElementById('edited-output-section').style.display = 'block';
 }
+
 
 
     function copyEditedToClipboard() {
