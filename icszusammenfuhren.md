@@ -411,15 +411,8 @@ function editAndDisplayEntries() {
                 const originalSummary = line.substring(index + 1).trim();
                 console.log("Original SUMMARY:", originalSummary); // Debugging
 
-                // Entferne Inhalte zwischen allen Arten von Klammern
-                let cleanedSummary = originalSummary.replace(/\\([^)]*\\)/g, ""); // Runde Klammern
-                cleanedSummary = cleanedSummary.replace(/\\[[^\\]]*\\]/g, ""); // Eckige Klammern
-                cleanedSummary = cleanedSummary.replace(/\\{[^\\}]*\\}/g, ""); // Geschweifte Klammern
-                cleanedSummary = cleanedSummary.replace(/<[^>]*>/g, ""); // Spitzklammern
-                console.log("Nach Klammern-Entfernung:", cleanedSummary); // Debugging
-
-                // Entferne Sonderzeichen
-                cleanedSummary = cleanedSummary.replace(/[!@#$%^&*(),.?":{}|<>]/g, "");
+                // Entferne alles ab dem ersten Sonderzeichen
+                let cleanedSummary = originalSummary.replace(/[^a-zA-ZäöüÄÖÜß\s]+.*/, "").trim();
                 console.log("Nach Sonderzeichen-Entfernung:", cleanedSummary); // Debugging
 
                 // Ersetze Umlaute
@@ -434,8 +427,8 @@ function editAndDisplayEntries() {
 
                 console.log("Nach Umlaut-Ersetzung:", cleanedSummary); // Debugging
 
-                // Entferne Ziffern, Punkte und Leerzeichen
-                cleanedSummary = cleanedSummary.replace(/[0-9.\s]/g, "");
+                // Entferne Ziffern und Punkte
+                cleanedSummary = cleanedSummary.replace(/[0-9.]/g, "").trim();
                 console.log("Finaler bereinigter SUMMARY:", cleanedSummary); // Debugging
 
                 return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY mit bereinigtem Wert
@@ -448,6 +441,7 @@ function editAndDisplayEntries() {
     editedOutput.value = editedLines.join("\n");
     document.getElementById('edited-output-section').style.display = 'block';
 }
+
 
 
 
