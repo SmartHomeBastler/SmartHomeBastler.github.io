@@ -371,54 +371,52 @@ function mergeICSFiles() {
         showSHBcustomAlert('Super!', 'Die ICS-Datei wurde in die Zwischenablage kopiert!');
     }
 
-    function editAndDisplayEntries() {
-        const icsData = document.getElementById('output').value;
+function editAndDisplayEntries() {
+    const icsData = document.getElementById('output').value;
 
-        if (!icsData) {
-            showSHBcustomAlert('Sorry!', 'Keine ICS-Daten verfügbar. Bitte zuerst eine Datei verarbeiten.');
-            return;
-        }
-
-        const lines = icsData.split("\n");
-
-        const editedLines = lines.map(line => {
-            if (line.startsWith("SUMMARY")) {
-                const index = line.indexOf(":");
-                if (index !== -1) {
-                    const originalSummary = line.substring(index + 1).trim();
-
-                    // Entferne Inhalte zwischen Klammern (rund, eckig, geschweift, spitz)
-                    let cleanedSummary = originalSummary.replace(/\\(.*?\\)/g, ""); // Entferne Inhalte zwischen runden Klammern
-                    cleanedSummary = cleanedSummary.replace(/\\[.*?\\]/g, ""); // Entferne Inhalte zwischen eckigen Klammern
-                    cleanedSummary = cleanedSummary.replace(/\\{.*?\\}/g, ""); // Entferne Inhalte zwischen geschweiften Klammern
-                    cleanedSummary = cleanedSummary.replace(/<.*?>/g, ""); // Entferne Inhalte zwischen spitzen Klammern
-
-                    // Entferne alle Sonderzeichen
-                    cleanedSummary = cleanedSummary.replace(/[!@#$%^&*(),.?":{}|<>]/g, "");
-
-                    // Ersetze Umlaute
-                    cleanedSummary = cleanedSummary
-                        .replace(/ä/g, "ae")
-                        .replace(/ö/g, "oe")
-                        .replace(/ü/g, "ue")
-                        .replace(/ß/g, "ss")
-                        .replace(/Ä/g, "Ae")
-                        .replace(/Ö/g, "Oe")
-                        .replace(/Ü/g, "Ue");
-
-                    // Entferne Ziffern, Punkte und Leerzeichen
-                    cleanedSummary = cleanedSummary.replace(/[0-9.\s]/g, "");
-
-                    return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY mit bereinigtem Wert
-                }
-            }
-            return line; // Unveränderte Zeilen zurückgeben
-        });
-
-        const editedOutput = document.getElementById('edited-output');
-        editedOutput.value = editedLines.join("\n");
-        document.getElementById('edited-output-section').style.display = 'block';
+    if (!icsData) {
+        showSHBcustomAlert('Sorry!', 'Keine ICS-Daten verfügbar. Bitte zuerst eine Datei verarbeiten.');
+        return;
     }
+
+    const lines = icsData.split("\n");
+
+    const editedLines = lines.map(line => {
+        if (line.startsWith("SUMMARY")) {
+            const index = line.indexOf(":");
+            if (index !== -1) {
+                const originalSummary = line.substring(index + 1).trim();
+
+                // Entferne Inhalte zwischen allen Arten von Klammern (rund, eckig, geschweift, spitz)
+                let cleanedSummary = originalSummary.replace(/\\(.*?\\)|\\[.*?\\]|\\{.*?\\}|<.*?>/g, "");
+
+                // Entferne Sonderzeichen
+                cleanedSummary = cleanedSummary.replace(/[!@#$%^&*(),.?":{}|<>]/g, "");
+
+                // Ersetze Umlaute
+                cleanedSummary = cleanedSummary
+                    .replace(/ä/g, "ae")
+                    .replace(/ö/g, "oe")
+                    .replace(/ü/g, "ue")
+                    .replace(/ß/g, "ss")
+                    .replace(/Ä/g, "Ae")
+                    .replace(/Ö/g, "Oe")
+                    .replace(/Ü/g, "Ue");
+
+                // Entferne Ziffern, Punkte und Leerzeichen
+                cleanedSummary = cleanedSummary.replace(/[0-9.\s]/g, "");
+
+                return `SUMMARY:${cleanedSummary}`; // Ersetze SUMMARY mit bereinigtem Wert
+            }
+        }
+        return line; // Unveränderte Zeilen zurückgeben
+    });
+
+    const editedOutput = document.getElementById('edited-output');
+    editedOutput.value = editedLines.join("\n");
+    document.getElementById('edited-output-section').style.display = 'block';
+}
+
 
     function copyEditedToClipboard() {
         const editedOutput = document.getElementById('edited-output');
