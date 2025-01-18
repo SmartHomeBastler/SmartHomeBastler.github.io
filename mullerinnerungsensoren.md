@@ -1307,7 +1307,7 @@ Nach den Änderungen klicke auf<br>
     /* Tabelle */
     .shb-custom-table {
         width: 100%;
-        border: 2px solid #1a73e8;
+        border: 2px solid #1ab5d5;
         border-collapse: collapse;
         font-family: Arial, sans-serif;
         text-align: left;
@@ -1316,7 +1316,7 @@ Nach den Änderungen klicke auf<br>
 
     /* Kopfzeile */
     .shb-custom-table thead th {
-        background-color: #1a73e8;
+        background-color: #1ab5d5;
         color: #ffffff;
         padding: 10px;
         font-weight: bold;
@@ -1326,18 +1326,19 @@ Nach den Änderungen klicke auf<br>
 
     /* Alternierende Zeilenfarben im Tabellenkörper */
     .shb-custom-table tbody tr:nth-child(odd) {
-        background-color: #e3f2fd;
+        background-color: #b8f3ff;
     }
 
     .shb-custom-table tbody tr:nth-child(even) {
-        background-color: #bbdefb;
+        background-color: #97ecfd;
     }
 
     /* Zellenstile */
     .shb-custom-table tbody td {
         padding: 10px;
         vertical-align: middle;
-        border: 1px solid #1a73e8;
+        border: 2px solid #1ab5d5;
+        color: #000000;
     }
 
     /* Hover-Effekt */
@@ -1365,6 +1366,33 @@ Nach den Änderungen klicke auf<br>
     .shb-custom-input::placeholder {
         color: #757575;
         font-style: italic;
+    }
+
+    .color-select {
+        padding: 8px;
+        color: #000000;
+        background-color: #1ab5d5;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .color-select:focus {
+        background-color: #37c4e1;
+        border: 2px solid #0048ff;
+        box-shadow: 0 4px 10px #7199ff;
+        outline: none;
+    }
+
+    /* Stile für die Optionen */
+    .color-select option {
+        background-color: #99eafb;
+    }
+
+    /* Jede zweite Zeile heller */
+    .color-select option:nth-child(even) {
+        background-color: #b4f2ff
     }
 
     /* Code Container */
