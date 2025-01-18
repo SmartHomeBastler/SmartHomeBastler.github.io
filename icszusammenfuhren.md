@@ -48,11 +48,11 @@ layout: page
 <section class="content-section" id="merge-section" style="display: none;">
 
 <h3 class="shb-section-title-center">ICS-Dateien hochladen, auslesen oder zusammenführen</h3>
-
+<div class="shb-center-container">
 <p>
     Wähle entweder eine oder mehrere <code>.ics</code>-Dateien aus um sie auszulesen bzw. zusammenzuführen.
 </p>
-
+</div>
 <div class="shb-form-group-container ics-file-container">
     <div class="shb-form-group ics-file-group">
         <label for="file1">ICS Datei 1 (erforderlich):</label>
