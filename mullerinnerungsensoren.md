@@ -199,7 +199,7 @@ Nach den Änderungen klicke auf<br>
 -->
 
 <div class="content-section" id="step-3" style="display:none;">
-<h2 class="custom-title">3. Sensoren Konfiguration</h2>
+<h2 class="shb-section-title-left">3. Sensoren Konfiguration</h2>
 
 <p>
     Wenn du eine ICS Datei verwendest, sollte an diesem Punkt diese Datei in deinem <strong>www/muell/</strong> Ordner abgelegt werden.
@@ -210,9 +210,9 @@ Nach den Änderungen klicke auf<br>
     Eine detaillierte Beschreibung wie diese einzurichten ist, findest du im <strong>⬇️ Dropdown Menü ⬇️</strong>
 </p>
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
-    <div id="galleryDropdown" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>&#9660;</span></button>
+    <div id="galleryDropdown" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -240,9 +240,9 @@ Nach den Änderungen klicke auf<br>
         </div>
     </div>
 </div>
-<h4>Was kann in der Waste Collection Schedule Integration eingerichtet werden:</h4>
+<h4 class="shb-section-title-left">Was kann in der Waste Collection Schedule Integration eingerichtet werden:</h4>
 
-<ul class="styled-list-start">
+<ul class="shb-list-start">
     <li><strong>Kalender</strong> - Anlegen deines Abfallkalenders mittels ICS, URL oder Abfall App</li>
     <li><strong>Mülltypen</strong> - Änderung der Bezeichnungen deiner einzelnen Abholungen (Alias Namen)</li>
     <li><strong>Sensor Nächste Abholung</strong> - Ein Sensor welche die nächste Abholung als Status ausgibt</li>
@@ -261,7 +261,7 @@ Nach den Änderungen klicke auf<br>
     Dann den Sensor-Namen zusammen mit dem Werte-Template in die Waste Collection Schedule eintragen.
 </p>
 
-<h3 class="custom-subtitle" id="sensor-header" style="display:none;">Anzulegende Sensoren und Mülltypen</h3>
+<h3 class="shb-section-title-center" id="sensor-header" style="display:none;">Anzulegende Sensoren und Mülltypen</h3>
 
 <table class="shb-custom-table" id="sensor-table" style="display:none;">
     <thead>
@@ -277,22 +277,22 @@ Nach den Änderungen klicke auf<br>
     </tbody>
 </table>
 
-<h3 class="custom-subtitle" id="template-header" style="display:none;">Werte Templates Sensoren</h3>
+<h3 class="shb-section-title-center" id="template-header" style="display:none;">Werte Templates Sensoren</h3>
 
 <div id="code-output-next" style="display:none;">
     <h4>Werte Template Nächste Abholung</h4>
-    <div class="code-container">
-        <button class="copy-button" onclick="copyCode('next-pickup-template', this)">Kopieren</button>
+    <div class="shb-code-container">
+        <button class="copy-code-button" onclick="copyCode('next-pickup-template', this)">Kopieren</button>
         <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
     </div>
     <h4>Werte Template einzelne Abholungen</h4>
-    <div class="code-container">
-        <button class="copy-button" onclick="copyCode('individual-pickup-template', this)">Kopieren</button>
+    <div class="shb-code-container">
+        <button class="copy-code-button" onclick="copyCode('individual-pickup-template', this)">Kopieren</button>
         <pre id="individual-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 </div>
 
-<h3 class="custom-subtitle" id="date-sensor-header" style="display:none;">Optionale Datum Sensoren</h3>
+<h3 class="shb-section-title-center" id="date-sensor-header" style="display:none;">Optionale Datum Sensoren</h3>
 
 <p>
     Wenn du das Datum der einzelnen Abholung benötigst, kannst du dir diesen Sensor ebenfalls anlegen.<br>
@@ -315,14 +315,13 @@ Nach den Änderungen klicke auf<br>
 
 <div id="code-output-date" style="display:none;">
     <h4>Werte Template Datum einzelne Abholungen</h4>
-    <div class="code-container">
-        <button class="copy-button" onclick="copyCode('date-pickup-template', this)">Kopieren</button>
+    <div class="shb-code-container">
+        <button class="copy-code-button" onclick="copyCode('date-pickup-template', this)">Kopieren</button>
         <pre id="date-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 </div>
-<div id="confirm-step-3" style="text-align: center; margin-top: 20px;">
-    <button class="custom-button" onclick="if (validateColors()) { showStep(4); }">
-        Sensoren angelegt? Weiter zu den Templates!
+<div class="shb-button" id="confirm-step-3" style="margin-top: 20px;">
+    <button class="shb-button shb-button-main" onclick="if (validateColors()) { showStep(4); }">👇  Sensoren angelegt? Weiter zu den Templates!  👇
     </button>
 </div>
 </div>
