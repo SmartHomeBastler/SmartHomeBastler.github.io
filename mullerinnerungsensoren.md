@@ -1349,7 +1349,7 @@ Nach den Änderungen klicke auf<br>
     /* Checkbox-Stil */
     .shb-custom-checkbox {
         transform: scale(1.4);
-        margin: 0;
+        margin: 0 20px;
     }
 
     /* Input-Felder in der Tabelle */
