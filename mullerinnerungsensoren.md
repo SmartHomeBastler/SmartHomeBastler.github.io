@@ -82,7 +82,7 @@ layout: page
 </div>
 <br>
 <div class="shb-button">
-    <button class="shb-button shb-button-green" style="margin-bottom: 30px;" onclick="showStep(1);">Hinweise gelesen! Vorbereitungen getroffen! Bereit zu starten!</button>
+    <button class="shb-button shb-button-main" style="margin-bottom: 30px;" onclick="showStep(1);">👇  Hinweise gelesen! Vorbereitungen getroffen! Bereit zu starten!  👇</button>
 </div>
 <!--
  █████  ██████  ███████  ██████ ██   ██ ███    ██ ██ ████████ ████████      ██ 
