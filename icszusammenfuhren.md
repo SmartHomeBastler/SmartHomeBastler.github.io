@@ -96,6 +96,7 @@ layout: page
 <section class="content-section" id="edit-section" style="display: none;">
 
 <h3 class="shb-section-title-center">Zusammengeführte ICS-Datei</h3>
+<div class="shb-center-container">
 <p>
     Die ausgelesenen und zusammengeführten Inhalte der ICS-Dateien werden hier angezeigt.<br>
     Du kannst sie über die Buttons in die Zwischenablage kopieren oder den kombinierten Kalender herunterladen.
@@ -106,6 +107,7 @@ layout: page
 <p>
     Mit einem Klick auf <strong>Einträge bearbeiten</strong> werden sämtliche fehlerhaften Einträge korrigiert und in einem neuen Ausgabefenster angezeigt.
 </p>
+</div>
 <div class="shb-text-output">
     <textarea class="shb-text-code-output" id="output" rows="20" cols="80" readonly></textarea>
 </div>
@@ -127,12 +129,14 @@ layout: page
 <section class="content-section" id="edited-output-section" style="display: none;">
 
 <h3 class="shb-section-title-center">Bearbeitete ICS-Datei</h3>
+<div class="shb-center-container">
 <p>
     Hier wird deine bearbeitete ICS-Datei angezeigt.
 </p>
 <p>
     Du kannst sie nun in die Zwischenablage kopieren oder herunterladen.
 </p>
+</div>
 <div class="shb-text-output">
     <textarea class="shb-text-code-output" id="edited-output" rows="20" readonly></textarea>
 </div>
@@ -309,16 +313,13 @@ layout: page
         const mergeCheckbox = document.getElementById('mergeICSCheckbox');
         const createCheckbox = document.getElementById('createICSCheckbox');
         const mergeSection = document.getElementById('merge-section');
-        const editSection = document.getElementById('edit-section');
         const createSection = document.getElementById('create-section');
 
         // Sichtbarkeit basierend auf Checkbox-Zustand
         if (mergeCheckbox.checked) {
             mergeSection.style.display = 'block';
-            editSection.style.display = 'block';
         } else {
             mergeSection.style.display = 'none';
-            editSection.style.display = 'none';
         }
 
         if (createCheckbox.checked) {
@@ -404,6 +405,7 @@ function mergeICSFiles() {
         displayErrorTable(errorList);
 
         document.getElementById('output').value = lines.join("\n");
+        document.getElementById('edit-section').style.display = 'block';
     });
 }
 
