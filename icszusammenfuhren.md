@@ -217,7 +217,7 @@ layout: page
 
 /* Styling für die spezifischen Eingabefelder */
 .ics-file-container .ics-file-group {
-    flex: 1 1 calc(50% - 20px); /* Zwei Spalten, Platz für Lücken */
+    flex: 1 1 calc(30% - 20px);
     box-sizing: border-box;
 }
 
