@@ -211,6 +211,12 @@
     background-color: #b4f2ff
 }
 
+.shb-form-group input::placeholder {
+    color: #ffffff;
+    font-style: italic;
+    opacity: 0.8;
+}
+
 .shb-form-group input:focus {
     background-color: #99eafb;
     border: 2px solid #0048ff;
