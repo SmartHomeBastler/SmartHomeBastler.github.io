@@ -271,83 +271,87 @@ layout: page
                     })
             )
         ).then(results => {
-            const mergedData = results.join("\n");
-            const lines = mergedData.split("\n");
-            const warningContainer = document.getElementById('warning-container');
+            const mergedData = results.join("\\n");
+            const lines = mergedData.split("\\n");
 
-            let errorList = [];
+            // Fehlerliste als Map für deduplizierte Einträge
+            const errorMap = new Map();
 
-            const processedLines = lines.map((line, index) => {
+            lines.forEach((line, index) => {
                 if (line.startsWith("SUMMARY")) {
-                    const fileIndex = Math.floor(index / lines.length * validFiles.length) + 1;
                     const contentIndex = line.indexOf(":");
-
                     if (contentIndex !== -1) {
                         const summaryContent = line.substring(contentIndex + 1).trim();
 
+                        // Fehlerüberprüfung
                         if (/[äöüÄÖÜß]/.test(summaryContent)) {
-                            errorList.push({ file: `File ${fileIndex}`, error: "Umlaut entdeckt" });
+                            errorMap.set(
+                                summaryContent,
+                                "Umlaut entdeckt"
+                            );
                         }
-
-                        if (/[()\/]/.test(summaryContent)) {
-                            errorList.push({ file: `File ${fileIndex}`, error: "Sonderzeichen entdeckt" });
+                        if (/[()\\/]/.test(summaryContent)) {
+                            errorMap.set(
+                                summaryContent,
+                                "Sonderzeichen entdeckt"
+                            );
                         }
-
                         if (/[0-9]/.test(summaryContent)) {
-                            errorList.push({ file: `File ${fileIndex}`, error: "Ziffer entdeckt" });
+                            errorMap.set(
+                                summaryContent,
+                                "Ziffer entdeckt"
+                            );
                         }
-
-                        if (/\s/.test(summaryContent)) {
-                            errorList.push({ file: `File ${fileIndex}`, error: "Leerzeichen entdeckt" });
+                        if (/\\s/.test(summaryContent)) {
+                            errorMap.set(
+                                summaryContent,
+                                "Leerzeichen entdeckt"
+                            );
                         }
                     }
                 }
-                return line;
             });
 
-            // Zeigt die Fehlerliste an
+            // Fehlerliste aus Map generieren
+            const errorList = Array.from(errorMap.entries()).map(([content, error]) => ({
+                summary: content,
+                error,
+            }));
+
+            // Zeigt die Fehler in der Tabelle an
             displayErrorTable(errorList);
 
-            // ICS-Inhalte werden trotzdem angezeigt
-            document.getElementById('output').value = processedLines.join("\n");
+            // ICS-Inhalte anzeigen
+            document.getElementById('output').value = lines.join("\\n");
         });
     }
 
     function displayErrorTable(errorList) {
-        console.log("Error List to display:", errorList); // Debugging
         const container = document.getElementById('error-table-container');
-
-        if (!container) {
-            console.error("Container for error table not found!");
-            return;
-        }
-
         container.innerHTML = ''; // Vorherigen Inhalt löschen
 
         if (errorList.length > 0) {
             const tableHTML = `<table class="shb-styled-table">
                 <thead>
                     <tr>
-                        <th>Datei</th>
-                        <th>Fehler</th>
+                        <th>Fehlerhafter SUMMARY</th>
+                        <th>Fehlerbeschreibung</th>
                     </tr>
                 </thead>
                 <tbody>
                     ${errorList
-                        .map(error => `<tr><td>${error.file}</td><td>${error.error}</td></tr>`)
+                        .map(error => `<tr><td>${error.summary}</td><td>${error.error}</td></tr>`)
                         .join('')}
                 </tbody>
             </table>`;
-
-            console.log("Generated Table HTML:", tableHTML); // Debugging
 
             container.innerHTML = tableHTML;
             container.style.display = "block"; // Tabelle sichtbar machen
         } else {
             container.style.display = "none"; // Keine Fehler -> Tabelle ausblenden
-            console.log("No errors to display, hiding table."); // Debugging
         }
     }
+
 
     function copyToClipboard() {
         const output = document.getElementById('output');
