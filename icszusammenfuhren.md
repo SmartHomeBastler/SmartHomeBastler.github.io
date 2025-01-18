@@ -30,6 +30,13 @@ layout: page
 </div>
 </div>
 
+<div id="shb-custom-alert" style="display: none;">
+    <div id="shb-custom-alert-content">
+        <h4 id="shb-custom-alert-title"></h4>
+        <p id="shb-custom-alert-message"></p>
+        <button id="shb-close-alert">OK</button>
+    </div>
+</div>
 <!--      ___ ____ ____                                                        __ _   _ _                        -->
 <!--     |_ _/ ___/ ___|   _____   _ ___  __ _ _ __ ___  _ __ ___   ___ _ __  / _(_) (_) |__  _ __ ___ _ __      -->
 <!--      | | |   \___ \  |_  / | | / __|/ _` | '_ ` _ \| '_ ` _ \ / _ \ '_ \| |_| | | | '_ \| '__/ _ \ '_ \     -->
@@ -253,7 +260,7 @@ function mergeICSFiles() {
     const validFiles = files.filter(file => file);
 
     if (validFiles.length === 0) {
-        alert("Bitte mindestens eine ICS-Datei hochladen.");
+        showSHBcustomAlert('Achtung!', 'Bitte mindestens eine ICS-Datei hochladen');
         return;
     }
 
@@ -361,14 +368,14 @@ function mergeICSFiles() {
         const output = document.getElementById('output');
         output.select();
         document.execCommand('copy');
-        alert('ICS-Datei in die Zwischenablage kopiert!');
+        showSHBcustomAlert('Super!', 'Die ICS-Datei wurde in die Zwischenablage kopiert!');
     }
 
     function editAndDisplayEntries() {
         const icsData = document.getElementById('output').value;
     
         if (!icsData) {
-            alert("Keine ICS-Daten verfügbar. Bitte zuerst eine Datei verarbeiten.");
+            showSHBcustomAlert('Sorry!', 'Keine ICS-Daten verfügbar. Bitte zuerst eine Datei verarbeiten.');
             return;
         }
     
@@ -394,14 +401,14 @@ function mergeICSFiles() {
         const editedOutput = document.getElementById('edited-output');
         editedOutput.select();
         document.execCommand('copy');
-        alert('Bearbeitete ICS-Daten in die Zwischenablage kopiert!');
+        showSHBcustomAlert('Perfekt!', 'Deine bearbeitete ICS-Datei wurde in die Zwischenablage kopiert!');
     }
 
     function downloadEditedICSFile() {
         const editedOutput = document.getElementById('edited-output').value;
 
         if (!editedOutput) {
-            alert("Keine bearbeiteten ICS-Daten verfügbar.");
+            showSHBcustomAlert('Oh Jeh!', 'Es sind keine bearbeiteten ICS-Daten verfügbar.');
             return;
         }
 
@@ -421,35 +428,35 @@ function mergeICSFiles() {
 
     let icsContent = "";
 
-    function addEventToICS() {
-        const calendarName = document.getElementById('calendarName').value || "Mein Kalender";
-        const eventName = document.getElementById('eventName').value || "Unbekanntes Event";
-        const eventDate = document.getElementById('eventDate').value;
+function addEventToICS() {
+    const calendarName = document.getElementById('calendarName').value || "Mein Kalender";
+    const eventName = document.getElementById('eventName').value || "Unbekanntes Event";
+    const eventDate = document.getElementById('eventDate').value;
 
-        if (!eventDate) {
-            alert("Bitte ein Datum für das Event auswählen.");
-            return;
-        }
-
-        if (!icsContent) {
-            icsContent = `BEGIN:VCALENDAR
-    VERSION:2.0
-    PRODID:${calendarName}
-    `;
-        }
-
-        const eventEntry = `BEGIN:VEVENT
-    SUMMARY:${eventName}
-    DTSTART;VALUE=DATE:${eventDate.replace(/-/g, "")}
-    DESCRIPTION:${eventName}
-    END:VEVENT
-    `;
-
-        icsContent += eventEntry;
-
-        // Zeige den aktuellen Inhalt der ICS-Datei im Textfeld an
-        document.getElementById('created-ics-output').value = `${icsContent}END:VCALENDAR`;
+    if (!eventDate) {
+        showSHBcustomAlert('Nicht vergessen!', 'Du musst ein Datum für das Event auswählen.');
+        return;
     }
+
+    if (!icsContent) {
+        icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:${calendarName}
+`;
+    }
+
+    const eventEntry = `BEGIN:VEVENT
+SUMMARY:${eventName}
+DTSTART;VALUE=DATE:${eventDate.replace(/-/g, "")}
+DESCRIPTION:${eventName}
+END:VEVENT
+`;
+
+    icsContent += eventEntry;
+
+    // Zeige den aktuellen Inhalt der ICS-Datei im Textfeld an
+    document.getElementById('created-ics-output').value = `${icsContent}END:VCALENDAR`;
+}
 
     function downloadCreatedICS() {
         const calendarName = document.getElementById('calendarName').value || "Mein Kalender";
