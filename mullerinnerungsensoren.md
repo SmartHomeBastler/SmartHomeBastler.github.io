@@ -335,7 +335,7 @@ Nach den Änderungen klicke auf<br>
 -->
 
 <div class="content-section" id="step-4" style="display:none;">
-<h2 class="custom-title">4. Templates Erstellen</h2>
+<h2 class="shb-section-title-left">4. Templates Erstellen</h2>
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
@@ -346,19 +346,21 @@ Nach den Änderungen klicke auf<br>
     </p>
 </div>
 
-<p>Eine Beschreibung wie man einen Template-Sensor Helfer in Home Assistant anlegt,findest du im <strong>⬇️ Dropdown Menü ⬇️</strong></p>
+<p>
+    Eine Beschreibung wie man einen Template-Sensor Helfer in Home Assistant anlegt,findest du im <strong>⬇️ Dropdown Menü ⬇️</strong>
+</p>
 
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
-    <div id="galleryDropdown2" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Home Assistant - Template Sensor Helfer anlegen <span>&#9660;</span></button>
+    <div id="galleryDropdown2" class="shb-dropdown-content" style="display: none;">
+        <div class="shb-dropdown-youtube">
+            {% include youtube.html video="3fhL_K4o3Dg" %}
+        </div>
         {% assign gallery_images = site.data.gallery_helfer_Template_mullerinnerung %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
                 <div class="column is-12">
                     <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                    <div style="margin: 0 auto; max-width: 60%;">
-                        {% include youtube.html video="3fhL_K4o3Dg" %}
-                    </div>
                 </div>
                 {% for image in gallery.images %}
                     <div class="column is-3-desktop is-6-tablet">
@@ -381,69 +383,77 @@ Nach den Änderungen klicke auf<br>
 
 
 <!-- Checkboxen für "keine"-Anzeige -->
-<div class="custom-form-group">
-    <input type="checkbox" id="keineHeute" />
-    <label for="keineHeute">Anzeige Text "keine" für Heute</label><br>
-    <input type="checkbox" id="keineMorgen" />
-    <label for="keineMorgen">Anzeige Text "keine" für Morgen</label>
+<div class="shb-form-group">
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="keineHeute" />
+        <label for="keineHeute">Anzeige Text "keine" für Heute</label>
+    </div>
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="keineMorgen" />
+        <label for="keineMorgen">Anzeige Text "keine" für Morgen</label>
+    </div>
 </div>
 
-<button class="custom-button" onclick="showStep(5); createTemplates()">Templates erstellen</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-main" onclick="showStep(5); createTemplates()">👇  Templates erstellen  👇</button>
+</div>
 
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
-    <div class="custom-title-inline">
+    <div class="shb-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
-    <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-heute', this)">Kopieren</button>
+    <div class="shb-code-container">
+        <button class="copy-code-button" onclick="copyCode('helper-template-heute', this)">Kopieren</button>
         <pre id="helper-template-heute" class="language-yaml"><code></code></pre>
     </div>
 </div>
 
 <!-- Ausgabe für "Müllabholung Text Heute" -->
 <div id="helper-template-output-text-heute" style="display:none;">
-    <div class="custom-title-inline">
+    <div class="shb-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
-    <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-text-heute', this)">Kopieren</button>
+    <div class="shb-code-container">
+        <button class="copy-code-button" onclick="copyCode('helper-template-text-heute', this)">Kopieren</button>
         <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
     </div>
 </div>
 
 <!-- Output for "Müllabholung Morgen" -->
 <div id="helper-template-output-morgen" style="display:none;">
-    <div class="custom-title-inline">
+    <div class="shb-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
-    <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-morgen', this)">Kopieren</button>
+    <div class="shb-code-container">
+        <button class="copy-code-button" onclick="copyCode('helper-template-morgen', this)">Kopieren</button>
         <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
 
 <!-- Ausgabe für "Müllabholung Text Morgen" -->
 <div id="helper-template-output-text-morgen" style="display:none;">
-    <div class="custom-title-inline">
+    <div class="shb-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Morgen</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
         <span class="copy-confirmation" style="display: inline;">❌</span>
     </div>
-    <div class="code-container">
-        <button class="copy-button" onclick="copyCode('helper-template-text-morgen', this)">Kopieren</button>
+    <div class="shb-code-container">
+        <button class="copy-code-button" onclick="copyCode('helper-template-text-morgen', this)">Kopieren</button>
         <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
 </div>
 <div class="content-section" id="step-5" style="display:none;">
-<button class="custom-button" onclick="showStep(6); createImageList();">Templates angelegt? Weiter zu den Dashboard-Karten!</button>
+    <div class="shb-button">
+        <button class="shb-button shb-button-main" onclick="showStep(6); createImageList();">👇  Templates angelegt? Weiter zu den Dashboard-Karten!  👇</button>
+    </div>
 </div>
 
 <!--
@@ -1087,24 +1097,7 @@ Nach den Änderungen klicke auf<br>
     .note-container strong {
         color: #0062ff;
         text-transform: uppercase;
-    }
-    .custom-title-inline {
-        display: flex; /* Elemente nebeneinander anordnen */
-        align-items: baseline; /* Ausrichtung an der Grundlinie */
-        gap: 10px; /* Abstand zwischen den Elementen */
-    }    
-    .custom-title-inline h4 {
-        margin: 0;
-        padding: 0;
-        font-size: 24px; /* Größere Schriftgröße für die Überschrift */
-        line-height: 1.2; /* Für saubere vertikale Ausrichtung */
-    }    
-    .custom-title-inline p {
-        margin: 0;
-        padding: 0;
-        font-size: 16px; /* Kleinere Schriftgröße für den Text */
-        line-height: 1.2; /* Passend zur `h4` */
-    }    
+    }  
     .copy-confirmation {
         font-size: 24px; /* Gleiche Schriftgröße wie `h4` */
         color: green; /* Bestätigungsfarbe */
