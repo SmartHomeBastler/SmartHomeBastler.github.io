@@ -46,34 +46,35 @@ layout: page
     Wähle entweder eine oder mehrere <code>.ics</code>-Dateien aus um sie auszulesen bzw. zusammenzuführen.
 </p>
 
-<div class="shb-form-group">
-    <label for="file1">ICS Datei 1 (erforderlich):</label>
-    <input type="file" id="file1" accept=".ics" style="width: 30%">
+<div class="shb-form-group-container ics-file-container">
+    <div class="shb-form-group ics-file-group">
+        <label for="file1">ICS Datei 1 (erforderlich):</label>
+        <input type="file" id="file1" accept=".ics">
+    </div>
+    <div class="shb-form-group ics-file-group">
+        <label for="file2">ICS Datei 2 (optional):</label>
+        <input type="file" id="file2" accept=".ics">
+    </div>
+    <div class="shb-form-group ics-file-group">
+        <label for="file3">ICS Datei 3 (optional):</label>
+        <input type="file" id="file3" accept=".ics">
+    </div>
+    <div class="shb-form-group ics-file-group">
+        <label for="file4">ICS Datei 4 (optional):</label>
+        <input type="file" id="file4" accept=".ics">
+    </div>
+    <div class="shb-form-group ics-file-group">
+        <label for="file5">ICS Datei 5 (optional):</label>
+        <input type="file" id="file5" accept=".ics">
+    </div>
+    <div class="shb-form-group ics-file-group">
+        <label for="file6">ICS Datei 6 (optional):</label>
+        <input type="file" id="file6" accept=".ics">
+    </div>
 </div>
 
-<div class="shb-form-group">
-    <label for="file2">ICS Datei 2 (optional):</label>
-    <input type="file" id="file2" accept=".ics" style="width: 30%">
-</div>
-
-<div class="shb-form-group">
-    <label for="file3">ICS Datei 3 (optional):</label>
-    <input type="file" id="file3" accept=".ics" style="width: 30%">
-</div>
-
-<div class="shb-form-group">
-    <label for="file4">ICS Datei 4 (optional):</label>
-    <input type="file" id="file4" accept=".ics" style="width: 30%">
-</div>
-
-<div class="shb-form-group">
-    <label for="file5">ICS Datei 5 (optional):</label>
-    <input type="file" id="file5" accept=".ics" style="width: 30%">
-</div>
-
-<div class="shb-form-group">
-    <label for="file6">ICS Datei 6 (optional):</label>
-    <input type="file" id="file6" accept=".ics" style="width: 30%">
+<div id="error-table-container" class="shb-styled-table-container" style="display: none;">
+    <!-- Tabelle wird hier dynamisch eingefügt -->
 </div>
 
 <div class="shb-button">
@@ -185,6 +186,36 @@ layout: page
 
 </div>
 
+<style>
+/* Styling nur für die ics-file-container */
+.ics-file-container {
+    display: flex;
+    flex-wrap: wrap; /* Mehrere Zeilen erlauben */
+    gap: 20px; /* Abstand zwischen den Feldern */
+    justify-content: space-between; /* Gleichmäßige Verteilung */
+}
+
+/* Styling für die spezifischen Eingabefelder */
+.ics-file-container .ics-file-group {
+    flex: 1 1 calc(50% - 20px); /* Zwei Spalten, Platz für Lücken */
+    box-sizing: border-box;
+}
+
+/* Input- und Label-Stil bleibt gleich */
+.ics-file-container .ics-file-group label {
+    font-weight: bold;
+}
+
+.ics-file-container .ics-file-group input {
+    width: 100%; /* Eingabefeld füllt die gesamte Breite */
+    padding: 8px;
+    background-color: #1ab5d5;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    font-size: 14px;
+}
+</style>
+
 <script>
     function toggleSections() {
         const mergeCheckbox = document.getElementById('mergeICSCheckbox');
@@ -218,20 +249,20 @@ layout: page
             document.getElementById('file5').files[0],
             document.getElementById('file6').files[0],
         ];
-    
+
         const validFiles = files.filter(file => file);
-    
+
         if (validFiles.length === 0) {
             alert("Bitte mindestens eine ICS-Datei hochladen.");
             return;
         }
-    
+
         const readers = validFiles.map(file => {
             const reader = new FileReader();
             reader.readAsText(file);
             return reader;
         });
-    
+
         Promise.all(
             readers.map(
                 reader =>
@@ -243,32 +274,79 @@ layout: page
             const mergedData = results.join("\n");
             const lines = mergedData.split("\n");
             const warningContainer = document.getElementById('warning-container');
-    
-            let containsInvalidSummary = false;
-    
-            const processedLines = lines.map((line) => {
+
+            let errorList = [];
+
+            const processedLines = lines.map((line, index) => {
                 if (line.startsWith("SUMMARY")) {
-                    const index = line.indexOf(":");
-                    if (index !== -1) {
-                        const summaryContent = line.substring(index + 1).trim(); // Inhalt nach dem ersten Doppelpunkt
-                        if (/\d|\./.test(summaryContent)) { // Prüft auf Ziffern oder Punkte
-                            containsInvalidSummary = true;
+                    const fileIndex = Math.floor(index / lines.length * validFiles.length) + 1;
+                    const contentIndex = line.indexOf(":");
+
+                    if (contentIndex !== -1) {
+                        const summaryContent = line.substring(contentIndex + 1).trim();
+
+                        if (/[äöüÄÖÜß]/.test(summaryContent)) {
+                            errorList.push({ file: `File ${fileIndex}`, error: "Umlaut entdeckt" });
+                        }
+
+                        if (/[()\/]/.test(summaryContent)) {
+                            errorList.push({ file: `File ${fileIndex}`, error: "Sonderzeichen entdeckt" });
+                        }
+
+                        if (/[0-9]/.test(summaryContent)) {
+                            errorList.push({ file: `File ${fileIndex}`, error: "Ziffer entdeckt" });
+                        }
+
+                        if (/\s/.test(summaryContent)) {
+                            errorList.push({ file: `File ${fileIndex}`, error: "Leerzeichen entdeckt" });
                         }
                     }
                 }
                 return line;
             });
-    
-            // Zeigt die Warnung an, falls ungültige Einträge gefunden werden
-            if (containsInvalidSummary) {
-                warningContainer.style.display = "block";
-            } else {
-                warningContainer.style.display = "none";
-            }
-    
+
+            // Zeigt die Fehlerliste an
+            displayErrorTable(errorList);
+
+            // ICS-Inhalte werden trotzdem angezeigt
             document.getElementById('output').value = processedLines.join("\n");
         });
     }
+
+    function displayErrorTable(errorList) {
+        const existingContainer = document.getElementById('error-table-container');
+        if (existingContainer) {
+            existingContainer.remove(); // Entfernt alte Fehlerliste, falls vorhanden
+        }
+
+        const errorTableContainer = document.createElement('div');
+        errorTableContainer.id = 'error-table-container';
+        errorTableContainer.className = 'shb-styled-table-container'; // Nutzt deinen vorhandenen Container-Stil
+
+        const tableHTML = `<table class="shb-styled-table">
+            <thead>
+                <tr>
+                    <th>Datei</th>
+                    <th>Fehler</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${errorList
+                    .map(error => `<tr><td>${error.file}</td><td>${error.error}</td></tr>`)
+                    .join('')}
+            </tbody>
+        </table>`;
+
+        errorTableContainer.innerHTML = tableHTML;
+        document.body.appendChild(errorTableContainer);
+
+        if (errorList.length > 0) {
+            errorTableContainer.style.display = "block";
+        } else {
+            errorTableContainer.style.display = "none";
+        }
+    }
+
 
     function copyToClipboard() {
         const output = document.getElementById('output');
