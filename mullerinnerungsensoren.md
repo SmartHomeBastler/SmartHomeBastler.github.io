@@ -169,7 +169,7 @@ Nach den Änderungen klicke auf<br>
 <table class="shb-custom-table" id="entry-table">
     <thead>
         <tr>
-            <th>Auswählen</th>
+            <th style="text-align: center;">Auswählen</th>
             <th>Kalendereintrag</th>
             <th>Eigene Bezeichnung</th>
         </tr>
@@ -267,7 +267,7 @@ Nach den Änderungen klicke auf<br>
     <thead>
         <tr>
             <th>Sensor Name</th>
-            <th>Kopiert</th>
+            <th style="text-align: center;">Kopiert</th>
             <th>Entity ID</th>
             <th>Tonnen Farbe</th>
         </tr>
@@ -304,7 +304,7 @@ Nach den Änderungen klicke auf<br>
     <thead>
         <tr>
             <th>Sensor Name</th>
-            <th>Kopiert</th>
+            <th style="text-align: center;">Kopiert</th>
             <th>Entity ID</th>
         </tr>
     </thead>
@@ -764,19 +764,19 @@ Nach den Änderungen klicke auf<br>
     <thead>
         <tr>
             <th>Helfer Name</th>
-            <th>Name kopiert</th>
+            <th style="text-align: center;">Name kopiert</th>
             <th>Helfer Entity-ID</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td class="copyable" data-helper="Müllerinnerung Taster">Müllerinnerung Taster</td>
-            <td class="status" id="status-taster">❌</td>
+            <td class="status" id="status-taster" style="text-align: center;">❌</td>
             <td>input_button.mullerinnerung_taster</td>
         </tr>
         <tr>
             <td class="copyable" data-helper="Müllerinnerung Zeitplan">Müllerinnerung Zeitplan</td>
-            <td class="status" id="status-zeitplan">❌</td>
+            <td class="status" id="status-zeitplan" style="text-align: center;">❌</td>
             <td>schedule.mullerinnerung_zeitplan</td>
         </tr>
     </tbody>
@@ -903,14 +903,14 @@ Nach den Änderungen klicke auf<br>
     <thead>
         <tr>
             <th>Blueprint</th>
-            <th>Blueprint kopiert</th>
+            <th style="text-align: center;">Blueprint kopiert</th>
             <th>Beschreibung</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td class="copyable" data-helper="https://gist.github.com/MaxxKra/3dbc1164e0d037bda67911fccead5f36">Blueprint Pop-Up öffnen</td>
-            <td class="status" id="status-blueprint">❌</td>
+            <td class="status" id="status-blueprint" style="text-align: center;">❌</td>
             <td>Ein Blueprint für die Automatisierung zum Öffnen eines Pop-Ups</td>
         </tr>
     </tbody>
@@ -920,14 +920,14 @@ Nach den Änderungen klicke auf<br>
     <thead>
         <tr>
             <th>Automatisierung Name</th>
-            <th>Name kopiert</th>
+            <th style="text-align: center;">Name kopiert</th>
             <th>Entity ID Automatisierung</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td class="copyable" data-helper="Müllerinnerung Pop-Up">Müllerinnerung Pop-Up</td>
-            <td class="status" id="status-automation">❌</td>
+            <td class="status" id="status-automation" style="text-align: center;">❌</td>
             <td>automation.mullerinnerung_pop_up</td>
         </tr>
     </tbody>
@@ -2235,7 +2235,7 @@ async function extractEntries() {
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Standardreihe "Nächste Abholung"
         
         // Tabelle für die Ausgabe erstellen
-        let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th>Bild Vorschau</th></tr></thead><tbody>';
+        let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th style="text-align: center;">Bild Vorschau</th></tr></thead><tbody>';
         
         // Mapping von Farben zu Bilddateinamen
         const colorToImageMap = {
@@ -2271,7 +2271,7 @@ async function extractEntries() {
                         <td>${sensorName}</td>
                         <td>${imageName}</td>
                         <td>${entityID}</td>
-                        <td>
+                        <td style="text-align: center;">
                             <a href="${imagePath}" download="${imageName}">
                                 <img src="${imagePath}" alt="${imageName}" style="width: 50px; height: auto; cursor: pointer;" title="Bild herunterladen">
                             </a>
