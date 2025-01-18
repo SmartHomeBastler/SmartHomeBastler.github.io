@@ -177,7 +177,7 @@ layout: page
 </section>
 
 <footer class="shb-footer">
-    <p>Mit dem ICS Code Generator kannst du deine Kalender schnell und einfach bearbeiten.</p>
+    <p>Mit dem ICS Code Generator kannst du deine Kalender schnell und einfach bearbeiten oder einen eigenen erstellen.</p>
     <h2>Viel Erfolg! 🎉</h2>
 </footer>
 
