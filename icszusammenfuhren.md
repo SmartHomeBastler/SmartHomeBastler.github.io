@@ -296,7 +296,8 @@ function mergeICSFiles() {
                     if (/[0-9]/.test(summaryContent)) {
                         errors.push("Ziffer entdeckt");
                     }
-                    if (/\\s/.test(summaryContent)) {
+                    // Prüft explizit auf Leerzeichen innerhalb des Inhalts
+                    if (summaryContent.includes(" ")) {
                         errors.push("Leerzeichen entdeckt");
                     }
 
