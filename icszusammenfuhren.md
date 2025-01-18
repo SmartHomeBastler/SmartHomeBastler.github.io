@@ -100,11 +100,9 @@ layout: page
 <p>
     Die ausgelesenen und zusammengeführten Inhalte der ICS-Dateien werden hier angezeigt.<br>
     Du kannst sie über die Buttons in die Zwischenablage kopieren oder den kombinierten Kalender herunterladen.
-</p>
-<p>
+<br><br>
     Wenn fehlerhafte Einträge vorhanden sind, werden diese in der Tabelle darunter angezeigt.
-</p>
-<p>
+<br><br>
     Mit einem Klick auf <strong>Einträge bearbeiten</strong> werden sämtliche fehlerhaften Einträge korrigiert und in einem neuen Ausgabefenster angezeigt.
 </p>
 </div>
@@ -132,8 +130,7 @@ layout: page
 <div class="shb-center-container">
 <p>
     Hier wird deine bearbeitete ICS-Datei angezeigt.
-</p>
-<p>
+<br><br>
     Du kannst sie nun in die Zwischenablage kopieren oder herunterladen.
 </p>
 </div>
