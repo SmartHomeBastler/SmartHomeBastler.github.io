@@ -1065,7 +1065,7 @@ Nach den Änderungen klicke auf<br>
         display: flex;
         gap: 20px; /* Abstand zwischen den Spalten */
         align-items: center;
-        margin-top: 20px 10%;
+        margin: 20px 10%;
     }
 
     .shb-left-column {
@@ -1099,6 +1099,7 @@ Nach den Änderungen klicke auf<br>
         box-shadow: 0 2px 5px #ffffff;
         border-radius: 5px;
         font-size: 14px;
+        width: 100%;
     }
 
     .shb-custom-input::placeholder {
@@ -1113,7 +1114,7 @@ Nach den Änderungen klicke auf<br>
         box-shadow: 0 4px 10px #7199ff;
         outline: none;
     }
-    
+
     .color-select {
         padding: 8px;
         color: #000000;
