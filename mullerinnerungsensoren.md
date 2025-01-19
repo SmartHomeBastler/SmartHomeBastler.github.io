@@ -586,7 +586,7 @@ Nach den Änderungen klicke auf<br>
     </div>
     <div class="shb-select-group">
         <!-- Hintergrund -->
-        <div class="shb-form-group">
+        <div class="shb-form-group" style="width: 30%">
             <label for="backgroundSelect">Hintergrund:</label>
             <select id="backgroundSelect">
                 <option value="transparent">Transparent</option>
@@ -594,7 +594,7 @@ Nach den Änderungen klicke auf<br>
             </select>
         </div>
         <!-- Rahmen Aussehen -->
-        <div class="shb-form-group">
+        <div class="shb-form-group" style="width: 30%">
             <label for="borderStyleSelect">Rahmen Aussehen:</label>
             <select id="borderStyleSelect">
                 <option value="none">Keinen Rahmen</option>
@@ -603,7 +603,7 @@ Nach den Änderungen klicke auf<br>
             </select>
         </div>
         <!-- Rahmen Form -->
-        <div class="shb-form-group">
+        <div class="shb-form-group" style="width: 30%">
             <label for="borderShapeSelect">Rahmen Form:</label>
             <select id="borderShapeSelect">
                 <option value="0px">Eckig</option>
@@ -1148,7 +1148,7 @@ Nach den Änderungen klicke auf<br>
     }
     /* Sensor-Zusammenfassung */
     .sensor-summary {
-        margin-top: 15px;
+        margin: 15px 0;
         font-size: 1.2em;
         line-height: 1.5;
         text-align: left;
