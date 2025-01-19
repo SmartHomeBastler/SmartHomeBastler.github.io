@@ -635,16 +635,12 @@ Nach den Änderungen klicke auf<br>
 
 <div class="content-section" id="step-7" style="display:none;">
 
-<div class="shb-code-container">
-    <button class="copy-code-button" onclick="copyCode('code-output', this)">Kopieren</button>
-    <pre id="code-output">
-        <code>
 
 <div id="dashboard-options" class="shb-select-group">
     <!-- YAML-Ausgabefenster -->
     <div id="yaml-output-container" class="shb-vertical-half-container">
         <h4 class="shb-section-title-center">Generierter YAML-Code</h4>
-        <div class="shb-code-container">
+        <div class="shb-code-container" style="max-height: 400px;">
             <button class="copy-code-button" onclick="copyCode('yaml-code-output', this)">Kopieren</button>
             <pre id="yaml-code-output"><code></code></pre>
         </div>
@@ -826,9 +822,9 @@ Nach den Änderungen klicke auf<br>
 
 <div id="popup-options" class="shb-select-group">
     <!-- YAML-Ausgabefenster -->
-    <div id="popup-output-container" class="shb-code-container">
-        <h4 class="shb-section-title-center">Generierter YAML-Code</h4>
+    <div id="popup-output-container" class="shb-vertical-half-container">>
         <h4 class="shb-section-title-center">Generierter Pop-Up-Code</h4>
+        <div class="shb-code-container" style="max-height: 400px;">
             <button class="copy-code-button" onclick="copyCode('popup-code-output', this)">Kopieren</button>
             <pre id="popup-code-output"><code></code></pre>
         </div>
