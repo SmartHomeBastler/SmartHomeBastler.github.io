@@ -30,7 +30,7 @@ layout: page
     <li>Bereitstellung einer ICS Datei oder URL</li>
 </ul>
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('noISCdropdown', this)">
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('noISCdropdown', this)">
         Was mache ich, wenn ich keine ICS Datei oder URL habe? <span>⬇️</span>
     </button>
     <div id="noISCdropdown" class="shb-dropdown-content" style="display: none;">
@@ -211,7 +211,7 @@ Nach den Änderungen klicke auf<br>
 </p>
 
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>⬇️</span></button>
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown', this)">Waste Collection Schedule Integration und Sensor Einrichtung <span>⬇️</span></button>
     <div id="galleryDropdown" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_mull_helfer %}
         <div class="columns is-multiline">
@@ -351,7 +351,7 @@ Nach den Änderungen klicke auf<br>
 </p>
 
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown2', this)">Home Assistant - Template Sensor Helfer anlegen <span>⬇️</span></button>
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown2', this)">Home Assistant - Template Sensor Helfer anlegen <span>⬇️</span></button>
     <div id="galleryDropdown2" class="shb-dropdown-content" style="display: none;">
         <div class="shb-dropdown-youtube">
             {% include youtube.html video="3fhL_K4o3Dg" %}
@@ -566,7 +566,7 @@ Nach den Änderungen klicke auf<br>
 
 <!-- Checkbox für "Style anpassen" -->
 <div class="shb-form-group">
-    <label for="styleUseCheckbox" class="custom-label">Karten Design anpassen?</label>
+    <label for="styleUseCheckbox">Karten Design anpassen?</label>
     <div class="checkbox-wrapper">
         <input type="checkbox" id="styleUseCheckbox">
         <label for="styleUseCheckbox">Style ändern</label>
@@ -709,7 +709,7 @@ Nach den Änderungen klicke auf<br>
  Wie man die notwendigen Helfer anlegt, findest du in den folgenden ⬇️ Dropdowns ⬇️
 </p>
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Taster einrichten <span>⬇️</span></button>
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown3', this)">Helfer-Taster einrichten <span>⬇️</span></button>
     <div id="galleryDropdown3" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_taster %}
         <div class="columns is-multiline">
@@ -739,7 +739,7 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">Helfer-Zeitplan einrichten <span>⬇️</span></button>
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown4', this)">Helfer-Zeitplan einrichten <span>⬇️</span></button>
     <div id="galleryDropdown4" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_zeitplan %}
         <div class="columns is-multiline">
@@ -861,7 +861,7 @@ Nach den Änderungen klicke auf<br>
     Wie man Browser Mod und die Browser ID einrichtet, erfährst du im ⬇️ Dropdown ⬇️
 </p>
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown5', this)">Browser Mod und Browser ID einrichten <span>⬇️</span></button>
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown5', this)">Browser Mod und Browser ID einrichten <span>⬇️</span></button>
     <div id="galleryDropdown5" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_browser_mod_id %}
         <div class="columns is-multiline">
@@ -942,7 +942,7 @@ Nach den Änderungen klicke auf<br>
     Wie man das Blueprint installiert und die Automatisierung einrichtet, siehst du im ⬇️ Dropdown ⬇️
 </p>
 <div class="shb-dropdown">
-    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown6', this)">Blueprint Installation und Einrichtung <span>⬇️</span></button>
+    <button class="shb-dropdown-toggle" onclick="toggleSHBdropdown('galleryDropdown6', this)">Blueprint Installation und Einrichtung <span>⬇️</span></button>
     <div id="galleryDropdown6" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_blueprint_popup %}
         <div class="columns is-multiline">
@@ -1001,142 +1001,6 @@ Nach den Änderungen klicke auf<br>
 -->
 
 <style>
-    .guide-container {
-        max-width: 100%;
-        margin: auto;
-        padding: 20px;
-        background-color: #1a1a1a;
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        border: 1px solid #1598b3;
-        border-radius: 8px;
-        box-shadow: 0 4px 4px 6px #1598b380;
-    }
-
-    .content-section {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #252525;
-        border: 1px solid #444;
-        border-radius: 8px;
-    }
-
-    .content-section h2 {
-        color: #1598b3;
-        font-size: 1.75em;
-        margin-bottom: 10px;
-    }
-
-    .content-section ul {
-        margin: 10px 0 0 20px;
-        padding: 0;
-        list-style-type: disc;
-    }
-
-    .content-section ul li {
-        margin-bottom: 10px;
-    }
-
-    .content h1 {
-        color: #1598b3
-    }
-    /* Titel und Untertitel */
-    .custom-title, .custom-subtitle {
-        text-align: center;
-        font-weight: bold;
-        margin-top: 20px;
-    }
-    /* Beschreibungstext */
-    .description-text {
-        margin: 15px 0;
-        font-size: 16px;
-        line-height: 1.5;
-        color: #d1d1d1;
-    }
-    /* Wichtiges Hinweis-Container */
-    .important-container {
-        background-color: rgb(255, 255, 255);
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 8px solid rgb(255, 0, 0);
-    }
-    .important-container h3 {
-        color: #d12700;
-        font-weight: bold;
-        text-shadow: 0 0 1px rgb(0, 0, 0);
-    }
-    .important-container p {
-        color: #383838;
-        font-family: Arial Black;
-    }
-    .important-container strong {
-        color:rgb(255, 0, 0);
-        text-transform: uppercase;
-    }
-    /* Hinweise */
-    .note-container {
-        background-color: rgb(255, 255, 255);
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 8px solid #0062ff;
-    }
-    .note-container h3 {
-        color: #0062ff;
-        font-weight: bold;
-        text-shadow: 0 0 1px rgb(0, 0, 0);
-    }
-    .note-container p {
-        color: #383838;
-    }
-    .note-container strong {
-        color: #0062ff;
-        text-transform: uppercase;
-    }  
-    .copy-confirmation {
-        font-size: 24px; /* Gleiche Schriftgröße wie `h4` */
-        color: green; /* Bestätigungsfarbe */
-        margin-left: 10px; /* Abstand zur Überschrift */
-        display: none; /* Standardmäßig versteckt */
-    } 
-    .dropdown {
-        margin: 0 0 20px;
-        text-align: center;
-    }
-    .dropdown-toggle {
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        background-color: #f39c12;
-        color: #ffffff;
-        padding: 10px 5px;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: inline-block;
-    }
-    .dropdown-toggle.rotated {
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: rotate(180deg); /* Text von unten nach oben */
-        padding: 20px 30px;
-        width: 200px;
-        height: auto;
-    }
-    .dropdown-toggle span {
-        float: right;
-    }
-    .dropdown-content {
-        padding: 20px;
-        background-color: #1a1a1a;
-        border: 1px solid #f39c12;
-        border-radius: 5px;
-        margin-top: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
     /* Sensor-Zusammenfassung */
     .sensor-summary {
         margin: 15px 0;
@@ -1149,154 +1013,6 @@ Nach den Änderungen klicke auf<br>
         padding: 8px;
         width: fit-content;
     }
-    /* Formulareingabefelder und Buttons */
-    .custom-form-group {
-        margin-top: 20px;
-    }
-    #custom-alert {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6); /* Dunkles Overlay */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    }
-    #custom-alert-content {
-        background-color: #fff;
-        padding: 20px 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        max-width: 400px;
-        animation: fadeIn 0.3s ease-in-out;
-    }
-    #custom-alert-title {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #333;
-        font-weight: bold;
-    }
-    #custom-alert-message {
-        margin-bottom: 15px;
-        font-size: 16px;
-        color: #666;
-    }
-    #close-alert {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    #close-alert:hover {
-        background-color: #218838;
-    }
-    /* Animation */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-    #custom-decision {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    }    
-    #custom-decision-content {
-        background: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        text-align: center;
-        max-width: 400px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }    
-    #custom-decision h4 {
-        margin: 0 0 10px;
-    }    
-    #custom-decision p {
-        margin: 0 0 20px;
-    }    
-    #custom-decision button {
-        margin: 0 5px;
-        padding: 10px 20px;
-        border: none;
-        background-color: #007bff;
-        color: white;
-        cursor: pointer;
-        border-radius: 5px;
-    }    
-    #custom-decision button:hover {
-        background-color: #0056b3;
-    }
-    #custom-decision-list {
-        text-align: left;
-        max-height: 300px;
-        overflow-y: auto;
-        margin: 10px 0;
-        padding: 0;
-        list-style: none;
-    }    
-    #custom-decision-list li {
-        margin: 5px 0;
-    }
-    #custom-decision-question {
-        font-size: 1.1em;
-        text-align: center;
-        margin-top: 10px;
-    }
-    .custom-label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    .custom-input, .custom-button, select {
-        width: 100%;
-        background-color: #e9e9e9;
-        padding: 10px;
-        margin-top: 5px;
-        border-radius: 5px;
-        border: 1px solid #c9c9c9;
-    }
-    .custom-button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        font-size: 16px;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .custom-button:hover {
-        background-color: #45a049;
-    }
-    /* Container für die angepasste Tabelle */
-    .shb-custom-table-container {
-        margin: auto;
-        width: 80%;
-    }
-
     /* Tabelle */
     .shb-custom-table {
         width: 100%;
@@ -1345,168 +1061,6 @@ Nach den Änderungen klicke auf<br>
         transform: scale(1.4);
         margin: 0 20px;
     }
-
-    /* Input-Felder in der Tabelle */
-    .shb-custom-input {
-        padding: 5px;
-        border: 1px solid #1a73e8;
-        border-radius: 3px;
-        width: 90%;
-        box-sizing: border-box;
-    }
-
-    /* Placeholder-Stil für Input-Felder */
-    .shb-custom-input::placeholder {
-        color: #757575;
-        font-style: italic;
-    }
-
-    .color-select {
-        padding: 8px;
-        color: #000000;
-        background-color: #1ab5d5;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-
-    .color-select:focus {
-        background-color: #37c4e1;
-        border: 2px solid #0048ff;
-        box-shadow: 0 4px 10px #7199ff;
-        outline: none;
-    }
-
-    /* Stile für die Optionen */
-    .color-select option {
-        background-color: #99eafb;
-    }
-
-    /* Jede zweite Zeile heller */
-    .color-select option:nth-child(even) {
-        background-color: #b4f2ff
-    }
-
-    /* Code Container */
-    .code-container {
-        position: relative;
-        background-color: #9fb9fb;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 5px;
-        padding: 15px;
-        margin-top: 5px;
-        margin-bottom: 30px;
-        overflow: auto;
-        max-height: 300px;
-    }
-    .code-container code {
-        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-        font-size: 0.95em;
-        line-height: 1.5;
-        color: #d1d1d1;
-    }
-    /* Stil für den Copy-Button */
-    .copy-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #007acc;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 8px 12px;
-        font-size: 0.85em;
-        cursor: pointer;
-        z-index: 10;
-    }
-    .copy-button:hover {
-        background: #005a9c;
-    }
-    .copy-button.copied {
-        background: #72dd8b; /* Grüner Hintergrund */
-        color: white;       /* Weiße Schrift */
-        content: '✔️';      /* Symbol */
-        padding: 8px 12px;
-    }
-    /* Button Container */
-    .button-container {
-        text-align: center;
-        margin-top: 25px;
-    }
-    /* Styling für die Auswahllisten */
-    .custom-select-group {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start; /* Überschriften werden oben ausgerichtet */
-        margin-top: 30px;
-        gap: 20px;
-    }
-    /* Dashboard Optionen Container */
-    .dashboard-options {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start; /* Überschriften werden oben ausgerichtet */
-        margin: 50px 0;
-        gap: 20px;
-    }
-    /* YAML-Code Container */
-    .yaml-output-container,
-    .example-card-container {
-        width: 48%;
-        display: flex;
-        flex-direction: column;
-    }
-    /* YAML-Code Header und Container */
-    .yaml-output-container h4,
-    .example-card-container h4 {
-        margin-bottom: 15px; /* Einheitlicher Abstand zur nächsten Sektion */
-    }
-    /* YAML-Code */
-    .yaml-code-container {
-        position: relative;
-        background-color: #9fb9fb;
-        border: 1px solid #ffffff;
-        box-shadow: 0 2px 5px #ffffff;
-        border-radius: 8px;
-        padding: 15px;
-        max-height: 400px;
-        overflow: auto; /* Ermöglicht Scrollen */
-    }
-    /* Beispielkarte Container */
-    .example-card-container {
-        padding: 0px;
-        text-align: center;
-    }
-    /* Bild im Beispielkarten-Container */
-    .example-image-wrapper {
-        width: 100%;
-        height: 400px; /* Gleiche Höhe wie das YAML-Fenster */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #000000;
-        overflow: hidden; /* Verhindert das Überlaufen von Bildern */
-    }
-    .example-image-wrapper img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain; /* Skaliert das Bild proportional */
-    }
-    .custom-background-select,
-    .custom-border-style-select,
-    .custom-border-shape-select {
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-    }
-    .custom-background-select h4,
-    .custom-border-style-select h4,
-    .custom-border-shape-select h4 {
-        margin-bottom: 15px;
-    }
-
     .shb-two-column-container {
         display: flex;
         gap: 20px; /* Abstand zwischen den Spalten */
@@ -1528,85 +1082,6 @@ Nach den Änderungen klicke auf<br>
         max-width: 300px; /* Maximale Breite für das Bild */
         height: auto; /* Bildverhältnis beibehalten */
         cursor: pointer; /* Zeigt den Download-Link an */
-    }
-    .styled-list {
-        list-style: none; /* Entfernt die Standard-Aufzählungspunkte */
-        counter-reset: list-counter; /* Initialisiert den Zähler */
-        padding-left: 0; /* Entfernt Einrückung */
-        margin: 20px 0; /* Abstand zur Umgebung */
-    }
-    .styled-list li strong {
-        color: #007acc; /* Gleiche Farbe wie die Linie */
-    }
-
-    .styled-list li {
-        counter-increment: list-counter; /* Erhöht den Zähler */
-        position: relative;
-        margin: 10px 30px; /* Abstand zwischen den Einträgen */
-        font-size: 1em;
-        line-height: 1.6;
-        color: #333; /* Dunkler Text */
-        background-color: #fff; /* Neutraler Hintergrund */
-        border-left: 3px solid #007acc; /* Farbliche Linie am linken Rand */
-        border-radius: 6px; /* Leicht abgerundete Kanten */
-        padding: 10px 60px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leichter Schatten für visuelle Tiefe */
-        width: 55%;
-    }
-
-    .styled-list li::before {
-        content: "6." counter(list-counter); /* Fügt "6." + die Zählernummer hinzu */
-        position: absolute;
-        left: 10px; /* Platzierung der Nummer links */
-        top: 50%; /* Vertikale Ausrichtung */
-        transform: translateY(-50%);
-        font-weight: bold;
-        color: #007acc; /* Gleiche Farbe wie die Linie */
-        font-size: 1.2em;
-        background-color: #e6f3ff; /* Heller Hintergrund für die Nummer */
-        padding: 5px 10px;
-        border-radius: 50%; /* Rundes Design für die Nummerierung */
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Nummer */
-        text-align: center;
-    }
-    .styled-list-start {
-        counter-reset: list-counter; /* Initialisiert den Zähler */
-        padding-left: 0; /* Entfernt Einrückung */
-        margin: 20px 0; /* Abstand zur Umgebung */
-    }
-    .styled-list-start li strong {
-        color: #007acc; /* Gleiche Farbe wie die Linie */
-    }
-
-    .styled-list-start li {
-        counter-increment: list-counter; /* Erhöht den Zähler */
-        position: relative;
-        margin: 10px 30px; /* Abstand zwischen den Einträgen */
-        font-size: 1em;
-        line-height: 1.6;
-        color: #333; /* Dunkler Text */
-        background-color: #fff; /* Neutraler Hintergrund */
-        border-left: 3px solid #007acc; /* Farbliche Linie am linken Rand */
-        border-radius: 6px; /* Leicht abgerundete Kanten */
-        padding: 10px 60px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leichter Schatten für visuelle Tiefe */
-        width: 90%;
-    }
-
-    .styled-list-start li::before {
-        content: counter(list-counter); /* Fügt die Nummerierung hinzu */
-        position: absolute;
-        left: 10px; /* Platzierung der Nummer links */
-        top: 50%; /* Vertikale Ausrichtung */
-        transform: translateY(-50%);
-        font-weight: bold;
-        color: #007acc; /* Gleiche Farbe wie die Linie */
-        font-size: 1.2em;
-        background-color: #e6f3ff; /* Heller Hintergrund für die Nummer */
-        padding: 5px 15px;
-        border-radius: 50%; /* Rundes Design für die Nummerierung */
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Nummer */
-        text-align: center;
     }
 
 </style>
@@ -2183,41 +1658,6 @@ async function extractEntries() {
         f([], arr);
         return result.filter(comb => comb.length > 0);
     }
-
-    function copyCode(elementId, button) {
-        const codeElement = document.getElementById(elementId);
-        const codeText = codeElement.innerText || codeElement.textContent;
-
-        navigator.clipboard.writeText(codeText)
-            .then(() => {
-                // Zeigt das benutzerdefinierte Fenster
-                showSHBcustomAlert("ERFOLG!", "Der Code wurde erfolgreich kopiert!");
-
-                // Button-Text und Stil dauerhaft ändern
-                button.classList.add('copied'); // Füge die CSS-Klasse hinzu
-                button.innerHTML = "Kopiert ✔️";       // Ändere den Button-Inhalt auf das Symbol
-                button.style.backgroundColor = "#72dd8b"; // Grüner Hintergrund
-                button.style.color = "white";             // Weiße Schrift
-                
-            })
-            .catch(err => {
-                console.error("Fehler beim Kopieren des Codes: ", err);
-                showSHBcustomAlert("FEHLER!", "Beim Kopieren des Codes ist ein Fehler aufgetreten.");
-            });
-    }
-
-
-    function toggleDropdown(dropdownId, toggleButton) {
-        var dropdownContent = document.getElementById(dropdownId);
-        if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
-            dropdownContent.style.display = "block";
-            toggleButton.classList.add("rotated"); // Klasse hinzufügen
-        } else {
-            dropdownContent.style.display = "none";
-            toggleButton.classList.remove("rotated"); // Klasse entfernen
-        }
-    }
-
 
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
