@@ -265,6 +265,25 @@
     /* Standardabstände entfernen */
 }
 
+/* Styling für die Auswahllisten */
+.shb-select-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Überschriften werden oben ausgerichtet */
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.shb-style-options {
+    display: none;
+    /* Standardmäßig ausgeblendet */
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+    gap: 20px;
+}
+
 /* LABLE */
 .shb-label {
     font-weight: bold;

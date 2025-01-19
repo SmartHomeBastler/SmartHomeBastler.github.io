@@ -466,7 +466,7 @@ Nach den Änderungen klicke auf<br>
 -->
 
 <div class="content-section" id="step-6" style="display:none;">
-<h2 class="custom-title">5. Dashboard-Karten</h2>
+<h2 class="shb-section-title-left">5. Dashboard-Karten</h2>
 
 <div class="important-container">
     <h3>❗Wichtig</h3>
@@ -487,31 +487,33 @@ Nach den Änderungen klicke auf<br>
 <div id="image-list-output"></div>
 
 
-<div id="example-section" style="margin-top: 20px;">
-    <h3 class="custom-title">Dashboard-Karten Optionen</h3>
+<div id="example-section" style="margin-top: 50px;">
+    <h3 class="shb-section-title-left">Dashboard-Karten Optionen</h3>
 </div>
 
 <div id="sensor-summary" class="sensor-summary">
     <p>
-        Du hast <span id="sensor-count" style="font-weight: bold; color: #4CAF50;">0</span> Sensoren angelegt.
+        Du hast <span id="sensor-count" style="font-weight: bold; color: #4be0ff;">0</span> Sensoren angelegt.
     </p>
 </div>
 
-<p class="description-text">
+<p>
     Mit dieser Checkbox kannst du auswählen, ob die Tonne bei Abholung blinken soll.<br>
     Bei der Anzeige Auswahl wird eingestellt, ob der Text und die optional blinkende Tonne für heute oder morgen angezeigt werden soll.
 </p>
 
 <!-- Checkbox für "Tonne blinkend" -->
-<div class="custom-form-group">
-    <input type="checkbox" id="blinkendCheckbox">
-    <label for="blinkendCheckbox">Tonne blinkend</label>
+<div class="shb-form-group">
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="blinkendCheckbox">
+        <label for="blinkendCheckbox">Tonne blinkend</label>
+    </div>
 </div>
 
 <!-- Auswahlliste für "Anzeige Heute" und "Anzeige Morgen" -->
-<div class="custom-form-group">
-    <label for="anzeigeAuswahl" class="custom-label">Anzeige Auswahl:</label>
-    <select id="anzeigeAuswahl" class="custom-input">
+<div class="shb-form-group">
+    <label for="anzeigeAuswahl">Anzeige Auswahl:</label>
+    <select id="anzeigeAuswahl" style="width: 30%;">
         <option value="heute">Anzeige Heute</option>
         <option value="morgen">Anzeige Morgen</option>
     </select>
@@ -523,22 +525,24 @@ Nach den Änderungen klicke auf<br>
 </p>
 
 <!-- Auswahlliste für Darstellung -->
-<div class="custom-form-group">
-    <label for="darstellungAuswahl" class="custom-label">Darstellung bei 4 Abholungen/Sensoren:</label>
-    <select id="darstellungAuswahl" class="custom-input">
+<div class="shb-form-group">
+    <label for="darstellungAuswahl">Darstellung bei 4 Abholungen/Sensoren:</label>
+    <select id="darstellungAuswahl" style="width: 30%;">
         <option value="einzeilig">Darstellung Einzeilig</option>
         <option value="mehrzeilig">Darstellung Mehrzeilig</option>
     </select>
 </div>
 
 <!-- Checkbox für "Datum anzeigen" -->
-<div class="custom-form-group">
-    <label for="dateUseCheckbox" class="custom-label">Datum der Abholung anzeigen?</label>
-    <input type="checkbox" id="dateUseCheckbox">
-    <label for="dateUseCheckbox">Datum anzeigen</label>
+<div class="shb-form-group">
+    <label for="dateUseCheckbox">Datum der Abholung anzeigen?</label>
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="dateUseCheckbox">
+        <label for="dateUseCheckbox">Datum anzeigen</label>
+    </div>
 </div>
 
-<p class="description-text">
+<p>
     Das Datum der Abholung kann auf der Karte nur ausgewählt werden, wenn der/die Sensor/Sensoren für diese Entität in der Waste Collection Schedule eingerichtet wurde/wurden.<br>
     Die Entität dieses Sensors soll demnach aus dem Sensor Namen der Abholung und dem Zusatz <strong>Datum</strong> bestehen.<br>
     <strong>Beispiel: "Restabfall Datum" = "sensor.restabfall_datum"</strong>
@@ -546,10 +550,10 @@ Nach den Änderungen klicke auf<br>
 
 <br>
 
-<div class="font-selection">
-    <label for="fontSelection" class="custom-label">Schriftart auswählen:</label>
-    <p class="description-text">Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.</p>
-    <select id="fontSelection" class="custom-input" onchange="toggleCustomFontInput()">
+<div class="shb-form-group">
+    <label for="fontSelection">Schriftart auswählen:</label>
+    <p>Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.</p>
+    <select id="fontSelection" style="width: 30%;" onchange="toggleCustomFontInput()">
         <option value="Arial Rounded MT" selected>Arial Rounded MT (Standard)</option>
         <option value="Arial">Arial</option>
         <option value="Verdana">Verdana</option>
@@ -559,18 +563,20 @@ Nach den Änderungen klicke auf<br>
         <option value="Georgia">Georgia</option>
         <option value="Custom">Eigene Schriftart</option>
     </select>
-    <input type="text" id="customFontInput" class="custom-input" style="display: none; margin-top: 10px;" placeholder="Eigene Schriftart eingeben">
+    <input type="text" id="customFontInput" style="display: none; margin-top: 10px;" placeholder="Eigene Schriftart eingeben">
 </div>
 
 <!-- Checkbox für "Style anpassen" -->
-<div class="custom-form-group">
+<div class="shb-form-group">
     <label for="styleUseCheckbox" class="custom-label">Karten Design anpassen?</label>
-    <input type="checkbox" id="styleUseCheckbox">
-    <label for="styleUseCheckbox">Style ändern</label>
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="styleUseCheckbox">
+        <label for="styleUseCheckbox">Style ändern</label>
+    </div>
 </div>
 
 <!-- Versteckter Container mit 3 Auswahllisten -->
-<div id="styleOptions" class="style-options">
+<div id="styleOptions" class="shb-style-options">
     <div class="important-container">
         <h3>❗Wichtig</h3>
         <p>
@@ -578,28 +584,28 @@ Nach den Änderungen klicke auf<br>
             Nur mit diesen Dashboard-Integrationen ist eine Änderung des Hintergrund und des Rahmens möglich.
         </p>
     </div>
-    <div class="custom-select-group">
+    <div class="shb-select-group">
         <!-- Hintergrund -->
-        <div class="custom-background-select">
-            <label class="custom-label" for="backgroundSelect">Hintergrund:</label>
-            <select id="backgroundSelect" class="custom-input">
+        <div class="shb-form-group">
+            <label for="backgroundSelect">Hintergrund:</label>
+            <select id="backgroundSelect">
                 <option value="transparent">Transparent</option>
                 <option value=" ">Standard</option>
             </select>
         </div>
         <!-- Rahmen Aussehen -->
-        <div class="custom-border-style-select">
-            <label class="custom-label" for="borderStyleSelect">Rahmen Aussehen:</label>
-            <select id="borderStyleSelect" class="custom-input">
+        <div class="shb-form-group">
+            <label for="borderStyleSelect">Rahmen Aussehen:</label>
+            <select id="borderStyleSelect">
                 <option value="none">Keinen Rahmen</option>
                 <option value=" ">Standard Rahmen</option>
                 <option value="1px solid var(--primary-color)">Dicker Rahmen Theme Farbe</option>
             </select>
         </div>
         <!-- Rahmen Form -->
-        <div class="custom-border-shape-select">
-            <label class="custom-label" for="borderShapeSelect">Rahmen Form:</label>
-            <select id="borderShapeSelect" class="custom-input">
+        <div class="shb-form-group">
+            <label for="borderShapeSelect">Rahmen Form:</label>
+            <select id="borderShapeSelect">
                 <option value="0px">Eckig</option>
                 <option value="12px">Abgerundet</option>
             </select>
@@ -607,15 +613,14 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
-<p class="description-text">
+<p>
     Wenn alle Einstellungen getroffen wurden, klicke auf <strong>Beispiel anzeigen & Code generieren</strong><br>
     Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generieren.
 </p>
 
-
 <!-- Button zur Aktualisierung -->
-<div class="button-container">
-    <button id="update-example-and-code" class="custom-button">Beispiel anzeigen & Code generieren</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-main" id="update-example-and-code">👇  Beispiel anzeigen & Code generieren  👇</button>
 </div>
 
 
@@ -1144,9 +1149,14 @@ Nach den Änderungen klicke auf<br>
     /* Sensor-Zusammenfassung */
     .sensor-summary {
         margin-top: 15px;
-        font-size: 18px;
+        font-size: 1.2em;
         line-height: 1.5;
         text-align: left;
+        color: #ffffff;
+        border: 2px solid #1598b3;
+        border-radius: 8px;
+        padding: 8px;
+        width: fit-content;
     }
     /* Formulareingabefelder und Buttons */
     .custom-form-group {
@@ -1433,7 +1443,8 @@ Nach den Änderungen klicke auf<br>
     .button-container {
         text-align: center;
         margin-top: 25px;
-    }        /* Styling für die Auswahllisten */
+    }
+    /* Styling für die Auswahllisten */
     .custom-select-group {
         display: flex;
         justify-content: space-between;
@@ -1491,13 +1502,6 @@ Nach den Änderungen klicke auf<br>
         max-width: 100%;
         max-height: 100%;
         object-fit: contain; /* Skaliert das Bild proportional */
-    }
-    .style-options {
-        display: none; /* Standardmäßig ausgeblendet */
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-top: 20px;
-        gap: 20px;
     }
     .custom-background-select,
     .custom-border-style-select,
@@ -2289,13 +2293,13 @@ async function extractEntries() {
         const sensorCountElement = document.getElementById('sensor-count');
         
         if (sensorCount === 1) {
-            sensorCountElement.textContent = "einen Sensor";
+            sensorCountElement.textContent = "einen Sensor / eine Müll-Type";
         } else {
-            sensorCountElement.textContent = `${sensorCount} Sensoren`;
+            sensorCountElement.textContent = `${sensorCount} Sensoren / Müll-Typen`;
         }
 
         sensorSummary.style.display = "block"; // Zusammenfassung einblenden
-        sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4CAF50;">${sensorCount === 1 ? "einen Sensor" : `${sensorCount} Sensoren`}</span> angelegt.`;
+        sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4be0ff;">${sensorCount === 1 ? "einen Sensor / eine Müll-Type" : `${sensorCount} Sensoren / Müll-Typen`}</span> angelegt.`;
     }
 
     function updateExampleCard() {
