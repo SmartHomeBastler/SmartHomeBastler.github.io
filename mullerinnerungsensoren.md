@@ -1084,6 +1084,54 @@ Nach den Änderungen klicke auf<br>
         cursor: pointer; /* Zeigt den Download-Link an */
     }
 
+    /* Checkbox-Stil */
+    .shb-custom-checkbox {
+        transform: scale(1.4);
+        margin: 0 20px;
+    }
+
+    /* Input-Felder in der Tabelle */
+    .shb-custom-input {
+        padding: 5px;
+        border: 1px solid #1a73e8;
+        border-radius: 3px;
+        width: 90%;
+        box-sizing: border-box;
+    }
+
+    /* Placeholder-Stil für Input-Felder */
+    .shb-custom-input::placeholder {
+        color: #757575;
+        font-style: italic;
+    }
+
+    .color-select {
+        padding: 8px;
+        color: #000000;
+        background-color: #1ab5d5;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .color-select:focus {
+        background-color: #37c4e1;
+        border: 2px solid #0048ff;
+        box-shadow: 0 4px 10px #7199ff;
+        outline: none;
+    }
+
+    /* Stile für die Optionen */
+    .color-select option {
+        background-color: #99eafb;
+    }
+
+    /* Jede zweite Zeile heller */
+    .color-select option:nth-child(even) {
+        background-color: #b4f2ff
+    }
+
 </style>
 
 <!--
