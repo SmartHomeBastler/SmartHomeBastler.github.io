@@ -532,7 +532,7 @@ Nach den Änderungen klicke auf<br>
         <option value="mehrzeilig">Darstellung Mehrzeilig</option>
     </select>
 </div>
-
+<br>
 <!-- Checkbox für "Datum anzeigen" -->
 <div class="shb-form-group">
     <label for="dateUseCheckbox">Datum der Abholung anzeigen?</label>
@@ -547,8 +547,6 @@ Nach den Änderungen klicke auf<br>
     Die Entität dieses Sensors soll demnach aus dem Sensor Namen der Abholung und dem Zusatz <strong>Datum</strong> bestehen.<br>
     <strong>Beispiel: "Restabfall Datum" = "sensor.restabfall_datum"</strong>
 </p>
-
-<br>
 
 <div class="shb-form-group">
     <label for="fontSelection">Schriftart auswählen:</label>
@@ -2342,17 +2340,6 @@ async function extractEntries() {
             customFontInput.style.display = "none";
         }
     }
-    // Event Listener für die Checkbox
-    document.getElementById("dateUseCheckbox").addEventListener("change", function () {
-        const dateOptionsDiv = document.getElementById("dateOptions");
-        if (this.checked) {
-            // Zeige den Container, wenn die Checkbox angehakt ist
-            dateOptionsDiv.date.display = "contents";
-        } else {
-            // Verstecke den Container, wenn die Checkbox nicht angehakt ist
-            dateOptionsDiv.date.display = "none";
-        }
-    });
 
     function getSelectedFont() {
         const fontSelection = document.getElementById("fontSelection").value;
