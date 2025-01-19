@@ -654,21 +654,21 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
-<h4 class="shb-section-title-center">Besteht noch Interesse an einer Dashboard Pop-Up Erinnerung?</h4><br>
+<h3 class="shb-section-title-center">Besteht noch Interesse an einer Dashboard Pop-Up Erinnerung?</h3><br>
 <div class="shb-button">
     <button class="shb-button shb-button-main" onclick="showStep(8);">👇  Ja! Weiter zu der Pop-Up Karte  👇</button>
 </div>
 </div>
 
 <div class="content-section" id="step-8" style="display:none;">
-<br>
+
 <h2 class="shb-section-title-center">6. Pop-Up-Karte</h2>
 
 <br>
 
-<h4>Zur Anzeige eines Pop-Up auf deinem Home Assistant Dashboard sind mehrere Schritte notwendig:</h4>
+<h4 class="shb-section-title-left">Zur Anzeige eines Pop-Up auf deinem Home Assistant Dashboard sind mehrere Schritte notwendig:</h4>
 
-<ul class="styled-list">
+<ul class="shb-list-start">
     <li>Herunterladen und Speichern des Hintergrund-Bilds</li>
     <li>Anlegen einer Helfer-Taste und eines Helfer-Zeitplans</li>
     <li>Erstellung des YAML-Codes für die Pop-Up Karte</li>
@@ -677,30 +677,30 @@ Nach den Änderungen klicke auf<br>
     <li>Einrichtung der Automatisierung für das Pop-Up</li>
 </ul>
 
-<div id="popup-background-section" style="margin: 60px 0 30px;">
-    <h3 class="custom-title">6.1 Hintergrund-Bild</h3>
-</div>
+
+<h3 class="shb-section-title-center">6.1 Hintergrund-Bild</h3>
+
 
 <div class="shb-two-column-container">
     <!-- Linke Spalte -->
     <div class="shb-left-column">
         <p>
-            Für das Pop-Up ist ein Hintergrundbild notwendig. Dieses kannst du dir hier mit einem Klick auf das Bild herunterladen und in Home Assistant in deinen <strong>"muell"</strong>-Ordner speichern.
+            Für das Pop-Up ist ein Hintergrundbild notwendig. 
+        </p>
+        <p>
+            Dieses kannst du dir hier mit einem Klick auf das Bild herunterladen und in Home Assistant in deinen <strong>"muell"</strong>-Ordner speichern.<br>
             Achte darauf, das Bild vor dem ersten Erstellen der Dashboard-Karte abzuspeichern, da ansonsten durch den Home Assistant Cache längere Zeit Fehler angezeigt werden können.
         </p>
     </div>
     <!-- Rechte Spalte -->
     <div class="shb-right-column">
         <a href="/img/muell/popup_background.png" download>
-            <img src="/img/muell/popup_background.png" alt="Hintergrundbild für Pop-Up" style="max-width: 300px;">
+            <img src="/img/muell/popup_background.png" alt="Hintergrundbild für Pop-Up">
         </a>
     </div>
 </div>
 
-
-<div id="popup-helper-section" style="margin: 60px 0 30px;">
-    <h3 class="custom-title">6.2 Helfer anlegen</h3>
-</div>
+<h3 class="shb-section-title-center">6.2 Helfer anlegen</h3>
 <p>
     Für das Öffnen des Pop-Ups ist ein Helfer-Taster erforderlich, und für die Automatisierung wird ein Helfer-Zeitplan benötigt.<br>
     Diese beiden Helfer tragen die Bezeichnungen <strong>Müllerinnerung Taster</strong> und <strong>Müllerinnerung Zeitplan</strong>. Sie müssen mit genau diesen Namen angelegt werden, um die Funktionalität des Pop-Ups sicherzustellen.
@@ -708,15 +708,15 @@ Nach den Änderungen klicke auf<br>
 <p>
  Wie man die notwendigen Helfer anlegt, findest du in den folgenden ⬇️ Dropdowns ⬇️
 </p>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Taster einrichten <span>⬇️</span></button>
-    <div id="galleryDropdown3" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown3', this)">Helfer-Taster einrichten <span>⬇️</span></button>
+    <div id="galleryDropdown3" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_taster %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
                 <div class="column is-12">
                     <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                    <div style="margin: 0 auto; max-width: 60%;">
+                    <div class="shb-dropdown-youtube">
                         {% include youtube.html video="7HlL8uKRyC0" %}
                     </div>
                 </div>
@@ -738,15 +738,15 @@ Nach den Änderungen klicke auf<br>
         </div>
     </div>
 </div>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">Helfer-Zeitplan einrichten <span>⬇️</span></button>
-    <div id="galleryDropdown4" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown4', this)">Helfer-Zeitplan einrichten <span>⬇️</span></button>
+    <div id="galleryDropdown4" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_helfer_zeitplan %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
                 <div class="column is-12">
                     <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
-                    <div style="margin: 0 auto; max-width: 60%;">
+                    <div class="shb-dropdown-youtube">
                         {% include youtube.html video="_oR8JQHNYqY" %}
                     </div>
                 </div>
@@ -796,10 +796,7 @@ Nach den Änderungen klicke auf<br>
     </tbody>
 </table>
 
-
-<div id="popup-code-section" style="margin: 60px 0 30px;">
-    <h3 class="custom-title">6.3 Pop-Up Code erstellen</h3>
-</div>
+<h3 class="shb-section-title-center">6.3 Pop-Up Code erstellen</h3>
 
 <div class="note-container">
     <h3>💡 Hinweis</h3> 
@@ -812,8 +809,8 @@ Nach den Änderungen klicke auf<br>
     Mit einem Klick auf <strong>Pop-Up erstellen</strong> wird der Code für das Pop-Up nach deinen zuvor gewählten Einstellungen und Angaben erstellt. 
 </p>
 
-<div class="button-container">
-    <button id="popup-code" class="custom-button">Pop-Up erstellen</button>
+<div class="shb-button">
+    <button class="shb-button shb-button-main" id="popup-code">👇  Pop-Up erstellen  👇</button>
 </div>
 
 <p>
@@ -822,7 +819,7 @@ Nach den Änderungen klicke auf<br>
 
 <div id="popup-options" class="shb-select-group">
     <!-- YAML-Ausgabefenster -->
-    <div id="popup-output-container" class="shb-vertical-half-container">>
+    <div id="popup-output-container" class="shb-vertical-half-container">
         <h4 class="shb-section-title-center">Generierter Pop-Up-Code</h4>
         <div class="shb-code-container" style="max-height: 400px;">
             <button class="copy-code-button" onclick="copyCode('popup-code-output', this)">Kopieren</button>
@@ -838,9 +835,7 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
-<div id="popup-code-section" style="margin: 60px 0 30px;">
-    <h3 class="custom-title">6.4 Pop-Up auf Dashboard speichern</h3>
-</div>
+<h3 class="shb-section-title-center">6.4 Pop-Up auf Dashboard speichern</h3>
 
 <p>
     Der kopierte Pop-Up Code wird nun auf jedes Dashboard gespeichert auf welchem es agezeigt werden soll.<br>
@@ -853,9 +848,7 @@ Nach den Änderungen klicke auf<br>
     Um das zu erreichen, ist eine Browser ID sowie eine Automatisierung notwendig. 
 </p>
 
-<div id="popup-code-section" style="margin: 60px 0 30px;">
-    <h3 class="custom-title">6.5 Browser ID einrichten</h3>
-</div>
+<h3 class="shb-section-title-center">6.5 Browser ID einrichten</h3>
 
 <p>
     Mit Browser Mod und dessen Browser ID ist es möglich, Aktionen auf Dashboards von registrierten Browsern auszuführen.<br>
@@ -867,9 +860,9 @@ Nach den Änderungen klicke auf<br>
 <p>
     Wie man Browser Mod und die Browser ID einrichtet, erfährst du im ⬇️ Dropdown ⬇️
 </p>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown5', this)">Browser Mod und Browser ID einrichten <span>⬇️</span></button>
-    <div id="galleryDropdown5" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown5', this)">Browser Mod und Browser ID einrichten <span>⬇️</span></button>
+    <div id="galleryDropdown5" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_browser_mod_id %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -878,7 +871,7 @@ Nach den Änderungen klicke auf<br>
                 </div>
                 <div class="column is-12" style="font-size: 1.2rem; font-weight: 400;">
                     {{ gallery.subtitle | markdownify }}
-                    <div style="margin: 0 auto; max-width: 60%;">
+                    <div class="shb-dropdown-youtube">
                         {% include youtube.html video="_GxgMv0LSLI" %}
                     </div>
                 </div>
@@ -901,9 +894,7 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
-<div id="popup-code-section" style="margin: 60px 0 30px;">
-    <h3 class="custom-title">6.6 Pop-Up Automatisierung</h3>
-</div>
+<h3 class="shb-section-title-center">6.6 Pop-Up Automatisierung</h3>
 
 <p>
     Um das Pop-Up automatisch bzw. über einen Tastendruck des Helfer-Taster zu öffnen, wird eine Automatisierung angelegt.
@@ -950,9 +941,9 @@ Nach den Änderungen klicke auf<br>
 <p>
     Wie man das Blueprint installiert und die Automatisierung einrichtet, siehst du im ⬇️ Dropdown ⬇️
 </p>
-<div class="dropdown">
-    <button class="dropdown-toggle" onclick="toggleDropdown('galleryDropdown6', this)">Blueprint Installation und Einrichtung <span>⬇️</span></button>
-    <div id="galleryDropdown6" class="dropdown-content" style="display: none;">
+<div class="shb-dropdown">
+    <button class="shb-dropdown-toggle" onclick="toggleDropdown('galleryDropdown6', this)">Blueprint Installation und Einrichtung <span>⬇️</span></button>
+    <div id="galleryDropdown6" class="shb-dropdown-content" style="display: none;">
         {% assign gallery_images = site.data.gallery_blueprint_popup %}
         <div class="columns is-multiline">
             {% for gallery in gallery_images %}
@@ -961,7 +952,7 @@ Nach den Änderungen klicke auf<br>
                 </div>
                 <div class="column is-12" style="font-size: 1.2rem; font-weight: 400;">
                     {{ gallery.subtitle | markdownify }}
-                    <div style="margin: 0 auto; max-width: 60%;">
+                    <div class="shb-dropdown-youtube">
                         {% include youtube.html video="WP8SMkcWKlM" %}
                     </div>
                 </div>
@@ -988,16 +979,16 @@ Nach den Änderungen klicke auf<br>
     Nach der Installation der Automatisierung sollte das Pop-Up auf deinen gewählten Dashboards durch den eingerichteten Zeitplan automatisch geöffnet werden.
 </p>
 </div>
-<div class="content-section" id="support-section;">
-<h4 class="custom-title">
-    Ich hoffe dieser Codegenerator konnte dir bei der Einrichtung deiner Müllerinnerung helfen.<br>
-    Über Feedback und Unterstützung würde ich mich auf jeden Fall freuen.
-</h4>
-<br>
-<h3 class="custom-title">Danke und gutes Gelingen! 🎉</h3>
-<br>
+
+
+<footer class="shb-footer">
+    <p>Ich hoffe dieser Codegenerator konnte dir bei der Einrichtung deiner Müllerinnerung helfen.<br>
+    Über Feedback und Unterstützung würde ich mich auf jeden Fall freuen.</p>
+    <h2>Danke und gutes Gelingen! 🎉</h2>
+</footer>
+
 {% include support_note.html %}
-</div>
+
 </div>
 
 <!--
@@ -1520,15 +1511,16 @@ Nach den Änderungen klicke auf<br>
         display: flex;
         gap: 20px; /* Abstand zwischen den Spalten */
         align-items: center;
-        margin-top: 20px;
+        margin-top: 20px 10%;
     }
 
     .shb-left-column {
-        flex: 1; /* Linke Spalte nimmt den restlichen Platz ein */
+        flex: 1;
+        text-align: center;
     }
 
     .shb-right-column {
-        flex-shrink: 0; /* Rechte Spalte bleibt in ihrer festen Größe */
+        flex: 0.4;
         text-align: center;
     }
 
