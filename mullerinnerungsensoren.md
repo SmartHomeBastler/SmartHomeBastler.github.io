@@ -91,7 +91,7 @@ layout: page
 -->
 
 <div class="content-section" id="step-1" style="display:none;">
-<h2 class="shb-section-title-left">1. Kalenderdaten Auslesen</h2>
+<h2 class="shb-section-title-center">1. Kalenderdaten Auslesen</h2>
 
 <p>
     Zum Auslesen der verschiedenen Abholungen aus deinem Müllkalender, gib bitte deine URL an oder lade die ICS-Datei hoch und bestätige mit<br>
@@ -122,7 +122,7 @@ layout: page
 -->
 
 <div class="content-section" id="step-2" style="display:none;">
-<h2 class="shb-section-title-left">2. Kalenderdaten Umwandeln</h2>
+<h2 class="shb-section-title-center">2. Kalenderdaten Umwandeln</h2>
 
 <p>
     Im nächsten Schritt wähle jene Einträge aus, welche zu deinen Sensoren hinzugefügt werden sollen.<br> Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
@@ -199,7 +199,7 @@ Nach den Änderungen klicke auf<br>
 -->
 
 <div class="content-section" id="step-3" style="display:none;">
-<h2 class="shb-section-title-left">3. Sensoren Konfiguration</h2>
+<h2 class="shb-section-title-center">3. Sensoren Konfiguration</h2>
 
 <p>
     Wenn du eine ICS Datei verwendest, sollte an diesem Punkt diese Datei in deinem <strong>www/muell/</strong> Ordner abgelegt werden.
@@ -335,7 +335,7 @@ Nach den Änderungen klicke auf<br>
 -->
 
 <div class="content-section" id="step-4" style="display:none;">
-<h2 class="shb-section-title-left">4. Templates Erstellen</h2>
+<h2 class="shb-section-title-center">4. Templates Erstellen</h2>
 
 <!-- Hinweisfenster mit Beschreibung -->
 <div class="note-container">
@@ -466,7 +466,7 @@ Nach den Änderungen klicke auf<br>
 -->
 
 <div class="content-section" id="step-6" style="display:none;">
-<h2 class="shb-section-title-left">5. Dashboard-Karten</h2>
+<h2 class="shb-section-title-center">5. Dashboard-Karten</h2>
 
 <div class="important-container">
     <h3>❗Wichtig</h3>
@@ -1092,19 +1092,28 @@ Nach den Änderungen klicke auf<br>
 
     /* Input-Felder in der Tabelle */
     .shb-custom-input {
-        padding: 5px;
-        border: 1px solid #1a73e8;
-        border-radius: 3px;
-        width: 90%;
-        box-sizing: border-box;
+        padding: 8px;
+        color: #000000;
+        background-color: #1ab5d5;
+        border: 1px solid #ffffff;
+        box-shadow: 0 2px 5px #ffffff;
+        border-radius: 5px;
+        font-size: 14px;
     }
 
-    /* Placeholder-Stil für Input-Felder */
     .shb-custom-input::placeholder {
-        color: #757575;
+        color: #ffffff;
         font-style: italic;
+        opacity: 0.8;
     }
 
+    .shb-custom-input:focus {
+        background-color: #99eafb;
+        border: 2px solid #0048ff;
+        box-shadow: 0 4px 10px #7199ff;
+        outline: none;
+    }
+    
     .color-select {
         padding: 8px;
         color: #000000;
@@ -1113,6 +1122,7 @@ Nach den Änderungen klicke auf<br>
         box-shadow: 0 2px 5px #ffffff;
         border-radius: 5px;
         font-size: 14px;
+        width: 100%;
     }
 
     .color-select:focus {
