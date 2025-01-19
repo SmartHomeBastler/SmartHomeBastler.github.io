@@ -635,31 +635,38 @@ Nach den Änderungen klicke auf<br>
 
 <div class="content-section" id="step-7" style="display:none;">
 
-<div id="dashboard-options" class="dashboard-options">
+<div class="shb-code-container">
+    <button class="copy-code-button" onclick="copyCode('code-output', this)">Kopieren</button>
+    <pre id="code-output">
+        <code>
+
+<div id="dashboard-options" class="shb-select-group">
     <!-- YAML-Ausgabefenster -->
-    <div id="yaml-output-container" class="yaml-output-container">
-        <h4 class="custom-title">Generierter YAML-Code</h4>
-        <div class="yaml-code-container">
-            <button class="copy-button" onclick="copyCode('yaml-code-output', this)">Kopieren</button>
-            <pre id="yaml-code-output" class="language-yaml"><code></code></pre>
+    <div id="yaml-output-container" class="shb-vertical-half-container">
+        <h4 class="shb-section-title-center">Generierter YAML-Code</h4>
+        <div class="shb-code-container">
+            <button class="copy-code-button" onclick="copyCode('yaml-code-output', this)">Kopieren</button>
+            <pre id="yaml-code-output"><code></code></pre>
         </div>
     </div>
     <!-- Beispielbild -->
-    <div id="example-card-container" class="example-card-container">
-        <h4 class="custom-title">Beispielkarte</h4>
-        <div class="example-image-wrapper">
+    <div id="example-card-container" class="shb-vertical-half-container">
+        <h4 class="shb-section-title-center">Beispielkarte</h4>
+        <div class="shb-image-wrapper">
             <img id="example-image" src="" alt="Beispielkarte">
         </div>
     </div>
 </div>
 
-<h4>Besteht noch Interesse an einer Dashboard Pop-Up Erinnerung?</h4><br>
-<button class="custom-button" onclick="showStep(8);">Ja! Weiter zu der Pop-Up Karte</button>
+<h4 class="shb-section-title-center">Besteht noch Interesse an einer Dashboard Pop-Up Erinnerung?</h4><br>
+<div class="shb-button">
+    <button class="shb-button shb-button-main" onclick="showStep(8);">👇  Ja! Weiter zu der Pop-Up Karte  👇</button>
+</div>
 </div>
 
 <div class="content-section" id="step-8" style="display:none;">
 <br>
-<h2 class="custom-title">6. Pop-Up-Karte</h2>
+<h2 class="shb-section-title-center">6. Pop-Up-Karte</h2>
 
 <br>
 
@@ -678,17 +685,16 @@ Nach den Änderungen klicke auf<br>
     <h3 class="custom-title">6.1 Hintergrund-Bild</h3>
 </div>
 
-<div class="two-column-container">
+<div class="shb-two-column-container">
     <!-- Linke Spalte -->
-    <div class="left-column">
+    <div class="shb-left-column">
         <p>
             Für das Pop-Up ist ein Hintergrundbild notwendig. Dieses kannst du dir hier mit einem Klick auf das Bild herunterladen und in Home Assistant in deinen <strong>"muell"</strong>-Ordner speichern.
             Achte darauf, das Bild vor dem ersten Erstellen der Dashboard-Karte abzuspeichern, da ansonsten durch den Home Assistant Cache längere Zeit Fehler angezeigt werden können.
         </p>
     </div>
-
     <!-- Rechte Spalte -->
-    <div class="right-column">
+    <div class="shb-right-column">
         <a href="/img/muell/popup_background.png" download>
             <img src="/img/muell/popup_background.png" alt="Hintergrundbild für Pop-Up" style="max-width: 300px;">
         </a>
@@ -818,19 +824,19 @@ Nach den Änderungen klicke auf<br>
     Den generierten Code kannst du mit <strong>Kopieren</strong> in die Zwischenablage kopieren.
 </p>
 
-<div id="popup-options" class="dashboard-options">
+<div id="popup-options" class="shb-select-group">
     <!-- YAML-Ausgabefenster -->
-    <div id="popup-output-container" class="yaml-output-container">
-        <h4 class="custom-title">Generierter Pop-Up-Code</h4>
-        <div class="yaml-code-container">
-            <button class="copy-button" onclick="copyCode('popup-code-output', this)">Kopieren</button>
-            <pre id="popup-code-output" class="language-yaml"><code></code></pre>
+    <div id="popup-output-container" class="shb-code-container">
+        <h4 class="shb-section-title-center">Generierter YAML-Code</h4>
+        <h4 class="shb-section-title-center">Generierter Pop-Up-Code</h4>
+            <button class="copy-code-button" onclick="copyCode('popup-code-output', this)">Kopieren</button>
+            <pre id="popup-code-output"><code></code></pre>
         </div>
     </div>
     <!-- Beispielbild -->
-    <div id="example-popup-container" class="example-card-container" style="display: none;">
-        <h4 class="custom-title">Pop-Up Beispiel</h4>
-        <div class="example-image-wrapper">
+    <div id="example-popup-container" class="shb-vertical-half-container" style="display: none;">
+        <h4 class="shb-section-title-center">Pop-Up Beispiel</h4>
+        <div class="shb-image-wrapper">
             <img id="example-popup" src="/img/muell/popupCard_example.png" alt="Pop-Up Beispiel">
         </div>
     </div>
@@ -1514,23 +1520,23 @@ Nach den Änderungen klicke auf<br>
         margin-bottom: 15px;
     }
 
-    .two-column-container {
+    .shb-two-column-container {
         display: flex;
         gap: 20px; /* Abstand zwischen den Spalten */
         align-items: center;
         margin-top: 20px;
     }
 
-    .left-column {
+    .shb-left-column {
         flex: 1; /* Linke Spalte nimmt den restlichen Platz ein */
     }
 
-    .right-column {
+    .shb-right-column {
         flex-shrink: 0; /* Rechte Spalte bleibt in ihrer festen Größe */
         text-align: center;
     }
 
-    .right-column img {
+    .shb-right-column img {
         max-width: 300px; /* Maximale Breite für das Bild */
         height: auto; /* Bildverhältnis beibehalten */
         cursor: pointer; /* Zeigt den Download-Link an */
