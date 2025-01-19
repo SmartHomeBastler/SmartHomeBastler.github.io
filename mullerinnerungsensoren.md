@@ -532,7 +532,7 @@ Nach den Änderungen klicke auf<br>
         <option value="mehrzeilig">Darstellung Mehrzeilig</option>
     </select>
 </div>
-<br>
+
 <!-- Checkbox für "Datum anzeigen" -->
 <div class="shb-form-group">
     <label for="dateUseCheckbox">Datum der Abholung anzeigen?</label>
@@ -550,7 +550,7 @@ Nach den Änderungen klicke auf<br>
 
 <div class="shb-form-group">
     <label for="fontSelection">Schriftart auswählen:</label>
-    <p>Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.</p>
+    <p style="margin-bottom: 0; padding-bottom: 0;">Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.</p>
     <select id="fontSelection" style="width: 30%;" onchange="toggleCustomFontInput()">
         <option value="Arial Rounded MT" selected>Arial Rounded MT (Standard)</option>
         <option value="Arial">Arial</option>
@@ -561,7 +561,7 @@ Nach den Änderungen klicke auf<br>
         <option value="Georgia">Georgia</option>
         <option value="Custom">Eigene Schriftart</option>
     </select>
-    <input type="text" id="customFontInput" style="display: none; margin-top: 10px;" placeholder="Eigene Schriftart eingeben">
+    <input type="text" id="customFontInput" style="display: none; margin-top: 10px; width: 30%;" placeholder="Eigene Schriftart eingeben">
 </div>
 
 <!-- Checkbox für "Style anpassen" -->
