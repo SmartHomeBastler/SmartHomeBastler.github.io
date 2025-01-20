@@ -321,7 +321,7 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
-<h3 class="shb-section-title-center" id="date-sensor-header" style="display:none;">Tageszeit des Anzeigewechsel ändern</h3>
+<h3 class="shb-section-title-center">Tageszeit des Anzeigewechsel ändern</h3>
 
 <p>
     In der Integration ist der Wechsel der Tageszeit lt. Standard <strong>10:00 Uhr</strong>.<br>
