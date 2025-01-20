@@ -49,7 +49,7 @@ published: true
 </p>
 
 <div class="columns is-centered">
-{% assign gallery_images = site.data.gallery_adventskranz_kerze %}
+{% assign gallery_images = site.data.gallery_adventkranz_kerze %}
     <div class="columns is-multiline">
         {% for gallery in gallery_images %}
             <div class="column is-12">
