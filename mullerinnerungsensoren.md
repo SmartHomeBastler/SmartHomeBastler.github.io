@@ -1116,6 +1116,7 @@ Nach den Änderungen klicke auf<br>
         max-width: 300px;
         height: auto;
         cursor: pointer;
+    }
 
     /* Checkbox-Stil */
     .shb-custom-checkbox {
