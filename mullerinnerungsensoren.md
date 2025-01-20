@@ -321,6 +321,14 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
+<h3 class="shb-section-title-center" id="date-sensor-header" style="display:none;">Tageszeit des Anzeigewechsel ändern</h3>
+
+<p>
+    In der Integration ist der Wechsel der Tageszeit lt. Standard <strong>10:00 Uhr</strong>.<br>
+    Ab diesem Zeitpunkt wird die Abholung für heute und morgen gewechselt und daher nicht mehr angezeigt.<br>
+    Diese Zeit kann wie folgt auf eigene Bedürfnisse geändert werden.
+</p>
+
 <div class="columns is-centered">
 {% assign gallery_images = site.data.gallery_wcs_integration_tageszeitwechsel %}
     <div class="columns is-multiline">
