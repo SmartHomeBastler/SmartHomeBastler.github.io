@@ -1063,7 +1063,7 @@ Nach den Änderungen klicke auf<br>
     }
     .shb-two-column-container {
         display: flex;
-        gap: 20px; /* Abstand zwischen den Spalten */
+        gap: 20px;
         align-items: center;
         margin: 20px 10%;
     }
@@ -1079,10 +1079,9 @@ Nach den Änderungen klicke auf<br>
     }
 
     .shb-right-column img {
-        max-width: 300px; /* Maximale Breite für das Bild */
-        height: auto; /* Bildverhältnis beibehalten */
-        cursor: pointer; /* Zeigt den Download-Link an */
-    }
+        max-width: 300px;
+        height: auto;
+        cursor: pointer;
 
     /* Checkbox-Stil */
     .shb-custom-checkbox {
