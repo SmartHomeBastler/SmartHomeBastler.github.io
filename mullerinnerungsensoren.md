@@ -320,6 +320,32 @@ Nach den Änderungen klicke auf<br>
         <pre id="date-pickup-template" class="language-yaml"><code></code></pre>
     </div>
 </div>
+
+<div class="columns is-centered">
+{% assign gallery_images = site.data.gallery_wcs_integration_tageszeitwechsel %}
+    <div class="columns is-multiline">
+        {% for gallery in gallery_images %}
+            <div class="column is-12">
+                <p class="title is-3 has-text-centered">{{ gallery.title }}</p>
+            </div>
+            {% for image in gallery.images %}
+                <div class="column is-3-desktop is-6-tablet">
+                    <div class="card">
+                        <div class="card-image">
+                            {% include image-modal.html ratio=image.ratio link=image.link alt=image.alt large_link=image.large_link %}
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                {{ image.description | markdownify }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
 <div class="shb-button" id="confirm-step-3" style="margin-top: 20px;">
     <button class="shb-button shb-button-main" onclick="if (validateColors()) { showStep(4); }">👇  Sensoren angelegt? Weiter zu den Templates!  👇
     </button>
