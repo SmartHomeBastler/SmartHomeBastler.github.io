@@ -273,6 +273,23 @@ Nach den Änderungen klicke auf<br>
 
 <h3 class="shb-section-title-center" id="sensor-header" style="display:none;">Anzulegende Sensoren und Mülltypen</h3>
 
+<table class="shb-custom-table" id="next-event-table">
+    <thead>
+        <tr>
+            <th>Sensor Name</th>
+            <th style="text-align: center;">Kopiert</th>
+            <th>Entity ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="copyable" data-helper="Nächste Abholung">Nächste Abholung</td>
+            <td class="status" id="next-event-sensor" style="text-align: center;">❌</td>
+            <td>sensor.nachste_abholung</td>
+        </tr>
+    </tbody>
+</table>
+
 <table class="shb-custom-table" id="sensor-table" style="display:none;">
     <thead>
         <tr>
@@ -1380,149 +1397,7 @@ async function extractEntries() {
         }
     }
 
-function generateSensorTable(selectedEntries) {
-    const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-    const sensorTable = document.getElementById('sensor-table');
-    sensorTableBody.innerHTML = "";
 
-    // Add standard row for "Nächste Abholung"
-    const standardRow = document.createElement("tr");
-
-    // Sensor Name
-    const standardNameCell = document.createElement("td");
-    standardNameCell.textContent = "Nächste Abholung";
-    standardNameCell.style.cursor = "pointer";
-    standardNameCell.onclick = () => {
-        toggleCopyStatus(standardCopyStatusCell);
-        copyToClipboards("Nächste Abholung", standardCopyStatusCell);
-    };
-    standardRow.appendChild(standardNameCell);
-
-    // Kopiert-Status
-    const standardCopyStatusCell = document.createElement("td");
-    standardCopyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>';
-    standardCopyStatusCell.style.textAlign = "center";
-    standardRow.appendChild(standardCopyStatusCell);
-
-    // Original Name
-    const standardOriginalCell = document.createElement("td");
-    standardOriginalCell.textContent = "-";
-    standardRow.appendChild(standardOriginalCell);
-
-    // Entity ID
-    const standardSensorCell = document.createElement("td");
-    standardSensorCell.textContent = "sensor.nachste_abholung";
-    standardRow.appendChild(standardSensorCell);
-
-    // Farbe (leer für die Standardzeile)
-    const standardColorCell = document.createElement("td");
-    standardColorCell.textContent = "-";
-    standardRow.appendChild(standardColorCell);
-
-    // Vorschau-Bild (leer für die Standardzeile)
-    const standardPreviewCell = document.createElement("td");
-    standardRow.appendChild(standardPreviewCell);
-
-    sensorTableBody.appendChild(standardRow);
-
-    // Add rows for selected entries
-    selectedEntries.forEach((row) => {
-        let originalName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent.trim();
-        let customName = originalName;
-
-        if (customName.includes("Sack") && !["Gelber Sack", "Schwarzer Sack", "Blauer Sack", "Roter Sack"].includes(customName)) {
-            customName = customName.replace(/\s*Sack/, "").trim();
-        }
-
-        const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
-            return {
-                'ä': 'a', 'ö': 'o', 'ü': 'u',
-                'Ä': 'A', 'Ö': 'O', 'Ü': 'U', 'ß': 'ss'
-            }[match];
-        })}`;
-
-        const sensorRow = document.createElement("tr");
-
-        // Sensor Name
-        const customNameCell = document.createElement("td");
-        customNameCell.textContent = customName;
-        customNameCell.style.cursor = "pointer";
-        customNameCell.onclick = () => {
-            toggleCopyStatus(copyStatusCell);
-            copyToClipboards(customName, copyStatusCell);
-        };
-        sensorRow.appendChild(customNameCell);
-
-        // Kopiert-Status
-        const copyStatusCell = document.createElement("td");
-        copyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>';
-        copyStatusCell.style.textAlign = "center";
-        sensorRow.appendChild(copyStatusCell);
-
-        // Original Name
-        const originalNameCell = document.createElement("td");
-        originalNameCell.textContent = originalName;
-        sensorRow.appendChild(originalNameCell);
-
-        // Entity ID
-        const sensorNameCell = document.createElement("td");
-        sensorNameCell.textContent = sensorName;
-        sensorRow.appendChild(sensorNameCell);
-
-        // Farbe Auswahlfeld
-        const colorCell = document.createElement("td");
-        const colorSelect = document.createElement("select");
-        colorSelect.className = "color-select";
-        [
-            "Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun",
-            "gelber Sack", "schwarzer Sack", "roter Sack", "blauer Sack", "grüner Sack"
-        ].forEach(color => {
-            const option = document.createElement("option");
-            option.value = color;
-            option.textContent = color;
-            colorSelect.appendChild(option);
-        });
-        colorCell.appendChild(colorSelect);
-        sensorRow.appendChild(colorCell);
-
-        // Vorschau-Bild
-        const previewCell = document.createElement("td");
-        const previewImage = document.createElement("img");
-        previewImage.src = "/img/muell/sack.png";
-        previewImage.style.width = "50px";
-        previewImage.style.height = "auto";
-        previewImage.style.display = "block";
-        previewImage.style.margin = "0 auto";
-        previewCell.appendChild(previewImage);
-
-        colorSelect.onchange = () => {
-            const colorToImageMap = {
-                "Schwarz": "schwarz.png",
-                "Blau": "blau.png",
-                "Rot": "rot.png",
-                "Gelb": "gelb.png",
-                "Grün": "gruen.png",
-                "Braun": "braun.png",
-                "Schwarz-Blau": "schwarz-blau.png",
-                "Schwarz-Rot": "schwarz-rot.png",
-                "Schwarz-Gelb": "schwarz-gelb.png",
-                "Schwarz-Grün": "schwarz-gruen.png",
-                "Schwarz-Braun": "schwarz-braun.png",
-                "gelber Sack": "gelb_sack.png",
-                "schwarzer Sack": "schwarz_sack.png",
-                "roter Sack": "rot_sack.png",
-                "blauer Sack": "blau_sack.png",
-                "grüner Sack": "gruen_sack.png"
-            };
-            previewImage.src = `/img/muell/${colorToImageMap[colorSelect.value] || "sack.png"}`;
-        };
-
-        sensorRow.appendChild(previewCell);
-        sensorTableBody.appendChild(sensorRow);
-    });
-
-    sensorTable.style.display = "table";
-}
 
 
     // Funktion zum Umschalten des Kopierstatus
@@ -1598,7 +1473,7 @@ function generateSensorTable(selectedEntries) {
 
     function validateColors() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
+        const rows = Array.from(Array.from(sensorTableBody.querySelectorAll("tr")); // überspringe die Standardreihe "Nächste Abholung"
 
         let colorNotSelected = false;
         const selectedColors = new Set();
@@ -1666,7 +1541,7 @@ function createTemplates() {
 
 function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
     const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody'); // Tabelle für Sensoren
-    const sensorRows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Zeilen der sensor-table (ohne Header)
+    const sensorRows = Array.from(Array.from(sensorTableBody.querySelectorAll("tr")); // Zeilen der sensor-table (ohne Header)
 
     const sensorState = {};
 
@@ -1759,7 +1634,7 @@ Du musst {{ DAY | lower }}
 
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Standardreihe "Nächste Abholung"
+        const rows = Array.from(Array.from(sensorTableBody.querySelectorAll("tr")); // Überspringe die Standardreihe "Nächste Abholung"
         
         // Tabelle für die Ausgabe erstellen
         let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th style="text-align: center;">Bild Vorschau und Download</th></tr></thead><tbody>';
