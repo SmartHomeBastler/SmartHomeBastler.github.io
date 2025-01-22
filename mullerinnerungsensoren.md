@@ -152,14 +152,23 @@ layout: page
     </p>
 </div>
 <p>
-    Wähle deine Bezeichnung so, dass sie kurz und sinnvoll ist. Es ist nicht notwendig, das Wort <strong>Tonne</strong> in die Bezeichnung aufzunehmen, da dies automatisch vom Codegenerator ergänzt wird. 
-</p>
-<p>
+    Wähle deine Bezeichnung so, dass sie kurz und sinnvoll ist. Es ist nicht notwendig, das Wort <strong>Tonne</strong> in die Bezeichnung aufzunehmen, da dies automatisch vom Codegenerator ergänzt wird.<br>
     Beispiel: Aus der Bezeichnung <strong>Papier</strong> wird automatisch <strong>die Papier Tonne</strong>.
 </p>
 <p>
-    Eine Ausnahme bilden <strong>Gelbe Tonne</strong> und <strong>Gelber Sack</strong>, da diese ohne den Zusatz nicht eindeutig wären.
+    Anders ist es bei der Verwendung von Säcken. Werdern anstatt Tonnen, Säcke verwendet, ist die Bezeichnung <strong>Sack</strong> der Farbe oder dem Müll-Typ anzuhängen.<br>
+    Beispiel: Für Restabfall wähle die Bezeichnung <strong>Restabfall Sack</strong>, für den gelben Sack wähle die Bezeichnung <strong>Gelber Sack</strong>. 
 </p>
+<p>
+
+    Es sind folgende Farben von Säcken für die Bezeichnung möglich:
+</p>
+<ul>
+    <li>Gelber Sack</li>
+    <li>Schwarzer Sack</li>
+    <li>Roter Sack</li>
+    <li>Blauer Sack</li>
+</ul>
 <p>
 Nach den Änderungen klicke auf<br>
 <strong>Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</strong>
@@ -252,7 +261,8 @@ Nach den Änderungen klicke auf<br>
 <br>
 <p>
     Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden.<br>
-    Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.
+    Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.<br>
+    Du kannst deine gewählten Bilder, um sie für dein Dashboard zu nutzen, später bei den Dashboard-Karten herunterladen.
 </p>
 
 <p>
@@ -268,8 +278,10 @@ Nach den Änderungen klicke auf<br>
         <tr>
             <th>Sensor Name</th>
             <th style="text-align: center;">Kopiert</th>
+            <th>Original Name</th>
             <th>Entity ID</th>
             <th>Tonnen Farbe</th>
+            <th style="text-align: center;">Vorschau</th>
         </tr>
     </thead>
     <tbody>
@@ -445,19 +457,6 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
-<!-- Ausgabe für "Müllabholung Text Heute" -->
-<div id="helper-template-output-text-heute" style="display:none;">
-    <div class="shb-title-inline">
-        <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Heute</h4>
-        <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span class="copy-confirmation" style="display: inline;">❌</span>
-    </div>
-    <div class="shb-code-container">
-        <button class="copy-code-button" onclick="copyCode('helper-template-text-heute', this)">Kopieren</button>
-        <pre id="helper-template-text-heute" class="language-yaml"><code></code></pre>
-    </div>
-</div>
-
 <!-- Output for "Müllabholung Morgen" -->
 <div id="helper-template-output-morgen" style="display:none;">
     <div class="shb-title-inline">
@@ -471,19 +470,6 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
-<!-- Ausgabe für "Müllabholung Text Morgen" -->
-<div id="helper-template-output-text-morgen" style="display:none;">
-    <div class="shb-title-inline">
-        <h4 onclick="copyTitleToClipboard(this)">Müllabholung Text Morgen</h4>
-        <p>Klicke auf die Überschrift um sie zu kopieren!</p>
-        <span class="copy-confirmation" style="display: inline;">❌</span>
-    </div>
-    <div class="shb-code-container">
-        <button class="copy-code-button" onclick="copyCode('helper-template-text-morgen', this)">Kopieren</button>
-        <pre id="helper-template-text-morgen" class="language-yaml"><code></code></pre>
-    </div>
-</div>
-</div>
 <div class="content-section" id="step-5" style="display:none;">
     <div class="shb-button">
         <button class="shb-button shb-button-main" onclick="showStep(6); createImageList();">👇  Templates angelegt? Weiter zu den Dashboard-Karten!  👇</button>
@@ -1394,93 +1380,150 @@ async function extractEntries() {
         }
     }
 
-    function generateSensorTable(selectedEntries) {
-        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const sensorTable = document.getElementById('sensor-table');
-        sensorTableBody.innerHTML = "";
+function generateSensorTable(selectedEntries) {
+    const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+    const sensorTable = document.getElementById('sensor-table');
+    sensorTableBody.innerHTML = "";
 
-        // Add standard row for "Nächste Abholung"
-        const standardRow = document.createElement("tr");
+    // Add standard row for "Nächste Abholung"
+    const standardRow = document.createElement("tr");
+
+    // Sensor Name
+    const standardNameCell = document.createElement("td");
+    standardNameCell.textContent = "Nächste Abholung";
+    standardNameCell.style.cursor = "pointer";
+    standardNameCell.onclick = () => {
+        toggleCopyStatus(standardCopyStatusCell);
+        copyToClipboards("Nächste Abholung", standardCopyStatusCell);
+    };
+    standardRow.appendChild(standardNameCell);
+
+    // Kopiert-Status
+    const standardCopyStatusCell = document.createElement("td");
+    standardCopyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>';
+    standardCopyStatusCell.style.textAlign = "center";
+    standardRow.appendChild(standardCopyStatusCell);
+
+    // Original Name
+    const standardOriginalCell = document.createElement("td");
+    standardOriginalCell.textContent = "-";
+    standardRow.appendChild(standardOriginalCell);
+
+    // Entity ID
+    const standardSensorCell = document.createElement("td");
+    standardSensorCell.textContent = "sensor.nachste_abholung";
+    standardRow.appendChild(standardSensorCell);
+
+    // Farbe (leer für die Standardzeile)
+    const standardColorCell = document.createElement("td");
+    standardColorCell.textContent = "-";
+    standardRow.appendChild(standardColorCell);
+
+    // Vorschau-Bild (leer für die Standardzeile)
+    const standardPreviewCell = document.createElement("td");
+    standardRow.appendChild(standardPreviewCell);
+
+    sensorTableBody.appendChild(standardRow);
+
+    // Add rows for selected entries
+    selectedEntries.forEach((row) => {
+        let originalName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent.trim();
+        let customName = originalName;
+
+        if (customName.includes("Sack") && !["Gelber Sack", "Schwarzer Sack", "Blauer Sack", "Roter Sack"].includes(customName)) {
+            customName = customName.replace(/\s*Sack/, "").trim();
+        }
+
+        const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
+            return {
+                'ä': 'a', 'ö': 'o', 'ü': 'u',
+                'Ä': 'A', 'Ö': 'O', 'Ü': 'U', 'ß': 'ss'
+            }[match];
+        })}`;
+
+        const sensorRow = document.createElement("tr");
 
         // Sensor Name
-        const standardNameCell = document.createElement("td");
-        standardNameCell.textContent = "Nächste Abholung";
-        standardNameCell.style.cursor = "pointer";
-        standardNameCell.onclick = () => {
-            toggleCopyStatus(standardCopyStatusCell);
-            copyToClipboards("Nächste Abholung", standardCopyStatusCell); // Name wird kopiert
+        const customNameCell = document.createElement("td");
+        customNameCell.textContent = customName;
+        customNameCell.style.cursor = "pointer";
+        customNameCell.onclick = () => {
+            toggleCopyStatus(copyStatusCell);
+            copyToClipboards(customName, copyStatusCell);
         };
-        standardRow.appendChild(standardNameCell);
+        sensorRow.appendChild(customNameCell);
 
         // Kopiert-Status
-        const standardCopyStatusCell = document.createElement("td");
-        standardCopyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>'; // Standardmäßig ❌
-        standardCopyStatusCell.style.textAlign = "center";
-        standardRow.appendChild(standardCopyStatusCell);
+        const copyStatusCell = document.createElement("td");
+        copyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>';
+        copyStatusCell.style.textAlign = "center";
+        sensorRow.appendChild(copyStatusCell);
+
+        // Original Name
+        const originalNameCell = document.createElement("td");
+        originalNameCell.textContent = originalName;
+        sensorRow.appendChild(originalNameCell);
 
         // Entity ID
-        const standardSensorCell = document.createElement("td");
-        standardSensorCell.textContent = "sensor.nachste_abholung";
-        standardRow.appendChild(standardSensorCell);
+        const sensorNameCell = document.createElement("td");
+        sensorNameCell.textContent = sensorName;
+        sensorRow.appendChild(sensorNameCell);
 
-        // Farbe (leer für die Standardzeile)
-        const standardColorCell = document.createElement("td");
-        standardColorCell.textContent = "-"; // No color selection for "Nächste Abholung"
-        standardRow.appendChild(standardColorCell);
-
-        sensorTableBody.appendChild(standardRow);
-
-        // Add rows for selected entries
-        selectedEntries.forEach((row) => {
-            const customName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent;
-            const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
-                return {
-                    'ä': 'a', 'ö': 'o', 'ü': 'u',
-                    'Ä': 'A', 'Ö': 'O', 'Ü': 'U', 'ß': 'ss'
-                }[match];
-            })}`;
-
-            const sensorRow = document.createElement("tr");
-
-            // Sensor Name
-            const customNameCell = document.createElement("td");
-            customNameCell.textContent = customName;
-            customNameCell.style.cursor = "pointer";
-            customNameCell.onclick = () => {
-                toggleCopyStatus(copyStatusCell); // Status ändern
-                copyToClipboards(customName, copyStatusCell); // Name kopieren
-            };
-            sensorRow.appendChild(customNameCell);
-
-            // Kopiert-Status
-            const copyStatusCell = document.createElement("td");
-            copyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>'; // Standardmäßig ❌
-            copyStatusCell.style.textAlign = "center";
-            sensorRow.appendChild(copyStatusCell);
-
-            // Entity ID
-            const sensorNameCell = document.createElement("td");
-            sensorNameCell.textContent = sensorName;
-            sensorRow.appendChild(sensorNameCell);
-
-            // Farbe Auswahlfeld
-            const colorCell = document.createElement("td");
-            const colorSelect = document.createElement("select");
-            colorSelect.className = "color-select";
-            ["Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Sack", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun"].forEach(color => {
-                const option = document.createElement("option");
-                option.value = color;
-                option.textContent = color;
-                colorSelect.appendChild(option);
-            });
-            colorCell.appendChild(colorSelect);
-            sensorRow.appendChild(colorCell);
-
-            sensorTableBody.appendChild(sensorRow);
+        // Farbe Auswahlfeld
+        const colorCell = document.createElement("td");
+        const colorSelect = document.createElement("select");
+        colorSelect.className = "color-select";
+        [
+            "Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun",
+            "gelber Sack", "schwarzer Sack", "roter Sack", "blauer Sack", "grüner Sack"
+        ].forEach(color => {
+            const option = document.createElement("option");
+            option.value = color;
+            option.textContent = color;
+            colorSelect.appendChild(option);
         });
+        colorCell.appendChild(colorSelect);
+        sensorRow.appendChild(colorCell);
 
-        sensorTable.style.display = "table";
-    }
+        // Vorschau-Bild
+        const previewCell = document.createElement("td");
+        const previewImage = document.createElement("img");
+        previewImage.src = "/img/muell/sack.png";
+        previewImage.style.width = "50px";
+        previewImage.style.height = "auto";
+        previewImage.style.display = "block";
+        previewImage.style.margin = "0 auto";
+        previewCell.appendChild(previewImage);
+
+        colorSelect.onchange = () => {
+            const colorToImageMap = {
+                "Schwarz": "schwarz.png",
+                "Blau": "blau.png",
+                "Rot": "rot.png",
+                "Gelb": "gelb.png",
+                "Grün": "gruen.png",
+                "Braun": "braun.png",
+                "Schwarz-Blau": "schwarz-blau.png",
+                "Schwarz-Rot": "schwarz-rot.png",
+                "Schwarz-Gelb": "schwarz-gelb.png",
+                "Schwarz-Grün": "schwarz-gruen.png",
+                "Schwarz-Braun": "schwarz-braun.png",
+                "gelber Sack": "gelb_sack.png",
+                "schwarzer Sack": "schwarz_sack.png",
+                "roter Sack": "rot_sack.png",
+                "blauer Sack": "blau_sack.png",
+                "grüner Sack": "gruen_sack.png"
+            };
+            previewImage.src = `/img/muell/${colorToImageMap[colorSelect.value] || "sack.png"}`;
+        };
+
+        sensorRow.appendChild(previewCell);
+        sensorTableBody.appendChild(sensorRow);
+    });
+
+    sensorTable.style.display = "table";
+}
+
 
     // Funktion zum Umschalten des Kopierstatus
     function toggleCopyStatus(statusCell) {
@@ -1497,7 +1540,14 @@ async function extractEntries() {
 
         // Add rows for selected entries
         selectedEntries.forEach((row) => {
-            const customName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent;
+            let customName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent;
+
+            // Überprüfen und gegebenenfalls "Sack" entfernen
+            if (customName.includes("Sack") && !["Gelber Sack", "Schwarzer Sack", "Blauer Sack", "Roter Sack"].includes(customName)) {
+                customName = customName.replace(/\s*Sack/, "").trim();
+            }
+
+            // Sensorname generieren und "_datum" anhängen
             const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
                 return {
                     'ä': 'a', 'ö': 'o', 'ü': 'u',
@@ -1512,8 +1562,8 @@ async function extractEntries() {
             customNameCell.textContent = `${customName} Datum`;
             customNameCell.style.cursor = "pointer";
             customNameCell.onclick = () => {
-                toggleCopyStatus(copyStatusCell); // Richtige Zelle für den Status
-                copyToClipboards(`${customName} Datum`, copyStatusCell); // Name wird kopiert
+                toggleCopyStatus(copyStatusCell); // Status ändern
+                copyToClipboards(`${customName} Datum`, copyStatusCell); // Name kopieren
             };
             sensorRow.appendChild(customNameCell);
 
@@ -1533,6 +1583,7 @@ async function extractEntries() {
 
         dateSensorTable.style.display = "table";
     }
+
 
     function copyToClipboards(textToCopy, statusCell) {
         navigator.clipboard.writeText(textToCopy).then(() => {
@@ -1555,7 +1606,7 @@ async function extractEntries() {
 
         rows.forEach(row => {
             // Suche nach dem Dropdown in der Spalte Tonnen Farbe
-            const selectElement = row.cells[3]?.querySelector("select");
+            const selectElement = row.cells[4]?.querySelector("select");
 
             if (!selectElement) {
                 console.error("Kein Dropdown-Element in der Spalte 'Tonnen Farbe' gefunden!");
@@ -1589,47 +1640,15 @@ async function extractEntries() {
         return true; // Rückgabe `true`, wenn alles korrekt ist
     }
 
-    function createTemplates() {
-        // Zugriff auf die Tabelle der Sensoren
-        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // überspringe die Standardreihe "Nächste Abholung"
+function createTemplates() {
+    // Checkboxen für "keine"-Anzeige prüfen
+    const heuteCheckbox = document.getElementById("keineHeute").checked;
+    const morgenCheckbox = document.getElementById("keineMorgen").checked;
 
-        // Template für "Heute" erstellen
-        createTemplate("Heute", "helper-template-heute", "helper-template-output-heute");
-
-        // Template für "Morgen" erstellen
-        createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen");
-
-        // Prüfen, ob die Checkboxen für "keine"-Anzeige aktiviert sind
-        const heuteCheckbox = document.getElementById("keineHeute").checked;
-        const morgenCheckbox = document.getElementById("keineMorgen").checked;
-
-        let textHeute, textMorgen;
-
-        // Texte für "Heute"
-        if (heuteCheckbox) {
-            textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\nDu musst heute keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
-        } else {
-            textHeute = `{% raw %}{% if states.sensor.mullabholung_heute.state != 'keine' %}\nDu musst heute {{ states.sensor.mullabholung_heute.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
-        }
-
-        // Texte für "Morgen"
-        if (morgenCheckbox) {
-            textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\nDu musst morgen keine Tonne rausstellen!\n{% endif %}{% endraw %}`;
-        } else {
-            textMorgen = `{% raw %}{% if states.sensor.mullabholung_morgen.state != 'keine' %}\nDu musst morgen {{ states.sensor.mullabholung_morgen.state }} rausstellen!\n{% else %}\n\n{% endif %}{% endraw %}`;
-        }
-
-        // Setzen Sie den Text für "Müllabholung Text Heute"
-        const textHeuteElement = document.getElementById("helper-template-text-heute");
-        textHeuteElement.innerHTML = `<code class="language-yaml">${textHeute}</code>`;
-        document.getElementById("helper-template-output-text-heute").style.display = "block";
-
-        // Setzen Sie den Text für "Müllabholung Text Morgen"
-        const textMorgenElement = document.getElementById("helper-template-text-morgen");
-        textMorgenElement.innerHTML = `<code class="language-yaml">${textMorgen}</code>`;
-        document.getElementById("helper-template-output-text-morgen").style.display = "block";
-    }
+    // Templates für "Heute" und "Morgen" erstellen
+    createTemplate("Heute", "helper-template-heute", "helper-template-output-heute", heuteCheckbox);
+    createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen", morgenCheckbox);
+}
 
     function copyTitleToClipboard(element) {
         const textToCopy = element.textContent.trim(); // Text der Überschrift
@@ -1645,119 +1664,105 @@ async function extractEntries() {
         });
     }
 
-    function createTemplate(day, templateId, outputId) {
-        const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1);
-        
-        let hasSack = false;
-        const sensorAssignments = [];
-        
-        rows.forEach(row => {
-            const customName = row.cells[0].textContent.trim();
-            const sensorName = "states.sensor." + customName.toLowerCase().replace(/\s+/g, "_") + ".state";
-            const templateName = customName.replace(/Gelber/g, "Gelben").replace(/\s+/g, "").replace(/Sack/g, "").replace(/Tonne/g, "")
-            const color = row.cells[3].querySelector("select").value;
-    
-            if (color === "Sack") {
-                hasSack = true;
-            }
-    
-            sensorAssignments.push({ customName, sensorName, templateName, color });
-        });
-    
-        // Generiere das Template für den angegebenen Tag ("Heute" oder "Morgen")
-        let templateText = "{% raw %}\n";
-    
-        // Setzen der Variablen
-        sensorAssignments.forEach(({ customName, sensorName }) => {
-            templateText += "{% set " + customName.toUpperCase().replace(/\s+/g, "") + " = " + sensorName + " %}\n";
-        });
-    
-        templateText += generateConditionsAsText(sensorAssignments, hasSack, day);
-    
-        templateText += "\n{% endraw %}";
-    
-        // Setze den Inhalt in das entsprechende <pre> Element
-        const templateElement = document.getElementById(templateId);
-        templateElement.innerHTML = `<code class="language-yaml">${templateText}</code>`;
-        document.getElementById(outputId).style.display = "block";
-    }    
-    
+function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
+    const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody'); // Tabelle für Sensoren
+    const sensorRows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Zeilen der sensor-table (ohne Header)
+
+    const sensorState = {};
+
+    // Verarbeitung der Daten
+    sensorRows.forEach(sensorRow => {
+        // Extrahiere customName aus der 1. Spalte
+        const customName = sensorRow.cells[0]?.textContent.trim();
+
+        // Extrahiere originalName aus der 3. Spalte
+        const originalName = sensorRow.cells[2]?.textContent.trim();
+
+        // Sicherheitsprüfung: Überspringe Zeilen ohne gültige Namen
+        if (!customName || !originalName) {
+            console.warn("Zeile übersprungen: Fehlender Name", sensorRow);
+            return;
+        }
+
+        // Generiere sensorName basierend auf customName
+        const sensorName = `states.sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
+            return { 'ä': 'a', 'ö': 'o', 'ü': 'u', 'Ä': 'A', 'Ö': 'O', 'Ü': 'U', 'ß': 'ss' }[match];
+        })}.state`;
+
+        // Anpassung für farbliche Säcke
+        let adjustedName = originalName;
+        if (originalName.match(/\b(Gelber|Schwarzer|Blauer|Roter) Sack\b/)) {
+            adjustedName = originalName
+                .replace(/\bGelber Sack\b/, "gelben Sack")
+                .replace(/\bSchwarzer Sack\b/, "schwarzen Sack")
+                .replace(/\bBlauer Sack\b/, "blauen Sack")
+                .replace(/\bRoter Sack\b/, "roten Sack");
+        }
+
+        // Füge adjustedName als Schlüssel und sensorName als Wert in sensorState ein
+        sensorState[adjustedName] = sensorName;
+    });
+
+    // Template-Text generieren ohne Anführungszeichen um die Sensorwerte
+    let sensorStateEntries = Object.entries(sensorState)
+        .map(([key, value]) => `    '${key}': ${value}`) // Generiere YAML-Zeilen
+        .join(",\n");
+
+    let templateText = `
 {% raw %}
-    function generateConditionsAsText(assignments, hasSack, conditionDay) {
-        let yaml = `{% if `;
+{% set SENSORSTATE = {
+${sensorStateEntries}
+} %}
+{%- set DAY = '${day}' %}
+{%- set SACKS = namespace(values=[]) %}
+{%- set TONNEN = namespace(values=[]) %}
 
-        // Hole alle Kombinationen und sortiere sie nach Länge (absteigend)
-        const combinations = getAllCombinations(assignments).sort((a, b) => b.length - a.length);
+{# Trenne Säcke und Tonnen #}
+{% for ITEM in SENSORSTATE.keys() %}
+    {% if 'Sack' in ITEM and SENSORSTATE[ITEM] == DAY %}
+        {% set SACKS.values = SACKS.values + [' den ' ~ ITEM] %}
+    {% elif SENSORSTATE[ITEM] == DAY %}
+        {% set TONNEN.values = TONNEN.values + [' die ' ~ ITEM] %}
+    {% endif %}
+{% endfor %}
 
-        combinations.forEach((combination, index) => {
-            const condition = combination
-                .map(a => `${a.customName.toUpperCase().replace(/\s+/g, "")} == "${conditionDay}"`)
-                .join(" and ");
-            const output = generateOutputText(combination, hasSack);
-
-            if (index === 0) {
-                yaml += `${condition} %}\n`;
-            } else {
-                yaml += `{% elif ${condition} %}\n`;
-            }
-            yaml += `    ${output}\n`;
-        });
-
-        yaml += "{% else %}keine {% endif %}"; // Abschluss des Bedingungsblocks
-
-        return yaml;
-    }
+{# Ausgabe der Ergebnisse #}
+{%- if SACKS.values | length > 0 or TONNEN.values | length > 0 %}
+Du musst {{ DAY | lower }}
+    {%- for ITEM in SACKS.values %}
+        {%- if not loop.first %}
+            {%- if loop.last and TONNEN.values | length == 0 %} und 
+            {%- else %}, 
+            {%- endif %}
+        {%- endif %}{{ ITEM }}
+    {%- endfor %}
+    {%- if SACKS.values | length > 0 and TONNEN.values | length == 1 %} und
+    {%- elif SACKS.values | length > 0 and TONNEN.values | length > 1 %},{% endif %}
+    {%- for ITEM in TONNEN.values %}
+        {%- if not loop.first %}
+            {%- if loop.last %} und 
+            {%- else %}, 
+            {%- endif %}
+        {%- endif %}{{ ITEM }}
+    {%- endfor %}
+    {%- if TONNEN.values | length > 0 %} Tonne{% endif %} rausstellen!
+{%- else %}${showNoCollectionMessage ? `\nDu musst heute keine Tonne rausstellen.` : ''}
+{%- endif %}
 {% endraw %}
-    
-    function generateOutputText(assignments, hasSack) {
-        // Sortiere "Sack"-Einträge an den Anfang
-        const formattedNames = assignments.map(({ templateName, color }) => {
-            if (hasSack && color === "Sack") {
-                return { text: "den " + templateName + " Sack", order: 0 };
-            }
-            return { text: "die " + templateName, order: 1 };
-        });
-    
-        // Sortiere nach der Reihenfolge: Sack zuerst, dann die anderen
-        formattedNames.sort((a, b) => a.order - b.order);
-    
-        // Extrahiere die Texte aus den Objekten und erstelle die finale Liste
-        const sortedTexts = formattedNames.map(item => item.text);
-    
-        // Füge "und" vor dem letzten Eintrag hinzu, wenn es mehrere gibt
-        if (sortedTexts.length > 1) {
-            sortedTexts[sortedTexts.length - 1] = "und " + sortedTexts[sortedTexts.length - 1];
-        }
-    
-        // Wenn nur "Sack" enthalten ist, füge kein "Tonne" hinzu
-        if (sortedTexts.length === 1 && hasSack && assignments[0].color === "Sack") {
-            return sortedTexts[0];
-        }
-    
-        // Verbinde alle Einträge mit Komma und füge "Tonne" am Ende hinzu
-        return sortedTexts.join(", ") + " Tonne";
-    }
+`;
 
-
-    function getAllCombinations(arr) {
-        const result = [];
-        const f = function(prefix = [], arr) {
-            result.push(prefix);
-            for (let i = 0; i < arr.length; i++) {
-                f(prefix.concat(arr[i]), arr.slice(i + 1));
-            }
-        };
-        f([], arr);
-        return result.filter(comb => comb.length > 0);
-    }
+    // Template in das entsprechende <pre> Element setzen
+    const templateElement = document.getElementById(templateId);
+    templateElement.innerHTML = `<code class="language-yaml">${templateText.trim()}</code>`;
+    document.getElementById(outputId).style.display = "block";
+}
 
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr")).slice(1); // Überspringe die Standardreihe "Nächste Abholung"
         
         // Tabelle für die Ausgabe erstellen
-        let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th style="text-align: center;">Bild Vorschau</th></tr></thead><tbody>';
+        let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th style="text-align: center;">Bild Vorschau und Download</th></tr></thead><tbody>';
         
         // Mapping von Farben zu Bilddateinamen
         const colorToImageMap = {
@@ -1767,20 +1772,24 @@ async function extractEntries() {
             "Gelb": "gelb.png",
             "Grün": "gruen.png",
             "Braun": "braun.png",
-            "Sack": "sack.png",
             "Schwarz-Blau": "schwarz-blau.png",
             "Schwarz-Rot": "schwarz-rot.png",
             "Schwarz-Gelb": "schwarz-gelb.png",
             "Schwarz-Grün": "schwarz-gruen.png",
-            "Schwarz-Braun": "schwarz-braun.png"
+            "Schwarz-Braun": "schwarz-braun.png", 
+            "gelber Sack": "gelb_sack.png", 
+            "schwarzer Sack": "schwarz_sack.png",
+            "roter Sack": "rot_sack.png",
+            "blauer Sack": "blau_sack.png",
+            "grüner Sack": "gruen_sack.png"
         };
         
         // Zeilen der Tabelle durchlaufen und Bildnamen sowie Bildvorschau zuordnen
         let sensorCount = 0; // Zähler für die Anzahl der Sensoren
         rows.forEach(row => {
             const sensorName = row.cells[0].textContent.trim(); // Sensor Name
-            const selectedColor = row.cells[3].querySelector("select").value; // Farbauswahl
-            const entityID = row.cells[2].textContent.trim(); // Entity ID
+            const selectedColor = row.cells[4].querySelector("select").value; // Farbauswahl
+            const entityID = row.cells[3].textContent.trim(); // Entity ID
 
             if (colorToImageMap[selectedColor]) {
                 sensorCount++; // Zähler inkrementieren
@@ -1916,7 +1925,7 @@ async function extractEntries() {
 
         // Für den Fall, dass 1 Sensor erstellt wurde
         if (sensorCount === 1) {
-            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
             // Sensor aus der Tabelle entnehmen
@@ -2015,7 +2024,7 @@ async function extractEntries() {
 
         // Für den Fall, dass 2 Sensoren erstellt wurden
         else if (sensorCount === 2) {
-            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
             // Sensoren aus der Tabelle entnehmen
@@ -2182,7 +2191,7 @@ async function extractEntries() {
         }
 
         else if (sensorCount === 3) {
-            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
             // Sensoren aus der Tabelle entnehmen
@@ -2290,7 +2299,7 @@ async function extractEntries() {
 
         // Für den Fall, dass 4 Sensoren erstellt wurden und Darstellung "Einzeilig"
         else if (sensorCount === 4 && darstellung === "einzeilig") {
-            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
             // Sensoren aus der Tabelle entnehmen
@@ -2397,7 +2406,7 @@ async function extractEntries() {
         }
 
         else if (sensorCount === 4 && darstellung === "mehrzeilig") {
-            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
             // Sensoren aus der Tabelle entnehmen
@@ -2568,7 +2577,7 @@ async function extractEntries() {
         }
 
         else if (sensorCount === 5) {
-            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
             // Sensoren aus der Tabelle entnehmen
@@ -2740,7 +2749,7 @@ async function extractEntries() {
 
 
         else if (sensorCount === 6) {
-            const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+            const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
             // Sensoren aus der Tabelle entnehmen
@@ -2963,7 +2972,7 @@ function generatePopupYAML() {
 
     const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value;
     const selectedFont = getSelectedFont();
-    const entityText = `sensor.mullabholung_text_${anzeigeAuswahl}`;
+    const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
     const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
     // Dynamisches Sammeln der Sensordaten
