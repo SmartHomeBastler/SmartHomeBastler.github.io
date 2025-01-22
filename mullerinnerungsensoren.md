@@ -259,19 +259,16 @@ Nach den Änderungen klicke auf<br>
     <li><strong>Sensor Datum</strong> - Sensoren welche das Datum der nächsten Abholung einzelner Mülltypen ausgibt</li>
 </ul>
 <br>
-<p>
-    Nun müssen den Sensoren bzw. Abholungen die Tonnenfarben zugeordnet werden.<br>
-    Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.<br>
-    Du kannst deine gewählten Bilder, um sie für dein Dashboard zu nutzen, später bei den Dashboard-Karten herunterladen.
-</p>
+
+<h3 class="shb-section-title-center" id="sensor-header" style="display:none;">Sensor zur Anzeige der nächsten Abholung</h3>
 
 <p>
-    Mit einem Klick auf den Sensor-Namen in der Tabelle wird dieser in die Zwischenablage kopiert.<br>
+    Der erste Sensor welcher anzulegen ist, betrifft die <strong>Nächste Abholung</strong>.<br>
+    <br>
+    Mit einem Klick auf den Sensor Namen in der Tabelle und auf den <code>Kopieren</code> Button des Werte Template, werden diese in die Zwischenablage kopiert.<br>
     Kopierte Einträge werden mit einem ✔️ gekennzeichnet.<br>
-    Dann den Sensor-Namen zusammen mit dem Werte-Template in die Waste Collection Schedule eintragen.
+    Dann den <strong>SENSOR NAME</strong> zusammen mit dem <strong>Werte Template Nächste Abholung</strong> in die Waste Collection Schedule eintragen.
 </p>
-
-<h3 class="shb-section-title-center" id="sensor-header" style="display:none;">Anzulegende Sensoren und Mülltypen</h3>
 
 <table class="shb-custom-table" id="next-event-table">
     <thead>
@@ -290,6 +287,26 @@ Nach den Änderungen klicke auf<br>
     </tbody>
 </table>
 
+<div id="code-output-next" style="display:none;">
+    <h4>Werte Template Nächste Abholung</h4>
+    <div class="shb-code-container">
+        <button class="copy-code-button" onclick="copyCode('next-pickup-template', this)">Kopieren</button>
+        <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
+    </div>
+</div>
+
+<h3 class="shb-section-title-center" id="template-header" style="display:none;">Sensoren für einzelne Abholungen / Müll-Typen</h3>
+
+<p>
+    Nun müssen den Sensoren bzw. den Müll-Typen die Tonnen oder Säcke in den verschidenen Farben zugeordnet werden.<br>
+    Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.<br>
+    Du kannst deine gewählten Bilder, um sie für dein Dashboard zu nutzen, später bei den Dashboard-Karten herunterladen.
+</p>
+<p>
+    Nach der Zuordnung sind auch diese Sensoren in der Waste Collection Schedule anzulegen.<br>
+    Auch hier funktioniert das Kopieren wie schon zuvor. Einfach den Sensor Name anklicken um ihn zu kopieren und zusammen mit dem <strong>Werte Template einzelne Abholungen</strong> als <code>Abfallarten</code> in der Waste Collection Schedule einzeln anlegen.
+</p>
+
 <table class="shb-custom-table" id="sensor-table" style="display:none;">
     <thead>
         <tr>
@@ -306,14 +323,7 @@ Nach den Änderungen klicke auf<br>
     </tbody>
 </table>
 
-<h3 class="shb-section-title-center" id="template-header" style="display:none;">Werte Templates Sensoren</h3>
-
-<div id="code-output-next" style="display:none;">
-    <h4>Werte Template Nächste Abholung</h4>
-    <div class="shb-code-container">
-        <button class="copy-code-button" onclick="copyCode('next-pickup-template', this)">Kopieren</button>
-        <pre id="next-pickup-template" class="language-yaml"><code></code></pre>
-    </div>
+<div id="code-output-events" style="display:none;">
     <h4>Werte Template einzelne Abholungen</h4>
     <div class="shb-code-container">
         <button class="copy-code-button" onclick="copyCode('individual-pickup-template', this)">Kopieren</button>
@@ -321,12 +331,12 @@ Nach den Änderungen klicke auf<br>
     </div>
 </div>
 
-<h3 class="shb-section-title-center" id="date-sensor-header" style="display:none;">Optionale Datum Sensoren</h3>
+<h3 class="shb-section-title-center" id="date-sensor-header" style="display:none;">Optional: Sensoren für die Datum Anzeige der einzelnen Müll-Typen</h3>
 
 <p>
     Wenn du das Datum der einzelnen Abholung benötigst, kannst du dir diesen Sensor ebenfalls anlegen.<br>
     Nutze dazu den Sensor Namen mit dem Zusatz <strong>Datum</strong>, kopiere ihn mit einem Klick aus der Liste 
-    und lege diesen Sensor zusammen mit dem <strong>Werte Template Datum einzelne Abholungen</strong> in der Waste Collection Schedule an.
+    und lege diesen Sensor zusammen mit dem <strong>Werte Template Datum einzelne Abholungen</strong> ebenfalls als <code>Abfallarten</code>, einzeln, in der Waste Collection Schedule an.
 </p>
 
 <table class="shb-custom-table" id="date-sensor-table" style="display: none;">
@@ -1387,6 +1397,7 @@ async function extractEntries() {
         document.getElementById("sensor-header").style.display = "block";
         document.getElementById("date-sensor-header").style.display = "block";
         document.getElementById("code-output-next").style.display = "block";
+        document.getElementById("code-output-events").style.display = "block";
         document.getElementById('code-output-date').style.display = 'block';
         return true;
     }
