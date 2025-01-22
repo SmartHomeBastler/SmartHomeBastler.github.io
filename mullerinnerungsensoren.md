@@ -1397,6 +1397,116 @@ async function extractEntries() {
         }
     }
 
+function generateSensorTable(selectedEntries) {
+    const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+    const sensorTable = document.getElementById('sensor-table');
+    sensorTableBody.innerHTML = "";
+
+    // Separate table for "Nächste Abholung"
+    const nextEventTable = document.getElementById('next-event-table');
+    const nextEventTableBody = nextEventTable.querySelector('tbody');
+    nextEventTableBody.innerHTML = "";
+
+    // Add standard row manually in the HTML (no need to generate via script)
+
+    // Add rows for selected entries
+    selectedEntries.forEach((row) => {
+        let originalName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent.trim();
+        let customName = originalName;
+
+        if (customName.includes("Sack") && !["Gelber Sack", "Schwarzer Sack", "Blauer Sack", "Roter Sack"].includes(customName)) {
+            customName = customName.replace(/\s*Sack/, "").trim();
+        }
+
+        const sensorName = `sensor.${customName.toLowerCase().replace(/\s+/g, "_").replace(/[äöüÄÖÜß]/g, match => {
+            return {
+                'ä': 'a', 'ö': 'o', 'ü': 'u',
+                'Ä': 'A', 'Ö': 'O', 'Ü': 'U', 'ß': 'ss'
+            }[match];
+        })}`;
+
+        const sensorRow = document.createElement("tr");
+
+        // Sensor Name
+        const customNameCell = document.createElement("td");
+        customNameCell.textContent = customName;
+        customNameCell.style.cursor = "pointer";
+        customNameCell.onclick = () => {
+            toggleCopyStatus(copyStatusCell);
+            copyToClipboards(customName, copyStatusCell);
+        };
+        sensorRow.appendChild(customNameCell);
+
+        // Kopiert-Status
+        const copyStatusCell = document.createElement("td");
+        copyStatusCell.innerHTML = '<span class="copy-checkmark">❌</span>';
+        copyStatusCell.style.textAlign = "center";
+        sensorRow.appendChild(copyStatusCell);
+
+        // Original Name
+        const originalNameCell = document.createElement("td");
+        originalNameCell.textContent = originalName;
+        sensorRow.appendChild(originalNameCell);
+
+        // Entity ID
+        const sensorNameCell = document.createElement("td");
+        sensorNameCell.textContent = sensorName;
+        sensorRow.appendChild(sensorNameCell);
+
+        // Farbe Auswahlfeld
+        const colorCell = document.createElement("td");
+        const colorSelect = document.createElement("select");
+        colorSelect.className = "color-select";
+        [
+            "Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun",
+            "gelber Sack", "schwarzer Sack", "roter Sack", "blauer Sack", "grüner Sack"
+        ].forEach(color => {
+            const option = document.createElement("option");
+            option.value = color;
+            option.textContent = color;
+            colorSelect.appendChild(option);
+        });
+        colorCell.appendChild(colorSelect);
+        sensorRow.appendChild(colorCell);
+
+        // Vorschau-Bild
+        const previewCell = document.createElement("td");
+        const previewImage = document.createElement("img");
+        previewImage.src = "/img/muell/sack.png";
+        previewImage.style.width = "50px";
+        previewImage.style.height = "auto";
+        previewImage.style.display = "block";
+        previewImage.style.margin = "0 auto";
+        previewCell.appendChild(previewImage);
+
+        colorSelect.onchange = () => {
+            const colorToImageMap = {
+                "Schwarz": "schwarz.png",
+                "Blau": "blau.png",
+                "Rot": "rot.png",
+                "Gelb": "gelb.png",
+                "Grün": "gruen.png",
+                "Braun": "braun.png",
+                "Schwarz-Blau": "schwarz-blau.png",
+                "Schwarz-Rot": "schwarz-rot.png",
+                "Schwarz-Gelb": "schwarz-gelb.png",
+                "Schwarz-Grün": "schwarz-gruen.png",
+                "Schwarz-Braun": "schwarz-braun.png",
+                "gelber Sack": "gelb_sack.png",
+                "schwarzer Sack": "schwarz_sack.png",
+                "roter Sack": "rot_sack.png",
+                "blauer Sack": "blau_sack.png",
+                "grüner Sack": "gruen_sack.png"
+            };
+            previewImage.src = `/img/muell/${colorToImageMap[colorSelect.value] || "sack.png"}`;
+        };
+
+        sensorRow.appendChild(previewCell);
+        sensorTableBody.appendChild(sensorRow);
+    });
+
+    sensorTable.style.display = "table";
+}
 
 
 
