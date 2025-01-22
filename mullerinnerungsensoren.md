@@ -469,7 +469,7 @@ Nach den Änderungen klicke auf<br>
         <pre id="helper-template-morgen" class="language-yaml"><code></code></pre>
     </div>
 </div>
-
+</div>
 <div class="content-section" id="step-5" style="display:none;">
     <div class="shb-button">
         <button class="shb-button shb-button-main" onclick="showStep(6); createImageList();">👇  Templates angelegt? Weiter zu den Dashboard-Karten!  👇</button>
