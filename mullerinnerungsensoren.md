@@ -1473,7 +1473,7 @@ async function extractEntries() {
 
     function validateColors() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(Array.from(sensorTableBody.querySelectorAll("tr")); // überspringe die Standardreihe "Nächste Abholung"
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")); // überspringe die Standardreihe "Nächste Abholung"
 
         let colorNotSelected = false;
         const selectedColors = new Set();
@@ -1541,7 +1541,7 @@ function createTemplates() {
 
 function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
     const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody'); // Tabelle für Sensoren
-    const sensorRows = Array.from(Array.from(sensorTableBody.querySelectorAll("tr")); // Zeilen der sensor-table (ohne Header)
+    const sensorRows = Array.from(sensorTableBody.querySelectorAll("tr")); // Zeilen der sensor-table (ohne Header)
 
     const sensorState = {};
 
@@ -1634,7 +1634,7 @@ Du musst {{ DAY | lower }}
 
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(Array.from(sensorTableBody.querySelectorAll("tr")); // Überspringe die Standardreihe "Nächste Abholung"
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr")); // Überspringe die Standardreihe "Nächste Abholung"
         
         // Tabelle für die Ausgabe erstellen
         let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th style="text-align: center;">Bild Vorschau und Download</th></tr></thead><tbody>';
