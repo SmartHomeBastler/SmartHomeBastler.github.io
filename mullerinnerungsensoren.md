@@ -1402,13 +1402,6 @@ function generateSensorTable(selectedEntries) {
     const sensorTable = document.getElementById('sensor-table');
     sensorTableBody.innerHTML = "";
 
-    // Separate table for "Nächste Abholung"
-    const nextEventTable = document.getElementById('next-event-table');
-    const nextEventTableBody = nextEventTable.querySelector('tbody');
-    nextEventTableBody.innerHTML = "";
-
-    // Add standard row manually in the HTML (no need to generate via script)
-
     // Add rows for selected entries
     selectedEntries.forEach((row) => {
         let originalName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent.trim();
