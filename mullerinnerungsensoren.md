@@ -95,7 +95,7 @@ layout: page
 
 <p>
     Zum Auslesen der verschiedenen Abholungen aus deinem Müllkalender, gib bitte deine URL an oder lade die ICS-Datei hoch und bestätige mit<br>
-    <code>Kalendereinträge extrahieren</code>.
+    <button class="shb-inline-button-main">Kalendereinträge extrahieren</button>.
 </p>
 
 <div class="shb-form-group">
