@@ -102,6 +102,12 @@ layout: page
     <label for="icsFile">ICS-Datei hochladen</label>
     <input type="file" id="icsFile" style="width: 30%" accept=".ics" />
 </div>
+<div id="progress-container" style="display: none; margin-top: 10px;">
+  <progress id="progress-bar" value="0" max="100" style="width: 30%;"></progress>
+  <span id="progress-text">0%</span>
+</div>
+<div id="upload-status" style="margin-top: 10px; font-weight: bold;"></div>
+<div id="calendar-events" style="margin-top: 10px;"></div>
 
 <div class="shb-form-group">
     <label for="calendarUrl">oder ICS-URL eingeben</label>
@@ -1280,6 +1286,96 @@ Nach den Änderungen klicke auf<br>
             window.scrollTo({ top: offsetTop, behavior: "smooth" });
         }
     }
+    
+document.getElementById('icsFile').addEventListener('change', async (event) => {
+  const fileInput = event.target;
+  const progressContainer = document.getElementById('progress-container');
+  const progressBar = document.getElementById('progress-bar');
+  const progressText = document.getElementById('progress-text');
+  const uploadStatus = document.getElementById('upload-status');
+  const eventsContainer = document.getElementById('calendar-events');
+
+  // Überprüfen, ob eine Datei ausgewählt wurde
+  if (!fileInput.files.length) {
+    uploadStatus.innerText = 'Bitte wählen Sie eine Datei aus!';
+    return;
+  }
+
+  const file = fileInput.files[0];
+  uploadStatus.innerText = '';
+  eventsContainer.innerHTML = '';
+
+  // Fortschrittsanzeige starten
+  progressContainer.style.display = 'block';
+  progressBar.value = 0;
+  progressText.innerText = 'Lese Datei...';
+
+  try {
+    // Datei einlesen
+    const content = await readFile(file);
+
+    // Fortschritt beenden
+    progressBar.value = 100;
+    progressText.innerText = '100%';
+
+    // ICS-Daten verarbeiten
+    const events = parseICS(content);
+    uploadStatus.innerText = 'Datei erfolgreich verarbeitet!';
+    displayEvents(events, eventsContainer);
+  } catch (error) {
+    uploadStatus.innerText = `Fehler: ${error.message}`;
+  } finally {
+    progressContainer.style.display = 'none';
+  }
+});
+
+// Funktion: Datei einlesen
+function readFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => resolve(event.target.result);
+    reader.onerror = (error) => reject(error);
+    reader.readAsText(file);
+  });
+}
+
+// Funktion: ICS-Daten analysieren
+function parseICS(data) {
+  const events = [];
+  const lines = data.split(/\r?\n/);
+  let currentEvent = null;
+
+  for (const line of lines) {
+    if (line.startsWith('BEGIN:VEVENT')) {
+      currentEvent = {};
+    } else if (line.startsWith('END:VEVENT')) {
+      events.push(currentEvent);
+      currentEvent = null;
+    } else if (currentEvent) {
+      const [key, value] = line.split(/:(.+)/);
+      currentEvent[key] = value;
+    }
+  }
+  return events;
+}
+
+// Funktion: Events anzeigen
+function displayEvents(events, container) {
+  if (events.length === 0) {
+    container.innerText = 'Keine Events gefunden.';
+    return;
+  }
+
+  const ul = document.createElement('ul');
+  events.forEach((event) => {
+    const li = document.createElement('li');
+    li.innerText = `Event: ${event['SUMMARY'] || 'Kein Titel'} | Datum: ${
+      event['DTSTART'] || 'Unbekannt'
+    }`;
+    ul.appendChild(li);
+  });
+  container.appendChild(ul);
+}
 
 async function extractEntries() {
     try {
