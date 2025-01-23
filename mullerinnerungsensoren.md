@@ -1318,7 +1318,7 @@ async function extractEntries() {
             }
         } else {
             // Zeige den customAlert bei fehlender Eingabe
-            showCustomAlert(
+            showSHBcustomAlert(
                 "Keine Eingabe",
                 "Bitte eine ICS-Datei hochladen oder eine URL eingeben."
             );
