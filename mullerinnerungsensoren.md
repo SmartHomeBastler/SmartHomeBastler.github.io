@@ -1870,7 +1870,7 @@ Du musst {{ DAY | lower }}
     function updateExampleCard() {
         const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
         const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
-        const sensorCount = sensorTableBody.querySelectorAll("tr").length - 1; // Exclude the header row
+        const sensorCount = sensorTableBody.querySelectorAll("tr"); // Exclude the header row
 
         let imagePath = "/img/muell/";
 
