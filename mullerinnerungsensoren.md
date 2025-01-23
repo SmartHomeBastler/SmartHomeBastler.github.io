@@ -95,7 +95,7 @@ layout: page
 
 <p>
     Zum Auslesen der verschiedenen Abholungen aus deinem Müllkalender, gib bitte deine URL an oder lade die ICS-Datei hoch und bestätige mit<br>
-    <strong>Kalendereinträge extrahieren</strong>.
+    <code>Kalendereinträge extrahieren</code>.
 </p>
 
 <div class="shb-form-group">
@@ -156,7 +156,7 @@ layout: page
     Beispiel: Aus der Bezeichnung <strong>Papier</strong> wird automatisch <strong>die Papier Tonne</strong>.
 </p>
 <p>
-    Anders ist es bei der Verwendung von Säcken. Werdern anstatt Tonnen, Säcke verwendet, ist die Bezeichnung <strong>Sack</strong> der Farbe oder dem Müll-Typ anzuhängen.<br>
+    Anders ist es bei der Verwendung von Säcken. Werden anstatt Tonnen, Säcke verwendet, ist die Bezeichnung <strong>Sack</strong> der Farbe oder dem Müll-Typ anzuhängen.<br>
     Beispiel: Für Restabfall wähle die Bezeichnung <strong>Restabfall Sack</strong>, für den gelben Sack wähle die Bezeichnung <strong>Gelber Sack</strong>. 
 </p>
 <p>
@@ -171,7 +171,7 @@ layout: page
 </ul>
 <p>
 Nach den Änderungen klicke auf<br>
-<strong>Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</strong>
+<code>Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</code>
 </p>
 
 <div class="shb-styled-table-container">
