@@ -950,79 +950,6 @@ Nach den Änderungen klicke auf<br>
 <p>
     Zur einfachen Einrichtung dieser Automatisierung habe ich ein Blueprint erstellt. Dieses kann mit einem Klick auf das Blueprint in der Tabelle herunter geladen und in Home Assistant installiert werden.
 </p>
-
-<table class="shb-custom-table" id="blueprint-table">
-    <thead>
-        <tr>
-            <th>Blueprint</th>
-            <th style="text-align: center;">Blueprint kopiert</th>
-            <th>Beschreibung</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="copyable" data-helper="https://gist.github.com/MaxxKra/3dbc1164e0d037bda67911fccead5f36">Blueprint Pop-Up öffnen</td>
-            <td class="status" id="status-blueprint" style="text-align: center;">❌</td>
-            <td>Ein Blueprint für die Automatisierung zum Öffnen eines Pop-Ups</td>
-        </tr>
-    </tbody>
-</table>
-<br>
-<h4 class="shb-section-title-left">Welche Eingaben sind im Blueprint zu trreffen?</h4>
-
-<ul class="shb-list-start">
-    <li>Der Zeitplan zum Öffnen des Pop-Ups</li>
-    <li>Der Taster welcher das Pop-Up öffnet</li>
-    <li>Der Sensor zur Müllabholung. Entweder <code>Müllabholung Heute</code> oder <code>Müllabholung Morgen</code></li>
-    <li>Der Pop-Up Sensor-Status welcher das Öffnen des Pop-Ups verhindert</li>
-    <li>Eine oder mehrere Browser-IDs, auf welchen das Pop-Up eingerichtet ist.</li>
-    <li>Zum Schluss der Automatisierungs Name welcher in der Tabelle unten kopiert werden kann.</li>
-</ul>
-<br>
-<table class="shb-custom-table" id="popup-sensor-table">
-    <thead>
-        <tr>
-            <th>Pop-up Sensor Status</th>
-            <th style="text-align: center;">Name kopiert</th>
-            <th>Beschreibung</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="copyable" data-helper="none">none</td>
-            <td class="status" id="status-automation" style="text-align: center;">❌</td>
-            <td>Wenn zuvor bei den Templates die Checkboxen für die Anzeige des Textes <strong>nicht</strong> angehakt wurden</td>
-        </tr>
-        <tr>
-            <td class="copyable" data-helper="Du musst heute keine Tonne rausstellen.">Du musst heute keine Tonne rausstellen.</td>
-            <td class="status" id="status-automation" style="text-align: center;">❌</td>
-            <td>Wenn das Pop-Up für <strong>Heute</strong> ist und zuvor bei den Templates die Checkboxen für die Anzeige des Textes angehakt wurden</td>
-        </tr>
-        <tr>
-            <td class="copyable" data-helper="Du musst morgen keine Tonne rausstellen.">Du musst morgen keine Tonne rausstellen.</td>
-            <td class="status" id="status-automation" style="text-align: center;">❌</td>
-            <td>Wenn das Pop-Up für <strong>Morgen</strong> ist und zuvor bei den Templates die Checkboxen für die Anzeige des Textes angehakt wurden</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="shb-custom-table" id="automation-table">
-    <thead>
-        <tr>
-            <th>Automatisierung Name</th>
-            <th style="text-align: center;">Name kopiert</th>
-            <th>Entity ID Automatisierung</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="copyable" data-helper="Müllerinnerung Pop-Up">Müllerinnerung Pop-Up</td>
-            <td class="status" id="status-automation" style="text-align: center;">❌</td>
-            <td>automation.mullerinnerung_pop_up</td>
-        </tr>
-    </tbody>
-</table>
-<br>
 <p>
     Wie man das Blueprint installiert und die Automatisierung einrichtet, siehst du im ⬇️ Dropdown ⬇️
 </p>
@@ -1059,6 +986,79 @@ Nach den Änderungen klicke auf<br>
         </div>
     </div>
 </div>
+<br>
+
+<table class="shb-custom-table" id="blueprint-table">
+    <thead>
+        <tr>
+            <th>Blueprint</th>
+            <th style="text-align: center;">Blueprint kopiert</th>
+            <th>Beschreibung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="copyable" data-helper="https://gist.github.com/MaxxKra/3dbc1164e0d037bda67911fccead5f36">Blueprint Pop-Up öffnen</td>
+            <td class="status" id="status-blueprint" style="text-align: center;">❌</td>
+            <td>Ein Blueprint für die Automatisierung zum Öffnen eines Pop-Ups</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<h4 class="shb-section-title-left">Welche Eingaben sind im Blueprint zu trreffen?</h4>
+
+<ul class="shb-list-start">
+    <li>Der Zeitplan zum Öffnen des Pop-Ups</li>
+    <li>Der Taster welcher das Pop-Up öffnet</li>
+    <li>Der Sensor zur Müllabholung. Entweder <code>Müllabholung Heute</code> oder <code>Müllabholung Morgen</code></li>
+    <li>Der Pop-Up Sensor-Status welcher das Öffnen des Pop-Ups verhindert</li>
+    <li>Eine oder mehrere Browser-IDs, auf welchen das Pop-Up eingerichtet ist.</li>
+    <li>Zum Schluss, der Automatisierungs Name welcher in der Tabelle unten kopiert werden kann.</li>
+</ul>
+<br>
+<table class="shb-custom-table" id="popup-sensor-table">
+    <thead>
+        <tr>
+            <th>Pop-up Sensor Status</th>
+            <th style="text-align: center;">Status kopiert</th>
+            <th>Beschreibung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="copyable" data-helper="none">none</td>
+            <td class="status" id="status-automation" style="text-align: center;">❌</td>
+            <td>Wenn zuvor bei den Templates die Checkboxen für die Anzeige des Textes <code>nicht</code> angehakt wurden</td>
+        </tr>
+        <tr>
+            <td class="copyable" data-helper="Du musst heute keine Tonne rausstellen.">Du musst heute keine Tonne rausstellen.</td>
+            <td class="status" id="status-automation" style="text-align: center;">❌</td>
+            <td>Wenn das Pop-Up für <code>Heute</code> ist und zuvor bei den Templates die Checkboxen für die Anzeige des Textes angehakt wurden</td>
+        </tr>
+        <tr>
+            <td class="copyable" data-helper="Du musst morgen keine Tonne rausstellen.">Du musst morgen keine Tonne rausstellen.</td>
+            <td class="status" id="status-automation" style="text-align: center;">❌</td>
+            <td>Wenn das Pop-Up für <code>Morgen</code> ist und zuvor bei den Templates die Checkboxen für die Anzeige des Textes angehakt wurden</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<table class="shb-custom-table" id="automation-table">
+    <thead>
+        <tr>
+            <th>Automatisierung Name</th>
+            <th style="text-align: center;">Name kopiert</th>
+            <th>Entity ID Automatisierung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="copyable" data-helper="Müllerinnerung Pop-Up">Müllerinnerung Pop-Up</td>
+            <td class="status" id="status-automation" style="text-align: center;">❌</td>
+            <td>automation.mullerinnerung_pop_up</td>
+        </tr>
+    </tbody>
+</table>
 <br>
 <p>
     Nach der Installation der Automatisierung sollte das Pop-Up auf deinen gewählten Dashboards durch den eingerichteten Zeitplan automatisch geöffnet werden.
