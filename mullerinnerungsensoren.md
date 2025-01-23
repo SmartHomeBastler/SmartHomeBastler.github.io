@@ -1027,17 +1027,17 @@ Nach den Änderungen klicke auf<br>
     <tbody>
         <tr>
             <td class="copyable" data-helper="none">none</td>
-            <td class="status" id="status-automation" style="text-align: center;">❌</td>
+            <td class="status" id="popup-state-none" style="text-align: center;">❌</td>
             <td>Wenn zuvor bei den Templates die Checkboxen für die Anzeige des Textes <code>nicht</code> angehakt wurden</td>
         </tr>
         <tr>
             <td class="copyable" data-helper="Du musst heute keine Tonne rausstellen.">Du musst heute keine Tonne rausstellen.</td>
-            <td class="status" id="status-automation" style="text-align: center;">❌</td>
+            <td class="status" id="popup-state-today" style="text-align: center;">❌</td>
             <td>Wenn das Pop-Up für <code>Heute</code> ist und zuvor bei den Templates die Checkboxen für die Anzeige des Textes angehakt wurden</td>
         </tr>
         <tr>
             <td class="copyable" data-helper="Du musst morgen keine Tonne rausstellen.">Du musst morgen keine Tonne rausstellen.</td>
-            <td class="status" id="status-automation" style="text-align: center;">❌</td>
+            <td class="status" id="popup-state-tomorrow" style="text-align: center;">❌</td>
             <td>Wenn das Pop-Up für <code>Morgen</code> ist und zuvor bei den Templates die Checkboxen für die Anzeige des Textes angehakt wurden</td>
         </tr>
     </tbody>
