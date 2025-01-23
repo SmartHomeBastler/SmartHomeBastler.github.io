@@ -108,7 +108,7 @@ layout: page
 </div>
 
 <div class="shb-button">
-    <button class="shb-button shb-button-main" style="margin-bottom: 30px;" onclick="extractEntries(); showStep(2);">👇  Kalendereinträge extrahieren!  👇</button>
+    <button class="shb-button shb-button-main" style="margin-bottom: 30px;" onclick="extractEntries();">👇  Kalendereinträge extrahieren!  👇</button>
 </div>
 </div>
 
@@ -1317,39 +1317,45 @@ async function extractEntries() {
                 return;
             }
         } else {
+            // Zeige den customAlert bei fehlender Eingabe
+            showCustomAlert(
+                "Keine Eingabe",
+                "Bitte eine ICS-Datei hochladen oder eine URL eingeben."
+            );
             entryTableBody.innerHTML = "<tr><td colspan='3'>Bitte eine ICS-Datei hochladen oder eine URL eingeben.</td></tr>";
             return;
         }
-    
+
+        // Wenn Daten geladen wurden, führe showStep aus
+        showStep(2);
+
         const summaryEntries = new Set();
         const invalidEntries = [];
         const lines = icsData.split("\n");
-    
+
         for (let line of lines) {
             if (line.startsWith("SUMMARY")) {
                 const summaryText = line.split(":").slice(1).join(":").trim();
                 summaryEntries.add(summaryText);
-    
+
                 // Überprüfen, ob Ziffern, Punkte oder unerlaubte Zeichen enthalten sind
                 if (/\d|\.|[äöüßÄÖÜ]|\s|[()!?]/.test(summaryText)) {
                     invalidEntries.push(summaryText);
                 }
             }
         }
-    
+
         // Zeige den Warnungscontainer bei ungültigen Einträgen
         if (invalidEntries.length > 0) {
-            const warningContainer = document.getElementById("warning-container");
-            const umlautWarningContainer = document.getElementById("umlaut-warning-container");
             warningContainer.style.display = "block"; // Container einblenden
             umlautWarningContainer.style.display = "none"; // Umlaut-Warnung ausblenden
         }
-    
+
         entryTableBody.innerHTML = "";
         let idCounter = 0;
         summaryEntries.forEach(entry => {
             const row = document.createElement("tr");
-    
+
             // Checkbox
             const checkboxCell = document.createElement("td");
             checkboxCell.setAttribute("style", "text-align: center;");
@@ -1359,7 +1365,7 @@ async function extractEntries() {
             checkbox.id = `shb-custom-checkbox-${idCounter}`;
             checkboxCell.appendChild(checkbox);
             row.appendChild(checkboxCell);
-    
+
             // Summary Entry
             const summaryCell = document.createElement("td");
             summaryCell.textContent = entry;
@@ -1371,7 +1377,7 @@ async function extractEntries() {
                 summaryCell.title = "Ungültiger Eintrag - bitte anpassen"; // Tooltip
             }
             row.appendChild(summaryCell);
-    
+
             // Custom Name Input
             const customNameCell = document.createElement("td");
             const customNameInput = document.createElement("input");
@@ -1381,11 +1387,11 @@ async function extractEntries() {
             customNameInput.id = `custom-name-${idCounter}`;
             customNameCell.appendChild(customNameInput);
             row.appendChild(customNameCell);
-    
+
             entryTableBody.appendChild(row);
             idCounter++;
         });
-    
+
     } catch (error) {
         console.error("Error in extractEntries:", error);
     }
