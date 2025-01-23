@@ -102,6 +102,11 @@ layout: page
     <label for="icsFile">ICS-Datei hochladen</label>
     <input type="file" id="icsFile" style="width: 30%" accept=".ics" />
 </div>
+<div id="progress-container" style="display: none; margin-top: 10px;">
+  <progress id="progress-bar" value="0" max="100" style="width: 30%;"></progress>
+  <span id="progress-text">0%</span>
+</div>
+<div id="upload-status" style="margin-top: 10px; font-weight: bold;"></div>
 
 <div class="shb-form-group">
     <label for="calendarUrl">oder ICS-URL eingeben</label>
@@ -1280,6 +1285,72 @@ Nach den Änderungen klicke auf<br>
             window.scrollTo({ top: offsetTop, behavior: "smooth" });
         }
     }
+    
+document.getElementById('icsFile').addEventListener('change', async () => {
+  const fileInput = document.getElementById('icsFile');
+  const progressContainer = document.getElementById('progress-container');
+  const progressBar = document.getElementById('progress-bar');
+  const progressText = document.getElementById('progress-text');
+  const uploadStatus = document.getElementById('upload-status');
+
+  // Überprüfen, ob eine Datei ausgewählt wurde
+  if (!fileInput.files.length) {
+    uploadStatus.innerText = 'Bitte wählen Sie eine Datei aus!';
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const formData = new FormData();
+  formData.append('file', file);
+
+  // Fortschrittsanzeige anzeigen
+  progressContainer.style.display = 'block';
+  progressBar.value = 0;
+  progressText.innerText = '0%';
+  uploadStatus.innerText = '';
+
+  try {
+    // XMLHttpRequest für Upload mit Fortschrittsanzeige
+    await uploadWithProgress(formData);
+    uploadStatus.innerText = 'Upload erfolgreich!';
+  } catch (error) {
+    uploadStatus.innerText = `Fehler: ${error.message}`;
+  } finally {
+    // Fortschrittsanzeige nach Abschluss ausblenden
+    progressContainer.style.display = 'none';
+    fileInput.value = ''; // Datei-Eingabe zurücksetzen
+  }
+});
+
+// Funktion für Upload mit Fortschrittsanzeige
+function uploadWithProgress(formData) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload-endpoint', true);
+
+    // Fortschritt verfolgen
+    xhr.upload.addEventListener('progress', (e) => {
+      if (e.lengthComputable) {
+        const percentComplete = Math.round((e.loaded / e.total) * 100);
+        document.getElementById('progress-bar').value = percentComplete;
+        document.getElementById('progress-text').innerText = `${percentComplete}%`;
+      }
+    });
+
+    // Upload abgeschlossen
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        resolve(xhr.response);
+      } else {
+        reject(new Error('Upload fehlgeschlagen!'));
+      }
+    };
+
+    // Fehlerbehandlung
+    xhr.onerror = () => reject(new Error('Netzwerkfehler beim Upload!'));
+    xhr.send(formData);
+  });
+}
 
 async function extractEntries() {
     try {
