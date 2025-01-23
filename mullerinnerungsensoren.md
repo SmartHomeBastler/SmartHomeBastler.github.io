@@ -94,8 +94,7 @@ layout: page
 <h2 class="shb-section-title-center">1. Kalenderdaten Auslesen</h2>
 
 <p>
-    Zum Auslesen der verschiedenen Abholungen aus deinem Müllkalender, gib bitte deine URL an oder lade die ICS-Datei hoch und bestätige mit<br>
-    <button class="shb-inline-button-main">Kalendereinträge extrahieren</button>.
+    Zum Auslesen der verschiedenen Abholungen aus deinem Müllkalender, gib bitte deine URL an oder lade die ICS-Datei hoch und bestätige unten mit <button class="shb-inline-button-main">Kalendereinträge extrahieren</button>.
 </p>
 
 <div class="shb-form-group">
@@ -170,8 +169,7 @@ layout: page
     <li>Blauer Sack</li>
 </ul>
 <p>
-Nach den Änderungen klicke auf<br>
-<code>Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</code>
+Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
 </p>
 
 <div class="shb-styled-table-container">
