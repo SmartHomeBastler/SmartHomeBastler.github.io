@@ -1735,7 +1735,7 @@ Du musst {{ DAY | lower }}
         {%- endif %}{{ ITEM }}
     {%- endfor %}
     {%- if TONNEN.values | length > 0 %} Tonne{% endif %} rausstellen!
-{%- else %}${showNoCollectionMessage ? `\nDu musst {{ DAY | lower }} keine Tonne rausstellen.` : '-'}
+{%- else %}${showNoCollectionMessage ? `\nDu musst {{ DAY | lower }} keine Tonne rausstellen.` : 'none'}
 {%- endif %}
 {% endraw %}
 `;
@@ -1948,6 +1948,8 @@ Du musst {{ DAY | lower }}
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
             yaml += `        - word-break: break-word\n`;
+            yaml += `        - visibility: >\n`;
+            yaml += `            [[[ return entity.state === 'none' ? 'hidden' : 'visible'; ]]]\n`;
             yaml += `      card:\n`;
             yaml += `        - background: transparent\n`;
             yaml += `        - border: none\n`;
@@ -2057,6 +2059,8 @@ Du musst {{ DAY | lower }}
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
             yaml += `        - word-break: break-word\n`;
+            yaml += `        - visibility: >\n`;
+            yaml += `            [[[ return entity.state === 'none' ? 'hidden' : 'visible'; ]]]\n`;
             yaml += `      card:\n`;
             yaml += `        - background: transparent\n`;
             yaml += `        - border: none\n`;
@@ -2220,6 +2224,8 @@ Du musst {{ DAY | lower }}
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
             yaml += `        - word-break: break-word\n`;
+            yaml += `        - visibility: >\n`;
+            yaml += `            [[[ return entity.state === 'none' ? 'hidden' : 'visible'; ]]]\n`;
             yaml += `      card:\n`;
             yaml += `        - background: transparent\n`;
             yaml += `        - border: none\n`;
@@ -2328,6 +2334,8 @@ Du musst {{ DAY | lower }}
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
             yaml += `        - word-break: break-word\n`;
+            yaml += `        - visibility: >\n`;
+            yaml += `            [[[ return entity.state === 'none' ? 'hidden' : 'visible'; ]]]\n`;
             yaml += `      card:\n`;
             yaml += `        - background: transparent\n`;
             yaml += `        - border: none\n`;
@@ -2435,6 +2443,8 @@ Du musst {{ DAY | lower }}
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
             yaml += `        - word-break: break-word\n`;
+            yaml += `        - visibility: >\n`;
+            yaml += `            [[[ return entity.state === 'none' ? 'hidden' : 'visible'; ]]]\n`;
             yaml += `      card:\n`;
             yaml += `        - background: transparent\n`;
             yaml += `        - border: none\n`;
@@ -2606,6 +2616,8 @@ Du musst {{ DAY | lower }}
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
             yaml += `        - word-break: break-word\n`;
+            yaml += `        - visibility: >\n`;
+            yaml += `            [[[ return entity.state === 'none' ? 'hidden' : 'visible'; ]]]\n`;
             yaml += `      card:\n`;
             yaml += `        - background: transparent\n`;
             yaml += `        - border: none\n`;
@@ -2778,6 +2790,8 @@ Du musst {{ DAY | lower }}
             yaml += `        - white-space: unset\n`;
             yaml += `        - text-overflow: unset\n`;
             yaml += `        - word-break: break-word\n`;
+            yaml += `        - visibility: >\n`;
+            yaml += `            [[[ return entity.state === 'none' ? 'hidden' : 'visible'; ]]]\n`;
             yaml += `      card:\n`;
             yaml += `        - background: transparent\n`;
             yaml += `        - border: none\n`;
@@ -3002,6 +3016,8 @@ function generatePopupYAML() {
     yaml += `          - white-space: unset\n`;
     yaml += `          - text-overflow: unset\n`;
     yaml += `          - word-break: break-word\n`;
+    yaml += `          - visibility: >\n`;
+    yaml += `              [[[ return entity.state === 'none' ? 'hidden' : 'visible'; ]]]\n`;
     yaml += `          - text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px grey\n`;
     yaml += `      style:\n`;
     yaml += `        left: 50%\n`;
