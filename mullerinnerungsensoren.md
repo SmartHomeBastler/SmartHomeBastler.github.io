@@ -1505,7 +1505,7 @@ function generateSensorTable(selectedEntries) {
         colorSelect.className = "color-select";
         [
             "Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun",
-            "gelber Sack", "schwarzer Sack", "roter Sack", "blauer Sack", "grüner Sack", "Sperrabfall"
+            "gelber Sack", "schwarzer Sack", "roter Sack", "blauer Sack", "grüner Sack", "Sperrabfall", "Grünschnitt"
         ].forEach(color => {
             const option = document.createElement("option");
             option.value = color;
@@ -1543,7 +1543,8 @@ function generateSensorTable(selectedEntries) {
                 "roter Sack": "rot_sack.png",
                 "blauer Sack": "blau_sack.png",
                 "grüner Sack": "gruen_sack.png",
-                "Sperrabfall": "sperrabfall.png"
+                "Sperrabfall": "sperrabfall.png",
+                "Grünschnitt": "gruenschnitt.png"
             };
             previewImage.src = `/img/muell/${colorToImageMap[colorSelect.value] || "sack.png"}`;
         };
@@ -1814,7 +1815,8 @@ Du musst {{ DAY | lower }}
             "roter Sack": "rot_sack.png",
             "blauer Sack": "blau_sack.png",
             "grüner Sack": "gruen_sack.png",
-            "Sperrabfall": "sperrabfall.png"
+            "Sperrabfall": "sperrabfall.png",
+            "Grünschnitt": "gruenschnitt.png"
         };
         
         // Zeilen der Tabelle durchlaufen und Bildnamen sowie Bildvorschau zuordnen
