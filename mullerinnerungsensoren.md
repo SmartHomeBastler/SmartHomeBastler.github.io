@@ -1735,7 +1735,7 @@ Du musst {{ DAY | lower }}
         {%- endif %}{{ ITEM }}
     {%- endfor %}
     {%- if TONNEN.values | length > 0 %} Tonne{% endif %} rausstellen!
-{%- else %}${showNoCollectionMessage ? `\nDu musst heute keine Tonne rausstellen.` : ''}
+{%- else %}${showNoCollectionMessage ? `\nDu musst {{ DAY | lower }} keine Tonne rausstellen.` : '-'}
 {%- endif %}
 {% endraw %}
 `;
