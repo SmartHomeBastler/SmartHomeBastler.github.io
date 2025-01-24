@@ -167,6 +167,7 @@ layout: page
     <li>Schwarzer Sack</li>
     <li>Roter Sack</li>
     <li>Blauer Sack</li>
+    <li>Grüner Sack</li>
 </ul>
 <p>
 Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
@@ -1703,6 +1704,9 @@ function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
         // Entferne " Sack" aus originalName, falls vorhanden
         if (originalName.includes(" Sack")) {
             originalName = originalName.replace(" Sack", "");
+        }
+        else if (originalName.includes(" Tonne")) {
+            originalName = originalName.replace(" Tonne", "");
         }
 
         // Extrahiere Farbe aus der 5. Spalte
