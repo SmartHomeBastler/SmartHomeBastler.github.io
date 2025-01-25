@@ -127,7 +127,7 @@ layout: page
     Im nächsten Schritt wähle jene Einträge aus, welche zu deinen Sensoren hinzugefügt werden sollen.<br> Zusätzlich hast du die Möglichkeit individuelle Bezeichnungen zu vergeben.
 </p>
 
-<div id="umlaut-warning-container" class="important-container" style="display: none;">
+<div id="zeichen-hinweis-container" class="note-container" style="display: none;">
     <h3>❗Achtung</h3>
     <p>
         Deine persönlichen Bezeichnungen dürfen keine Sonderzeichen enthalten.<br>
@@ -136,7 +136,7 @@ layout: page
     </p>
 </div>
 <!-- Warnungscontainer -->
-<div id="warning-container" class="important-container" style="display: none;">
+<div id="zeichen-warning-container" class="important-container" style="display: none;">
     <h3>❗Achtung</h3>
     <p>
         Deine Kalender enthält ungültige Einträge wie z.B. <strong>( ), + oder andere Sonderzeichen</strong>.<br>
@@ -1293,12 +1293,12 @@ async function extractEntries() {
         const entryTableBody = document.getElementById('entry-table').querySelector('tbody');
 
         // Alle Warncontainer ausblenden
-        const warningContainer = document.getElementById("warning-container");
-        const umlautWarningContainer = document.getElementById("umlaut-warning-container");
+        const zeichenWarningContainer = document.getElementById("zeichen-warning-container");
+        const zeichenHinweisContainer = document.getElementById("zeichen-hinweis-container");
         const urlWarningContainer = document.getElementById("url-warning-container");
 
-        warningContainer.style.display = "none";
-        umlautWarningContainer.style.display = "none";
+        zeichenWarningContainer.style.display = "none";
+        zeichenHinweisContainer.style.display = "block";
         urlWarningContainer.style.display = "none";
 
         entryTableBody.innerHTML = "Lade und verarbeite Daten...";
@@ -1319,6 +1319,7 @@ async function extractEntries() {
             } catch (error) {
                 // Zeige den URL-Warncontainer bei einem Fehler
                 urlWarningContainer.style.display = "block";
+                zeichenHinweisContainer.style.display = "none";
                 console.error("Fetch error:", error);
                 entryTableBody.innerHTML = `<tr><td colspan="3">Fehler beim Laden der URL: ${error.message}</td></tr>`;
                 return;
@@ -1354,8 +1355,8 @@ async function extractEntries() {
 
         // Zeige den Warnungscontainer bei ungültigen Einträgen
         if (invalidEntries.length > 0) {
-            warningContainer.style.display = "block"; // Container einblenden
-            umlautWarningContainer.style.display = "none"; // Umlaut-Warnung ausblenden
+            zeichenWarningContainer.style.display = "block"; // Container einblenden
+            zeichenHinweisContainer.style.display = "none"; // Umlaut-Warnung ausblenden
         }
 
         entryTableBody.innerHTML = "";
