@@ -1722,6 +1722,23 @@ function createTemplates() {
         });
     }
 
+function showTemplatePreview(heuteState, morgenState) {
+    const previewElementHeute = document.getElementById("template-preview-heute");
+    const previewElementMorgen = document.getElementById("template-preview-morgen");
+
+    // Vorschautexte für Heute und Morgen erstellen
+    const heutePreviewText = generatePreviewText(heuteState, "Heute");
+    const morgenPreviewText = generatePreviewText(morgenState, "Morgen");
+
+    // Vorschau anzeigen
+    if (previewElementHeute) {
+        previewElementHeute.textContent = heutePreviewText;
+    }
+    if (previewElementMorgen) {
+        previewElementMorgen.textContent = morgenPreviewText;
+    }
+}
+
 function generatePreviewText(sensorState, day) {
     const sacks = [];
     const tonnen = [];
