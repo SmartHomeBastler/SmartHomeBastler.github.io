@@ -1700,9 +1700,9 @@ function createTemplates() {
     const heuteCheckbox = document.getElementById("keineHeute").checked;
     const morgenCheckbox = document.getElementById("keineMorgen").checked;
 
-    // Templates für "Heute" und "Morgen" erstellen
-    createTemplate("Heute", "helper-template-heute", "helper-template-output-heute", heuteCheckbox);
-    createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen", morgenCheckbox);
+    // Templates für "Heute" und "Morgen" erstellen und Zustände speichern
+    const heuteState = createTemplate("Heute", "helper-template-heute", "helper-template-output-heute", heuteCheckbox);
+    const morgenState = createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen", morgenCheckbox);
 
     // Generiere und zeige Vorschau an
     showTemplatePreview(heuteState, morgenState);
