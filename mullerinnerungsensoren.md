@@ -506,6 +506,10 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
+    <p>
+        Die Überschrift kann wieder als Template Name verwendet und mit einem Klick kopiert werden.<br>
+        Zusammen mit dem Template diese einfach in Home Assistant bei den Helfern anlegen.
+    </p>
     <div class="shb-title-inline">
         <h4 onclick="copyTitleToClipboard(this)">Müllabholung Heute</h4>
         <p>Klicke auf die Überschrift um sie zu kopieren!</p>
