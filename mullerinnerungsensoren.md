@@ -1747,15 +1747,13 @@ function generatePreviewText(sensorState, day) {
     const sammlungen = [];
 
     // Trenne Einträge basierend auf der Kategorie
-    sensorState.forEach(([name, category, state]) => {
-        if (state === fixedDay) { // Nutze nur Einträge mit dem fixierten Zustand
-            if (category === "SACK") {
-                sacks.push(`den ${name}`);
-            } else if (category === "TONNE") {
-                tonnen.push(`die ${name}`);
-            } else if (category === "SAMMLUNG") {
-                sammlungen.push(`die ${name}`);
-            }
+    sensorState.forEach(([name, category, state]) => { 
+        if (category === "SACK") {
+            sacks.push(`den ${name}`);
+        } else if (category === "TONNE") {
+            tonnen.push(`die ${name}`);
+        } else if (category === "SAMMLUNG") {
+            sammlungen.push(`die ${name}`);
         }
     });
 
