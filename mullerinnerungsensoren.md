@@ -1768,7 +1768,7 @@ function generatePreviewText(sensorState, day) {
         // Tonnen hinzufügen
         if (tonnen.length > 0) {
             if (sacks.length > 0) {
-                previewText += (sammlungen.length > 0 ? ", sowie " : " und ");
+                previewText += ", sowie ";
             }
             previewText += formatList(tonnen) + " Tonne";
         }
@@ -1776,7 +1776,7 @@ function generatePreviewText(sensorState, day) {
         // Sammlungen hinzufügen
         if (sammlungen.length > 0) {
             if (sacks.length > 0 || tonnen.length > 0) {
-                previewText += " sowie ";
+                previewText += ", sowie ";
             }
             previewText += formatList(sammlungen) + " Sammlung";
         }
