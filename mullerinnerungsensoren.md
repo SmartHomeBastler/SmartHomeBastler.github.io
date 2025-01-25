@@ -164,22 +164,29 @@ layout: page
 <p>
     Es sind folgende Farben von Tonnen und Säcken für die Bezeichnung möglich:
 </p>
-<ul>
-    <li>Gelbe Tonne</li>
-    <li>Schwarze Tonne</li>
-    <li>Rote Tonne</li>
-    <li>Blaue Tonne</li>
-    <li>Grüne Tonne</li>
-    <li>Braune Tonne</li>
-</ul>
-<ul>
-    <li>Gelber Sack</li>
-    <li>Schwarzer Sack</li>
-    <li>Roter Sack</li>
-    <li>Blauer Sack</li>
-    <li>Grüner Sack</li>
-    <li>Brauner Sack</li>
-</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <ul style="list-style: none; margin: 0; padding: 0; width: calc(100% / 4 - 10px);">
+        <li>Gelbe Tonne</li>
+        <li>Schwarze Tonne</li>
+        <li>Rote Tonne</li>
+    </ul>
+    <ul style="list-style: none; margin: 0; padding: 0; width: calc(100% / 4 - 10px);">
+        <li>Blaue Tonne</li>
+        <li>Grüne Tonne</li>
+        <li>Braune Tonne</li>
+    </ul>
+    <ul style="list-style: none; margin: 0; padding: 0; width: calc(100% / 4 - 10px);">
+        <li>Gelber Sack</li>
+        <li>Schwarzer Sack</li>
+        <li>Roter Sack</li>
+    </ul>
+    <ul style="list-style: none; margin: 0; padding: 0; width: calc(100% / 4 - 10px);">
+        <li>Blauer Sack</li>
+        <li>Grüner Sack</li>
+        <li>Brauner Sack</li>
+    </ul>
+</div>
+
 <p>
 Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
 </p>
