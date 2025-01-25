@@ -157,23 +157,28 @@ layout: page
     </p>
 </div>
 <p>
-    Wähle deine Bezeichnung so, dass sie kurz und sinnvoll ist. Es ist nicht notwendig, das Wort <strong>Tonne</strong> in die Bezeichnung aufzunehmen, da dies automatisch vom Codegenerator ergänzt wird.<br>
-    Beispiel: Aus der Bezeichnung <strong>Papier</strong> wird automatisch <strong>die Papier Tonne</strong>.
+    Wähle deine Bezeichnung so, dass sie kurz und sinnvoll ist.<br>
+    Es ist nicht notwendig, das Wort <strong>Tonne</strong> oder <strong>Sack</strong> in die Bezeichnung aufzunehmen, da dies automatisch vom Codegenerator durch das Auswählen der Bilder ergänzt wird.<br>
+    Eine Ausnahme bildet die Verwendung von Farben in der Bezeichnung, da die Betitelung deines Müll-Typs am Dashboard mit z.B. <strong>Gelbe</strong> anstatt <strong>Gelbe Tonne</strong> nicht besonders aussagekräftig wäre.<br>
 </p>
 <p>
-    Anders ist es bei der Verwendung von Säcken. Werden anstatt Tonnen, Säcke verwendet, ist die Bezeichnung <strong>Sack</strong> der Farbe oder dem Müll-Typ anzuhängen.<br>
-    Beispiel: Für Restabfall wähle die Bezeichnung <strong>Restabfall Sack</strong>, für den gelben Sack wähle die Bezeichnung <strong>Gelber Sack</strong>. 
+    Es sind folgende Farben von Tonnen und Säcken für die Bezeichnung möglich:
 </p>
-<p>
-
-    Es sind folgende Farben von Säcken für die Bezeichnung möglich:
-</p>
+<ul>
+    <li>Gelbe Tonne</li>
+    <li>Schwarze Tonne</li>
+    <li>Rote Tonne</li>
+    <li>Blaue Tonne</li>
+    <li>Grüne Tonne</li>
+    <li>Braune Tonne</li>
+</ul>
 <ul>
     <li>Gelber Sack</li>
     <li>Schwarzer Sack</li>
     <li>Roter Sack</li>
     <li>Blauer Sack</li>
     <li>Grüner Sack</li>
+    <li>Brauner Sack</li>
 </ul>
 <p>
 Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Auswahl getroffen, eigene Bezeichnungen gewählt? Weiter mit Sensoren!</button>
@@ -1468,7 +1473,7 @@ function generateSensorTable(selectedEntries) {
         let originalName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent.trim();
         let customName = originalName;
 
-        if (customName.includes("Sack") && !["Gelber Sack", "Grüner Sack", "Schwarzer Sack", "Blauer Sack", "Roter Sack"].includes(customName)) {
+        if (customName.includes("Sack") && !["Gelber Sack", "Grüner Sack", "Schwarzer Sack", "Blauer Sack", "Roter Sack", "Brauner Sack"].includes(customName)) {
             customName = customName.replace(/\s*Sack/, "").trim();
         }
 
@@ -1513,7 +1518,7 @@ function generateSensorTable(selectedEntries) {
         colorSelect.className = "color-select";
         [
             "Farbe wählen", "Schwarz", "Blau", "Rot", "Gelb", "Grün", "Braun", "Schwarz-Blau", "Schwarz-Rot", "Schwarz-Gelb", "Schwarz-Grün", "Schwarz-Braun",
-            "gelber Sack", "schwarzer Sack", "roter Sack", "blauer Sack", "grüner Sack", "Sperrabfall", "Grünschnitt", "Glas"
+            "gelber Sack", "schwarzer Sack", "roter Sack", "blauer Sack", "grüner Sack", "brauner Sack", "Sperrabfall", "Grünschnitt", "Glas"
         ].forEach(color => {
             const option = document.createElement("option");
             option.value = color;
@@ -1551,6 +1556,7 @@ function generateSensorTable(selectedEntries) {
                 "roter Sack": "rot_sack.png",
                 "blauer Sack": "blau_sack.png",
                 "grüner Sack": "gruen_sack.png",
+                "brauner Sack": "braun_sack.png",
                 "Sperrabfall": "sperrabfall.png",
                 "Grünschnitt": "gruenschnitt.png",
                 "Glas": "glas.png"
@@ -1585,7 +1591,7 @@ function generateSensorTable(selectedEntries) {
             let customName = row.querySelector(".shb-custom-input").value || row.querySelector("td:nth-child(2)").textContent;
 
             // Überprüfen und gegebenenfalls "Sack" entfernen
-            if (customName.includes("Sack") && !["Gelber Sack", "Schwarzer Sack", "Blauer Sack", "Roter Sack", "Grüner Sack"].includes(customName)) {
+            if (customName.includes("Sack") && !["Gelber Sack", "Schwarzer Sack", "Blauer Sack", "Roter Sack", "Grüner Sack", "Brauner Sack"].includes(customName)) {
                 customName = customName.replace(/\s*Sack/, "").trim();
             }
 
@@ -1729,7 +1735,7 @@ function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
         let category;
         if ("Schwarz,Blau,Rot,Gelb,Grün,Braun,Schwarz-Blau,Schwarz-Rot,Schwarz-Gelb,Schwarz-Grün,Schwarz-Braun".split(",").includes(color)) {
             category = "TONNE";
-        } else if ("gelber Sack,schwarzer Sack,roter Sack,blauer Sack,grüner Sack".split(",").includes(color)) {
+        } else if ("gelber Sack,schwarzer Sack,roter Sack,blauer Sack,grüner Sack,brauner Sack".split(",").includes(color)) {
             category = "SACK";
         } else if ("Sperrabfall,Grünschnitt,Glas".split(",").includes(color)) {
             category = "SAMMLUNG";
@@ -1745,13 +1751,14 @@ function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
 
         // Anpassung für farbliche Säcke
         let adjustedName = originalName;
-        if (originalName.match(/\b(Gelber|Schwarzer|Blauer|Roter|Grüner)\b/)) {
+        if (originalName.match(/\b(Gelber|Schwarzer|Blauer|Roter|Grüner|Brauner)\b/)) {
             adjustedName = originalName
                 .replace(/\bGelber\b/, "gelben")
                 .replace(/\bSchwarzer\b/, "schwarzen")
                 .replace(/\bBlauer\b/, "blauen")
                 .replace(/\bRoter\b/, "roten")
-                .replace(/\bGrüner\b/, "grünen");
+                .replace(/\bGrüner\b/, "grünen")
+                .replace(/\bBrauner\b/, "braunen");
         }
 
         // Füge Kategorie, Namen und Sensorstatus in das Array ein
@@ -1852,6 +1859,7 @@ Du musst {{ DAY | lower }}
             "roter Sack": "rot_sack.png",
             "blauer Sack": "blau_sack.png",
             "grüner Sack": "gruen_sack.png",
+            "brauner Sack": "braun_sack.png",
             "Sperrabfall": "sperrabfall.png",
             "Grünschnitt": "gruenschnitt.png",
             "Glas": "glas.png"
