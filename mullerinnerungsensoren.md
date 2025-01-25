@@ -507,6 +507,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
     <p>
+        <br>
         Die Überschrift kann wieder als Template Name verwendet und mit einem Klick kopiert werden.<br>
         Zusammen mit dem Template diese einfach in Home Assistant bei den Helfern anlegen.
     </p>
@@ -556,7 +557,9 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     <h3>❗Wichtig</h3>
     <p>
         Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist.<br>
-        Diese Button Card ist für die korrekte Darstellung der Dashboard-Karte unbedingt notwendig.
+        Diese Button Card ist für die korrekte Darstellung der Dashboard-Karte unbedingt notwendig.<br>
+        <br>
+        Wichtig
     </p>
 </div>
 
