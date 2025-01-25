@@ -1903,6 +1903,8 @@ Du musst {{ DAY | lower }}
     const templateElement = document.getElementById(templateId);
     templateElement.innerHTML = `<code class="language-yaml">${templateText.trim()}</code>`;
     document.getElementById(outputId).style.display = "block";
+
+    return sensorState;
 }
 
 
