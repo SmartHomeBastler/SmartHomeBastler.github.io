@@ -386,7 +386,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 
 <p>
     In der Integration ist der Wechsel der Tageszeit lt. Standard <code>10:00</code> Uhr.<br>
-    Ab diesem Zeitpunkt wird die Abholung für <strong>heute<strong> auf den nächsten Termin gewechselt und daher nicht mehr angezeigt.<br>
+    Ab diesem Zeitpunkt wird die Abholung für <strong>heute</strong> auf den nächsten Termin gewechselt und daher nicht mehr angezeigt.<br>
     Diese Zeit kann wie folgt auf eigene Bedürfnisse geändert werden.
 </p>
 
@@ -419,6 +419,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     <button class="shb-button shb-button-main" onclick="if (validateColors()) { showStep(4); }">👇  Sensoren angelegt? Weiter zu den Templates!  👇
     </button>
 </div>
+
 </div>
 
 <!--
@@ -1740,13 +1741,14 @@ function showTemplatePreview(heuteState, morgenState) {
 }
 
 function generatePreviewText(sensorState, day) {
+    const fixedDay = day; // Fixiere den Zustand auf "Heute" oder "Morgen"
     const sacks = [];
     const tonnen = [];
     const sammlungen = [];
 
     // Trenne Einträge basierend auf der Kategorie
     sensorState.forEach(([name, category, state]) => {
-        if (state === day) {
+        if (state === fixedDay) { // Nutze nur Einträge mit dem fixierten Zustand
             if (category === "SACK") {
                 sacks.push(`den ${name}`);
             } else if (category === "TONNE") {
@@ -1758,7 +1760,7 @@ function generatePreviewText(sensorState, day) {
     });
 
     // Generiere die Vorschau
-    let previewText = `Du musst ${day.toLowerCase()} `;
+    let previewText = `Du musst ${fixedDay.toLowerCase()} `;
     if (sacks.length > 0 || tonnen.length > 0 || sammlungen.length > 0) {
         previewText += sacks.join(", ");
         if (sacks.length > 0 && tonnen.length > 0) previewText += ", sowie ";
@@ -1772,6 +1774,7 @@ function generatePreviewText(sensorState, day) {
 
     return previewText;
 }
+
 
 function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
     const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody'); // Tabelle für Sensoren
