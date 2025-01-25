@@ -494,10 +494,13 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     <button class="shb-button shb-button-main" onclick="showStep(5); createTemplates()">👇  Templates erstellen  👇</button>
 </div>
 <br>
-<div id="template-preview-heute" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">
+<p>
+    Nach einem Klick auf <strong>Templates Erstellen</strong> wird hier eine Vorschau für das Ergebnis deines Templates angezeigt und zwar im Falle, dass alle Abholungen "Heute" bzw. "Morgen" wären
+</p>
+<div id="template-preview-heute" class="shb-preview-text">
     Vorschau für Heute wird hier angezeigt...
 </div>
-<div id="template-preview-morgen" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">
+<div id="template-preview-morgen" class="shb-preview-text">
     Vorschau für Morgen wird hier angezeigt...
 </div>
 
@@ -1256,6 +1259,15 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     /* Jede zweite Zeile heller */
     .color-select option:nth-child(even) {
         background-color: #b4f2ff
+    }
+
+    .shb-preview-text {
+        margin: 15px 0;
+        font-weight: bold;
+        font-size: 1.1em;
+        border: 2px dashed #1598b3;
+        padding: 5px;
+        background: #454545;
     }
 
 </style>
