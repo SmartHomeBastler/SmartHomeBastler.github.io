@@ -1741,13 +1741,12 @@ function showTemplatePreview(heuteState, morgenState) {
 }
 
 function generatePreviewText(sensorState, day) {
-    const fixedDay = day; // Fixiere den Zustand auf "Heute" oder "Morgen"
     const sacks = [];
     const tonnen = [];
     const sammlungen = [];
 
     // Trenne Einträge basierend auf der Kategorie
-    sensorState.forEach(([name, category, state]) => { 
+    sensorState.forEach(([name, category]) => {
         if (category === "SACK") {
             sacks.push(`den ${name}`);
         } else if (category === "TONNE") {
@@ -1757,14 +1756,68 @@ function generatePreviewText(sensorState, day) {
         }
     });
 
-    // Generiere die Vorschau
-    let previewText = `Du musst ${fixedDay.toLowerCase()} `;
+    // Generiere die Vorschau basierend auf der Template-Logik
+    let previewText = `Du musst ${day.toLowerCase()} `;
+
     if (sacks.length > 0 || tonnen.length > 0 || sammlungen.length > 0) {
-        previewText += sacks.join(", ");
-        if (sacks.length > 0 && tonnen.length > 0) previewText += ", sowie ";
-        previewText += tonnen.join(", ");
-        if ((sacks.length > 0 || tonnen.length > 0) && sammlungen.length > 0) previewText += ", sowie ";
-        previewText += sammlungen.join(", ");
+        // Säcke hinzufügen
+        previewText += sacks.map((item, index) => {
+            if (index > 0) {
+                if (index === sacks.length - 1 && tonnen.length === 0 && sammlungen.length === 0) {
+                    return " und " + item;
+                } else {
+                    return ", " + item;
+                }
+            }
+            return item;
+        }).join("");
+
+        if (sacks.length > 0) {
+            previewText += " Sack";
+        }
+
+        // Tonnen hinzufügen
+        if (tonnen.length > 0 && sacks.length > 0 && sammlungen.length > 0) {
+            previewText += ", sowie ";
+        } else if (tonnen.length > 0 && sacks.length > 0) {
+            previewText += " und ";
+        }
+
+        previewText += tonnen.map((item, index) => {
+            if (index > 0) {
+                if (index === tonnen.length - 1 && sammlungen.length === 0) {
+                    return " und " + item;
+                } else {
+                    return ", " + item;
+                }
+            }
+            return item;
+        }).join("");
+
+        if (tonnen.length > 0) {
+            previewText += " Tonne";
+        }
+
+        // Sammlungen hinzufügen
+        if (sammlungen.length > 0 && (tonnen.length > 0 || sacks.length > 0)) {
+            previewText += ", sowie ";
+        }
+
+        previewText += sammlungen.map((item, index) => {
+            if (index > 0) {
+                if (index === sammlungen.length - 1) {
+                    return " und " + item;
+                } else {
+                    return ", " + item;
+                }
+            }
+            return item;
+        }).join("");
+
+        if (sammlungen.length > 0) {
+            previewText += " Sammlung";
+        }
+
         previewText += " rausstellen!";
     } else {
         previewText += "keine Tonne rausstellen.";
@@ -1772,6 +1825,7 @@ function generatePreviewText(sensorState, day) {
 
     return previewText;
 }
+
 
 
 function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
