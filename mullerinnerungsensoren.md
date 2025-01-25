@@ -128,11 +128,11 @@ layout: page
 </p>
 
 <div id="zeichen-hinweis-container" class="note-container" style="display: none;">
-    <h3>❗Achtung</h3>
+    <h3>💡 Hinweis</h3>
     <p>
         Deine persönlichen Bezeichnungen dürfen keine Sonderzeichen enthalten.<br>
-        Beachte bitte, dass nur die folgenden Zeichen Verwendung finden:<strong>A-Z a-z 0-9 Leerzeichen _ - </strong><br>
-        In der neuen Waste Collection Schedule können auch <strong>Ää Üü Öö ß</strong> verwendet werden.  
+        Beachte bitte, dass nur die folgenden Zeichen Verwendung finden:<strong style="text-transform: none;">A-Z a-z 0-9 Leerzeichen _ - </strong><br>
+        In der neuen Waste Collection Schedule können auch <strong style="text-transform: none;">Ää Üü Öö ß</strong> verwendet werden.  
     </p>
 </div>
 <!-- Warnungscontainer -->
@@ -144,8 +144,8 @@ layout: page
         <br>
         Am Besten korrigierst du diese hier über die <strong>Eigenen Bezeichnungen</strong> und in der Waste Collection Schedule gleichermaßen über die <strong>Mülltypen (Alias-Namen)</strong>.<br>
         <br>
-        Beachte bitte, dass nur die folgenden Zeichen Verwendung finden:<strong>A-Z a-z 0-9 Leerzeichen _ - </strong><br>
-        In der neuen Waste Collection Schedule können auch <strong>Ää Üü Öö ß</strong> verwendet werden.  
+        Beachte bitte, dass nur die folgenden Zeichen Verwendung finden:<strong style="text-transform: none;">A-Z a-z 0-9 Leerzeichen _ - </strong><br>
+        In der neuen Waste Collection Schedule können auch <strong style="text-transform: none;">Ää Üü Öö ß</strong> verwendet werden.  
     </p>
 </div>
 <div id="url-warning-container" class="important-container" style="display: none;">
