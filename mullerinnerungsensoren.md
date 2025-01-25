@@ -316,11 +316,16 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 
 <p>
     Nun müssen den Sensoren bzw. den Müll-Typen die Tonnen oder Säcke in den verschidenen Farben zugeordnet werden.<br>
-    Wichtig ist, dass <strong>keine</strong> Farbe zweimal verwendet werden darf.<br>
-    Du kannst deine gewählten Bilder, um sie für dein Dashboard zu nutzen, später bei den Dashboard-Karten herunterladen.
+    <br>
+    Du kannst deine gewählten Bilder in der Vorschau sehen und sie später bei den Dashboard-Karten zu deiner Verwendung herunterladen.
 </p>
 <p>
-    Nach der Zuordnung sind auch diese Sensoren in der Waste Collection Schedule anzulegen.<br>
+    Durch das Zuordnen der Bilder werden deine Müll-Typen in drei Kategorien unterteilt.<br>
+    Diese sind <strong>TONNE</strong>, <strong>SACK</strong> und <strong>SAMMLUNG</strong><br>
+    Dies ist für eine "schöne" Darstellung des Template-Textes im nächsten Schritt vorteilhaft.
+</p>
+<p>
+    Nach der Zuordnung sind nun auch diese Sensoren in der Waste Collection Schedule anzulegen.<br>
     Auch hier funktioniert das Kopieren wie schon zuvor. Einfach den Sensor Name anklicken um ihn zu kopieren und zusammen mit dem <strong>Werte Template einzelne Abholungen</strong> als <code>Abfallarten</code> in der Waste Collection Schedule einzeln anlegen.
 </p>
 
@@ -380,8 +385,8 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 <h3 class="shb-section-title-center">Tageszeit des Anzeigewechsel ändern</h3>
 
 <p>
-    In der Integration ist der Wechsel der Tageszeit lt. Standard <strong>10:00 Uhr</strong>.<br>
-    Ab diesem Zeitpunkt wird die Abholung für heute und morgen gewechselt und daher nicht mehr angezeigt.<br>
+    In der Integration ist der Wechsel der Tageszeit lt. Standard <code>10:00</code> Uhr.<br>
+    Ab diesem Zeitpunkt wird die Abholung für <strong>heute<strong> auf den nächsten Termin gewechselt und daher nicht mehr angezeigt.<br>
     Diese Zeit kann wie folgt auf eigene Bedürfnisse geändert werden.
 </p>
 
@@ -488,6 +493,13 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     <button class="shb-button shb-button-main" onclick="showStep(5); createTemplates()">👇  Templates erstellen  👇</button>
 </div>
 <br>
+<div id="template-preview-heute" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">
+    Vorschau für Heute wird hier angezeigt...
+</div>
+<div id="template-preview-morgen" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">
+    Vorschau für Morgen wird hier angezeigt...
+</div>
+
 <!-- Output for "Müllabholung Heute" -->
 <div id="helper-template-output-heute" style="display:none;">
     <div class="shb-title-inline">
@@ -1691,6 +1703,9 @@ function createTemplates() {
     // Templates für "Heute" und "Morgen" erstellen
     createTemplate("Heute", "helper-template-heute", "helper-template-output-heute", heuteCheckbox);
     createTemplate("Morgen", "helper-template-morgen", "helper-template-output-morgen", morgenCheckbox);
+
+    // Generiere und zeige Vorschau an
+    showTemplatePreview(heuteState, morgenState);
 }
 
     function copyTitleToClipboard(element) {
@@ -1706,6 +1721,40 @@ function createTemplates() {
             console.error("Fehler beim Kopieren in die Zwischenablage:", err);
         });
     }
+
+function generatePreviewText(sensorState, day) {
+    const sacks = [];
+    const tonnen = [];
+    const sammlungen = [];
+
+    // Trenne Einträge basierend auf der Kategorie
+    sensorState.forEach(([name, category, state]) => {
+        if (state === day) {
+            if (category === "SACK") {
+                sacks.push(`den ${name}`);
+            } else if (category === "TONNE") {
+                tonnen.push(`die ${name}`);
+            } else if (category === "SAMMLUNG") {
+                sammlungen.push(`die ${name}`);
+            }
+        }
+    });
+
+    // Generiere die Vorschau
+    let previewText = `Du musst ${day.toLowerCase()} `;
+    if (sacks.length > 0 || tonnen.length > 0 || sammlungen.length > 0) {
+        previewText += sacks.join(", ");
+        if (sacks.length > 0 && tonnen.length > 0) previewText += ", sowie ";
+        previewText += tonnen.join(", ");
+        if ((sacks.length > 0 || tonnen.length > 0) && sammlungen.length > 0) previewText += ", sowie ";
+        previewText += sammlungen.join(", ");
+        previewText += " rausstellen!";
+    } else {
+        previewText += "keine Tonne rausstellen.";
+    }
+
+    return previewText;
+}
 
 function createTemplate(day, templateId, outputId, showNoCollectionMessage) {
     const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody'); // Tabelle für Sensoren
