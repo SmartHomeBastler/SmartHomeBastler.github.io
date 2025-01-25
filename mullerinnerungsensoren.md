@@ -1761,61 +1761,24 @@ function generatePreviewText(sensorState, day) {
 
     if (sacks.length > 0 || tonnen.length > 0 || sammlungen.length > 0) {
         // Säcke hinzufügen
-        previewText += sacks.map((item, index) => {
-            if (index > 0) {
-                if (index === sacks.length - 1 && tonnen.length === 0 && sammlungen.length === 0) {
-                    return " und " + item;
-                } else {
-                    return ", " + item;
-                }
-            }
-            return item;
-        }).join("");
-
         if (sacks.length > 0) {
-            previewText += " Sack";
+            previewText += formatList(sacks) + " Sack";
         }
 
         // Tonnen hinzufügen
-        if (tonnen.length > 0 && sacks.length > 0 && sammlungen.length > 0) {
-            previewText += ", sowie ";
-        } else if (tonnen.length > 0 && sacks.length > 0) {
-            previewText += " und ";
-        }
-
-        previewText += tonnen.map((item, index) => {
-            if (index > 0) {
-                if (index === tonnen.length - 1 && sammlungen.length === 0) {
-                    return " und " + item;
-                } else {
-                    return ", " + item;
-                }
-            }
-            return item;
-        }).join("");
-
         if (tonnen.length > 0) {
-            previewText += " Tonne";
+            if (sacks.length > 0) {
+                previewText += (sammlungen.length > 0 ? ", sowie " : " und ");
+            }
+            previewText += formatList(tonnen) + " Tonne";
         }
 
         // Sammlungen hinzufügen
-        if (sammlungen.length > 0 && (tonnen.length > 0 || sacks.length > 0)) {
-            previewText += ", sowie ";
-        }
-
-        previewText += sammlungen.map((item, index) => {
-            if (index > 0) {
-                if (index === sammlungen.length - 1) {
-                    return " und " + item;
-                } else {
-                    return ", " + item;
-                }
-            }
-            return item;
-        }).join("");
-
         if (sammlungen.length > 0) {
-            previewText += " Sammlung";
+            if (sacks.length > 0 || tonnen.length > 0) {
+                previewText += " sowie ";
+            }
+            previewText += formatList(sammlungen) + " Sammlung";
         }
 
         previewText += " rausstellen!";
@@ -1825,6 +1788,17 @@ function generatePreviewText(sensorState, day) {
 
     return previewText;
 }
+
+// Hilfsfunktion, um Listen zu formatieren
+function formatList(items) {
+    if (items.length === 1) {
+        return items[0];
+    } else {
+        const lastItem = items.pop(); // Letztes Element entfernen
+        return items.join(", ") + " und " + lastItem; // Liste mit "und" verbinden
+    }
+}
+
 
 
 
