@@ -130,16 +130,22 @@ layout: page
 <div id="umlaut-warning-container" class="important-container" style="display: none;">
     <h3>❗Achtung</h3>
     <p>
-        Deine persönlichen Bezeichnungen dürfen keine Umlaute enthalten und Leerzeichen sollen vermieden werden!
+        Deine persönlichen Bezeichnungen dürfen keine Sonderzeichen enthalten.<br>
+        Beachte bitte, dass nur die folgenden Zeichen Verwendung finden:<strong>A-Z a-z 0-9 Leerzeichen _ - </strong><br>
+        In der neuen Waste Collection Schedule können auch <strong>Ää Üü Öö ß</strong> verwendet werden.  
     </p>
 </div>
 <!-- Warnungscontainer -->
 <div id="warning-container" class="important-container" style="display: none;">
     <h3>❗Achtung</h3>
     <p>
-        Deine Kalender enthält ungültige Einträge wie z.B. <strong>Ä, Ö, Ü, Leerzeichen oder Sonderzeichen </strong>.<br>
+        Deine Kalender enthält ungültige Einträge wie z.B. <strong>( ), + oder andere Sonderzeichen</strong>.<br>
         Diese Einträge sollten unbedingt ohne diese Zeichen angepasst werden, um Fehler zu vermeiden.<br>
-        Am Besten korrigierst du diese hier über die <strong>Eigenen Bezeichnungen</strong> und in der Waste Collection Schedule gleichermaßen über die <strong>Mülltypen (Alias-Namen)</strong>. 
+        <br>
+        Am Besten korrigierst du diese hier über die <strong>Eigenen Bezeichnungen</strong> und in der Waste Collection Schedule gleichermaßen über die <strong>Mülltypen (Alias-Namen)</strong>.<br>
+        <br>
+        Beachte bitte, dass nur die folgenden Zeichen Verwendung finden:<strong>A-Z a-z 0-9 Leerzeichen _ - </strong><br>
+        In der neuen Waste Collection Schedule können auch <strong>Ää Üü Öö ß</strong> verwendet werden.  
     </p>
 </div>
 <div id="url-warning-container" class="important-container" style="display: none;">
@@ -1340,7 +1346,7 @@ async function extractEntries() {
                 summaryEntries.add(summaryText);
 
                 // Überprüfen, ob Ziffern, Punkte oder unerlaubte Zeichen enthalten sind
-                if (/[^a-zA-Z\d_\-\s]/.test(summaryText)) {
+                if (/[^äöüÄÖÜßa-zA-Z0-9\s-_]/.test(summaryText)) {
                     invalidEntries.push(summaryText);
                 }
             }
