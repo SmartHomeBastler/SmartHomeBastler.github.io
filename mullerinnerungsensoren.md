@@ -3653,6 +3653,7 @@ function generatePopupYAML() {
             yaml += `        left: ${position.left}%\n`;
             yaml += `        top: ${position.top}%\n`;
             yaml += `        width: ${position.width}%\n`;
+            yaml += `        z-index: ${position.index}%\n`;
         }
     });
 
@@ -3669,14 +3670,16 @@ function generatePopupYAML() {
 // Funktion zur Berechnung der Position basierend auf dem Index
 function getPositionByIndex(index) {
     const positions = {
-        1: { left: 27, top: 75, width: 22 },
-        2: { left: 57, top: 75, width: 22 },
-        3: { left: 87, top: 75, width: 22 },
-        4: { left: 12, top: 79, width: 23 },
-        5: { left: 42, top: 79, width: 23 },
-        6: { left: 72, top: 79, width: 23 }
+        1: { left: 56, top: 81, width: 20, index: 1 },
+        2: { left: 33, top: 81, width: 20, index: 1  },
+        3: { left: 80, top: 81, width: 20, index: 1  },
+        4: { left: 10, top: 81, width: 20, index: 1  },
+        5: { left: 45, top: 74, width: 19, index: 0  },
+        6: { left: 68, top: 74, width: 19, index: 0  },
+        7: { left: 21, top: 74, width: 19, index: 0  },
+        8: { left: 92, top: 74, width: 19, index: 0  }
     };
-    return positions[index] || { left: 50, top: 50, width: 20 }; // Standardposition
+    return positions[index] || { left: 50, top: 50, width: 20, index: -1 }; // Standardposition
 }
 
 // Update both the example card and YAML code
