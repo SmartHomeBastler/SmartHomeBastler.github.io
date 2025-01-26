@@ -1961,11 +1961,6 @@ Du musst {{ DAY | lower }}
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
         const rows = Array.from(sensorTableBody.querySelectorAll("tr"));
         
-        const sensorCount = rows.length;
-
-        // Tabelle für die Ausgabe erstellen
-        let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th style="text-align: center;">Bild Vorschau und Download</th></tr></thead><tbody>';
-        
         // Mapping von Farben zu Bilddateinamen
         const colorToImageMap = {
             "Schwarz": "schwarz.png",
@@ -1989,6 +1984,9 @@ Du musst {{ DAY | lower }}
             "Grünschnitt": "gruenschnitt.png",
             "Glas": "glas.png"
         };
+
+        // Tabelle für die Ausgabe erstellen
+        let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th style="text-align: center;">Bild Vorschau und Download</th></tr></thead><tbody>';
         
         rows.forEach(row => {
             const sensorName = row.cells[0].textContent.trim(); // Sensor Name
@@ -2025,19 +2023,26 @@ Du musst {{ DAY | lower }}
         }
         document.getElementById('image-list-output').innerHTML = imageTable;
 
-        // Sensor-Zusammenfassung anzeigen
-        const sensorSummary = document.getElementById('sensor-summary');
-        const sensorCountElement = document.getElementById('sensor-count');
-        
-        if (sensorCount === 1) {
-            sensorCountElement.textContent = "einen Sensor / einen Müll-Typ";
-        } else {
-            sensorCountElement.textContent = `${sensorCount} Sensoren / Müll-Typen`;
+        // Sensor-Anzahl aktualisieren
+        updateSensorCount();
         }
 
-        sensorSummary.style.display = "block"; // Zusammenfassung einblenden
+function updateSensorCount() {
+    const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
+    const sensorCount = sensorTableBody.querySelectorAll("tr").length;
+
+    const sensorSummary = document.getElementById('sensor-summary');
+    const sensorCountElement = document.getElementById('sensor-count');
+
+    if (sensorCountElement) {
+        sensorCountElement.textContent = sensorCount === 1 ? "einen Sensor / einen Müll-Typ" : `${sensorCount} Sensoren / Müll-Typen`;
+    }
+
+    if (sensorSummary) {
+        sensorSummary.style.display = "block";
         sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4be0ff;">${sensorCount === 1 ? "einen Sensor / eine Müll-Type" : `${sensorCount} Sensoren / Müll-Typen`}</span> angelegt.`;
     }
+}
 
 function updateExampleCard() {
     const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
