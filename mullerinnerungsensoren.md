@@ -1959,8 +1959,10 @@ Du musst {{ DAY | lower }}
 
     function createImageList() {
         const sensorTableBody = document.getElementById('sensor-table').querySelector('tbody');
-        const rows = Array.from(sensorTableBody.querySelectorAll("tr")); // Überspringe die Standardreihe "Nächste Abholung"
+        const rows = Array.from(sensorTableBody.querySelectorAll("tr"));
         
+        const sensorCount = rows.length;
+
         // Tabelle für die Ausgabe erstellen
         let imageTable = '<table class="shb-custom-table"><thead><tr><th>Sensor Name</th><th>Bilder Name</th><th>Entity ID</th><th style="text-align: center;">Bild Vorschau und Download</th></tr></thead><tbody>';
         
@@ -1988,8 +1990,6 @@ Du musst {{ DAY | lower }}
             "Glas": "glas.png"
         };
         
-        // Zeilen der Tabelle durchlaufen und Bildnamen sowie Bildvorschau zuordnen
-        let sensorCount = 0; // Zähler für die Anzahl der Sensoren
         rows.forEach(row => {
             const sensorName = row.cells[0].textContent.trim(); // Sensor Name
             const selectedColor = row.cells[4].querySelector("select").value; // Farbauswahl
@@ -2031,7 +2031,7 @@ Du musst {{ DAY | lower }}
         const sensorCountElement = document.getElementById('sensor-count');
         
         if (sensorCount === 1) {
-            sensorCountElement.textContent = "einen Sensor / eine Müll-Type";
+            sensorCountElement.textContent = "einen Sensor / einen Müll-Typ";
         } else {
             sensorCountElement.textContent = `${sensorCount} Sensoren / Müll-Typen`;
         }
