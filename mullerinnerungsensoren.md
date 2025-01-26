@@ -559,7 +559,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
         Bevor du die Dashboard-Karte erstellst, stelle sicher, dass die <strong>"Custom Button Card"</strong> in HACS installiert ist.<br>
         Diese Button Card ist für die korrekte Darstellung der Dashboard-Karte unbedingt notwendig.<br>
         <br>
-        Wichtig
+        <strong>Zur Zeit ist die Dashboard Karte bis max. 8 Müll-Typen möglich!</strong>>
     </p>
 </div>
 
@@ -585,8 +585,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 </div>
 <br>
 <p style="padding: 0">
-    Mit dieser Checkbox kannst du auswählen, ob die Tonne bei Abholung blinken soll.<br>
-    Bei der Anzeige Auswahl wird eingestellt, ob der Text und die optional blinkende Tonne für heute oder morgen angezeigt werden soll.
+    Mit dieser Checkbox kannst du auswählen, ob die Tonne bei Abholung blinken soll.
 </p>
 
 <!-- Checkbox für "Tonne blinkend" -->
@@ -600,7 +599,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 <!-- Auswahlliste für "Anzeige Heute" und "Anzeige Morgen" -->
 <div class="shb-form-group">
     <label for="anzeigeAuswahl">Anzeige Auswahl:</label>
-    <p class="description-text">
+    <p style="padding: 0">
         Hier kannst du einstellen, ob die Anzeige auf deiner Dashboard-Karte für die Abholung <strong>Heute</strong> oder <strong>Morgen</strong> erstellt werden soll. Diese Einstellung gilt in weiterer Folge auch für die Pop-Up Karte.
     </p>
     <select id="anzeigeAuswahl" style="width: 30%;">
@@ -613,7 +612,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 <!-- Auswahlliste für Darstellung -->
 <div class="shb-form-group">
     <label for="darstellungAuswahl">Darstellung bei 4 Müll-Typen/Sensoren:</label>
-    <p class="description-text">
+    <p style="padding: 0">
         Die Dashboard-Karten wurden so konfiguriert, dass sie bis 3 Müll-Typen/Sensoren einzeilig und ab 5 Müll-Typen/Sensoren zweizeilig dargestellt werden.<br>
         Für 4 Müll-Typen/Sensoren kann hier entschieden werden, ob ein- oder zwei- zeilig.
     </p>
@@ -626,7 +625,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 <!-- Checkbox für "Datum anzeigen" -->
 <div class="shb-form-group">
     <label for="dateUseCheckbox">Datum der Abholung anzeigen?</label>
-    <p>
+    <p style="padding: 0">
         Das Datum der Abholung kann auf der Karte nur ausgewählt werden, wenn der/die Sensor/Sensoren für diese Entität in der Waste Collection Schedule eingerichtet wurde/wurden.<br>
         Die Entität dieses Sensors soll demnach aus dem Sensor Namen der Abholung und dem Zusatz <strong>Datum</strong> bestehen.<br>
         <strong>Beispiel: "Restabfall Datum" = "sensor.restabfall_datum"</strong>
@@ -639,7 +638,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 <br>
 <div class="shb-form-group">
     <label for="fontSelection">Schriftart auswählen:</label>
-    <p style="margin-bottom: 0; padding-bottom: 0;">Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.</p>
+    <p style="padding: 0">Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.</p>
     <select id="fontSelection" style="width: 30%;" onchange="toggleCustomFontInput()">
         <option value="Arial Rounded MT" selected>Arial Rounded MT (Standard)</option>
         <option value="Arial">Arial</option>
@@ -656,7 +655,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
 <!-- Checkbox für "Style anpassen" -->
 <div class="shb-form-group">
     <label for="styleUseCheckbox">Karten Design anpassen?</label>
-    <p>
+    <p style="padding: 0">
         Hier kann die Erscheinung deiner Karte, (Hintergrund, Rahmen und Rahmenform) minimal angepasst werden.
     </p>
     <div class="checkbox-wrapper">
