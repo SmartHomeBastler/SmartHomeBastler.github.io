@@ -2040,39 +2040,46 @@ Du musst {{ DAY | lower }}
         sensorSummary.innerHTML = `Du hast <span style="font-weight: bold; color: #4be0ff;">${sensorCount === 1 ? "einen Sensor / eine Müll-Type" : `${sensorCount} Sensoren / Müll-Typen`}</span> angelegt.`;
     }
 
-    function updateExampleCard() {
-        const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
-        const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
-        const sensorCount = sensorTableBody.querySelectorAll("tr");
-        const blinkend = document.getElementById("blinkendCheckbox").checked; // blinkende Tonne?
-        const dateUsed = document.getElementById("dateUseCheckbox").checked;
+function updateExampleCard() {
+    const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
+    const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
+    const sensorCount = sensorTableBody.querySelectorAll("tr").length; // Anzahl der Zeilen zählen
+    const blinkend = document.getElementById("blinkendCheckbox").checked; // blinkende Tonne?
+    const dateUsed = document.getElementById("dateUseCheckbox").checked;
 
-        let imagePath = "/img/muell/";
+    let imagePath = "/img/muell/";
 
-        if (sensorCount === 1) {
-            imagePath += "exampleCard_1.png";
-        } else if (sensorCount === 2) {
-            imagePath += "exampleCard_2.png";
-        } else if (sensorCount === 3) {
-            imagePath += "exampleCard_3.png";
-        } else if (sensorCount === 4) {
+    if (sensorCount >= 1 && sensorCount <= 8) {
+        if (sensorCount === 4) {
+            // Sonderfall für sensorCount = 4 mit darstellungAuswahl
             if (darstellungAuswahl === "einzeilig") {
-                imagePath += "exampleCard_4_1.png";
+                imagePath += "exampleCard_4_1";
             } else if (darstellungAuswahl === "mehrzeilig") {
-                imagePath += "exampleCard_4_2.png";
+                imagePath += "exampleCard_4_2";
             }
-        } else if (sensorCount === 5) {
-            imagePath += "exampleCard_5.png";
-        } else if (sensorCount === 6) {
-            imagePath += "exampleCard_6.png";
         } else {
-            imagePath += "exampleDateCard_8.gif";
+            imagePath += `exampleCard_${sensorCount}`;
         }
 
-        const exampleImage = document.getElementById("example-image");
-        exampleImage.src = imagePath;
-        exampleImage.style.display = "block"; // Show the image
+        if (dateUsed) {
+            imagePath = imagePath.replace("exampleCard", "exampleDateCard");
+        }
+
+        if (blinkend) {
+            imagePath += ".gif";
+        } else {
+            imagePath += ".png";
+        }
+    } else {
+        // Default-Bild, wenn sensorCount außerhalb des Bereichs liegt
+        imagePath = "/img/muell/exampleDateCard_8.gif";
     }
+
+    const exampleImage = document.getElementById("example-image");
+    exampleImage.src = imagePath;
+    exampleImage.style.display = "block"; // Bild anzeigen
+}
+
 
     function toggleCustomFontInput() {
         const fontSelection = document.getElementById("fontSelection").value;
