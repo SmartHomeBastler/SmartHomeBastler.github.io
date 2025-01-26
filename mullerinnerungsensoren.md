@@ -734,7 +734,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     </div>
     <!-- Beispielbild -->
     <div id="example-card-container" class="shb-vertical-half-container">
-        <h4 class="shb-section-title-center">Beispielkarte</h4>
+        <h4 class="shb-section-title-center" id="example-card-title">Beispielkarte</h4>
         <div class="shb-image-wrapper">
             <img id="example-image" src="" alt="Beispielkarte">
         </div>
@@ -2082,7 +2082,30 @@ function updateExampleCard() {
     const exampleImage = document.getElementById("example-image");
     exampleImage.src = imagePath;
     exampleImage.style.display = "block"; // Bild anzeigen
-}
+
+    // Überschrift aktualisieren
+    updateExampleCardTitle(sensorCount, blinkend, dateUsed);
+    }
+
+    function updateExampleCardTitle(sensorCount, blinkend, dateUsed) {
+        const titleElement = document.getElementById("example-card-title");
+        let titleText = `Beispielkarte: ${sensorCount} Müll-Typ${sensorCount > 1 ? "en" : ""}`;
+
+        if (blinkend) {
+            titleText += ", blinkend";
+        } else {
+            titleText += ", nicht blinkend";
+        }
+
+        if (dateUsed) {
+            titleText += " mit Datum Anzeige";
+        } else {
+            titleText += " ohne Datum Anzeige";
+        }
+
+        // Überschrift aktualisieren
+        titleElement.textContent = titleText;
+    }
 
 
     function toggleCustomFontInput() {
