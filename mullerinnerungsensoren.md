@@ -42,7 +42,7 @@ layout: page
             Wenn du keine ICS Datei oder eine URL zur Einrichtung deines Kalenders in der <strong>Waste Collection Schedule</strong> hast, kannst du den Codegenerator mit einem kleinen Trick trotzdem nutzen.
         </p>
         <p>
-            Da in der neuen <strong>Waste Collection Schedule</strong> Integration, die Namen der einzelnen Abholungen frei vergeben werden können, kannst du dir zur Nutzung des Codegenartors eine Helfer-ICS Datei anlegen.
+            Da in der neuen <strong>Waste Collection Schedule</strong> Integration, die Namen der einzelnen Müll-Typen frei vergeben werden können, kannst du dir zur Nutzung des Codegenartors eine Helfer-ICS Datei anlegen.
         </p>
         <ol>
             <li>Gehe im Menü <strong>Müllerinnerung Tools</strong> auf <strong>ICS zusammenführen / erstellen</strong></li>
@@ -583,8 +583,8 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
         Du hast <span id="sensor-count" style="font-weight: bold; color: #4be0ff;">0</span> Sensoren angelegt.
     </p>
 </div>
-
-<p>
+<br>
+<p style="padding: 0">
     Mit dieser Checkbox kannst du auswählen, ob die Tonne bei Abholung blinken soll.<br>
     Bei der Anzeige Auswahl wird eingestellt, ob der Text und die optional blinkende Tonne für heute oder morgen angezeigt werden soll.
 </p>
@@ -596,45 +596,47 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
         <label for="blinkendCheckbox">Tonne blinkend</label>
     </div>
 </div>
-
+<br>
 <!-- Auswahlliste für "Anzeige Heute" und "Anzeige Morgen" -->
 <div class="shb-form-group">
     <label for="anzeigeAuswahl">Anzeige Auswahl:</label>
+    <p class="description-text">
+        Hier kannst du einstellen, ob die Anzeige auf deiner Dashboard-Karte für die Abholung <strong>Heute</strong> oder <strong>Morgen</strong> erstellt werden soll. Diese Einstellung gilt in weiterer Folge auch für die Pop-Up Karte.
+    </p>
     <select id="anzeigeAuswahl" style="width: 30%;">
         <option value="heute">Anzeige Heute</option>
         <option value="morgen">Anzeige Morgen</option>
     </select>
 </div>
-
-<p class="description-text">
-    Die Dashboard-Karten wurden so konfiguriert, dass sie bis 3 Abholungen/Sensoren einzeilig und ab 5 Abholungen/Sensoren zweizeilig dargestellt werden.<br>
-    Für 4 Abholungen/Sensoren kann hier entschieden werden, ob ein- oder mehrzeilig.
-</p>
+<br>
 
 <!-- Auswahlliste für Darstellung -->
 <div class="shb-form-group">
-    <label for="darstellungAuswahl">Darstellung bei 4 Abholungen/Sensoren:</label>
+    <label for="darstellungAuswahl">Darstellung bei 4 Müll-Typen/Sensoren:</label>
+    <p class="description-text">
+        Die Dashboard-Karten wurden so konfiguriert, dass sie bis 3 Müll-Typen/Sensoren einzeilig und ab 5 Müll-Typen/Sensoren zweizeilig dargestellt werden.<br>
+        Für 4 Müll-Typen/Sensoren kann hier entschieden werden, ob ein- oder zwei- zeilig.
+    </p>
     <select id="darstellungAuswahl" style="width: 30%;">
-        <option value="einzeilig">Darstellung Einzeilig</option>
-        <option value="mehrzeilig">Darstellung Mehrzeilig</option>
+        <option value="einzeilig">Darstellung einzeilig</option>
+        <option value="zweizeilig">Darstellung zweizeilig</option>
     </select>
 </div>
-
+<br>
 <!-- Checkbox für "Datum anzeigen" -->
 <div class="shb-form-group">
     <label for="dateUseCheckbox">Datum der Abholung anzeigen?</label>
+    <p>
+        Das Datum der Abholung kann auf der Karte nur ausgewählt werden, wenn der/die Sensor/Sensoren für diese Entität in der Waste Collection Schedule eingerichtet wurde/wurden.<br>
+        Die Entität dieses Sensors soll demnach aus dem Sensor Namen der Abholung und dem Zusatz <strong>Datum</strong> bestehen.<br>
+        <strong>Beispiel: "Restabfall Datum" = "sensor.restabfall_datum"</strong>
+    </p>
     <div class="checkbox-wrapper">
         <input type="checkbox" id="dateUseCheckbox">
         <label for="dateUseCheckbox">Datum anzeigen</label>
     </div>
 </div>
-
-<p>
-    Das Datum der Abholung kann auf der Karte nur ausgewählt werden, wenn der/die Sensor/Sensoren für diese Entität in der Waste Collection Schedule eingerichtet wurde/wurden.<br>
-    Die Entität dieses Sensors soll demnach aus dem Sensor Namen der Abholung und dem Zusatz <strong>Datum</strong> bestehen.<br>
-    <strong>Beispiel: "Restabfall Datum" = "sensor.restabfall_datum"</strong>
-</p>
-
+<br>
 <div class="shb-form-group">
     <label for="fontSelection">Schriftart auswählen:</label>
     <p style="margin-bottom: 0; padding-bottom: 0;">Hier kann eine Schriftart für die Dashboard-Karte gewählt oder eine eigene eingetragen werden.</p>
@@ -650,16 +652,19 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     </select>
     <input type="text" id="customFontInput" style="display: none; margin-top: 10px; width: 30%;" placeholder="Eigene Schriftart eingeben">
 </div>
-
+<br>
 <!-- Checkbox für "Style anpassen" -->
 <div class="shb-form-group">
     <label for="styleUseCheckbox">Karten Design anpassen?</label>
+    <p>
+        Hier kann die Erscheinung deiner Karte, (Hintergrund, Rahmen und Rahmenform) minimal angepasst werden.
+    </p>
     <div class="checkbox-wrapper">
         <input type="checkbox" id="styleUseCheckbox">
         <label for="styleUseCheckbox">Style ändern</label>
     </div>
 </div>
-
+<br>
 <!-- Versteckter Container mit 3 Auswahllisten -->
 <div id="styleOptions" class="shb-style-options">
     <div class="important-container">
@@ -697,7 +702,7 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
         </div>
     </div>
 </div>
-
+<br>
 <p>
     Wenn alle Einstellungen getroffen wurden, klicke auf <strong>Beispiel anzeigen & Code generieren</strong><br>
     Du kannst nachträglich jederzeit Einstellungen ändern und den Code neu generieren.
@@ -2058,7 +2063,7 @@ function updateExampleCard() {
             // Sonderfall für sensorCount = 4 mit darstellungAuswahl
             if (darstellungAuswahl === "einzeilig") {
                 imagePath += "exampleCard_4_1";
-            } else if (darstellungAuswahl === "mehrzeilig") {
+            } else if (darstellungAuswahl === "zweizeilig") {
                 imagePath += "exampleCard_4_2";
             }
         } else {
@@ -2157,7 +2162,7 @@ function updateExampleCard() {
         const styleUsed = document.getElementById("styleUseCheckbox").checked; // Style geändert
         const styleUnused = !document.getElementById("styleUseCheckbox").checked; // Style nicht geändert
         const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value; // Anzeige "heute" oder "morgen",
-        const darstellung = document.getElementById("darstellungAuswahl").value; // Karte einzeilig oder mehrzeilig
+        const darstellung = document.getElementById("darstellungAuswahl").value; // Karte einzeilig oder zweizeilig
         const selectedFont = getSelectedFont(); // Ausgewählte Schriftart
         const StyleHintergrund = document.getElementById("backgroundSelect").value; // Gewählter Hintergrund
         const StyleRahmenStil = document.getElementById("borderStyleSelect").value; // Gewählter Rahmen
@@ -2655,7 +2660,7 @@ function updateExampleCard() {
             });
         }
 
-        else if (sensorCount === 4 && darstellung === "mehrzeilig") {
+        else if (sensorCount === 4 && darstellung === "zweizeilig") {
             const entityText = `sensor.mullabholung_${anzeigeAuswahl}`;
             const valueText = `${anzeigeAuswahl.charAt(0).toUpperCase() + anzeigeAuswahl.slice(1)}`; // "Heute" oder "Morgen"
 
