@@ -1996,7 +1996,6 @@ Du musst {{ DAY | lower }}
             const entityID = row.cells[3].textContent.trim(); // Entity ID
 
             if (colorToImageMap[selectedColor]) {
-                sensorCount++; // Zähler inkrementieren
                 const imageName = colorToImageMap[selectedColor];
                 const imagePath = `/img/muell/${imageName}`;
                 
