@@ -2043,7 +2043,9 @@ Du musst {{ DAY | lower }}
     function updateExampleCard() {
         const darstellungAuswahl = document.getElementById("darstellungAuswahl").value;
         const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
-        const sensorCount = sensorTableBody.querySelectorAll("tr"); // Exclude the header row
+        const sensorCount = sensorTableBody.querySelectorAll("tr");
+        const blinkend = document.getElementById("blinkendCheckbox").checked; // blinkende Tonne?
+        const dateUsed = document.getElementById("dateUseCheckbox").checked;
 
         let imagePath = "/img/muell/";
 
@@ -2061,8 +2063,10 @@ Du musst {{ DAY | lower }}
             }
         } else if (sensorCount === 5) {
             imagePath += "exampleCard_5.png";
-        } else {
+        } else if (sensorCount === 6) {
             imagePath += "exampleCard_6.png";
+        } else {
+            imagePath += "exampleDateCard_8.gif";
         }
 
         const exampleImage = document.getElementById("example-image");
@@ -3259,7 +3263,7 @@ Du musst {{ DAY | lower }}
                 yaml += `            entity: ${sensor.entity}\n`;
                 yaml += `            show_entity_picture: true\n`;
                 yaml += `            entity_picture: /local/muell/${sensor.image}\n`;
-                yaml += `            size: 60%\n`;
+                yaml += `            size: 50%\n`;
                 yaml += `            show_state: false\n`;
                 yaml += `            show_name: false\n`;
                 yaml += `            styles:\n`;
