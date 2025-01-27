@@ -2148,7 +2148,7 @@ function updateExamplePopup() {
         const titleElement = document.getElementById("example-popup-title");
         let titleText = `Pop-Up Beispiel: ${sensorCount} Müll-Typ${sensorCount > 1 ? "en" : ""}`;
 
-        if (anzeigeAuswahl === "Anzeige Heute") {
+        if (anzeigeAuswahl === "heute") {
             titleText += ", Erinnerung für Heute";
         } else {
             titleText += ", Erinnerung für Morgen";
