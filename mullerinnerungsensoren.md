@@ -2120,10 +2120,10 @@ function updateExamplePopup() {
     let imagePath = "/img/muell/";
 
     if (sensorCount >= 1 && sensorCount <= 8) {
-        if (anzeigeAuswahl === "Anzeige Heute") {
+        if (anzeigeAuswahl === "heute") {
             imagePath += `popupPreview_${sensorCount}.png`;
             } 
-        else if (anzeigeAuswahl === "Anzeige Morgen") {
+        else if (anzeigeAuswahl === "morgen") {
             imagePath += `popupMorgenPreview_${sensorCount}.png`;
             }
         else {
