@@ -919,9 +919,9 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     </div>
     <!-- Beispielbild -->
     <div id="example-popup-container" class="shb-vertical-half-container">
-        <h4 class="shb-section-title-center" id="example-popup-title">Pop-Up Beispiel</h4>
+        <h4 class="shb-section-title-center" id="example-popup-title" style="display: none">Pop-Up Beispiel</h4>
         <div class="shb-image-wrapper">
-            <img id="example-popup" src="" alt="Pop-Up Beispiel">
+            <img id="example-popup" src="" alt="Pop-Up Beispiel" style="display: none">
         </div>
     </div>
 </div>
@@ -2137,6 +2137,8 @@ function updateExamplePopup() {
     const examplePopup = document.getElementById("example-popup");
     examplePopup.src = imagePath;
     examplePopup.style.display = "block"; // Bild anzeigen
+    const examplePopupTitle = document.getElementById("example-popup-title");
+    examplePopupTitle.style.display = "block"; // Bild anzeigen
 
     // Überschrift aktualisieren
     updateExamplePopupTitle(sensorCount, anzeigeAuswahl);
