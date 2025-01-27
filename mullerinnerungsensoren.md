@@ -919,9 +919,9 @@ Nach den Änderungen klicke unten auf <button class="shb-inline-button-main">Aus
     </div>
     <!-- Beispielbild -->
     <div id="example-popup-container" class="shb-vertical-half-container" style="display: none;">
-        <h4 class="shb-section-title-center">Pop-Up Beispiel</h4>
+        <h4 class="shb-section-title-center" id="example-popup-title">Pop-Up Beispiel</h4>
         <div class="shb-image-wrapper">
-            <img id="example-popup" src="/img/muell/popupCard_example.png" alt="Pop-Up Beispiel">
+            <img id="example-popup" src="" alt="Pop-Up Beispiel">
         </div>
     </div>
 </div>
@@ -2111,6 +2111,50 @@ function updateExampleCard() {
         titleElement.textContent = titleText;
     }
 
+
+function updateExamplePopup() {
+    const anzeigeAuswahl = document.getElementById("anzeigeAuswahl").value;
+    const sensorTableBody = document.getElementById("sensor-table").querySelector("tbody");
+    const sensorCount = sensorTableBody.querySelectorAll("tr").length;
+
+    let imagePath = "/img/muell/";
+
+    if (sensorCount >= 1 && sensorCount <= 8) {
+        if (anzeigeAuswahl === "Anzeige Heute") {
+            imagePath += `popupPreview_${sensorCount}.png`;
+            } 
+        else if (anzeigeAuswahl === "Anzeige Morgen") {
+            imagePath += `popupMorgenPreview_${sensorCount}.png`;
+            }
+        else {
+            imagePath += `popupCard_example.png`;
+        }
+    } else {
+        // Default-Bild, wenn sensorCount außerhalb des Bereichs liegt
+        imagePath = "/img/muell/popupCard_example.png";
+    }
+
+    const examplePopup = document.getElementById("example-popup");
+    examplePopup.src = imagePath;
+    examplepopup.style.display = "block"; // Bild anzeigen
+
+    // Überschrift aktualisieren
+    updateExamplePopupTitle(sensorCount, anzeigeAuswahl);
+    }
+
+    function updateExamplePopupTitle(sensorCount, anzeigeAuswahl) {
+        const titleElement = document.getElementById("example-popup-title");
+        let titleText = `Pop-Up Beispiel: ${sensorCount} Müll-Typ${sensorCount > 1 ? "en" : ""}`;
+
+        if (anzeigeAuswahl === "Anzeige Heute") {
+            titleText += ", Erinnerung für Heute";
+        } else {
+            titleText += ", Erinnerung für Morgen";
+        }
+
+        // Überschrift aktualisieren
+        titleElement.textContent = titleText;
+    }
 
     function toggleCustomFontInput() {
         const fontSelection = document.getElementById("fontSelection").value;
@@ -3653,7 +3697,7 @@ function generatePopupYAML() {
             yaml += `        left: ${position.left}%\n`;
             yaml += `        top: ${position.top}%\n`;
             yaml += `        width: ${position.width}%\n`;
-            yaml += `        z-index: ${position.index}%\n`;
+            yaml += `        z-index: ${position.index}\n`;
         }
     });
 
@@ -3685,6 +3729,7 @@ function getPositionByIndex(index) {
 // Update both the example card and YAML code
 document.getElementById("popup-code").addEventListener("click", () => {
     generatePopupYAML(); // YAML generieren
+    updateExamplePopup();
 
     // Beispielbild anzeigen
     const exampleContainer = document.getElementById("example-popup-container");
