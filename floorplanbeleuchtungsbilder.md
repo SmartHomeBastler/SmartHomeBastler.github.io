@@ -73,25 +73,22 @@ layout: page
     Diese kannst du kopieren und entweder direkt hier einfügen oder eine .csv oder .txt Datei erstellen und diese hier einfügen
 </p>
 
-<div class="shb-form-group" style="display: flex; align-items: center; justify-content: flex-end; gap: 30px;">
-    
+<div class="shb-form-group" style="display: flex;justify-content: flex-start;gap: 30px;flex-direction: row;align-items: center;">
     <!-- Container für das Dropdown -->
-    <div style="display: flex; flex-direction: column; text-align: right;">
+    <div style="display: flex;text-align: right;align-items: flex-start;flex-direction: column;width: 30%;">
         <label for="domain-select">Auswahl:</label>
-        <select id="domain-select" style="width: 200px;" onchange="updateTemplateCode()">
+        <select id="domain-select" style="width: 100%;" onchange="updateTemplateCode()">
             <option value="light">light</option>
             <option value="switch">switch</option>
             <option value="input_boolean">input_boolean</option>
             <option value="binary_sensor">binary_sensor</option>
         </select>
     </div>
-
     <!-- Container für die Checkbox -->
-    <div style="display: flex; align-items: center;">
-        <input type="checkbox" id="show-count" onchange="updateTemplateCode()">
-        <label for="show-count" style="margin-left: 5px;">Anzahl anzeigen</label>
+    <div style="display: flex;flex-direction: column;gap: 10px;align-items: center;">
+        <label for="show-count">Anzahl anzeigen</label>
+        <input type="checkbox" id="show-count" onchange="updateTemplateCode()" style="margin-bottom: 15px;">
     </div>
-
 </div>
 
 
