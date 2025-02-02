@@ -73,7 +73,7 @@ layout: page
     Diese kannst du kopieren und entweder direkt hier einfügen oder eine .csv oder .txt Datei erstellen und diese hier einfügen
 </p>
 
-<div class="shb-form-group">
+<div class="shb-form-group" style="display: flex; align-items: center; gap: 10px;">
     <label for="domain-select">Auswahl:</label>
     <select id="domain-select" style="width: 30%;" onchange="updateTemplateCode()">
         <option value="light">light</option>
@@ -81,7 +81,11 @@ layout: page
         <option value="input_boolean">input_boolean</option>
         <option value="binary_sensor">binary_sensor</option>
     </select>
+    
+    <input type="checkbox" id="show-count" onchange="updateTemplateCode()">
+    <label for="show-count">Anzahl anzeigen</label>
 </div>
+
 
 <div class="shb-code-container">
     <button class="copy-code-button" onclick="copyCode('template-output', this)">Code kopieren</button>
@@ -365,16 +369,22 @@ layout: page
 
 function updateTemplateCode() {
     const domain = document.getElementById('domain-select').value;
+    const showCount = document.getElementById('show-count').checked;
     const codeElement = document.querySelector('#template-output code');
 
-    // Neuer Code mit RAW-Block
-    const templateCode = `{%- raw %}
+    let templateCode = `{%- raw %}
 {%- set ${domain}_entities = states.${domain} | map(attribute='entity_id') | list -%}
-{{ ${domain}_entities | join('\\n') }}{% endraw -%}`;
+`;
 
-    // Aktualisiere den Inhalt des <code>-Elements
+    if (showCount) {
+        templateCode += `Anzahl der ${domain}-Entitäten: {{ ${domain}_entities | length }}\n\n`;
+    }
+
+    templateCode += `{{ ${domain}_entities | join('\\n') }}{% endraw -%}`;
+
     codeElement.innerText = templateCode;
 }
+
 
 // Initialer Template-Code für die Standardauswahl "light"
 updateTemplateCode();
