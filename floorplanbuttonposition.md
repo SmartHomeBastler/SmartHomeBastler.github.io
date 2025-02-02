@@ -29,18 +29,26 @@ layout: page
 <p>
     Mit dem folgenden Tool kannst du für die ausgewählte Domain (z. B. <code>light</code>, <code>switch</code>, <code>binary_sensor</code> usw.) den passenden Template-Code generieren, um alle Entitäten dieser Domain in einer Liste auszugeben. 
     Kopiere den Code und füge ihn in deinen Template-Editor in den Home Assistant Entwicklerwerkzeugen ein.<br>
-    Als Ergebnis erhällst du eine Liste aller Entitäten dieser Domain.<br> 
-    Diese kannst du kopieren und entweder direkt hier einfügen oder eine .csv oder .txt Datei erstellen und diese hier einfügen
+    Als Ergebnis erhälst du eine Liste aller Entitäten dieser Domain. Mit der Aktivierung der Checkbox <code>Anzahl anzeigen</code>, wird die Anzahl der ausgewählten Domain zur Information ebenfalls mit ausgegeben. <br> 
+    Die generierte Liste kannst du kopieren und entweder direkt hier einfügen oder eine .csv oder .txt Datei erstellen und diese hier einfügen
 </p>
 
-<div class="shb-form-group">
-    <label for="domain-select">Auswahl:</label>
-    <select id="domain-select" style="width: 30%;" onchange="updateTemplateCode()">
-        <option value="light">light</option>
-        <option value="switch">switch</option>
-        <option value="input_boolean">input_boolean</option>
-        <option value="binary_sensor">binary_sensor</option>
-    </select>
+<div class="shb-form-group" style="display: flex;justify-content: flex-start;gap: 30px;flex-direction: row;align-items: center;">
+    <!-- Container für das Dropdown -->
+    <div style="display: flex;text-align: right;align-items: flex-start;flex-direction: column;width: 30%;">
+        <label for="domain-select">Auswahl:</label>
+        <select id="domain-select" style="width: 100%;" onchange="updateTemplateCode()">
+            <option value="light">light</option>
+            <option value="switch">switch</option>
+            <option value="input_boolean">input_boolean</option>
+            <option value="binary_sensor">binary_sensor</option>
+        </select>
+    </div>
+    <!-- Container für die Checkbox -->
+    <div style="display: flex;flex-direction: column;gap: 10px;align-items: center;">
+        <label for="show-count">Anzahl anzeigen</label>
+        <input type="checkbox" id="show-count" onchange="updateTemplateCode()" style="margin-bottom: 15px;">
+    </div>
 </div>
 
 <div class="shb-code-container">
@@ -473,14 +481,19 @@ layout: page
 
 function updateTemplateCode() {
     const domain = document.getElementById('domain-select').value;
+    const showCount = document.getElementById('show-count').checked;
     const codeElement = document.querySelector('#template-output code');
 
-    // Neuer Code mit RAW-Block
-    const templateCode = `{%- raw %}
+    let templateCode = `{%- raw %}
 {%- set ${domain}_entities = states.${domain} | map(attribute='entity_id') | list -%}
-{{ ${domain}_entities | join('\\n') }}{% endraw -%}`;
+`;
 
-    // Aktualisiere den Inhalt des <code>-Elements
+    if (showCount) {
+        templateCode += `Anzahl der ${domain}-Entitäten: {{ ${domain}_entities | length }}\n\n`;
+    }
+
+    templateCode += `{{ ${domain}_entities | join('\\n') }}{% endraw -%}`;
+
     codeElement.innerText = templateCode;
 }
 
