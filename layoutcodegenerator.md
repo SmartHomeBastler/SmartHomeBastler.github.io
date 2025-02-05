@@ -32,7 +32,7 @@ layout: page
 <style>
     #gridPreviewContainer {
         width: 100%;
-        max-width: 1000px;
+        max-width: 95%;
         margin: 20px auto;
         padding: 10px;
         border: 1px solid #ccc;
@@ -40,7 +40,7 @@ layout: page
     }
     .grid-container {
         display: grid;
-        gap: 10px;
+        gap: 1px;
         width: 100%;
         background: #f0f0f0;
         padding: 10px;
