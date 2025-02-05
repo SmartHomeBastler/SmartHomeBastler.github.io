@@ -91,6 +91,7 @@ layout: page
         tableHead.innerHTML = "";
         tableBody.innerHTML = "";
         
+        // Tabellenkopf mit Spaltenbreiten
         let headerRow = document.createElement("tr");
         for (let i = 0; i < columns; i++) {
             let th = document.createElement("th");
@@ -100,12 +101,13 @@ layout: page
             input.max = "100";
             input.value = Math.floor(100 / columns);
             input.setAttribute("data-index", i);
-            input.oninput = function () { updatePreview(); };
+            input.oninput = function () { adjustLastColumn(); };
             th.appendChild(input);
             headerRow.appendChild(th);
         }
         tableHead.appendChild(headerRow);
         
+        // Tabellenkörper mit Area-Namen
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
             for (let c = 0; c < columns; c++) {
@@ -113,14 +115,11 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
-                input.oninput = function () { adjustLastColumn(); updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
             }
             tableBody.appendChild(tr);
         }
-        
-        updatePreview();
     }
     
     function adjustLastColumn() {
@@ -137,7 +136,11 @@ layout: page
         if (lastInput) {
             lastInput.value = Math.max(100 - totalWidth, 0);
         }
+
+        updatePreview();
     }
+    
+    updateTable();
     
     function updatePreview() {
         let gridPreview = document.getElementById("gridPreview");
@@ -158,6 +161,4 @@ layout: page
             gridPreview.appendChild(div);
         });
     }
-    
-    updateTable();
 </script>
