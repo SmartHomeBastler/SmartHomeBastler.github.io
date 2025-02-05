@@ -113,7 +113,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
-                input.oninput = function () { updatePreview(); };
+                input.oninput = function () { adjustLastColumn(); updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
             }
