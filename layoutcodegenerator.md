@@ -120,6 +120,8 @@ layout: page
             }
             tableBody.appendChild(tr);
         }
+
+        updatePreview();
     }
     
     function adjustLastColumn() {
