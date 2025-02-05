@@ -7,29 +7,41 @@ layout: page
 ---
 
 <div class="shb-main-container">
-    <div id="shb-custom-alert" style="display: none;">
-        <div id="shb-custom-alert-content">
-            <h4 id="shb-custom-alert-title"></h4>
-            <p id="shb-custom-alert-message"></p>
-            <button id="shb-close-alert">OK</button>
-        </div>
+<div id="shb-custom-alert" style="display: none;">
+    <div id="shb-custom-alert-content">
+        <h4 id="shb-custom-alert-title"></h4>
+        <p id="shb-custom-alert-message"></p>
+        <button id="shb-close-alert">OK</button>
     </div>
-    <section class="content-section">
-        <h1 class="shb-main-title">Layout Codegenerator</h1>
-        <h2 class="shb-section-title-center">Definiere die Größe und Position der einzelnen Areas</h2>
-        <p class="shb-main-description">
-            Mit diesem Tool kannst du durch Eingabe der Angaben zur Spaltenbreite und Betitelung der einzelnen Areas den Code für dein Layout erstellen. 
-        </p>
+</div>
+<section class="content-section">
+
+<h1 class="shb-main-title">Layout Codegenerator</h1>
+<h2 class="shb-section-title-center">Definiere die Größe und Position der einzelnen Areas</h2>
+<p class="shb-main-description">
+    Mit diesem Tool kannst du durch Eingabe der Angaben zur Spaltenbreite und Betitelung der einzelnen Areas den Code für dein Layout erstellen. 
+</p>
+
+<div class="shb-form-group" style="display: flex;justify-content: flex-start;gap: 30px;flex-direction: row;align-items: center;">
+    <!-- Container für das Dropdown -->
+    <div style="display: flex;text-align: right;align-items: flex-start;flex-direction: column;width: 30%;">
         <label for="columns">Anzahl der Spalten:</label>
         <input type="number" id="columns" value="3" min="1" max="12" onchange="updateTable()">
+    </div>
+    <!-- Container für die Checkbox -->
+    <div style="display: flex;flex-direction: column;gap: 10px;align-items: center;">
         <label for="rows">Anzahl der Zeilen:</label>
         <input type="number" id="rows" value="3" min="1" max="12" onchange="updateTable()">
-        <h2>Tabelle</h2>
-        <table id="layoutTable" border="1">
-            <thead></thead>
-            <tbody></tbody>
-        </table>
-    </section>
+    </div>
+</div>
+
+<h2>Tabelle</h2>
+<table id="layoutTable" border="1">
+    <thead></thead>
+    <tbody></tbody>
+</table>
+
+</section>
 </div>
 <style>
     table {
