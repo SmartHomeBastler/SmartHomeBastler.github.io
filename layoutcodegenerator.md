@@ -35,7 +35,7 @@ layout: page
 
 <h2>Tabelle</h2>
 <div class="shb-styled-table-container" style="width: 100%;">
-<table id="layoutTable" border="1" class="shb-styled-table">
+<table id="layoutTable" border="1" class="shb-styled-table" style="text-align: center">
     <thead></thead>
     <tbody></tbody>
 </table>
