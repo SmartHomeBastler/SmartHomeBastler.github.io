@@ -53,6 +53,9 @@ layout: page
         text-align: center;
         border: 1px solid #aaa;
     }
+    .grid-item input {
+        width: 90%;
+    }
     .column-inputs-container {
         display: flex;
         gap: 10px;
@@ -116,8 +119,8 @@ layout: page
                 div.className = "grid-item";
                 let areaInput = document.createElement("input");
                 areaInput.type = "text";
-                areaInput.style = "width: 100%";
                 areaInput.placeholder = `Area ${r+1}-${c+1}`;
+                areaInput.style.width = "90%";
                 div.appendChild(areaInput);
                 gridPreview.appendChild(div);
             }
