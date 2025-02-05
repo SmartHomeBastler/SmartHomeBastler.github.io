@@ -34,11 +34,12 @@ layout: page
 </div>
 
 <h2>Tabelle</h2>
-<table id="layoutTable" border="1">
+<div class="shb-styled-table-container" style="width: 100%;">
+<table id="layoutTable" border="1" class="shb-styled-table">
     <thead></thead>
     <tbody></tbody>
 </table>
-
+</div>
 </section>
 </div>
 <style>
