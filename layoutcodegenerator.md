@@ -68,8 +68,8 @@ layout: page
 </style>
 <script>
     function updateGrid() {
-        let columns = document.getElementById("columns").value;
-        let rows = document.getElementById("rows").value;
+        let columns = parseInt(document.getElementById("columns").value);
+        let rows = parseInt(document.getElementById("rows").value);
         let gridPreview = document.getElementById("gridPreview");
         let columnInputs = document.getElementById("columnInputs");
         
@@ -79,7 +79,8 @@ layout: page
         columnInputs.style.gap = '10px';
         
         let templateColumns = [];
-        let templateRows = `repeat(${rows}, auto)`;
+        let inputs = [];
+        let totalWidth = 0;
         
         for (let i = 0; i < columns; i++) {
             let container = document.createElement("div");
@@ -94,19 +95,43 @@ layout: page
             input.max = "100";
             input.value = Math.floor(100 / columns);
             input.setAttribute("data-index", i);
-            input.onchange = function () { updatePreview(); };
+            input.oninput = function () { updatePreview(); };
             
             container.appendChild(label);
             container.appendChild(input);
             columnInputs.appendChild(container);
+            inputs.push(input);
+        }
+        
+        updatePreview();
+    }
+
+    function updatePreview() {
+        let gridPreview = document.getElementById("gridPreview");
+        let inputs = document.querySelectorAll("#columnInputs input");
+        let templateColumns = [];
+        let totalWidth = 0;
+        
+        inputs.forEach((input, index) => {
             templateColumns.push(input.value + "%");
+            totalWidth += parseInt(input.value);
+        });
+        
+        let lastInput = inputs[inputs.length - 1];
+        if (lastInput) {
+            let remainingWidth = 100 - totalWidth;
+            lastInput.value = Math.max(remainingWidth, 0);
+            templateColumns[inputs.length - 1] = lastInput.value + "%";
         }
         
         gridPreview.style.gridTemplateColumns = templateColumns.join(" ");
-        gridPreview.style.gridTemplateRows = templateRows;
+        
+        let rows = parseInt(document.getElementById("rows").value);
+        gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
+        gridPreview.innerHTML = '';
         
         for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < columns; c++) {
+            for (let c = 0; c < inputs.length; c++) {
                 let div = document.createElement("div");
                 div.className = "grid-item";
                 let areaInput = document.createElement("input");
