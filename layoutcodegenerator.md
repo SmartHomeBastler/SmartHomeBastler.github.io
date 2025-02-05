@@ -22,6 +22,8 @@ layout: page
         </p>
         <label for="columns">Anzahl der Spalten:</label>
         <input type="number" id="columns" value="3" min="1" max="12" onchange="updateGrid()">
+        <label for="rows">Anzahl der Zeilen:</label>
+        <input type="number" id="rows" value="3" min="1" max="12" onchange="updateGrid()">
         <div id="columnInputs" class="column-inputs-container"></div>
         <h2>Vorschau</h2>
         <div id="gridPreviewContainer">
@@ -32,7 +34,7 @@ layout: page
 <style>
     #gridPreviewContainer {
         width: 100%;
-        max-width: 95%;
+        max-width: 98%;
         margin: 20px auto;
         padding: 10px;
         border: 1px solid #ccc;
@@ -64,6 +66,7 @@ layout: page
 <script>
     function updateGrid() {
         let columns = document.getElementById("columns").value;
+        let rows = document.getElementById("rows").value;
         let gridPreview = document.getElementById("gridPreview");
         let columnInputs = document.getElementById("columnInputs");
         
@@ -72,7 +75,7 @@ layout: page
         columnInputs.style.display = 'flex';
         columnInputs.style.gap = '10px';
         
-        let template = [];
+        let templateColumns = [];
         let totalWidth = 0;
         
         for (let i = 0; i < columns; i++) {
@@ -94,13 +97,8 @@ layout: page
             container.appendChild(input);
             columnInputs.appendChild(container);
             
-            template.push(input.value + "%");
+            templateColumns.push(input.value + "%");
             totalWidth += parseInt(input.value);
-            
-            let div = document.createElement("div");
-            div.className = "grid-item";
-            div.textContent = `Spalte ${i+1}`;
-            gridPreview.appendChild(div);
         }
         
         let lastInput = columnInputs.lastChild.querySelector("input");
@@ -109,30 +107,20 @@ layout: page
             lastInput.value = parseInt(lastInput.value) + remainingWidth;
         }
         
-        updatePreview();
-    }
-
-    function updatePreview() {
-        let inputs = document.querySelectorAll("#columnInputs input");
-        let gridPreview = document.getElementById("gridPreview");
-        let template = [];
+        gridPreview.style.gridTemplateColumns = templateColumns.join(" ");
+        gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
         
-        let totalWidth = 0;
-        inputs.forEach((input, index) => {
-            if (index < inputs.length - 1) {
-                template.push(input.value + "%");
-                totalWidth += parseInt(input.value);
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < columns; c++) {
+                let div = document.createElement("div");
+                div.className = "grid-item";
+                let areaInput = document.createElement("input");
+                areaInput.type = "text";
+                areaInput.placeholder = `Area ${r+1}-${c+1}`;
+                div.appendChild(areaInput);
+                gridPreview.appendChild(div);
             }
-        });
-        
-        let lastInput = inputs[inputs.length - 1];
-        if (lastInput) {
-            let remainingWidth = 100 - totalWidth;
-            lastInput.value = remainingWidth;
-            template.push(remainingWidth + "%");
         }
-        
-        gridPreview.style.gridTemplateColumns = template.join(" ");
     }
 
     updateGrid();
