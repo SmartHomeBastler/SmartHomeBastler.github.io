@@ -21,127 +21,89 @@ layout: page
             Mit diesem Tool kannst du durch Eingabe der Angaben zur Spaltenbreite und Betitelung der einzelnen Areas den Code für dein Layout erstellen. 
         </p>
         <label for="columns">Anzahl der Spalten:</label>
-        <input type="number" id="columns" value="3" min="1" max="12" onchange="updateGrid()">
+        <input type="number" id="columns" value="3" min="1" max="12" onchange="updateTable()">
         <label for="rows">Anzahl der Zeilen:</label>
-        <input type="number" id="rows" value="3" min="1" max="12" onchange="updateGrid()">
-        <div id="columnInputs" class="column-inputs-container"></div>
-        <h2>Vorschau</h2>
-        <div id="gridPreviewContainer">
-            <div id="gridPreview" class="grid-container"></div>
-        </div>
+        <input type="number" id="rows" value="3" min="1" max="12" onchange="updateTable()">
+        <h2>Tabelle</h2>
+        <table id="layoutTable" border="1">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
     </section>
 </div>
 <style>
-    #gridPreviewContainer {
+    table {
         width: 100%;
-        max-width: 98%;
-        margin: 20px auto;
-        padding: 10px;
-        border: 1px solid #ccc;
-        background: #f9f9f9;
+        border-collapse: collapse;
+        margin-top: 20px;
     }
-    .grid-container {
-        display: grid;
-        gap: 1px;
-        width: 100%;
-        background: #f0f0f0;
+    th, td {
         padding: 10px;
-    }
-    .grid-item {
-        background: #ddd;
-        padding: 20px;
         text-align: center;
-        border: 1px solid #aaa;
+        border: 1px solid #ccc;
     }
-    .grid-item input {
-        width: 90%;
-    }
-    .column-inputs-container {
-        display: flex;
-        gap: 10px;
-    }
-    .column-input {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    input {
+        width: 80%;
+        text-align: center;
     }
 </style>
+
 <script>
-    function updateGrid() {
+    function updateTable() {
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
-        let gridPreview = document.getElementById("gridPreview");
-        let columnInputs = document.getElementById("columnInputs");
+        let tableHead = document.querySelector("#layoutTable thead");
+        let tableBody = document.querySelector("#layoutTable tbody");
         
-        gridPreview.innerHTML = '';
-        columnInputs.innerHTML = '';
-        columnInputs.style.display = 'flex';
-        columnInputs.style.gap = '10px';
+        tableHead.innerHTML = "";
+        tableBody.innerHTML = "";
         
-        let templateColumns = [];
-        let inputs = [];
-        let totalWidth = 0;
-        
+        // Tabellenkopf mit Spaltenbreiten
+        let headerRow = document.createElement("tr");
         for (let i = 0; i < columns; i++) {
-            let container = document.createElement("div");
-            container.className = "column-input";
-            
-            let label = document.createElement("label");
-            label.textContent = `Spalte ${i+1}`;
-            
+            let th = document.createElement("th");
             let input = document.createElement("input");
             input.type = "number";
             input.min = "1";
             input.max = "100";
             input.value = Math.floor(100 / columns);
             input.setAttribute("data-index", i);
-            input.oninput = function () { updatePreview(); };
-            
-            container.appendChild(label);
-            container.appendChild(input);
-            columnInputs.appendChild(container);
-            inputs.push(input);
+            input.oninput = function () { adjustLastColumn(); };
+            th.appendChild(input);
+            headerRow.appendChild(th);
         }
+        tableHead.appendChild(headerRow);
         
-        updatePreview();
+        // Tabellenkörper mit Area-Namen
+        for (let r = 0; r < rows; r++) {
+            let tr = document.createElement("tr");
+            for (let c = 0; c < columns; c++) {
+                let td = document.createElement("td");
+                let input = document.createElement("input");
+                input.type = "text";
+                input.placeholder = `Area ${r+1}-${c+1}`;
+                td.appendChild(input);
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+        }
     }
-
-    function updatePreview() {
-        let gridPreview = document.getElementById("gridPreview");
-        let inputs = document.querySelectorAll("#columnInputs input");
-        let templateColumns = [];
+    
+    function adjustLastColumn() {
+        let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
         
         inputs.forEach((input, index) => {
-            templateColumns.push(input.value + "%");
-            totalWidth += parseInt(input.value);
+            if (index < inputs.length - 1) {
+                totalWidth += parseInt(input.value);
+            }
         });
         
         let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
-            let remainingWidth = 100 - totalWidth;
-            lastInput.value = Math.max(remainingWidth, 0);
-            templateColumns[inputs.length - 1] = lastInput.value + "%";
-        }
-        
-        gridPreview.style.gridTemplateColumns = templateColumns.join(" ");
-        
-        let rows = parseInt(document.getElementById("rows").value);
-        gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
-        gridPreview.innerHTML = '';
-        
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < inputs.length; c++) {
-                let div = document.createElement("div");
-                div.className = "grid-item";
-                let areaInput = document.createElement("input");
-                areaInput.type = "text";
-                areaInput.placeholder = `Area ${r+1}-${c+1}`;
-                div.appendChild(areaInput);
-                gridPreview.appendChild(div);
-            }
+            lastInput.value = Math.max(100 - totalWidth, 0);
         }
     }
-
-    updateGrid();
+    
+    updateTable();
 </script>
