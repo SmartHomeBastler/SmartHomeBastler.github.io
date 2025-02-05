@@ -79,7 +79,7 @@ layout: page
         columnInputs.style.gap = '10px';
         
         let templateColumns = [];
-        let totalWidth = 0;
+        let inputs = [];
         
         for (let i = 0; i < columns; i++) {
             let container = document.createElement("div");
@@ -94,37 +94,38 @@ layout: page
             input.max = "100";
             input.value = Math.floor(100 / columns);
             input.setAttribute("data-index", i);
-            input.onchange = updateGrid;
+            input.onchange = function () { updatePreview(); };
             
             container.appendChild(label);
             container.appendChild(input);
             columnInputs.appendChild(container);
-            
-            templateColumns.push(input.value + "%");
-            totalWidth += parseInt(input.value);
+            inputs.push(input);
         }
         
-        let lastInput = columnInputs.lastChild.querySelector("input");
+        updatePreview();
+    }
+
+    function updatePreview() {
+        let gridPreview = document.getElementById("gridPreview");
+        let inputs = document.querySelectorAll("#columnInputs input");
+        let templateColumns = [];
+        let totalWidth = 0;
+        
+        inputs.forEach((input, index) => {
+            if (index < inputs.length - 1) {
+                templateColumns.push(input.value + "%");
+                totalWidth += parseInt(input.value);
+            }
+        });
+        
+        let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
             let remainingWidth = 100 - totalWidth;
-            lastInput.value = parseInt(lastInput.value) + remainingWidth;
+            lastInput.value = remainingWidth;
+            templateColumns.push(remainingWidth + "%");
         }
         
         gridPreview.style.gridTemplateColumns = templateColumns.join(" ");
-        gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
-        
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < columns; c++) {
-                let div = document.createElement("div");
-                div.className = "grid-item";
-                let areaInput = document.createElement("input");
-                areaInput.type = "text";
-                areaInput.placeholder = `Area ${r+1}-${c+1}`;
-                areaInput.style.width = "90%";
-                div.appendChild(areaInput);
-                gridPreview.appendChild(div);
-            }
-        }
     }
 
     updateGrid();
