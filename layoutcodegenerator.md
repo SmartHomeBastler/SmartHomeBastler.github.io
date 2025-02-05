@@ -116,6 +116,7 @@ layout: page
                 div.className = "grid-item";
                 let areaInput = document.createElement("input");
                 areaInput.type = "text";
+                areaInput.style = "width: 100%";
                 areaInput.placeholder = `Area ${r+1}-${c+1}`;
                 div.appendChild(areaInput);
                 gridPreview.appendChild(div);
