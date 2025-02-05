@@ -66,82 +66,84 @@ layout: page
         align-items: center;
     }
 </style>
+
 <script>
-    function updateGrid() {
-        let columns = parseInt(document.getElementById("columns").value);
-        let rows = parseInt(document.getElementById("rows").value);
-        let gridPreview = document.getElementById("gridPreview");
-        let columnInputs = document.getElementById("columnInputs");
-        
-        gridPreview.innerHTML = '';
-        columnInputs.innerHTML = '';
-        columnInputs.style.display = 'flex';
-        columnInputs.style.gap = '10px';
-        
-        let templateColumns = [];
-        let inputs = [];
-        let totalWidth = 0;
-        
-        for (let i = 0; i < columns; i++) {
-            let container = document.createElement("div");
-            container.className = "column-input";
-            
-            let label = document.createElement("label");
-            label.textContent = `Spalte ${i+1}`;
-            
-            let input = document.createElement("input");
-            input.type = "number";
-            input.min = "1";
-            input.max = "100";
-            input.value = Math.floor(100 / columns);
-            input.setAttribute("data-index", i);
-            input.oninput = function () { updatePreview(); };
-            
-            container.appendChild(label);
-            container.appendChild(input);
-            columnInputs.appendChild(container);
-            inputs.push(input);
-        }
-        
-        updatePreview();
-    }
 
-    function updatePreview() {
-        let gridPreview = document.getElementById("gridPreview");
-        let inputs = document.querySelectorAll("#columnInputs input");
-        let templateColumns = [];
-        let totalWidth = 0;
+function updateGrid() {
+    let columns = parseInt(document.getElementById("columns").value);
+    let rows = parseInt(document.getElementById("rows").value);
+    let gridPreview = document.getElementById("gridPreview");
+    let columnInputs = document.getElementById("columnInputs");
+    
+    gridPreview.innerHTML = '';
+    columnInputs.innerHTML = '';
+    columnInputs.style.display = 'flex';
+    columnInputs.style.gap = '10px';
+    
+    let templateColumns = [];
+    let inputs = [];
+    let totalWidth = 0;
+    
+    for (let i = 0; i < columns; i++) {
+        let container = document.createElement("div");
+        container.className = "column-input";
         
-        inputs.forEach((input, index) => {
-            templateColumns.push(input.value + "%");
-            totalWidth += parseInt(input.value);
-        });
+        let label = document.createElement("label");
+        label.textContent = `Spalte ${i+1}`;
         
-        let lastInput = inputs[inputs.length - 1];
-        if (lastInput) {
-            let remainingWidth = 100 - totalWidth;
-            lastInput.value = Math.max(remainingWidth, 0);
-            templateColumns[inputs.length - 1] = lastInput.value + "%";
-        }
+        let input = document.createElement("input");
+        input.type = "number";
+        input.min = "1";
+        input.max = "100";
+        input.value = Math.floor(100 / columns);
+        input.setAttribute("data-index", i);
+        input.oninput = function () { updatePreview(); };
         
-        gridPreview.style.gridTemplateColumns = templateColumns.join(" ");
-        
-        let rows = parseInt(document.getElementById("rows").value);
-        gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
-        gridPreview.innerHTML = '';
-        
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < inputs.length; c++) {
-                let div = document.createElement("div");
-                div.className = "grid-item";
-                let areaInput = document.createElement("input");
-                areaInput.type = "text";
-                areaInput.placeholder = `Area ${r+1}-${c+1}`;
-                div.appendChild(areaInput);
-                gridPreview.appendChild(div);
-            }
+        container.appendChild(label);
+        container.appendChild(input);
+        columnInputs.appendChild(container);
+        inputs.push(input);
+    }
+    
+    updatePreview();
+}
+
+function updatePreview() {
+    let gridPreview = document.getElementById("gridPreview");
+    let inputs = document.querySelectorAll("#columnInputs input");
+    let templateColumns = [];
+    let totalWidth = 0;
+    
+    inputs.forEach((input, index) => {
+        templateColumns.push(input.value + "%");
+        totalWidth += parseInt(input.value);
+    });
+    
+    let lastInput = inputs[inputs.length - 1];
+    if (lastInput) {
+        let remainingWidth = 100 - totalWidth;
+        lastInput.value = remainingWidth;
+        templateColumns.push(remainingWidth + "%");
+    }
+    
+    gridPreview.style.gridTemplateColumns = templateColumns.join(" ");
+    
+    let rows = parseInt(document.getElementById("rows").value);
+    gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
+    gridPreview.innerHTML = '';
+    
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < inputs.length; c++) {
+            let div = document.createElement("div");
+            div.className = "grid-item";
+            let areaInput = document.createElement("input");
+            areaInput.type = "text";
+            areaInput.placeholder = `Area ${r+1}-${c+1}`;
+            div.appendChild(areaInput);
+            gridPreview.appendChild(div);
         }
     }
+}
 
-    updateGrid();
+updateGrid();
 </script>
