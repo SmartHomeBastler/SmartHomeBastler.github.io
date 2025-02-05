@@ -22,7 +22,7 @@ layout: page
         </p>
         <label for="columns">Anzahl der Spalten:</label>
         <input type="number" id="columns" value="3" min="1" max="12" onchange="updateGrid()">
-        <div id="columnInputs"></div>
+        <div id="columnInputs" class="column-inputs-container"></div>
         <h2>Vorschau</h2>
         <div id="gridPreviewContainer">
             <div id="gridPreview" class="grid-container"></div>
@@ -51,6 +51,15 @@ layout: page
         text-align: center;
         border: 1px solid #aaa;
     }
+    .column-inputs-container {
+        display: flex;
+        gap: 10px;
+    }
+    .column-input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 </style>
 <script>
     function updateGrid() {
@@ -60,13 +69,18 @@ layout: page
         
         gridPreview.innerHTML = '';
         columnInputs.innerHTML = '';
+        columnInputs.style.display = 'flex';
+        columnInputs.style.gap = '10px';
         
         let template = [];
         let totalWidth = 0;
         
         for (let i = 0; i < columns; i++) {
+            let container = document.createElement("div");
+            container.className = "column-input";
+            
             let label = document.createElement("label");
-            label.textContent = `Spalte ${i+1}: `;
+            label.textContent = `Spalte ${i+1}`;
             
             let input = document.createElement("input");
             input.type = "number";
@@ -76,9 +90,9 @@ layout: page
             input.setAttribute("data-index", i);
             input.onchange = updatePreview;
             
-            columnInputs.appendChild(label);
-            columnInputs.appendChild(input);
-            columnInputs.appendChild(document.createElement("br"));
+            container.appendChild(label);
+            container.appendChild(input);
+            columnInputs.appendChild(container);
             
             template.push(input.value + "%");
             totalWidth += parseInt(input.value);
@@ -89,7 +103,7 @@ layout: page
             gridPreview.appendChild(div);
         }
         
-        let lastInput = document.querySelector("#columnInputs input:last-child");
+        let lastInput = columnInputs.lastChild.querySelector("input");
         if (lastInput) {
             let remainingWidth = 100 - totalWidth;
             lastInput.value = parseInt(lastInput.value) + remainingWidth;
