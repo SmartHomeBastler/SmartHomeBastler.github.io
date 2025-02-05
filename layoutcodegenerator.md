@@ -91,7 +91,7 @@ layout: page
             input.max = "100";
             input.value = Math.floor(100 / columns);
             input.setAttribute("data-index", i);
-            input.onchange = updatePreview;
+            input.onchange = updateGrid;
             
             container.appendChild(label);
             container.appendChild(input);
