@@ -62,8 +62,12 @@ layout: page
         columnInputs.innerHTML = '';
         
         let template = [];
+        let totalWidth = 0;
         
         for (let i = 0; i < columns; i++) {
+            let label = document.createElement("label");
+            label.textContent = `Spalte ${i+1}: `;
+            
             let input = document.createElement("input");
             input.type = "number";
             input.min = "1";
@@ -71,17 +75,27 @@ layout: page
             input.value = Math.floor(100 / columns);
             input.setAttribute("data-index", i);
             input.onchange = updatePreview;
-            columnInputs.appendChild(document.createTextNode(` Spalte ${i+1}: `));
+            
+            columnInputs.appendChild(label);
             columnInputs.appendChild(input);
+            columnInputs.appendChild(document.createElement("br"));
             
             template.push(input.value + "%");
+            totalWidth += parseInt(input.value);
             
             let div = document.createElement("div");
             div.className = "grid-item";
             div.textContent = `Spalte ${i+1}`;
             gridPreview.appendChild(div);
         }
-        gridPreview.style.gridTemplateColumns = template.join(" ");
+        
+        let lastInput = document.querySelector("#columnInputs input:last-child");
+        if (lastInput) {
+            let remainingWidth = 100 - totalWidth;
+            lastInput.value = parseInt(lastInput.value) + remainingWidth;
+        }
+        
+        updatePreview();
     }
 
     function updatePreview() {
@@ -89,9 +103,20 @@ layout: page
         let gridPreview = document.getElementById("gridPreview");
         let template = [];
         
-        inputs.forEach(input => {
-            template.push(input.value + "%");
+        let totalWidth = 0;
+        inputs.forEach((input, index) => {
+            if (index < inputs.length - 1) {
+                template.push(input.value + "%");
+                totalWidth += parseInt(input.value);
+            }
         });
+        
+        let lastInput = inputs[inputs.length - 1];
+        if (lastInput) {
+            let remainingWidth = 100 - totalWidth;
+            lastInput.value = remainingWidth;
+            template.push(remainingWidth + "%");
+        }
         
         gridPreview.style.gridTemplateColumns = template.join(" ");
     }
