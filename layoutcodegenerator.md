@@ -24,18 +24,44 @@ layout: page
         <input type="number" id="columns" value="3" min="1" max="12" onchange="updateGrid()">
         <div id="columnInputs"></div>
         <h2>Vorschau</h2>
-        <div id="gridPreview" class="grid-container"></div>
+        <div id="gridPreviewContainer">
+            <div id="gridPreview" class="grid-container"></div>
+        </div>
     </section>
 </div>
+<style>
+    #gridPreviewContainer {
+        width: 100%;
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background: #f9f9f9;
+    }
+    .grid-container {
+        display: grid;
+        gap: 10px;
+        width: 100%;
+        background: #f0f0f0;
+        padding: 10px;
+    }
+    .grid-item {
+        background: #ddd;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #aaa;
+    }
+</style>
 <script>
     function updateGrid() {
         let columns = document.getElementById("columns").value;
         let gridPreview = document.getElementById("gridPreview");
         let columnInputs = document.getElementById("columnInputs");
         
-        gridPreview.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
         gridPreview.innerHTML = '';
         columnInputs.innerHTML = '';
+        
+        let template = [];
         
         for (let i = 0; i < columns; i++) {
             let input = document.createElement("input");
@@ -48,11 +74,14 @@ layout: page
             columnInputs.appendChild(document.createTextNode(` Spalte ${i+1}: `));
             columnInputs.appendChild(input);
             
+            template.push(input.value + "%");
+            
             let div = document.createElement("div");
             div.className = "grid-item";
             div.textContent = `Spalte ${i+1}`;
             gridPreview.appendChild(div);
         }
+        gridPreview.style.gridTemplateColumns = template.join(" ");
     }
 
     function updatePreview() {
