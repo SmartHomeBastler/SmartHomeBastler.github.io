@@ -23,13 +23,11 @@ layout: page
 </p>
 
 <div class="shb-form-group" style="display: flex;justify-content: flex-start;gap: 30px;flex-direction: row;align-items: center;">
-    <!-- Container für das Dropdown -->
-    <div style="display: flex;text-align: right;align-items: flex-start;flex-direction: column;width: 30%;">
+    <div style="display: flex; align-items: flex-start; flex-direction: column; width: 20%;">
         <label for="columns">Anzahl der Spalten:</label>
         <input type="number" id="columns" value="3" min="1" max="12" onchange="updateTable()">
     </div>
-    <!-- Container für die Checkbox -->
-    <div style="display: flex;flex-direction: column;gap: 10px;align-items: center;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; width: 20%">
         <label for="rows">Anzahl der Zeilen:</label>
         <input type="number" id="rows" value="3" min="1" max="12" onchange="updateTable()">
     </div>
