@@ -27,7 +27,7 @@ layout: page
             </div>
             <div style="display: flex; flex-direction: column; align-items: flex-start; width: 20%">
                 <label for="rows">Anzahl der Zeilen:</label>
-                <input type="number" id="rows" value="3" min="1" max="12" onchange="updateTable()">
+                <input type="number" id="rows" value="1" min="1" max="12" onchange="updateTable()">
             </div>
         </div>
         <h2>Tabelle</h2>
@@ -91,7 +91,6 @@ layout: page
         tableHead.innerHTML = "";
         tableBody.innerHTML = "";
         
-        // Tabellenkopf mit Spaltenbreiten
         let headerRow = document.createElement("tr");
         for (let i = 0; i < columns; i++) {
             let th = document.createElement("th");
@@ -107,7 +106,6 @@ layout: page
         }
         tableHead.appendChild(headerRow);
         
-        // Tabellenkörper mit Area-Namen
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
             for (let c = 0; c < columns; c++) {
@@ -115,12 +113,13 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
+                input.oninput = function () { updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
             }
             tableBody.appendChild(tr);
         }
-
+        
         updatePreview();
     }
     
@@ -138,11 +137,9 @@ layout: page
         if (lastInput) {
             lastInput.value = Math.max(100 - totalWidth, 0);
         }
-
+        
         updatePreview();
     }
-    
-    updateTable();
     
     function updatePreview() {
         let gridPreview = document.getElementById("gridPreview");
@@ -163,4 +160,6 @@ layout: page
             gridPreview.appendChild(div);
         });
     }
+    
+    updateTable();
 </script>
