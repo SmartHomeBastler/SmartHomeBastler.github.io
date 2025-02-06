@@ -95,6 +95,8 @@ layout: page
         tableBody.innerHTML = "";
         
         let headerRow = document.createElement("tr");
+        let newWidth = Math.floor(100 / columns);
+        
         for (let i = 0; i < columns; i++) {
             let th = document.createElement("th");
             let input = document.createElement("input");
@@ -102,9 +104,9 @@ layout: page
             input.min = "1";
             input.max = "100";
             if (isColumnChange) {
-                input.value = Math.floor(100 / columns);
+                input.value = newWidth;
             } else {
-                input.value = storedWidths[i] || Math.floor(100 / columns);
+                input.value = storedWidths[i] || newWidth;
             }
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustLastColumn(); updatePreview(); };
@@ -122,7 +124,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
-                input.value = storedAreas[r * columns + c] || "";
+                input.value = storedAreas[r * (columns - 1) + c] || "";
                 input.oninput = function () { updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
@@ -173,6 +175,7 @@ layout: page
     
     updateTable(true);
 </script>
+
 
 
 
