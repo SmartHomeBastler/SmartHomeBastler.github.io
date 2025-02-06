@@ -102,6 +102,21 @@ layout: page
         inputs.forEach(input => {
             input.value = newWidth;
         });
+
+        // Add new column with the same width
+        if (inputs.length < columns) {
+            let newInput = document.createElement("input");
+            newInput.type = "number";
+            newInput.min = "1";
+            newInput.max = "100";
+            newInput.value = newWidth;
+            newInput.oninput = updateColumnWidth;
+            let th = document.createElement("th");
+            th.appendChild(newInput);
+            document.querySelector("#layoutTable thead tr").appendChild(th);
+        }
+
+        adjustLastColumn();
     }
 
     function updateColumnWidth() {
@@ -195,6 +210,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
