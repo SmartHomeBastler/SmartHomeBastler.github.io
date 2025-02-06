@@ -102,10 +102,10 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            if (isColumnChange || isNaN(storedWidths[i])) {
+            if (isColumnChange) {
                 input.value = Math.floor(100 / columns);
             } else {
-                input.value = storedWidths[i];
+                input.value = storedWidths[i] || Math.floor(100 / columns);
             }
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustLastColumn(); updatePreview(); };
@@ -124,7 +124,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
-                input.value = storedAreas[r * columns + c] || "";
+                input.value = storedAreas[r * (columns - 1) + c] || "";
                 input.oninput = function () { updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
@@ -175,6 +175,7 @@ layout: page
     
     updateTable(true);
 </script>
+
 
 
 
