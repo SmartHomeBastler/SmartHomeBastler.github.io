@@ -87,32 +87,38 @@ layout: page
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
-        
+
         let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value) || 0);
         let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
-        
+
         tableHead.innerHTML = "";
         tableBody.innerHTML = "";
-        
+
         let headerRow = document.createElement("tr");
         let newWidth = Math.floor(100 / columns);
-        
+
         for (let i = 0; i < columns; i++) {
             let th = document.createElement("th");
             let input = document.createElement("input");
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = isColumnChange ? newWidth : (storedWidths[i] || newWidth);
+
+            if (isColumnChange) {
+                input.value = newWidth;
+            } else {
+                input.value = storedWidths[i] !== undefined ? storedWidths[i] : newWidth;
+            }
+
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustLastColumn(); updatePreview(); };
             th.appendChild(input);
             headerRow.appendChild(th);
         }
         tableHead.appendChild(headerRow);
-        
+
         adjustLastColumn();
-        
+
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
             for (let c = 0; c < columns; c++) {
@@ -127,33 +133,33 @@ layout: page
             }
             tableBody.appendChild(tr);
         }
-        
+
         updatePreview();
     }
-    
+
     function adjustLastColumn() {
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
-        
+
         for (let i = 0; i < inputs.length - 1; i++) {
             totalWidth += parseInt(inputs[i].value);
         }
-        
+
         let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
             lastInput.value = Math.max(100 - totalWidth, 0);
         }
-        
+
         updatePreview();
     }
-    
+
     function updatePreview() {
         let gridPreview = document.getElementById("gridPreview");
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let areaInputs = document.querySelectorAll("#layoutTable tbody input");
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
-        
+
         let sumWidths = Array.from(inputs).reduce((sum, input) => sum + parseInt(input.value), 0);
         if (sumWidths !== 100) {
             let scaleFactor = 100 / sumWidths;
@@ -161,12 +167,12 @@ layout: page
                 input.value = Math.round(parseInt(input.value) * scaleFactor);
             });
         }
-        
+
         let templateColumns = Array.from(inputs).map(input => input.value + "%").join(" ");
         gridPreview.style.gridTemplateColumns = templateColumns;
         gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
         gridPreview.innerHTML = "";
-        
+
         areaInputs.forEach((input, index) => {
             let div = document.createElement("div");
             div.className = "shb-grid-item";
@@ -174,9 +180,10 @@ layout: page
             gridPreview.appendChild(div);
         });
     }
-    
+
     updateTable(true);
 </script>
+
 
 
 
