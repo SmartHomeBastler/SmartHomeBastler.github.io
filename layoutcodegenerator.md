@@ -108,14 +108,14 @@ layout: page
                 input.value = storedWidths[i] || Math.floor(100 / columns);
             }
             input.setAttribute("data-index", i);
-            input.oninput = function () { adjustLastColumn(); updatePreview(); };
+            input.oninput = function () { adjustColumns(); updatePreview(); };
             th.appendChild(input);
             headerRow.appendChild(th);
             totalWidth += parseInt(input.value);
         }
         tableHead.appendChild(headerRow);
         
-        adjustLastColumn();
+        adjustColumns();
         
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -124,7 +124,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
-                input.value = storedAreas[r * (columns - 1) + c] || "";
+                input.value = storedAreas[r * columns + c] || "";
                 input.oninput = function () { updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
@@ -135,7 +135,7 @@ layout: page
         updatePreview();
     }
     
-    function adjustLastColumn() {
+    function adjustColumns() {
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
         
@@ -148,6 +148,14 @@ layout: page
         let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
             lastInput.value = Math.max(100 - totalWidth, 0);
+        }
+        
+        let sumWidths = Array.from(inputs).reduce((sum, input) => sum + parseInt(input.value), 0);
+        if (sumWidths !== 100) {
+            let scaleFactor = 100 / sumWidths;
+            inputs.forEach(input => {
+                input.value = Math.round(parseInt(input.value) * scaleFactor);
+            });
         }
         
         updatePreview();
@@ -175,6 +183,7 @@ layout: page
     
     updateTable(true);
 </script>
+
 
 
 
