@@ -92,7 +92,12 @@ layout: page
     function addRow() {
         let rows = parseInt(document.getElementById("rows").value);
         document.getElementById("rows").value = rows + 1;
-        updateTable(true);
+
+        // Spaltenbreiten speichern
+        let tableHead = document.querySelector("#layoutTable thead");
+        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => input.value);
+
+        updateTable(true, storedWidths);
     }
 
     function redistributeColumnWidths(columns) {
@@ -126,14 +131,13 @@ layout: page
         updatePreview();
     }
 
-    function updateTable(preserveWidths = false) {
+    function updateTable(preserveWidths = false, storedWidths = []) {
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
-        // Spaltenbreiten und Area-Namen speichern
-        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => input.value);
+        // Area-Namen speichern
         let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
 
         tableHead.innerHTML = "";
@@ -220,6 +224,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
