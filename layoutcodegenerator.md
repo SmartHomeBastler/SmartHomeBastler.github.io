@@ -103,11 +103,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            if (isColumnChange) {
-                input.value = newWidth;
-            } else {
-                input.value = storedWidths[i] || newWidth;
-            }
+            input.value = isColumnChange ? newWidth : (storedWidths[i] || newWidth);
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustLastColumn(); updatePreview(); };
             th.appendChild(input);
@@ -124,7 +120,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
-                input.value = storedAreas[r * (columns - 1) + c] || "";
+                input.value = storedAreas[r * columns + c] || "";
                 input.oninput = function () { updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
@@ -139,11 +135,9 @@ layout: page
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
         
-        inputs.forEach((input, index) => {
-            if (index < inputs.length - 1) {
-                totalWidth += parseInt(input.value);
-            }
-        });
+        for (let i = 0; i < inputs.length - 1; i++) {
+            totalWidth += parseInt(inputs[i].value);
+        }
         
         let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
@@ -160,6 +154,14 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         
+        let sumWidths = Array.from(inputs).reduce((sum, input) => sum + parseInt(input.value), 0);
+        if (sumWidths !== 100) {
+            let scaleFactor = 100 / sumWidths;
+            inputs.forEach(input => {
+                input.value = Math.round(parseInt(input.value) * scaleFactor);
+            });
+        }
+        
         let templateColumns = Array.from(inputs).map(input => input.value + "%").join(" ");
         gridPreview.style.gridTemplateColumns = templateColumns;
         gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
@@ -175,6 +177,7 @@ layout: page
     
     updateTable(true);
 </script>
+
 
 
 
