@@ -95,8 +95,6 @@ layout: page
         tableBody.innerHTML = "";
         
         let headerRow = document.createElement("tr");
-        let totalWidth = 0;
-        
         for (let i = 0; i < columns; i++) {
             let th = document.createElement("th");
             let input = document.createElement("input");
@@ -105,16 +103,13 @@ layout: page
             input.max = "100";
             input.value = isColumnChange ? (storedWidths[i] || Math.floor(100 / columns)) : Math.floor(100 / columns);
             input.setAttribute("data-index", i);
-            input.oninput = function () { adjustLastColumn(); };
-            totalWidth += parseInt(input.value);
+            input.oninput = function () { adjustLastColumn(); updatePreview(); };
             th.appendChild(input);
             headerRow.appendChild(th);
         }
         tableHead.appendChild(headerRow);
         
-        if (isColumnChange) {
-            adjustLastColumn();
-        }
+        adjustLastColumn();
         
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
