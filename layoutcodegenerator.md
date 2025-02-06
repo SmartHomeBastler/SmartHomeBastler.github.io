@@ -82,7 +82,34 @@ layout: page
 </style>
 
 <script>
-    function updateTable(isColumnChange) {
+    function addColumn() {
+        let columns = parseInt(document.getElementById("columns").value);
+        document.getElementById("columns").value = columns + 1;
+        redistributeColumnWidths(columns + 1);
+        updateTable();
+    }
+
+    function addRow() {
+        let rows = parseInt(document.getElementById("rows").value);
+        document.getElementById("rows").value = rows + 1;
+        updateTable();
+    }
+
+    function redistributeColumnWidths(columns) {
+        let newWidth = Math.floor(100 / columns);
+        let inputs = document.querySelectorAll("#layoutTable thead input");
+
+        inputs.forEach(input => {
+            input.value = newWidth;
+        });
+    }
+
+    function updateColumnWidth() {
+        adjustLastColumn();
+        updatePreview();
+    }
+
+    function updateTable() {
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
@@ -96,11 +123,6 @@ layout: page
 
         let headerRow = document.createElement("tr");
 
-        if (isColumnChange) {
-            let newWidth = Math.floor(100 / columns);
-            storedWidths = Array(columns).fill(newWidth);
-        }
-
         for (let i = 0; i < columns; i++) {
             let th = document.createElement("th");
             let input = document.createElement("input");
@@ -108,9 +130,8 @@ layout: page
             input.min = "1";
             input.max = "100";
             input.value = storedWidths[i] !== undefined ? storedWidths[i] : Math.floor(100 / columns);
-
             input.setAttribute("data-index", i);
-            input.oninput = function () { adjustLastColumn(); updatePreview(); };
+            input.oninput = updateColumnWidth;
             th.appendChild(input);
             headerRow.appendChild(th);
         }
@@ -124,9 +145,9 @@ layout: page
                 let td = document.createElement("td");
                 let input = document.createElement("input");
                 input.type = "text";
-                input.placeholder = `Area ${r+1}-${c+1}`;
+                input.placeholder = `Area ${r + 1}-${c + 1}`;
                 input.value = storedAreas[r * columns + c] || "";
-                input.oninput = function () { updatePreview(); };
+                input.oninput = updatePreview;
                 td.appendChild(input);
                 tr.appendChild(td);
             }
@@ -159,14 +180,6 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
 
-        let sumWidths = Array.from(inputs).reduce((sum, input) => sum + parseInt(input.value), 0);
-        if (sumWidths !== 100) {
-            let scaleFactor = 100 / sumWidths;
-            inputs.forEach(input => {
-                input.value = Math.round(parseInt(input.value) * scaleFactor);
-            });
-        }
-
         let templateColumns = Array.from(inputs).map(input => input.value + "%").join(" ");
         gridPreview.style.gridTemplateColumns = templateColumns;
         gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
@@ -180,8 +193,9 @@ layout: page
         });
     }
 
-    updateTable(true);
+    updateTable();
 </script>
+
 
 
 
