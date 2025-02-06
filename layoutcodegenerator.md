@@ -101,15 +101,19 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = isColumnChange ? Math.floor(100 / columns) : (storedWidths[i] || Math.floor(100 / columns));
+            if (isColumnChange) {
+                input.value = Math.floor(100 / columns);
+            } else {
+                input.value = storedWidths[i] || Math.floor(100 / columns);
+            }
             input.setAttribute("data-index", i);
-            input.oninput = function () { adjustColumns(); updatePreview(); };
+            input.oninput = function () { adjustLastColumn(); updatePreview(); };
             th.appendChild(input);
             headerRow.appendChild(th);
         }
         tableHead.appendChild(headerRow);
         
-        adjustColumns();
+        adjustLastColumn();
         
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -118,7 +122,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
-                input.value = storedAreas[r * (columns - 1) + c] || "";
+                input.value = storedAreas[r * columns + c] || "";
                 input.oninput = function () { updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
@@ -129,14 +133,20 @@ layout: page
         updatePreview();
     }
     
-    function adjustColumns() {
+    function adjustLastColumn() {
         let inputs = document.querySelectorAll("#layoutTable thead input");
-        let totalWidth = inputs.length > 0 ? inputs.length * Math.floor(100 / inputs.length) : 100;
-        let scaleFactor = 100 / totalWidth;
+        let totalWidth = 0;
         
-        inputs.forEach(input => {
-            input.value = Math.round(parseInt(input.value) * scaleFactor);
+        inputs.forEach((input, index) => {
+            if (index < inputs.length - 1) {
+                totalWidth += parseInt(input.value);
+            }
         });
+        
+        let lastInput = inputs[inputs.length - 1];
+        if (lastInput) {
+            lastInput.value = Math.max(100 - totalWidth, 0);
+        }
         
         updatePreview();
     }
@@ -163,6 +173,7 @@ layout: page
     
     updateTable(true);
 </script>
+
 
 
 
