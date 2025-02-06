@@ -88,7 +88,7 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
         
-        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value) || Math.floor(100 / columns));
+        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value));
         let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
         
         tableHead.innerHTML = "";
@@ -102,8 +102,10 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            if (isColumnChange) {
-                input.value = storedWidths[i] || Math.floor(100 / columns);
+            if (isColumnChange || isNaN(storedWidths[i])) {
+                input.value = Math.floor(100 / columns);
+            } else {
+                input.value = storedWidths[i];
             }
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustLastColumn(); updatePreview(); };
@@ -113,9 +115,7 @@ layout: page
         }
         tableHead.appendChild(headerRow);
         
-        if (isColumnChange) {
-            adjustLastColumn();
-        }
+        adjustLastColumn();
         
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -173,8 +173,9 @@ layout: page
         });
     }
     
-    updateTable(false);
+    updateTable(true);
 </script>
+
 
 
 
