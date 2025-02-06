@@ -88,7 +88,7 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
         
-        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value));
+        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value) || Math.floor(100 / columns));
         let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
         
         tableHead.innerHTML = "";
@@ -103,7 +103,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = (isColumnChange && storedWidths[i]) ? storedWidths[i] : Math.floor(100 / columns);
+            input.value = isColumnChange ? (storedWidths[i] || Math.floor(100 / columns)) : Math.floor(100 / columns);
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustLastColumn(); };
             totalWidth += parseInt(input.value);
@@ -129,24 +129,6 @@ layout: page
                 tr.appendChild(td);
             }
             tableBody.appendChild(tr);
-        }
-        
-        updatePreview();
-    }
-    
-    function adjustLastColumn() {
-        let inputs = document.querySelectorAll("#layoutTable thead input");
-        let totalWidth = 0;
-        
-        inputs.forEach((input, index) => {
-            if (index < inputs.length - 1) {
-                totalWidth += parseInt(input.value);
-            }
-        });
-        
-        let lastInput = inputs[inputs.length - 1];
-        if (lastInput) {
-            lastInput.value = Math.max(100 - totalWidth, 0);
         }
         
         updatePreview();
