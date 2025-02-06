@@ -130,8 +130,9 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
-        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value));
-        let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
+        // Werte speichern
+        let storedWidths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value));
+        let storedAreas = Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
 
         tableHead.innerHTML = "";
         tableBody.innerHTML = "";
@@ -144,7 +145,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = resetWidths ? Math.floor(100 / columns) : (storedWidths[i] || Math.floor(100 / columns));
+            input.value = (resetWidths && storedWidths.length === 0) ? Math.floor(100 / columns) : (storedWidths[i] || Math.floor(100 / columns));
             input.setAttribute("data-index", i);
             input.oninput = updateColumnWidth;
             th.appendChild(input);
@@ -210,6 +211,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
