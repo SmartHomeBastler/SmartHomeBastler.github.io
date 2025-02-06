@@ -86,7 +86,7 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
         redistributeColumnWidths(columns + 1);
-        updateTable();
+        updateTable(false);
     }
 
     function addRow() {
@@ -96,8 +96,9 @@ layout: page
     }
 
     function redistributeColumnWidths(columns) {
-        let newWidth = Math.floor(100 / columns);
         let inputs = document.querySelectorAll("#layoutTable thead input");
+        let totalWidth = 100;
+        let newWidth = Math.floor(totalWidth / columns);
 
         inputs.forEach(input => {
             input.value = newWidth;
@@ -130,7 +131,6 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
-        // Werte speichern
         let storedWidths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value));
         let storedAreas = Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
 
@@ -145,7 +145,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = (resetWidths && storedWidths.length === 0) ? Math.floor(100 / columns) : (storedWidths[i] || Math.floor(100 / columns));
+            input.value = (resetWidths && storedWidths.length === 0) ? Math.floor(100 / columns) : (storedWidths[i] !== undefined ? storedWidths[i] : Math.floor(100 / columns));
             input.setAttribute("data-index", i);
             input.oninput = updateColumnWidth;
             th.appendChild(input);
@@ -211,6 +211,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
