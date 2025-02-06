@@ -88,30 +88,24 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
         
-        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value));
+        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value) || 0);
         let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
         
         tableHead.innerHTML = "";
         tableBody.innerHTML = "";
         
         let headerRow = document.createElement("tr");
-        let totalWidth = 0;
         for (let i = 0; i < columns; i++) {
             let th = document.createElement("th");
             let input = document.createElement("input");
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            if (isColumnChange) {
-                input.value = Math.floor(100 / columns);
-            } else {
-                input.value = storedWidths[i] || Math.floor(100 / columns);
-            }
+            input.value = isColumnChange ? Math.floor(100 / columns) : (storedWidths[i] || Math.floor(100 / columns));
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustColumns(); updatePreview(); };
             th.appendChild(input);
             headerRow.appendChild(th);
-            totalWidth += parseInt(input.value);
         }
         tableHead.appendChild(headerRow);
         
@@ -124,7 +118,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
-                input.value = storedAreas[r * columns + c] || "";
+                input.value = storedAreas[r * (columns - 1) + c] || "";
                 input.oninput = function () { updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
@@ -137,26 +131,12 @@ layout: page
     
     function adjustColumns() {
         let inputs = document.querySelectorAll("#layoutTable thead input");
-        let totalWidth = 0;
+        let totalWidth = inputs.length > 0 ? inputs.length * Math.floor(100 / inputs.length) : 100;
+        let scaleFactor = 100 / totalWidth;
         
-        inputs.forEach((input, index) => {
-            if (index < inputs.length - 1) {
-                totalWidth += parseInt(input.value);
-            }
+        inputs.forEach(input => {
+            input.value = Math.round(parseInt(input.value) * scaleFactor);
         });
-        
-        let lastInput = inputs[inputs.length - 1];
-        if (lastInput) {
-            lastInput.value = Math.max(100 - totalWidth, 0);
-        }
-        
-        let sumWidths = Array.from(inputs).reduce((sum, input) => sum + parseInt(input.value), 0);
-        if (sumWidths !== 100) {
-            let scaleFactor = 100 / sumWidths;
-            inputs.forEach(input => {
-                input.value = Math.round(parseInt(input.value) * scaleFactor);
-            });
-        }
         
         updatePreview();
     }
@@ -183,6 +163,7 @@ layout: page
     
     updateTable(true);
 </script>
+
 
 
 
