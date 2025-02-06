@@ -68,7 +68,7 @@ layout: page
     }
     .shb-grid-preview {
         display: grid;
-        gap: 5px;
+        gap: 1px;
         width: 100%;
         background: #f0f0f0;
         padding: 10px;
@@ -88,6 +88,9 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
         
+        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => input.value);
+        let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
+        
         tableHead.innerHTML = "";
         tableBody.innerHTML = "";
         
@@ -98,7 +101,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = Math.floor(100 / columns);
+            input.value = storedWidths[i] || Math.floor(100 / columns);
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustLastColumn(); };
             th.appendChild(input);
@@ -113,6 +116,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r+1}-${c+1}`;
+                input.value = storedAreas[r * columns + c] || "";
                 input.oninput = function () { updatePreview(); };
                 td.appendChild(input);
                 tr.appendChild(td);
