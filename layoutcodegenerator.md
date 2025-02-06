@@ -99,12 +99,13 @@ layout: page
         let newWidth = Math.floor(100 / columns);
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
+        // Gleichmäßige Verteilung der Breiten
         inputs.forEach(input => {
             input.value = newWidth;
         });
 
-        // Add new column with the same width
-        if (inputs.length < columns) {
+        // Neue Spalte hinzufügen
+        while (inputs.length < columns) {
             let newInput = document.createElement("input");
             newInput.type = "number";
             newInput.min = "1";
@@ -114,6 +115,7 @@ layout: page
             let th = document.createElement("th");
             th.appendChild(newInput);
             document.querySelector("#layoutTable thead tr").appendChild(th);
+            inputs = document.querySelectorAll("#layoutTable thead input"); // Update inputs
         }
 
         adjustLastColumn();
@@ -130,7 +132,6 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
-        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value) || 0);
         let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
 
         tableHead.innerHTML = "";
@@ -144,7 +145,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = storedWidths[i] !== undefined ? storedWidths[i] : Math.floor(100 / columns);
+            input.value = Math.floor(100 / columns);
             input.setAttribute("data-index", i);
             input.oninput = updateColumnWidth;
             th.appendChild(input);
@@ -210,6 +211,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
