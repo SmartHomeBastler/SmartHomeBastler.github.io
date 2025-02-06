@@ -101,7 +101,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = isColumnChange ? (storedWidths[i] || Math.floor(100 / columns)) : Math.floor(100 / columns);
+            input.value = storedWidths[i] || Math.floor(100 / columns);
             input.setAttribute("data-index", i);
             input.oninput = function () { adjustLastColumn(); updatePreview(); };
             th.appendChild(input);
@@ -109,7 +109,9 @@ layout: page
         }
         tableHead.appendChild(headerRow);
         
-        adjustLastColumn();
+        if (isColumnChange) {
+            adjustLastColumn();
+        }
         
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -169,4 +171,5 @@ layout: page
     
     updateTable(false);
 </script>
+
 
