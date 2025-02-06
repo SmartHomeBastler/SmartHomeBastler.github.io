@@ -129,6 +129,24 @@ layout: page
         updatePreview();
     }
     
+    function adjustLastColumn() {
+        let inputs = document.querySelectorAll("#layoutTable thead input");
+        let totalWidth = 0;
+        
+        inputs.forEach((input, index) => {
+            if (index < inputs.length - 1) {
+                totalWidth += parseInt(input.value);
+            }
+        });
+        
+        let lastInput = inputs[inputs.length - 1];
+        if (lastInput) {
+            lastInput.value = Math.max(100 - totalWidth, 0);
+        }
+        
+        updatePreview();
+    }
+    
     function updatePreview() {
         let gridPreview = document.getElementById("gridPreview");
         let inputs = document.querySelectorAll("#layoutTable thead input");
@@ -151,3 +169,4 @@ layout: page
     
     updateTable(false);
 </script>
+
