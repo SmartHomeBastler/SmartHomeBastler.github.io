@@ -85,23 +85,32 @@ layout: page
     function addColumn() {
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
+
+        // Spaltenbreiten und Area-Namen speichern
+        let storedWidths = getStoredWidths();
+        let storedAreas = getStoredAreas();
+
         redistributeColumnWidths(columns + 1);
-        updateTable();
+        updateTable(true, storedWidths, storedAreas);
     }
 
     function addRow() {
         let rows = parseInt(document.getElementById("rows").value);
         document.getElementById("rows").value = rows + 1;
 
-        // Spaltenbreiten speichern
-        let tableHead = document.querySelector("#layoutTable thead");
-        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => input.value);
-
-        // Area-Namen speichern
-        let tableBody = document.querySelector("#layoutTable tbody");
-        let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
+        // Spaltenbreiten und Area-Namen speichern
+        let storedWidths = getStoredWidths();
+        let storedAreas = getStoredAreas();
 
         updateTable(true, storedWidths, storedAreas);
+    }
+
+    function getStoredWidths() {
+        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => input.value);
+    }
+
+    function getStoredAreas() {
+        return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
     }
 
     function redistributeColumnWidths(columns) {
@@ -135,7 +144,7 @@ layout: page
         updatePreview();
     }
 
-    function updateTable(preserveWidths = false, storedWidths = [], storedAreas = []) {
+    function updateTable(preserveWidths = true, storedWidths = [], storedAreas = []) {
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
@@ -225,6 +234,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
