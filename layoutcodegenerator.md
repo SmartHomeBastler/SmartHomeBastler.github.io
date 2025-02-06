@@ -92,19 +92,17 @@ layout: page
     function addRow() {
         let rows = parseInt(document.getElementById("rows").value);
         document.getElementById("rows").value = rows + 1;
-        updateTable();
+        updateTable(false);
     }
 
     function redistributeColumnWidths(columns) {
         let newWidth = Math.floor(100 / columns);
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
-        // Gleichmäßige Verteilung der Breiten
         inputs.forEach(input => {
             input.value = newWidth;
         });
 
-        // Neue Spalte hinzufügen
         while (inputs.length < columns) {
             let newInput = document.createElement("input");
             newInput.type = "number";
@@ -115,7 +113,7 @@ layout: page
             let th = document.createElement("th");
             th.appendChild(newInput);
             document.querySelector("#layoutTable thead tr").appendChild(th);
-            inputs = document.querySelectorAll("#layoutTable thead input"); // Update inputs
+            inputs = document.querySelectorAll("#layoutTable thead input");
         }
 
         adjustLastColumn();
@@ -126,12 +124,13 @@ layout: page
         updatePreview();
     }
 
-    function updateTable() {
+    function updateTable(resetWidths = true) {
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
+        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => parseInt(input.value));
         let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
 
         tableHead.innerHTML = "";
@@ -145,7 +144,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = Math.floor(100 / columns);
+            input.value = resetWidths ? Math.floor(100 / columns) : (storedWidths[i] || Math.floor(100 / columns));
             input.setAttribute("data-index", i);
             input.oninput = updateColumnWidth;
             th.appendChild(input);
@@ -211,6 +210,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
