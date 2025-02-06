@@ -112,7 +112,9 @@ layout: page
         }
         tableHead.appendChild(headerRow);
         
-        adjustLastColumn();
+        if (isColumnChange) {
+            adjustLastColumn();
+        }
         
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
