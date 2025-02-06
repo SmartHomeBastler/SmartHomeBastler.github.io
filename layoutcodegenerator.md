@@ -92,7 +92,7 @@ layout: page
     function addRow() {
         let rows = parseInt(document.getElementById("rows").value);
         document.getElementById("rows").value = rows + 1;
-        updateTable();
+        updateTable(true);
     }
 
     function redistributeColumnWidths(columns) {
@@ -126,12 +126,14 @@ layout: page
         updatePreview();
     }
 
-    function updateTable() {
+    function updateTable(preserveWidths = false) {
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
+        // Spaltenbreiten und Area-Namen speichern
+        let storedWidths = Array.from(tableHead.querySelectorAll("input"), input => input.value);
         let storedAreas = Array.from(tableBody.querySelectorAll("input"), input => input.value);
 
         tableHead.innerHTML = "";
@@ -145,7 +147,14 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = Math.floor(100 / columns);
+
+            // Wiederherstellung der gespeicherten Spaltenbreiten
+            if (preserveWidths && storedWidths[i] !== undefined) {
+                input.value = storedWidths[i];
+            } else {
+                input.value = Math.floor(100 / columns);
+            }
+
             input.setAttribute("data-index", i);
             input.oninput = updateColumnWidth;
             th.appendChild(input);
@@ -211,6 +220,8 @@ layout: page
 
     updateTable();
 </script>
+
+
 
 
 
