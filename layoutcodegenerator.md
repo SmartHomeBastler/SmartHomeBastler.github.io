@@ -168,6 +168,14 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
+        if (!isRowUpdate) {
+            storedWidths = getStoredWidths();
+        }
+
+        if (storedAreas.length === 0) {
+            storedAreas = getStoredAreas();
+        }
+
         tableHead.innerHTML = "";
         tableBody.innerHTML = "";
 
@@ -218,8 +226,6 @@ layout: page
     }
 
     function adjustLastColumn() {
-        if (document.querySelector("#layoutTable").dataset.adjust === "false") return;
-
         console.log("Adjusting last column to maintain 100% width");
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
@@ -262,7 +268,7 @@ layout: page
         console.log("Current column widths:", templateColumns);
     }
 
-    document.querySelector("#layoutTable").dataset.adjust = "true";
     updateTable();
 </script>
+
 
