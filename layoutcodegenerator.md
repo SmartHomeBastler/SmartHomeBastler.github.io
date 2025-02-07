@@ -92,7 +92,7 @@ layout: page
 
         console.log("Stored Widths before adding column:", storedWidths);
 
-        redistributeColumnWidths(columns + 1);
+        redistributeColumnWidths(columns + 1, storedWidths);
         updateTable(false, storedWidths, storedAreas);
     }
 
@@ -119,13 +119,23 @@ layout: page
         return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
     }
 
-    function redistributeColumnWidths(columns) {
+    function redistributeColumnWidths(columns, storedWidths) {
         console.log("Redistributing column widths");
-        let newWidth = Math.floor(100 / columns);
+        let totalStoredWidth = storedWidths.reduce((a, b) => a + b, 0);
+        let newWidth = Math.floor((100 - totalStoredWidth) / (columns - storedWidths.length));
+
+        console.log("Total Stored Width:", totalStoredWidth);
+        console.log("New Width for additional columns:", newWidth);
+
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
-        inputs.forEach(input => {
-            input.value = newWidth;
+        inputs.forEach((input, index) => {
+            if (storedWidths[index] !== undefined) {
+                input.value = storedWidths[index];
+            } else {
+                input.value = newWidth;
+            }
+            console.log(`Column ${index + 1} width set to:`, input.value);
         });
 
         while (inputs.length < columns) {
@@ -152,9 +162,6 @@ layout: page
 
     function updateTable(isRowUpdate = false, storedWidths = [], storedAreas = []) {
         console.log("Updating table", { isRowUpdate, storedWidths, storedAreas });
-
-        if (storedWidths.length === 0) storedWidths = getStoredWidths();
-        if (storedAreas.length === 0) storedAreas = getStoredAreas();
 
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
@@ -211,6 +218,8 @@ layout: page
     }
 
     function adjustLastColumn() {
+        if (document.querySelector("#layoutTable").dataset.adjust === "false") return;
+
         console.log("Adjusting last column to maintain 100% width");
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
@@ -253,8 +262,7 @@ layout: page
         console.log("Current column widths:", templateColumns);
     }
 
+    document.querySelector("#layoutTable").dataset.adjust = "true";
     updateTable();
 </script>
-
-
 
