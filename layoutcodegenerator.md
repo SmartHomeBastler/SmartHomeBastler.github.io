@@ -87,13 +87,10 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
 
-        let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
-        console.log("Stored Widths before adding column:", storedWidths);
-
-        redistributeColumnWidths(columns + 1, storedWidths);
-        updateTable(false, storedWidths, storedAreas);
+        redistributeColumnWidths(columns + 1);
+        updateTable(false, [], storedAreas);
     }
 
     function addRow() {
@@ -103,8 +100,6 @@ layout: page
 
         let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
-
-        console.log("Stored Widths before adding row:", storedWidths);
 
         updateTable(true, storedWidths, storedAreas);
     }
@@ -119,24 +114,14 @@ layout: page
         return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
     }
 
-    function redistributeColumnWidths(columns, storedWidths) {
-        console.log("Redistributing column widths");
-        let totalStoredWidth = storedWidths.reduce((a, b) => a + b, 0);
-        let remainingWidth = 100 - totalStoredWidth;
-        let newWidth = Math.floor(remainingWidth / (columns - storedWidths.length));
-
-        console.log("Total Stored Width:", totalStoredWidth);
-        console.log("New Width for additional columns:", newWidth);
+    function redistributeColumnWidths(columns) {
+        console.log("Redistributing column widths equally");
+        let newWidth = Math.floor(100 / columns);
 
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
-        inputs.forEach((input, index) => {
-            if (storedWidths[index] !== undefined) {
-                input.value = storedWidths[index];
-            } else {
-                input.value = newWidth;
-            }
-            console.log(`Column ${index + 1} width set to:`, input.value);
+        inputs.forEach(input => {
+            input.value = newWidth;
         });
 
         while (inputs.length < columns) {
@@ -189,11 +174,7 @@ layout: page
             input.min = "1";
             input.max = "100";
 
-            if (storedWidths[i] !== undefined) {
-                input.value = storedWidths[i];
-            } else {
-                input.value = Math.floor(100 / columns);
-            }
+            input.value = Math.floor(100 / columns);
 
             console.log(`Setting width for column ${i + 1}:`, input.value);
 
@@ -270,6 +251,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
