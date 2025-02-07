@@ -163,6 +163,9 @@ layout: page
     function updateTable(isRowUpdate = false, storedWidths = [], storedAreas = []) {
         console.log("Updating table", { isRowUpdate, storedWidths, storedAreas });
 
+        if (storedWidths.length === 0) storedWidths = getStoredWidths();
+        if (storedAreas.length === 0) storedAreas = getStoredAreas();
+
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
@@ -218,8 +221,6 @@ layout: page
     }
 
     function adjustLastColumn() {
-        if (document.querySelector("#layoutTable").dataset.adjust === "false") return;
-
         console.log("Adjusting last column to maintain 100% width");
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
@@ -262,7 +263,7 @@ layout: page
         console.log("Current column widths:", templateColumns);
     }
 
-    document.querySelector("#layoutTable").dataset.adjust = "true";
     updateTable();
 </script>
+
 
