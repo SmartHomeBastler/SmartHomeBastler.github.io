@@ -122,7 +122,8 @@ layout: page
     function redistributeColumnWidths(columns, storedWidths) {
         console.log("Redistributing column widths");
         let totalStoredWidth = storedWidths.reduce((a, b) => a + b, 0);
-        let newWidth = Math.floor((100 - totalStoredWidth) / (columns - storedWidths.length));
+        let remainingWidth = 100 - totalStoredWidth;
+        let newWidth = Math.floor(remainingWidth / (columns - storedWidths.length));
 
         console.log("Total Stored Width:", totalStoredWidth);
         console.log("New Width for additional columns:", newWidth);
@@ -203,9 +204,7 @@ layout: page
         }
         tableHead.appendChild(headerRow);
 
-        if (!isRowUpdate) {
-            adjustLastColumn();
-        }
+        adjustLastColumn();
 
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -270,5 +269,6 @@ layout: page
 
     updateTable();
 </script>
+
 
 
