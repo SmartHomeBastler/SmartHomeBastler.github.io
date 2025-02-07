@@ -92,7 +92,7 @@ layout: page
 
         console.log("Stored Widths before adding column:", storedWidths);
 
-        redistributeColumnWidths(columns + 1, storedWidths);
+        redistributeColumnWidths(columns + 1);
         updateTable(false, storedWidths, storedAreas);
     }
 
@@ -119,23 +119,13 @@ layout: page
         return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
     }
 
-    function redistributeColumnWidths(columns, storedWidths) {
+    function redistributeColumnWidths(columns) {
         console.log("Redistributing column widths");
-        let totalStoredWidth = storedWidths.reduce((a, b) => a + b, 0);
-        let newWidth = Math.floor((100 - totalStoredWidth) / (columns - storedWidths.length));
-
-        console.log("Total Stored Width:", totalStoredWidth);
-        console.log("New Width for additional columns:", newWidth);
-
+        let newWidth = Math.floor(100 / columns);
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
-        inputs.forEach((input, index) => {
-            if (storedWidths[index] !== undefined) {
-                input.value = storedWidths[index];
-            } else {
-                input.value = newWidth;
-            }
-            console.log(`Column ${index + 1} width set to:`, input.value);
+        inputs.forEach(input => {
+            input.value = newWidth;
         });
 
         while (inputs.length < columns) {
@@ -265,5 +255,6 @@ layout: page
 
     updateTable();
 </script>
+
 
 
