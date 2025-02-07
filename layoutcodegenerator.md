@@ -87,10 +87,11 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
 
+        let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
         redistributeColumnWidths(columns + 1);
-        updateTable(false, [], storedAreas);
+        updateTable(false, storedWidths, storedAreas);
     }
 
     function addRow() {
@@ -157,7 +158,7 @@ layout: page
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
-        if (isRowUpdate && storedWidths.length === 0) {
+        if (!isRowUpdate) {
             storedWidths = getStoredWidths();
         }
 
@@ -236,6 +237,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
