@@ -87,10 +87,11 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
 
+        let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
-        redistributeColumnWidths(columns + 1);
-        updateTable(false, [], storedAreas);
+        redistributeColumnWidths(columns + 1, storedWidths);
+        updateTable(false, storedWidths, storedAreas);
     }
 
     function addRow() {
@@ -101,53 +102,53 @@ layout: page
         let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
+        console.log("Stored Widths:", storedWidths);
+        console.log("Stored Areas:", storedAreas);
+
         updateTable(true, storedWidths, storedAreas);
     }
 
     function getStoredWidths() {
-        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
+        const widths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
+        console.log("Retrieved Stored Widths:", widths);
+        return widths;
     }
 
     function getStoredAreas() {
-        return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
+        const areas = Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
+        console.log("Retrieved Stored Areas:", areas);
+        return areas;
     }
 
-    function redistributeColumnWidths(columns) {
-        let equalWidth = Math.floor(100 / columns);
-        let inputs = document.querySelectorAll("#layoutTable thead input");
+    function redistributeColumnWidths(columns, storedWidths) {
+        console.log("Redistributing column widths equally for", columns, "columns");
 
-        inputs.forEach(input => {
-            input.value = equalWidth;
-        });
-
-        while (inputs.length < columns) {
-            let newInput = document.createElement("input");
-            newInput.type = "number";
-            newInput.min = "1";
-            newInput.max = "100";
-            newInput.value = equalWidth;
-            newInput.oninput = updateColumnWidth;
-            let th = document.createElement("th");
-            th.appendChild(newInput);
-            document.querySelector("#layoutTable thead tr").appendChild(th);
-            inputs = document.querySelectorAll("#layoutTable thead input");
+        if (storedWidths.length < columns) {
+            let equalWidth = Math.floor(100 / columns);
+            for (let i = 0; i < columns; i++) {
+                if (storedWidths[i] === undefined) {
+                    storedWidths[i] = equalWidth;
+                }
+            }
         }
 
-        adjustLastColumn();
+        adjustLastColumn(storedWidths);
     }
 
     function updateColumnWidth() {
-        adjustLastColumn();
+        console.log("Column width changed");
+        adjustLastColumn(getStoredWidths());
         updatePreview();
     }
 
     function updateTable(isRowUpdate = false, storedWidths = [], storedAreas = []) {
+        console.log("Updating table with isRowUpdate:", isRowUpdate);
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
-        if (isRowUpdate && storedWidths.length === 0) {
+        if (!isRowUpdate) {
             storedWidths = getStoredWidths();
         }
 
@@ -169,7 +170,9 @@ layout: page
         }
         tableHead.appendChild(headerRow);
 
-        adjustLastColumn();
+        if (!isRowUpdate) {
+            adjustLastColumn(storedWidths);
+        }
 
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -189,7 +192,7 @@ layout: page
         updatePreview();
     }
 
-    function adjustLastColumn() {
+    function adjustLastColumn(storedWidths) {
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = Array.from(inputs).slice(0, -1).reduce((sum, input) => sum + parseInt(input.value || 0), 0);
 
@@ -198,10 +201,12 @@ layout: page
             lastInput.value = Math.max(0, 100 - totalWidth);
         }
 
+        console.log("Adjusted last column to maintain 100% width. Total width:", totalWidth);
         updatePreview();
     }
 
     function updatePreview() {
+        console.log("Updating preview");
         let gridPreview = document.getElementById("gridPreview");
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let areaInputs = document.querySelectorAll("#layoutTable tbody input");
@@ -218,10 +223,13 @@ layout: page
             div.textContent = input.value || input.placeholder;
             gridPreview.appendChild(div);
         });
+
+        console.log("Current grid template:", gridPreview.style.gridTemplateColumns);
     }
 
     updateTable();
 </script>
+
 
 
 
