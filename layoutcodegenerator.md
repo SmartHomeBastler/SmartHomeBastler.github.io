@@ -83,30 +83,36 @@ layout: page
 
 <script>
     function addColumn() {
+        console.log("Adding a column");
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
 
-        // Spaltenbreiten und Area-Namen speichern
         let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
+        console.log("Stored Widths before adding column:", storedWidths);
+
         redistributeColumnWidths(columns + 1, storedWidths);
-        updateTable(false, storedWidths, storedAreas); // false = Spaltenänderung
+        updateTable(false, storedWidths, storedAreas);
     }
 
     function addRow() {
+        console.log("Adding a row");
         let rows = parseInt(document.getElementById("rows").value);
         document.getElementById("rows").value = rows + 1;
 
-        // Spaltenbreiten und Area-Namen speichern
         let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
-        updateTable(true, storedWidths, storedAreas); // true = Zeilenänderung
+        console.log("Stored Widths before adding row:", storedWidths);
+
+        updateTable(true, storedWidths, storedAreas);
     }
 
     function getStoredWidths() {
-        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
+        let widths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
+        console.log("Retrieved Stored Widths:", widths);
+        return widths;
     }
 
     function getStoredAreas() {
@@ -114,21 +120,24 @@ layout: page
     }
 
     function redistributeColumnWidths(columns, storedWidths) {
+        console.log("Redistributing column widths");
         let totalStoredWidth = storedWidths.reduce((a, b) => a + b, 0);
         let newWidth = Math.floor((100 - totalStoredWidth) / (columns - storedWidths.length));
 
+        console.log("Total Stored Width:", totalStoredWidth);
+        console.log("New Width for additional columns:", newWidth);
+
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
-        // Gleichmäßige Verteilung der Breiten
         inputs.forEach((input, index) => {
             if (storedWidths[index] !== undefined) {
                 input.value = storedWidths[index];
             } else {
                 input.value = newWidth;
             }
+            console.log(`Column ${index + 1} width set to:`, input.value);
         });
 
-        // Neue Spalte hinzufügen
         while (inputs.length < columns) {
             let newInput = document.createElement("input");
             newInput.type = "number";
@@ -146,11 +155,14 @@ layout: page
     }
 
     function updateColumnWidth() {
+        console.log("Column width changed");
         adjustLastColumn();
         updatePreview();
     }
 
     function updateTable(isRowUpdate = false, storedWidths = [], storedAreas = []) {
+        console.log("Updating table", { isRowUpdate, storedWidths, storedAreas });
+
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
@@ -174,6 +186,8 @@ layout: page
                 input.value = Math.floor(100 / columns);
             }
 
+            console.log(`Setting width for column ${i + 1}:`, input.value);
+
             input.setAttribute("data-index", i);
             input.oninput = updateColumnWidth;
             th.appendChild(input);
@@ -182,7 +196,7 @@ layout: page
         tableHead.appendChild(headerRow);
 
         if (!isRowUpdate) {
-            adjustLastColumn(); // Nur bei Spaltenänderungen
+            adjustLastColumn();
         }
 
         for (let r = 0; r < rows; r++) {
@@ -204,6 +218,7 @@ layout: page
     }
 
     function adjustLastColumn() {
+        console.log("Adjusting last column to maintain 100% width");
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
 
@@ -211,15 +226,19 @@ layout: page
             totalWidth += parseInt(inputs[i].value);
         }
 
+        console.log("Total width before adjustment:", totalWidth);
+
         let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
             lastInput.value = Math.max(100 - totalWidth, 0);
+            console.log("Last column width adjusted to:", lastInput.value);
         }
 
         updatePreview();
     }
 
     function updatePreview() {
+        console.log("Updating grid preview");
         let gridPreview = document.getElementById("gridPreview");
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let areaInputs = document.querySelectorAll("#layoutTable tbody input");
@@ -237,29 +256,9 @@ layout: page
             div.textContent = input.value || input.placeholder;
             gridPreview.appendChild(div);
         });
+
+        console.log("Current column widths:", templateColumns);
     }
 
     updateTable();
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
