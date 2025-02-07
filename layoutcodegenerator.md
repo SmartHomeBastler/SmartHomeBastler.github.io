@@ -174,7 +174,7 @@ layout: page
             input.min = "1";
             input.max = "100";
 
-            input.value = Math.floor(100 / columns);
+            input.value = isRowUpdate && storedWidths[i] !== undefined ? storedWidths[i] : Math.floor(100 / columns);
 
             console.log(`Setting width for column ${i + 1}:`, input.value);
 
@@ -185,7 +185,9 @@ layout: page
         }
         tableHead.appendChild(headerRow);
 
-        adjustLastColumn();
+        if (!isRowUpdate) {
+            adjustLastColumn();
+        }
 
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -251,6 +253,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
