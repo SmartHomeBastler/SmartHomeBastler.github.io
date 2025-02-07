@@ -229,15 +229,16 @@ layout: page
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let totalWidth = 0;
 
-        for (let i = 0; i < inputs.length - 1; i++) {
-            totalWidth += parseInt(inputs[i].value);
-        }
+        inputs.forEach((input, index) => {
+            totalWidth += parseInt(input.value) || 0;
+        });
 
         console.log("Total width before adjustment:", totalWidth);
 
         let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
-            lastInput.value = Math.max(100 - totalWidth, 0);
+            let difference = 100 - totalWidth;
+            lastInput.value = parseInt(lastInput.value) + difference;
             console.log("Last column width adjusted to:", lastInput.value);
         }
 
@@ -269,6 +270,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
