@@ -101,18 +101,26 @@ layout: page
         let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
+        console.log("Stored Widths:", storedWidths);
+        console.log("Stored Areas:", storedAreas);
+
         updateTable(true, storedWidths, storedAreas);
     }
 
     function getStoredWidths() {
-        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
+        const widths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
+        console.log("Retrieved Stored Widths:", widths);
+        return widths;
     }
 
     function getStoredAreas() {
-        return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
+        const areas = Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
+        console.log("Retrieved Stored Areas:", areas);
+        return areas;
     }
 
     function redistributeColumnWidths(columns) {
+        console.log("Redistributing column widths equally for", columns, "columns");
         let equalWidth = Math.floor(100 / columns);
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
@@ -137,11 +145,13 @@ layout: page
     }
 
     function updateColumnWidth() {
+        console.log("Column width changed");
         adjustLastColumn();
         updatePreview();
     }
 
     function updateTable(isRowUpdate = false, storedWidths = [], storedAreas = []) {
+        console.log("Updating table with isRowUpdate:", isRowUpdate);
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
@@ -198,10 +208,12 @@ layout: page
             lastInput.value = Math.max(0, 100 - totalWidth);
         }
 
+        console.log("Adjusted last column to maintain 100% width. Total width:", totalWidth);
         updatePreview();
     }
 
     function updatePreview() {
+        console.log("Updating preview");
         let gridPreview = document.getElementById("gridPreview");
         let inputs = document.querySelectorAll("#layoutTable thead input");
         let areaInputs = document.querySelectorAll("#layoutTable tbody input");
@@ -218,10 +230,13 @@ layout: page
             div.textContent = input.value || input.placeholder;
             gridPreview.appendChild(div);
         });
+
+        console.log("Current grid template:", gridPreview.style.gridTemplateColumns);
     }
 
     updateTable();
 </script>
+
 
 
 
