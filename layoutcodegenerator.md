@@ -101,22 +101,15 @@ layout: page
         let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
-        console.log("Stored Widths:", storedWidths);
-        console.log("Stored Areas:", storedAreas);
-
         updateTable(true, storedWidths, storedAreas);
     }
 
     function getStoredWidths() {
-        const widths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
-        console.log("Retrieved Stored Widths:", widths);
-        return widths;
+        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
     }
 
     function getStoredAreas() {
-        const areas = Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
-        console.log("Retrieved Stored Areas:", areas);
-        return areas;
+        return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
     }
 
     function redistributeColumnWidths(columns) {
