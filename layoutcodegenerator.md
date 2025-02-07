@@ -90,8 +90,8 @@ layout: page
         let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
-        redistributeColumnWidths(columns + 1);
-        updateTable(true, storedWidths, storedAreas);
+        redistributeColumnWidths(columns + 1, storedWidths);
+        updateTable(false, storedWidths, storedAreas); // false = Spaltenänderung
     }
 
     function addRow() {
@@ -102,24 +102,30 @@ layout: page
         let storedWidths = getStoredWidths();
         let storedAreas = getStoredAreas();
 
-        updateTable(true, storedWidths, storedAreas);
+        updateTable(true, storedWidths, storedAreas); // true = Zeilenänderung
     }
 
     function getStoredWidths() {
-        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => input.value);
+        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
     }
 
     function getStoredAreas() {
         return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
     }
 
-    function redistributeColumnWidths(columns) {
-        let newWidth = Math.floor(100 / columns);
+    function redistributeColumnWidths(columns, storedWidths) {
+        let totalStoredWidth = storedWidths.reduce((a, b) => a + b, 0);
+        let newWidth = Math.floor((100 - totalStoredWidth) / (columns - storedWidths.length));
+
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
         // Gleichmäßige Verteilung der Breiten
-        inputs.forEach(input => {
-            input.value = newWidth;
+        inputs.forEach((input, index) => {
+            if (storedWidths[index] !== undefined) {
+                input.value = storedWidths[index];
+            } else {
+                input.value = newWidth;
+            }
         });
 
         // Neue Spalte hinzufügen
@@ -133,7 +139,7 @@ layout: page
             let th = document.createElement("th");
             th.appendChild(newInput);
             document.querySelector("#layoutTable thead tr").appendChild(th);
-            inputs = document.querySelectorAll("#layoutTable thead input"); // Update inputs
+            inputs = document.querySelectorAll("#layoutTable thead input");
         }
 
         adjustLastColumn();
@@ -144,7 +150,7 @@ layout: page
         updatePreview();
     }
 
-    function updateTable(preserveWidths = true, storedWidths = [], storedAreas = []) {
+    function updateTable(isRowUpdate = false, storedWidths = [], storedAreas = []) {
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
@@ -162,8 +168,7 @@ layout: page
             input.min = "1";
             input.max = "100";
 
-            // Wiederherstellung der gespeicherten Spaltenbreiten
-            if (preserveWidths && storedWidths[i] !== undefined) {
+            if (storedWidths[i] !== undefined) {
                 input.value = storedWidths[i];
             } else {
                 input.value = Math.floor(100 / columns);
@@ -176,7 +181,9 @@ layout: page
         }
         tableHead.appendChild(headerRow);
 
-        adjustLastColumn();
+        if (!isRowUpdate) {
+            adjustLastColumn(); // Nur bei Spaltenänderungen
+        }
 
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -234,6 +241,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
