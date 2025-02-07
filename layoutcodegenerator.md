@@ -174,7 +174,13 @@ layout: page
             input.min = "1";
             input.max = "100";
 
-            input.value = isRowUpdate && storedWidths[i] !== undefined ? storedWidths[i] : Math.floor(100 / columns);
+            if (isRowUpdate && storedWidths[i] !== undefined) {
+                input.value = storedWidths[i];
+            } else if (!isRowUpdate && storedWidths[i] !== undefined) {
+                input.value = storedWidths[i];
+            } else {
+                input.value = Math.floor(100 / columns);
+            }
 
             console.log(`Setting width for column ${i + 1}:`, input.value);
 
@@ -253,6 +259,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
