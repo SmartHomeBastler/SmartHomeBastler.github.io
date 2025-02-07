@@ -86,15 +86,29 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
 
+        let storedAreas = getStoredAreas();
+        let storedWidths = getStoredWidths();
+
         redistributeColumnWidths(columns + 1);
-        updateTable();
+        updateTable(storedAreas, storedWidths);
     }
 
     function addRow() {
         let rows = parseInt(document.getElementById("rows").value);
         document.getElementById("rows").value = rows + 1;
 
-        updateTable();
+        let storedAreas = getStoredAreas();
+        let storedWidths = getStoredWidths();
+
+        updateTable(storedAreas, storedWidths);
+    }
+
+    function getStoredAreas() {
+        return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
+    }
+
+    function getStoredWidths() {
+        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => input.value);
     }
 
     function redistributeColumnWidths(columns) {
@@ -121,7 +135,7 @@ layout: page
         adjustLastColumn();
     }
 
-    function updateTable() {
+    function updateTable(storedAreas = [], storedWidths = []) {
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
@@ -137,7 +151,7 @@ layout: page
             input.type = "number";
             input.min = "1";
             input.max = "100";
-            input.value = Math.floor(100 / columns);
+            input.value = storedWidths[i] !== undefined ? storedWidths[i] : Math.floor(100 / columns);
             input.oninput = adjustLastColumn;
             th.appendChild(input);
             headerRow.appendChild(th);
@@ -153,6 +167,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r + 1}-${c + 1}`;
+                input.value = storedAreas[r * columns + c] || "";
                 input.oninput = updatePreview;
                 td.appendChild(input);
                 tr.appendChild(td);
@@ -209,6 +224,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
