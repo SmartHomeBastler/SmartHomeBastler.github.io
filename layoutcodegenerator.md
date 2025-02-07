@@ -238,7 +238,7 @@ layout: page
         let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
             let difference = 100 - totalWidth;
-            lastInput.value = parseInt(lastInput.value) + difference;
+            lastInput.value = Math.max(0, parseInt(lastInput.value) + difference);
             console.log("Last column width adjusted to:", lastInput.value);
         }
 
@@ -270,6 +270,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
