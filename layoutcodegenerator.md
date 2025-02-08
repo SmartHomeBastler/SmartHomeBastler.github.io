@@ -84,10 +84,12 @@ layout: page
 <script>
     document.getElementById("columns").addEventListener("change", function() {
         console.log("Columns input changed to:", this.value);
+        updateTable(getStoredAreas(), getStoredWidths(), false);
     });
 
     document.getElementById("rows").addEventListener("change", function() {
         console.log("Rows input changed to:", this.value);
+        updateTable(getStoredAreas(), getStoredWidths(), true);
     });
 
     function addColumn() {
@@ -95,14 +97,8 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
 
-        let storedAreas = getStoredAreas(columns);
-        let storedWidths = getStoredWidths();
-
-        console.log("Stored Areas before adding column:", storedAreas);
-        console.log("Stored Widths before adding column:", storedWidths);
-
-        redistributeColumnWidths(columns + 1, storedWidths);
-        updateTable(storedAreas, storedWidths, false);
+        redistributeColumnWidths(columns + 1);
+        updateTable(getStoredAreas(), getStoredWidths(), false);
     }
 
     function addRow() {
@@ -110,47 +106,40 @@ layout: page
         let rows = parseInt(document.getElementById("rows").value);
         document.getElementById("rows").value = rows + 1;
 
-        let storedAreas = getStoredAreas();
-        let storedWidths = getStoredWidths();
-
-        console.log("Stored Areas before adding row:", storedAreas);
-        console.log("Stored Widths before adding row:", storedWidths);
-
-        updateTable(storedAreas, storedWidths, true);
+        updateTable(getStoredAreas(), getStoredWidths(), true);
     }
 
-    function getStoredAreas(columns = parseInt(document.getElementById("columns").value)) {
+    function getStoredAreas() {
         const inputs = document.querySelectorAll("#layoutTable tbody input");
         const areas = [];
 
         inputs.forEach((input, index) => {
+            const columns = parseInt(document.getElementById("columns").value);
             const row = Math.floor(index / columns);
             if (!areas[row]) areas[row] = [];
             areas[row][index % columns] = input.value;
         });
 
-        console.log("Captured Areas:", areas);
         return areas;
     }
 
     function getStoredWidths() {
-        const widths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
-        console.log("Captured Widths:", widths);
-        return widths;
+        return Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
     }
 
-    function redistributeColumnWidths(columns, storedWidths) {
-        console.log("Redistributing column widths...");
-        let equalWidth = Math.floor(100 / columns);
-        let inputs = document.querySelectorAll("#layoutTable thead input");
+    function redistributeColumnWidths(columns) {
+        const equalWidth = Math.floor(100 / columns);
+        const inputs = document.querySelectorAll("#layoutTable thead input");
 
-        if (inputs.length < columns) {
-            for (let i = inputs.length; i < columns; i++) {
+        for (let i = 0; i < columns; i++) {
+            if (inputs[i]) {
+                inputs[i].value = equalWidth;
+            } else {
                 let newInput = document.createElement("input");
                 newInput.type = "number";
                 newInput.min = "1";
                 newInput.max = "100";
-                newInput.value = storedWidths[i] !== undefined ? storedWidths[i] : equalWidth;
+                newInput.value = equalWidth;
                 newInput.oninput = adjustLastColumn;
                 let th = document.createElement("th");
                 th.appendChild(newInput);
@@ -163,18 +152,18 @@ layout: page
 
     function updateTable(storedAreas = [], storedWidths = [], isRowUpdate = false) {
         console.log("Updating table with stored data...");
-        let columns = parseInt(document.getElementById("columns").value);
-        let rows = parseInt(document.getElementById("rows").value);
-        let tableHead = document.querySelector("#layoutTable thead");
-        let tableBody = document.querySelector("#layoutTable tbody");
+        const columns = parseInt(document.getElementById("columns").value);
+        const rows = parseInt(document.getElementById("rows").value);
+        const tableHead = document.querySelector("#layoutTable thead");
+        const tableBody = document.querySelector("#layoutTable tbody");
 
         if (!isRowUpdate) {
             tableHead.innerHTML = "";
+            const headerRow = document.createElement("tr");
 
-            let headerRow = document.createElement("tr");
             for (let i = 0; i < columns; i++) {
-                let th = document.createElement("th");
-                let input = document.createElement("input");
+                const th = document.createElement("th");
+                const input = document.createElement("input");
                 input.type = "number";
                 input.min = "1";
                 input.max = "100";
@@ -183,18 +172,18 @@ layout: page
                 th.appendChild(input);
                 headerRow.appendChild(th);
             }
-            tableHead.appendChild(headerRow);
 
+            tableHead.appendChild(headerRow);
             adjustLastColumn();
         }
 
         tableBody.innerHTML = "";
 
         for (let r = 0; r < rows; r++) {
-            let tr = document.createElement("tr");
+            const tr = document.createElement("tr");
             for (let c = 0; c < columns; c++) {
-                let td = document.createElement("td");
-                let input = document.createElement("input");
+                const td = document.createElement("td");
+                const input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r + 1}-${c + 1}`;
                 input.value = storedAreas[r]?.[c] || "";
@@ -209,11 +198,10 @@ layout: page
     }
 
     function adjustLastColumn() {
-        console.log("Adjusting last column...");
-        let inputs = document.querySelectorAll("#layoutTable thead input");
-        let totalWidth = Array.from(inputs).slice(0, -1).reduce((sum, input) => sum + parseInt(input.value || 0), 0);
+        const inputs = document.querySelectorAll("#layoutTable thead input");
+        const totalWidth = Array.from(inputs).slice(0, -1).reduce((sum, input) => sum + parseInt(input.value || 0), 0);
+        const lastInput = inputs[inputs.length - 1];
 
-        let lastInput = inputs[inputs.length - 1];
         if (lastInput) {
             lastInput.value = Math.max(0, 100 - totalWidth);
         }
@@ -222,42 +210,28 @@ layout: page
     }
 
     function updatePreview() {
-        console.log("Updating preview...");
-        let gridPreview = document.getElementById("gridPreview");
-        let inputs = document.querySelectorAll("#layoutTable thead input");
-        let areaInputs = document.querySelectorAll("#layoutTable tbody input");
-        let columns = parseInt(document.getElementById("columns").value);
-        let rows = parseInt(document.getElementById("rows").value);
+        const gridPreview = document.getElementById("gridPreview");
+        const inputs = document.querySelectorAll("#layoutTable thead input");
+        const areaInputs = document.querySelectorAll("#layoutTable tbody input");
+        const columns = parseInt(document.getElementById("columns").value);
+        const rows = parseInt(document.getElementById("rows").value);
 
         gridPreview.style.gridTemplateColumns = Array.from(inputs).map(input => input.value + "%").join(" ");
         gridPreview.style.gridTemplateRows = `repeat(${rows}, auto)`;
         gridPreview.innerHTML = "";
 
-        let areaColors = {};
-        let colorPalette = ["#FFCDD2", "#C8E6C9", "#BBDEFB", "#FFF9C4", "#D1C4E9"];
-        let colorIndex = 0;
-
         areaInputs.forEach(input => {
-            let div = document.createElement("div");
+            const div = document.createElement("div");
             div.className = "shb-grid-item";
             div.textContent = input.value || input.placeholder;
-
-            if (input.value) {
-                if (!areaColors[input.value]) {
-                    areaColors[input.value] = colorPalette[colorIndex % colorPalette.length];
-                    colorIndex++;
-                }
-                div.style.backgroundColor = areaColors[input.value];
-            }
-
             gridPreview.appendChild(div);
         });
-
-        console.log("Preview updated with grid columns:", gridPreview.style.gridTemplateColumns);
     }
 
     updateTable();
 </script>
+
+
 
 
 
