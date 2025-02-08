@@ -105,12 +105,15 @@ layout: page
 
     function getStoredAreas(columns = parseInt(document.getElementById("columns").value)) {
         const inputs = document.querySelectorAll("#layoutTable tbody input");
-        return Array.from(inputs, input => input.value).reduce((acc, val, index) => {
+        const areas = [];
+
+        inputs.forEach((input, index) => {
             const row = Math.floor(index / columns);
-            if (!acc[row]) acc[row] = [];
-            acc[row].push(val);
-            return acc;
-        }, []);
+            if (!areas[row]) areas[row] = [];
+            areas[row][index % columns] = input.value;
+        });
+
+        return areas;
     }
 
     function getStoredWidths() {
@@ -230,6 +233,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
