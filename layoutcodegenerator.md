@@ -102,7 +102,7 @@ layout: page
         console.log("Stored Widths before adding column:", storedWidths);
 
         redistributeColumnWidths(columns + 1, storedWidths);
-        updateTable(storedAreas, storedWidths);
+        updateTable(storedAreas, storedWidths, false);
     }
 
     function addRow() {
@@ -170,10 +170,7 @@ layout: page
 
         if (!isRowUpdate) {
             tableHead.innerHTML = "";
-        }
-        tableBody.innerHTML = "";
 
-        if (!isRowUpdate) {
             let headerRow = document.createElement("tr");
             for (let i = 0; i < columns; i++) {
                 let th = document.createElement("th");
@@ -187,9 +184,11 @@ layout: page
                 headerRow.appendChild(th);
             }
             tableHead.appendChild(headerRow);
+
+            adjustLastColumn();
         }
 
-        adjustLastColumn();
+        tableBody.innerHTML = "";
 
         for (let r = 0; r < rows; r++) {
             let tr = document.createElement("tr");
@@ -259,6 +258,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
