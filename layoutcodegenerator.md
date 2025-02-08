@@ -134,7 +134,7 @@ layout: page
     }
 
     function getStoredWidths() {
-        const widths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => input.value);
+        const widths = Array.from(document.querySelectorAll("#layoutTable thead input"), input => parseInt(input.value) || 0);
         console.log("Captured Widths:", widths);
         return widths;
     }
@@ -258,6 +258,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
