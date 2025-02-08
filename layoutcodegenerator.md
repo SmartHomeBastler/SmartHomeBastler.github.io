@@ -116,7 +116,7 @@ layout: page
         console.log("Stored Areas before adding row:", storedAreas);
         console.log("Stored Widths before adding row:", storedWidths);
 
-        updateTable(storedAreas, storedWidths);
+        updateTable(storedAreas, storedWidths, true);
     }
 
     function getStoredAreas(columns = parseInt(document.getElementById("columns").value)) {
@@ -161,29 +161,33 @@ layout: page
         adjustLastColumn();
     }
 
-    function updateTable(storedAreas = [], storedWidths = []) {
+    function updateTable(storedAreas = [], storedWidths = [], isRowUpdate = false) {
         console.log("Updating table with stored data...");
         let columns = parseInt(document.getElementById("columns").value);
         let rows = parseInt(document.getElementById("rows").value);
         let tableHead = document.querySelector("#layoutTable thead");
         let tableBody = document.querySelector("#layoutTable tbody");
 
-        tableHead.innerHTML = "";
+        if (!isRowUpdate) {
+            tableHead.innerHTML = "";
+        }
         tableBody.innerHTML = "";
 
-        let headerRow = document.createElement("tr");
-        for (let i = 0; i < columns; i++) {
-            let th = document.createElement("th");
-            let input = document.createElement("input");
-            input.type = "number";
-            input.min = "1";
-            input.max = "100";
-            input.value = storedWidths[i] !== undefined ? storedWidths[i] : Math.floor(100 / columns);
-            input.oninput = adjustLastColumn;
-            th.appendChild(input);
-            headerRow.appendChild(th);
+        if (!isRowUpdate) {
+            let headerRow = document.createElement("tr");
+            for (let i = 0; i < columns; i++) {
+                let th = document.createElement("th");
+                let input = document.createElement("input");
+                input.type = "number";
+                input.min = "1";
+                input.max = "100";
+                input.value = storedWidths[i] !== undefined ? storedWidths[i] : Math.floor(100 / columns);
+                input.oninput = adjustLastColumn;
+                th.appendChild(input);
+                headerRow.appendChild(th);
+            }
+            tableHead.appendChild(headerRow);
         }
-        tableHead.appendChild(headerRow);
 
         adjustLastColumn();
 
@@ -255,6 +259,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
