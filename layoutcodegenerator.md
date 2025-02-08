@@ -124,21 +124,18 @@ layout: page
         let equalWidth = Math.floor(100 / columns);
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
-        inputs.forEach(input => {
-            input.value = equalWidth;
-        });
-
-        while (inputs.length < columns) {
-            let newInput = document.createElement("input");
-            newInput.type = "number";
-            newInput.min = "1";
-            newInput.max = "100";
-            newInput.value = equalWidth;
-            newInput.oninput = adjustLastColumn;
-            let th = document.createElement("th");
-            th.appendChild(newInput);
-            document.querySelector("#layoutTable thead tr").appendChild(th);
-            inputs = document.querySelectorAll("#layoutTable thead input");
+        if (inputs.length < columns) {
+            for (let i = inputs.length; i < columns; i++) {
+                let newInput = document.createElement("input");
+                newInput.type = "number";
+                newInput.min = "1";
+                newInput.max = "100";
+                newInput.value = equalWidth;
+                newInput.oninput = adjustLastColumn;
+                let th = document.createElement("th");
+                th.appendChild(newInput);
+                document.querySelector("#layoutTable thead tr").appendChild(th);
+            }
         }
 
         adjustLastColumn();
@@ -233,6 +230,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
