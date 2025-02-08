@@ -89,7 +89,7 @@ layout: page
         let storedAreas = getStoredAreas(columns);
         let storedWidths = getStoredWidths();
 
-        redistributeColumnWidths(columns + 1);
+        redistributeColumnWidths(columns + 1, storedWidths);
         updateTable(storedAreas, storedWidths);
     }
 
@@ -120,7 +120,7 @@ layout: page
         return Array.from(document.querySelectorAll("#layoutTable thead input"), input => input.value);
     }
 
-    function redistributeColumnWidths(columns) {
+    function redistributeColumnWidths(columns, storedWidths) {
         let equalWidth = Math.floor(100 / columns);
         let inputs = document.querySelectorAll("#layoutTable thead input");
 
@@ -130,7 +130,7 @@ layout: page
                 newInput.type = "number";
                 newInput.min = "1";
                 newInput.max = "100";
-                newInput.value = equalWidth;
+                newInput.value = storedWidths[i] !== undefined ? storedWidths[i] : equalWidth;
                 newInput.oninput = adjustLastColumn;
                 let th = document.createElement("th");
                 th.appendChild(newInput);
@@ -230,6 +230,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
