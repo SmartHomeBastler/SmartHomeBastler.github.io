@@ -86,7 +86,7 @@ layout: page
         let columns = parseInt(document.getElementById("columns").value);
         document.getElementById("columns").value = columns + 1;
 
-        let storedAreas = getStoredAreas();
+        let storedAreas = getStoredAreas(columns);
         let storedWidths = getStoredWidths();
 
         redistributeColumnWidths(columns + 1);
@@ -103,8 +103,14 @@ layout: page
         updateTable(storedAreas, storedWidths);
     }
 
-    function getStoredAreas() {
-        return Array.from(document.querySelectorAll("#layoutTable tbody input"), input => input.value);
+    function getStoredAreas(columns = parseInt(document.getElementById("columns").value)) {
+        const inputs = document.querySelectorAll("#layoutTable tbody input");
+        return Array.from(inputs, input => input.value).reduce((acc, val, index) => {
+            const row = Math.floor(index / columns);
+            if (!acc[row]) acc[row] = [];
+            acc[row].push(val);
+            return acc;
+        }, []);
     }
 
     function getStoredWidths() {
@@ -167,7 +173,7 @@ layout: page
                 let input = document.createElement("input");
                 input.type = "text";
                 input.placeholder = `Area ${r + 1}-${c + 1}`;
-                input.value = storedAreas[r * columns + c] || "";
+                input.value = storedAreas[r]?.[c] || "";
                 input.oninput = updatePreview;
                 td.appendChild(input);
                 tr.appendChild(td);
@@ -224,6 +230,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
