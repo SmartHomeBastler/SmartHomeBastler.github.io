@@ -82,6 +82,14 @@ layout: page
 </style>
 
 <script>
+    document.getElementById("columns").addEventListener("change", function() {
+        console.log("Columns input changed to:", this.value);
+    });
+
+    document.getElementById("rows").addEventListener("change", function() {
+        console.log("Rows input changed to:", this.value);
+    });
+
     function addColumn() {
         console.log("Adding column...");
         let columns = parseInt(document.getElementById("columns").value);
@@ -247,6 +255,7 @@ layout: page
 
     updateTable();
 </script>
+
 
 
 
