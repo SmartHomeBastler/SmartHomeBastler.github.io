@@ -29,7 +29,7 @@ layout: page
     </div>
 </div>
 <div style="margin: 0 auto; max-width: 60%;">
-    {% include youtube.html video="j54-l1iPa6g" %}
+    {% include youtube.html video="hs7c3p8hORg" %}
 </div>
 <br>
 <h1 class="custom-title">HACS in Home Assistant OS installieren</h1>
