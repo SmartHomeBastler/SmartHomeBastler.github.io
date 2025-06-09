@@ -187,8 +187,8 @@ layout: page
 </p>
 <p>
     Wenn man bei RGB-Leuchten ein eingestelltes „Weißlicht“ darstellen möchte, müssen ebenso zwei Bilder in SweetHome3D in rot und weiß erstellt werden.<br>
-    Für die Generierung des Codes ist die Einstellung <strong>RGBW</strong> zu verwenden.<br>
-    Nach dem Einfügen des Codes in Home Assistant muss folgender Code-Teil manuell angepasst werden:<br><br>
+    Für die Generierung des Codes ist die Option <strong>RGBW</strong> zu verwenden.<br>
+    Nach dem Einfügen des Codes in Home Assistant muss folgender Code-Teil bei allen betroffenen Entitäten manuell angepasst werden:<br><br>
     Suche nach:<br>
     <code>${FARBMODUS === 'color_temp' ?</code><br><br>
     und ersetze durch:<br>
