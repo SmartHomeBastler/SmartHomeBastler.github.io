@@ -736,6 +736,7 @@ function generateYAML() {
             yaml += `      FARBMODUS: states['${entity}'].attributes.color_mode\n`;
             yaml += `      LICHTFARBE: states['${entity}'].attributes.hs_color\n`;
             yaml += `      HELLIGKEIT: states['${entity}'].attributes.brightness\n`;
+            yaml += `      RGBCOLOR: states['${entity}'].attributes.rgb_color\n`;
             yaml += `    entities:\n`;
             yaml += `      - ${entity}\n`;
             yaml += `    element:\n`;
@@ -765,6 +766,7 @@ function generateYAML() {
             yaml += `      FARBMODUS: states['${entity}'].attributes.color_mode\n`;
             yaml += `      LICHTFARBE: states['${entity}'].attributes.hs_color\n`;
             yaml += `      HELLIGKEIT: states['${entity}'].attributes.brightness\n`;
+            yaml += `      RGBCOLOR: states['${entity}'].attributes.rgb_color\n`;
             yaml += `    entities:\n`;
             yaml += `      - ${entity}\n`;
             yaml += `    element:\n`;
