@@ -185,6 +185,17 @@ layout: page
     Bei der Option RGBW ist zusätzlich zum roten Beleuchtungsbild mit der Endung <strong>_farbe.png</strong> ein zusätzliches weißes Bild mit gleichem Namen aber der Endung <strong>_weiss.png</strong> in deinem Ordner zu speichern.<br>
     Für RGBW reicht es aus, das rote Bild hochzuladen. Der Codegenerator fügt das weiße Bild automatisch basierend auf dem roten Bildnamen ein. 
 </p>
+<p>
+    Wenn man bei RGB-Leuchten ein eingestelltes „Weißlicht“ darstellen möchte, müssen ebenso zwei Bilder in SweetHome3D in rot und weiß erstellt werden.<br>
+    Für die Generierung des Codes ist die Einstellung <strong>RGBW</strong> zu verwenden.<br>
+    Nach dem Einfügen des Codes in Home Assistant muss folgender Code-Teil manuell angepasst werden:<br><br>
+    Suche nach:<br>
+    <code>${FARBMODUS === 'color_temp' ?</code><br><br>
+    und ersetze durch:<br>
+    <code>${RGBCOLOR && RGBCOLOR[0] === 255 && RGBCOLOR[1] === 194 && RGBCOLOR[2] === 140 ?</code><br><br>
+    Die Werte der Farben sind entsprechend deiner eingestellten Weißlichtfarbe anzupassen.
+</p>
+
 <div class="important-container">
     <h3>❗Wichtig</h3>
     <p>
