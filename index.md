@@ -3,8 +3,8 @@ title: Smart Home Bastler
 subtitle: Schritt für Schritt ins smarte Zuhause!
 layout: page
 show_sidebar: true
-meeting_title: "2025.12"
-meeting_date: "11-12-2025"  # Eingabe im DD-MM-YYYY Format
+meeting_title: "2026.01"
+meeting_date: "08-01-2026"  # Eingabe im DD-MM-YYYY Format
 meeting_time: "18:00"       # Eingabe im HH:mm Format
 ---
 <div class="page-content">
