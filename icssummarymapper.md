@@ -132,178 +132,364 @@ layout: page
 </style>
 
 <script>
-/* ---------------- helpers ---------------- */
-
-function shbAlert(t,m){ alert(t + "\\n\\n" + m); }
-
-function normalizeNewlines(t){
-  return t.replace(/\\r\\n/g,"\\n").replace(/\\r/g,"\\n");
-}
-
-function unfoldIcs(t){
-  return normalizeNewlines(t).replace(/\\n[ \\t]/g,"");
-}
-
-function normSummary(s){
-  return String(s||"")
-    .trim()
-    .replace(/\\u00A0/g," ")
-    .replace(/[‐-‒–—]/g,"-")
-    .replace(/\\s+/g," ");
-}
-
-/* ---------------- ICS parsing ---------------- */
-
-function extractVevents(txt){
-  const events=[];
-  let inEvent=false, buf=[];
-  txt.split("\\n").forEach(l=>{
-    const t=l.trim();
-    if(t==="BEGIN:VEVENT"){ inEvent=true; buf=[l]; return; }
-    if(t==="END:VEVENT"){
-      if(inEvent){ buf.push(l); events.push(buf.join("\\n")); }
-      inEvent=false; buf=[]; return;
+  // ---------- Alert helper ----------
+  function shbAlert(title, msg) {
+    if (typeof showSHBcustomAlert === "function") {
+      showSHBcustomAlert(title, msg);
+      return;
     }
-    if(inEvent) buf.push(l);
+    alert(title + "\n\n" + msg);
+  }
+
+  // ---------- Core helpers ----------
+  function normalizeNewlines(text) {
+    return text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  }
+
+  // RFC5545 unfolding: newline + space/tab => continuation
+  function unfoldIcs(text) {
+    const n = normalizeNewlines(text);
+    return n.replace(/\n[ \t]/g, "");
+  }
+
+  // Normalize SUMMARY strings (NBSP, different dashes, multiple spaces)
+  function normSummary(s) {
+    return String(s || "")
+      .trim()
+      .replace(/\u00A0/g, " ")
+      .replace(/[‐-‒–—]/g, "-")
+      .replace(/\s+/g, " ");
+  }
+
+  function extractVevents(unfoldedText) {
+    const events = [];
+    const lines = unfoldedText.split("\n");
+    let inEvent = false;
+    let buf = [];
+
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+
+      if (line === "BEGIN:VEVENT") {
+        inEvent = true;
+        buf = [rawLine];
+        continue;
+      }
+
+      if (line === "END:VEVENT") {
+        if (inEvent) {
+          buf.push(rawLine);
+          events.push(buf.join("\n"));
+        }
+        inEvent = false;
+        buf = [];
+        continue;
+      }
+
+      if (inEvent) buf.push(rawLine);
+    }
+
+    return events;
+  }
+
+  function getSummaryFromEvent(eventBlock) {
+    const lines = eventBlock.split("\n");
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+      if (line.startsWith("SUMMARY")) {
+        const idx = line.indexOf(":");
+        if (idx !== -1) return line.slice(idx + 1).trim();
+      }
+    }
+    return null;
+  }
+
+  function replaceSummaryInEvent(eventBlock, newSummary) {
+    const lines = eventBlock.split("\n");
+    for (let i = 0; i < lines.length; i++) {
+      const trimmed = lines[i].trim();
+      if (trimmed.startsWith("SUMMARY")) {
+        const idx = lines[i].indexOf(":");
+        if (idx >= 0) {
+          const left = lines[i].slice(0, idx); // keep params / spaces
+          lines[i] = left + ":" + newSummary;
+        } else {
+          lines[i] = "SUMMARY:" + newSummary;
+        }
+        break;
+      }
+    }
+    return lines.join("\n");
+  }
+
+  function summarizeIcs(text) {
+    const unfolded = unfoldIcs(text);
+    const events = extractVevents(unfolded);
+
+    const map = new Map(); // summaryNorm -> { rawSet:Set, count, samples[] }
+    for (const ev of events) {
+      const raw = getSummaryFromEvent(ev);
+      if (!raw) continue;
+
+      const key = normSummary(raw);
+      const dt = (ev.match(/^DTSTART.*:(.+)$/m) || [])[1] || "";
+
+      if (!map.has(key)) map.set(key, { rawSet: new Set(), count: 0, samples: [] });
+      const obj = map.get(key);
+      obj.rawSet.add(raw);
+      obj.count++;
+      if (dt && obj.samples.length < 3) obj.samples.push(dt);
+    }
+
+    return { unfolded, events, summaryMap: map };
+  }
+
+  // simple similarity
+  function similarity(a, b) {
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+    if (a === b) return 1;
+    let best = 0;
+    for (let i = 0; i < a.length; i++) {
+      for (let j = i + 2; j <= a.length; j++) {
+        const sub = a.slice(i, j);
+        if (b.includes(sub)) best = Math.max(best, sub.length);
+      }
+    }
+    return best / Math.max(a.length, b.length);
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, m => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[m]));
+  }
+
+  // ---------- App State ----------
+  let OLD_TEXT = "";
+  let NEW_TEXT = "";
+  let analysis = null;
+  let patchedIcs = "";
+
+  const elOldFile = document.getElementById("oldFile");
+  const elNewFile = document.getElementById("newFile");
+  const elOldStats = document.getElementById("oldStats");
+  const elNewStats = document.getElementById("newStats");
+  const elMappingSection = document.getElementById("mapping-section");
+  const elOutputSection = document.getElementById("output-section");
+  const elMappingTableContainer = document.getElementById("mappingTableContainer");
+  const elPatchedOutput = document.getElementById("patchedOutput");
+
+  // ---------- File Reading ----------
+  elOldFile.addEventListener("change", async (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    OLD_TEXT = await f.text();
+    updateStats();
   });
-  return events;
-}
 
-function getSummaryFromEvent(block){
-  return block.split("\\n")
-    .map(l=>l.trim())
-    .find(l=>l.startsWith("SUMMARY"))
-    ?.split(":").slice(1).join(":").trim() || null;
-}
+  elNewFile.addEventListener("change", async (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    NEW_TEXT = await f.text();
+    updateStats();
+  });
 
-function replaceSummaryInEvent(block,newSum){
-  const lines=block.split("\\n");
-  for(let i=0;i<lines.length;i++){
-    if(lines[i].trim().startsWith("SUMMARY")){
-      const idx=lines[i].indexOf(":");
-      lines[i]=lines[i].slice(0,idx)+":"+newSum;
-      break;
+  function updateStats() {
+    try {
+      if (OLD_TEXT) {
+        const s = summarizeIcs(OLD_TEXT);
+        elOldStats.textContent = `VEVENTS: ${s.events.length} | SUMMARY eindeutig: ${s.summaryMap.size}`;
+      } else elOldStats.textContent = "";
+    } catch {
+      elOldStats.textContent = "Konnte Alt-ICS nicht parsen.";
+    }
+
+    try {
+      if (NEW_TEXT) {
+        const s = summarizeIcs(NEW_TEXT);
+        elNewStats.textContent = `VEVENTS: ${s.events.length} | SUMMARY eindeutig: ${s.summaryMap.size}`;
+      } else elNewStats.textContent = "";
+    } catch {
+      elNewStats.textContent = "Konnte Neu-ICS nicht parsen.";
     }
   }
-  return lines.join("\\n");
-}
 
-function summarizeIcs(txt){
-  const ev=extractVevents(unfoldIcs(txt));
-  const map=new Map();
-  ev.forEach(e=>{
-    const s=getSummaryFromEvent(e);
-    if(!s) return;
-    const k=normSummary(s);
-    if(!map.has(k)) map.set(k,{count:0});
-    map.get(k).count++;
-  });
-  return {events:ev, summaryMap:map};
-}
+  // ---------- Analyze & Render Mapping ----------
+  window.analyzeICS = function analyzeICS() {
+    if (!OLD_TEXT || !NEW_TEXT) {
+      shbAlert("Achtung!", "Bitte beide ICS-Dateien hochladen (Alt und Neu).");
+      return;
+    }
 
-/* ---------------- state ---------------- */
+    let oldSum, newSum;
+    try {
+      oldSum = summarizeIcs(OLD_TEXT);
+      newSum = summarizeIcs(NEW_TEXT);
+    } catch (err) {
+      shbAlert("Fehler!", "Beim Parsen der ICS-Dateien ist etwas schief gelaufen.");
+      return;
+    }
 
-let OLD_TEXT="", NEW_TEXT="", analysis=null, patchedIcs="";
+    const oldKeys = [...oldSum.summaryMap.keys()].sort((a,b)=>a.localeCompare(b));
+    const newKeys = [...newSum.summaryMap.keys()].sort((a,b)=>a.localeCompare(b));
 
-/* ---------------- file input ---------------- */
+    const rows = newKeys.map(nk => {
+      let bestKey = "";
+      let bestScore = 0;
+      for (const ok of oldKeys) {
+        const sc = similarity(nk, ok);
+        if (sc > bestScore) { bestScore = sc; bestKey = ok; }
+      }
+      const suggested = bestScore >= 0.35 ? bestKey : "";
+      const meta = newSum.summaryMap.get(nk);
 
-oldFile.onchange=async e=>{ OLD_TEXT=await e.target.files[0].text(); updateStats(); };
-newFile.onchange=async e=>{ NEW_TEXT=await e.target.files[0].text(); updateStats(); };
+      return {
+        newKey: nk,
+        oldKey: suggested,
+        count: meta.count,
+        samples: meta.samples || [],
+        auto: !!suggested
+      };
+    });
 
-function updateStats(){
-  if(OLD_TEXT){
-    const s=summarizeIcs(OLD_TEXT);
-    oldStats.textContent=`VEVENTS: ${s.events.length} | SUMMARY eindeutig: ${s.summaryMap.size}`;
-  }
-  if(NEW_TEXT){
-    const s=summarizeIcs(NEW_TEXT);
-    newStats.textContent=`VEVENTS: ${s.events.length} | SUMMARY eindeutig: ${s.summaryMap.size}`;
-  }
-}
+    analysis = { oldSum, newSum, oldKeys, newKeys, rows };
 
-/* ---------------- analyze ---------------- */
-
-function analyzeICS(){
-  if(!OLD_TEXT||!NEW_TEXT){
-    shbAlert("Achtung","Bitte beide ICS-Dateien hochladen.");
-    return;
-  }
-
-  const oldS=summarizeIcs(OLD_TEXT);
-  const newS=summarizeIcs(NEW_TEXT);
-
-  analysis={
-    old:[...oldS.summaryMap.keys()],
-    rows:[...newS.summaryMap.entries()].map(([k,v])=>{
-      const best=analysis?.old?.find(o=>o===k)||"";
-      return {newKey:k, oldKey:best, count:v.count};
-    })
+    renderMappingTable();
+    elMappingSection.style.display = "block";
+    elOutputSection.style.display = "none";
+    patchedIcs = "";
   };
 
-  renderMapping();
-  mapping-section.style.display="block";
-}
+  function renderMappingTable() {
+    elMappingTableContainer.style.display = "block";
 
-function renderMapping(){
-  const rows=analysis.rows.map((r,i)=>`
-    <tr>
-      <td class="summary-cell">${r.newKey}</td>
-      <td>
-        <select onchange="analysis.rows[${i}].oldKey=this.value">
-          <option value="">— keine Änderung —</option>
-          ${analysis.old.map(o=>`<option ${o===r.oldKey?"selected":""}>${o}</option>`).join("")}
-        </select>
-      </td>
-      <td class="count-cell">${r.count}</td>
-    </tr>
-  `).join("");
+    const oldOptions = analysis.oldKeys;
 
-  mappingTableContainer.innerHTML=`
-    <table class="shb-map-table">
-      <tr><th>SUMMARY Neu</th><th>→ SUMMARY Alt</th><th>Events</th></tr>
-      ${rows}
-    </table>`;
-  mappingTableContainer.style.display="block";
-}
+    const optionsHtml = (selected) => `
+      <option value="" ${selected==="" ? "selected" : ""}>— keine Änderung —</option>
+      ${oldOptions.map(k => `<option value="${escapeHtml(k)}" ${k===selected ? "selected" : ""}>${escapeHtml(k)}</option>`).join("")}
+    `;
 
-/* ---------------- apply ---------------- */
+    const table = `
+      <table class="shb-map-table">
+        <thead>
+          <tr>
+            <th>SUMMARY Neu</th>
+            <th>→ SUMMARY Alt</th>
+            <th>Events</th>
+            <th>Beispiele DTSTART</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${analysis.rows.map((r, idx) => `
+            <tr>
+              <td class="summary-cell">${escapeHtml(r.newKey)} ${r.auto ? '<div class="muted">Auto-Vorschlag ✓</div>' : '<div class="muted">Kein Auto-Match</div>'}</td>
+              <td>
+                <select class="shb-map-select" data-idx="${idx}">
+                  ${optionsHtml(r.oldKey)}
+                </select>
+              </td>
+              <td class="count-cell">${r.count}</td>
+              <td class="preview-cell">${(r.samples || []).map(s => escapeHtml(s)).join("<br>")}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
 
-function applyMapping(){
-  const dict=new Map();
-  analysis.rows.forEach(r=>{
-    if(r.oldKey) dict.set(normSummary(r.newKey), r.oldKey);
-  });
+    elMappingTableContainer.innerHTML = table;
 
-  let replaced=0;
-  let out=unfoldIcs(NEW_TEXT).replace(/BEGIN:VEVENT[\\s\\S]*?END:VEVENT/g,b=>{
-    const s=normSummary(getSummaryFromEvent(b));
-    if(dict.has(s)){ replaced++; return replaceSummaryInEvent(b,dict.get(s)); }
-    return b;
-  });
+    elMappingTableContainer.querySelectorAll("select[data-idx]").forEach(sel => {
+      sel.addEventListener("change", (e) => {
+        const i = Number(e.target.getAttribute("data-idx"));
+        analysis.rows[i].oldKey = e.target.value;
+        patchedIcs = "";
+      });
+    });
+  }
 
-  patchedIcs=out.replace(/\\n/g,"\\r\\n");
-  patchedOutput.value=out;
-  output-section.style.display="block";
-  shbAlert("Fertig",`SUMMARY ersetzt in ${replaced} Events`);
-}
+  // ---------- Apply Mapping ----------
+  window.applyMapping = function applyMapping() {
+    if (!analysis) {
+      shbAlert("Oh Jeh!", "Bitte zuerst analysieren.");
+      return;
+    }
 
-/* ---------------- export ---------------- */
+    const dict = new Map();
+    for (const r of analysis.rows) {
+      if (r.oldKey && r.oldKey !== r.newKey) dict.set(normSummary(r.newKey), r.oldKey.trim());
+    }
 
-function copyPatchedToClipboard(){
-  patchedOutput.select(); document.execCommand("copy");
-}
+    const unfolded = unfoldIcs(NEW_TEXT);
 
-function downloadPatchedICS(){
-  const b=new Blob([patchedIcs],{type:"text/calendar"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(b);
-  a.download="kalender_neu_gemappt.ics";
-  a.click();
-}
+    let replaced = 0;
+    const out = unfolded.replace(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g, (block) => {
+      const s = normSummary(getSummaryFromEvent(block));
+      if (s && dict.has(s)) {
+        replaced++;
+        return replaceSummaryInEvent(block, dict.get(s));
+      }
+      return block;
+    });
 
-function copyMappingJson(){
-  const o={};
-  analysis.rows.forEach(r=>{ if(r.oldKey) o[r.newKey]=r.oldKey; });
-  navigator.clipboard.writeText(JSON.stringify(o,null,2));
-}
+    patchedIcs = out.replace(/\n/g, "\r\n");
+    elPatchedOutput.value = out;
+    elOutputSection.style.display = "block";
+    shbAlert("Super!", `Fertig! SUMMARY wurde in ${replaced} VEVENT(s) angepasst.`);
+  };
+
+  // ---------- Export / Copy ----------
+  window.copyPatchedToClipboard = function copyPatchedToClipboard() {
+    if (!elPatchedOutput.value) {
+      shbAlert("Oh Jeh!", "Keine bearbeitete ICS verfügbar. Bitte erst anwenden.");
+      return;
+    }
+    elPatchedOutput.select();
+    document.execCommand("copy");
+    shbAlert("Perfekt!", "Die bearbeitete ICS wurde kopiert.");
+  };
+
+  window.downloadPatchedICS = function downloadPatchedICS() {
+    if (!patchedIcs) {
+      shbAlert("Oh Jeh!", "Keine bearbeitete ICS verfügbar. Bitte erst anwenden.");
+      return;
+    }
+    const blob = new Blob([patchedIcs], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "kalender_neu_gemappt.ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  window.copyMappingJson = function copyMappingJson() {
+    if (!analysis) {
+      shbAlert("Hinweis", "Bitte erst analysieren.");
+      return;
+    }
+    const obj = {};
+    analysis.rows.forEach(r => {
+      if (r.oldKey && r.oldKey !== r.newKey) obj[r.newKey] = r.oldKey;
+    });
+    const json = JSON.stringify(obj, null, 2);
+
+    const tmp = document.createElement("textarea");
+    tmp.value = json;
+    document.body.appendChild(tmp);
+    tmp.select();
+    document.execCommand("copy");
+    tmp.remove();
+
+    shbAlert("Nice!", "Mapping-JSON wurde in die Zwischenablage kopiert.");
+  };
 </script>
+
