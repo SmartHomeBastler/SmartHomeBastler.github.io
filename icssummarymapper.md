@@ -242,15 +242,22 @@ layout: page
 
 
   function getSummaryFromEvent(eventBlock) {
-    const lines = eventBlock.split("\\n");
-    for (const l of lines) {
-      if (l.startsWith("SUMMARY")) {
-        const idx = l.indexOf(":");
-        if (idx >= 0) return l.slice(idx + 1).trim();
+    const lines = eventBlock.split("\n");
+  
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+  
+      // erlaubt: SUMMARY:..., SUMMARY;LANG=de:..., SUMMARY;CHARSET=...
+      if (line.startsWith("SUMMARY")) {
+        const idx = line.indexOf(":");
+        if (idx !== -1) {
+          return line.slice(idx + 1).trim();
+        }
       }
     }
     return null;
   }
+
 
   function replaceSummaryInEvent(eventBlock, newSummary) {
     const lines = eventBlock.split("\\n");
