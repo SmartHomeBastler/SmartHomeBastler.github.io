@@ -30,6 +30,8 @@
       link: /mullerinnerungsbeschreibung
     - name: ICS zusammenführen / erstellen
       link: /icszusammenfuhren
+    - name: ICS vergleichen / bearbeiten
+      link: /icssummarymapper
     - name: Müllerinnerung Sensoren
       link: /mullerinnerungsensoren
 - name: Floorplan Tools
