@@ -210,31 +210,35 @@ layout: page
 
   function extractVevents(unfoldedText) {
     const events = [];
-    const lines = unfoldedText.split("\\n");
+    const lines = unfoldedText.split("\n");
     let inEvent = false;
     let buf = [];
-
-  for (const rawLine of lines) {
-    const line = rawLine.trim();
   
-    if (line === "BEGIN:VEVENT") {
-      inEvent = true;
-      buf = [rawLine];
-      continue;
-    }
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
   
-    if (line === "END:VEVENT") {
-      if (inEvent) {
-        buf.push(rawLine);
-        events.push(buf.join("\n"));
+      if (line === "BEGIN:VEVENT") {
+        inEvent = true;
+        buf = [rawLine];
+        continue;
       }
-      inEvent = false;
-      buf = [];
-      continue;
+  
+      if (line === "END:VEVENT") {
+        if (inEvent) {
+          buf.push(rawLine);
+          events.push(buf.join("\n"));
+        }
+        inEvent = false;
+        buf = [];
+        continue;
+      }
+  
+      if (inEvent) buf.push(rawLine);
     }
   
-    if (inEvent) buf.push(rawLine);
+    return events;
   }
+
 
 
   function getSummaryFromEvent(eventBlock) {
