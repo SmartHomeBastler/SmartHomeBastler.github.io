@@ -115,20 +115,74 @@ layout: page
 </div>
 
 <style>
-.ics-compare-file-container {
-  display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between;
-}
-.ics-compare-file-group { flex:1 1 calc(45% - 20px); }
-.muted { color:#b6b6b6; font-size:.9em; margin-top:6px; }
-.shb-map-table {
-  width:100%; border:4px solid #1ab5d5; border-collapse:collapse;
-}
-.shb-map-table th {
-  background:#1ab5d5; color:#000; padding:8px; text-transform:uppercase;
-}
-.shb-map-table td { padding:8px; border-left:2px solid #1ab5d5; }
-.summary-cell { background:rgba(184,243,255,.6); font-weight:bold; }
-.count-cell { background:rgba(255,247,204,.6); font-weight:bold; }
+  .ics-compare-file-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  .ics-compare-file-container .ics-compare-file-group {
+    flex: 1 1 calc(45% - 20px);
+    box-sizing: border-box;
+  }
+  .ics-compare-file-container .ics-compare-file-group input {
+    width: 100%;
+    padding: 8px;
+    background-color: #1ab5d5;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    font-size: 14px;
+  }
+  .muted { color:#b6b6b6; font-size: 0.9em; margin-top: 6px; }
+
+  /* Mapping Table uses your shb-error-table look */
+  .shb-map-table {
+    width: 100%;
+    border: 4px solid #1ab5d5;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    margin: 20px 0;
+  }
+  .shb-map-table thead th {
+    background-color: #1ab5d5;
+    color: #000000 !important;
+    padding: 8px 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-left: 2px solid #000000 !important;
+  }
+  .shb-map-table thead th:first-child { border-left: none; }
+  .shb-map-table tbody tr:nth-child(odd) { background-color: #fffdf0 !important; }
+  .shb-map-table tbody tr:nth-child(even) { background-color: #fff7cc !important; }
+  .shb-map-table tbody td {
+    padding: 10px;
+    vertical-align: top;
+    border-left: 2px solid #1ab5d5;
+  }
+  .shb-map-table tbody td:first-child { border-left:none; }
+
+  .summary-cell {
+    background-color: rgba(184, 243, 255, 0.6);
+    color: #000;
+    font-weight: bold;
+  }
+  .count-cell {
+    background-color: rgba(255, 247, 204, 0.6);
+    color:#000;
+    font-weight: bold;
+    width: 110px;
+  }
+  .preview-cell { color:#333; font-size: 0.9em; }
+
+  select.shb-map-select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 2px solid #1ab5d5;
+    background: #fff;
+    font-size: 14px;
+  }
 </style>
 
 <script>
