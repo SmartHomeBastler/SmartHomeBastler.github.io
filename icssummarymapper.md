@@ -214,32 +214,35 @@ layout: page
     let inEvent = false;
     let buf = [];
 
-    for (const line of lines) {
-      if (line === "BEGIN:VEVENT") {
-        inEvent = true;
-        buf = [line];
-        continue;
-      }
-      if (line === "END:VEVENT") {
-        if (inEvent) {
-          buf.push(line);
-          events.push(buf.join("\\n"));
-        }
-        inEvent = false;
-        buf = [];
-        continue;
-      }
-      if (inEvent) buf.push(line);
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+  
+    if (line === "BEGIN:VEVENT") {
+      inEvent = true;
+      buf = [rawLine];
+      continue;
     }
-    return events;
+  
+    if (line === "END:VEVENT") {
+      if (inEvent) {
+        buf.push(rawLine);
+        events.push(buf.join("\n"));
+      }
+      inEvent = false;
+      buf = [];
+      continue;
+    }
+  
+    if (inEvent) buf.push(rawLine);
   }
+
 
   function getSummaryFromEvent(eventBlock) {
     const lines = eventBlock.split("\\n");
     for (const l of lines) {
       if (l.startsWith("SUMMARY")) {
         const idx = l.indexOf(":");
-        if (idx >= 0) return l.slice(idx + 1);
+        if (idx >= 0) return l.slice(idx + 1).trim();
       }
     }
     return null;
