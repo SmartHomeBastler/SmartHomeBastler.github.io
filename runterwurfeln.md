@@ -37,7 +37,7 @@ show_sidebar: false
 
         <p class="rw-note">
           Startguthaben: <strong>30</strong> pro Spieler. <br/>
-          Regel: <strong>0</strong> wird als <strong>🐟</strong> angezeigt. <strong>Negativ</strong> = wird übersprungen.
+          Regel: Status: <strong>🎲</strong> = im Plus, <strong>🐟</strong> = 0, <strong>❌</strong> = RAUS (übersprungen). <strong>Negativ</strong> = wird übersprungen.
         </p>
       </div>
 
@@ -218,6 +218,10 @@ show_sidebar: false
   /** State */
   let state = load() ?? newGameState();
 
+  state.players.forEach(p => p.balance = balanceNum(p.balance));
+  save();
+
+
   function newGameState() {
     return {
       version: 1,
@@ -253,13 +257,25 @@ show_sidebar: false
     renderAll();
   }
 
-  function formatBalance(b) {
+  function balanceNum(v) {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : 0;
+  }
+  
+  function statusIcon(balance) {
+    const b = balanceNum(balance);
+    if (b > 0) return "🎲";
     if (b === 0) return "🐟";
-    return String(b);
+    return "❌";
+  }
+
+
+  function formatBalance(v) {
+    return String(balanceNum(v)); // immer Zahl als Text (auch 0 und negativ)
   }
 
   function isAvailable(p) {
-    return p.balance >= 0; // 🐟 ist verfügbar, negativ wird übersprungen
+    return balanceNum(p.balance) >= 0; // 0 ist ok, negativ nicht
   }
 
   function getPlayer(id) {
@@ -385,7 +401,7 @@ show_sidebar: false
 
     if (sum < 30) {
       diff = 30 - sum;
-      current.balance -= diff;
+      current.balance = balanceNum(current.balance) - diff;
     } else if (sum === 30) {
       // nothing
     } else { // sum > 30
@@ -395,7 +411,7 @@ show_sidebar: false
 
       targetId = nextAvailablePlayerId(current.id);
       const target = targetId ? getPlayer(targetId) : null;
-      if (target) target.balance -= penalty;
+      if (target) target.balance = balanceNum(target.balance) - penalty;
     }
 
     const turn = {
@@ -455,7 +471,7 @@ show_sidebar: false
 
   function showResultModal(auto) {
     const ranking = computeRanking();
-    const winner = ranking.find(r => r.balance >= 0) ?? ranking[0];
+    const winner = ranking.find(r => balanceNum(r.balance) >= 0) ?? ranking[0];
 
     const html = `
       <div class="rw-callout">
@@ -470,12 +486,14 @@ show_sidebar: false
         </thead>
         <tbody>
           ${ranking.map((r, idx) => {
-            const status = r.balance < 0 ? "raus" : (r.balance === 0 ? "🐟 schwimmt" : "im Spiel");
-            const cls = r.balance < 0 ? "rw-out" : "";
+            const bal = balanceNum(r.balance);
+            const status = statusIcon(bal);
+            const cls = bal < 0 ? "rw-out" : "";
+        
             return `<tr class="${cls}">
               <td><span class="rw-badge">${idx+1}</span></td>
               <td>${escapeHtml(r.name)}</td>
-              <td><strong>${formatBalance(r.balance)}</strong></td>
+              <td><strong>${formatBalance(bal)}</strong></td>
               <td>${status}</td>
             </tr>`;
           }).join("")}
@@ -491,17 +509,23 @@ show_sidebar: false
   }
 
   function computeRanking() {
-    // Ranking: verfügbar (>=0) zuerst, dann nach balance desc, dann negative (mehr negativ = schlechter)
     const copy = state.players.map(p => ({ ...p }));
-    copy.sort((a,b) => {
-      const aAvail = a.balance >= 0 ? 0 : 1;
-      const bAvail = b.balance >= 0 ? 0 : 1;
+  
+    copy.sort((a, b) => {
+      const aBal = balanceNum(a.balance);
+      const bBal = balanceNum(b.balance);
+  
+      const aAvail = aBal >= 0 ? 0 : 1;
+      const bAvail = bBal >= 0 ? 0 : 1;
       if (aAvail !== bAvail) return aAvail - bAvail;
-      // both available: higher balance first (🐟=0 naturally)
-      if (aAvail === 0) return b.balance - a.balance;
-      // both negative: higher (less negative) first
-      return b.balance - a.balance;
+  
+      // beide verfügbar: höherer Kontostand zuerst
+      if (aAvail === 0) return bBal - aBal;
+  
+      // beide negativ: weniger negativ zuerst
+      return bBal - aBal;
     });
+  
     return copy;
   }
 
@@ -510,7 +534,7 @@ show_sidebar: false
     ui.playerChips.innerHTML = state.players.map(p => `
       <span class="rw-chip">
         <strong>${escapeHtml(p.name)}</strong>
-        <span class="rw-badge">${formatBalance(p.balance)}</span>
+        <span class="rw-badge">${formatBalance(p.balance)} ${statusIcon(p.balance)}</span>
         ${state.started ? "" : `<button class="rw-btn rw-btn-ghost" data-remove="${p.id}">✖</button>`}
       </span>
     `).join("");
@@ -559,17 +583,17 @@ show_sidebar: false
     }
 
     const rows = state.players.map(p => {
-      const isOut = p.balance < 0;
-      const isCurrent = p.id === state.currentPlayerId && state.started;
-      const badge = formatBalance(p.balance);
-      const status = isOut ? "raus" : (p.balance === 0 ? "🐟" : "");
-      return `
+    const bal = balanceNum(p.balance);
+    const isOut = bal < 0;
+    const isCurrent = p.id === state.currentPlayerId && state.started;
+
+    return `
         <tr class="${isOut ? "rw-out" : ""}">
-          <td>${escapeHtml(p.name)} ${isCurrent ? "👉" : ""}</td>
-          <td><strong>${badge}</strong></td>
-          <td>${status}</td>
+        <td>${escapeHtml(p.name)} ${isCurrent ? "👉" : ""}</td>
+        <td><strong>${bal}</strong></td>
+        <td>${statusIcon(bal)}</td>
         </tr>
-      `;
+    `;
     }).join("");
 
     ui.scoreboard.innerHTML = `
@@ -590,7 +614,9 @@ show_sidebar: false
     const roundCards = state.rounds.map(r => {
       const end = r.endBalances.map(x => {
         const p = getPlayer(x.id);
-        return `${p ? escapeHtml(p.name) : "?"}: <strong>${formatBalance(x.balance)}</strong>`;
+        const bal = balanceNum(x.balance);
+        const name = p ? escapeHtml(p.name) : "?";
+        return `${name}: <strong>${formatBalance(bal)}</strong> ${statusIcon(bal)}`;
       }).join(" · ");
 
       const turns = r.turns.map(t => {
