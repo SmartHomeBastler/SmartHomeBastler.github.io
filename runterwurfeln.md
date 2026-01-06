@@ -141,35 +141,50 @@ show_sidebar: false
         <h2 class="rw-h2" style="margin:0;">📖 Spielanleitung</h2>
         <button class="rw-btn rw-btn-ghost" id="helpClose">✖</button>
       </div>
-
       <div class="rw-callout" style="margin-top:10px; line-height:1.55;">
-        <p><strong>Ziel:</strong> Wer am Ende als einziger <strong>nicht negativ</strong> ist, gewinnt. (Oder – falls mehrere überleben – der höchste Endstand.)</p>
-
-        <p><strong>Start:</strong> Jeder Spieler startet mit <strong>30</strong>.</p>
-
-        <ul style="margin:8px 0 0 18px;">
-          <li><strong>Summe &lt; 30:</strong> Differenz wird bei dir abgezogen.<br/>
-            Beispiel: 27 ⇒ −3 bei dir.</li>
-
-          <li><strong>Summe = 30:</strong> Perfekt – keine Änderung.</li>
-
-          <li><strong>Summe &gt; 30:</strong> <strong>Überschuss</strong> = Summe − 30.<br/>
-            Du gibst <strong>Treffer</strong> an. Abzug = Treffer × Überschuss → trifft den <strong>nächsten verfügbaren Spieler</strong>.</li>
-
-          <li><strong>Negativ:</strong> Spieler mit &lt; 0 ist <strong>❌ raus</strong> und wird übersprungen.</li>
-
-          <li><strong>🐟 bei 0:</strong> bleibt spielbar.</li>
+        <p><strong>Ziel:</strong> Als einziger Spieler <strong>nicht ins Minus</strong> stolpern!</p>
+      
+        <p><strong>Start:</strong> Jeder Spieler startet mit <strong>30 Punkten</strong>.</p>
+      
+        <p style="margin-top:10px;"><strong>Ablauf pro Zug:</strong></p>
+        <ol style="margin:8px 0 0 18px;">
+          <li>
+            Mit <strong>6 Würfeln</strong> würfeln. Nach jedem Wurf muss <strong>mindestens ein Würfel</strong> zur Seite gelegt werden.
+            Nach dem letzten Wurf zählt die <strong>Summe aller Augen</strong>.
+          </li>
+          <li style="margin-top:6px;">
+            <strong>Summe &lt; 30:</strong> Differenz wird bei dir abgezogen. <em>Beispiel:</em> 27 ⇒ −3 bei dir.<br/>
+            <strong>Summe = 30:</strong> Keine Änderung.<br/>
+            <strong>Summe &gt; 30:</strong> <strong>Überschuss</strong> = Summe − 30. <em>Beispiel:</em> 34 ⇒ Überschuss 4.
+          </li>
+          <li style="margin-top:6px;">
+            Bei <strong>Überschuss</strong> versuchst du die <strong>Überschusszahl</strong> zu würfeln (z.B. die 4) und legst jeden Treffer zur Seite.
+            Sobald du <strong>keine Überschusszahl</strong> mehr würfelst, ist Schluss.
+            Im Tracker wird die <strong>Anzahl der Trefferwürfel</strong> eingetragen.
+          </li>
+          <li style="margin-top:6px;">
+            Abzug beim <strong>nächsten verfügbaren Spieler</strong>: <strong>Treffer × Überschuss</strong>.<br/>
+            <em>Beispiel:</em> Überschuss 4, Treffer 3 ⇒ −12 beim nächsten Spieler.
+          </li>
+        </ol>
+      
+        <ul style="margin:10px 0 0 18px;">
+          <li><strong>🐟 bei 0:</strong> du schwimmst weiter (bleibst im Spiel).</li>
+          <li><strong>❌ unter 0:</strong> du bist raus und wirst übersprungen.</li>
         </ul>
-
+      
         <p style="margin-top:10px;">
           <strong>Bedienung:</strong><br/>
-          💾 Zug speichern = Zug fixieren<br/>
-          ↩️ Undo = letzten Zug rückgängig<br/>
-          🏁 Spiel beenden = Auswertung + Export
+          Spielernamen eingeben (Spielreihenfolge) → <strong>Spiel starten</strong><br/>
+          Summe eintragen → <strong>💾 Zug speichern</strong><br/>
+          Bei Überschuss Treffer eintragen → <strong>💾 Zug speichern</strong><br/>
+          <strong>↩️ Undo</strong> = letzten Zug rückgängig<br/>
+          Spiel endet automatisch bei nur mehr einem Spieler ≥ 0 oder via <strong>🏁 Spiel beenden</strong><br/>
+          Export im Spielbericht möglich
         </p>
-
+      
         <p class="rw-note" style="margin-top:12px;">
-          Tipp: Mit <strong>ESC</strong> kannst du Popups schließen (Desktop).
+          Viel Spaß beim <strong>Runter Würfeln</strong>! 🎲
         </p>
       </div>
     </div>
