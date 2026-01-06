@@ -1,6 +1,6 @@
 ---
 title: Runter Würfeln – Punkte Tracker
-subtitle: Runden speichern, 🐟-Schwimmer ehren, Negativlinge überspringen
+subtitle: 🎲 Punkte jagen · 🐟 Null halten · ❌ rausfliegen
 description: Punkte-Tracker für „Runter Würfeln“ mit beliebig vielen Spielern. <30 = Differenzabzug, >30 = Überschuss trifft nächsten verfügbaren Spieler.
 layout: page
 show_sidebar: false
@@ -12,7 +12,12 @@ show_sidebar: false
   <div class="rw-grid">
     <!-- LEFT: Setup / Controls -->
     <section class="rw-card">
-      <h2 class="rw-h2">Spiel</h2>
+
+      <!-- Header "Spiel" + kleiner Help Button -->
+      <div class="rw-row rw-row-between" style="margin:0 0 10px 0;">
+        <h2 class="rw-h2" style="margin:0;">Spiel</h2>
+        <button class="rw-btn rw-btn-ghost rw-btn-small" id="btnHelp" title="Spielanleitung">❓</button>
+      </div>
 
       <div class="rw-row">
         <button class="rw-btn" id="btnNewGame">🧼 Neues Spiel</button>
@@ -59,7 +64,7 @@ show_sidebar: false
           <div class="rw-sep"></div>
           <div class="rw-callout rw-callout-warn">
             <div><strong>Überschuss:</strong> <span id="overshootValue">–</span></div>
-            <div class="rw-note">Gib nur die <strong>Anzahl Trefferwürfel</strong> an (0–6). Abzug = Treffer × Überschuss.</div>
+            <div class="rw-note">Gib nur die <strong>Anzahl Trefferwürfel</strong> an. Abzug = Treffer × Überschuss.</div>
           </div>
 
           <div class="rw-row rw-row-wrap">
@@ -127,6 +132,48 @@ show_sidebar: false
       <p class="rw-note">Tipp: Auf iPhone Safari → Teilen → „Zum Home-Bildschirm“ = fühlt sich an wie eine App 😉</p>
     </div>
   </div>
+
+  <!-- HELP MODAL -->
+  <div id="helpModal" class="rw-modal rw-hidden" role="dialog" aria-modal="true">
+    <div class="rw-modal-backdrop" id="helpCloseBg"></div>
+    <div class="rw-modal-card">
+      <div class="rw-row">
+        <h2 class="rw-h2" style="margin:0;">📖 Spielanleitung</h2>
+        <button class="rw-btn rw-btn-ghost" id="helpClose">✖</button>
+      </div>
+
+      <div class="rw-callout" style="margin-top:10px; line-height:1.55;">
+        <p><strong>Ziel:</strong> Wer am Ende als einziger <strong>nicht negativ</strong> ist, gewinnt. (Oder – falls mehrere überleben – der höchste Endstand.)</p>
+
+        <p><strong>Start:</strong> Jeder Spieler startet mit <strong>30</strong>.</p>
+
+        <ul style="margin:8px 0 0 18px;">
+          <li><strong>Summe &lt; 30:</strong> Differenz wird bei dir abgezogen.<br/>
+            Beispiel: 27 ⇒ −3 bei dir.</li>
+
+          <li><strong>Summe = 30:</strong> Perfekt – keine Änderung.</li>
+
+          <li><strong>Summe &gt; 30:</strong> <strong>Überschuss</strong> = Summe − 30.<br/>
+            Du gibst <strong>Treffer</strong> an. Abzug = Treffer × Überschuss → trifft den <strong>nächsten verfügbaren Spieler</strong>.</li>
+
+          <li><strong>Negativ:</strong> Spieler mit &lt; 0 ist <strong>❌ raus</strong> und wird übersprungen.</li>
+
+          <li><strong>🐟 bei 0:</strong> bleibt spielbar.</li>
+        </ul>
+
+        <p style="margin-top:10px;">
+          <strong>Bedienung:</strong><br/>
+          💾 Zug speichern = Zug fixieren<br/>
+          ↩️ Undo = letzten Zug rückgängig<br/>
+          🏁 Spiel beenden = Auswertung + Export
+        </p>
+
+        <p class="rw-note" style="margin-top:12px;">
+          Tipp: Mit <strong>ESC</strong> kannst du Popups schließen (Desktop).
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -138,6 +185,7 @@ show_sidebar: false
   .rw-h2 { font-size: 1.2rem; margin: 0 0 10px 0; }
   .rw-h3 { font-size: 1.0rem; margin: 10px 0; opacity: 0.95; }
   .rw-row { display:flex; gap:10px; align-items:center; margin: 8px 0; }
+  .rw-row-between { justify-content: space-between; }
   .rw-row-wrap { flex-wrap: wrap; }
   .rw-label { font-size: 0.9rem; opacity: 0.9; }
   .rw-input { padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); color: inherit; outline: none; min-width: 220px; }
@@ -148,6 +196,7 @@ show_sidebar: false
   .rw-btn-primary { background: rgba(21,152,179,0.25); border-color: rgba(21,152,179,0.5); }
   .rw-btn-primary:hover { background: rgba(21,152,179,0.35); }
   .rw-btn-ghost { background: transparent; }
+  .rw-btn-small { padding: 6px 10px; border-radius: 10px; font-size: 0.95rem; line-height: 1; }
   .rw-note { font-size: 0.9rem; opacity: 0.85; margin: 8px 0 0; }
   .rw-sep { height: 1px; background: rgba(255,255,255,0.08); margin: 12px 0; }
 
@@ -183,6 +232,8 @@ show_sidebar: false
   const ui = {
     btnNewGame: el("btnNewGame"),
     btnResetAll: el("btnResetAll"),
+    btnHelp: el("btnHelp"),
+
     playerName: el("playerName"),
     btnAddPlayer: el("btnAddPlayer"),
     playerChips: el("playerChips"),
@@ -215,6 +266,10 @@ show_sidebar: false
     btnExportJson: el("btnExportJson"),
     btnCopySummary: el("btnCopySummary"),
     btnExportPdf: el("btnExportPdf"),
+
+    helpModal: el("helpModal"),
+    helpCloseBg: el("helpCloseBg"),
+    helpClose: el("helpClose"),
   };
 
   /** State */
@@ -222,7 +277,6 @@ show_sidebar: false
 
   state.players.forEach(p => p.balance = balanceNum(p.balance));
   save();
-
 
   function newGameState() {
     return {
@@ -263,14 +317,13 @@ show_sidebar: false
     const n = Number(v);
     return Number.isFinite(n) ? n : 0;
   }
-  
+
   function statusIcon(balance) {
     const b = balanceNum(balance);
     if (b > 0) return "🎲";
     if (b === 0) return "🐟";
     return "❌";
   }
-
 
   function formatBalance(v) {
     return String(balanceNum(v)); // immer Zahl als Text (auch 0 und negativ)
@@ -291,7 +344,7 @@ show_sidebar: false
   function nextAvailablePlayerId(fromId) {
     const idx = state.players.findIndex(p => p.id === fromId);
     if (idx < 0) return state.players.find(isAvailable)?.id ?? null;
-  
+
     for (let step = 1; step <= state.players.length; step++) {
       const p = state.players[(idx + step) % state.players.length];
       if (p && isAvailable(p)) return p.id;
@@ -305,9 +358,7 @@ show_sidebar: false
   }
 
   function pushUndoSnapshot() {
-    // keep it small but reliable
     state.history.push(JSON.stringify(state));
-    // limit history size
     if (state.history.length > 50) state.history.shift();
   }
 
@@ -332,7 +383,6 @@ show_sidebar: false
 
   function removePlayer(id) {
     state.players = state.players.filter(p => p.id !== id);
-    // fix current player
     if (state.currentPlayerId === id) {
       const next = state.players[0]?.id ?? null;
       state.currentPlayerId = next;
@@ -344,7 +394,6 @@ show_sidebar: false
   function startGame() {
     if (state.players.length < 2) return;
     state.started = true;
-    // ensure current player is first available
     const firstAvail = state.players.find(isAvailable)?.id ?? state.players[0].id;
     state.currentPlayerId = firstAvail;
     save();
@@ -353,11 +402,9 @@ show_sidebar: false
 
   function maybeEndRound() {
     const currentAvail = availablePlayerIds();
-    // end round when every currently available player has played once
     const playedSet = new Set(state.playedThisRound);
     const allPlayed = currentAvail.every(id => playedSet.has(id));
 
-    // also: if only one available player remains -> end game
     if (currentAvail.length <= 1) {
       endGame(true);
       return;
@@ -373,7 +420,6 @@ show_sidebar: false
       state.round += 1;
       state.currentRoundTurns = [];
       state.playedThisRound = [];
-      // keep currentPlayerId as-is (already advanced)
       save();
     }
   }
@@ -381,40 +427,38 @@ show_sidebar: false
   function saveTurn() {
     const current = getPlayer(state.currentPlayerId);
     if (!current || !isAvailable(current)) {
-      // pick next available
       const nxt = nextAvailablePlayerId(state.currentPlayerId);
       if (nxt) state.currentPlayerId = nxt;
       save();
       renderAll();
       return;
     }
-  
+
     const sum = Number(ui.sumInput.value);
     if (!Number.isFinite(sum)) return;
-  
+
     pushUndoSnapshot();
-  
+
     let diff = 0;
     let overshoot = 0;
     let hits = 0;
     let penalty = 0;
     let targetId = null;
-  
+
     if (sum < 30) {
       diff = 30 - sum;
       current.balance = balanceNum(current.balance) - diff;
-  
+
     } else if (sum === 30) {
       // nothing
-  
+
     } else { // sum > 30
       overshoot = sum - 30;
       hits = clampInt(Number(ui.hitsInput.value), 0, 999);
       penalty = hits * overshoot;
-  
+
       targetId = nextAvailablePlayerId(current.id);
-  
-      // Wenn kein anderer verfügbar ist (oder aus irgendeinem Grund man selbst zurückkommt):
+
       if (!targetId || targetId === current.id) {
         targetId = null;
         penalty = 0;
@@ -422,8 +466,8 @@ show_sidebar: false
         const target = getPlayer(targetId);
         if (target) target.balance = balanceNum(target.balance) - penalty;
       }
-    } // ✅ WICHTIG: diese Klammer hat bei dir gefehlt!
-  
+    }
+
     const turn = {
       round: state.round,
       playerId: current.id,
@@ -437,19 +481,17 @@ show_sidebar: false
       targetName: targetId ? (getPlayer(targetId)?.name ?? null) : null,
       time: new Date().toISOString()
     };
-  
+
     state.currentRoundTurns.push(turn);
     if (!state.playedThisRound.includes(current.id)) state.playedThisRound.push(current.id);
-  
-    // advance current player (skip negatives)
+
     const nextId = nextAvailablePlayerId(current.id);
     if (nextId) state.currentPlayerId = nextId;
-  
-    // clear inputs for next
+
     ui.sumInput.value = "";
     ui.hitsInput.value = "0";
     ui.overshootBlock.classList.add("rw-hidden");
-  
+
     maybeEndRound();
     save();
     renderAll();
@@ -462,7 +504,6 @@ show_sidebar: false
   }
 
   function endGame(auto = false) {
-    // store current round if it has any turns
     if (state.currentRoundTurns.length > 0) {
       state.rounds.push({
         no: state.round,
@@ -499,7 +540,7 @@ show_sidebar: false
             const bal = balanceNum(r.balance);
             const status = statusIcon(bal);
             const cls = bal < 0 ? "rw-out" : "";
-        
+
             return `<tr class="${cls}">
               <td><span class="rw-badge">${idx+1}</span></td>
               <td>${escapeHtml(r.name)}</td>
@@ -518,29 +559,33 @@ show_sidebar: false
     ui.resultModal.classList.add("rw-hidden");
   }
 
+  function showHelpModal() {
+    ui.helpModal.classList.remove("rw-hidden");
+  }
+
+  function hideHelpModal() {
+    ui.helpModal.classList.add("rw-hidden");
+  }
+
   function computeRanking() {
     const copy = state.players.map(p => ({ ...p }));
-  
+
     copy.sort((a, b) => {
       const aBal = balanceNum(a.balance);
       const bBal = balanceNum(b.balance);
-  
+
       const aAvail = aBal >= 0 ? 0 : 1;
       const bAvail = bBal >= 0 ? 0 : 1;
       if (aAvail !== bAvail) return aAvail - bAvail;
-  
-      // beide verfügbar: höherer Kontostand zuerst
-      if (aAvail === 0) return bBal - aBal;
-  
-      // beide negativ: weniger negativ zuerst
-      return bBal - aBal;
+
+      if (aAvail === 0) return bBal - aBal; // verfügbar: höher zuerst
+      return bBal - aBal; // negativ: weniger negativ zuerst
     });
-  
+
     return copy;
   }
 
   function renderSetup() {
-    // chips
     ui.playerChips.innerHTML = state.players.map(p => `
       <span class="rw-chip">
         <strong>${escapeHtml(p.name)}</strong>
@@ -553,7 +598,6 @@ show_sidebar: false
     ui.setupBlock.classList.toggle("rw-hidden", state.started);
     ui.playBlock.classList.toggle("rw-hidden", !state.started);
 
-    // bind remove buttons
     ui.playerChips.querySelectorAll("[data-remove]").forEach(btn => {
       btn.addEventListener("click", () => removePlayer(btn.getAttribute("data-remove")));
     });
@@ -565,10 +609,8 @@ show_sidebar: false
     const current = getPlayer(state.currentPlayerId);
     ui.currentPlayer.textContent = current ? current.name : "–";
 
-    // Undo availability
     ui.btnUndo.disabled = state.history.length === 0;
 
-    // overshoot block logic on sum typing
     const sum = Number(ui.sumInput.value);
     const showOver = Number.isFinite(sum) && sum > 30;
     ui.overshootBlock.classList.toggle("rw-hidden", !showOver);
@@ -581,7 +623,7 @@ show_sidebar: false
 
       let targetId = current ? nextAvailablePlayerId(current.id) : null;
       if (targetId === current?.id) targetId = null;
-      
+
       const target = targetId ? getPlayer(targetId) : null;
       ui.targetPlayer.textContent = target ? `${target.name} (${formatBalance(target.balance)})` : "–";
       ui.penaltyPreview.textContent = String(hits * overshoot);
@@ -595,17 +637,17 @@ show_sidebar: false
     }
 
     const rows = state.players.map(p => {
-    const bal = balanceNum(p.balance);
-    const isOut = bal < 0;
-    const isCurrent = p.id === state.currentPlayerId && state.started;
+      const bal = balanceNum(p.balance);
+      const isOut = bal < 0;
+      const isCurrent = p.id === state.currentPlayerId && state.started;
 
-    return `
+      return `
         <tr class="${isOut ? "rw-out" : ""}">
-        <td>${escapeHtml(p.name)} ${isCurrent ? "👉" : ""}</td>
-        <td><strong>${bal}</strong></td>
-        <td>${statusIcon(bal)}</td>
+          <td>${escapeHtml(p.name)} ${isCurrent ? "👉" : ""}</td>
+          <td><strong>${bal}</strong></td>
+          <td>${statusIcon(bal)}</td>
         </tr>
-    `;
+      `;
     }).join("");
 
     ui.scoreboard.innerHTML = `
@@ -613,7 +655,7 @@ show_sidebar: false
         <thead><tr><th>Spieler</th><th>Guthaben</th><th>Status</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
-      <p class="rw-note">Regel: Nur <strong>negative</strong> Spieler werden übersprungen. 🐟 bleibt spielbar.</p>
+      <p class="rw-note">Regel: Kommst du ins <strong>Minus</strong> bist du raus. 🐟 schwimmt weiter.</p>
     `;
   }
 
@@ -648,7 +690,6 @@ show_sidebar: false
       `;
     }).join("");
 
-    // include current round (unsaved) preview
     const currentPreview = state.currentRoundTurns.length > 0 ? `
       <details class="rw-callout rw-callout-warn" style="margin:10px 0;">
         <summary><strong>Runde ${state.round} (läuft gerade)</strong> <span class="rw-note">– bisherige Züge: ${state.currentRoundTurns.length}</span></summary>
@@ -712,8 +753,7 @@ show_sidebar: false
 
   function exportPdf() {
     const ranking = computeRanking();
-  
-    // Rundenliste inkl. laufender Runde (falls vorhanden)
+
     const allRounds = [
       ...state.rounds,
       ...(state.currentRoundTurns.length > 0 ? [{
@@ -723,10 +763,10 @@ show_sidebar: false
         endedAt: null
       }] : [])
     ];
-  
+
     const now = new Date();
     const dateStr = now.toLocaleString();
-  
+
     const rankingRows = ranking.map((p, i) => {
       const bal = balanceNum(p.balance);
       return `
@@ -738,25 +778,25 @@ show_sidebar: false
         </tr>
       `;
     }).join("");
-  
+
     const roundsHtml = allRounds.map(r => {
       const end = (r.endBalances || []).map(x => {
         const pl = getPlayer(x.id);
         const bal = balanceNum(x.balance);
         return `${pl ? escapeHtml(pl.name) : "?"}: <strong>${formatBalance(bal)}</strong> ${statusIcon(bal)}`;
       }).join(" · ");
-  
+
       const turnsRows = (r.turns || []).map(t => {
         const selfText =
           t.sum < 30 ? `−${t.diff} (selbst)` :
           t.sum === 30 ? `✓` :
           `Ü ${t.overshoot}`;
-  
+
         const targetText =
           t.sum > 30 && t.penalty > 0
             ? `−${t.penalty} an ${escapeHtml(t.targetName || "–")}`
             : "–";
-  
+
         return `
           <tr>
             <td>${escapeHtml(t.playerName)}</td>
@@ -768,12 +808,12 @@ show_sidebar: false
           </tr>
         `;
       }).join("");
-  
+
       return `
         <div class="section">
           <h3>Runde ${r.no}${r.endedAt ? "" : " (läuft)"}</h3>
           <div class="muted">Endstände: ${end || "–"}</div>
-  
+
           <table>
             <thead>
               <tr>
@@ -792,63 +832,63 @@ show_sidebar: false
         </div>
       `;
     }).join("");
-  
+
     const winner = ranking.find(r => balanceNum(r.balance) >= 0) ?? ranking[0];
-  
+
     const html = `
-  <!doctype html>
-  <html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Runter Würfeln – Export</title>
-    <style>
-      :root { color-scheme: light; }
-      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 22px; }
-      h1 { margin: 0 0 6px 0; font-size: 22px; }
-      .muted { color: #555; font-size: 13px; margin-top: 4px; }
-      .meta { margin: 10px 0 16px 0; font-size: 13px; color: #333; }
-      .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; margin: 14px 0; }
-      .section { margin-top: 18px; page-break-inside: avoid; }
-      h3 { margin: 12px 0 6px 0; font-size: 16px; }
-      table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-      th, td { border-bottom: 1px solid #e5e5e5; padding: 8px; font-size: 13px; vertical-align: top; }
-      th { text-align: left; background: #fafafa; }
-      .right { text-align: right; }
-      .center { text-align: center; }
-      @media print {
-        body { margin: 10mm; }
-        .noprint { display: none !important; }
-      }
-    </style>
-  </head>
-  <body>
-    <h1>🎲 Runter Würfeln – Spielbericht</h1>
-    <div class="meta">
-      Export: ${escapeHtml(dateStr)}<br>
-      Spieler: ${state.players.map(p => escapeHtml(p.name)).join(", ")}<br>
-      Sieger: <strong>${winner ? escapeHtml(winner.name) : "–"}</strong>
-    </div>
-  
-    <div class="card">
-      <h3>🏆 Endwertung</h3>
-      <table>
-        <thead><tr><th>Platz</th><th>Spieler</th><th class="right">Endstand</th><th class="center">Status</th></tr></thead>
-        <tbody>${rankingRows}</tbody>
-      </table>
-    </div>
-  
-    <div class="card">
-      <h3>📚 Runden</h3>
-      ${roundsHtml || '<div class="muted">Keine Runden vorhanden.</div>'}
-    </div>
-  
-    <div class="noprint muted">
-      Tipp: Im Druckdialog „Als PDF sichern“ auswählen.
-    </div>
-  </body>
-  </html>`;
-  
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Runter Würfeln – Export</title>
+  <style>
+    :root { color-scheme: light; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 22px; }
+    h1 { margin: 0 0 6px 0; font-size: 22px; }
+    .muted { color: #555; font-size: 13px; margin-top: 4px; }
+    .meta { margin: 10px 0 16px 0; font-size: 13px; color: #333; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; margin: 14px 0; }
+    .section { margin-top: 18px; page-break-inside: avoid; }
+    h3 { margin: 12px 0 6px 0; font-size: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border-bottom: 1px solid #e5e5e5; padding: 8px; font-size: 13px; vertical-align: top; }
+    th { text-align: left; background: #fafafa; }
+    .right { text-align: right; }
+    .center { text-align: center; }
+    @media print {
+      body { margin: 10mm; }
+      .noprint { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎲 Runter Würfeln – Spielbericht</h1>
+  <div class="meta">
+    Export: ${escapeHtml(dateStr)}<br>
+    Spieler: ${state.players.map(p => escapeHtml(p.name)).join(", ")}<br>
+    Sieger: <strong>${winner ? escapeHtml(winner.name) : "–"}</strong>
+  </div>
+
+  <div class="card">
+    <h3>🏆 Endwertung</h3>
+    <table>
+      <thead><tr><th>Platz</th><th>Spieler</th><th class="right">Endstand</th><th class="center">Status</th></tr></thead>
+      <tbody>${rankingRows}</tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>📚 Runden</h3>
+    ${roundsHtml || '<div class="muted">Keine Runden vorhanden.</div>'}
+  </div>
+
+  <div class="noprint muted">
+    Tipp: Im Druckdialog „Als PDF sichern“ auswählen.
+  </div>
+</body>
+</html>`;
+
     const w = window.open("", "_blank");
     if (!w) {
       alert("Pop-up blockiert 😅 Bitte Pop-ups erlauben oder Seite direkt drucken.");
@@ -857,8 +897,7 @@ show_sidebar: false
     w.document.open();
     w.document.write(html);
     w.document.close();
-  
-    // Kleiner Delay, damit Styles sicher geladen sind
+
     setTimeout(() => w.print(), 250);
   }
 
@@ -875,7 +914,6 @@ show_sidebar: false
   ui.btnStartGame.addEventListener("click", startGame);
 
   ui.btnNewGame.addEventListener("click", () => {
-    // keep players, reset balances + rounds
     if (state.players.length === 0) return;
     pushUndoSnapshot();
     state.started = true;
@@ -923,8 +961,20 @@ show_sidebar: false
   ui.btnCopySummary.addEventListener("click", copySummary);
   ui.btnExportPdf.addEventListener("click", exportPdf);
 
+  // Help modal events
+  ui.btnHelp.addEventListener("click", showHelpModal);
+  ui.helpCloseBg.addEventListener("click", hideHelpModal);
+  ui.helpClose.addEventListener("click", hideHelpModal);
+
+  // ESC closes modals (desktop)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      hideHelpModal();
+      hideResultModal();
+    }
+  });
+
   // Init
-  // If game started but current player became negative, jump to next available
   if (state.started && state.currentPlayerId) {
     const cp = getPlayer(state.currentPlayerId);
     if (cp && !isAvailable(cp)) {
