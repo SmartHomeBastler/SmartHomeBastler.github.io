@@ -119,6 +119,7 @@ show_sidebar: false
       <div class="rw-sep"></div>
 
       <div class="rw-row rw-row-wrap">
+        <button class="rw-btn" id="btnExportPdf">🖨️ PDF / Drucken</button>
         <button class="rw-btn" id="btnExportJson">📤 Export JSON</button>
         <button class="rw-btn rw-btn-ghost" id="btnCopySummary">📋 Summary kopieren</button>
       </div>
@@ -213,6 +214,7 @@ show_sidebar: false
     finalRanking: el("finalRanking"),
     btnExportJson: el("btnExportJson"),
     btnCopySummary: el("btnCopySummary"),
+    btnExportPdf: el("btnExportPdf"),
   };
 
   /** State */
@@ -708,6 +710,158 @@ show_sidebar: false
     alert("Summary kopiert ✅");
   }
 
+  function exportPdf() {
+    const ranking = computeRanking();
+  
+    // Rundenliste inkl. laufender Runde (falls vorhanden)
+    const allRounds = [
+      ...state.rounds,
+      ...(state.currentRoundTurns.length > 0 ? [{
+        no: state.round,
+        turns: state.currentRoundTurns,
+        endBalances: state.players.map(p => ({ id: p.id, balance: p.balance })),
+        endedAt: null
+      }] : [])
+    ];
+  
+    const now = new Date();
+    const dateStr = now.toLocaleString();
+  
+    const rankingRows = ranking.map((p, i) => {
+      const bal = balanceNum(p.balance);
+      return `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${escapeHtml(p.name)}</td>
+          <td style="text-align:right;"><strong>${formatBalance(bal)}</strong></td>
+          <td style="text-align:center;">${statusIcon(bal)}</td>
+        </tr>
+      `;
+    }).join("");
+  
+    const roundsHtml = allRounds.map(r => {
+      const end = (r.endBalances || []).map(x => {
+        const pl = getPlayer(x.id);
+        const bal = balanceNum(x.balance);
+        return `${pl ? escapeHtml(pl.name) : "?"}: <strong>${formatBalance(bal)}</strong> ${statusIcon(bal)}`;
+      }).join(" · ");
+  
+      const turnsRows = (r.turns || []).map(t => {
+        const selfText =
+          t.sum < 30 ? `−${t.diff} (selbst)` :
+          t.sum === 30 ? `✓` :
+          `Ü ${t.overshoot}`;
+  
+        const targetText =
+          t.sum > 30 && t.penalty > 0
+            ? `−${t.penalty} an ${escapeHtml(t.targetName || "–")}`
+            : "–";
+  
+        return `
+          <tr>
+            <td>${escapeHtml(t.playerName)}</td>
+            <td style="text-align:right;">${t.sum}</td>
+            <td>${selfText}</td>
+            <td style="text-align:right;">${t.hits ?? 0}</td>
+            <td>${targetText}</td>
+            <td style="font-size:12px; opacity:.8;">${new Date(t.time).toLocaleTimeString()}</td>
+          </tr>
+        `;
+      }).join("");
+  
+      return `
+        <div class="section">
+          <h3>Runde ${r.no}${r.endedAt ? "" : " (läuft)"}</h3>
+          <div class="muted">Endstände: ${end || "–"}</div>
+  
+          <table>
+            <thead>
+              <tr>
+                <th>Spieler</th>
+                <th style="text-align:right;">Summe</th>
+                <th>Ergebnis</th>
+                <th style="text-align:right;">Treffer</th>
+                <th>Ziel-Abzug</th>
+                <th>Zeit</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${turnsRows || '<tr><td colspan="6" class="muted">Keine Züge</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }).join("");
+  
+    const winner = ranking.find(r => balanceNum(r.balance) >= 0) ?? ranking[0];
+  
+    const html = `
+  <!doctype html>
+  <html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Runter Würfeln – Export</title>
+    <style>
+      :root { color-scheme: light; }
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 22px; }
+      h1 { margin: 0 0 6px 0; font-size: 22px; }
+      .muted { color: #555; font-size: 13px; margin-top: 4px; }
+      .meta { margin: 10px 0 16px 0; font-size: 13px; color: #333; }
+      .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; margin: 14px 0; }
+      .section { margin-top: 18px; page-break-inside: avoid; }
+      h3 { margin: 12px 0 6px 0; font-size: 16px; }
+      table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+      th, td { border-bottom: 1px solid #e5e5e5; padding: 8px; font-size: 13px; vertical-align: top; }
+      th { text-align: left; background: #fafafa; }
+      .right { text-align: right; }
+      .center { text-align: center; }
+      @media print {
+        body { margin: 10mm; }
+        .noprint { display: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎲 Runter Würfeln – Spielbericht</h1>
+    <div class="meta">
+      Export: ${escapeHtml(dateStr)}<br>
+      Spieler: ${state.players.map(p => escapeHtml(p.name)).join(", ")}<br>
+      Sieger: <strong>${winner ? escapeHtml(winner.name) : "–"}</strong>
+    </div>
+  
+    <div class="card">
+      <h3>🏆 Endwertung</h3>
+      <table>
+        <thead><tr><th>Platz</th><th>Spieler</th><th class="right">Endstand</th><th class="center">Status</th></tr></thead>
+        <tbody>${rankingRows}</tbody>
+      </table>
+    </div>
+  
+    <div class="card">
+      <h3>📚 Runden</h3>
+      ${roundsHtml || '<div class="muted">Keine Runden vorhanden.</div>'}
+    </div>
+  
+    <div class="noprint muted">
+      Tipp: Im Druckdialog „Als PDF sichern“ auswählen.
+    </div>
+  </body>
+  </html>`;
+  
+    const w = window.open("", "_blank");
+    if (!w) {
+      alert("Pop-up blockiert 😅 Bitte Pop-ups erlauben oder Seite direkt drucken.");
+      return;
+    }
+    w.document.open();
+    w.document.write(html);
+    w.document.close();
+  
+    // Kleiner Delay, damit Styles sicher geladen sind
+    setTimeout(() => w.print(), 250);
+  }
+
   // Events
   ui.btnAddPlayer.addEventListener("click", () => {
     addPlayer(ui.playerName.value);
@@ -767,6 +921,7 @@ show_sidebar: false
   ui.modalClose.addEventListener("click", hideResultModal);
   ui.btnExportJson.addEventListener("click", exportJson);
   ui.btnCopySummary.addEventListener("click", copySummary);
+  ui.btnExportPdf.addEventListener("click", exportPdf);
 
   // Init
   // If game started but current player became negative, jump to next available
