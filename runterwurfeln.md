@@ -655,7 +655,7 @@ show_sidebar: false
         <thead><tr><th>Spieler</th><th>Guthaben</th><th>Status</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
-      <p class="rw-note">Regel: Kommst du ins <strong>Minus</strong> bist du raus. 🐟 schwimmt weiter.</p>
+      <p class="rw-note">Regel: Wenn du ins <strong>Minus</strong> stolperst, bist du ❌ <strong>raus</strong>. Bei 0 wirst du zum 🐟 und schwimmst weiter.</p>
     `;
   }
 
