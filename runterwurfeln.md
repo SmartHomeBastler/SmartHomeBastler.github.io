@@ -66,7 +66,7 @@ show_sidebar: false
             <label class="rw-label">Trefferwürfel</label>
             <div class="rw-stepper">
               <button class="rw-btn rw-btn-ghost" id="hitsMinus">−</button>
-              <input id="hitsInput" class="rw-input rw-input-small" type="number" min="0" max="6" value="0" inputmode="numeric" />
+              <input id="hitsInput" class="rw-input rw-input-small" type="number" min="0" max="999" value="0" inputmode="numeric" />
               <button class="rw-btn rw-btn-ghost" id="hitsPlus">+</button>
             </div>
           </div>
@@ -287,13 +287,12 @@ show_sidebar: false
   }
 
   function nextAvailablePlayerId(fromId) {
-    const ids = state.players.map(p => p.id);
-    const startIdx = Math.max(0, ids.indexOf(fromId));
-    const n = ids.length;
-    for (let step = 1; step <= n; step++) {
-      const id = ids[(startIdx + step) % n];
-      const p = getPlayer(id);
-      if (p && isAvailable(p)) return id;
+    const idx = state.players.findIndex(p => p.id === fromId);
+    if (idx < 0) return state.players.find(isAvailable)?.id ?? null;
+  
+    for (let step = 1; step <= state.players.length; step++) {
+      const p = state.players[(idx + step) % state.players.length];
+      if (p && isAvailable(p)) return p.id;
     }
     return null;
   }
@@ -406,13 +405,19 @@ show_sidebar: false
       // nothing
     } else { // sum > 30
       overshoot = sum - 30;
-      hits = clampInt(Number(ui.hitsInput.value), 0, 6);
+      hits = clampInt(Number(ui.hitsInput.value), 0, 999);
       penalty = hits * overshoot;
 
       targetId = nextAvailablePlayerId(current.id);
-      const target = targetId ? getPlayer(targetId) : null;
-      if (target) target.balance = balanceNum(target.balance) - penalty;
-    }
+      
+      // Wenn kein anderer verfügbar ist (oder aus irgendeinem Grund man selbst zurückkommt):
+      if (!targetId || targetId === current.id) {
+        targetId = null;
+        penalty = 0;
+      } else {
+        const target = getPlayer(targetId);
+        if (target) target.balance = balanceNum(target.balance) - penalty;
+      }
 
     const turn = {
       round: state.round,
@@ -566,10 +571,12 @@ show_sidebar: false
     if (showOver) {
       const overshoot = computeOvershoot(sum);
       ui.overshootValue.textContent = String(overshoot);
-      const hits = clampInt(Number(ui.hitsInput.value), 0, 6);
+      const hits = clampInt(Number(ui.hitsInput.value), 0, 999);
       ui.hitsInput.value = String(hits);
 
-      const targetId = current ? nextAvailablePlayerId(current.id) : null;
+      let targetId = current ? nextAvailablePlayerId(current.id) : null;
+      if (targetId === current?.id) targetId = null;
+      
       const target = targetId ? getPlayer(targetId) : null;
       ui.targetPlayer.textContent = target ? `${target.name} (${formatBalance(target.balance)})` : "–";
       ui.penaltyPreview.textContent = String(hits * overshoot);
@@ -737,15 +744,15 @@ show_sidebar: false
   ui.sumInput.addEventListener("input", () => renderPlay());
 
   ui.hitsMinus.addEventListener("click", () => {
-    ui.hitsInput.value = String(clampInt(Number(ui.hitsInput.value) - 1, 0, 6));
+    ui.hitsInput.value = String(clampInt(Number(ui.hitsInput.value) - 1, 0, 999));
     renderPlay();
   });
   ui.hitsPlus.addEventListener("click", () => {
-    ui.hitsInput.value = String(clampInt(Number(ui.hitsInput.value) + 1, 0, 6));
+    ui.hitsInput.value = String(clampInt(Number(ui.hitsInput.value) + 1, 0, 999));
     renderPlay();
   });
   ui.hitsInput.addEventListener("input", () => {
-    ui.hitsInput.value = String(clampInt(Number(ui.hitsInput.value), 0, 6));
+    ui.hitsInput.value = String(clampInt(Number(ui.hitsInput.value), 0, 999));
     renderPlay();
   });
 
