@@ -1,18 +1,18 @@
 ---
-title: Yazzee Tracker (Manuell)
-subtitle: Mehrspieler-Scoreboard + 3 Modi + Bonus + Serviert + Hausregel-Chance
-description: Punkte manuell eintragen (echte Würfel), Modi runter/rauf/durcheinander, Fixziele per Klick (Normal/Serviert/Streichen), Bonus ab 63, Treffer-Eingabe für 1–6, Chance als Fixziel.
+title: Yahtzee Scoreboard
+subtitle: Mehrspieler-Yahtzee-Scoreboard mit 3 verschiedenen Spiel-Varianten
+description: Punkte manuell eintragen (echte Würfel), Modi runter/rauf/durcheinander, Fixziele per Klick (Normal/Serviert/Streichen), Bonus ab 63, Treffer-Eingabe für 1–6, Chance als Fixziel (außer Modus 3).
 show_sidebar: false
 layout: page
 ---
 
 <div class="shb-main-container yazzee-wrap">
 
-  <h1 class="shb-main-title">Yazzee Tracker (manuell)</h1>
+  <h1 class="shb-main-title">Yahtzee Scoreboard</h1>
   <p class="shb-main-description">
     Gewürfelt wird am Tisch – hier wird nur eingetragen 🙂
     <br>
-    Fixziele: <strong>Normal</strong> / <strong>Serviert</strong> / <strong>Streichen</strong>.
+    Ziele: Erziele so viele Punkte wie möglich 🎲🎲🎲🎲🎲
   </p>
 
   <!-- Setup -->
@@ -29,9 +29,9 @@ layout: page
       <div class="y-field">
         <label class="y-label">Spielmodus</label>
         <div class="y-mode">
-          <label class="y-radio"><input type="radio" name="mode" value="runter" checked> Mod1: runter</label>
-          <label class="y-radio"><input type="radio" name="mode" value="rauf"> Mod2: rauf</label>
-          <label class="y-radio"><input type="radio" name="mode" value="frei"> Mod3: durcheinander</label>
+          <label class="y-radio"><input type="radio" name="mode" value="runter" checked> Spiel ⬇️</label>
+          <label class="y-radio"><input type="radio" name="mode" value="rauf"> Spiel ⬆️</label>
+          <label class="y-radio"><input type="radio" name="mode" value="frei"> Spiel ↕️</label>
         </div>
       </div>
 
@@ -84,7 +84,7 @@ layout: page
 
 </div>
 
-<!-- Modal -->
+<!-- Modal: Score Input -->
 <div class="y-modal" id="scoreModal" style="display:none;">
   <div class="y-modal-backdrop" id="modalBackdrop"></div>
 
@@ -123,7 +123,7 @@ layout: page
 
     <!-- Chance special selector -->
     <div id="chanceWrap" style="display:none;">
-      <div class="y-field">
+      <div class="y-field" id="chanceSelectWrap">
         <label class="y-label" for="chanceSelect">Chance-Wertung</label>
         <select id="chanceSelect" class="y-input">
           <option value="chance_manual">Chance (manuell Punkte)</option>
@@ -137,7 +137,7 @@ layout: page
 
       <div id="chanceManualInner" style="display:none; margin-top:10px;">
         <div class="y-field">
-          <label class="y-label" for="chanceManualScore">Punkte</label>
+          <label class="y-label" for="chanceManualScore">Augensumme</label>
           <input id="chanceManualScore" class="y-input" type="number" min="0" step="1" inputmode="numeric" placeholder="Summe aller Augen">
           <div class="y-help">0 ist erlaubt (streichen).</div>
         </div>
@@ -156,6 +156,22 @@ layout: page
     <div class="y-modal-actions" id="modalActions">
       <button class="y-btn" id="btnCancel">Abbrechen</button>
       <button class="y-btn y-btn-primary" id="btnApply">Eintragen</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Final Results -->
+<div class="y-modal" id="finalModal" style="display:none;">
+  <div class="y-modal-backdrop" id="finalBackdrop"></div>
+
+  <div class="y-modal-card">
+    <div class="y-modal-title">🏁 Endergebnis</div>
+    <div class="y-modal-sub" id="finalSub">–</div>
+
+    <div class="y-fixed-info" id="finalBody" style="margin-top:10px;">–</div>
+
+    <div class="y-modal-actions">
+      <button class="y-btn" id="btnFinalClose">Schließen</button>
     </div>
   </div>
 </div>
@@ -249,20 +265,17 @@ layout: page
   .y-table{
     width:100%;
     border-collapse:collapse;
-    /* tabletfreundlicher */
     min-width: 720px;
     background: rgba(0,0,0,0.25);
   }
   .y-table th, .y-table td{
-    padding: 8px 8px; /* weniger Platz = mehr Spalten sichtbar */
+    padding: 8px 8px;
     border-bottom:1px solid rgba(255,255,255,0.08);
     border-right:1px solid rgba(255,255,255,0.06);
     text-align:center;
     vertical-align:middle;
     font-size:0.92rem;
   }
-
-  /* Linke Spalte schmaler */
   .y-table th:first-child, .y-table td:first-child{
     text-align:left;
     position:sticky;
@@ -273,7 +286,6 @@ layout: page
     min-width: 210px;
     max-width: 260px;
   }
-
   .y-table thead th{
     position:sticky;
     top:0;
@@ -281,8 +293,6 @@ layout: page
     backdrop-filter: blur(6px);
     z-index:3;
   }
-
-  .y-rowhint{ font-size:0.82rem; opacity:0.75; display:block; margin-top:2px; }
 
   .y-cell{ cursor:pointer; transition: background .15s ease; }
   .y-cell:hover{ background: rgba(255,255,255,0.06); }
@@ -294,12 +304,10 @@ layout: page
   .y-bottomrow td, .y-bottomrow th{ font-weight: 900; background: rgba(255,255,255,0.09); }
   .y-bottomrow.total td, .y-bottomrow.total th{ background: rgba(255,255,255,0.13); font-size: 1.02rem; }
 
-  /* Extra fürs Tablet Hochformat */
   @media (max-width: 820px){
     .y-table{ min-width: 640px; }
     .y-table th, .y-table td{ padding: 7px 6px; font-size: 0.9rem; }
     .y-table th:first-child, .y-table td:first-child{ min-width: 175px; max-width: 220px; }
-    .y-rowhint{ display:none; } /* optional: spart Höhe/Breite */
   }
 
   .y-foot{
@@ -316,12 +324,11 @@ layout: page
     margin-right:8px;
   }
 
-  /* Modal */
   .y-modal{ position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; padding:16px; }
   .y-modal-backdrop{ position:absolute; inset:0; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); }
   .y-modal-card{
     position:relative;
-    width:min(620px, 100%);
+    width:min(650px, 100%);
     border-radius:14px;
     border:1px solid rgba(255,255,255,0.12);
     background: rgba(0,0,0,0.78);
@@ -348,7 +355,7 @@ layout: page
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.12);
     background: rgba(255,255,255,0.06);
-    line-height: 1.35;
+    line-height: 1.5;
   }
   .y-fixed-actions{
     display:flex;
@@ -361,7 +368,7 @@ layout: page
 
 <script>
 (() => {
-  const STORAGE_KEY = "shb_yazzee_manual_v4";
+  const STORAGE_KEY = "shb_yazzee_manual_v5";
 
   const categories = [
     { key: "ones",   label: "1 – alle 1 zählen", type: "upper", face: 1 },
@@ -388,14 +395,13 @@ layout: page
 
   const el = (id) => document.getElementById(id);
 
-  // Setup UI
+  // UI
   const playerInput = el("playerInput");
   const btnStart = el("btnStart");
   const btnResetAll = el("btnResetAll");
   const btnSave = el("btnSave");
   const setupNote = el("setupNote");
 
-  // Turn UI
   const turnArea = el("turnArea");
   const tableArea = el("tableArea");
   const activePlayerName = el("activePlayerName");
@@ -404,7 +410,7 @@ layout: page
   const btnNext = el("btnNext");
   const scoreTable = el("scoreTable");
 
-  // Modal UI
+  // Score modal
   const scoreModal = el("scoreModal");
   const modalBackdrop = el("modalBackdrop");
   const modalTitle = el("modalTitle");
@@ -428,6 +434,7 @@ layout: page
   const btnFixedStrike = el("btnFixedStrike");
 
   const chanceWrap = el("chanceWrap");
+  const chanceSelectWrap = el("chanceSelectWrap");
   const chanceSelect = el("chanceSelect");
   const chanceManualInner = el("chanceManualInner");
   const chanceManualScore = el("chanceManualScore");
@@ -437,8 +444,21 @@ layout: page
   const btnChanceFixedServed = el("btnChanceFixedServed");
   const btnChanceFixedStrike = el("btnChanceFixedStrike");
 
+  // Final modal
+  const finalModal = el("finalModal");
+  const finalBackdrop = el("finalBackdrop");
+  const finalSub = el("finalSub");
+  const finalBody = el("finalBody");
+  const btnFinalClose = el("btnFinalClose");
+
   let modalCtx = { playerIndex: null, catKey: null };
-  let state = { mode: "runter", players: [], active: 0 };
+
+  let state = {
+    mode: "runter",
+    players: [],
+    active: 0,
+    finalShown: false
+  };
 
   const clampInt = (n, min, max) => {
     n = Number(n);
@@ -449,13 +469,12 @@ layout: page
     return n;
   };
 
-  // Storage
   const save = () => {
     try{
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       setupNote.style.display = "block";
       setupNote.textContent = "✓ Gespeichert.";
-      setTimeout(()=> setupNote.style.display="none", 1100);
+      setTimeout(()=> setupNote.style.display="none", 1000);
     }catch(e){}
   };
 
@@ -468,11 +487,12 @@ layout: page
       state = parsed;
       state.mode ??= "runter";
       state.active ??= 0;
+      state.finalShown ??= false;
       return true;
     }catch(e){ return false; }
   };
 
-  // Mode order restriction
+  // Mode ordering
   const getOrder = () => {
     const keys = categories.map(c => c.key);
     if (state.mode === "runter") return keys;
@@ -497,7 +517,7 @@ layout: page
     return getNextRequiredKey(p) === catKey;
   };
 
-  // Summen
+  // Sums
   const getUpperSum = (p) => upperKeys.reduce((acc,k)=> acc + (p.scores[k] ?? 0), 0);
   const getBonus = (p) => (getUpperSum(p) >= 63 ? 35 : 0);
   const getUpperWithBonus = (p) => getUpperSum(p) + getBonus(p);
@@ -513,6 +533,52 @@ layout: page
 
   const getTotal = (p) => getUpperWithBonus(p) + getLowerSum(p);
 
+  const allFieldsFilled = () => {
+    if (!state.players.length) return false;
+    for (const p of state.players) {
+      for (const cat of categories) {
+        if (p.scores[cat.key] == null) return false;
+      }
+    }
+    return true;
+  };
+
+  const showFinalModal = () => {
+    const rows = state.players.map(p => ({
+      name: p.name,
+      upper: getUpperWithBonus(p),
+      lower: getLowerSum(p),
+      total: getTotal(p)
+    })).sort((a,b) => b.total - a.total);
+
+    // ranking with ties
+    let html = "";
+    let rank = 0;
+    let shownRank = 0;
+    let prevScore = null;
+
+    rows.forEach((r, idx) => {
+      rank = idx + 1;
+      if (prevScore === null || r.total !== prevScore) shownRank = rank;
+      prevScore = r.total;
+
+      html += `<div style="display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.10);">
+        <div><strong>#${shownRank}</strong> – ${r.name}</div>
+        <div><strong>${r.total}</strong> P</div>
+      </div>
+      <div style="opacity:0.8; font-size:0.9rem; margin:-2px 0 8px 0;">
+        oben ${r.upper} · unten ${r.lower}
+      </div>`;
+    });
+
+    finalSub.textContent = `Spiel beendet – ${state.players.length} Spieler`;
+    finalBody.innerHTML = html;
+    finalModal.style.display = "flex";
+  };
+
+  const closeFinalModal = () => { finalModal.style.display = "none"; };
+
+  // Render helpers
   const addSummaryRow = (tbody, label, cls, calcFn) => {
     const tr = document.createElement("tr");
     tr.className = cls;
@@ -529,7 +595,6 @@ layout: page
     tbody.appendChild(tr);
   };
 
-  // Render
   const renderTop = () => {
     const p = state.players[state.active];
     activePlayerName.textContent = p ? p.name : "–";
@@ -551,12 +616,10 @@ layout: page
     });
 
     thead.appendChild(trh);
-
     const tbody = document.createElement("tbody");
 
     categories.forEach(cat => {
       const tr = document.createElement("tr");
-
       const tdL = document.createElement("td");
       tdL.innerHTML = `<strong>${cat.label}</strong>`;
       tr.appendChild(tdL);
@@ -580,7 +643,6 @@ layout: page
             openModal(pIdx, cat.key);
           });
         }
-
         tr.appendChild(td);
       });
 
@@ -618,6 +680,15 @@ layout: page
 
   const closeModal = () => { scoreModal.style.display = "none"; };
 
+  const afterScoreChange = () => {
+    // Spielende erkannt?
+    if (!state.finalShown && allFieldsFilled()) {
+      state.finalShown = true;
+      save();
+      showFinalModal();
+    }
+  };
+
   const applyScoreAndNext = (playerIndex, catKey, scoreVal) => {
     const p = state.players[playerIndex];
     p.scores[catKey] = clampInt(scoreVal, 0, 9999);
@@ -626,6 +697,7 @@ layout: page
     save();
     closeModal();
     renderAll();
+    afterScoreChange();
   };
 
   const updateUpperPreview = (face) => {
@@ -654,6 +726,8 @@ layout: page
       chanceFixedInfo.innerHTML =
         `<strong>${fixedCat.label}</strong><br>` +
         `Normal: <strong>${fixedCat.base}P</strong> · Serviert: <strong>${fixedCat.served}P</strong> · Streichen: <strong>0P</strong>`;
+      btnChanceFixedBase.textContent = `Normal (${fixedCat.base}P)`;
+      btnChanceFixedServed.textContent = `Serviert (${fixedCat.served}P)`;
     }
   };
 
@@ -697,8 +771,24 @@ layout: page
     }
 
     if (cat.type === "chance") {
-      modalSub.textContent = "Chance: manuell eintragen oder (Hausregel) als Fixziel verwenden";
       chanceWrap.style.display = "block";
+
+      // ✅ Änderung: In Modus 3 (frei/durcheinander) nur Augensumme, KEIN Fixziel
+      if (state.mode === "frei") {
+        modalSub.textContent = "Chance: nur Augensumme eintragen (Modus 3)";
+        chanceSelectWrap.style.display = "none";
+        chanceFixedInner.style.display = "none";
+        chanceManualInner.style.display = "block";
+        modalActions.style.display = "flex";
+        chanceManualScore.value = "";
+        scoreModal.style.display = "flex";
+        chanceManualScore.focus();
+        return;
+      }
+
+      // andere Modi: Hausregel-Auswahl erlaubt
+      modalSub.textContent = "Chance: manuell eintragen oder (Hausregel) als Fixziel verwenden";
+      chanceSelectWrap.style.display = "block";
       chanceSelect.value = "chance_manual";
       chanceManualInner.style.display = "block";
       chanceFixedInner.style.display = "none";
@@ -707,7 +797,6 @@ layout: page
       setChanceInnerMode();
       chanceSelect.onchange = setChanceInnerMode;
 
-      // Buttons für Fixziel-in-Chance
       btnChanceFixedBase.onclick = () => {
         const fixedKey = chanceSelect.value;
         const fixedCat = categories.find(c => c.key === fixedKey);
@@ -725,7 +814,7 @@ layout: page
       return;
     }
 
-    // manual
+    // manual category
     modalSub.textContent = "Punkte manuell eintragen (0 erlaubt = streichen)";
     manualWrap.style.display = "block";
     manualScore.value = "";
@@ -745,7 +834,8 @@ layout: page
     }
 
     if (cat.type === "chance") {
-      if (chanceSelect.value !== "chance_manual") return; // Fixfälle gehen per Buttons
+      // In frei-Modus immer manual; sonst nur manual wenn ausgewählt
+      if (state.mode !== "frei" && chanceSelect.value !== "chance_manual") return;
       applyScoreAndNext(playerIndex, catKey, clampInt(chanceManualScore.value, 0, 9999));
       return;
     }
@@ -770,6 +860,10 @@ layout: page
   btnCancel.addEventListener("click", closeModal);
   btnApply.addEventListener("click", applyModal);
 
+  // Final modal events
+  finalBackdrop.addEventListener("click", closeFinalModal);
+  btnFinalClose.addEventListener("click", closeFinalModal);
+
   // Setup
   const startGame = (names, mode) => {
     const clean = names.map(n=>n.trim()).filter(n=>n.length>0);
@@ -785,6 +879,7 @@ layout: page
       scores: Object.fromEntries(categories.map(c => [c.key, null])),
     }));
     state.active = 0;
+    state.finalShown = false;
 
     turnArea.style.display = "block";
     tableArea.style.display = "block";
@@ -801,7 +896,7 @@ layout: page
 
   btnResetAll.addEventListener("click", () => {
     localStorage.removeItem(STORAGE_KEY);
-    state = { mode: "runter", players: [], active: 0 };
+    state = { mode: "runter", players: [], active: 0, finalShown: false };
     turnArea.style.display = "none";
     tableArea.style.display = "none";
     setupNote.style.display = "block";
@@ -810,7 +905,7 @@ layout: page
 
   btnSave.addEventListener("click", save);
 
-  // Load on init
+  // Init
   const loaded = load();
   if (loaded && state.players.length > 0) {
     turnArea.style.display = "block";
@@ -819,6 +914,13 @@ layout: page
     const r = document.querySelector(`input[name="mode"][value="${state.mode}"]`);
     if (r) r.checked = true;
     renderAll();
+
+    // Falls jemand einen fertigen Spielstand lädt und finalShown noch false ist:
+    if (!state.finalShown && allFieldsFilled()) {
+      state.finalShown = true;
+      save();
+      showFinalModal();
+    }
   }
 })();
 </script>
