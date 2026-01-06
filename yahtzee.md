@@ -1,7 +1,7 @@
 ---
 title: Yazzee Tracker (Manuell)
 subtitle: Mehrspieler-Scoreboard + 3 Modi + Bonus + Serviert + Hausregel-Chance
-description: Punkte manuell eintragen (echte Würfel), Modi runter/rauf/durcheinander, Serviert-Logik (Buttons), Bonus ab 63, Treffer-Eingabe für 1–6, Chance als Fixziel.
+description: Punkte manuell eintragen (echte Würfel), Modi runter/rauf/durcheinander, Fixziele per Klick (Normal/Serviert/Streichen), Bonus ab 63, Treffer-Eingabe für 1–6, Chance als Fixziel.
 show_sidebar: false
 layout: page
 ---
@@ -12,7 +12,7 @@ layout: page
   <p class="shb-main-description">
     Gewürfelt wird am Tisch – hier wird nur eingetragen 🙂
     <br>
-    <strong>Fixe Ziele</strong> gehen nur mit <strong>Serviert</strong> oder <strong>Streichen (0P)</strong>.
+    Fixziele: <strong>Normal</strong> / <strong>Serviert</strong> / <strong>Streichen</strong>.
   </p>
 
   <!-- Setup -->
@@ -111,11 +111,12 @@ layout: page
       </div>
     </div>
 
-    <!-- Fixed: served or strike -->
+    <!-- Fixed: base / served / strike -->
     <div id="fixedWrap" style="display:none;">
       <div class="y-fixed-info" id="fixedInfo">–</div>
       <div class="y-fixed-actions">
-        <button class="y-btn y-btn-primary" id="btnFixedServed">Serviert eintragen</button>
+        <button class="y-btn y-btn-primary" id="btnFixedBase">Normal</button>
+        <button class="y-btn y-btn-primary" id="btnFixedServed">Serviert</button>
         <button class="y-btn" id="btnFixedStrike">Streichen (0P)</button>
       </div>
     </div>
@@ -145,7 +146,8 @@ layout: page
       <div id="chanceFixedInner" style="display:none; margin-top:10px;">
         <div class="y-fixed-info" id="chanceFixedInfo">–</div>
         <div class="y-fixed-actions">
-          <button class="y-btn y-btn-primary" id="btnChanceFixedServed">Serviert eintragen</button>
+          <button class="y-btn y-btn-primary" id="btnChanceFixedBase">Normal</button>
+          <button class="y-btn y-btn-primary" id="btnChanceFixedServed">Serviert</button>
           <button class="y-btn" id="btnChanceFixedStrike">Streichen (0P)</button>
         </div>
       </div>
@@ -247,17 +249,20 @@ layout: page
   .y-table{
     width:100%;
     border-collapse:collapse;
-    min-width:860px;
+    /* tabletfreundlicher */
+    min-width: 720px;
     background: rgba(0,0,0,0.25);
   }
   .y-table th, .y-table td{
-    padding:10px 10px;
+    padding: 8px 8px; /* weniger Platz = mehr Spalten sichtbar */
     border-bottom:1px solid rgba(255,255,255,0.08);
     border-right:1px solid rgba(255,255,255,0.06);
     text-align:center;
     vertical-align:middle;
-    font-size:0.95rem;
+    font-size:0.92rem;
   }
+
+  /* Linke Spalte schmaler */
   .y-table th:first-child, .y-table td:first-child{
     text-align:left;
     position:sticky;
@@ -265,8 +270,10 @@ layout: page
     background: rgba(0,0,0,0.55);
     backdrop-filter: blur(6px);
     z-index:2;
-    min-width:280px;
+    min-width: 210px;
+    max-width: 260px;
   }
+
   .y-table thead th{
     position:sticky;
     top:0;
@@ -275,7 +282,7 @@ layout: page
     z-index:3;
   }
 
-  .y-rowhint{ font-size:0.85rem; opacity:0.75; display:block; margin-top:2px; }
+  .y-rowhint{ font-size:0.82rem; opacity:0.75; display:block; margin-top:2px; }
 
   .y-cell{ cursor:pointer; transition: background .15s ease; }
   .y-cell:hover{ background: rgba(255,255,255,0.06); }
@@ -283,20 +290,16 @@ layout: page
   .y-cell.disabled{ cursor:not-allowed; opacity:0.35; }
   .y-cell.active{ outline: 2px solid rgba(255,255,255,0.22); outline-offset:-2px; }
 
-  /* NEU: Zwischen-Summen optisch abheben */
-  .y-midrow td, .y-midrow th{
-    font-weight: 900;
-    background: rgba(255,255,255,0.06);
-  }
+  .y-midrow td, .y-midrow th{ font-weight: 900; background: rgba(255,255,255,0.06); }
+  .y-bottomrow td, .y-bottomrow th{ font-weight: 900; background: rgba(255,255,255,0.09); }
+  .y-bottomrow.total td, .y-bottomrow.total th{ background: rgba(255,255,255,0.13); font-size: 1.02rem; }
 
-  /* NEU: Footer-Summen nochmal stärker */
-  .y-bottomrow td, .y-bottomrow th{
-    font-weight: 900;
-    background: rgba(255,255,255,0.09);
-  }
-  .y-bottomrow.total td, .y-bottomrow.total th{
-    background: rgba(255,255,255,0.13);
-    font-size: 1.02rem;
+  /* Extra fürs Tablet Hochformat */
+  @media (max-width: 820px){
+    .y-table{ min-width: 640px; }
+    .y-table th, .y-table td{ padding: 7px 6px; font-size: 0.9rem; }
+    .y-table th:first-child, .y-table td:first-child{ min-width: 175px; max-width: 220px; }
+    .y-rowhint{ display:none; } /* optional: spart Höhe/Breite */
   }
 
   .y-foot{
@@ -358,7 +361,7 @@ layout: page
 
 <script>
 (() => {
-  const STORAGE_KEY = "shb_yazzee_manual_v3";
+  const STORAGE_KEY = "shb_yazzee_manual_v4";
 
   const categories = [
     { key: "ones",   label: "1 – alle 1 zählen", type: "upper", face: 1 },
@@ -399,7 +402,6 @@ layout: page
   const modeInfo = el("modeInfo");
   const btnPrev = el("btnPrev");
   const btnNext = el("btnNext");
-
   const scoreTable = el("scoreTable");
 
   // Modal UI
@@ -421,6 +423,7 @@ layout: page
 
   const fixedWrap = el("fixedWrap");
   const fixedInfo = el("fixedInfo");
+  const btnFixedBase = el("btnFixedBase");
   const btnFixedServed = el("btnFixedServed");
   const btnFixedStrike = el("btnFixedStrike");
 
@@ -430,11 +433,21 @@ layout: page
   const chanceManualScore = el("chanceManualScore");
   const chanceFixedInner = el("chanceFixedInner");
   const chanceFixedInfo = el("chanceFixedInfo");
+  const btnChanceFixedBase = el("btnChanceFixedBase");
   const btnChanceFixedServed = el("btnChanceFixedServed");
   const btnChanceFixedStrike = el("btnChanceFixedStrike");
 
   let modalCtx = { playerIndex: null, catKey: null };
   let state = { mode: "runter", players: [], active: 0 };
+
+  const clampInt = (n, min, max) => {
+    n = Number(n);
+    if (!Number.isFinite(n)) n = 0;
+    n = Math.round(n);
+    if (n < min) n = min;
+    if (n > max) n = max;
+    return n;
+  };
 
   // Storage
   const save = () => {
@@ -442,7 +455,7 @@ layout: page
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       setupNote.style.display = "block";
       setupNote.textContent = "✓ Gespeichert.";
-      setTimeout(()=> setupNote.style.display="none", 1200);
+      setTimeout(()=> setupNote.style.display="none", 1100);
     }catch(e){}
   };
 
@@ -484,15 +497,6 @@ layout: page
     return getNextRequiredKey(p) === catKey;
   };
 
-  const clampInt = (n, min, max) => {
-    n = Number(n);
-    if (!Number.isFinite(n)) n = 0;
-    n = Math.round(n);
-    if (n < min) n = min;
-    if (n > max) n = max;
-    return n;
-  };
-
   // Summen
   const getUpperSum = (p) => upperKeys.reduce((acc,k)=> acc + (p.scores[k] ?? 0), 0);
   const getBonus = (p) => (getUpperSum(p) >= 63 ? 35 : 0);
@@ -509,17 +513,9 @@ layout: page
 
   const getTotal = (p) => getUpperWithBonus(p) + getLowerSum(p);
 
-  // Render
-  const renderTop = () => {
-    const p = state.players[state.active];
-    activePlayerName.textContent = p ? p.name : "–";
-    modeInfo.textContent = `Modus: ${state.mode}`;
-  };
-
   const addSummaryRow = (tbody, label, cls, calcFn) => {
     const tr = document.createElement("tr");
     tr.className = cls;
-
     const tdL = document.createElement("td");
     tdL.innerHTML = `<strong>${label}</strong>`;
     tr.appendChild(tdL);
@@ -531,6 +527,13 @@ layout: page
     });
 
     tbody.appendChild(tr);
+  };
+
+  // Render
+  const renderTop = () => {
+    const p = state.players[state.active];
+    activePlayerName.textContent = p ? p.name : "–";
+    modeInfo.textContent = `Modus: ${state.mode}`;
   };
 
   const renderTable = () => {
@@ -555,11 +558,7 @@ layout: page
       const tr = document.createElement("tr");
 
       const tdL = document.createElement("td");
-      tdL.innerHTML = `<strong>${cat.label}</strong>${
-        (cat.type === "fixed")
-          ? `<span class="y-rowhint">${cat.base}P (serviert ${cat.served}P) – Hausregel: nur serviert oder 0</span>`
-          : `<span class="y-rowhint">&nbsp;</span>`
-      }`;
+      tdL.innerHTML = `<strong>${cat.label}</strong>`;
       tr.appendChild(tdL);
 
       state.players.forEach((p, pIdx) => {
@@ -575,7 +574,6 @@ layout: page
           if (!allowed) td.classList.add("disabled");
           if (pIdx === state.active) td.classList.add("active");
           td.textContent = allowed ? "Eintragen" : "–";
-          td.title = allowed ? "Klicken zum Eintragen" : "In diesem Modus gerade nicht erlaubt";
 
           td.addEventListener("click", () => {
             if (!isCellAllowed(pIdx, cat.key)) return;
@@ -588,7 +586,6 @@ layout: page
 
       tbody.appendChild(tr);
 
-      // ✅ NEU: Zwischen 6 und 1 Paar
       if (cat.key === "sixes") {
         addSummaryRow(tbody, "Summe (1–6)", "y-midrow", (p) => getUpperSum(p));
         addSummaryRow(tbody, "Bonus", "y-midrow", (p) => getBonus(p));
@@ -596,7 +593,6 @@ layout: page
       }
     });
 
-    // ✅ NEU: Footer ganz unten (unten / oben / gesamt)
     addSummaryRow(tbody, "Summe unten", "y-bottomrow", (p) => getLowerSum(p));
     addSummaryRow(tbody, "Summe oben", "y-bottomrow", (p) => getUpperWithBonus(p));
     addSummaryRow(tbody, "Gesamt", "y-bottomrow total", (p) => getTotal(p));
@@ -652,10 +648,12 @@ layout: page
     } else {
       chanceManualInner.style.display = "none";
       chanceFixedInner.style.display = "block";
+      modalActions.style.display = "none";
+
       const fixedCat = categories.find(c => c.key === v);
       chanceFixedInfo.innerHTML =
-        `<strong>${fixedCat.label}</strong><br>Hausregel: nur <strong>serviert (${fixedCat.served}P)</strong> oder <strong>streichen (0P)</strong>.`;
-      modalActions.style.display = "none";
+        `<strong>${fixedCat.label}</strong><br>` +
+        `Normal: <strong>${fixedCat.base}P</strong> · Serviert: <strong>${fixedCat.served}P</strong> · Streichen: <strong>0P</strong>`;
     }
   };
 
@@ -665,7 +663,6 @@ layout: page
 
     modalCtx = { playerIndex, catKey };
     modalTitle.textContent = `${p.name} – ${cat.label}`;
-
     hideAllModalSections();
 
     if (cat.type === "upper") {
@@ -680,11 +677,18 @@ layout: page
     }
 
     if (cat.type === "fixed") {
-      modalSub.textContent = "Fixziel: nur Serviert oder Streichen (Hausregel)";
+      modalSub.textContent = "Fixziel auswählen";
       fixedWrap.style.display = "block";
-      fixedInfo.innerHTML = `<strong>${cat.label}</strong><br>Serviert: <strong>${cat.served}P</strong> – oder Streichen: <strong>0P</strong>`;
       modalActions.style.display = "none";
 
+      fixedInfo.innerHTML =
+        `<strong>${cat.label}</strong><br>` +
+        `Normal: <strong>${cat.base}P</strong> · Serviert: <strong>${cat.served}P</strong> · Streichen: <strong>0P</strong>`;
+
+      btnFixedBase.textContent = `Normal (${cat.base}P)`;
+      btnFixedServed.textContent = `Serviert (${cat.served}P)`;
+
+      btnFixedBase.onclick = () => applyScoreAndNext(playerIndex, catKey, cat.base);
       btnFixedServed.onclick = () => applyScoreAndNext(playerIndex, catKey, cat.served);
       btnFixedStrike.onclick = () => applyScoreAndNext(playerIndex, catKey, 0);
 
@@ -703,6 +707,12 @@ layout: page
       setChanceInnerMode();
       chanceSelect.onchange = setChanceInnerMode;
 
+      // Buttons für Fixziel-in-Chance
+      btnChanceFixedBase.onclick = () => {
+        const fixedKey = chanceSelect.value;
+        const fixedCat = categories.find(c => c.key === fixedKey);
+        applyScoreAndNext(playerIndex, catKey, fixedCat.base);
+      };
       btnChanceFixedServed.onclick = () => {
         const fixedKey = chanceSelect.value;
         const fixedCat = categories.find(c => c.key === fixedKey);
@@ -715,7 +725,7 @@ layout: page
       return;
     }
 
-    // manual category
+    // manual
     modalSub.textContent = "Punkte manuell eintragen (0 erlaubt = streichen)";
     manualWrap.style.display = "block";
     manualScore.value = "";
@@ -735,7 +745,7 @@ layout: page
     }
 
     if (cat.type === "chance") {
-      if (chanceSelect.value !== "chance_manual") return;
+      if (chanceSelect.value !== "chance_manual") return; // Fixfälle gehen per Buttons
       applyScoreAndNext(playerIndex, catKey, clampInt(chanceManualScore.value, 0, 9999));
       return;
     }
