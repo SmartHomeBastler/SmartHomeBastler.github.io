@@ -386,30 +386,32 @@ show_sidebar: false
       renderAll();
       return;
     }
-
+  
     const sum = Number(ui.sumInput.value);
     if (!Number.isFinite(sum)) return;
-
+  
     pushUndoSnapshot();
-
+  
     let diff = 0;
     let overshoot = 0;
     let hits = 0;
     let penalty = 0;
     let targetId = null;
-
+  
     if (sum < 30) {
       diff = 30 - sum;
       current.balance = balanceNum(current.balance) - diff;
+  
     } else if (sum === 30) {
       // nothing
+  
     } else { // sum > 30
       overshoot = sum - 30;
       hits = clampInt(Number(ui.hitsInput.value), 0, 999);
       penalty = hits * overshoot;
-
+  
       targetId = nextAvailablePlayerId(current.id);
-      
+  
       // Wenn kein anderer verfügbar ist (oder aus irgendeinem Grund man selbst zurückkommt):
       if (!targetId || targetId === current.id) {
         targetId = null;
@@ -418,7 +420,8 @@ show_sidebar: false
         const target = getPlayer(targetId);
         if (target) target.balance = balanceNum(target.balance) - penalty;
       }
-
+    } // ✅ WICHTIG: diese Klammer hat bei dir gefehlt!
+  
     const turn = {
       round: state.round,
       playerId: current.id,
@@ -432,19 +435,19 @@ show_sidebar: false
       targetName: targetId ? (getPlayer(targetId)?.name ?? null) : null,
       time: new Date().toISOString()
     };
-
+  
     state.currentRoundTurns.push(turn);
     if (!state.playedThisRound.includes(current.id)) state.playedThisRound.push(current.id);
-
+  
     // advance current player (skip negatives)
     const nextId = nextAvailablePlayerId(current.id);
     if (nextId) state.currentPlayerId = nextId;
-
+  
     // clear inputs for next
     ui.sumInput.value = "";
     ui.hitsInput.value = "0";
     ui.overshootBlock.classList.add("rw-hidden");
-
+  
     maybeEndRound();
     save();
     renderAll();
