@@ -294,14 +294,20 @@ show_sidebar: false
   }
 
   function save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    // history NICHT persistieren (spart enorm Speicher)
+    const { history, ...persistable } = state;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
   }
 
   function load() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return null;
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+  
+      // history kommt nicht aus dem Storage -> immer frisch
+      parsed.history = [];
+      return parsed;
     } catch {
       return null;
     }
@@ -358,7 +364,11 @@ show_sidebar: false
   }
 
   function pushUndoSnapshot() {
-    state.history.push(JSON.stringify(state));
+    // Snapshot ohne history, sonst wächst es exponentiell!
+    const snapshot = { ...state, history: [] };
+    state.history.push(JSON.stringify(snapshot));
+  
+    // limit history size
     if (state.history.length > 50) state.history.shift();
   }
 
