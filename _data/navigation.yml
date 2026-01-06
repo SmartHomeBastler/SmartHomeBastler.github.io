@@ -52,3 +52,9 @@
   dropdown:
     - name: ASCII Code
       link: /asciicodeueberschriften
+- name: 🎲🎲
+  dropdown:
+    - name: Runter Würfeln
+      link: /runterwurfeln
+    - name: Yahtzee
+      link: /yahtzee
