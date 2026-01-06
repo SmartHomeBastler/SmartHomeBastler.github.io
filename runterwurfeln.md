@@ -4,7 +4,6 @@ subtitle: Runden speichern, 🐟-Schwimmer ehren, Negativlinge überspringen
 description: Punkte-Tracker für „Runter Würfeln“ mit beliebig vielen Spielern. <30 = Differenzabzug, >30 = Überschuss trifft nächsten verfügbaren Spieler.
 layout: page
 show_sidebar: false
-permalink: /wurfel/
 ---
 
 <div class="shb-main-container" id="app">
