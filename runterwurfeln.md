@@ -158,7 +158,7 @@ show_sidebar: false
             <strong>Summe &gt; 30:</strong> <strong>Überschuss</strong> = Summe − 30. <em>Beispiel:</em> 34 ⇒ Überschuss 4.
           </li>
           <li style="margin-top:6px;">
-            Bei <strong>Überschuss</strong> versuchst du die <strong>Überschusszahl</strong> zu würfeln (z.B. die 4) und legst jeden Treffer zur Seite.
+            Bei <strong>Überschuss</strong> versuchst du die <strong>Überschusszahl</strong> mit allen Würfeln zu werfen (z.B. die 4) und legst jeden Treffer zur Seite. Bei 6 erreichten Treffern, wird wieder mit allen Würfeln geworfen und weitere Treffer beiseite gelegt und gezählt.
             Sobald du <strong>keine Überschusszahl</strong> mehr würfelst, ist Schluss.
             Im Tracker wird die <strong>Anzahl der Trefferwürfel</strong> eingetragen.
           </li>
