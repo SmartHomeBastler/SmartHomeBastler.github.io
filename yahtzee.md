@@ -1,7 +1,7 @@
 ---
 title: Yahtzee Scoreboard
 subtitle: Mehrspieler-Yahtzee-Scoreboard mit 3 verschiedenen Spiel-Varianten
-description: Punkte manuell eintragen (echte Würfel), Modi runter/rauf/durcheinander, Fixziele per Klick (Normal/Serviert/Streichen), Bonus ab 63, Treffer-Eingabe für 1–6, Chance als Fixziel (außer Modus 3).
+description: Punkte manuell eintragen (echte Würfel), Modi runter/rauf/durcheinander, Fixziele per Klick (Normal/Serviert/Streichen), Bonus ab 63, Treffer-Eingabe für 1–6, Chance als Fixziel (außer Modus 3). Mit Historie + Druck-Export + schönerem End-Popup.
 show_sidebar: false
 layout: page
 ---
@@ -17,9 +17,14 @@ layout: page
 
   <!-- Setup -->
   <div class="y-card">
-    <h2 class="y-h2">Spiel-Setup</h2>
+    <div class="y-headrow">
+      <h2 class="y-h2" style="margin:0;">Spiel-Setup</h2>
+      <div class="y-head-actions">
+        <button class="y-btn" id="btnHistoryTop">📚 Historie</button>
+      </div>
+    </div>
 
-    <div class="y-grid">
+    <div class="y-grid" style="margin-top:12px;">
       <div class="y-field">
         <label class="y-label" for="playerInput">Spieler (mit Komma trennen)</label>
         <input id="playerInput" class="y-input" type="text" placeholder="Maxx, Moni, Mia">
@@ -37,7 +42,7 @@ layout: page
 
       <div class="y-field y-actions">
         <button class="y-btn y-btn-primary" id="btnStart">Spiel starten / neu starten</button>
-        <button class="y-btn" id="btnResetAll" title="Alles löschen (inkl. Speicher)">Alles löschen</button>
+        <button class="y-btn" id="btnResetAll" title="Aktuelles Spiel löschen (Historie bleibt)">Alles löschen</button>
       </div>
     </div>
 
@@ -66,9 +71,14 @@ layout: page
 
   <!-- Table -->
   <div class="y-card" id="tableArea" style="display:none;">
-    <h2 class="y-h2">Punkte</h2>
+    <div class="y-headrow">
+      <h2 class="y-h2" style="margin:0;">Punkte</h2>
+      <div class="y-head-actions">
+        <button class="y-btn" id="btnHistory">📚 Historie</button>
+      </div>
+    </div>
 
-    <div class="y-table-wrap">
+    <div class="y-table-wrap" style="margin-top:12px;">
       <table class="y-table" id="scoreTable"></table>
     </div>
 
@@ -132,7 +142,7 @@ layout: page
           <option value="large">Große Straße (Fixziel)</option>
           <option value="yazzee">Yazzee (Fixziel)</option>
         </select>
-        <div class="y-help">Hausregel: Chance darf auch als Fixziel verwendet werden.</div>
+        <div class="y-help">Hausregel: Chance darf auch als Fixziel verwendet werden (außer Modus 3).</div>
       </div>
 
       <div id="chanceManualInner" style="display:none; margin-top:10px;">
@@ -160,24 +170,69 @@ layout: page
   </div>
 </div>
 
-<!-- Modal: Final Results -->
+<!-- Modal: Final Results (schicker) -->
 <div class="y-modal" id="finalModal" style="display:none;">
   <div class="y-modal-backdrop" id="finalBackdrop"></div>
 
-  <div class="y-modal-card">
+  <div class="y-modal-card y-modal-card-wide">
     <div class="y-modal-title">🏁 Endergebnis</div>
     <div class="y-modal-sub" id="finalSub">–</div>
 
-    <div class="y-fixed-info" id="finalBody" style="margin-top:10px;">–</div>
+    <div class="y-podium" id="podiumTop"></div>
 
-    <div class="y-modal-actions">
-      <button class="y-btn" id="btnFinalClose">Schließen</button>
+    <div class="y-section-title">Alle Platzierungen</div>
+    <div class="y-ranklist" id="finalBody"></div>
+
+    <div class="y-modal-actions y-modal-actions-split">
+      <div class="y-left-actions">
+        <button class="y-btn y-btn-primary" id="btnNewRoundSame">🔁 Neue Runde (gleich)</button>
+        <button class="y-btn y-btn-primary" id="btnNewRoundLoser">🧊 Verlierer beginnt</button>
+      </div>
+      <div class="y-right-actions">
+        <button class="y-btn" id="btnFinalHistory">📚 Historie</button>
+        <button class="y-btn" id="btnFinalClose">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: History -->
+<div class="y-modal" id="historyModal" style="display:none;">
+  <div class="y-modal-backdrop" id="historyBackdrop"></div>
+
+  <div class="y-modal-card y-modal-card-wide">
+    <div class="y-modal-title">📚 Historie</div>
+    <div class="y-modal-sub" id="historySub">–</div>
+
+    <div class="y-history-grid">
+      <div class="y-history-card">
+        <div class="y-section-title" style="margin-top:0;">🏆 Siege</div>
+        <div class="y-smallhint">Gleichstand zählt als Sieg für alle Gewinner.</div>
+        <div id="historyWins"></div>
+      </div>
+
+      <div class="y-history-card">
+        <div class="y-section-title" style="margin-top:0;">🗂️ Spiele</div>
+        <div class="y-smallhint">Neueste oben.</div>
+        <div class="y-history-list" id="historyList"></div>
+      </div>
+    </div>
+
+    <div class="y-modal-actions y-modal-actions-split">
+      <div class="y-left-actions">
+        <button class="y-btn y-btn-primary" id="btnHistoryPrint">🖨️ Drucken / Export (PDF)</button>
+      </div>
+      <div class="y-right-actions">
+        <button class="y-btn y-btn-danger" id="btnHistoryClear">🗑️ Historie löschen</button>
+        <button class="y-btn" id="btnHistoryClose">Schließen</button>
+      </div>
     </div>
   </div>
 </div>
 
 <style>
   .yazzee-wrap { margin-top: 1rem; }
+
   .y-card{
     background: rgba(0,0,0,0.25);
     border: 1px solid rgba(255,255,255,0.08);
@@ -186,7 +241,18 @@ layout: page
     margin: 14px 0;
     backdrop-filter: blur(6px);
   }
+
+  .y-headrow{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .y-head-actions{ display:flex; gap:10px; }
+
   .y-h2{ margin: 0 0 12px 0; font-size: 1.2rem; letter-spacing: 0.2px; }
+
   .y-grid{ display:grid; grid-template-columns: 1.2fr 1fr auto; gap: 12px; align-items:end; }
   @media (max-width: 900px){ .y-grid{ grid-template-columns: 1fr; } }
 
@@ -234,6 +300,8 @@ layout: page
   .y-btn:hover{ border-color: rgba(255,255,255,0.30); background: rgba(255,255,255,0.06); }
   .y-btn:active{ transform: scale(0.98); }
   .y-btn-primary{ border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.08); font-weight:800; }
+  .y-btn-danger{ border-color: rgba(255,90,90,0.35); background: rgba(255,90,90,0.10); }
+  .y-btn-danger:hover{ border-color: rgba(255,90,90,0.55); background: rgba(255,90,90,0.14); }
 
   .y-note{
     margin-top:10px;
@@ -324,6 +392,7 @@ layout: page
     margin-right:8px;
   }
 
+  /* Modals */
   .y-modal{ position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; padding:16px; }
   .y-modal-backdrop{ position:absolute; inset:0; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); }
   .y-modal-card{
@@ -335,9 +404,13 @@ layout: page
     padding:16px;
     box-shadow: 0 20px 70px rgba(0,0,0,0.55);
   }
+  .y-modal-card-wide{ width:min(980px, 100%); }
   .y-modal-title{ font-size:1.1rem; font-weight:900; margin-bottom:4px; }
   .y-modal-sub{ font-size:0.92rem; opacity:0.8; margin-bottom:12px; }
-  .y-modal-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:12px; }
+
+  .y-modal-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:12px; flex-wrap:wrap; }
+  .y-modal-actions-split{ justify-content:space-between; }
+  .y-left-actions, .y-right-actions{ display:flex; gap:10px; flex-wrap:wrap; }
 
   .y-preview{
     margin-top: 10px;
@@ -364,11 +437,129 @@ layout: page
     flex-wrap:wrap;
     margin-top: 12px;
   }
+
+  /* Final / Podium */
+  .y-section-title{
+    margin-top:14px;
+    font-weight:900;
+    opacity:0.95;
+    letter-spacing:0.2px;
+  }
+
+  .y-podium{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:12px;
+    margin-top:10px;
+  }
+  @media (max-width: 860px){
+    .y-podium{ grid-template-columns: 1fr; }
+  }
+  .y-podium-card{
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    padding:12px;
+  }
+  .y-podium-rank{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    font-weight:900;
+    font-size:1.05rem;
+  }
+  .y-podium-name{ font-size:1.1rem; font-weight:900; margin-top:8px; }
+  .y-podium-score{ font-size:1.3rem; font-weight:900; margin-top:2px; }
+  .y-podium-sub{ opacity:0.78; font-size:0.9rem; margin-top:2px; }
+
+  .y-ranklist{
+    margin-top:8px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.10);
+    overflow:hidden;
+  }
+  .y-rankrow{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 12px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.20);
+  }
+  .y-rankrow:last-child{ border-bottom:none; }
+  .y-rankleft{ display:flex; gap:10px; align-items:center; }
+  .y-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:3px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    font-weight:900;
+    font-size:0.9rem;
+    white-space:nowrap;
+  }
+  .y-rankmeta{ opacity:0.8; font-size:0.9rem; margin-top:2px; }
+
+  /* History */
+  .y-history-grid{
+    display:grid;
+    grid-template-columns: 320px 1fr;
+    gap:12px;
+  }
+  @media (max-width: 920px){
+    .y-history-grid{ grid-template-columns: 1fr; }
+  }
+  .y-history-card{
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    padding:12px;
+  }
+  .y-smallhint{ opacity:0.75; font-size:0.9rem; margin-top:4px; }
+
+  .y-winrow{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,0.10);
+  }
+  .y-winrow:last-child{ border-bottom:none; }
+
+  .y-history-list{ display:flex; flex-direction:column; gap:10px; margin-top:10px; }
+  .y-gamecard{
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.12);
+    background: rgba(0,0,0,0.20);
+    padding:12px;
+  }
+  .y-gamehead{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    font-weight:900;
+  }
+  .y-gamemeta{ opacity:0.78; font-size:0.9rem; margin-top:4px; }
+  .y-gamerows{ margin-top:10px; border-top:1px solid rgba(255,255,255,0.10); padding-top:10px; }
+  .y-gamerow{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:6px 0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .y-gamerow:last-child{ border-bottom:none; }
 </style>
 
 <script>
 (() => {
-  const STORAGE_KEY = "shb_yazzee_manual_v5";
+  // --- Storage keys
+  const STORAGE_KEY = "shb_yazzee_manual_v6";
+  const STORAGE_HISTORY_KEY = "shb_yazzee_history_v1";
 
   const categories = [
     { key: "ones",   label: "1 – alle 1 zählen", type: "upper", face: 1 },
@@ -401,6 +592,9 @@ layout: page
   const btnResetAll = el("btnResetAll");
   const btnSave = el("btnSave");
   const setupNote = el("setupNote");
+
+  const btnHistory = el("btnHistory");
+  const btnHistoryTop = el("btnHistoryTop");
 
   const turnArea = el("turnArea");
   const tableArea = el("tableArea");
@@ -448,8 +642,22 @@ layout: page
   const finalModal = el("finalModal");
   const finalBackdrop = el("finalBackdrop");
   const finalSub = el("finalSub");
+  const podiumTop = el("podiumTop");
   const finalBody = el("finalBody");
   const btnFinalClose = el("btnFinalClose");
+  const btnNewRoundSame = el("btnNewRoundSame");
+  const btnNewRoundLoser = el("btnNewRoundLoser");
+  const btnFinalHistory = el("btnFinalHistory");
+
+  // History modal
+  const historyModal = el("historyModal");
+  const historyBackdrop = el("historyBackdrop");
+  const historySub = el("historySub");
+  const historyWins = el("historyWins");
+  const historyList = el("historyList");
+  const btnHistoryClose = el("btnHistoryClose");
+  const btnHistoryPrint = el("btnHistoryPrint");
+  const btnHistoryClear = el("btnHistoryClear");
 
   let modalCtx = { playerIndex: null, catKey: null };
 
@@ -457,9 +665,11 @@ layout: page
     mode: "runter",
     players: [],
     active: 0,
-    finalShown: false
+    finalShown: false,
+    gameId: null
   };
 
+  // --- helpers
   const clampInt = (n, min, max) => {
     n = Number(n);
     if (!Number.isFinite(n)) n = 0;
@@ -469,12 +679,26 @@ layout: page
     return n;
   };
 
+  const normalizeName = (s) => String(s ?? "")
+    .trim()
+    .replace(/\s+/g, " ");
+
+  const makeGameId = () => String(Date.now()) + "_" + Math.random().toString(16).slice(2);
+
+  // --- history storage
+  const loadHistory = () => {
+    try { return JSON.parse(localStorage.getItem(STORAGE_HISTORY_KEY) || "[]"); }
+    catch { return []; }
+  };
+  const saveHistory = (arr) => localStorage.setItem(STORAGE_HISTORY_KEY, JSON.stringify(arr));
+
+  // --- save/load current state
   const save = () => {
     try{
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       setupNote.style.display = "block";
       setupNote.textContent = "✓ Gespeichert.";
-      setTimeout(()=> setupNote.style.display="none", 1000);
+      setTimeout(()=> setupNote.style.display="none", 900);
     }catch(e){}
   };
 
@@ -488,6 +712,7 @@ layout: page
       state.mode ??= "runter";
       state.active ??= 0;
       state.finalShown ??= false;
+      state.gameId ??= makeGameId();
       return true;
     }catch(e){ return false; }
   };
@@ -543,7 +768,8 @@ layout: page
     return true;
   };
 
-  const showFinalModal = () => {
+  // rank helper: returns sorted rows with displayedRank
+  const computeRankingRows = () => {
     const rows = state.players.map(p => ({
       name: p.name,
       upper: getUpperWithBonus(p),
@@ -551,34 +777,236 @@ layout: page
       total: getTotal(p)
     })).sort((a,b) => b.total - a.total);
 
-    // ranking with ties
-    let html = "";
-    let rank = 0;
+    let prev = null;
     let shownRank = 0;
-    let prevScore = null;
-
     rows.forEach((r, idx) => {
-      rank = idx + 1;
-      if (prevScore === null || r.total !== prevScore) shownRank = rank;
-      prevScore = r.total;
-
-      html += `<div style="display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.10);">
-        <div><strong>#${shownRank}</strong> – ${r.name}</div>
-        <div><strong>${r.total}</strong> P</div>
-      </div>
-      <div style="opacity:0.8; font-size:0.9rem; margin:-2px 0 8px 0;">
-        oben ${r.upper} · unten ${r.lower}
-      </div>`;
+      const rank = idx + 1;
+      if (prev === null || r.total !== prev) shownRank = rank;
+      r.rank = rank;
+      r.shownRank = shownRank;
+      prev = r.total;
     });
 
-    finalSub.textContent = `Spiel beendet – ${state.players.length} Spieler`;
-    finalBody.innerHTML = html;
+    return rows;
+  };
+
+  const medalForRank = (rank) => {
+    if (rank === 1) return "🥇";
+    if (rank === 2) return "🥈";
+    if (rank === 3) return "🥉";
+    return "🏅";
+  };
+
+  // --- add finished game to history (idempotent)
+  const addFinishedGameToHistory = () => {
+    const history = loadHistory();
+    if (history.some(g => g.gameId === state.gameId)) return;
+
+    const rows = computeRankingRows();
+    const maxTotal = Math.max(...rows.map(r => r.total));
+    const winners = rows.filter(r => r.total === maxTotal).map(r => r.name);
+
+    history.unshift({
+      gameId: state.gameId,
+      finishedAt: new Date().toISOString(),
+      mode: state.mode,
+      winners,
+      results: rows.map(r => ({ name: r.name, total: r.total, upper: r.upper, lower: r.lower, rank: r.shownRank }))
+    });
+
+    if (history.length > 300) history.length = 300;
+    saveHistory(history);
+  };
+
+  // --- Final modal rendering
+  const showFinalModal = () => {
+    const rows = computeRankingRows();
+
+    finalSub.textContent = `Spiel beendet – ${state.players.length} Spieler · Modus: ${state.mode}`;
+
+    // Podium (Top 3 unique ranks)
+    const topRanks = [];
+    for (const r of rows) {
+      if (!topRanks.includes(r.shownRank)) topRanks.push(r.shownRank);
+      if (topRanks.length === 3) break;
+    }
+
+    const podiumCards = topRanks.map(rank => {
+      const group = rows.filter(x => x.shownRank === rank);
+      const names = group.map(x => x.name).join(", ");
+      const points = group[0]?.total ?? 0;
+      const sub = group.length > 1 ? `Gleichstand · oben ${group[0].upper} · unten ${group[0].lower}` : `oben ${group[0].upper} · unten ${group[0].lower}`;
+
+      return `
+        <div class="y-podium-card">
+          <div class="y-podium-rank">
+            <span>${medalForRank(rank)} Platz ${rank}</span>
+            <span class="y-chip">${points} P</span>
+          </div>
+          <div class="y-podium-name">${names}</div>
+          <div class="y-podium-sub">${sub}</div>
+        </div>
+      `;
+    }).join("");
+
+    podiumTop.innerHTML = podiumCards || `<div class="y-fixed-info">Keine Daten.</div>`;
+
+    // Full list
+    finalBody.innerHTML = rows.map(r => {
+      const chip = `<span class="y-chip">${medalForRank(r.shownRank)} #${r.shownRank}</span>`;
+      return `
+        <div class="y-rankrow">
+          <div>
+            <div class="y-rankleft">
+              ${chip}
+              <div>
+                <div style="font-weight:900;">${r.name}</div>
+                <div class="y-rankmeta">oben ${r.upper} · unten ${r.lower}</div>
+              </div>
+            </div>
+          </div>
+          <div style="font-weight:900; font-size:1.05rem;">${r.total} P</div>
+        </div>
+      `;
+    }).join("");
+
     finalModal.style.display = "flex";
   };
 
   const closeFinalModal = () => { finalModal.style.display = "none"; };
 
-  // Render helpers
+  // --- History modal
+  const formatMode = (m) => (m === "runter" ? "⬇️ runter" : m === "rauf" ? "⬆️ rauf" : "↕️ durcheinander");
+
+  const fmtDateTime = (iso) => {
+    try{
+      const d = new Date(iso);
+      return d.toLocaleString(undefined, { year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit" });
+    } catch {
+      return iso;
+    }
+  };
+
+  const openHistoryModal = () => {
+    const history = loadHistory();
+    historySub.textContent = history.length ? `${history.length} gespeicherte Spiele` : "Noch keine gespeicherten Spiele.";
+
+    // wins
+    const winMap = new Map();
+    for (const g of history) {
+      (g.winners || []).forEach(w => winMap.set(w, (winMap.get(w) || 0) + 1));
+    }
+    const winsArr = [...winMap.entries()].map(([name, wins]) => ({ name, wins }))
+      .sort((a,b) => b.wins - a.wins || a.name.localeCompare(b.name));
+
+    historyWins.innerHTML = winsArr.length
+      ? winsArr.map((w, idx) => `
+          <div class="y-winrow">
+            <div><strong>#${idx+1}</strong> ${w.name}</div>
+            <div class="y-chip">${w.wins} Sieg${w.wins===1?"":"e"}</div>
+          </div>
+        `).join("")
+      : `<div class="y-fixed-info" style="margin-top:10px;">Noch keine Daten. Erst ein Spiel fertig spielen 😄</div>`;
+
+    // game list
+    historyList.innerHTML = history.length
+      ? history.map(g => {
+          const winners = (g.winners || []).join(", ") || "–";
+          const res = (g.results || []).slice().sort((a,b)=> (a.rank||999)-(b.rank||999) || (b.total||0)-(a.total||0));
+          const top = res.slice(0, Math.min(6, res.length)).map(r => `
+            <div class="y-gamerow">
+              <div>${medalForRank(r.rank)} #${r.rank} <strong>${r.name}</strong></div>
+              <div><strong>${r.total}</strong> P</div>
+            </div>
+          `).join("");
+          return `
+            <div class="y-gamecard">
+              <div class="y-gamehead">
+                <div>${fmtDateTime(g.finishedAt)} · ${formatMode(g.mode)}</div>
+                <div class="y-chip">🏆 ${winners}</div>
+              </div>
+              <div class="y-gamemeta">Game-ID: ${g.gameId}</div>
+              <div class="y-gamerows">${top}</div>
+            </div>
+          `;
+        }).join("")
+      : `<div class="y-fixed-info" style="margin-top:10px;">Keine Spiele gespeichert.</div>`;
+
+    historyModal.style.display = "flex";
+  };
+
+  const closeHistoryModal = () => { historyModal.style.display = "none"; };
+
+  const printHistory = () => {
+    const history = loadHistory();
+    const now = new Date().toLocaleString();
+    const title = "Yahtzee – Historie";
+
+    const winsHtml = historyWins.innerHTML || "";
+    const listHtml = historyList.innerHTML || "";
+
+    const html = `
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>${title}</title>
+  <style>
+    body{ font-family: Arial, sans-serif; color:#111; padding:24px; }
+    h1{ margin:0 0 6px 0; }
+    .sub{ color:#444; margin-bottom:18px; }
+    .grid{ display:grid; grid-template-columns: 280px 1fr; gap:16px; align-items:start; }
+    @media print { .grid{ grid-template-columns: 1fr; } }
+    .card{ border:1px solid #ddd; border-radius:12px; padding:12px; }
+    .chip{ display:inline-block; border:1px solid #ddd; border-radius:999px; padding:3px 10px; font-weight:700; }
+    .winrow, .gamerow{ display:flex; justify-content:space-between; gap:10px; padding:6px 0; border-bottom:1px solid #eee; }
+    .winrow:last-child, .gamerow:last-child{ border-bottom:none; }
+    .gamecard{ border:1px solid #ddd; border-radius:12px; padding:12px; margin-bottom:12px; }
+    .gamehead{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-weight:800; }
+    .meta{ color:#666; font-size:12px; margin-top:4px; }
+    .rows{ margin-top:10px; border-top:1px solid #eee; padding-top:10px; }
+    .small{ color:#555; font-size:13px; margin-top:4px; }
+  </style>
+</head>
+<body>
+  <h1>${title}</h1>
+  <div class="sub">Stand: ${now} · gespeicherte Spiele: ${history.length}</div>
+
+  <div class="grid">
+    <div class="card">
+      <div style="font-weight:900; margin-bottom:6px;">🏆 Siege</div>
+      <div class="small">Gleichstand zählt als Sieg für alle Gewinner.</div>
+      <div style="margin-top:10px;">${winsHtml}</div>
+    </div>
+
+    <div class="card">
+      <div style="font-weight:900; margin-bottom:6px;">🗂️ Spiele</div>
+      <div class="small">Neueste oben.</div>
+      <div style="margin-top:10px;">${listHtml}</div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+    const w = window.open("", "_blank");
+    if (!w) {
+      alert("Popup wurde blockiert. Bitte Popups für diese Seite erlauben, dann erneut versuchen.");
+      return;
+    }
+    w.document.open();
+    w.document.write(html);
+    w.document.close();
+    w.focus();
+    w.print();
+  };
+
+  const clearHistory = () => {
+    if (!confirm("Historie wirklich löschen? Das kann nicht rückgängig gemacht werden.")) return;
+    localStorage.removeItem(STORAGE_HISTORY_KEY);
+    openHistoryModal(); // re-render empty state
+  };
+
+  // --- Render helpers
   const addSummaryRow = (tbody, label, cls, calcFn) => {
     const tr = document.createElement("tr");
     tr.className = cls;
@@ -681,9 +1109,12 @@ layout: page
   const closeModal = () => { scoreModal.style.display = "none"; };
 
   const afterScoreChange = () => {
-    // Spielende erkannt?
     if (!state.finalShown && allFieldsFilled()) {
       state.finalShown = true;
+
+      // ✅ save to history once
+      addFinishedGameToHistory();
+
       save();
       showFinalModal();
     }
@@ -773,9 +1204,9 @@ layout: page
     if (cat.type === "chance") {
       chanceWrap.style.display = "block";
 
-      // ✅ Änderung: In Modus 3 (frei/durcheinander) nur Augensumme, KEIN Fixziel
+      // Modus 3 (frei): nur Augensumme
       if (state.mode === "frei") {
-        modalSub.textContent = "Chance: nur Augensumme eintragen (Modus 3)";
+        modalSub.textContent = "Chance: nur Augensumme eintragen (Modus ↕️)";
         chanceSelectWrap.style.display = "none";
         chanceFixedInner.style.display = "none";
         chanceManualInner.style.display = "block";
@@ -786,7 +1217,7 @@ layout: page
         return;
       }
 
-      // andere Modi: Hausregel-Auswahl erlaubt
+      // andere Modi: Hausregel erlaubt
       modalSub.textContent = "Chance: manuell eintragen oder (Hausregel) als Fixziel verwenden";
       chanceSelectWrap.style.display = "block";
       chanceSelect.value = "chance_manual";
@@ -834,7 +1265,6 @@ layout: page
     }
 
     if (cat.type === "chance") {
-      // In frei-Modus immer manual; sonst nur manual wenn ausgewählt
       if (state.mode !== "frei" && chanceSelect.value !== "chance_manual") return;
       applyScoreAndNext(playerIndex, catKey, clampInt(chanceManualScore.value, 0, 9999));
       return;
@@ -864,9 +1294,24 @@ layout: page
   finalBackdrop.addEventListener("click", closeFinalModal);
   btnFinalClose.addEventListener("click", closeFinalModal);
 
+  btnFinalHistory.addEventListener("click", () => {
+    closeFinalModal();
+    openHistoryModal();
+  });
+
+  // History modal events
+  historyBackdrop.addEventListener("click", closeHistoryModal);
+  btnHistoryClose.addEventListener("click", closeHistoryModal);
+  btnHistoryPrint.addEventListener("click", printHistory);
+  btnHistoryClear.addEventListener("click", clearHistory);
+
+  // History buttons
+  btnHistory.addEventListener("click", openHistoryModal);
+  btnHistoryTop.addEventListener("click", openHistoryModal);
+
   // Setup
   const startGame = (names, mode) => {
-    const clean = names.map(n=>n.trim()).filter(n=>n.length>0);
+    const clean = names.map(normalizeName).filter(n=>n.length>0);
     if (clean.length < 1) {
       setupNote.style.display = "block";
       setupNote.textContent = "Bitte mindestens einen Spieler eingeben 🙂";
@@ -880,13 +1325,47 @@ layout: page
     }));
     state.active = 0;
     state.finalShown = false;
+    state.gameId = makeGameId();
 
     turnArea.style.display = "block";
     tableArea.style.display = "block";
 
+    // Update input display
+    playerInput.value = clean.join(", ");
+
     save();
     renderAll();
   };
+
+  const restartRoundWithOrder = (orderNames) => {
+    const mode = state.mode; // keep same mode as finished game
+    startGame(orderNames, mode);
+
+    // reflect mode radio
+    const r = document.querySelector(\`input[name="mode"][value="\${mode}"]\`);
+    if (r) r.checked = true;
+
+    closeFinalModal();
+  };
+
+  btnNewRoundSame.addEventListener("click", () => {
+    const order = state.players.map(p => p.name);
+    restartRoundWithOrder(order);
+  });
+
+  btnNewRoundLoser.addEventListener("click", () => {
+    const rows = computeRankingRows();
+    const minTotal = Math.min(...rows.map(r => r.total));
+
+    // loser group in CURRENT player order (variant 2: all last players to front)
+    const nameToTotal = new Map(rows.map(r => [r.name, r.total]));
+    const currentOrder = state.players.map(p => p.name);
+
+    const losers = currentOrder.filter(n => (nameToTotal.get(n) ?? 0) === minTotal);
+    const others = currentOrder.filter(n => (nameToTotal.get(n) ?? 0) !== minTotal);
+
+    restartRoundWithOrder([...losers, ...others]);
+  });
 
   btnStart.addEventListener("click", () => {
     const names = playerInput.value.split(",");
@@ -895,12 +1374,13 @@ layout: page
   });
 
   btnResetAll.addEventListener("click", () => {
+    // deletes only current game state, history remains
     localStorage.removeItem(STORAGE_KEY);
-    state = { mode: "runter", players: [], active: 0, finalShown: false };
+    state = { mode: "runter", players: [], active: 0, finalShown: false, gameId: null };
     turnArea.style.display = "none";
     tableArea.style.display = "none";
     setupNote.style.display = "block";
-    setupNote.textContent = "Alles gelöscht. Neues Spiel kann starten.";
+    setupNote.textContent = "Aktuelles Spiel gelöscht. Historie bleibt erhalten.";
   });
 
   btnSave.addEventListener("click", save);
@@ -910,14 +1390,17 @@ layout: page
   if (loaded && state.players.length > 0) {
     turnArea.style.display = "block";
     tableArea.style.display = "block";
+
     playerInput.value = state.players.map(p=>p.name).join(", ");
     const r = document.querySelector(`input[name="mode"][value="${state.mode}"]`);
     if (r) r.checked = true;
+
     renderAll();
 
-    // Falls jemand einen fertigen Spielstand lädt und finalShown noch false ist:
+    // Falls fertiger Stand geladen wurde:
     if (!state.finalShown && allFieldsFilled()) {
       state.finalShown = true;
+      addFinishedGameToHistory();
       save();
       showFinalModal();
     }
