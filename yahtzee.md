@@ -1356,15 +1356,26 @@ layout: page
   btnNewRoundLoser.addEventListener("click", () => {
     const rows = computeRankingRows();
     const minTotal = Math.min(...rows.map(r => r.total));
-
-    // loser group in CURRENT player order (variant 2: all last players to front)
-    const nameToTotal = new Map(rows.map(r => [r.name, r.total]));
+  
+    // Sitzreihenfolge (aktuelles Spieler-Order im Spiel)
     const currentOrder = state.players.map(p => p.name);
-
+  
+    // Map Name -> Punkte
+    const nameToTotal = new Map(rows.map(r => [r.name, r.total]));
+  
+    // Verlierer = Spieler mit Min-Punkten
     const losers = currentOrder.filter(n => (nameToTotal.get(n) ?? 0) === minTotal);
-    const others = currentOrder.filter(n => (nameToTotal.get(n) ?? 0) !== minTotal);
-
-    restartRoundWithOrder([...losers, ...others]);
+  
+    // Rotation: starte beim ersten Verlierer in Sitzreihenfolge
+    const startName = losers[0];
+    const startIdx = currentOrder.indexOf(startName);
+  
+    const rotated = [
+      ...currentOrder.slice(startIdx),
+      ...currentOrder.slice(0, startIdx)
+    ];
+  
+    restartRoundWithOrder(rotated);
   });
 
   btnStart.addEventListener("click", () => {
