@@ -13,10 +13,14 @@ show_sidebar: false
     <!-- LEFT: Setup / Controls -->
     <section class="rw-card">
 
-      <!-- Header "Spiel" + kleiner Help Button -->
+      <!-- Header "Spiel" + kleine Buttons -->
       <div class="rw-row rw-row-between" style="margin:0 0 10px 0;">
         <h2 class="rw-h2" style="margin:0;">Spiel</h2>
-        <button class="rw-btn rw-btn-ghost rw-btn-small" id="btnHelp" title="Spielanleitung">❓</button>
+        <div class="rw-btn-group">
+          <button class="rw-btn rw-btn-ghost rw-btn-small" id="btnLoserStarts" title="Verlierer beginnt (Startspieler setzen)">🐟</button>
+          <button class="rw-btn rw-btn-ghost rw-btn-small" id="btnHistory" title="Historie">📜</button>
+          <button class="rw-btn rw-btn-ghost rw-btn-small" id="btnHelp" title="Spielanleitung">❓</button>
+        </div>
       </div>
 
       <div class="rw-row">
@@ -41,8 +45,8 @@ show_sidebar: false
         </div>
 
         <p class="rw-note">
-          Startguthaben: <strong>30</strong> pro Spieler. <br/>
-          Regel: Status: <strong>🎲</strong> = im Plus, <strong>🐟</strong> = 0, <strong>❌</strong> = RAUS (übersprungen). <strong>Negativ</strong> = wird übersprungen.
+          Startguthaben: <strong>30</strong> pro Spieler.<br/>
+          Status: <strong>🎲</strong> = im Plus, <strong>🐟</strong> = 0, <strong>❌</strong> = RAUS (übersprungen).
         </p>
       </div>
 
@@ -133,6 +137,31 @@ show_sidebar: false
     </div>
   </div>
 
+  <!-- HISTORY MODAL -->
+  <div id="historyModal" class="rw-modal rw-hidden" role="dialog" aria-modal="true">
+    <div class="rw-modal-backdrop" id="historyCloseBg"></div>
+    <div class="rw-modal-card">
+      <div class="rw-row">
+        <h2 class="rw-h2" style="margin:0;">📜 Historie</h2>
+        <button class="rw-btn rw-btn-ghost" id="historyClose">✖</button>
+      </div>
+
+      <div class="rw-row rw-row-wrap" style="margin-top:10px;">
+        <button class="rw-btn" id="btnHistoryPrint">🖨️ Drucken / PDF</button>
+        <button class="rw-btn" id="btnHistoryExportJson">📤 Export JSON</button>
+        <button class="rw-btn rw-btn-ghost" id="btnHistoryClear">🗑️ Historie löschen</button>
+      </div>
+
+      <div class="rw-sep"></div>
+
+      <div id="historyBody"></div>
+
+      <p class="rw-note" style="margin-top:12px;">
+        Tipp: Historie ist begrenzt (damit dein Browser nicht explodiert 💥). Älteste Spiele fliegen automatisch raus.
+      </p>
+    </div>
+  </div>
+
   <!-- HELP MODAL -->
   <div id="helpModal" class="rw-modal rw-hidden" role="dialog" aria-modal="true">
     <div class="rw-modal-backdrop" id="helpCloseBg"></div>
@@ -141,11 +170,12 @@ show_sidebar: false
         <h2 class="rw-h2" style="margin:0;">📖 Spielanleitung</h2>
         <button class="rw-btn rw-btn-ghost" id="helpClose">✖</button>
       </div>
+
       <div class="rw-callout" style="margin-top:10px; line-height:1.55;">
         <p><strong>Ziel:</strong> Als einziger Spieler <strong>nicht ins Minus</strong> stolpern!</p>
-      
+
         <p><strong>Start:</strong> Jeder Spieler startet mit <strong>30 Punkten</strong>.</p>
-      
+
         <p style="margin-top:10px;"><strong>Ablauf pro Zug:</strong></p>
         <ol style="margin:8px 0 0 18px;">
           <li>
@@ -158,7 +188,8 @@ show_sidebar: false
             <strong>Summe &gt; 30:</strong> <strong>Überschuss</strong> = Summe − 30. <em>Beispiel:</em> 34 ⇒ Überschuss 4.
           </li>
           <li style="margin-top:6px;">
-            Bei <strong>Überschuss</strong> versuchst du die <strong>Überschusszahl</strong> mit allen Würfeln zu werfen (z.B. die 4) und legst jeden Treffer zur Seite. Bei 6 erreichten Treffern, wird wieder mit allen Würfeln geworfen und weitere Treffer beiseite gelegt und gezählt.
+            Bei <strong>Überschuss</strong> versuchst du die <strong>Überschusszahl</strong> mit allen Würfeln zu werfen (z.B. die 4) und legst jeden Treffer zur Seite.
+            Bei 6 Treffern: wieder mit allen Würfeln weiter, Treffer zählen.
             Sobald du <strong>keine Überschusszahl</strong> mehr würfelst, ist Schluss.
             Im Tracker wird die <strong>Anzahl der Trefferwürfel</strong> eingetragen.
           </li>
@@ -167,12 +198,12 @@ show_sidebar: false
             <em>Beispiel:</em> Überschuss 4, Treffer 3 ⇒ −12 beim nächsten Spieler.
           </li>
         </ol>
-      
+
         <ul style="margin:10px 0 0 18px;">
           <li><strong>🐟 bei 0:</strong> du schwimmst weiter (bleibst im Spiel).</li>
           <li><strong>❌ unter 0:</strong> du bist raus und wirst übersprungen.</li>
         </ul>
-      
+
         <p style="margin-top:10px;">
           <strong>Bedienung:</strong><br/>
           Spielernamen eingeben (Spielreihenfolge) → <strong>Spiel starten</strong><br/>
@@ -182,7 +213,7 @@ show_sidebar: false
           Spiel endet automatisch bei nur mehr einem Spieler ≥ 0 oder via <strong>🏁 Spiel beenden</strong><br/>
           Export im Spielbericht möglich
         </p>
-      
+
         <p class="rw-note" style="margin-top:12px;">
           Viel Spaß beim <strong>Runter Würfeln</strong>! 🎲
         </p>
@@ -199,19 +230,25 @@ show_sidebar: false
   .rw-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px; }
   .rw-h2 { font-size: 1.2rem; margin: 0 0 10px 0; }
   .rw-h3 { font-size: 1.0rem; margin: 10px 0; opacity: 0.95; }
+
   .rw-row { display:flex; gap:10px; align-items:center; margin: 8px 0; }
   .rw-row-between { justify-content: space-between; }
   .rw-row-wrap { flex-wrap: wrap; }
+  .rw-btn-group { display:flex; gap:8px; align-items:center; }
+
   .rw-label { font-size: 0.9rem; opacity: 0.9; }
   .rw-input { padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); color: inherit; outline: none; min-width: 220px; }
   .rw-input-small { min-width: 90px; width: 90px; text-align:center; }
+
   .rw-btn { padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: inherit; cursor:pointer; }
   .rw-btn:hover { background: rgba(255,255,255,0.09); }
   .rw-btn:disabled { opacity: 0.5; cursor:not-allowed; }
+
   .rw-btn-primary { background: rgba(21,152,179,0.25); border-color: rgba(21,152,179,0.5); }
   .rw-btn-primary:hover { background: rgba(21,152,179,0.35); }
   .rw-btn-ghost { background: transparent; }
   .rw-btn-small { padding: 6px 10px; border-radius: 10px; font-size: 0.95rem; line-height: 1; }
+
   .rw-note { font-size: 0.9rem; opacity: 0.85; margin: 8px 0 0; }
   .rw-sep { height: 1px; background: rgba(255,255,255,0.08); margin: 12px 0; }
 
@@ -241,13 +278,18 @@ show_sidebar: false
 <script>
 (() => {
   const STORAGE_KEY = "runter_wuerfeln_v1";
+  const HISTORY_KEY = "runter_wuerfeln_history_v1";
+  const HISTORY_LIMIT = 15;
 
   const el = (id) => document.getElementById(id);
 
   const ui = {
     btnNewGame: el("btnNewGame"),
     btnResetAll: el("btnResetAll"),
+
     btnHelp: el("btnHelp"),
+    btnHistory: el("btnHistory"),
+    btnLoserStarts: el("btnLoserStarts"),
 
     playerName: el("playerName"),
     btnAddPlayer: el("btnAddPlayer"),
@@ -285,44 +327,95 @@ show_sidebar: false
     helpModal: el("helpModal"),
     helpCloseBg: el("helpCloseBg"),
     helpClose: el("helpClose"),
+
+    historyModal: el("historyModal"),
+    historyCloseBg: el("historyCloseBg"),
+    historyClose: el("historyClose"),
+    historyBody: el("historyBody"),
+    btnHistoryPrint: el("btnHistoryPrint"),
+    btnHistoryExportJson: el("btnHistoryExportJson"),
+    btnHistoryClear: el("btnHistoryClear"),
   };
 
   /** State */
   let state = load() ?? newGameState();
-
   state.players.forEach(p => p.balance = balanceNum(p.balance));
+
+  /** History */
+  let historyList = loadHistory();
+
+  // Save immediately (in case defaults were missing)
   save();
 
   function newGameState() {
     return {
-      version: 1,
+      version: 2,
       started: false,
       createdAt: new Date().toISOString(),
       players: [], // {id, name, balance}
       currentPlayerId: null,
+
       round: 1,
       rounds: [], // {no, turns:[], endBalances:[{id,balance}]}
-      currentRoundTurns: [], // turns for this round
-      playedThisRound: [], // array of player ids who took a turn (for persistence)
-      history: [], // snapshots for Undo
+      currentRoundTurns: [],
+      playedThisRound: [],
+
+      // Undo snapshots (NOT persisted)
+      history: [],
+
+      // for "Verlierer beginnt"
+      lastLoserId: null,
+      lastLoserName: null,
+      lastEndedAt: null,
     };
+  }
+
+  function withDefaults(parsed) {
+    const base = newGameState();
+    const merged = { ...base, ...(parsed || {}) };
+    merged.history = []; // undo is always fresh
+    merged.players = Array.isArray(merged.players) ? merged.players : [];
+    merged.rounds = Array.isArray(merged.rounds) ? merged.rounds : [];
+    merged.currentRoundTurns = Array.isArray(merged.currentRoundTurns) ? merged.currentRoundTurns : [];
+    merged.playedThisRound = Array.isArray(merged.playedThisRound) ? merged.playedThisRound : [];
+    return merged;
   }
 
   function save() {
     // history NICHT persistieren (spart enorm Speicher)
     const { history, ...persistable } = state;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
+    } catch (e) {
+      // Wenn’s trotzdem zu groß wird: notfalls alte Rundendetails abschneiden
+      try {
+        const shrink = shrinkStateForStorage(persistable);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(shrink));
+      } catch {
+        alert("Speicher voll 😅 Bitte exportieren oder 'Alles löschen' verwenden.");
+      }
+    }
+  }
+
+  function shrinkStateForStorage(persistable) {
+    // Abschneiden, aber Spielstand bleibt erhalten
+    const copy = JSON.parse(JSON.stringify(persistable));
+    // behalte nur letzte 20 Runden-Details
+    if (Array.isArray(copy.rounds) && copy.rounds.length > 20) {
+      copy.rounds = copy.rounds.slice(-20);
+    }
+    // laufende Runde begrenzen
+    if (Array.isArray(copy.currentRoundTurns) && copy.currentRoundTurns.length > 60) {
+      copy.currentRoundTurns = copy.currentRoundTurns.slice(-60);
+    }
+    return copy;
   }
 
   function load() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return null;
-      const parsed = JSON.parse(raw);
-  
-      // history kommt nicht aus dem Storage -> immer frisch
-      parsed.history = [];
-      return parsed;
+      return withDefaults(JSON.parse(raw));
     } catch {
       return null;
     }
@@ -330,6 +423,7 @@ show_sidebar: false
 
   function resetAll() {
     localStorage.removeItem(STORAGE_KEY);
+    // History bleibt, außer du willst auch die killen
     state = newGameState();
     renderAll();
   }
@@ -347,7 +441,7 @@ show_sidebar: false
   }
 
   function formatBalance(v) {
-    return String(balanceNum(v)); // immer Zahl als Text (auch 0 und negativ)
+    return String(balanceNum(v));
   }
 
   function isAvailable(p) {
@@ -378,23 +472,32 @@ show_sidebar: false
     return 0;
   }
 
+  function clampInt(v, min, max) {
+    const x = Math.round(v);
+    if (!Number.isFinite(x)) return min;
+    return Math.max(min, Math.min(max, x));
+  }
+
+  // ---------------------------
+  // Undo (nur RAM)
+  // ---------------------------
   function pushUndoSnapshot() {
-    // Snapshot ohne history, sonst wächst es exponentiell!
     const snapshot = { ...state, history: [] };
     state.history.push(JSON.stringify(snapshot));
-  
-    // limit history size
     if (state.history.length > 50) state.history.shift();
   }
 
   function undo() {
     const last = state.history.pop();
     if (!last) return;
-    state = JSON.parse(last);
+    state = withDefaults(JSON.parse(last));
     save();
     renderAll();
   }
 
+  // ---------------------------
+  // Players
+  // ---------------------------
   function addPlayer(name) {
     const trimmed = name.trim();
     if (!trimmed) return;
@@ -409,8 +512,7 @@ show_sidebar: false
   function removePlayer(id) {
     state.players = state.players.filter(p => p.id !== id);
     if (state.currentPlayerId === id) {
-      const next = state.players[0]?.id ?? null;
-      state.currentPlayerId = next;
+      state.currentPlayerId = state.players[0]?.id ?? null;
     }
     save();
     renderAll();
@@ -419,12 +521,63 @@ show_sidebar: false
   function startGame() {
     if (state.players.length < 2) return;
     state.started = true;
-    const firstAvail = state.players.find(isAvailable)?.id ?? state.players[0].id;
-    state.currentPlayerId = firstAvail;
+
+    // Wenn jemand "Verlierer beginnt" gedrückt hat, currentPlayerId ist schon korrekt.
+    // Falls nicht: erster verfügbarer Spieler
+    if (!state.currentPlayerId || !getPlayer(state.currentPlayerId)) {
+      state.currentPlayerId = state.players.find(isAvailable)?.id ?? state.players[0].id;
+    }
+
     save();
     renderAll();
   }
 
+  // ---------------------------
+  // "Verlierer beginnt"
+  // ---------------------------
+  function canChangeStarter() {
+    // Erlaubt wenn:
+    // - Spiel noch nicht gestartet
+    // - ODER Spiel ist gerade frisch (Runde 1, noch kein Zug gespeichert)
+    const fresh = state.started && state.round === 1 && state.rounds.length === 0 && state.currentRoundTurns.length === 0;
+    return state.players.length >= 2 && (!state.started || fresh);
+  }
+
+  function computeLoserFromStateBalances() {
+    if (!state.players.length) return null;
+    const sorted = [...state.players].sort((a,b) => balanceNum(a.balance) - balanceNum(b.balance));
+    return sorted[0] ?? null;
+  }
+
+  function setLoserStarts() {
+    if (!canChangeStarter()) {
+      alert("Startspieler kann nur vor dem ersten Zug gesetzt werden 🙂");
+      return;
+    }
+
+    let loserId = state.lastLoserId;
+
+    // falls lastLoserId nicht mehr existiert (Spieler gelöscht), fallback: aktueller niedrigster Stand
+    if (!loserId || !getPlayer(loserId)) {
+      loserId = computeLoserFromStateBalances()?.id ?? null;
+    }
+
+    if (!loserId) return;
+
+    state.currentPlayerId = loserId;
+    save();
+    renderAll();
+
+    const p = getPlayer(loserId);
+    if (p) {
+      // kleiner UX-Hinweis
+      try { navigator.vibrate?.(25); } catch {}
+    }
+  }
+
+  // ---------------------------
+  // Rundenlogik
+  // ---------------------------
   function maybeEndRound() {
     const currentAvail = availablePlayerIds();
     const playedSet = new Set(state.playedThisRound);
@@ -477,7 +630,7 @@ show_sidebar: false
     } else if (sum === 30) {
       // nothing
 
-    } else { // sum > 30
+    } else {
       overshoot = sum - 30;
       hits = clampInt(Number(ui.hitsInput.value), 0, 999);
       penalty = hits * overshoot;
@@ -522,10 +675,32 @@ show_sidebar: false
     renderAll();
   }
 
-  function clampInt(v, min, max) {
-    const x = Math.round(v);
-    if (!Number.isFinite(x)) return min;
-    return Math.max(min, Math.min(max, x));
+  // ---------------------------
+  // Game end + Ranking
+  // ---------------------------
+  function computeRanking(players = state.players) {
+    const copy = players.map(p => ({ ...p }));
+
+    copy.sort((a, b) => {
+      const aBal = balanceNum(a.balance);
+      const bBal = balanceNum(b.balance);
+
+      const aAvail = aBal >= 0 ? 0 : 1;
+      const bAvail = bBal >= 0 ? 0 : 1;
+      if (aAvail !== bAvail) return aAvail - bAvail;
+
+      if (aAvail === 0) return bBal - aBal; // verfügbar: höher zuerst
+      return bBal - aBal; // negativ: weniger negativ zuerst
+    });
+
+    return copy;
+  }
+
+  function computeLoser(players = state.players) {
+    if (!players.length) return null;
+    // loser = niedrigster Kontostand (meist negativster)
+    const sorted = [...players].sort((a,b) => balanceNum(a.balance) - balanceNum(b.balance));
+    return sorted[0] ?? null;
   }
 
   function endGame(auto = false) {
@@ -539,8 +714,18 @@ show_sidebar: false
       state.round += 1;
       state.currentRoundTurns = [];
       state.playedThisRound = [];
-      save();
     }
+
+    // Verlierer merken (für "Verlierer beginnt")
+    const loser = computeLoser();
+    state.lastLoserId = loser?.id ?? null;
+    state.lastLoserName = loser?.name ?? null;
+    state.lastEndedAt = new Date().toISOString();
+
+    // Historie-Eintrag
+    addGameToHistory();
+
+    save();
     renderAll();
     showResultModal(auto);
   }
@@ -565,7 +750,6 @@ show_sidebar: false
             const bal = balanceNum(r.balance);
             const status = statusIcon(bal);
             const cls = bal < 0 ? "rw-out" : "";
-
             return `<tr class="${cls}">
               <td><span class="rw-badge">${idx+1}</span></td>
               <td>${escapeHtml(r.name)}</td>
@@ -584,32 +768,329 @@ show_sidebar: false
     ui.resultModal.classList.add("rw-hidden");
   }
 
-  function showHelpModal() {
-    ui.helpModal.classList.remove("rw-hidden");
+  // ---------------------------
+  // Help modal
+  // ---------------------------
+  function showHelpModal() { ui.helpModal.classList.remove("rw-hidden"); }
+  function hideHelpModal() { ui.helpModal.classList.add("rw-hidden"); }
+
+  // ---------------------------
+  // History store
+  // ---------------------------
+  function loadHistory() {
+    try {
+      const raw = localStorage.getItem(HISTORY_KEY);
+      if (!raw) return [];
+      const arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch {
+      return [];
+    }
   }
 
-  function hideHelpModal() {
-    ui.helpModal.classList.add("rw-hidden");
+  function saveHistory() {
+    // Begrenzen
+    if (historyList.length > HISTORY_LIMIT) {
+      historyList = historyList.slice(0, HISTORY_LIMIT);
+    }
+
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(historyList));
+    } catch (e) {
+      // Quota: älteste rauswerfen bis es passt
+      while (historyList.length > 0) {
+        historyList.pop(); // remove last (oldest, weil wir newest-first speichern)
+        try {
+          localStorage.setItem(HISTORY_KEY, JSON.stringify(historyList));
+          break;
+        } catch {}
+      }
+    }
   }
 
-  function computeRanking() {
-    const copy = state.players.map(p => ({ ...p }));
+  function compressRoundsForHistory(rounds) {
+    // Minimale Turn-Objekte, spart Speicher
+    return (rounds || []).map(r => ({
+      no: r.no,
+      endedAt: r.endedAt ?? null,
+      turns: (r.turns || []).map(t => ({
+        p: t.playerName,
+        s: t.sum,
+        d: t.diff || 0,
+        o: t.overshoot || 0,
+        h: t.hits || 0,
+        pen: t.penalty || 0,
+        tgt: t.targetName || null,
+        time: t.time
+      }))
+    }));
+  }
 
-    copy.sort((a, b) => {
-      const aBal = balanceNum(a.balance);
-      const bBal = balanceNum(b.balance);
+  function addGameToHistory() {
+    const ranking = computeRanking();
+    const winner = ranking.find(r => balanceNum(r.balance) >= 0) ?? ranking[0];
+    const loser = computeLoser();
 
-      const aAvail = aBal >= 0 ? 0 : 1;
-      const bAvail = bBal >= 0 ? 0 : 1;
-      if (aAvail !== bAvail) return aAvail - bAvail;
+    const entry = {
+      id: crypto?.randomUUID?.() ?? (Date.now().toString(36) + Math.random().toString(36).slice(2)),
+      endedAt: new Date().toISOString(),
+      players: state.players.map(p => ({ name: p.name, balance: balanceNum(p.balance) })),
+      winner: winner ? { name: winner.name, balance: balanceNum(winner.balance) } : null,
+      loser: loser ? { name: loser.name, balance: balanceNum(loser.balance) } : null,
+      roundsCount: state.rounds.length,
+      turnsCount: state.rounds.reduce((a,r) => a + ((r.turns || []).length), 0),
+      rounds: compressRoundsForHistory(state.rounds),
+    };
 
-      if (aAvail === 0) return bBal - aBal; // verfügbar: höher zuerst
-      return bBal - aBal; // negativ: weniger negativ zuerst
+    // newest-first
+    historyList.unshift(entry);
+    if (historyList.length > HISTORY_LIMIT) historyList = historyList.slice(0, HISTORY_LIMIT);
+    saveHistory();
+  }
+
+  function showHistoryModal() {
+    renderHistory();
+    ui.historyModal.classList.remove("rw-hidden");
+  }
+  function hideHistoryModal() {
+    ui.historyModal.classList.add("rw-hidden");
+  }
+
+  function renderHistory() {
+    if (!historyList.length) {
+      ui.historyBody.innerHTML = `<p class="rw-note">Noch keine gespeicherten Spiele. Erstmal würfeln – dann wird hier Geschichte geschrieben 😉</p>`;
+      return;
+    }
+
+    const items = historyList.map((g, idx) => {
+      const dt = new Date(g.endedAt);
+      const dateStr = dt.toLocaleString();
+      const w = g.winner ? `🥇 <strong>${escapeHtml(g.winner.name)}</strong>` : "🥇 –";
+      const l = g.loser ? `🐟 Verlierer: <strong>${escapeHtml(g.loser.name)}</strong>` : "🐟 Verlierer: –";
+      const plist = (g.players || []).map(p => {
+        const bal = balanceNum(p.balance);
+        return `${escapeHtml(p.name)}: <strong>${bal}</strong> ${statusIcon(bal)}`;
+      }).join(" · ");
+
+      const rounds = (g.rounds || []).map(r => {
+        const turns = (r.turns || []).map(t => {
+          const parts = [];
+          parts.push(`<strong>${escapeHtml(t.p)}</strong> → ${t.s}`);
+          if (t.s < 30) parts.push(`(−${t.d} selbst)`);
+          if (t.s === 30) parts.push(`(✓)`);
+          if (t.s > 30) parts.push(`(Ü ${t.o}, Treffer ${t.h} ⇒ −${t.pen} an ${escapeHtml(t.tgt || "–")})`);
+          return `<li>${parts.join(" ")}</li>`;
+        }).join("");
+
+        return `
+          <details class="rw-callout" style="margin:10px 0;">
+            <summary><strong>Runde ${r.no}</strong> <span class="rw-note">– Züge: ${(r.turns || []).length}</span></summary>
+            <ul style="margin:10px 0 0 18px;">${turns || "<li class='rw-note'>Keine Züge</li>"}</ul>
+          </details>
+        `;
+      }).join("");
+
+      return `
+        <details class="rw-callout" style="margin:12px 0;">
+          <summary>
+            <strong>#${historyList.length - idx}</strong> · ${escapeHtml(dateStr)} · ${w}
+            <span class="rw-note"> · ${l} · Spieler: ${(g.players || []).length} · Runden: ${g.roundsCount} · Züge: ${g.turnsCount}</span>
+          </summary>
+
+          <div style="margin-top:10px;">
+            <div class="rw-note"><strong>Endstände:</strong> ${plist}</div>
+
+            <div class="rw-row rw-row-wrap" style="margin-top:10px;">
+              <button class="rw-btn" data-print-game="${g.id}">🖨️ Dieses Spiel drucken</button>
+              <button class="rw-btn rw-btn-ghost" data-delete-game="${g.id}">🗑️ Löschen</button>
+            </div>
+
+            ${rounds || "<p class='rw-note' style='margin-top:10px;'>Keine Runden gespeichert.</p>"}
+          </div>
+        </details>
+      `;
+    }).join("");
+
+    ui.historyBody.innerHTML = items;
+
+    ui.historyBody.querySelectorAll("[data-delete-game]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-delete-game");
+        historyList = historyList.filter(x => x.id !== id);
+        saveHistory();
+        renderHistory();
+      });
     });
 
-    return copy;
+    ui.historyBody.querySelectorAll("[data-print-game]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-print-game");
+        const g = historyList.find(x => x.id === id);
+        if (g) printHistoryGame(g);
+      });
+    });
   }
 
+  function exportHistoryJson() {
+    const blob = new Blob([JSON.stringify(historyList, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "runter-wuerfeln-historie.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearHistory() {
+    if (!confirm("Historie wirklich löschen?")) return;
+    historyList = [];
+    try { localStorage.removeItem(HISTORY_KEY); } catch {}
+    renderHistory();
+  }
+
+  function printHistoryAll() {
+    const html = buildHistoryPrintHtml(historyList);
+    openPrintWindow(html);
+  }
+
+  function printHistoryGame(game) {
+    const html = buildHistoryPrintHtml([game]);
+    openPrintWindow(html);
+  }
+
+  function buildHistoryPrintHtml(games) {
+    const now = new Date().toLocaleString();
+
+    const blocks = (games || []).map(g => {
+      const dt = new Date(g.endedAt).toLocaleString();
+      const playersRows = (g.players || []).map((p, i) => {
+        const bal = balanceNum(p.balance);
+        return `
+          <tr>
+            <td>${i+1}</td>
+            <td>${escapeHtml(p.name)}</td>
+            <td style="text-align:right;"><strong>${bal}</strong></td>
+            <td style="text-align:center;">${statusIcon(bal)}</td>
+          </tr>
+        `;
+      }).join("");
+
+      const roundsHtml = (g.rounds || []).map(r => {
+        const turnsRows = (r.turns || []).map(t => {
+          const selfText =
+            t.s < 30 ? `−${t.d} (selbst)` :
+            t.s === 30 ? `✓` :
+            `Ü ${t.o}`;
+
+          const targetText =
+            t.s > 30 && t.pen > 0
+              ? `−${t.pen} an ${escapeHtml(t.tgt || "–")}`
+              : "–";
+
+          return `
+            <tr>
+              <td>${escapeHtml(t.p)}</td>
+              <td style="text-align:right;">${t.s}</td>
+              <td>${selfText}</td>
+              <td style="text-align:right;">${t.h ?? 0}</td>
+              <td>${targetText}</td>
+              <td style="font-size:12px; opacity:.8;">${t.time ? new Date(t.time).toLocaleTimeString() : ""}</td>
+            </tr>
+          `;
+        }).join("");
+
+        return `
+          <div class="section">
+            <h3>Runde ${r.no}</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Spieler</th>
+                  <th style="text-align:right;">Summe</th>
+                  <th>Ergebnis</th>
+                  <th style="text-align:right;">Treffer</th>
+                  <th>Ziel-Abzug</th>
+                  <th>Zeit</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${turnsRows || '<tr><td colspan="6" class="muted">Keine Züge</td></tr>'}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }).join("");
+
+      return `
+        <div class="card">
+          <h2 style="margin:0;">🎲 Runter Würfeln – Spiel vom ${escapeHtml(dt)}</h2>
+          <div class="muted" style="margin-top:4px;">
+            Sieger: <strong>${escapeHtml(g.winner?.name || "–")}</strong>
+            · Verlierer: <strong>${escapeHtml(g.loser?.name || "–")}</strong>
+            · Spieler: ${(g.players || []).length}
+            · Runden: ${g.roundsCount}
+            · Züge: ${g.turnsCount}
+          </div>
+
+          <h3 style="margin-top:12px;">🏆 Endstände</h3>
+          <table>
+            <thead><tr><th>#</th><th>Spieler</th><th style="text-align:right;">Endstand</th><th style="text-align:center;">Status</th></tr></thead>
+            <tbody>${playersRows}</tbody>
+          </table>
+
+          <h3 style="margin-top:12px;">📚 Runden</h3>
+          ${roundsHtml || '<div class="muted">Keine Runden gespeichert.</div>'}
+        </div>
+      `;
+    }).join("");
+
+    return `
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Runter Würfeln – Historie</title>
+  <style>
+    :root { color-scheme: light; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 22px; }
+    .muted { color: #555; font-size: 13px; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; margin: 14px 0; }
+    .section { margin-top: 14px; page-break-inside: avoid; }
+    h3 { margin: 12px 0 6px 0; font-size: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border-bottom: 1px solid #e5e5e5; padding: 8px; font-size: 13px; vertical-align: top; }
+    th { text-align: left; background: #fafafa; }
+    @media print { body { margin: 10mm; } .noprint { display:none !important; } }
+  </style>
+</head>
+<body>
+  <h1 style="margin:0 0 6px 0;">📜 Runter Würfeln – Historie</h1>
+  <div class="muted">Export: ${escapeHtml(now)}</div>
+  ${blocks || '<div class="muted" style="margin-top:12px;">Keine Spiele vorhanden.</div>'}
+  <div class="noprint muted" style="margin-top:12px;">Tipp: Im Druckdialog „Als PDF sichern“ auswählen.</div>
+</body>
+</html>
+    `;
+  }
+
+  function openPrintWindow(html) {
+    const w = window.open("", "_blank");
+    if (!w) {
+      alert("Pop-up blockiert 😅 Bitte Pop-ups erlauben oder Seite direkt drucken.");
+      return;
+    }
+    w.document.open();
+    w.document.write(html);
+    w.document.close();
+    setTimeout(() => w.print(), 250);
+  }
+
+  // ---------------------------
+  // Rendering
+  // ---------------------------
   function renderSetup() {
     ui.playerChips.innerHTML = state.players.map(p => `
       <span class="rw-chip">
@@ -623,6 +1104,9 @@ show_sidebar: false
     ui.setupBlock.classList.toggle("rw-hidden", state.started);
     ui.playBlock.classList.toggle("rw-hidden", !state.started);
 
+    // enable/disable "Verlierer beginnt"
+    ui.btnLoserStarts.disabled = !canChangeStarter();
+
     ui.playerChips.querySelectorAll("[data-remove]").forEach(btn => {
       btn.addEventListener("click", () => removePlayer(btn.getAttribute("data-remove")));
     });
@@ -635,6 +1119,9 @@ show_sidebar: false
     ui.currentPlayer.textContent = current ? current.name : "–";
 
     ui.btnUndo.disabled = state.history.length === 0;
+
+    // allow loser button only at very beginning
+    ui.btnLoserStarts.disabled = !canChangeStarter();
 
     const sum = Number(ui.sumInput.value);
     const showOver = Number.isFinite(sum) && sum > 30;
@@ -750,8 +1237,12 @@ show_sidebar: false
       .replaceAll("'", "&#039;");
   }
 
+  // ---------------------------
+  // Exports (current game)
+  // ---------------------------
   function exportJson() {
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+    const { history, ...persistable } = state;
+    const blob = new Blob([JSON.stringify(persistable, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -768,9 +1259,7 @@ show_sidebar: false
     lines.push(`Runter Würfeln – Summary`);
     lines.push(`Runden gespeichert: ${state.rounds.length}`);
     lines.push(`Stand:`);
-    ranking.forEach((p, i) => {
-      lines.push(`${i+1}. ${p.name}: ${formatBalance(p.balance)}`);
-    });
+    ranking.forEach((p, i) => lines.push(`${i+1}. ${p.name}: ${formatBalance(p.balance)}`));
     const text = lines.join("\n");
     navigator.clipboard?.writeText(text);
     alert("Summary kopiert ✅");
@@ -914,19 +1403,12 @@ show_sidebar: false
 </body>
 </html>`;
 
-    const w = window.open("", "_blank");
-    if (!w) {
-      alert("Pop-up blockiert 😅 Bitte Pop-ups erlauben oder Seite direkt drucken.");
-      return;
-    }
-    w.document.open();
-    w.document.write(html);
-    w.document.close();
-
-    setTimeout(() => w.print(), 250);
+    openPrintWindow(html);
   }
 
+  // ---------------------------
   // Events
+  // ---------------------------
   ui.btnAddPlayer.addEventListener("click", () => {
     addPlayer(ui.playerName.value);
     ui.playerName.value = "";
@@ -939,6 +1421,7 @@ show_sidebar: false
   ui.btnStartGame.addEventListener("click", startGame);
 
   ui.btnNewGame.addEventListener("click", () => {
+    // keep players, reset balances + rounds (lastLoser bleibt!)
     if (state.players.length === 0) return;
     pushUndoSnapshot();
     state.started = true;
@@ -947,10 +1430,15 @@ show_sidebar: false
     state.currentRoundTurns = [];
     state.playedThisRound = [];
     state.players.forEach(p => p.balance = 30);
+
+    // default starter: erster verfügbarer
     state.currentPlayerId = state.players.find(isAvailable)?.id ?? state.players[0].id;
+
     save();
     renderAll();
   });
+
+  ui.btnLoserStarts.addEventListener("click", setLoserStarts);
 
   ui.btnResetAll.addEventListener("click", () => {
     if (confirm("Wirklich ALLES löschen? (Spieler, Runden, Stand)")) resetAll();
@@ -986,20 +1474,29 @@ show_sidebar: false
   ui.btnCopySummary.addEventListener("click", copySummary);
   ui.btnExportPdf.addEventListener("click", exportPdf);
 
-  // Help modal events
+  // Help
   ui.btnHelp.addEventListener("click", showHelpModal);
   ui.helpCloseBg.addEventListener("click", hideHelpModal);
   ui.helpClose.addEventListener("click", hideHelpModal);
+
+  // History
+  ui.btnHistory.addEventListener("click", showHistoryModal);
+  ui.historyCloseBg.addEventListener("click", hideHistoryModal);
+  ui.historyClose.addEventListener("click", hideHistoryModal);
+  ui.btnHistoryExportJson.addEventListener("click", exportHistoryJson);
+  ui.btnHistoryPrint.addEventListener("click", printHistoryAll);
+  ui.btnHistoryClear.addEventListener("click", clearHistory);
 
   // ESC closes modals (desktop)
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       hideHelpModal();
       hideResultModal();
+      hideHistoryModal();
     }
   });
 
-  // Init
+  // Init: wenn current player negativ ist -> nächster verfügbarer
   if (state.started && state.currentPlayerId) {
     const cp = getPlayer(state.currentPlayerId);
     if (cp && !isAvailable(cp)) {
