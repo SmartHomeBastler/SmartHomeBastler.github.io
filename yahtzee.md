@@ -1342,7 +1342,7 @@ layout: page
     startGame(orderNames, mode);
 
     // reflect mode radio
-    const r = document.querySelector(\`input[name="mode"][value="\${mode}"]\`);
+    const r = document.querySelector(`input[name="mode"][value="${mode}"]`);
     if (r) r.checked = true;
 
     closeFinalModal();
