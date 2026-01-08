@@ -1138,13 +1138,27 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
       const inText = (opt.includes("doublein") ? (p.hasIn ? "IN ✅" : "noch nicht IN") : "IN (frei)");
       const last = p.lastTurn?.darts ? p.lastTurn.darts.join(", ") : "–";
       const bust = p.lastTurn?.bust ? ` <span class="pill bad">BUST</span>` : "";
-
+    
+      const needsDoubleOut = (opt === "doubleout" || opt === "doublein_doubleout");
+      const needsDoubleIn  = (opt === "doublein" || opt === "doublein_doubleout");
+    
+      let coText = "–";
+      if(!state.finishedAt){
+        if(needsDoubleIn && !p.hasIn){
+          coText = "Double-In nötig";
+        } else {
+          const co = getCheckoutSuggestion501(p.score, { requiresDoubleOut: needsDoubleOut });
+          coText = co || "–";
+        }
+      }
+        
       return `
         <tr>
           <td><strong>${escapeHtml(p.name)}</strong> ${tag}</td>
           <td><span class="pill">${p.score}</span></td>
           <td>${escapeHtml(inText)}${bust}</td>
           <td>${escapeHtml(last)}</td>
+          <td>${escapeHtml(coText)}</td>
         </tr>
       `;
     }).join("");
@@ -1160,6 +1174,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
             <th>Rest</th>
             <th>Status</th>
             <th>Letzter Zug</th>
+            <th>Checkout</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -1177,7 +1192,6 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
         <th>Punkte</th>
         ${t.map(x => `<th>${x}</th>`).join("")}
         <th>Letzter Zug</th>
-        <th>Checkout</th>
       </tr>
     `;
 
@@ -1193,23 +1207,13 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
       }).join("");
 
       const last = p.lastTurn?.darts ? p.lastTurn.darts.join(", ") : "–";
-        
-      const needsDoubleOut = (opt === "doubleout" || opt === "doublein_doubleout");
-      const canSuggest = p.hasIn; // wenn Double-In aktiv, erst nach IN sinnvoll
-      const co = (canSuggest && !state.finishedAt)
-        ? getCheckoutSuggestion501(p.score, { requiresDoubleOut: needsDoubleOut })
-        : null;
-    
-      const coText = !canSuggest && opt.includes("doublein")
-        ? "Double-In nötig"
-        : (co || "–");
+
       return `
         <tr>
           <td><strong>${escapeHtml(p.name)}</strong> ${tag}</td>
           <td><span class="pill">${p.points}</span></td>
           ${marks}
           <td>${escapeHtml(last)}</td>
-          <td>${escapeHtml(coText)}</td>
         </tr>
       `;
     }).join("");
@@ -1390,7 +1394,9 @@ ${escapeHtml(boardText)}
     addChip("D", "D", true);
     addChip("T", "T", true);
 
-    [20,19,18,17,16,15,14,13,12,11,10].forEach(n => addChip(String(n), String(n)));
+    [for(let n = 20; n >= 1; n--){
+      addChip(String(n), String(n), n >= 19);
+    }
   }
 
   function pushTokenToFirstEmpty(token){
