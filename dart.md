@@ -266,11 +266,14 @@ layout: page
       width: 100%;
       border-collapse: collapse;
       border: 1px solid #000;
+      margin-top: 10px;
     }
     #shb-print-area th, #shb-print-area td{
       border: 1px solid #000;
       padding: 6px;
+      vertical-align: top;
     }
+    #shb-print-area h2, #shb-print-area h3{ margin: 0 0 6px 0; }
   }
 </style>
 
@@ -315,20 +318,20 @@ layout: page
         </div>
         <div style="flex:0 0 auto;">
           <div class="shb-label">&nbsp;</div>
-          <button id="addPlayer" class="shb-btn">+ Spieler</button>
+          <button id="addPlayer" class="shb-btn" type="button">+ Spieler</button>
         </div>
       </div>
 
       <div class="shb-players" id="playerList"></div>
 
       <div class="shb-row" style="margin-top:.9rem;">
-        <button id="startGame" class="shb-btn primary" style="flex:1 1 auto;">▶ Spiel starten</button>
-        <button id="openHistory" class="shb-btn" style="flex:0 0 auto;">📜 Historie</button>
+        <button id="startGame" class="shb-btn primary" style="flex:1 1 auto;" type="button">▶ Spiel starten</button>
+        <button id="openHistory" class="shb-btn" style="flex:0 0 auto;" type="button">📜 Historie</button>
       </div>
 
       <div class="shb-row" style="margin-top:.6rem;">
-        <button id="exportHistory" class="shb-btn" style="flex:1 1 auto;">⬇ Export JSON</button>
-        <button id="importHistory" class="shb-btn" style="flex:1 1 auto;">⬆ Import JSON</button>
+        <button id="exportHistory" class="shb-btn" style="flex:1 1 auto;" type="button">⬇ Export JSON</button>
+        <button id="importHistory" class="shb-btn" style="flex:1 1 auto;" type="button">⬆ Import JSON</button>
         <input id="importFile" type="file" accept="application/json" style="display:none;" />
       </div>
     </div>
@@ -342,9 +345,9 @@ layout: page
           <div class="shb-hint" id="liveHint">Starte ein Spiel – dann kommt hier die Live-Übersicht.</div>
         </div>
         <div class="shb-row" style="justify-content:flex-end;">
-          <button id="enterThrows" class="shb-btn primary" disabled>🎯 Treffer eingeben</button>
-          <button id="undo" class="shb-btn" disabled>↩ Undo</button>
-          <button id="endGame" class="shb-btn danger" disabled>⛔ Spiel beenden</button>
+          <button id="enterThrows" class="shb-btn primary" disabled type="button">🎯 Treffer eingeben</button>
+          <button id="undo" class="shb-btn" disabled type="button">↩ Undo</button>
+          <button id="endGame" class="shb-btn danger" disabled type="button">⛔ Spiel beenden</button>
         </div>
       </div>
 
@@ -361,7 +364,7 @@ layout: page
         <div class="ttl" id="scoreModalTitle">Treffer eingeben</div>
         <div class="shb-hint" id="scoreModalSub">3 Darts pro Runde</div>
       </div>
-      <button class="shb-btn" id="closeScoreModal">✕</button>
+      <button class="shb-btn" id="closeScoreModal" type="button">✕</button>
     </div>
 
     <div class="body">
@@ -404,8 +407,8 @@ layout: page
     </div>
 
     <div class="foot">
-      <button class="shb-btn" id="clearDarts">🧹 Leeren</button>
-      <button class="shb-btn primary" id="applyDarts">✅ Anwenden</button>
+      <button class="shb-btn" id="clearDarts" type="button">🧹 Leeren</button>
+      <button class="shb-btn primary" id="applyDarts" type="button">✅ Anwenden</button>
     </div>
   </div>
 </div>
@@ -418,12 +421,12 @@ layout: page
         <div class="ttl">🏁 Spiel beendet</div>
         <div class="shb-hint" id="endMeta">–</div>
       </div>
-      <button class="shb-btn" id="closeEndModal">✕</button>
+      <button class="shb-btn" id="closeEndModal" type="button">✕</button>
     </div>
     <div class="body" id="endBody"></div>
     <div class="foot">
-      <button class="shb-btn" id="printEnd">🖨 Drucken</button>
-      <button class="shb-btn primary" id="okEnd">✅ OK</button>
+      <button class="shb-btn" id="printEnd" type="button">🖨 Drucken</button>
+      <button class="shb-btn primary" id="okEnd" type="button">✅ OK</button>
     </div>
   </div>
 </div>
@@ -436,13 +439,13 @@ layout: page
         <div class="ttl">📜 Historie</div>
         <div class="shb-hint">Gespeicherte Spiele (localStorage). Export/Import macht’s “portabel”.</div>
       </div>
-      <button class="shb-btn" id="closeHistory">✕</button>
+      <button class="shb-btn" id="closeHistory" type="button">✕</button>
     </div>
     <div class="body" id="historyBody"></div>
     <div class="foot">
-      <button class="shb-btn" id="printHistory">🖨 Drucken</button>
-      <button class="shb-btn danger" id="clearHistory">🧨 Alles löschen</button>
-      <button class="shb-btn primary" id="closeHistory2">✅ Schließen</button>
+      <button class="shb-btn" id="printHistory" type="button">🖨 Drucken</button>
+      <button class="shb-btn danger" id="clearHistory" type="button">🧨 Alles löschen</button>
+      <button class="shb-btn primary" id="closeHistory2" type="button">✅ Schließen</button>
     </div>
   </div>
 </div>
@@ -495,14 +498,17 @@ layout: page
   */
   function parseDartToken(token){
     let raw = (token || "").trim().toUpperCase();
-    
+
     // erlaubt Eingaben wie "S 5", "D 16", "T 20"
     raw = raw.replace(/^([SDT])\s+(\d{1,2})$/i, "$1$2");
     raw = raw.replace(/\s+/g, " ");
     if(!raw) return { raw:"", kind:"empty", mult:0, value:0, isDouble:false, isTriple:false };
 
     if(raw === "MISS" || raw === "0") return { raw, kind:"score", mult:0, value:0, isDouble:false, isTriple:false };
-    if(raw === "BULL") return { raw, kind:"score", mult:1, value:50, isDouble:false, isTriple:false };
+
+    // ✅ BULL zählt als Double (Double 25) – wichtig für Double-Out
+    if(raw === "BULL")  return { raw, kind:"score", mult:2, value:50, isDouble:true, isTriple:false };
+    if(raw === "DBULL") return { raw, kind:"score", mult:2, value:50, isDouble:true, isTriple:false };
 
     if(/^\d+$/.test(raw)){
       const v = parseInt(raw, 10);
@@ -521,8 +527,6 @@ layout: page
       return { raw, kind:"invalid", mult:0, value:0, isDouble:false, isTriple:false };
     }
 
-    if(raw === "DBULL") return { raw, kind:"score", mult:2, value:50, isDouble:true, isTriple:false };
-
     return { raw, kind:"invalid", mult:0, value:0, isDouble:false, isTriple:false };
   }
 
@@ -531,93 +535,91 @@ layout: page
     const invalid = darts.filter(d => d.kind === "invalid");
     return { darts, invalid };
   }
-/* ───────────────────────── 501 Checkout Suggestions ───────────────────────── */
 
-const _ALL_DARTS = (() => {
-  const darts = [];
+  /* ───────────────────────── 501 Checkout Suggestions ───────────────────────── */
+  const _ALL_DARTS = (() => {
+    const darts = [];
 
-  // Singles, Doubles, Triples 1..20
-  for (let n = 1; n <= 20; n++) {
-    darts.push({ label: `S${n}`, score: n, out: false, t: "S" });
-    darts.push({ label: `D${n}`, score: 2*n, out: true,  t: "D" });
-    darts.push({ label: `T${n}`, score: 3*n, out: false, t: "T" });
-  }
-
-  // Bulls
-  darts.push({ label: "25",   score: 25, out: false, t: "SB" });
-  darts.push({ label: "BULL", score: 50, out: true,  t: "DB" }); // counts as double-out
-
-  return darts;
-})();
-
-function _comboScore(combo) {
-  // Ranking: prefer fewer darts, then more triples, then higher first dart
-  const darts = combo;
-  const len = darts.length;
-
-  const tripleCount = darts.filter(d => d.t === "T").length;
-  const firstScore = darts[0]?.score || 0;
-
-  // fewer darts -> bigger base
-  let s = 0;
-  s += (4 - len) * 100000;      // 1 dart best, then 2, then 3
-  s += tripleCount * 1000;      // prefer triples
-  s += firstScore * 10;         // prefer big first dart
-  return s;
-}
-
-function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
-  // Standard: show only for <=170 (classic 3-dart checkouts)
-  if (rest <= 1) return null;
-  if (rest > 170) return null;
-
-  const outs = requiresDoubleOut ? _ALL_DARTS.filter(d => d.out) : _ALL_DARTS;
-
-  let best = null;
-  let bestS = -Infinity;
-
-  // 1 dart
-  for (const d3 of outs) {
-    if (d3.score === rest) {
-      const cand = [d3];
-      const sc = _comboScore(cand);
-      if (sc > bestS) { bestS = sc; best = cand; }
+    // Singles, Doubles, Triples 1..20
+    for (let n = 1; n <= 20; n++) {
+      darts.push({ label: `S${n}`, score: n, out: false, t: "S" });
+      darts.push({ label: `D${n}`, score: 2*n, out: true,  t: "D" });
+      darts.push({ label: `T${n}`, score: 3*n, out: false, t: "T" });
     }
+
+    // Bulls
+    darts.push({ label: "25",   score: 25, out: false, t: "SB" });
+    darts.push({ label: "BULL", score: 50, out: true,  t: "DB" }); // counts as double-out
+
+    return darts;
+  })();
+
+  function _comboScore(combo) {
+    // Ranking: prefer fewer darts, then more triples, then higher first dart
+    const darts = combo;
+    const len = darts.length;
+
+    const tripleCount = darts.filter(d => d.t === "T").length;
+    const firstScore = darts[0]?.score || 0;
+
+    // fewer darts -> bigger base
+    let s = 0;
+    s += (4 - len) * 100000;      // 1 dart best, then 2, then 3
+    s += tripleCount * 1000;      // prefer triples
+    s += firstScore * 10;         // prefer big first dart
+    return s;
   }
 
-  // 2 darts
-  for (const d1 of _ALL_DARTS) {
+  function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
+    // Standard: show only for <=170 (classic 3-dart checkouts)
+    if (rest <= 1) return null;
+    if (rest > 170) return null;
+
+    const outs = requiresDoubleOut ? _ALL_DARTS.filter(d => d.out) : _ALL_DARTS;
+
+    let best = null;
+    let bestS = -Infinity;
+
+    // 1 dart
     for (const d3 of outs) {
-      if (d1.score + d3.score === rest) {
-        const cand = [d1, d3];
+      if (d3.score === rest) {
+        const cand = [d3];
         const sc = _comboScore(cand);
         if (sc > bestS) { bestS = sc; best = cand; }
       }
     }
-  }
 
-  // 3 darts
-  for (const d1 of _ALL_DARTS) {
-    for (const d2 of _ALL_DARTS) {
-      const partial = d1.score + d2.score;
-      if (partial >= rest) continue;
-      const need = rest - partial;
-
+    // 2 darts
+    for (const d1 of _ALL_DARTS) {
       for (const d3 of outs) {
-        if (d3.score === need) {
-          const cand = [d1, d2, d3];
+        if (d1.score + d3.score === rest) {
+          const cand = [d1, d3];
           const sc = _comboScore(cand);
           if (sc > bestS) { bestS = sc; best = cand; }
         }
       }
     }
+
+    // 3 darts
+    for (const d1 of _ALL_DARTS) {
+      for (const d2 of _ALL_DARTS) {
+        const partial = d1.score + d2.score;
+        if (partial >= rest) continue;
+        const need = rest - partial;
+
+        for (const d3 of outs) {
+          if (d3.score === need) {
+            const cand = [d1, d2, d3];
+            const sc = _comboScore(cand);
+            if (sc > bestS) { bestS = sc; best = cand; }
+          }
+        }
+      }
+    }
+
+    if (!best) return null;
+    return best.map(d => d.label).join("–"); // T20–T20–D20
   }
-
-  if (!best) return null;
-
-  // output like: T20–T20–D20
-  return best.map(d => d.label).join("–");
-}
 
   /* ───────────────────────── Game Builders ───────────────────────── */
   function build501(players, opt){
@@ -625,6 +627,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
       gameType: "501",
       opt501: opt,
       startScore: 501,
+      turns: [],
       players: players.map(p => ({
         id: uid(), name: p,
         score: 501,
@@ -644,6 +647,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
     return {
       gameType: "cricket",
       targets,
+      turns: [],
       players: players.map(p => ({
         id: uid(), name: p,
         points: 0,
@@ -691,6 +695,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
 
     return {
       gameType: "tictactoe",
+      turns: [],
       players,
       board,
       turnIndex: 0,
@@ -723,7 +728,6 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
         }
         continue;
       }
-
       delta += d.value;
     }
 
@@ -834,7 +838,6 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
             actions.push({ target:tgt, type:"dead" });
           }
         }
-
         remainingMarks--;
       }
     }
@@ -1020,6 +1023,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
 
   let setupPlayers = [];
   let active = loadActive();
+  let lastFinishedState = null; // ✅ fürs Drucken nach Spielende
 
   function escapeHtml(s){
     return String(s).replace(/[&<>"']/g, m => ({
@@ -1056,9 +1060,9 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
           <div class="meta">Position ${idx+1}</div>
         </div>
         <div class="right">
-          <button class="shb-btn" data-act="up" data-idx="${idx}">↑</button>
-          <button class="shb-btn" data-act="down" data-idx="${idx}">↓</button>
-          <button class="shb-btn danger" data-act="del" data-idx="${idx}">🗑</button>
+          <button class="shb-btn" type="button" data-act="up" data-idx="${idx}">↑</button>
+          <button class="shb-btn" type="button" data-act="down" data-idx="${idx}">↓</button>
+          <button class="shb-btn danger" type="button" data-act="del" data-idx="${idx}">🗑</button>
         </div>
       `;
       ui.playerList.appendChild(row);
@@ -1118,7 +1122,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
     } else if(type === "cricket"){
       ui.liveArea.innerHTML = renderCricketTable(state);
     } else {
-      ui.liveArea.innerHTML = renderTicTacToe(state);
+      ui.liveArea.innerHTML = renderTicTacToe(state) + renderTurns(state);
     }
   }
 
@@ -1138,10 +1142,10 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
       const inText = (opt.includes("doublein") ? (p.hasIn ? "IN ✅" : "noch nicht IN") : "IN (frei)");
       const last = p.lastTurn?.darts ? p.lastTurn.darts.join(", ") : "–";
       const bust = p.lastTurn?.bust ? ` <span class="pill bad">BUST</span>` : "";
-    
+
       const needsDoubleOut = (opt === "doubleout" || opt === "doublein_doubleout");
       const needsDoubleIn  = (opt === "doublein" || opt === "doublein_doubleout");
-    
+
       let coText = "–";
       if(!state.finishedAt){
         if(needsDoubleIn && !p.hasIn){
@@ -1151,7 +1155,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
           coText = co || "–";
         }
       }
-        
+
       return `
         <tr>
           <td><strong>${escapeHtml(p.name)}</strong> ${tag}</td>
@@ -1179,6 +1183,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
         </thead>
         <tbody>${rows}</tbody>
       </table>
+      ${renderTurns(state)}
     `;
   }
 
@@ -1227,6 +1232,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
         <thead>${head}</thead>
         <tbody>${rows}</tbody>
       </table>
+      ${renderTurns(state)}
     `;
   }
 
@@ -1251,7 +1257,7 @@ function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
 
     const legend = `
       <div class="shb-row" style="margin-bottom:.7rem;">
-        <div><span class="pill accent">${escapeHtml(p1.name)} = ❌</span></div>
+        <div><span class="pill" style="border-color: rgba(21,152,179,.55); background: rgba(21,152,179,.14);">${escapeHtml(p1.name)} = ❌</span></div>
         <div><span class="pill">${escapeHtml(p2.name)} = ⭕</span></div>
         <div style="text-align:right; color: var(--shb-muted);">
           ${state.finishedAt
@@ -1278,7 +1284,7 @@ ${escapeHtml(boardText)}
         : false;
 
       return `
-        <button class="shb-ttt-cell ${owner ? "owned" : ""} ${isWinCell ? "win" : ""}" disabled>
+        <button class="shb-ttt-cell ${owner ? "owned" : ""} ${isWinCell ? "win" : ""}" disabled type="button">
           <div class="marks top">${"❌".repeat(m1)}</div>
           <div class="big">${escapeHtml(big)}</div>
           <div class="marks bottom">${"⭕".repeat(m2)}</div>
@@ -1342,6 +1348,29 @@ ${escapeHtml(boardText)}
     `;
   }
 
+  function renderTurns(state){
+    const turns = (state.turns || []).slice(-30).reverse(); // letzte 30, neueste oben
+    if(!turns.length) return `<div class="shb-hint" style="margin-top:.7rem;">Noch keine Runden.</div>`;
+
+    const rows = turns.map(t => `
+      <tr>
+        <td><span class="pill">#${t.no}</span></td>
+        <td><strong>${escapeHtml(t.player)}</strong></td>
+        <td>${escapeHtml(t.text)}</td>
+      </tr>
+    `).join("");
+
+    return `
+      <div class="shb-card" style="margin-top:.9rem;">
+        <h3>Runden (letzte 30)</h3>
+        <table class="shb-table">
+          <thead><tr><th>#</th><th>Spieler</th><th>Treffer / Ergebnis</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    `;
+  }
+
   /* ───────────────────────── Modals ───────────────────────── */
   function openModal(el){
     el.classList.add("active");
@@ -1359,6 +1388,7 @@ ${escapeHtml(boardText)}
     const addChip = (label, val, accent=false) => {
       const b = document.createElement("button");
       b.className = "shb-chip" + (accent ? " accent" : "");
+      b.type = "button";
       b.textContent = label;
       b.addEventListener("click", () => pushTokenToFirstEmpty(val));
       ui.quickChips.appendChild(b);
@@ -1367,12 +1397,10 @@ ${escapeHtml(boardText)}
     const type = state.gameType;
 
     if(type === "tictactoe"){
-      // TicTacToe: show the actual random board values
       addChip("MISS", "0");
       addChip("25", "25");
       addChip("BULL", "BULL", true);
 
-      // Multipliers are useful
       addChip("S", "S", true);
       addChip("D", "D", true);
       addChip("T", "T", true);
@@ -1394,7 +1422,7 @@ ${escapeHtml(boardText)}
     addChip("D", "D", true);
     addChip("T", "T", true);
 
-    [for(let n = 20; n >= 1; n--){
+    for(let n = 20; n >= 1; n--){
       addChip(String(n), String(n), n >= 19);
     }
   }
@@ -1420,8 +1448,7 @@ ${escapeHtml(boardText)}
     });
 
     // 2) über zwei Felder "S" + "5" -> "S5"
-    const vals = ui.dartInputs.map(i => i.value.trim());
-    for(let i=0;i<vals.length-1;i++){
+    for(let i=0;i<ui.dartInputs.length-1;i++){
       const a = ui.dartInputs[i].value.trim().toUpperCase();
       const b = ui.dartInputs[i+1].value.trim().toUpperCase();
 
@@ -1523,6 +1550,28 @@ ${escapeHtml(boardText)}
     ui.scorePreview.innerHTML = `<span class="pill">${escapeHtml(txt)}</span>`;
   }
 
+  function turnSummary(state, res){
+    if(state.gameType === "501"){
+      if(res.bust) return `BUST (bleibt ${res.startScore}) • ${res.darts.join(", ")}`;
+      if(res.win)  return `FINISH! ${res.startScore}→0 • ${res.darts.join(", ")}`;
+      return `${res.startScore}→${res.endScore} (-${res.delta}) • ${res.darts.join(", ")}`;
+    }
+
+    if(state.gameType === "cricket"){
+      const acts = (res.actions?.length)
+        ? res.actions.map(a => a.type==="score" ? `+${a.value}` : `${a.target}:${a.type}`).join(" • ")
+        : "–";
+      return `+${res.gained} • ${acts} • ${res.darts.join(", ")}`;
+    }
+
+    // tictactoe
+    if(res.win) return `WIN (${res.winLine.join("-")}) • ${res.darts.join(", ")}`;
+    if(res.draw) return `DRAW • ${res.darts.join(", ")}`;
+    const hits = res.hits?.length ? res.hits.map(h => `${h.value}(+${h.add})`).join(", ") : "–";
+    const claimed = res.claimed?.length ? res.claimed.join(", ") : "–";
+    return `Hits: ${hits} • Claim: ${claimed} • ${res.darts.join(", ")}`;
+  }
+
   function applyModal(){
     if(!active || active.finishedAt) return;
     normalizeInputsForSdt();
@@ -1538,13 +1587,24 @@ ${escapeHtml(boardText)}
     pushLog(active, snapshotState(active));
 
     const p = getTurnPlayer(active);
+    let res;
     if(active.gameType === "501"){
-      apply501Turn(active, p.id, darts);
+      res = apply501Turn(active, p.id, darts);
     } else if(active.gameType === "cricket"){
-      applyCricketTurn(active, p.id, darts);
+      res = applyCricketTurn(active, p.id, darts);
     } else {
-      applyTicTacToeTurn(active, p.id, darts);
+      res = applyTicTacToeTurn(active, p.id, darts);
     }
+
+    active.turns = active.turns || [];
+    const dartsRaw = darts.map(d => d.raw);
+    active.turns.push({
+      no: active.turns.length + 1,
+      at: nowISO(),
+      player: p.name,
+      darts: dartsRaw,
+      text: turnSummary(active, { ...res, darts: dartsRaw })
+    });
 
     if(!active.finishedAt){
       nextTurn(active);
@@ -1604,6 +1664,11 @@ ${escapeHtml(boardText)}
       state.finishedAt = nowISO();
     }
 
+    // ✅ Historie soll NICHT die Runden (turns) enthalten
+    const rawForHistory = structuredClone(state);
+    delete rawForHistory.turns;
+    delete rawForHistory.log;
+
     const hist = loadHistory();
     const entry = {
       id: uid(),
@@ -1616,18 +1681,20 @@ ${escapeHtml(boardText)}
         (state.winnerId === "DRAW") ? "Unentschieden"
         : state.winnerId ? (state.players.find(p => p.id === state.winnerId)?.name || null) : null,
       standings: computeFinalStandings(state),
-      raw: state
+      raw: rawForHistory
     };
+
     hist.unshift(entry);
     saveHistory(hist);
     clearActive();
     active = null;
     renderLive();
 
-    showEndModal(entry.raw);
+    showEndModal(state); // Endscreen darf turns zeigen
   }
 
   function showEndModal(state){
+    lastFinishedState = state; // ✅ fürs Drucken
     const meta = `${typeLabel(state.gameType)} • Start: ${fmtDate(state.createdAt)} • Ende: ${fmtDate(state.finishedAt)}`;
     ui.endMeta.textContent = meta;
 
@@ -1638,6 +1705,15 @@ ${escapeHtml(boardText)}
       return `<tr><td>${medal} #${s.rank}</td><td><strong>${escapeHtml(s.name)}</strong></td><td>${escapeHtml(s.value)}</td></tr>`;
     }).join("");
 
+    const turns = (state.turns || []);
+    const turnRows = turns.map(t => `
+      <tr>
+        <td>#${t.no}</td>
+        <td>${escapeHtml(t.player)}</td>
+        <td>${escapeHtml(t.text)}</td>
+      </tr>
+    `).join("");
+
     ui.endBody.innerHTML = `
       <div class="shb-card">
         <h3>Endstand</h3>
@@ -1645,6 +1721,16 @@ ${escapeHtml(boardText)}
           <thead><tr><th>Platz</th><th>Spieler</th><th>Wert</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
+      </div>
+
+      <div class="shb-card" style="margin-top:.9rem;">
+        <h3>Runden</h3>
+        ${turns.length ? `
+          <table class="shb-table">
+            <thead><tr><th>#</th><th>Spieler</th><th>Treffer / Ergebnis</th></tr></thead>
+            <tbody>${turnRows}</tbody>
+          </table>
+        ` : `<div class="shb-hint">Keine Runden gespeichert.</div>`}
       </div>
     `;
     openModal(ui.endModal);
@@ -1667,7 +1753,7 @@ ${escapeHtml(boardText)}
           <td>${escapeHtml(players)}</td>
           <td><span class="pill">${escapeHtml(winner)}</span></td>
           <td style="text-align:right;">
-            <button class="shb-btn" data-act="detail" data-id="${h.id}">Details</button>
+            <button class="shb-btn" type="button" data-act="detail" data-id="${h.id}">Details</button>
           </td>
         </tr>
       `;
@@ -1703,7 +1789,7 @@ ${escapeHtml(boardText)}
           <div class="shb-hint">Spieler: ${escapeHtml(entry.players.join(", "))}</div>
           <div class="shb-hint">Winner: <strong>${escapeHtml(entry.winner || "–")}</strong></div>
           <div style="margin-top:.7rem;">
-            <button class="shb-btn" data-act="printOne">🖨 Drucken (dieses Spiel)</button>
+            <button class="shb-btn" type="button" data-act="printOne">🖨 Drucken (dieses Spiel)</button>
           </div>
         `;
         $$(".shb-card", ui.historyBody).forEach(x => x.remove());
@@ -1723,20 +1809,32 @@ ${escapeHtml(boardText)}
 
     const rows = standings.map(s => `<tr><td>#${s.rank}</td><td>${escapeHtml(s.name)}</td><td>${escapeHtml(s.value)}</td></tr>`).join("");
 
+    const turns = (state.turns || []);
+    const turnRows = turns.map(t => `<tr><td>#${t.no}</td><td>${escapeHtml(t.player)}</td><td>${escapeHtml(t.text)}</td></tr>`).join("");
+
     ui.printArea.style.display = "block";
     ui.printArea.innerHTML = `
       <h2>Dart Scoreboard – ${escapeHtml(title)}</h2>
       <p>Start: ${fmtDate(state.createdAt)}<br>Ende: ${fmtDate(state.finishedAt)}</p>
+
       <h3>Endstand</h3>
       <table>
         <thead><tr><th>Platz</th><th>Spieler</th><th>Wert</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
+
+      ${turns.length ? `
+        <h3 style="margin-top:16px;">Runden</h3>
+        <table>
+          <thead><tr><th>#</th><th>Spieler</th><th>Treffer / Ergebnis</th></tr></thead>
+          <tbody>${turnRows}</tbody>
+        </table>
+      ` : ``}
     `;
   }
 
   function setPrintAreaForHistoryEntry(entry){
-    setPrintAreaForGameState(entry.raw);
+    setPrintAreaForGameState(entry.raw); // raw in Historie enthält bewusst KEINE turns → daher kein Rundendruck
   }
 
   function setPrintAreaForHistoryList(){
@@ -1834,11 +1932,10 @@ ${escapeHtml(boardText)}
 
   ui.closeEndModal.addEventListener("click", () => closeModal(ui.endModal));
   ui.okEnd.addEventListener("click", () => closeModal(ui.endModal));
+
   ui.printEnd.addEventListener("click", () => {
-    const hist = loadHistory();
-    const entry = hist[0];
-    if(entry?.raw){
-      setPrintAreaForGameState(entry.raw);
+    if(lastFinishedState){
+      setPrintAreaForGameState(lastFinishedState); // ✅ druckt Endstand + Runden
       window.print();
     }
   });
@@ -1895,6 +1992,7 @@ ${escapeHtml(boardText)}
 
     if(active){
       if(active.finishedAt){
+        // wenn “active” im Storage als finished liegt, sauber archivieren:
         finalizeGame(active);
         active = null;
       } else {
