@@ -494,7 +494,11 @@ layout: page
      Returns: { raw, kind, mult, value, isDouble, isTriple, base? }
   */
   function parseDartToken(token){
-    const raw = (token || "").trim().toUpperCase();
+    let raw = (token || "").trim().toUpperCase();
+    
+    // erlaubt Eingaben wie "S 5", "D 16", "T 20"
+    raw = raw.replace(/^([SDT])\s+(\d{1,2})$/i, "$1$2");
+    raw = raw.replace(/\s+/g, " ");
     if(!raw) return { raw:"", kind:"empty", mult:0, value:0, isDouble:false, isTriple:false };
 
     if(raw === "MISS" || raw === "0") return { raw, kind:"score", mult:0, value:0, isDouble:false, isTriple:false };
@@ -1305,13 +1309,21 @@ ${escapeHtml(boardText)}
   }
 
   function normalizeInputsForSdt(){
+    // 1) innerhalb eines Feldes "S 5" -> "S5"
+    ui.dartInputs.forEach(inp => {
+      const v = inp.value.trim();
+      inp.value = v.replace(/^([SDT])\s+(\d{1,2})$/i, "$1$2");
+    });
+
+    // 2) über zwei Felder "S" + "5" -> "S5"
     const vals = ui.dartInputs.map(i => i.value.trim());
     for(let i=0;i<vals.length-1;i++){
-      const a = vals[i].toUpperCase();
-      const b = vals[i+1].toUpperCase();
+      const a = ui.dartInputs[i].value.trim().toUpperCase();
+      const b = ui.dartInputs[i+1].value.trim().toUpperCase();
+
       if((a==="S" || a==="D" || a==="T") && /^\d{1,2}$/.test(b)){
-        ui.dartInputs[i].value = a + b;
-        ui.dartInputs[i+1].value = "";
+        ui.dartInputs[i].value = a + b;   // S5
+        ui.dartInputs[i+1].value = "";   // nächstes Feld leeren
       }
     }
   }
