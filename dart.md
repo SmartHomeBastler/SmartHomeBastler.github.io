@@ -531,6 +531,93 @@ layout: page
     const invalid = darts.filter(d => d.kind === "invalid");
     return { darts, invalid };
   }
+/* ───────────────────────── 501 Checkout Suggestions ───────────────────────── */
+
+const _ALL_DARTS = (() => {
+  const darts = [];
+
+  // Singles, Doubles, Triples 1..20
+  for (let n = 1; n <= 20; n++) {
+    darts.push({ label: `S${n}`, score: n, out: false, t: "S" });
+    darts.push({ label: `D${n}`, score: 2*n, out: true,  t: "D" });
+    darts.push({ label: `T${n}`, score: 3*n, out: false, t: "T" });
+  }
+
+  // Bulls
+  darts.push({ label: "25",   score: 25, out: false, t: "SB" });
+  darts.push({ label: "BULL", score: 50, out: true,  t: "DB" }); // counts as double-out
+
+  return darts;
+})();
+
+function _comboScore(combo) {
+  // Ranking: prefer fewer darts, then more triples, then higher first dart
+  const darts = combo;
+  const len = darts.length;
+
+  const tripleCount = darts.filter(d => d.t === "T").length;
+  const firstScore = darts[0]?.score || 0;
+
+  // fewer darts -> bigger base
+  let s = 0;
+  s += (4 - len) * 100000;      // 1 dart best, then 2, then 3
+  s += tripleCount * 1000;      // prefer triples
+  s += firstScore * 10;         // prefer big first dart
+  return s;
+}
+
+function getCheckoutSuggestion501(rest, { requiresDoubleOut = true } = {}) {
+  // Standard: show only for <=170 (classic 3-dart checkouts)
+  if (rest <= 1) return null;
+  if (rest > 170) return null;
+
+  const outs = requiresDoubleOut ? _ALL_DARTS.filter(d => d.out) : _ALL_DARTS;
+
+  let best = null;
+  let bestS = -Infinity;
+
+  // 1 dart
+  for (const d3 of outs) {
+    if (d3.score === rest) {
+      const cand = [d3];
+      const sc = _comboScore(cand);
+      if (sc > bestS) { bestS = sc; best = cand; }
+    }
+  }
+
+  // 2 darts
+  for (const d1 of _ALL_DARTS) {
+    for (const d3 of outs) {
+      if (d1.score + d3.score === rest) {
+        const cand = [d1, d3];
+        const sc = _comboScore(cand);
+        if (sc > bestS) { bestS = sc; best = cand; }
+      }
+    }
+  }
+
+  // 3 darts
+  for (const d1 of _ALL_DARTS) {
+    for (const d2 of _ALL_DARTS) {
+      const partial = d1.score + d2.score;
+      if (partial >= rest) continue;
+      const need = rest - partial;
+
+      for (const d3 of outs) {
+        if (d3.score === need) {
+          const cand = [d1, d2, d3];
+          const sc = _comboScore(cand);
+          if (sc > bestS) { bestS = sc; best = cand; }
+        }
+      }
+    }
+  }
+
+  if (!best) return null;
+
+  // output like: T20–T20–D20
+  return best.map(d => d.label).join("–");
+}
 
   /* ───────────────────────── Game Builders ───────────────────────── */
   function build501(players, opt){
@@ -1090,6 +1177,7 @@ layout: page
         <th>Punkte</th>
         ${t.map(x => `<th>${x}</th>`).join("")}
         <th>Letzter Zug</th>
+        <th>Checkout</th>
       </tr>
     `;
 
@@ -1105,13 +1193,23 @@ layout: page
       }).join("");
 
       const last = p.lastTurn?.darts ? p.lastTurn.darts.join(", ") : "–";
-
+        
+      const needsDoubleOut = (opt === "doubleout" || opt === "doublein_doubleout");
+      const canSuggest = p.hasIn; // wenn Double-In aktiv, erst nach IN sinnvoll
+      const co = (canSuggest && !state.finishedAt)
+        ? getCheckoutSuggestion501(p.score, { requiresDoubleOut: needsDoubleOut })
+        : null;
+    
+      const coText = !canSuggest && opt.includes("doublein")
+        ? "Double-In nötig"
+        : (co || "–");
       return `
         <tr>
           <td><strong>${escapeHtml(p.name)}</strong> ${tag}</td>
           <td><span class="pill">${p.points}</span></td>
           ${marks}
           <td>${escapeHtml(last)}</td>
+          <td>${escapeHtml(coText)}</td>
         </tr>
       `;
     }).join("");
