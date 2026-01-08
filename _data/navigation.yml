@@ -54,7 +54,9 @@
       link: /asciicodeueberschriften
 - name: 🎲🎲
   dropdown:
-    - name: Runter Würfeln
+    - name: Runter Würfeln 🎲
       link: /runterwurfeln
-    - name: Yahtzee
+    - name: Yahtzee 🎲
       link: /yahtzee
+    - name: Dart 🎯
+      link: /dart
