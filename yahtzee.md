@@ -404,7 +404,21 @@ layout: page
     padding:16px;
     box-shadow: 0 20px 70px rgba(0,0,0,0.55);
   }
-  .y-modal-card-wide{ width:min(980px, 100%); }
+  .y-modal-card-wide{
+    width:min(980px, 100%);
+    max-height: calc(100vh - 32px);
+    display:flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  /* Scrollbereich innerhalb des Modals */
+  .y-modal-scroll{
+    flex: 1 1 auto;
+    overflow: auto;
+    padding-right: 6px;    /* Platz für Scrollbar */
+    margin-right: -6px;    /* damit Layout nicht "springt" */
+  }
   .y-modal-title{ font-size:1.1rem; font-weight:900; margin-bottom:4px; }
   .y-modal-sub{ font-size:0.92rem; opacity:0.8; margin-bottom:12px; }
 
