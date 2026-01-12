@@ -203,21 +203,20 @@ layout: page
   <div class="y-modal-card y-modal-card-wide">
     <div class="y-modal-title">📚 Historie</div>
     <div class="y-modal-sub" id="historySub">–</div>
-
-    <div class="y-history-grid">
-      <div class="y-history-card">
-        <div class="y-section-title" style="margin-top:0;">🏆 Siege</div>
-        <div class="y-smallhint">Gleichstand zählt als Sieg für alle Gewinner.</div>
-        <div id="historyWins"></div>
-      </div>
-
-      <div class="y-history-card">
-        <div class="y-section-title" style="margin-top:0;">🗂️ Spiele</div>
-        <div class="y-smallhint">Neueste oben.</div>
-        <div class="y-history-list" id="historyList"></div>
+    <div class="y-modal-scroll">
+      <div class="y-history-grid">
+        <div class="y-history-card">
+          <div class="y-section-title" style="margin-top:0;">🏆 Siege</div>
+          <div class="y-smallhint">Gleichstand zählt als Sieg für alle Gewinner.</div>
+          <div id="historyWins"></div>
+        </div>  
+        <div class="y-history-card">
+          <div class="y-section-title" style="margin-top:0;">🗂️ Spiele</div>
+          <div class="y-smallhint">Neueste oben.</div>
+          <div class="y-history-list" id="historyList"></div>
+        </div>
       </div>
     </div>
-
     <div class="y-modal-actions y-modal-actions-split">
       <div class="y-left-actions">
         <button class="y-btn y-btn-primary" id="btnHistoryPrint">🖨️ Drucken / Export (PDF)</button>
