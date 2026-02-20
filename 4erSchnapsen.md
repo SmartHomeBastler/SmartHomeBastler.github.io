@@ -8,9 +8,9 @@ show_sidebar: false
 
 <div class="content">
 
-<div class="notification is-info is-light" style="border-radius: 14px;">
-  <b>Hinweis:</b> Daten werden automatisch im Browser gespeichert (localStorage).  
-  Bilder erwartet unter <code>/img/hangman/Bummerl_0.png</code> bis <code>Bummerl_13.png</code>.
+<div class="notification is-info is-light" style="border-radius:14px; margin-bottom:14px;">
+  <b>Hinweis:</b> Spielstände werden im Browser gespeichert.  
+  Hangman-Bilder: <span class="shb-chip">/img/hangman/Bummerl_0.png</span> bis <span class="shb-chip">Bummerl_13.png</span>
 </div>
 
 </div>
@@ -21,6 +21,18 @@ show_sidebar: false
 </div>
 
 <style>
+
+/* Schöne “Chip”-Optik statt Code-Klotz */
+.shb-chip{
+  display:inline-block;
+  padding:2px 8px;
+  border-radius:999px;
+  background: rgba(0,0,0,.12);
+  border: 1px solid rgba(0,0,0,.10);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+}
+    
 /* ====== Theme-freundlich: wir lassen Bulma, aber kapseln alles unter #shb-schnapsen-app ====== */
 #shb-schnapsen-app{
   --bg:#0f1115;
@@ -107,12 +119,12 @@ show_sidebar: false
   gap:12px;
   align-items:center;
 }
-
+    
 #shb-schnapsen-app .hangman{
   width:120px;
   height:120px;
-  background: rgba(0,0,0,.18);
-  border: 1px solid rgba(255,255,255,.10);
+  background: #ffffff;           /* <-- neu */
+  border: 1px solid rgba(0,0,0,.15);
   border-radius: 14px;
   display:flex;
   align-items:center;
@@ -291,6 +303,9 @@ show_sidebar: false
   display:grid;
   gap:12px;
 }
+#shb-schnapsen-app .modal{
+  display:block;
+}    
 #shb-schnapsen-app label{
   font-size:12px;
   color:var(--muted);
@@ -461,7 +476,7 @@ show_sidebar: false
 
     <!-- Modal: Runde -->
     <div class="modalOverlay" id="modalRound">
-      <div class="modal">
+      <div class="shbModal">
         <div class="modalHead">
           <h2 id="modalRoundTitle">Runde eintragen</h2>
           <button class="btnGhost" id="btnCloseRound">Schließen</button>
@@ -512,7 +527,7 @@ show_sidebar: false
 
     <!-- Modal: Setup -->
     <div class="modalOverlay" id="modalSetup">
-      <div class="modal">
+      <div class="shbModal">
         <div class="modalHead">
           <h2>Spieler & Start-Geber</h2>
           <button class="btnGhost" id="btnCloseSetup">Schließen</button>
@@ -571,7 +586,7 @@ show_sidebar: false
 
     <!-- Modal: History -->
     <div class="modalOverlay" id="modalHistory">
-      <div class="modal">
+      <div class="shbModal">
         <div class="modalHead">
           <h2>History</h2>
           <button class="btnGhost" id="btnCloseHistory">Schließen</button>
