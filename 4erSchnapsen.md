@@ -724,9 +724,12 @@ function teamLabel(team){
     : `Team B (${p[3]} + ${p[4]})`;
 }
 function hangmanImg(team){
-  const path = (state.settings.imgPath || "/img/hangman").replace(/\\/$/,"");
+  const rawPath = (state.settings.imgPath || "/img/hangman");
+  const path = rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
+
   const b = team==="A" ? state.match.teamA_bummerl : state.match.teamB_bummerl;
   const step = clamp(b, 0, state.match.bummerlToWin);
+
   return `${path}/Bummerl_${step}.png`;
 }
 
