@@ -373,6 +373,28 @@ show_sidebar: false
   object-fit: contain;
 }
 
+/* ===== Popup (shbModal) wirklich nicht transparent ===== */
+#shb-schnapsen-app .shbModal{
+  width: min(720px, 100%);
+  border-radius: 20px;
+  background: #11151d !important;                 /* solid */
+  border: 1px solid rgba(255,255,255,.16) !important;
+  box-shadow: 0 30px 90px rgba(0,0,0,.80) !important;
+  overflow: hidden;
+
+  /* falls irgendwo ein Glass-Effekt aktiv ist */
+  backdrop-filter: none !important;
+}
+
+#shb-schnapsen-app .shbModal .modalHead,
+#shb-schnapsen-app .shbModal .modalFoot{
+  background: #0d1118 !important;
+}
+
+#shb-schnapsen-app .shbModal .modalBody{
+  background: #11151d !important;
+}
+    
 /* Responsive */
 @media (max-width: 900px){
   #shb-schnapsen-app .grid2{ grid-template-columns: 1fr; }
