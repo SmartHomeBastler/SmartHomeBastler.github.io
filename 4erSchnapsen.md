@@ -12,41 +12,22 @@ show_sidebar: false
 </div>
 
 <style>
-
-/* Schöne “Chip”-Optik statt Code-Klotz */
-.shb-chip{
-  display:inline-block;
-  padding:2px 8px;
-  border-radius:999px;
-  background: rgba(0,0,0,.12);
-  border: 1px solid rgba(0,0,0,.10);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-  font-size: 12px;
-}
-    
 /* ====== Theme-freundlich: wir lassen Bulma, aber kapseln alles unter #shb-schnapsen-app ====== */
 #shb-schnapsen-app{
   --bg:#0f1115;
-  --card:#161a22;
-  --card2:#1c2230;
   --text:#e7eaf0;
   --muted:#aab2c5;
-  --line:#2b3242;
   --accent:#7fd18b;
-  --danger:#ff5c5c;
-  --warn:#ffcc66;
-  --info:#6bb7ff;
   --shadow: 0 12px 30px rgba(0,0,0,.35);
   --radius: 18px;
-
   color: var(--text);
 }
 
-/* Layout */
 #shb-schnapsen-app .wrap{
-  background: radial-gradient(1200px 700px at 20% -10%, rgba(127,209,139,.15), transparent 60%),
-              radial-gradient(900px 600px at 100% 0%, rgba(107,183,255,.12), transparent 55%),
-              var(--bg);
+  background:
+    radial-gradient(1200px 700px at 20% -10%, rgba(127,209,139,.15), transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, rgba(107,183,255,.12), transparent 55%),
+    var(--bg);
   border-radius: var(--radius);
   padding: 16px;
   border: 1px solid rgba(255,255,255,.06);
@@ -103,58 +84,6 @@ show_sidebar: false
 }
 
 #shb-schnapsen-app .contentPad{ padding:14px; }
-
-#shb-schnapsen-app .teamRow{
-  display:grid;
-  grid-template-columns: 120px 1fr;
-  gap:12px;
-  align-items:center;
-}
-    
-#shb-schnapsen-app .hangman{
-  width:120px;
-  height:120px;
-  background: #ffffff;           /* <-- neu */
-  border: 1px solid rgba(0,0,0,.15);
-  border-radius: 14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-
-#shb-schnapsen-app .hangman img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-}
-
-#shb-schnapsen-app .tallyLine{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-  font-size: 18px;
-  background: rgba(0,0,0,.18);
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 14px;
-  padding:10px 12px;
-  min-height: 46px;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-#shb-schnapsen-app .pillWrap{
-  margin-top:10px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  color:var(--muted);
-  font-size:13px;
-}
-#shb-schnapsen-app .pill{
-  padding:6px 10px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.03);
-}
 
 #shb-schnapsen-app .scoreBox{
   display:grid;
@@ -219,9 +148,7 @@ show_sidebar: false
   border-color: rgba(255,92,92,.30);
 }
 
-#shb-schnapsen-app .btnGhost{
-  background: transparent;
-}
+#shb-schnapsen-app .btnGhost{ background: transparent; }
 
 #shb-schnapsen-app table{
   width:100%;
@@ -262,77 +189,7 @@ show_sidebar: false
   background: rgba(255,204,102,.08);
 }
 
-/* Modal */
-#shb-schnapsen-app .modalOverlay{
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:16px;
-  z-index:1000;
-}
-#shb-schnapsen-app .modal{
-  width:min(720px, 100%);
-  border-radius: 20px;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow: 0 20px 60px rgba(0,0,0,.55);
-  overflow:hidden;
-}
-#shb-schnapsen-app .modalHead{
-  padding:14px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background: rgba(255,255,255,.04);
-  border-bottom:1px solid rgba(255,255,255,.10);
-}
-#shb-schnapsen-app .modalBody{
-  padding:16px;
-  display:grid;
-  gap:12px;
-}
-#shb-schnapsen-app .modal{
-  display:block;
-}    
-#shb-schnapsen-app label{
-  font-size:12px;
-  color:var(--muted);
-  display:block;
-  margin:0 0 6px;
-  font-weight:900;
-}
-#shb-schnapsen-app select,
-#shb-schnapsen-app input[type="text"]{
-  width:100%;
-  padding:10px 10px;
-  border-radius: 14px;
-  border:1px solid rgba(255,255,255,.14);
-  background: rgba(0,0,0,.18);
-  color:var(--text);
-  outline:none;
-}
-#shb-schnapsen-app .modalFoot{
-  padding:14px 16px;
-  display:flex;
-  gap:10px;
-  justify-content:flex-end;
-  border-top:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.03);
-}
-#shb-schnapsen-app .note{
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.35;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px dashed rgba(255,255,255,.18);
-  background: rgba(0,0,0,.14);
-}
-
-/* Team-Name über den Bildern */
+/* ===== Team-Bilder ===== */
 #shb-schnapsen-app .teamHeaderNames{
   font-weight: 900;
   font-size: 14px;
@@ -345,13 +202,12 @@ show_sidebar: false
   gap: 12px;
   align-items:center;
   justify-content:flex-start;
-  flex-wrap: nowrap; /* <- wichtig: nicht umbrechen, sonst wirkt’s wild */
-  overflow: hidden;  /* <- nichts schiebt raus */
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
-/* Gemeinsame Bildbox */
 #shb-schnapsen-app .imgBox{
-  background: #ffffff;                 /* wichtig: Hangman sichtbar */
+  background: #ffffff;
   border-radius: 16px;
   border: 1px solid rgba(0,0,0,.15);
   box-shadow: 0 10px 24px rgba(0,0,0,.20);
@@ -363,65 +219,119 @@ show_sidebar: false
 
 #shb-schnapsen-app .imgBoxBig{
   height: 160px;
-  width: clamp(220px, 40vw, 300px);  /* <- dynamisch, nie riesig */
+  width: clamp(220px, 40vw, 300px);
 }
 
-/* Bilder sauber einpassen */
 #shb-schnapsen-app .imgBox img{
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* ===== Popup (shbModal) wirklich nicht transparent ===== */
+/* ===== Modal (Popup) ===== */
+#shb-schnapsen-app .modalOverlay{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  z-index:1000;
+}
+
 #shb-schnapsen-app .shbModal{
   width: min(720px, 100%);
+  max-height: 88vh;
   border-radius: 20px;
-  background: #11151d !important;                 /* solid */
-  border: 1px solid rgba(255,255,255,.16) !important;
-  box-shadow: 0 30px 90px rgba(0,0,0,.80) !important;
+  background: #11151d;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 30px 90px rgba(0,0,0,.80);
   overflow: hidden;
 
-  /* falls irgendwo ein Glass-Effekt aktiv ist */
-  backdrop-filter: none !important;
+  display: flex;
+  flex-direction: column;
+
+  backdrop-filter: none;
 }
 
-#shb-schnapsen-app .shbModal .modalHead,
-#shb-schnapsen-app .shbModal .modalFoot{
-  background: #0d1118 !important;
+#shb-schnapsen-app .modalHead{
+  padding:14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background: #0d1118;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  flex: 0 0 auto;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
-#shb-schnapsen-app .shbModal .modalBody{
-  background: #11151d !important;
+#shb-schnapsen-app .modalBody{
+  padding:16px;
+  display:grid;
+  gap:12px;
+  background: #11151d;
+
+  flex: 1 1 auto;
+  overflow-y: auto;
+  max-height: calc(88vh - 120px);
+  padding-right: 10px;
 }
-    
-/* Responsive */
+
+#shb-schnapsen-app .modalFoot{
+  padding:14px 16px;
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  border-top:1px solid rgba(255,255,255,.10);
+  background: #0d1118;
+  flex: 0 0 auto;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+#shb-schnapsen-app label{
+  font-size:12px;
+  color:var(--muted);
+  display:block;
+  margin:0 0 6px;
+  font-weight:900;
+}
+
+#shb-schnapsen-app select,
+#shb-schnapsen-app input[type="text"]{
+  width:100%;
+  padding:10px 10px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.35);
+  color:var(--text);
+  outline:none;
+}
+
+#shb-schnapsen-app .note{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.35;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px dashed rgba(255,255,255,.18);
+  background: rgba(0,0,0,.14);
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 900px){
   #shb-schnapsen-app .grid2{ grid-template-columns: 1fr; }
   #shb-schnapsen-app .mainGrid{ grid-template-columns: 1fr; }
 }
 
-@media (max-width: 520px){
-  #shb-schnapsen-app .teamImagesRow{
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  #shb-schnapsen-app .imgBoxBig{
-    width: 100%;
-    height: 180px;
-  }
-}
-
 @media (max-width: 650px){
-  #shb-schnapsen-app .teamImagesRow{
-    flex-wrap: wrap;
-  }
-  #shb-schnapsen-app .imgBoxBig{
-    width: 100%;
-    height: 180px;
-  }
+  #shb-schnapsen-app .teamImagesRow{ flex-wrap: wrap; }
+  #shb-schnapsen-app .imgBoxBig{ width: 100%; height: 180px; }
 }
-    
 </style>
 
 <div id="shb-schnapsen-app">
@@ -438,17 +348,16 @@ show_sidebar: false
           <div class="badge" id="teamABadge">Bummerl: 0 / 13</div>
         </div>
         <div class="contentPad">
-        <div class="teamHeaderNames" id="teamAPlayers">Spieler 1 + Spieler 2</div>
-        
-        <div class="teamImagesRow">
-          <div class="imgBox imgBoxBig">
-            <img id="teamAImg" alt="Hangman Team A" src="" />
+          <div class="teamHeaderNames" id="teamAPlayers">Spieler 1 + Spieler 2</div>
+
+          <div class="teamImagesRow">
+            <div class="imgBox imgBoxBig">
+              <img id="teamAImg" alt="Hangman Team A" src="" />
+            </div>
+            <div class="imgBox imgBoxBig">
+              <img id="teamAStricherlImg" alt="Stricherl Team A" src="" />
+            </div>
           </div>
-        
-          <div class="imgBox imgBoxBig">
-            <img id="teamAStricherlImg" alt="Stricherl Team A" src="" />
-          </div>
-        </div>
         </div>
       </div>
 
@@ -458,17 +367,16 @@ show_sidebar: false
           <div class="badge" id="teamBBadge">Bummerl: 0 / 13</div>
         </div>
         <div class="contentPad">
-        <div class="teamHeaderNames" id="teamBPlayers">Spieler 3 + Spieler 4</div>
-        
-        <div class="teamImagesRow">
-          <div class="imgBox imgBoxBig">
-            <img id="teamBImg" alt="Hangman Team B" src="" />
+          <div class="teamHeaderNames" id="teamBPlayers">Spieler 3 + Spieler 4</div>
+
+          <div class="teamImagesRow">
+            <div class="imgBox imgBoxBig">
+              <img id="teamBImg" alt="Hangman Team B" src="" />
+            </div>
+            <div class="imgBox imgBoxBig">
+              <img id="teamBStricherlImg" alt="Stricherl Team B" src="" />
+            </div>
           </div>
-        
-          <div class="imgBox imgBoxBig">
-            <img id="teamBStricherlImg" alt="Stricherl Team B" src="" />
-          </div>
-        </div>
         </div>
       </div>
     </div>
@@ -650,8 +558,9 @@ show_sidebar: false
               </select>
             </div>
             <div>
-              <label>Hangman-Bilder Pfad</label>
+              <label>Bilder-Pfad</label>
               <input type="text" id="imgPath" placeholder="/img/hangman" />
+              <div class="small" style="margin-top:6px;">Erwartet: Bummerl_0..13.png & Stricherl_0..13.png</div>
             </div>
           </div>
 
@@ -675,8 +584,24 @@ show_sidebar: false
           <h2>History</h2>
           <button class="btnGhost" id="btnCloseHistory">Schließen</button>
         </div>
-        <div class="modalBody" id="historyBody">
-          <div class="note">Noch keine Daten.</div>
+        <div class="modalBody">
+          <div class="grid2" style="margin-bottom:10px;">
+            <div>
+              <label>Bummerl auswählen</label>
+              <select id="historySelect"></select>
+            </div>
+            <div>
+              <label>Anzeige</label>
+              <select id="historyView">
+                <option value="details">Details</option>
+                <option value="compact">Kompakt</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="historyBody">
+            <div class="note">Noch keine Daten.</div>
+          </div>
         </div>
         <div class="modalFoot">
           <button id="btnExport">Export JSON</button>
@@ -689,7 +614,9 @@ show_sidebar: false
 </div>
 
 <script>
-/* ======= Spiele ======= */
+/* =======================
+   Daten / Konfig
+======================= */
 const GAME_DEFS = [
   { key:"normal_3", label:"Normale Runde (3)", points:3 },
   { key:"normal_2", label:"Normale Runde (2)", points:2 },
@@ -707,9 +634,9 @@ const GAME_DEFS = [
   { key:"farbenring_trumpf", label:"Farbenring Trumpf (24)", points:24, noShot:true }
 ];
 
-const STORAGE_KEY = "shb_schnapsen_tracker_v1";
+const STORAGE_KEY = "shb_schnapsen_tracker_v2";
 
-/* ======= Dealer Rotation (clockwise): 1 → 3 → 2 → 4 ======= */
+/* Rundtisch Uhrzeigersinn: 1 → 3 → 2 → 4 */
 const CLOCKWISE = [1,3,2,4];
 function nextDealer(d){
   const i = CLOCKWISE.indexOf(d);
@@ -757,25 +684,23 @@ function saveState(){
 
 function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
 
-function tallyString(n){
-  let out = "";
-  let full = Math.floor(n/5);
-  let rest = n%5;
-  for(let i=0;i<full;i++) out += "||||/\\n";
-  out += "|".repeat(rest);
-  return out.trim();
-}
-
 let state = loadState() ?? freshState();
 
-/* ======= UI ======= */
+/* =======================
+   DOM refs
+======================= */
 const el = {
   teamAName: document.getElementById("teamAName"),
   teamBName: document.getElementById("teamBName"),
   teamABadge: document.getElementById("teamABadge"),
   teamBBadge: document.getElementById("teamBBadge"),
+
+  teamAPlayers: document.getElementById("teamAPlayers"),
+  teamBPlayers: document.getElementById("teamBPlayers"),
   teamAImg: document.getElementById("teamAImg"),
   teamBImg: document.getElementById("teamBImg"),
+  teamAStricherlImg: document.getElementById("teamAStricherlImg"),
+  teamBStricherlImg: document.getElementById("teamBStricherlImg"),
 
   bummerlInfo: document.getElementById("bummerlInfo"),
   dealerInfo: document.getElementById("dealerInfo"),
@@ -788,7 +713,6 @@ const el = {
   modalRound: document.getElementById("modalRound"),
   modalSetup: document.getElementById("modalSetup"),
   modalHistory: document.getElementById("modalHistory"),
-  historyBody: document.getElementById("historyBody"),
 
   selWinner: document.getElementById("selWinner"),
   selTrumpf: document.getElementById("selTrumpf"),
@@ -803,46 +727,46 @@ const el = {
   p4: document.getElementById("p4"),
   selStartDealer: document.getElementById("selStartDealer"),
   imgPath: document.getElementById("imgPath"),
-  
-  teamAStricherlImg: document.getElementById("teamAStricherlImg"),
-  teamBStricherlImg: document.getElementById("teamBStricherlImg"),
-  teamAPlayers: document.getElementById("teamAPlayers"),
-  teamBPlayers: document.getElementById("teamBPlayers"),
-  };
 
-function openModal(m){ m.style.display="flex"; }
-function closeModal(m){ m.style.display="none"; }
+  historyBody: document.getElementById("historyBody"),
+  historySelect: document.getElementById("historySelect"),
+  historyView: document.getElementById("historyView"),
+};
+
+function openModal(m){ if(m) m.style.display="flex"; }
+function closeModal(m){ if(m) m.style.display="none"; }
 
 function dealerName(n){
   const p = state.settings.players;
   return `${p[n]} (Spieler ${n})`;
 }
+
 function teamLabel(team){
   const p = state.settings.players;
   return team==="A"
     ? `Team A (${p[1]} + ${p[2]})`
     : `Team B (${p[3]} + ${p[4]})`;
 }
-function hangmanImg(team){
-  const rawPath = (state.settings.imgPath || "/img/hangman");
-  const path = rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
 
+function normalizePath(raw){
+  const p = (raw || "/img/hangman").trim();
+  return p.endsWith("/") ? p.slice(0,-1) : p;
+}
+
+function hangmanImg(team){
+  const path = normalizePath(state.settings.imgPath);
   const b = team==="A" ? state.match.teamA_bummerl : state.match.teamB_bummerl;
   const step = clamp(b, 0, state.match.bummerlToWin);
-
   return `${path}/Bummerl_${step}.png`;
 }
 
 function stricherlImg(team){
-  const rawPath = (state.settings.imgPath || "/img/hangman");
-  const path = rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
-
+  const path = normalizePath(state.settings.imgPath);
   const b = team==="A" ? state.match.teamA_bummerl : state.match.teamB_bummerl;
   const step = clamp(b, 0, state.match.bummerlToWin);
-
   return `${path}/Stricherl_${step}.png`;
 }
-  
+
 function buildGameSelect(){
   el.selGame.innerHTML = "";
   for(const g of GAME_DEFS){
@@ -854,7 +778,9 @@ function buildGameSelect(){
 }
 buildGameSelect();
 
-/* ======= Retour-Schneider Logic ======= */
+/* =======================
+   Retour/Schneider Logik
+======================= */
 function refreshRetourCandidate(){
   const {restA, restB} = state.match.current;
   let cand = null;
@@ -880,6 +806,7 @@ function applyRound(round){
   if(round.winner==="A") c.restA = clamp(c.restA - pts, 0, 24);
   else c.restB = clamp(c.restB - pts, 0, 24);
 
+  // Wenn Kandidat existiert und verliert eine Runde => Kandidat weg
   if(c.retourCandidate && c.retourCandidate !== round.winner){
     c.retourCandidate = null;
   }
@@ -899,9 +826,7 @@ function recomputeCurrent(){
   state.match.current.dealer = start;
   state.match.current.retourCandidate = null;
 
-  for(const r of rounds){
-    applyRound(r);
-  }
+  for(const r of rounds) applyRound(r);
   state.match.current.rounds = rounds;
 }
 
@@ -939,6 +864,7 @@ function awardBummerl(winnerTeam){
     startedBy: c.bummerlStartDealer
   });
 
+  // Neuer Bummerl
   const nextStart = nextStartDealer(c.bummerlStartDealer);
   state.match.bummerlIndex += 1;
   state.match.current = {
@@ -951,11 +877,12 @@ function awardBummerl(winnerTeam){
 
   saveState();
   render();
-
   alert(`${reason}! Verlierer bekommt ${add} Bummerl. (Neuer Bummerl gestartet)`);
 }
 
-/* ======= Modals ======= */
+/* =======================
+   Modals: Runde
+======================= */
 let pendingRoundIndex = null;
 
 function updateRoundPreview(){
@@ -1006,7 +933,9 @@ function openSetupModal(){
   openModal(el.modalSetup);
 }
 
-/* ======= Render ======= */
+/* =======================
+   Render
+======================= */
 function render(){
   const p = state.settings.players;
 
@@ -1016,14 +945,9 @@ function render(){
   el.teamABadge.textContent = `Bummerl: ${state.match.teamA_bummerl} / ${state.match.bummerlToWin}`;
   el.teamBBadge.textContent = `Bummerl: ${state.match.teamB_bummerl} / ${state.match.bummerlToWin}`;
 
-  el.teamAImg.src = hangmanImg("A");
-  el.teamBImg.src = hangmanImg("B");
-
-  // Header-Namen (ohne Süd/Nord usw.)
   el.teamAPlayers.textContent = `${p[1]} + ${p[2]}`;
   el.teamBPlayers.textContent = `${p[3]} + ${p[4]}`;
-  
-  // Hangman + Stricherl Bilder
+
   el.teamAImg.src = hangmanImg("A");
   el.teamBImg.src = hangmanImg("B");
   el.teamAStricherlImg.src = stricherlImg("A");
@@ -1039,6 +963,7 @@ function render(){
   el.teamARestSmall.textContent = cand==="A" ? "Retour-Schneider Kandidat ✅" : "";
   el.teamBRestSmall.textContent = cand==="B" ? "Retour-Schneider Kandidat ✅" : "";
 
+  // Tabelle
   el.roundTable.innerHTML = "";
   const rounds = state.match.current.rounds;
 
@@ -1067,56 +992,97 @@ function render(){
   if(state.match.teamB_bummerl >= state.match.bummerlToWin) alert("🏆 Team B hat das Match gewonnen!");
 }
 
-/* ======= History ======= */
+/* =======================
+   History (Dropdown)
+======================= */
 function renderHistory(){
   const hist = state.match.history;
+
   if(!hist.length){
     el.historyBody.innerHTML = `<div class="note">Noch keine abgeschlossenen Bummerl in der History.</div>`;
+    el.historySelect.innerHTML = "";
     return;
   }
-  let html = "";
-  for(let i=hist.length-1;i>=0;i--){
+
+  el.historySelect.innerHTML = "";
+
+  // neueste zuerst
+  for(let i = hist.length - 1; i >= 0; i--){
     const h = hist[i];
+    const opt = document.createElement("option");
+    opt.value = String(i);
+
     const p = state.settings.players;
-    const win = h.winner==="A" ? `Team A (${p[1]}+${p[2]})` : `Team B (${p[3]}+${p[4]})`;
-
-    html += `
-      <div class="note">
-        <b>Bummerl #${h.bummerlIndex}</b> – ${h.reason}<br/>
-        Gewinner: <b>${win}</b> · Verlierer bekommt <b>${h.addBummerlToLoser}</b> Bummerl<br/>
-        Start-Geber: <b>${dealerName(h.startedBy)}</b> · Endstand Rest: A <b>${h.endRestA}</b> / B <b>${h.endRestB}</b>
-      </div>
-    `;
-
-    html += `
-      <table style="margin-top:8px;">
-        <thead>
-          <tr><th>#</th><th>Geber</th><th>Gewinner</th><th>Ansage</th><th>Schuss</th><th>Trumpf</th><th class="right">Punkte</th></tr>
-        </thead>
-        <tbody>
-          ${h.rounds.map((r,idx)=>{
-            const g = GAME_DEFS.find(x=>x.key===r.gameKey);
-            return `
-              <tr>
-                <td>${idx+1}</td>
-                <td>${dealerName(r.dealer)}</td>
-                <td>${r.winner==="A"?"Team A":"Team B"}</td>
-                <td>${g?.label ?? r.gameKey}</td>
-                <td>${r.shot?"Ja":"Nein"}</td>
-                <td>${r.trumpf || "–"}</td>
-                <td class="right"><b>${r.points ?? ""}</b></td>
-              </tr>
-            `;
-          }).join("")}
-        </tbody>
-      </table>
-      <div style="height:12px"></div>
-    `;
+    const winnerName = h.winner==="A" ? `${p[1]}+${p[2]}` : `${p[3]}+${p[4]}`;
+    opt.textContent = `Bummerl #${h.bummerlIndex} – ${h.reason} – Sieger: ${winnerName}`;
+    el.historySelect.appendChild(opt);
   }
-  el.historyBody.innerHTML = html;
+
+  if(!el.historySelect.value) el.historySelect.value = String(hist.length - 1);
+  renderSelectedHistory();
 }
 
-/* ======= Events ======= */
+function renderSelectedHistory(){
+  const hist = state.match.history;
+  if(!hist.length) return;
+
+  const idx = Number(el.historySelect.value);
+  const h = hist[idx];
+  if(!h){
+    el.historyBody.innerHTML = `<div class="note">Auswahl ungültig.</div>`;
+    return;
+  }
+
+  const p = state.settings.players;
+  const winTeam = h.winner==="A" ? `Team A (${p[1]} + ${p[2]})` : `Team B (${p[3]} + ${p[4]})`;
+  const loseTeam = h.loser==="A" ? `Team A (${p[1]} + ${p[2]})` : `Team B (${p[3]} + ${p[4]})`;
+
+  const view = el.historyView?.value ?? "details";
+
+  const header = `
+    <div class="note" style="margin-bottom:10px;">
+      <b>Bummerl #${h.bummerlIndex}</b> – ${h.reason}<br/>
+      Gewinner: <b>${winTeam}</b><br/>
+      Verlierer: <b>${loseTeam}</b> bekommt <b>${h.addBummerlToLoser}</b> Bummerl<br/>
+      Start-Geber: <b>${dealerName(h.startedBy)}</b> · Endstand Rest: A <b>${h.endRestA}</b> / B <b>${h.endRestB}</b>
+    </div>
+  `;
+
+  if(view === "compact"){
+    el.historyBody.innerHTML = header + `<div class="note">Runden: <b>${h.rounds.length}</b></div>`;
+    return;
+  }
+
+  const rows = h.rounds.map((r,idx)=>{
+    const g = GAME_DEFS.find(x=>x.key===r.gameKey);
+    return `
+      <tr>
+        <td>${idx+1}</td>
+        <td>${dealerName(r.dealer)}</td>
+        <td>${r.winner==="A"?"Team A":"Team B"}</td>
+        <td>${g?.label ?? r.gameKey}</td>
+        <td>${r.shot?"Ja":"Nein"}</td>
+        <td>${r.trumpf || "–"}</td>
+        <td class="right"><b>${r.points ?? ""}</b></td>
+      </tr>
+    `;
+  }).join("");
+
+  el.historyBody.innerHTML = header + `
+    <table style="margin-top:8px;">
+      <thead>
+        <tr>
+          <th>#</th><th>Geber</th><th>Gewinner</th><th>Ansage</th><th>Schuss</th><th>Trumpf</th><th class="right">Punkte</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+/* =======================
+   Events
+======================= */
 document.getElementById("btnAddRound").addEventListener("click", ()=>openRoundModal(null));
 document.getElementById("btnCloseRound").addEventListener("click", ()=>closeModal(el.modalRound));
 document.getElementById("btnCancelRound").addEventListener("click", ()=>closeModal(el.modalRound));
@@ -1128,6 +1094,7 @@ el.selTrumpf.addEventListener("change", updateRoundPreview);
 
 document.getElementById("btnSaveRound").addEventListener("click", ()=>{
   const c = state.match.current;
+
   const round = {
     winner: el.selWinner.value,
     gameKey: el.selGame.value,
@@ -1138,10 +1105,10 @@ document.getElementById("btnSaveRound").addEventListener("click", ()=>{
   };
 
   if(pendingRoundIndex === null){
-    round.dealer = c.dealer;
+    round.dealer = c.dealer; // Dealer vor Apply
     c.rounds.push(round);
   } else {
-    round.dealer = c.rounds[pendingRoundIndex].dealer;
+    round.dealer = c.rounds[pendingRoundIndex].dealer; // Dealer beibehalten
     c.rounds[pendingRoundIndex] = round;
   }
 
@@ -1180,7 +1147,7 @@ document.getElementById("btnSaveSetup").addEventListener("click", ()=>{
   state.settings.players[3] = el.p3.value.trim() || "Spieler 3";
   state.settings.players[4] = el.p4.value.trim() || "Spieler 4";
   state.settings.startDealer = Number(el.selStartDealer.value);
-  state.settings.imgPath = el.imgPath.value.trim() || "/img/hangman";
+  state.settings.imgPath = normalizePath(el.imgPath.value) || "/img/hangman";
 
   if(state.match.bummerlIndex === 1 && state.match.current.rounds.length === 0){
     const sd = state.settings.startDealer;
@@ -1219,11 +1186,17 @@ document.getElementById("btnCloseHistory2").addEventListener("click", ()=>closeM
 
 document.getElementById("btnExport").addEventListener("click", ()=>{
   const data = JSON.stringify(state, null, 2);
-  navigator.clipboard.writeText(data).then(()=>alert("JSON in Zwischenablage kopiert ✅"))
+  navigator.clipboard.writeText(data)
+    .then(()=>alert("JSON in Zwischenablage kopiert ✅"))
     .catch(()=>alert("Konnte nicht kopieren (Browser Rechte)."));
 });
 
-/* ======= Init ======= */
+if(el.historySelect) el.historySelect.addEventListener("change", renderSelectedHistory);
+if(el.historyView) el.historyView.addEventListener("change", renderSelectedHistory);
+
+/* =======================
+   Init
+======================= */
 (function init(){
   if(!state.match.current.bummerlStartDealer){
     const sd = state.settings.startDealer ?? 1;
