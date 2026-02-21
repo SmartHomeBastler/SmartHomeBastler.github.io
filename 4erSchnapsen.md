@@ -769,13 +769,13 @@ const el = {
   p3: document.getElementById("p3"),
   p4: document.getElementById("p4"),
   selStartDealer: document.getElementById("selStartDealer"),
-  imgPath: document.getElementById("imgPath")
-
+  imgPath: document.getElementById("imgPath"),
+  
   teamAStricherlImg: document.getElementById("teamAStricherlImg"),
   teamBStricherlImg: document.getElementById("teamBStricherlImg"),
   teamAPlayers: document.getElementById("teamAPlayers"),
   teamBPlayers: document.getElementById("teamBPlayers"),
-};
+  };
 
 function openModal(m){ m.style.display="flex"; }
 function closeModal(m){ m.style.display="none"; }
