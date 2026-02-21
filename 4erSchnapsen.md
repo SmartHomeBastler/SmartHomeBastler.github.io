@@ -6,15 +6,6 @@ layout: page
 show_sidebar: false
 ---
 
-<div class="content">
-
-<div class="notification is-info is-light" style="border-radius:14px; margin-bottom:14px;">
-  <b>Hinweis:</b> Spielstände werden im Browser gespeichert.  
-  Hangman-Bilder: <span class="shb-chip">/img/hangman/Bummerl_0.png</span> bis <span class="shb-chip">Bummerl_13.png</span>
-</div>
-
-</div>
-
 <!-- Tracker Container (Theme: Bulma Clean -> content + box + columns) -->
 <div class="box" style="border-radius: 18px;">
   <div id="shb-schnapsen-app"></div>
@@ -349,12 +340,12 @@ show_sidebar: false
   margin-bottom: 10px;
 }
 
-/* Hangman + Stricherl nebeneinander */
 #shb-schnapsen-app .teamImagesRow{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  align-items: center;
+  display:flex;
+  gap: 14px;
+  align-items:center;
+  justify-content:flex-start;
+  flex-wrap: wrap;              /* falls es eng wird */
 }
 
 /* Gemeinsame Bildbox */
@@ -362,15 +353,17 @@ show_sidebar: false
   background: #ffffff;                 /* wichtig: Hangman sichtbar */
   border-radius: 16px;
   border: 1px solid rgba(0,0,0,.15);
+  box-shadow: 0 10px 24px rgba(0,0,0,.20);
   overflow: hidden;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-/* größer als vorher */
 #shb-schnapsen-app .imgBoxBig{
-  height: 170px;                        /* kannst du auf 180/200 drehen */
+  height: 160px;
+  width: 320px;                 /* fixe Breite für “Board-Look” */
+  max-width: 100%;
 }
 
 /* Bilder sauber einpassen */
@@ -386,6 +379,17 @@ show_sidebar: false
   #shb-schnapsen-app .mainGrid{ grid-template-columns: 1fr; }
 }
 </style>
+
+@media (max-width: 520px){
+  #shb-schnapsen-app .teamImagesRow{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #shb-schnapsen-app .imgBoxBig{
+    width: 100%;
+    height: 180px;
+  }
+}
 
 <div id="shb-schnapsen-app">
   <div class="wrap">
