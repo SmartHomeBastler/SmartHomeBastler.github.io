@@ -296,7 +296,7 @@ show_sidebar: false
 #modalRound .shbModal{
   box-shadow: 0 35px 110px rgba(0,0,0,.85), 0 0 28px rgba(21,152,179,.12);
 }
-  
+
 #shb-schnapsen-app .modalHead{
   padding:14px 16px;
   display:flex;
@@ -364,15 +364,93 @@ show_sidebar: false
   background: rgba(0,0,0,.14);
 }
 
-/* SHB Alert Modal kompakter */
+/* ===== SHB Alert Styling (modern & mit Sieger/Grund) ===== */
 #shb-schnapsen-app .shbAlertModal{
-  width: min(560px, 100%);
+  width: min(620px, 100%);
 }
-#shb-schnapsen-app #alertText{
-  font-size: 14px;
+
+#shb-schnapsen-app .shbAlertHead{
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  background:
+    linear-gradient(90deg, rgba(21,152,179,.35), rgba(0,0,0,0) 45%),
+    #0d1118 !important;
+}
+
+#shb-schnapsen-app .shbAlertTitleWrap{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+#shb-schnapsen-app .shbAlertIcon{
+  width:42px;
+  height:42px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  background: rgba(21,152,179,.18);
+  border: 1px solid rgba(21,152,179,.35);
+  box-shadow: 0 0 18px rgba(21,152,179,.18);
+}
+
+#shb-schnapsen-app .shbAlertCard{
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.20);
+  padding: 14px;
+  box-shadow: 0 14px 30px rgba(0,0,0,.35);
+}
+
+#shb-schnapsen-app .shbAlertRow{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom: 10px;
+}
+
+#shb-schnapsen-app .shbTag{
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(231,234,240,.95);
+}
+
+#shb-schnapsen-app .shbTagSoft{
+  color: rgba(231,234,240,.85);
+  background: rgba(0,0,0,.18);
+}
+
+#shb-schnapsen-app .shbAlertMain{
+  font-size: 16px;
+  font-weight: 900;
+  color: rgba(231,234,240,.95);
+  margin: 6px 0 8px 0;
+}
+
+#shb-schnapsen-app .shbAlertMeta{
+  font-size: 13px;
+  color: rgba(231,234,240,.72);
   line-height: 1.45;
+  white-space: pre-line;
 }
-  
+
+/* Teamfarben */
+#shb-schnapsen-app .shbWinA .shbAlertIcon{
+  background: rgba(127,209,139,.18);
+  border-color: rgba(127,209,139,.35);
+  box-shadow: 0 0 18px rgba(127,209,139,.16);
+}
+#shb-schnapsen-app .shbWinB .shbAlertIcon{
+  background: rgba(255,204,102,.16);
+  border-color: rgba(255,204,102,.35);
+  box-shadow: 0 0 18px rgba(255,204,102,.16);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 900px){
   #shb-schnapsen-app .grid2{ grid-template-columns: 1fr; }
@@ -387,10 +465,12 @@ show_sidebar: false
 
 <div id="shb-schnapsen-app">
   <div class="wrap">
+
     <div class="shb-tool-title">
       <div class="shb-tool-title-line">🎲 Ana hod imma des Bummal!</div>
       <div class="shb-tool-sub">Schnapsen-Tracker (2 vs 2) · Schneider & Retour-Schneider · Hangman bis 13</div>
     </div>
+
     <div class="grid2" style="margin-top:8px;">
       <div class="card">
         <div class="cardHeader">
@@ -409,6 +489,7 @@ show_sidebar: false
           </div>
         </div>
       </div>
+
       <div class="card">
         <div class="cardHeader">
           <h2 id="teamBName">Team B (Spieler 3+4)</h2>
@@ -427,6 +508,7 @@ show_sidebar: false
         </div>
       </div>
     </div>
+
     <div class="mainGrid">
       <div class="card">
         <div class="cardHeader">
@@ -446,7 +528,9 @@ show_sidebar: false
               <div class="small" id="teamBRestSmall"></div>
             </div>
           </div>
+
           <div style="height:12px"></div>
+
           <table>
             <thead>
               <tr>
@@ -461,11 +545,13 @@ show_sidebar: false
             </thead>
             <tbody id="roundTable"></tbody>
           </table>
+
           <div class="small" style="margin-top:10px;">
             Klicke auf eine Zeile zum Eintragen oder Bearbeiten. Gespeichert wird erst mit <b>„Fertig“</b>.
           </div>
         </div>
       </div>
+
       <div>
         <div class="card">
           <div class="cardHeader">
@@ -481,6 +567,7 @@ show_sidebar: false
               <button id="btnUndo">Letzte Runde zurück</button>
               <button class="btnDanger" id="btnReset">Alles löschen</button>
             </div>
+
             <div class="note" style="margin-top:12px;">
               <b>Retour-Schneider Markierung:</b><br/>
               Team steht noch bei <b>24</b>, Gegner hat schon Punkte ⇒ dieses Team ist “Retour-Kandidat”.  
@@ -488,6 +575,7 @@ show_sidebar: false
             </div>
           </div>
         </div>
+
         <div class="card" style="margin-top:14px;">
           <div class="cardHeader">
             <h2>Setup</h2>
@@ -505,6 +593,7 @@ show_sidebar: false
         </div>
       </div>
     </div>
+
     <!-- Modal: Runde -->
     <div class="modalOverlay" id="modalRound">
       <div class="shbModal">
@@ -532,6 +621,7 @@ show_sidebar: false
               </select>
             </div>
           </div>
+
           <div class="grid2">
             <div>
               <label>Ansage / Spiel</label>
@@ -545,6 +635,7 @@ show_sidebar: false
               </select>
             </div>
           </div>
+
           <div class="note" id="modalPreview">–</div>
         </div>
         <div class="modalFoot">
@@ -553,6 +644,7 @@ show_sidebar: false
         </div>
       </div>
     </div>
+
     <!-- Modal: Setup -->
     <div class="modalOverlay" id="modalSetup">
       <div class="shbModal">
@@ -571,6 +663,7 @@ show_sidebar: false
               <input type="text" id="p2" placeholder="z.B. Moni" />
             </div>
           </div>
+
           <div class="grid2">
             <div>
               <label>Spieler 3 (West)</label>
@@ -581,6 +674,7 @@ show_sidebar: false
               <input type="text" id="p4" placeholder="z.B. Rita" />
             </div>
           </div>
+
           <div class="grid2">
             <div>
               <label>Wer beginnt als Geber? (Bummerl #1)</label>
@@ -597,6 +691,7 @@ show_sidebar: false
               <div class="small" style="margin-top:6px;">Erwartet: Bummerl_0..13.png & Stricherl_0..13.png</div>
             </div>
           </div>
+
           <div class="note">
             Teams fix: <b>(1+2)</b> vs <b>(3+4)</b><br/>
             Geber rotiert: <b>1 → 3 → 2 → 4</b><br/>
@@ -609,6 +704,7 @@ show_sidebar: false
         </div>
       </div>
     </div>
+
     <!-- Modal: History -->
     <div class="modalOverlay" id="modalHistory">
       <div class="shbModal">
@@ -630,6 +726,7 @@ show_sidebar: false
               </select>
             </div>
           </div>
+
           <div id="historyBody">
             <div class="note">Noch keine Daten.</div>
           </div>
@@ -640,22 +737,41 @@ show_sidebar: false
         </div>
       </div>
     </div>
+
   </div>
-  <!-- Modal: SHB Alert -->
+
+  <!-- Modal: SHB Alert (modern) -->
   <div class="modalOverlay" id="modalAlert">
     <div class="shbModal shbAlertModal">
-      <div class="modalHead">
-        <h2 id="alertTitle">Info</h2>
-        <button class="btnGhost" id="btnCloseAlert">OK</button>
+      <div class="modalHead shbAlertHead">
+        <div class="shbAlertTitleWrap">
+          <div class="shbAlertIcon" id="alertIcon">🏁</div>
+          <div>
+            <h2 id="alertTitle" style="margin:0;">Info</h2>
+            <div class="small" id="alertSubtitle" style="margin-top:2px;">–</div>
+          </div>
+        </div>
+        <button class="btnGhost" id="btnCloseAlert">✕</button>
       </div>
+
       <div class="modalBody">
-        <div class="note" id="alertText">–</div>
+        <div class="shbAlertCard">
+          <div class="shbAlertRow">
+            <div class="shbTag" id="alertReason">Info</div>
+            <div class="shbTag shbTagSoft" id="alertAdd"></div>
+          </div>
+
+          <div class="shbAlertMain" id="alertText">–</div>
+          <div class="shbAlertMeta" id="alertMeta">–</div>
+        </div>
       </div>
+
       <div class="modalFoot">
         <button class="btnPrimary" id="btnCloseAlert2">OK</button>
       </div>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -765,9 +881,15 @@ const el = {
   modalPreview: document.getElementById("modalPreview"),
   modalRoundTitle: document.getElementById("modalRoundTitle"),
 
+  // Alert modal (modern)
   modalAlert: document.getElementById("modalAlert"),
   alertTitle: document.getElementById("alertTitle"),
+  alertSubtitle: document.getElementById("alertSubtitle"),
   alertText: document.getElementById("alertText"),
+  alertMeta: document.getElementById("alertMeta"),
+  alertReason: document.getElementById("alertReason"),
+  alertAdd: document.getElementById("alertAdd"),
+  alertIcon: document.getElementById("alertIcon"),
   btnCloseAlert: document.getElementById("btnCloseAlert"),
   btnCloseAlert2: document.getElementById("btnCloseAlert2"),
 
@@ -786,12 +908,35 @@ const el = {
 function openModal(m){ if(m) m.style.display="flex"; }
 function closeModal(m){ if(m) m.style.display="none"; }
 
-function shbAlert(message, title="Info"){
+/* ===== Modern SHB Alert ===== */
+function shbAlert(opts){
+  const {
+    title = "Info",
+    subtitle = "",
+    text = "",
+    meta = "",
+    reason = "Info",
+    add = "",
+    icon = "✅",
+    winnerTeam = "" // "A" | "B" | ""
+  } = opts || {};
+
   el.alertTitle.textContent = title;
-  el.alertText.textContent = message;
+  el.alertSubtitle.textContent = subtitle;
+  el.alertText.textContent = text;
+  el.alertMeta.textContent = meta;
+  el.alertReason.textContent = reason;
+  el.alertAdd.textContent = add;
+  el.alertIcon.textContent = icon;
+
+  const modalBox = el.modalAlert.querySelector(".shbModal");
+  modalBox.classList.remove("shbWinA","shbWinB");
+  if(winnerTeam === "A") modalBox.classList.add("shbWinA");
+  if(winnerTeam === "B") modalBox.classList.add("shbWinB");
+
   openModal(el.modalAlert);
 }
-  
+
 function dealerName(n){
   const p = state.settings.players;
   return `${p[n]} (Spieler ${n})`;
@@ -919,6 +1064,12 @@ function awardBummerl(winnerTeam){
     startedBy: c.bummerlStartDealer
   });
 
+  const p = state.settings.players;
+  const winName = winnerTeam==="A" ? `${p[1]} + ${p[2]}` : `${p[3]} + ${p[4]}`;
+  const loseName = loser==="A" ? `${p[1]} + ${p[2]}` : `${p[3]} + ${p[4]}`;
+  const icon = (reason === "Retour-Schneider") ? "🔥" : (reason === "Schneider") ? "✂️" : "🏁";
+
+  // Neuer Bummerl
   const nextStart = nextStartDealer(c.bummerlStartDealer);
   state.match.bummerlIndex += 1;
   state.match.current = {
@@ -931,7 +1082,17 @@ function awardBummerl(winnerTeam){
 
   saveState();
   render();
-  shbAlert(`${reason}! Verlierer bekommt ${add} Bummerl.\nNeuer Bummerl gestartet.`, "Bummerl beendet");
+
+  shbAlert({
+    title: "Bummerl beendet",
+    subtitle: `Sieger: ${winName}`,
+    text: `${winName} gewinnt den Bummerl!`,
+    meta: `Verlierer: ${loseName}\nGrund: ${reason}\nNeuer Bummerl gestartet (Geber rotiert).`,
+    reason: reason,
+    add: `+${add} Bummerl für ${loseName}`,
+    icon,
+    winnerTeam
+  });
 }
 
 /* =======================
@@ -1017,9 +1178,6 @@ function render(){
   el.teamARestSmall.textContent = cand==="A" ? "Retour-Schneider Kandidat ✅" : "";
   el.teamBRestSmall.textContent = cand==="B" ? "Retour-Schneider Kandidat ✅" : "";
 
-  el.btnCloseAlert.addEventListener("click", ()=>closeModal(el.modalAlert));
-  el.btnCloseAlert2.addEventListener("click", ()=>closeModal(el.modalAlert));
-
   el.roundTable.innerHTML = "";
   const rounds = state.match.current.rounds;
 
@@ -1043,9 +1201,6 @@ function render(){
     tr.addEventListener("click", ()=>openRoundModal(i));
     el.roundTable.appendChild(tr);
   }
-
-  if(state.match.teamA_bummerl >= state.match.bummerlToWin) shbAlert("🏆 Team A hat das Match gewonnen!", "Match beendet");
-  if(state.match.teamB_bummerl >= state.match.bummerlToWin) shbAlert("🏆 Team B hat das Match gewonnen!", "Match beendet");
 }
 
 /* =======================
@@ -1241,12 +1396,16 @@ document.getElementById("btnCloseHistory2").addEventListener("click", ()=>closeM
 document.getElementById("btnExport").addEventListener("click", ()=>{
   const data = JSON.stringify(state, null, 2);
   navigator.clipboard.writeText(data)
-    .then(()=>alert("JSON in Zwischenablage kopiert ✅"))
-    .catch(()=>alert("Konnte nicht kopieren (Browser Rechte)."));
+    .then(()=>shbAlert({ title:"Export", subtitle:"Zwischenablage", text:"JSON wurde in die Zwischenablage kopiert ✅", meta:"", reason:"Export", add:"", icon:"📋" }))
+    .catch(()=>shbAlert({ title:"Export", subtitle:"Fehler", text:"Konnte nicht kopieren (Browser Rechte).", meta:"", reason:"Export", add:"", icon:"⚠️" }));
 });
 
 if(el.historySelect) el.historySelect.addEventListener("change", renderSelectedHistory);
 if(el.historyView) el.historyView.addEventListener("change", renderSelectedHistory);
+
+/* Alert Buttons */
+el.btnCloseAlert.addEventListener("click", ()=>closeModal(el.modalAlert));
+el.btnCloseAlert2.addEventListener("click", ()=>closeModal(el.modalAlert));
 
 /* =======================
    Init
