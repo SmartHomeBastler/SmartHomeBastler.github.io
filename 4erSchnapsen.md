@@ -341,6 +341,45 @@ show_sidebar: false
   background: rgba(0,0,0,.14);
 }
 
+/* Team-Name über den Bildern */
+#shb-schnapsen-app .teamHeaderNames{
+  font-weight: 900;
+  font-size: 14px;
+  color: rgba(255,255,255,.92);
+  margin-bottom: 10px;
+}
+
+/* Hangman + Stricherl nebeneinander */
+#shb-schnapsen-app .teamImagesRow{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Gemeinsame Bildbox */
+#shb-schnapsen-app .imgBox{
+  background: #ffffff;                 /* wichtig: Hangman sichtbar */
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,.15);
+  overflow: hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* größer als vorher */
+#shb-schnapsen-app .imgBoxBig{
+  height: 170px;                        /* kannst du auf 180/200 drehen */
+}
+
+/* Bilder sauber einpassen */
+#shb-schnapsen-app .imgBox img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 /* Responsive */
 @media (max-width: 900px){
   #shb-schnapsen-app .grid2{ grid-template-columns: 1fr; }
@@ -362,13 +401,17 @@ show_sidebar: false
           <div class="badge" id="teamABadge">Bummerl: 0 / 13</div>
         </div>
         <div class="contentPad">
-          <div class="teamRow">
-            <div class="hangman"><img id="teamAImg" alt="Hangman A" src="" /></div>
-            <div>
-              <div class="tallyLine" id="teamATally"></div>
-              <div class="pillWrap" id="teamAMeta"></div>
-            </div>
+        <div class="teamHeaderNames" id="teamAPlayers">Spieler 1 + Spieler 2</div>
+        
+        <div class="teamImagesRow">
+          <div class="imgBox imgBoxBig">
+            <img id="teamAImg" alt="Hangman Team A" src="" />
           </div>
+        
+          <div class="imgBox imgBoxBig">
+            <img id="teamAStricherlImg" alt="Stricherl Team A" src="" />
+          </div>
+        </div>
         </div>
       </div>
 
@@ -378,13 +421,17 @@ show_sidebar: false
           <div class="badge" id="teamBBadge">Bummerl: 0 / 13</div>
         </div>
         <div class="contentPad">
-          <div class="teamRow">
-            <div class="hangman"><img id="teamBImg" alt="Hangman B" src="" /></div>
-            <div>
-              <div class="tallyLine" id="teamBTally"></div>
-              <div class="pillWrap" id="teamBMeta"></div>
-            </div>
+        <div class="teamHeaderNames" id="teamBPlayers">Spieler 3 + Spieler 4</div>
+        
+        <div class="teamImagesRow">
+          <div class="imgBox imgBoxBig">
+            <img id="teamBImg" alt="Hangman Team B" src="" />
           </div>
+        
+          <div class="imgBox imgBoxBig">
+            <img id="teamBStricherlImg" alt="Stricherl Team B" src="" />
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -723,6 +770,11 @@ const el = {
   p4: document.getElementById("p4"),
   selStartDealer: document.getElementById("selStartDealer"),
   imgPath: document.getElementById("imgPath")
+
+  teamAStricherlImg: document.getElementById("teamAStricherlImg"),
+  teamBStricherlImg: document.getElementById("teamBStricherlImg"),
+  teamAPlayers: document.getElementById("teamAPlayers"),
+  teamBPlayers: document.getElementById("teamBPlayers"),
 };
 
 function openModal(m){ m.style.display="flex"; }
@@ -748,6 +800,16 @@ function hangmanImg(team){
   return `${path}/Bummerl_${step}.png`;
 }
 
+function stricherlImg(team){
+  const rawPath = (state.settings.imgPath || "/img/hangman");
+  const path = rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
+
+  const b = team==="A" ? state.match.teamA_bummerl : state.match.teamB_bummerl;
+  const step = clamp(b, 0, state.match.bummerlToWin);
+
+  return `${path}/Stricherl_${step}.png`;
+}
+  
 function buildGameSelect(){
   el.selGame.innerHTML = "";
   for(const g of GAME_DEFS){
@@ -924,17 +986,15 @@ function render(){
   el.teamAImg.src = hangmanImg("A");
   el.teamBImg.src = hangmanImg("B");
 
-  el.teamATally.textContent = tallyString(state.match.teamA_bummerl) || " ";
-  el.teamBTally.textContent = tallyString(state.match.teamB_bummerl) || " ";
-
-  el.teamAMeta.innerHTML = `
-    <div class="pill">Süd: <b>${p[1]}</b> (Spieler 1)</div>
-    <div class="pill">Nord: <b>${p[2]}</b> (Spieler 2)</div>
-  `;
-  el.teamBMeta.innerHTML = `
-    <div class="pill">West: <b>${p[3]}</b> (Spieler 3)</div>
-    <div class="pill">Ost: <b>${p[4]}</b> (Spieler 4)</div>
-  `;
+  // Header-Namen (ohne Süd/Nord usw.)
+  el.teamAPlayers.textContent = `${p[1]} + ${p[2]}`;
+  el.teamBPlayers.textContent = `${p[3]} + ${p[4]}`;
+  
+  // Hangman + Stricherl Bilder
+  el.teamAImg.src = hangmanImg("A");
+  el.teamBImg.src = hangmanImg("B");
+  el.teamAStricherlImg.src = stricherlImg("A");
+  el.teamBStricherlImg.src = stricherlImg("B");
 
   el.bummerlInfo.textContent = `Bummerl #${state.match.bummerlIndex}`;
   el.dealerInfo.textContent = `Geber: ${dealerName(state.match.current.dealer)}`;
