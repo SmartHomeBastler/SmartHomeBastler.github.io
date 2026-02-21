@@ -7,17 +7,29 @@ show_sidebar: false
 ---
 
 <!-- Tracker Container (Theme: Bulma Clean -> content + box + columns) -->
-<div class="box" style="border-radius: 18px;">
+<div class="box shb-tool-box">
   <div id="shb-schnapsen-app"></div>
 </div>
 
 <style>
+/* ===== SHB Tool-Container wie bei deinen anderen Tools ===== */
+.shb-tool-box{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-top: 0 !important;
+}
+
 /* ====== Theme-freundlich: wir lassen Bulma, aber kapseln alles unter #shb-schnapsen-app ====== */
 #shb-schnapsen-app{
   --bg:#0f1115;
   --text:#e7eaf0;
   --muted:#aab2c5;
+
+  --shb-accent:#1598b3;  /* SHB Türkis */
   --accent:#7fd18b;
+
   --shadow: 0 12px 30px rgba(0,0,0,.35);
   --radius: 18px;
   color: var(--text);
@@ -26,24 +38,48 @@ show_sidebar: false
 #shb-schnapsen-app .wrap{
   background:
     radial-gradient(1200px 700px at 20% -10%, rgba(127,209,139,.15), transparent 60%),
-    radial-gradient(900px 600px at 100% 0%, rgba(107,183,255,.12), transparent 55%),
+    radial-gradient(900px 600px at 100% 0%, rgba(21,152,179,.14), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
     var(--bg);
-  border-radius: var(--radius);
-  padding: 16px;
-  border: 1px solid rgba(255,255,255,.06);
-  box-shadow: var(--shadow);
+
+  border-radius: 22px;
+  padding: 18px;
+
+  border: 2px solid rgba(21,152,179,.55);
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,.45) inset,
+    0 0 28px rgba(21,152,179,.20),
+    0 18px 40px rgba(0,0,0,.55);
+
+  overflow: hidden;
+}
+
+/* ===== Tool Titel wie bei deinen anderen Trackern ===== */
+#shb-schnapsen-app .shb-tool-title{
+  text-align:center;
+  padding: 6px 0 14px 0;
+}
+
+#shb-schnapsen-app .shb-tool-title-line{
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: .5px;
+  color: var(--shb-accent);
+  text-shadow:
+    0 2px 0 rgba(0,0,0,.65),
+    0 0 20px rgba(21,152,179,.30);
+}
+
+#shb-schnapsen-app .shb-tool-sub{
+  margin-top: 6px;
+  font-size: 14px;
+  color: rgba(231,234,240,.80);
 }
 
 #shb-schnapsen-app h2{
   margin:0;
   font-size:16px;
   font-weight:800;
-}
-
-#shb-schnapsen-app .sub{
-  margin-top:6px;
-  color:var(--muted);
-  font-size:13px;
 }
 
 #shb-schnapsen-app .grid2{
@@ -61,9 +97,10 @@ show_sidebar: false
 
 #shb-schnapsen-app .card{
   background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-  border: 1px solid rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.10);
   border-radius: var(--radius);
   overflow:hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
 }
 
 #shb-schnapsen-app .cardHeader{
@@ -72,7 +109,7 @@ show_sidebar: false
   align-items:center;
   justify-content:space-between;
   border-bottom:1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.03);
+  background: rgba(255,255,255,.04);
 }
 
 #shb-schnapsen-app .badge{
@@ -336,12 +373,12 @@ show_sidebar: false
 
 <div id="shb-schnapsen-app">
   <div class="wrap">
-    <div style="text-align:center;">
-      <h2 style="color: var(--accent); font-size:22px; margin-bottom:2px;">Ana hod imma des Bummal!</h2>
-      <div class="sub">Schnapsen-Tracker (2 vs 2) · Schneider & Retour-Schneider · Hangman bis 13</div>
+    <div class="shb-tool-title">
+      <div class="shb-tool-title-line">🎲 Ana hod imma des Bummal!</div>
+      <div class="shb-tool-sub">Schnapsen-Tracker (2 vs 2) · Schneider & Retour-Schneider · Hangman bis 13</div>
     </div>
 
-    <div class="grid2" style="margin-top:14px;">
+    <div class="grid2" style="margin-top:8px;">
       <div class="card">
         <div class="cardHeader">
           <h2 id="teamAName">Team A (Spieler 1+2)</h2>
@@ -683,7 +720,6 @@ function saveState(){
 }
 
 function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
-
 let state = loadState() ?? freshState();
 
 /* =======================
@@ -806,7 +842,6 @@ function applyRound(round){
   if(round.winner==="A") c.restA = clamp(c.restA - pts, 0, 24);
   else c.restB = clamp(c.restB - pts, 0, 24);
 
-  // Wenn Kandidat existiert und verliert eine Runde => Kandidat weg
   if(c.retourCandidate && c.retourCandidate !== round.winner){
     c.retourCandidate = null;
   }
@@ -864,7 +899,6 @@ function awardBummerl(winnerTeam){
     startedBy: c.bummerlStartDealer
   });
 
-  // Neuer Bummerl
   const nextStart = nextStartDealer(c.bummerlStartDealer);
   state.match.bummerlIndex += 1;
   state.match.current = {
@@ -881,7 +915,7 @@ function awardBummerl(winnerTeam){
 }
 
 /* =======================
-   Modals: Runde
+   Runde Modal
 ======================= */
 let pendingRoundIndex = null;
 
@@ -963,7 +997,6 @@ function render(){
   el.teamARestSmall.textContent = cand==="A" ? "Retour-Schneider Kandidat ✅" : "";
   el.teamBRestSmall.textContent = cand==="B" ? "Retour-Schneider Kandidat ✅" : "";
 
-  // Tabelle
   el.roundTable.innerHTML = "";
   const rounds = state.match.current.rounds;
 
@@ -993,7 +1026,7 @@ function render(){
 }
 
 /* =======================
-   History (Dropdown)
+   History
 ======================= */
 function renderHistory(){
   const hist = state.match.history;
@@ -1005,8 +1038,6 @@ function renderHistory(){
   }
 
   el.historySelect.innerHTML = "";
-
-  // neueste zuerst
   for(let i = hist.length - 1; i >= 0; i--){
     const h = hist[i];
     const opt = document.createElement("option");
@@ -1105,10 +1136,10 @@ document.getElementById("btnSaveRound").addEventListener("click", ()=>{
   };
 
   if(pendingRoundIndex === null){
-    round.dealer = c.dealer; // Dealer vor Apply
+    round.dealer = c.dealer;
     c.rounds.push(round);
   } else {
-    round.dealer = c.rounds[pendingRoundIndex].dealer; // Dealer beibehalten
+    round.dealer = c.rounds[pendingRoundIndex].dealer;
     c.rounds[pendingRoundIndex] = round;
   }
 
