@@ -283,7 +283,7 @@ show_sidebar: false
   border-radius: 20px;
   background: #11151d;
   border: 1px solid rgba(255,255,255,.16);
-  box-shadow: 0 30px 90px rgba(0,0,0,.80);
+  box-shadow: 0 30px 90px rgba(0,0,0,.80), 0 0 0 1px rgba(21,152,179,.12);
   overflow: hidden;
 
   display: flex;
@@ -292,6 +292,11 @@ show_sidebar: false
   backdrop-filter: none;
 }
 
+/* Runde-Popup: extra Schatten + leichter Glow */
+#modalRound .shbModal{
+  box-shadow: 0 35px 110px rgba(0,0,0,.85), 0 0 28px rgba(21,152,179,.12);
+}
+  
 #shb-schnapsen-app .modalHead{
   padding:14px 16px;
   display:flex;
@@ -359,6 +364,15 @@ show_sidebar: false
   background: rgba(0,0,0,.14);
 }
 
+/* SHB Alert Modal kompakter */
+#shb-schnapsen-app .shbAlertModal{
+  width: min(560px, 100%);
+}
+#shb-schnapsen-app #alertText{
+  font-size: 14px;
+  line-height: 1.45;
+}
+  
 /* ===== Responsive ===== */
 @media (max-width: 900px){
   #shb-schnapsen-app .grid2{ grid-template-columns: 1fr; }
@@ -377,7 +391,6 @@ show_sidebar: false
       <div class="shb-tool-title-line">🎲 Ana hod imma des Bummal!</div>
       <div class="shb-tool-sub">Schnapsen-Tracker (2 vs 2) · Schneider & Retour-Schneider · Hangman bis 13</div>
     </div>
-
     <div class="grid2" style="margin-top:8px;">
       <div class="card">
         <div class="cardHeader">
@@ -386,7 +399,6 @@ show_sidebar: false
         </div>
         <div class="contentPad">
           <div class="teamHeaderNames" id="teamAPlayers">Spieler 1 + Spieler 2</div>
-
           <div class="teamImagesRow">
             <div class="imgBox imgBoxBig">
               <img id="teamAImg" alt="Hangman Team A" src="" />
@@ -397,7 +409,6 @@ show_sidebar: false
           </div>
         </div>
       </div>
-
       <div class="card">
         <div class="cardHeader">
           <h2 id="teamBName">Team B (Spieler 3+4)</h2>
@@ -405,7 +416,6 @@ show_sidebar: false
         </div>
         <div class="contentPad">
           <div class="teamHeaderNames" id="teamBPlayers">Spieler 3 + Spieler 4</div>
-
           <div class="teamImagesRow">
             <div class="imgBox imgBoxBig">
               <img id="teamBImg" alt="Hangman Team B" src="" />
@@ -417,7 +427,6 @@ show_sidebar: false
         </div>
       </div>
     </div>
-
     <div class="mainGrid">
       <div class="card">
         <div class="cardHeader">
@@ -437,9 +446,7 @@ show_sidebar: false
               <div class="small" id="teamBRestSmall"></div>
             </div>
           </div>
-
           <div style="height:12px"></div>
-
           <table>
             <thead>
               <tr>
@@ -454,13 +461,11 @@ show_sidebar: false
             </thead>
             <tbody id="roundTable"></tbody>
           </table>
-
           <div class="small" style="margin-top:10px;">
             Klicke auf eine Zeile zum Eintragen oder Bearbeiten. Gespeichert wird erst mit <b>„Fertig“</b>.
           </div>
         </div>
       </div>
-
       <div>
         <div class="card">
           <div class="cardHeader">
@@ -476,7 +481,6 @@ show_sidebar: false
               <button id="btnUndo">Letzte Runde zurück</button>
               <button class="btnDanger" id="btnReset">Alles löschen</button>
             </div>
-
             <div class="note" style="margin-top:12px;">
               <b>Retour-Schneider Markierung:</b><br/>
               Team steht noch bei <b>24</b>, Gegner hat schon Punkte ⇒ dieses Team ist “Retour-Kandidat”.  
@@ -484,7 +488,6 @@ show_sidebar: false
             </div>
           </div>
         </div>
-
         <div class="card" style="margin-top:14px;">
           <div class="cardHeader">
             <h2>Setup</h2>
@@ -502,7 +505,6 @@ show_sidebar: false
         </div>
       </div>
     </div>
-
     <!-- Modal: Runde -->
     <div class="modalOverlay" id="modalRound">
       <div class="shbModal">
@@ -530,7 +532,6 @@ show_sidebar: false
               </select>
             </div>
           </div>
-
           <div class="grid2">
             <div>
               <label>Ansage / Spiel</label>
@@ -544,7 +545,6 @@ show_sidebar: false
               </select>
             </div>
           </div>
-
           <div class="note" id="modalPreview">–</div>
         </div>
         <div class="modalFoot">
@@ -553,7 +553,6 @@ show_sidebar: false
         </div>
       </div>
     </div>
-
     <!-- Modal: Setup -->
     <div class="modalOverlay" id="modalSetup">
       <div class="shbModal">
@@ -572,7 +571,6 @@ show_sidebar: false
               <input type="text" id="p2" placeholder="z.B. Moni" />
             </div>
           </div>
-
           <div class="grid2">
             <div>
               <label>Spieler 3 (West)</label>
@@ -583,7 +581,6 @@ show_sidebar: false
               <input type="text" id="p4" placeholder="z.B. Rita" />
             </div>
           </div>
-
           <div class="grid2">
             <div>
               <label>Wer beginnt als Geber? (Bummerl #1)</label>
@@ -600,7 +597,6 @@ show_sidebar: false
               <div class="small" style="margin-top:6px;">Erwartet: Bummerl_0..13.png & Stricherl_0..13.png</div>
             </div>
           </div>
-
           <div class="note">
             Teams fix: <b>(1+2)</b> vs <b>(3+4)</b><br/>
             Geber rotiert: <b>1 → 3 → 2 → 4</b><br/>
@@ -613,7 +609,6 @@ show_sidebar: false
         </div>
       </div>
     </div>
-
     <!-- Modal: History -->
     <div class="modalOverlay" id="modalHistory">
       <div class="shbModal">
@@ -635,7 +630,6 @@ show_sidebar: false
               </select>
             </div>
           </div>
-
           <div id="historyBody">
             <div class="note">Noch keine Daten.</div>
           </div>
@@ -646,7 +640,21 @@ show_sidebar: false
         </div>
       </div>
     </div>
-
+  </div>
+  <!-- Modal: SHB Alert -->
+  <div class="modalOverlay" id="modalAlert">
+    <div class="shbModal shbAlertModal">
+      <div class="modalHead">
+        <h2 id="alertTitle">Info</h2>
+        <button class="btnGhost" id="btnCloseAlert">OK</button>
+      </div>
+      <div class="modalBody">
+        <div class="note" id="alertText">–</div>
+      </div>
+      <div class="modalFoot">
+        <button class="btnPrimary" id="btnCloseAlert2">OK</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -757,6 +765,12 @@ const el = {
   modalPreview: document.getElementById("modalPreview"),
   modalRoundTitle: document.getElementById("modalRoundTitle"),
 
+  modalAlert: document.getElementById("modalAlert"),
+  alertTitle: document.getElementById("alertTitle"),
+  alertText: document.getElementById("alertText"),
+  btnCloseAlert: document.getElementById("btnCloseAlert"),
+  btnCloseAlert2: document.getElementById("btnCloseAlert2"),
+
   p1: document.getElementById("p1"),
   p2: document.getElementById("p2"),
   p3: document.getElementById("p3"),
@@ -772,6 +786,12 @@ const el = {
 function openModal(m){ if(m) m.style.display="flex"; }
 function closeModal(m){ if(m) m.style.display="none"; }
 
+function shbAlert(message, title="Info"){
+  el.alertTitle.textContent = title;
+  el.alertText.textContent = message;
+  openModal(el.modalAlert);
+}
+  
 function dealerName(n){
   const p = state.settings.players;
   return `${p[n]} (Spieler ${n})`;
@@ -911,7 +931,7 @@ function awardBummerl(winnerTeam){
 
   saveState();
   render();
-  alert(`${reason}! Verlierer bekommt ${add} Bummerl. (Neuer Bummerl gestartet)`);
+  shbAlert(`${reason}! Verlierer bekommt ${add} Bummerl.\nNeuer Bummerl gestartet.`, "Bummerl beendet");
 }
 
 /* =======================
@@ -997,6 +1017,9 @@ function render(){
   el.teamARestSmall.textContent = cand==="A" ? "Retour-Schneider Kandidat ✅" : "";
   el.teamBRestSmall.textContent = cand==="B" ? "Retour-Schneider Kandidat ✅" : "";
 
+  el.btnCloseAlert.addEventListener("click", ()=>closeModal(el.modalAlert));
+  el.btnCloseAlert2.addEventListener("click", ()=>closeModal(el.modalAlert));
+
   el.roundTable.innerHTML = "";
   const rounds = state.match.current.rounds;
 
@@ -1021,8 +1044,8 @@ function render(){
     el.roundTable.appendChild(tr);
   }
 
-  if(state.match.teamA_bummerl >= state.match.bummerlToWin) alert("🏆 Team A hat das Match gewonnen!");
-  if(state.match.teamB_bummerl >= state.match.bummerlToWin) alert("🏆 Team B hat das Match gewonnen!");
+  if(state.match.teamA_bummerl >= state.match.bummerlToWin) shbAlert("🏆 Team A hat das Match gewonnen!", "Match beendet");
+  if(state.match.teamB_bummerl >= state.match.bummerlToWin) shbAlert("🏆 Team B hat das Match gewonnen!", "Match beendet");
 }
 
 /* =======================
