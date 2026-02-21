@@ -342,10 +342,11 @@ show_sidebar: false
 
 #shb-schnapsen-app .teamImagesRow{
   display:flex;
-  gap: 14px;
+  gap: 12px;
   align-items:center;
   justify-content:flex-start;
-  flex-wrap: wrap;              /* falls es eng wird */
+  flex-wrap: nowrap; /* <- wichtig: nicht umbrechen, sonst wirkt’s wild */
+  overflow: hidden;  /* <- nichts schiebt raus */
 }
 
 /* Gemeinsame Bildbox */
@@ -362,8 +363,7 @@ show_sidebar: false
 
 #shb-schnapsen-app .imgBoxBig{
   height: 160px;
-  width: 320px;                 /* fixe Breite für “Board-Look” */
-  max-width: 100%;
+  width: clamp(220px, 40vw, 300px);  /* <- dynamisch, nie riesig */
 }
 
 /* Bilder sauber einpassen */
@@ -378,7 +378,6 @@ show_sidebar: false
   #shb-schnapsen-app .grid2{ grid-template-columns: 1fr; }
   #shb-schnapsen-app .mainGrid{ grid-template-columns: 1fr; }
 }
-</style>
 
 @media (max-width: 520px){
   #shb-schnapsen-app .teamImagesRow{
@@ -390,6 +389,18 @@ show_sidebar: false
     height: 180px;
   }
 }
+
+@media (max-width: 650px){
+  #shb-schnapsen-app .teamImagesRow{
+    flex-wrap: wrap;
+  }
+  #shb-schnapsen-app .imgBoxBig{
+    width: 100%;
+    height: 180px;
+  }
+}
+    
+</style>
 
 <div id="shb-schnapsen-app">
   <div class="wrap">
@@ -743,10 +754,6 @@ const el = {
   teamBBadge: document.getElementById("teamBBadge"),
   teamAImg: document.getElementById("teamAImg"),
   teamBImg: document.getElementById("teamBImg"),
-  teamATally: document.getElementById("teamATally"),
-  teamBTally: document.getElementById("teamBTally"),
-  teamAMeta: document.getElementById("teamAMeta"),
-  teamBMeta: document.getElementById("teamBMeta"),
 
   bummerlInfo: document.getElementById("bummerlInfo"),
   dealerInfo: document.getElementById("dealerInfo"),
