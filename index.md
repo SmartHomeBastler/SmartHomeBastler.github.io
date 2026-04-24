@@ -1,6 +1,7 @@
 ---
 title: Smart Home Bastler
 subtitle: Schritt für Schritt ins smarte Zuhause!
+description: Auf dieser Website dreht sich alles um Code-Snippets, Codegeneratoren und Code-Vorlagen für die Einrichtung, die Erweiterung und das Design von Home Assistant.
 layout: page
 show_sidebar: true
 meeting_title: "2026.04"
