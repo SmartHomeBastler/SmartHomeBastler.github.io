@@ -1,6 +1,6 @@
 ---
 title: Herzlich willkommen beim Smart Home Bastler
-subtitle: Auf dieser Website dreht sich alles um Code-Snippets, Codegeneratoren und Code-Vorlagen für die Einrichtung, die Erweiterung und das Design von Home Assistant.
+subtitle: Auf dieser Website dreht sich alles um Code-Snippets, Codegeneratoren und Code-Vorlagen
 layout: page
 show_sidebar: true
 meeting_title: "2026.05"
