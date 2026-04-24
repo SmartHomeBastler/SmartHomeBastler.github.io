@@ -12,16 +12,15 @@ meeting_time: "18:00"       # Eingabe im HH:mm Format
     Einladung zum <br>
     <span style="white-space: nowrap;">
         <img src="/img/logos/ha-logo.png" alt="Home Assistant Logo" style="width: 60px; height: auto; vertical-align: middle;"> 
-        Home Assistant Treffen {{ page.meeting_title }}
+        {{ page.meeting_title }} Home Assistant Treffen 
         <img src="/img/logos/ha-logo.png" alt="Home Assistant Logo" style="width: 60px; height: auto; vertical-align: middle;">
     </span>
     <br>
-    Code Website
+    in Linz
 </h1>
 <br>
 <div style="margin: 20px 0;">
-    <h2 style="text-align: center;">Einladung zum {{ page.meeting_title }} Home Assistant-Treffen in Linz<br>
-    am <span id="meetingDay" style="margin: 0;"></span> um {{ page.meeting_time }} Uhr</h2>
+    <h2 style="text-align: center;">Wann: <span id="meetingDay" style="margin: 0;"></span> um {{ page.meeting_time }} Uhr</h2>
 </div>
 
 <div id="countdown-container" style="text-align: center; padding: 20px;">
