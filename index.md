@@ -1,35 +1,23 @@
 ---
-title: Smart Home Bastler
-subtitle: Schritt für Schritt ins smarte Zuhause!
-description: Auf dieser Website dreht sich alles um Code-Snippets, Codegeneratoren und Code-Vorlagen für die Einrichtung, die Erweiterung und das Design von Home Assistant.
+title: Herzlich willkommen beim Smart Home Bastler
+subtitle: Auf dieser Website dreht sich alles um Code-Snippets, Codegeneratoren und Code-Vorlagen für die Einrichtung, die Erweiterung und das Design von Home Assistant.
 layout: page
 show_sidebar: true
-meeting_title: "2026.04"
-meeting_date: "09-04-2026"  # Eingabe im DD-MM-YYYY Format
+meeting_title: "2026.05"
+meeting_date: "14-05-2026"  # Eingabe im DD-MM-YYYY Format
 meeting_time: "18:00"       # Eingabe im HH:mm Format
 ---
 <div class="page-content">
 <h1 style="text-align: center; line-height: 1.6; font-size: 2.6em;">
-    Herzlich willkommen auf meiner<br>
+    Einladung zum <br>
     <span style="white-space: nowrap;">
         <img src="/img/logos/ha-logo.png" alt="Home Assistant Logo" style="width: 60px; height: auto; vertical-align: middle;"> 
-        Home Assistant 
+        Home Assistant Treffen {{ page.meeting_title }}
         <img src="/img/logos/ha-logo.png" alt="Home Assistant Logo" style="width: 60px; height: auto; vertical-align: middle;">
     </span>
     <br>
     Code Website
 </h1>
-<br>
-<p style="text-align: center;">
-    Auf dieser Website dreht sich alles um Code-Snippets, Codegeneratoren und Code-Vorlagen für die Einrichtung, die Erweiterung und das Design von Home Assistant.<br>
-</p>
-<p style="text-align: center;">
-    Viel Spaß beim Schmökern, Testen und Designen.
-</p>
-<br>
-<p style="text-align: center;">
-    Beste Grüße, Maxx
-</p>
 <br>
 <div style="margin: 20px 0;">
     <h2 style="text-align: center;">Einladung zum {{ page.meeting_title }} Home Assistant-Treffen in Linz<br>
