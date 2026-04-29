@@ -20,6 +20,8 @@
 - name: Beiträge
   link: /blog/
   dropdown:
+    - name: Tageslicht Anzeige
+      link: /dashboard/2026/04/29/tageslicht-am-floorplan-in-homeassistant-2026/
     - name: Smarter Adventkranz
       link: /dashboard/2024/11/23/adventkranz-mit-esphome-smart-machen/
     - name: Eigene Schriftarten
