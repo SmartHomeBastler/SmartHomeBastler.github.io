@@ -12,6 +12,31 @@ published: true
 <p>
     Ich wollte meine Tageslicht Ansicht auf meinem Dashboard wetterbedingt und Tageszeitabhängig angezeigt bekommen. Um das zu erreichen habe ich mir zwei Sensoren zur Berechnung und ein Overlay Bild zur Darstellung erstellt. In diesem Beitrag möchte ich Euch Schritt für Schritt zeigen was man dazu alles benötigt und wie ich das erstellt habe.
 </p>
+
+<h3>Tageslicht Ansicht erstellen</h3>
+
+<p>
+    Beginnen wir damit, das Tageslicht Bild in Sweet Home 3D zu erstellen. 
+</p>
+
+<p>
+    Wir öffnen unseren Flurplan in Sweet Home 3D, deaktivieren alle Beleuchtungen und klicken auf das Fotosymbol .
+</p>
+
+<p>
+    Nun müssen wir dieselben Einstellungen verwenden, die wir auch bei unserem Floorplan benutzt haben, abgesehen von der Helligkeit. Hier wähle ich eine Uhrzeit aus, welche in etwa um die Mittagszeit, in meinem Fall 13:00 Uhr angezeigt wird.
+</p>
+
+<p>
+    Wenn diese Einstellungen abgeschlossen sind, gehe ich auf Foto erstellen. 
+</p>
+
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/floorplan_tageslicht/SH3D_Tageslicht_1_k.png" alt="Example image" large_link="/img/blog/floorplan_tageslicht/SH3D_Tageslicht_1.png" %}
+</div>
+</div>
+
 <div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/floorplan_tageslicht/0034_Tageslicht_hell-768x384.png" alt="Example image" large_link="/img/blog/floorplan_tageslicht/0034_Tageslicht_hell-1024x512.png" %}
