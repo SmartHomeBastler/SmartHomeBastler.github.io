@@ -8,3 +8,8 @@ description: "Wie man am Floorplan ein Tageslicht Overlay einrichtet und die Hel
 image: /img/blog/floorplan_tageslicht/blog-post-tageslicht-am-floorplan.png
 published: true
 ---
+<div class="post-content">
+<p>
+    Ich wollte meine Tageslicht Ansicht auf meinem Dashboard wetterbedingt und Tageszeitabhängig angezeigt bekommen. Um das zu erreichen habe ich mir zwei Sensoren zur Berechnung und ein Overlay Bild zur Darstellung erstellt. In diesem Beitrag möchte ich Euch Schritt für Schritt zeigen was man dazu alles benötigt und wie ich das erstellt habe.
+</p>
+</div>
