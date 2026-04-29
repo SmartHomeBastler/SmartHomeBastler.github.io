@@ -37,13 +37,31 @@ published: true
 </div>
 </div>
 
+<p>
+    Nun habe ich ein fertig gerendertes Bild in einer kompletten Übersicht. 
+</p>
+
+<div class="columns is-centered">
+<div class="column is-5">
+{% include image-modal.html ratio="is-4by3" link="/img/blog/floorplan_tageslicht/0034_Tageslicht-768x384.png" alt="Example image" large_link="/img/blog/floorplan_tageslicht/0034_Tageslicht-1024x512.png" %}
+</div>
+</div>
+
+<p>
+    Leider ist es in Sweet Home 3D nicht möglich den Schatten einer Decke, sprich nur den Tageslichteinfall durch die Fenster anzuzeigen. Aus diesem Grund öffne ich das nun gerenderte Bild in einem Bildbearbeitungsprogramm wie Gimp oder Photoshop und entferne alle Bereiche, die in der Wohnung sind, abgesehen von den Fensterflächen.
+Damit dieses Bild dann als Overlay, also ein überlagerndes Bild fungiert, muss der Hintergrund dieses Bildes entfernt und transparent dargestellt oder in schwarzer Farbe übermalt werden. 
+Schwarze Flächen werden in weiter Folge im Code transparent dargestellt.
+</p>
+
 <div class="columns is-centered">
 <div class="column is-5">
 {% include image-modal.html ratio="is-4by3" link="/img/blog/floorplan_tageslicht/0034_Tageslicht_hell-768x384.png" alt="Example image" large_link="/img/blog/floorplan_tageslicht/0034_Tageslicht_hell-1024x512.png" %}
 </div>
 </div>
 
-
+<p>
+    Somit sichern wir dieses Bild als PNG und übertragen es auf unseren Speicherort in Home Assistant. 
+</p>
 
 
 
