@@ -3,7 +3,7 @@ layout: post
 title: "Tageslicht am Floorplan in Homeassistant 2026"
 date: 2026-04-28 04:06:00
 categories: Dashboard
-tags: [Floorplan, Homeassistant, Tageslihct, Bewölkung, ]
+tags: [Floorplan, Homeassistant, Tageslicht, Bewölkung, Template, Sensor, SweetHome3D, SH3D, Dashboard, ]
 description: "Wie man am Floorplan ein Tageslicht Overlay einrichtet und die Helligkeit Sensorsteuert, zeige ich hier"
 image: /img/blog/floorplan_tageslicht/blog-post-tageslicht-am-floorplan.png
 published: true
