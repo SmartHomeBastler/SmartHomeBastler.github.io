@@ -20,7 +20,7 @@ published: true
 </p>
 
 <p>
-    Wir öffnen unseren Flurplan in Sweet Home 3D, deaktivieren alle Beleuchtungen und klicken auf das Fotosymbol .
+    Wir öffnen unseren Floorplan in Sweet Home 3D, deaktivieren alle Beleuchtungen und klicken auf das Fotosymbol .
 </p>
 
 <p>
