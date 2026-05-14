@@ -3,8 +3,8 @@ title: Herzlich willkommen beim Smart Home Bastler
 subtitle: Auf dieser Website dreht sich alles um Code-Snippets, Codegeneratoren und Code-Vorlagen
 layout: page
 show_sidebar: true
-meeting_title: "2026.05"
-meeting_date: "14-05-2026"  # Eingabe im DD-MM-YYYY Format
+meeting_title: "2026.06"
+meeting_date: "11-06-2026"  # Eingabe im DD-MM-YYYY Format
 meeting_time: "18:00"       # Eingabe im HH:mm Format
 ---
 <div class="page-content">
