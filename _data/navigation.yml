@@ -54,8 +54,10 @@
   dropdown:
     - name: ASCII Code
       link: /asciicodeueberschriften
-- name: 🎲🎲
+- name: 🎮 Spiele
   dropdown:
+    - name: Schattenpalast ⚔️
+      link: /spiele/schattenpalast/
     - name: Runter Würfeln 🎲
       link: /runterwurfeln
     - name: Yahtzee 🎲
