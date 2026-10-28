@@ -62,14 +62,14 @@ kbd{font:inherit;font-size:11px;color:#eff8ff;background:#1e324d;border:1px soli
  <nav class="top" aria-label="Webseiten-Navigation">
   <a class="back" href="https://smarthomebastler.github.io/">← Zurück zur Webseite</a><span class="brand">SMART HOME BASTLER · ARCADE</span>
  </nav>
- <div class="heading"><div class="symbol">🛢️</div><div><h1>NEON <span>TOWER</span></h1><p class="subtitle">Fassflucht – hoch hinaus, bevor dich die Fässer erwischen!</p></div></div>
+ <div class="heading"><div class="symbol">🛢️</div><div><h1>NEON <span>TOWER</span></h1><p class="subtitle">Fassflucht – rollende und geworfene Fässer machen dir das Leben schwer!</p></div></div>
  <div class="layout">
   <main>
    <div class="frame"><div class="screen">
     <canvas id="board" width="720" height="700" aria-label="Neon Tower Spielfeld"></canvas>
     <div class="overlay" id="overlay">
      <div class="modal"><div id="overlayIcon" class="modal-icon">🛢️</div><h2 id="overlayTitle">Auf zur Turmspitze!</h2>
-      <p id="overlayText">Laufe über fünf Etagen, steige die Leitern hinauf und springe über rollende Fässer. Erreiche die Rettungskapsel oben rechts!</p>
+      <p id="overlayText">Erklimme fünf Etagen, springe über rollende Fässer und weiche gezielten Fasswürfen des Roboters aus. Rote Warnkreise zeigen, wo geworfene Fässer landen. Erreiche die Rettungskapsel!</p>
       <button class="primary" id="overlayButton" type="button">Abenteuer starten ▶</button>
       <span class="keys">← → Laufen · ↑ ↓ Leiter · Leertaste Springen · P Pause</span>
      </div>
@@ -82,7 +82,7 @@ kbd{font:inherit;font-size:11px;color:#eff8ff;background:#1e324d;border:1px soli
      <button type="button" data-control="down" aria-label="Leiter runter">▼</button>
      <button type="button" data-control="jump" class="jump" aria-label="Springen">SPRUNG</button>
    </div>
-   <p class="tip">Tipp: Die großen Schraubenschlüssel machen dich kurzzeitig unverwundbar und räumen rollende Fässer aus dem Weg. Springst du über ein Fass, gibt es Bonuspunkte!</p>
+   <p class="tip">Tipp: Achte auf rote Warnringe – dort landen geworfene Fässer! Der Schraubenschlüssel schützt dich kurzzeitig. Springe über Fässer für Bonuspunkte.</p>
   </main>
   <aside class="side">
    <div class="stats">
@@ -92,9 +92,10 @@ kbd{font:inherit;font-size:11px;color:#eff8ff;background:#1e324d;border:1px soli
      <div class="stat"><small>Leben</small><strong id="lives">♥ ♥ ♥</strong></div>
    </div>
    <section class="card"><h3>Punkte & Extras</h3>
-    <div class="info"><span class="emoji">🛢️</span><span>Fass überspringen: <b>+100</b></span></div>
+    <div class="info"><span class="emoji">🛢️</span><span>Fass überspringen: <b>+100 / +150</b></span></div>
     <div class="info"><span class="emoji">💎</span><span>Kristall sammeln: <b>+200</b></span></div>
     <div class="info"><span class="emoji">🔧</span><span>Schraubenschlüssel: Fässer zerstören <b>+150</b></span></div>
+    <div class="info"><span class="emoji">🎯</span><span>Wurf-Fässer: Achtung, rote Zielmarkierung!</span></div>
     <div class="info"><span class="emoji">🚀</span><span>Rettungskapsel: Zielbonus und nächstes Level</span></div>
    </section>
    <section class="card"><h3>Spielsteuerung</h3>
@@ -119,7 +120,7 @@ const cvs=document.getElementById("board"),ctx=cvs.getContext("2d"),get=id=>docu
 const ui={overlay:get("overlay"),icon:get("overlayIcon"),title:get("overlayTitle"),text:get("overlayText"),button:get("overlayButton"),score:get("score"),high:get("highscore"),level:get("level"),lives:get("lives"),status:get("status"),pause:get("pauseButton"),sound:get("soundButton")};
 let p={x:92,foot:FLOORS[0],floor:0,vy:0,climbing:null,invuln:0,hammer:0,dir:1,walking:0};
 let barrels=[],items=[],particles=[],stars=[],keys={left:false,right:false,up:false,down:false,jump:false};
-let mode="ready",level=1,lives=3,score=0,high=0,remaining=145,spawnTimer=3.2,elapsed=0,frameClock=0,last=0,anim=0,soundOn=true,audio=null,flash="",flashTime=0;
+let mode="ready",level=1,lives=3,score=0,high=0,remaining=120,spawnTimer=2,elapsed=0,frameClock=0,last=0,anim=0,robotThrow=0,launchCount=0,soundOn=true,audio=null,flash="",flashTime=0;
 try{high=Number(localStorage.getItem("shb-neon-tower-high")||0)||0;soundOn=localStorage.getItem("shb-neon-tower-sound")!=="off"}catch(e){}
 const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),format=n=>Math.floor(n).toLocaleString("de-AT");
 function refresh(){
@@ -151,7 +152,7 @@ function backgroundStars(){
 }
 function resetPlayer(){p={x:92,foot:FLOORS[0],floor:0,vy:0,climbing:null,invuln:2.2,hammer:0,dir:1,walking:0};keys.left=false;keys.right=false;keys.up=false;keys.down=false;keys.jump=false}
 function startLevel(){
- resetPlayer();barrels=[];remaining=145;elapsed=0;spawnTimer=2.6;flashTime=0;particles=[];
+ resetPlayer();barrels=[];remaining=Math.max(85,120-(level-1)*4);elapsed=0;spawnTimer=1.9;flashTime=0;particles=[];robotThrow=0;launchCount=0;
  items=[
   {type:"gem",floor:0,x:405,taken:false},
   {type:"gem",floor:1,x:355,taken:false},
@@ -172,8 +173,27 @@ function togglePause(){
  refresh();
 }
 function spawnBarrel(){
- if(barrels.length>=18)return;
- barrels.push({x:220,y:FLOORS[4]-13,floor:4,dir:1,dropTo:null,spin:0,jumped:false,speed:75+Math.min(100,(level-1)*14)});
+ if(barrels.length>=20)return;
+ launchCount++;
+ const speed=99+Math.min(125,(level-1)*17);
+ const throwIt=launchCount%3===2||Math.random()<Math.min(.43,.15+(level-1)*.035);
+ robotThrow=.5;
+ if(throwIt){
+  // Aimed arc: a visible target marker appears before the barrel can land.
+  const floor=p.climbing?(p.climbing.direction<0?p.climbing.top:p.climbing.bottom):
+   p.floor!==null?p.floor:FLOORS.reduce((best,v,i)=>Math.abs(v-p.foot)<Math.abs(FLOORS[best]-p.foot)?i:best,0);
+  const x=197,y=FLOORS[4]-55,targetX=clamp(p.x+rnd(-110,110),XMIN+27,XMAX-27);
+  const targetY=FLOORS[floor]-13,gravity=920,vy=-260;
+  const flight=(-vy+Math.sqrt(vy*vy+2*gravity*(targetY-y)))/gravity;
+  const vx=(targetX-x)/flight;
+  barrels.push({x,y,floor:null,dir:vx>=0?1:-1,dropTo:null,spin:0,jumped:false,speed:speed*1.04,
+   thrown:true,airborne:true,gravity,vx,vy,targetFloor:floor,targetX,flightLeft:flight});
+  announce("⚠ WURFFASS – ETAGE "+(floor+1)+"!",1.15);beep(310,.18,"sawtooth",.055);
+ }else{
+  const fast=launchCount%4===0;
+  barrels.push({x:220,y:FLOORS[4]-13,floor:4,dir:1,dropTo:null,spin:0,jumped:false,speed:speed*(fast?1.27:1),thrown:false,airborne:false,fast});
+  beep(230,.07,"triangle",.025);
+ }
 }
 function climbUp(){
  if(p.floor===null||p.climbing||!keys.up)return false;
@@ -219,8 +239,19 @@ function updatePlayer(dt){
 function updateBarrels(dt){
  for(let i=barrels.length-1;i>=0;i--){
   const b=barrels[i];
-  b.spin+=dt*6.5;
-  if(b.dropTo!==null){
+  b.spin+=dt*(b.airborne?11:7.6);
+  if(b.airborne){
+   const landingY=FLOORS[b.targetFloor]-13;
+   const previousY=b.y;
+   b.x+=b.vx*dt;b.y+=b.vy*dt+.5*b.gravity*dt*dt;b.vy+=b.gravity*dt;
+   b.flightLeft=Math.max(0,b.flightLeft-dt);
+   // Only settle onto the announced platform; upper girder openings are arcade-style.
+   if(b.vy>=0&&previousY<=landingY&&b.y>=landingY){
+    b.y=landingY;b.x=clamp(b.x,XMIN+14,XMAX-14);b.floor=b.targetFloor;b.airborne=false;
+    b.dir=b.x>p.x?-1:1;b.jumped=false;puff(b.x,b.y,"#ffa56f",10);
+    beep(145,.09,"sawtooth",.045);
+   }
+  }else if(b.dropTo!==null){
    b.y+=(245+Math.min(90,level*15))*dt;
    const target=FLOORS[b.dropTo]-13;
    if(b.y>=target){b.y=target;b.floor=b.dropTo;b.dropTo=null;b.dir*=-1;b.jumped=false}
@@ -235,7 +266,7 @@ function updateBarrels(dt){
   // Award only once per barrel passage when the player is clearly above it.
   const vertical=p.foot-b.y;
   if(!b.jumped&&!p.climbing&&p.floor===null&&Math.abs(p.x-b.x)<22&&vertical<-15&&vertical>-100){
-   b.jumped=true;points(100);announce("+100 FASS ÜBERSPRUNGEN",.85);beep(880,.1,"triangle",.035)
+   b.jumped=true;const bonus=b.thrown?150:100;points(bonus);announce("+"+bonus+" FASS ÜBERSPRUNGEN",.85);beep(880,.1,"triangle",.035)
   }
   const dx=p.x-b.x,dy=p.foot-17-b.y;
   if(dx*dx+dy*dy<27*27){
@@ -253,7 +284,7 @@ function collectItems(){
   if(p.floor!==item.floor||Math.abs(p.x-item.x)>19)continue;
   item.taken=true;
   if(item.type==="gem"){points(200);puff(item.x,FLOORS[item.floor]-24,"#8ceeff",17);beep(960,.15,"sine",.07);announce("+200 KRISTALL",.9)}
-  else{p.hammer=8.5;puff(item.x,FLOORS[item.floor]-22,"#ffe28d",20);beep(620,.3,"triangle",.09);announce("SCHRAUBENSCHLÜSSEL! 8 SEK.",1.2)}
+  else{p.hammer=6.5;puff(item.x,FLOORS[item.floor]-22,"#ffe28d",20);beep(620,.3,"triangle",.09);announce("SCHRAUBENSCHLÜSSEL! 6,5 SEK.",1.2)}
  }
 }
 function loseLife(){
@@ -263,7 +294,7 @@ function loseLife(){
   mode="over";show("💥","Game Over","Du hast "+format(score)+" Punkte erreicht und bist bis Level "+level+" gekommen. Dein Highscore: "+format(high)+".","Noch einmal spielen ▶");
   ui.status.textContent="Game Over · "+format(score)+" Punkte";
  }else{
-  barrels=[];spawnTimer=3;remaining=Math.max(35,remaining-12);resetPlayer();announce("LEBEN VERLOREN – NOCH "+lives,1.3);
+  barrels=[];spawnTimer=2.5;robotThrow=0;remaining=Math.max(35,remaining-10);resetPlayer();announce("LEBEN VERLOREN – NOCH "+lives,1.3);
  }
  refresh();
 }
@@ -271,11 +302,11 @@ function clearLevel(){
  if(mode!=="playing")return;
  const bonus=1000+Math.round(remaining)*10+level*250;
  points(bonus);mode="cleared";beep(880,.45,"triangle",.09);
- show("🚀","Turm geschafft!","Du hast die Rettungskapsel erreicht! Bonus: "+format(bonus)+" Punkte. Im nächsten Level rollen die Fässer schneller und häufiger.","Nächstes Level ▶");
+ show("🚀","Turm geschafft!","Du hast die Rettungskapsel erreicht! Bonus: "+format(bonus)+" Punkte. Im nächsten Level rollen mehr Fässer und der Roboter wirft noch häufiger.","Nächstes Level ▶");
  ui.status.textContent="Level "+level+" geschafft!";refresh();
 }
 function update(dt){
- frameClock+=dt;elapsed+=dt;flashTime=Math.max(0,flashTime-dt);
+ frameClock+=dt;elapsed+=dt;robotThrow=Math.max(0,robotThrow-dt);flashTime=Math.max(0,flashTime-dt);
  for(let i=particles.length-1;i>=0;i--){const s=particles[i];s.life-=dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=180*dt;if(s.life<=0)particles.splice(i,1)}
  if(mode!=="playing")return;
  remaining-=dt;
@@ -284,7 +315,7 @@ function update(dt){
  if(mode!=="playing")return;
  collectItems();
  spawnTimer-=dt;
- if(spawnTimer<=0){spawnBarrel();spawnTimer=Math.max(1.3,3.25-level*.16)*rnd(.78,1.2)}
+ if(spawnTimer<=0){spawnBarrel();spawnTimer=Math.max(.88,2.45-level*.105)*rnd(.84,1.16)}
  updateBarrels(dt);
  if(mode!=="playing")return;
  if(p.floor===4&&p.x>=624)clearLevel();
@@ -338,9 +369,12 @@ function drawRobot(){
  rounded(-21,-27,42,17,3,"#241832");
  rect(-14,-22,10,9,"#7efbff");rect(5,-22,10,9,"#ffba6a");
  ctx.shadowBlur=0;rect(-25,-1,14,5,"#d39cc8");rect(11,-1,14,5,"#d39cc8");
- ctx.save();ctx.rotate(Math.sin(frameClock*3)*.15);
- rect(-38,-12,11,8,"#ac7cbd");rect(27,-14,11,8,"#ac7cbd");
- ctx.restore();ctx.restore();
+ ctx.save();
+ ctx.translate(-28,-12);ctx.rotate(robotThrow>0?-.5-Math.sin((.5-robotThrow)*Math.PI/.5)*1.2:Math.sin(frameClock*3)*.15);
+ rect(-10,-3,18,9,robotThrow>0?"#ffd28a":"#ac7cbd");ctx.restore();
+ ctx.save();ctx.translate(28,-14);ctx.rotate(robotThrow>0?-1.2:Math.sin(frameClock*3)*-.15);
+ rect(-5,-3,18,9,robotThrow>0?"#ffd28a":"#ac7cbd");ctx.restore();
+ ctx.restore();
  ctx.fillStyle="#b99ad6";ctx.font="800 11px monospace";ctx.textAlign="center";ctx.fillText("FASS-ROBOTER",x,y-69);
 }
 function drawCapsule(){
@@ -372,12 +406,21 @@ function drawPickups(){
 }
 function drawBarrels(){
  for(const b of barrels){
+  if(b.airborne){
+   const floorY=FLOORS[b.targetFloor],pulse=Math.sin(frameClock*11)*3;
+   ctx.save();ctx.strokeStyle="#ff765f";ctx.lineWidth=2.5;ctx.setLineDash([4,5]);
+   ctx.beginPath();ctx.ellipse(b.targetX,floorY-4,19+pulse,8+pulse*.23,0,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+   ctx.fillStyle="#ff9186";ctx.font="900 10px monospace";ctx.textAlign="center";ctx.fillText("!",b.targetX,floorY-18);ctx.restore();
+  }
   ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.spin*b.dir);
-  ctx.shadowColor="#ff9d53";ctx.shadowBlur=8;
-  rounded(-14,-14,28,28,8,"#aa5b39");ctx.shadowBlur=0;
-  ctx.strokeStyle="#ffc087";ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,11,0,Math.PI*2);ctx.stroke();
+  const color=b.thrown?"#ff725f":b.fast?"#ffa84b":"#aa5b39";
+  ctx.shadowColor=color;ctx.shadowBlur=b.thrown?18:8;
+  rounded(-14,-14,28,28,8,color);ctx.shadowBlur=0;
+  ctx.strokeStyle=b.thrown?"#ffd4a1":"#ffc087";ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,11,0,Math.PI*2);ctx.stroke();
   rect(-12,-2,24,4,"#512a31");
-  rect(-2,-11,4,22,"#de8a54");ctx.restore();
+  rect(-2,-11,4,22,b.thrown?"#fff0ac":"#de8a54");
+  if(b.airborne){ctx.fillStyle="#ffdb83";rect(-21,-4,8,6,"#ffdb83");rect(-28,-2,6,4,"#ff9d59")}
+  ctx.restore();
  }
 }
 function drawPlayer(){
