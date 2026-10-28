@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#091226">
+<title>Neon Tower – Fassflucht | Smart Home Bastler Arcade</title>
+<style>
+:root{color-scheme:dark;--ink:#edf8ff;--muted:#98adc9;--cyan:#65ebff;--gold:#ffd677;--pink:#ff88b5;--line:#2c4a6f}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#070d1c;color:var(--ink)}
+body{background:radial-gradient(ellipse at 50% -10%,#234366 0,transparent 60%),linear-gradient(150deg,#0b1329,#050917);font:500 15px/1.48 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.shell{max-width:1160px;margin:0 auto;padding:17px clamp(12px,3vw,32px) 35px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:15px}
+.back{font-size:13px;color:#c3d4e9}.brand{color:var(--cyan);letter-spacing:2px;font-weight:850;font-size:11px}
+.heading{display:flex;gap:14px;align-items:center;margin-bottom:17px}
+.symbol{display:grid;place-items:center;flex:none;width:56px;height:56px;border-radius:16px;border:1px solid #6d669a;background:linear-gradient(140deg,#302746,#111d34);font-size:31px;box-shadow:0 0 28px #b45eff28}
+h1{font-size:clamp(28px,4.5vw,43px);font-weight:950;letter-spacing:-1.35px;line-height:1.08;margin:0 0 3px}
+h1 span{color:var(--gold)}.subtitle{color:var(--muted);font-size:13px;margin:0}
+.layout{display:grid;grid-template-columns:minmax(0,740px) minmax(230px,1fr);gap:18px;align-items:start}
+.frame{border:1px solid #355476;background:#0b1528;border-radius:19px;padding:9px;box-shadow:0 18px 60px #02060eb5,inset 0 1px #ffffff10}
+.screen{position:relative;border-radius:12px;overflow:hidden;background:#080e1e;line-height:0}
+canvas{display:block;width:100%;height:auto;aspect-ratio:720/700;touch-action:none}
+.overlay{position:absolute;inset:0;z-index:5;display:flex;justify-content:center;align-items:center;padding:15px;background:#050917d9;backdrop-filter:blur(4px);line-height:1.5}
+.overlay.hidden{display:none}
+.modal{width:min(410px,100%);padding:clamp(20px,4vw,32px) 20px;border:1px solid #637da6;border-radius:20px;background:linear-gradient(145deg,#1c2b46f7,#11182bf9);text-align:center;box-shadow:0 20px 60px #000a}
+.modal-icon{font-size:49px;line-height:1.1;margin:0 0 15px;filter:drop-shadow(0 0 13px #ffdf7588)}
+.modal h2{font-size:clamp(23px,4vw,31px);line-height:1.16;margin:0 0 12px}
+.modal p{font-size:14px;color:#c3d3e9;margin:0 0 20px}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.primary{min-height:44px;border:0;border-radius:11px;background:linear-gradient(135deg,#ffe68e,#ffb553);color:#16243a;font-weight:850;padding:12px 23px;box-shadow:0 4px 0 #9e6729}
+.primary:hover{filter:brightness(1.07)}.primary:active{transform:translateY(2px);box-shadow:0 2px 0 #9e6729}
+.modal .keys{display:block;color:#92abc6;font-size:11px;margin-top:17px}
+.side{min-width:0}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.stat{background:linear-gradient(145deg,#1a2b47,#111b31);border:1px solid #304d71;border-radius:13px;padding:12px 13px 9px}
+.stat small{display:block;font-size:10px;color:#9eb9dd;letter-spacing:1.3px;text-transform:uppercase;font-weight:800}
+.stat strong{font-variant-numeric:tabular-nums;display:block;font-size:24px;line-height:1.3;margin-top:3px}
+.stat .yellow{color:var(--gold)}.stat .blue{color:var(--cyan)}
+.card{border:1px solid #2c4767;background:#101d31;border-radius:14px;padding:15px;margin-bottom:11px}
+.card h3{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 12px}
+.info{display:flex;align-items:center;gap:10px;color:#c0d0e5;font-size:13px;margin:9px 0}
+.info .emoji{font-size:20px;min-width:28px;text-align:center}
+.buttons{display:flex;gap:8px;flex-wrap:wrap}
+.secondary{border:1px solid #486589;background:#1b3351;color:#ecf6ff;padding:8px 10px;min-height:39px;border-radius:10px;font-size:13px;font-weight:750}
+.secondary:hover{background:#294767}
+.status{color:#abc5e3;min-height:22px;margin:13px 0 0;font-size:13px}
+kbd{font:inherit;font-size:11px;color:#eff8ff;background:#1e324d;border:1px solid #4d6283;border-radius:5px;padding:1px 5px}
+.tip{color:#94a9c7;font-size:12px;margin:10px 2px;line-height:1.6}
+.touch{display:none;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:13px 0 0;user-select:none;touch-action:none}
+.touch button{border:1px solid #476a8d;background:linear-gradient(150deg,#264464,#172840);color:#e7f6ff;min-height:62px;border-radius:12px;font-size:23px;font-weight:900;touch-action:none}
+.touch button.jump{font-size:12px;color:#ffebc4;background:linear-gradient(145deg,#6c4f38,#402d2d);border-color:#aa8252}
+.touch button.pressed{filter:brightness(1.4)}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats{grid-column:1/-1;grid-template-columns:repeat(4,1fr);margin-bottom:0}.card{margin:0}}
+@media(max-width:570px){.shell{padding-top:10px}.heading{gap:10px}.symbol{width:44px;height:44px;font-size:25px}.frame{padding:5px}.side{display:block}.stats{gap:5px;margin:12px 0 10px}.stat{padding:8px 5px;text-align:center;border-radius:10px}.stat strong{font-size:19px}.stat small{font-size:8px;letter-spacing:.5px}.card{margin-bottom:10px}.touch{display:grid}}
+@media(pointer:coarse){.touch{display:grid}}
+</style>
+</head>
+<body>
+<div class="shell">
+ <nav class="top" aria-label="Webseiten-Navigation">
+  <a class="back" href="https://smarthomebastler.github.io/">← Zurück zur Webseite</a><span class="brand">SMART HOME BASTLER · ARCADE</span>
+ </nav>
+ <div class="heading"><div class="symbol">🛢️</div><div><h1>NEON <span>TOWER</span></h1><p class="subtitle">Fassflucht – hoch hinaus, bevor dich die Fässer erwischen!</p></div></div>
+ <div class="layout">
+  <main>
+   <div class="frame"><div class="screen">
+    <canvas id="board" width="720" height="700" aria-label="Neon Tower Spielfeld"></canvas>
+    <div class="overlay" id="overlay">
+     <div class="modal"><div id="overlayIcon" class="modal-icon">🛢️</div><h2 id="overlayTitle">Auf zur Turmspitze!</h2>
+      <p id="overlayText">Laufe über fünf Etagen, steige die Leitern hinauf und springe über rollende Fässer. Erreiche die Rettungskapsel oben rechts!</p>
+      <button class="primary" id="overlayButton" type="button">Abenteuer starten ▶</button>
+      <span class="keys">← → Laufen · ↑ ↓ Leiter · Leertaste Springen · P Pause</span>
+     </div>
+    </div>
+   </div></div>
+   <div class="touch" aria-label="Touch-Steuerung">
+     <button type="button" data-control="left" aria-label="Links">◀</button>
+     <button type="button" data-control="right" aria-label="Rechts">▶</button>
+     <button type="button" data-control="up" aria-label="Leiter hoch">▲</button>
+     <button type="button" data-control="down" aria-label="Leiter runter">▼</button>
+     <button type="button" data-control="jump" class="jump" aria-label="Springen">SPRUNG</button>
+   </div>
+   <p class="tip">Tipp: Die großen Schraubenschlüssel machen dich kurzzeitig unverwundbar und räumen rollende Fässer aus dem Weg. Springst du über ein Fass, gibt es Bonuspunkte!</p>
+  </main>
+  <aside class="side">
+   <div class="stats">
+     <div class="stat"><small>Punkte</small><strong id="score" class="yellow">0</strong></div>
+     <div class="stat"><small>Rekord</small><strong id="highscore">0</strong></div>
+     <div class="stat"><small>Level</small><strong id="level" class="blue">1</strong></div>
+     <div class="stat"><small>Leben</small><strong id="lives">♥ ♥ ♥</strong></div>
+   </div>
+   <section class="card"><h3>Punkte & Extras</h3>
+    <div class="info"><span class="emoji">🛢️</span><span>Fass überspringen: <b>+100</b></span></div>
+    <div class="info"><span class="emoji">💎</span><span>Kristall sammeln: <b>+200</b></span></div>
+    <div class="info"><span class="emoji">🔧</span><span>Schraubenschlüssel: Fässer zerstören <b>+150</b></span></div>
+    <div class="info"><span class="emoji">🚀</span><span>Rettungskapsel: Zielbonus und nächstes Level</span></div>
+   </section>
+   <section class="card"><h3>Spielsteuerung</h3>
+    <div class="info"><span><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd> Laufen</span></div>
+    <div class="info"><span><kbd>↑</kbd> <kbd>↓</kbd> / <kbd>W</kbd> <kbd>S</kbd> Klettern</span></div>
+    <div class="info"><span><kbd>Leertaste</kbd> Springen · <kbd>P</kbd> Pause</span></div>
+    <div class="buttons">
+      <button type="button" class="secondary" id="pauseButton">⏸ Pause</button>
+      <button type="button" class="secondary" id="soundButton">♫ Ton an</button>
+      <button type="button" class="secondary" id="restartButton">↻ Neustart</button>
+    </div>
+    <p class="status" id="status" aria-live="polite">Bereit zur Fassflucht?</p>
+   </section>
+  </aside>
+ </div>
+</div>
+<script>
+(function(){
+"use strict";
+const W=720,H=700,FLOORS=[630,515,400,285,170],LADDERS=[{floor:0,x:616},{floor:1,x:108},{floor:2,x:616},{floor:3,x:108}],XMIN=35,XMAX=685;
+const cvs=document.getElementById("board"),ctx=cvs.getContext("2d"),get=id=>document.getElementById(id);
+const ui={overlay:get("overlay"),icon:get("overlayIcon"),title:get("overlayTitle"),text:get("overlayText"),button:get("overlayButton"),score:get("score"),high:get("highscore"),level:get("level"),lives:get("lives"),status:get("status"),pause:get("pauseButton"),sound:get("soundButton")};
+let p={x:92,foot:FLOORS[0],floor:0,vy:0,climbing:null,invuln:0,hammer:0,dir:1,walking:0};
+let barrels=[],items=[],particles=[],stars=[],keys={left:false,right:false,up:false,down:false,jump:false};
+let mode="ready",level=1,lives=3,score=0,high=0,remaining=145,spawnTimer=3.2,elapsed=0,frameClock=0,last=0,anim=0,soundOn=true,audio=null,flash="",flashTime=0;
+try{high=Number(localStorage.getItem("shb-neon-tower-high")||0)||0;soundOn=localStorage.getItem("shb-neon-tower-sound")!=="off"}catch(e){}
+const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),format=n=>Math.floor(n).toLocaleString("de-AT");
+function refresh(){
+ ui.score.textContent=format(score);ui.high.textContent=format(high);ui.level.textContent=String(level);
+ ui.lives.textContent=lives?("♥ ".repeat(lives)).trim():"–";
+ ui.pause.textContent=mode==="paused"?"▶ Weiter":"⏸ Pause";ui.sound.textContent=soundOn?"♫ Ton an":"♫ Ton aus";
+ if(mode==="playing")ui.status.textContent=p.hammer>0?"🔧 Extra aktiv: "+p.hammer.toFixed(1)+" s":"Noch "+Math.ceil(remaining)+" Sekunden · Level "+level;
+}
+function points(amount){
+ score+=amount;if(score>high){high=score;try{localStorage.setItem("shb-neon-tower-high",String(high))}catch(e){}}
+ refresh();
+}
+function audioReady(){if(!soundOn)return;try{if(!audio){const A=window.AudioContext||window.webkitAudioContext;if(A)audio=new A()}if(audio&&audio.state==="suspended")audio.resume()}catch(e){}}
+function beep(freq=440,dur=.07,type="square",volume=.04){
+ if(!soundOn||!audio)return;
+ try{const o=audio.createOscillator(),g=audio.createGain(),t=audio.currentTime;o.type=type;o.frequency.setValueAtTime(freq,t);o.frequency.exponentialRampToValueAtTime(Math.max(60,freq*.65),t+dur);g.gain.setValueAtTime(volume,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.connect(g);g.connect(audio.destination);o.start(t);o.stop(t+dur+.01)}catch(e){}
+}
+function show(icon,title,description,button){
+ ui.icon.textContent=icon;ui.title.textContent=title;ui.text.textContent=description;ui.button.textContent=button;ui.overlay.classList.remove("hidden")
+}
+function hide(){ui.overlay.classList.add("hidden")}
+function announce(s,time=1){flash=s;flashTime=time}
+function puff(x,y,color,num=15){
+ for(let i=0;i<num;i++){const a=rnd(0,Math.PI*2),speed=rnd(50,170);particles.push({x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:rnd(.2,.6),total:.6,color})}
+ if(particles.length>260)particles.splice(0,particles.length-260);
+}
+function backgroundStars(){
+ stars=Array.from({length:94},()=>({x:rnd(0,W),y:rnd(0,H),size:rnd(.7,2),phase:rnd(0,6)}));
+}
+function resetPlayer(){p={x:92,foot:FLOORS[0],floor:0,vy:0,climbing:null,invuln:2.2,hammer:0,dir:1,walking:0};keys.left=false;keys.right=false;keys.up=false;keys.down=false;keys.jump=false}
+function startLevel(){
+ resetPlayer();barrels=[];remaining=145;elapsed=0;spawnTimer=2.6;flashTime=0;particles=[];
+ items=[
+  {type:"gem",floor:0,x:405,taken:false},
+  {type:"gem",floor:1,x:355,taken:false},
+  {type:"gem",floor:2,x:475,taken:false},
+  {type:"gem",floor:3,x:350,taken:false},
+  {type:"gem",floor:4,x:500,taken:false},
+  {type:"hammer",floor:1,x:200,taken:false},
+  {type:"hammer",floor:3,x:515,taken:false}
+ ];
+ refresh();
+}
+function newGame(){score=0;level=1;lives=3;startLevel();mode="playing";hide();audioReady();beep(700,.25,"triangle",.08);refresh()}
+function nextLevel(){level++;startLevel();mode="playing";hide();audioReady();refresh()}
+function action(){if(mode==="ready"||mode==="over")newGame();else if(mode==="cleared")nextLevel();else if(mode==="paused")togglePause()}
+function togglePause(){
+ if(mode==="playing"){mode="paused";keys={left:false,right:false,up:false,down:false,jump:false};show("⏸","Pause","Die Fässer warten auf deinen nächsten Zug.","Weiterspielen ▶")}
+ else if(mode==="paused"){mode="playing";hide();last=performance.now()}
+ refresh();
+}
+function spawnBarrel(){
+ if(barrels.length>=18)return;
+ barrels.push({x:220,y:FLOORS[4]-13,floor:4,dir:1,dropTo:null,spin:0,jumped:false,speed:75+Math.min(100,(level-1)*14)});
+}
+function climbUp(){
+ if(p.floor===null||p.climbing||!keys.up)return false;
+ const ladder=LADDERS.find(l=>l.floor===p.floor&&Math.abs(p.x-l.x)<23);
+ if(!ladder)return false;
+ p.x=ladder.x;p.climbing={bottom:ladder.floor,top:ladder.floor+1,target:FLOORS[ladder.floor+1],direction:-1};p.floor=null;beep(400,.05,"sine",.025);return true;
+}
+function climbDown(){
+ if(p.floor===null||p.climbing||!keys.down)return false;
+ const ladder=LADDERS.find(l=>l.floor===p.floor-1&&Math.abs(p.x-l.x)<23);
+ if(!ladder)return false;
+ p.x=ladder.x;p.climbing={bottom:ladder.floor,top:ladder.floor+1,target:FLOORS[ladder.floor],direction:1};p.floor=null;beep(270,.06,"sine",.025);return true;
+}
+function updatePlayer(dt){
+ p.invuln=Math.max(0,p.invuln-dt);p.hammer=Math.max(0,p.hammer-dt);
+ if(p.climbing){
+  const c=p.climbing;
+  p.foot+=c.direction*155*dt;
+  if(c.direction<0&&p.foot<=c.target){p.foot=c.target;p.floor=c.top;p.climbing=null}
+  else if(c.direction>0&&p.foot>=c.target){p.foot=c.target;p.floor=c.bottom;p.climbing=null}
+  return;
+ }
+ if(p.floor!==null){
+  if(climbUp()||climbDown())return;
+  if(keys.jump){
+   p.vy=-405;p.floor=null;keys.jump=false;beep(460,.1,"triangle",.045)
+  }
+ }
+ const move=(keys.right?1:0)-(keys.left?1:0);
+ p.x=clamp(p.x+move*(194+Math.min(42,level*4))*dt,XMIN+9,XMAX-9);
+ if(move){p.dir=move;p.walking+=dt*13}
+ if(p.floor===null){
+  const old=p.foot;
+  p.vy+=1050*dt;p.foot+=p.vy*dt;
+  if(p.vy>=0)for(let i=FLOORS.length-1;i>=0;i--){
+   if(old<=FLOORS[i]+.001&&p.foot>=FLOORS[i]){
+    p.foot=FLOORS[i];p.floor=i;p.vy=0;break;
+   }
+  }
+  if(p.foot>H+40){loseLife();return}
+ }else p.foot=FLOORS[p.floor];
+}
+function updateBarrels(dt){
+ for(let i=barrels.length-1;i>=0;i--){
+  const b=barrels[i];
+  b.spin+=dt*6.5;
+  if(b.dropTo!==null){
+   b.y+=(245+Math.min(90,level*15))*dt;
+   const target=FLOORS[b.dropTo]-13;
+   if(b.y>=target){b.y=target;b.floor=b.dropTo;b.dropTo=null;b.dir*=-1;b.jumped=false}
+  }else{
+   b.x+=b.dir*(b.speed+(4-b.floor)*7)*dt;
+   if(b.x>=XMAX-5||b.x<=XMIN+5){
+    b.x=clamp(b.x,XMIN+5,XMAX-5);
+    if(b.floor===0){barrels.splice(i,1);continue}
+    b.dropTo=b.floor-1;b.jumped=false;
+   }
+  }
+  // Award only once per barrel passage when the player is clearly above it.
+  const vertical=p.foot-b.y;
+  if(!b.jumped&&!p.climbing&&p.floor===null&&Math.abs(p.x-b.x)<22&&vertical<-15&&vertical>-100){
+   b.jumped=true;points(100);announce("+100 FASS ÜBERSPRUNGEN",.85);beep(880,.1,"triangle",.035)
+  }
+  const dx=p.x-b.x,dy=p.foot-17-b.y;
+  if(dx*dx+dy*dy<27*27){
+   if(p.hammer>0){
+    puff(b.x,b.y,"#ffc875",17);barrels.splice(i,1);points(150);announce("+150 FASS ZERLEGT",.85);beep(590,.2,"sawtooth",.08);
+    continue;
+   }
+   if(p.invuln<=0){loseLife();return}
+  }
+ }
+}
+function collectItems(){
+ for(const item of items){
+  if(item.taken||p.climbing)continue;
+  if(p.floor!==item.floor||Math.abs(p.x-item.x)>19)continue;
+  item.taken=true;
+  if(item.type==="gem"){points(200);puff(item.x,FLOORS[item.floor]-24,"#8ceeff",17);beep(960,.15,"sine",.07);announce("+200 KRISTALL",.9)}
+  else{p.hammer=8.5;puff(item.x,FLOORS[item.floor]-22,"#ffe28d",20);beep(620,.3,"triangle",.09);announce("SCHRAUBENSCHLÜSSEL! 8 SEK.",1.2)}
+ }
+}
+function loseLife(){
+ if(mode!=="playing")return;
+ lives--;beep(120,.4,"sawtooth",.09);puff(p.x,p.foot-18,"#ff849a",26);
+ if(lives<=0){
+  mode="over";show("💥","Game Over","Du hast "+format(score)+" Punkte erreicht und bist bis Level "+level+" gekommen. Dein Highscore: "+format(high)+".","Noch einmal spielen ▶");
+  ui.status.textContent="Game Over · "+format(score)+" Punkte";
+ }else{
+  barrels=[];spawnTimer=3;remaining=Math.max(35,remaining-12);resetPlayer();announce("LEBEN VERLOREN – NOCH "+lives,1.3);
+ }
+ refresh();
+}
+function clearLevel(){
+ if(mode!=="playing")return;
+ const bonus=1000+Math.round(remaining)*10+level*250;
+ points(bonus);mode="cleared";beep(880,.45,"triangle",.09);
+ show("🚀","Turm geschafft!","Du hast die Rettungskapsel erreicht! Bonus: "+format(bonus)+" Punkte. Im nächsten Level rollen die Fässer schneller und häufiger.","Nächstes Level ▶");
+ ui.status.textContent="Level "+level+" geschafft!";refresh();
+}
+function update(dt){
+ frameClock+=dt;elapsed+=dt;flashTime=Math.max(0,flashTime-dt);
+ for(let i=particles.length-1;i>=0;i--){const s=particles[i];s.life-=dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=180*dt;if(s.life<=0)particles.splice(i,1)}
+ if(mode!=="playing")return;
+ remaining-=dt;
+ if(remaining<=0){loseLife();return}
+ updatePlayer(dt);
+ if(mode!=="playing")return;
+ collectItems();
+ spawnTimer-=dt;
+ if(spawnTimer<=0){spawnBarrel();spawnTimer=Math.max(1.3,3.25-level*.16)*rnd(.78,1.2)}
+ updateBarrels(dt);
+ if(mode!=="playing")return;
+ if(p.floor===4&&p.x>=624)clearLevel();
+ refresh();
+}
+function rect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(x,y,w,h)}
+function rounded(x,y,w,h,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+function drawBackground(){
+ const bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,"#07172a");bg.addColorStop(1,"#0c1425");rect(0,0,W,H,bg);
+ for(const s of stars){
+  ctx.globalAlpha=.25+Math.sin(frameClock*.8+s.phase)*.18;
+  rect(s.x,s.y,s.size,s.size,"#a3daff");
+ }
+ ctx.globalAlpha=1;
+ // Stadt-Silhouette und vertikale Träger
+ for(let i=0;i<19;i++){
+  const x=i*43-7,h=60+((i*37)%120);
+  rect(x,H-h,36,h,"#10223a");rect(x+9,H-h-9,10,10,"#10223a");
+  for(let row=0;row<4;row++)rect(x+8,H-h+15+row*17,3,4,i%3?"#1d3950":"#456084");
+ }
+ for(const x of [19,700]){
+  rect(x,68,7,592,"#23405b");
+  for(let y=75;y<650;y+=36)rect(x-3,y,13,3,"#5476a1");
+ }
+}
+function drawPlatforms(){
+ for(let i=0;i<FLOORS.length;i++){
+  const y=FLOORS[i];
+  ctx.shadowColor=i%2?"#ff91b0":"#ffb471";ctx.shadowBlur=8;
+  rounded(XMIN-9,y,672,11,3,"#ed7086");
+  ctx.shadowBlur=0;
+  rect(XMIN-9,y+6,672,10,"#823c58");rect(XMIN-9,y+10,672,2,"#e39a7c");
+  for(let x=45;x<690;x+=43){
+   rect(x,y+5,10,3,"#ffcc8d");
+   ctx.strokeStyle="#b65268";ctx.lineWidth=2;
+   ctx.beginPath();ctx.moveTo(x,y+15);ctx.lineTo(x+20,y+27);ctx.lineTo(x+37,y+15);ctx.stroke();
+  }
+ }
+ for(const ladder of LADDERS){
+  const x=ladder.x,top=FLOORS[ladder.floor+1],bottom=FLOORS[ladder.floor];
+  ctx.shadowColor="#59c9fc";ctx.shadowBlur=8;rect(x-19,top-1,5,bottom-top+9,"#63d6fa");rect(x+14,top-1,5,bottom-top+9,"#63d6fa");ctx.shadowBlur=0;
+  for(let y=top+9;y<bottom;y+=14)rect(x-17,y,34,4,"#94e2fa");
+ }
+}
+function drawRobot(){
+ const y=FLOORS[4],x=175;
+ ctx.save();ctx.translate(x,y-24);
+ ctx.shadowColor="#cb88ff";ctx.shadowBlur=15;
+ rounded(-31,-37,62,38,8,"#674477");
+ rounded(-25,-31,50,26,6,"#8c5fa3");
+ rounded(-21,-27,42,17,3,"#241832");
+ rect(-14,-22,10,9,"#7efbff");rect(5,-22,10,9,"#ffba6a");
+ ctx.shadowBlur=0;rect(-25,-1,14,5,"#d39cc8");rect(11,-1,14,5,"#d39cc8");
+ ctx.save();ctx.rotate(Math.sin(frameClock*3)*.15);
+ rect(-38,-12,11,8,"#ac7cbd");rect(27,-14,11,8,"#ac7cbd");
+ ctx.restore();ctx.restore();
+ ctx.fillStyle="#b99ad6";ctx.font="800 11px monospace";ctx.textAlign="center";ctx.fillText("FASS-ROBOTER",x,y-69);
+}
+function drawCapsule(){
+ const x=640,y=FLOORS[4]-20;
+ ctx.save();ctx.translate(x,y);
+ ctx.shadowColor="#84ffcb";ctx.shadowBlur=18;
+ rounded(-20,-32,40,38,12,"#67dcb9");
+ rounded(-13,-26,26,19,7,"#123e5d");rect(-4,-26,8,15,"#c9ffe7");
+ rect(-15,6,30,7,"#a8ffe8");
+ rect(-27,-1,8,9,"#5ae8cf");rect(19,-1,8,9,"#5ae8cf");
+ ctx.restore();ctx.fillStyle="#a1f5d8";ctx.font="800 11px monospace";ctx.textAlign="center";ctx.fillText("RETTUNG",x,y-43);
+}
+function drawPickups(){
+ for(const a of items){
+  if(a.taken)continue;
+  const x=a.x,y=FLOORS[a.floor]-27+Math.sin(frameClock*4+a.x)*3;
+  ctx.save();ctx.translate(x,y);ctx.shadowBlur=12;
+  if(a.type==="gem"){
+   ctx.shadowColor="#9bf3ff";ctx.fillStyle="#82edff";ctx.beginPath();ctx.moveTo(0,-10);ctx.lineTo(10,0);ctx.lineTo(0,10);ctx.lineTo(-10,0);ctx.closePath();ctx.fill();
+   ctx.fillStyle="#fff9bc";ctx.fillRect(-2,-7,4,9);
+  }else{
+   ctx.shadowColor="#ffe08e";ctx.strokeStyle="#ffe08e";ctx.lineWidth=5;
+   ctx.beginPath();ctx.arc(-5,-6,7,.5,Math.PI*1.75);ctx.stroke();
+   ctx.beginPath();ctx.moveTo(0,-1);ctx.lineTo(14,14);ctx.stroke();
+   ctx.fillStyle="#ffe7b5";ctx.fillRect(9,11,9,5);
+  }
+  ctx.restore();
+ }
+}
+function drawBarrels(){
+ for(const b of barrels){
+  ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.spin*b.dir);
+  ctx.shadowColor="#ff9d53";ctx.shadowBlur=8;
+  rounded(-14,-14,28,28,8,"#aa5b39");ctx.shadowBlur=0;
+  ctx.strokeStyle="#ffc087";ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,11,0,Math.PI*2);ctx.stroke();
+  rect(-12,-2,24,4,"#512a31");
+  rect(-2,-11,4,22,"#de8a54");ctx.restore();
+ }
+}
+function drawPlayer(){
+ if(p.invuln>0&&Math.floor(frameClock*11)%2===0)return;
+ const x=p.x,y=p.foot-1,step=Math.sin(p.walking)*(keys.left||keys.right?5:0);
+ ctx.save();ctx.translate(x,y);
+ if(p.dir<0)ctx.scale(-1,1);
+ ctx.shadowColor="#62e9fc";ctx.shadowBlur=p.hammer>0?20:10;
+ rounded(-12,-37,24,20,5,p.hammer>0?"#ffe48b":"#53e2f4");
+ ctx.shadowBlur=0;
+ // Helmet, eyes and shoes
+ rounded(-12,-43,25,10,5,"#ffe5a0");rect(-3,-49,7,7,"#c4a8ff");
+ rounded(-10,-35,20,13,4,"#182c4e");
+ rect(2,-31,4,4,"#efffff");rect(-7,-19,14,4,"#ffbd83");
+ rect(-10,-16,8,14+step*.2,"#4873ac");rect(3,-16,8,14-step*.2,"#4873ac");
+ rect(-14,-4,12,5,"#182f4d");rect(2,-4,13,5,"#182f4d");
+ rect(-15,-29,6,12,"#efb089");rect(10,-29,6,12,"#efb089");
+ if(p.hammer>0){
+  ctx.save();ctx.translate(17,-28);ctx.rotate(Math.sin(frameClock*15)*1);
+  rect(0,-2,6,27,"#e6b878");rounded(-11,-7,29,12,3,"#e5f6ff");ctx.restore();
+ }
+ ctx.restore();
+ if(p.invuln>0){ctx.strokeStyle="#9bddff8a";ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y-23,30,0,Math.PI*2);ctx.stroke()}
+}
+function render(){
+ ctx.clearRect(0,0,W,H);
+ drawBackground();drawPlatforms();drawRobot();drawCapsule();drawPickups();drawBarrels();drawPlayer();
+ for(const s of particles){ctx.globalAlpha=clamp(s.life/s.total,0,1);rect(s.x,s.y,4,4,s.color)}ctx.globalAlpha=1;
+ rect(0,0,W,31,"#091427c9");
+ ctx.fillStyle="#c6e2fa";ctx.font="800 12px monospace";ctx.textAlign="left";ctx.fillText("ZEIT "+Math.ceil(remaining)+"s",15,21);
+ ctx.textAlign="right";ctx.fillStyle=p.hammer>0?"#ffe07b":"#9ec6e0";
+ ctx.fillText(p.hammer>0?"🔧 EXTRA "+p.hammer.toFixed(1)+"s":"NEON TOWER // V"+level,W-16,21);
+ if(flashTime>0){ctx.font="900 21px system-ui";ctx.textAlign="center";ctx.strokeStyle="#081324";ctx.lineWidth=6;ctx.strokeText(flash,W/2,355);ctx.fillStyle="#ffe3a2";ctx.shadowColor="#ffdd76";ctx.shadowBlur=12;ctx.fillText(flash,W/2,355);ctx.shadowBlur=0}
+}
+function setControl(k,on){
+ if(k==="ArrowLeft"||k==="a"||k==="A")keys.left=on;
+ else if(k==="ArrowRight"||k==="d"||k==="D")keys.right=on;
+ else if(k==="ArrowUp"||k==="w"||k==="W")keys.up=on;
+ else if(k==="ArrowDown"||k==="s"||k==="S")keys.down=on;
+ else if(k===" "||k==="Space")keys.jump=on;
+ else return false;
+ return true;
+}
+document.addEventListener("keydown",e=>{
+ if(setControl(e.key,true)){e.preventDefault();return}
+ if(e.repeat)return;
+ if(e.key==="p"||e.key==="P"){e.preventDefault();if(mode==="playing"||mode==="paused")togglePause()}
+ else if(e.key==="m"||e.key==="M"){e.preventDefault();get("soundButton").click()}
+ else if(e.key==="r"||e.key==="R"){e.preventDefault();newGame()}
+ else if(e.key==="Enter"){if(mode!=="playing")action()}
+});
+document.addEventListener("keyup",e=>{if(setControl(e.key,false))e.preventDefault()});
+document.querySelectorAll("[data-control]").forEach(button=>{
+ const control=button.dataset.control;
+ button.addEventListener("pointerdown",e=>{e.preventDefault();audioReady();keys[control]=true;button.classList.add("pressed");try{button.setPointerCapture(e.pointerId)}catch(err){}});
+ const stop=e=>{e.preventDefault();keys[control]=false;button.classList.remove("pressed")};
+ button.addEventListener("pointerup",stop);button.addEventListener("pointercancel",stop);
+ button.addEventListener("lostpointercapture",()=>{keys[control]=false;button.classList.remove("pressed")});
+});
+ui.button.addEventListener("click",action);
+ui.pause.addEventListener("click",()=>{if(mode==="playing"||mode==="paused")togglePause()});
+get("restartButton").addEventListener("click",newGame);
+ui.sound.addEventListener("click",()=>{
+ soundOn=!soundOn;try{localStorage.setItem("shb-neon-tower-sound",soundOn?"on":"off")}catch(e){}
+ if(soundOn){audioReady();beep(630,.13,"sine",.06)}refresh()
+});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&mode==="playing")togglePause()});
+window.addEventListener("blur",()=>{if(mode==="playing")togglePause()});
+function loop(time){
+ const dt=Math.min(.045,Math.max(0,(time-last)/1000||0));last=time;
+ if(mode==="playing")update(dt);else frameClock+=dt*.3;
+ render();requestAnimationFrame(loop)
+}
+(function hidpi(){const d=Math.min(2,window.devicePixelRatio||1);cvs.width=Math.round(W*d);cvs.height=Math.round(H*d);ctx.setTransform(d,0,0,d,0,0)})();
+backgroundStars();startLevel();mode="ready";refresh();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
