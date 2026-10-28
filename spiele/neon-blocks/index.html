@@ -356,7 +356,7 @@ function drawBoard(){
  }
 }
 function drawMini(cvs,c,types){
- const w=cvs.width,h=cvs.height;c.clearRect(0,0,w,h);
+ const ratio=Math.min(2,window.devicePixelRatio||1),w=cvs.width/ratio,h=cvs.height/ratio;c.clearRect(0,0,w,h);
  c.fillStyle="#07162b";c.fillRect(0,0,w,h);
  for(let i=0;i<types.length;i++){
   const type=types[i];if(!type)continue;
