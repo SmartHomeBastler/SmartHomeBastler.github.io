@@ -193,9 +193,11 @@ function makeMap(){
 function makeActor(loc,sp,dir){
  return {c:loc.c,r:loc.r,x:loc.c,y:loc.r,dir:dir||"left",wanted:dir||"left",speed:sp,move:null,safe:0};
 }
+function playerSpeed(){return Math.min(7.15,6.0+Math.max(0,level-1)*.16)}
+function botSpeed(){return 3.4+Math.min(1.8,level*.18)}
 function resetActors(){
- player=makeActor(playerStart,7.15,"left");player.wanted="left";
- bots=botStarts.map((loc,i)=>Object.assign(makeActor(loc,4.0+Math.min(1.5,level*.18),["right","left","up","down"][i]),{index:i,safe:2.5+i*.1}));
+ player=makeActor(playerStart,playerSpeed(),"left");player.wanted="left";
+ bots=botStarts.map((loc,i)=>Object.assign(makeActor(loc,botSpeed(),["right","left","up","down"][i]),{index:i,safe:2.5+i*.1}));
  invulnerable=2.2;
 }
 function setupLevel(){
@@ -348,7 +350,7 @@ function tick(dt){
  else {starCountdown-=dt;if(starCountdown<=0){spawnStar();starCountdown=24}}
  moveActor(player,dt,choosePlayer);
  if(mode!=="playing")return;
- for(const b of bots){b.safe=Math.max(0,b.safe-dt);b.speed=(4.0+Math.min(1.6,level*.18))*(power>0?.74:1);moveActor(b,dt,chooseBot)}
+ for(const b of bots){b.safe=Math.max(0,b.safe-dt);b.speed=botSpeed()*(power>0?.74:1);moveActor(b,dt,chooseBot)}
  checkHits();refreshUI();
 }
 function roundRect(x,y,w,h,r){
