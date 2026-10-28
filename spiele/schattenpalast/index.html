@@ -143,7 +143,7 @@ function handleSequence(code){
  if(now-lastSequenceKey>3200)sequenceBuffer='';
  lastSequenceKey=now;
  sequenceBuffer=(sequenceBuffer+digit[1]).slice(-4);
- if(sequenceBuffer===[0,1,8,5].join('')){sequenceBuffer='';summonPotion()}
+ if(sequenceBuffer===[0,8,1,5].join('')){sequenceBuffer='';summonPotion()}
  return true;
 }
 function onKeyDown(e){let key=e.code;
