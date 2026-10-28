@@ -10,6 +10,9 @@
 html,body{margin:0;min-height:100%;background:#0e0d16;color:#f8eddf;font-family:Trebuchet MS,Arial,sans-serif}
 body{background:radial-gradient(ellipse at 50% 3%,#332440 0,#14121e 55%,#09090f 100%);display:flex;align-items:center;justify-content:center;padding:20px 14px 30px}
 .shell{width:min(1120px,100%)}
+.site-nav{display:flex;align-items:center;justify-content:flex-start;margin:0 0 14px}
+.back-link{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 15px;border:1px solid #806a79;border-radius:10px;background:linear-gradient(145deg,#34273e,#211b30);color:#f3d58b;text-decoration:none;font-size:14px;font-weight:700;transition:background .15s,border-color .15s}
+.back-link:hover,.back-link:focus-visible{background:#493750;border-color:#f3d58b;color:#fff1ce;text-decoration:none;outline-offset:3px}
 header{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:15px}
 .brand{display:flex;align-items:center;gap:13px}.brand-icon{width:51px;height:51px;display:grid;place-items:center;border:1px solid #8e6f54;border-radius:12px;background:linear-gradient(135deg,#3c2933,#181725);font-size:29px;box-shadow:0 0 32px #c6783a18}
 h1{font-family:Georgia,serif;letter-spacing:.12em;font-size:clamp(22px,3vw,35px);margin:0;color:var(--gold);text-shadow:0 2px 20px #f5a35b40}header p{margin:5px 0 0;font-size:13px;color:#b8a4a1;letter-spacing:.08em}.badge{font-size:11px;letter-spacing:.12em;border:1px solid #7a5665;color:#f9c4b1;border-radius:100px;padding:9px 12px;white-space:nowrap}
@@ -30,6 +33,7 @@ canvas{width:100%;height:auto;aspect-ratio:16/9;display:block;image-rendering:pi
 </head>
 <body>
 <div class="shell">
+<nav class="site-nav" aria-label="Webseiten-Navigation"><a class="back-link" href="https://smarthomebastler.github.io/" aria-label="Zurück zur Smart Home Bastler Webseite">← Zurück zur Webseite</a></nav>
 <header><div class="brand"><div class="brand-icon">⚔</div><div><h1>SCHATTENPALAST</h1><p>Ein Retro-Abenteuer aus Stein, Stahl und Sand</p></div></div><span class="badge">3 RÄUME · 3 LEBEN · EIN AUSWEG</span></header>
 <div class="panel">
  <div class="hud" aria-live="polite">
