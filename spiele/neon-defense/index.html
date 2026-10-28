@@ -453,7 +453,7 @@ function draw(){
   drawRange({c:hover.c,r:hover.r,type:selectedType,level:1});
   drawTower({c:hover.c,r:hover.r,type:selectedType,level:1},true);
  }
- towers.forEach(drawTower);
+ towers.forEach(t=>drawTower(t));
  drawEnemies();drawEffects();
  round(20,566,750,38,8,"#102642b5");
  ctx.font="800 12px system-ui";ctx.textAlign="left";ctx.fillStyle="#a6d8ef";
