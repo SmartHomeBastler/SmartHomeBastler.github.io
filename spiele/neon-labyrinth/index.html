@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080d1b">
+<title>Neon-Labyrinth | Smart Home Bastler Spiele</title>
+<style>
+:root{color-scheme:dark;--bg:#080d1b;--panel:#101a30;--cyan:#61efff;--gold:#ffe176;--white:#eaf5ff;--muted:#94a8c6;--pink:#ff78ac}
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0}
+body{background:radial-gradient(ellipse at 50% -15%,#18365d 0,transparent 55%),linear-gradient(160deg,#0a1224,#060911 85%);color:var(--white);font:500 15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.shell{max-width:1080px;margin:0 auto;padding:18px clamp(12px,3vw,30px) 32px}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:10px}
+.back{font-size:13px;color:var(--muted)}.back:hover{color:var(--white)}
+.brand{font-size:12px;letter-spacing:2.5px;font-weight:850;color:var(--cyan)}
+h1{margin:1px 0 5px;font-size:clamp(28px,4vw,42px);letter-spacing:-1.2px;line-height:1.1}
+h1 span{color:var(--gold)}
+.subtitle{margin:0 0 18px;color:var(--muted);font-size:14px}
+.layout{display:grid;grid-template-columns:minmax(0,670px) minmax(225px,1fr);align-items:start;gap:18px}
+.gamepanel{background:#080f20;border:1px solid #27436b;border-radius:20px;padding:9px;box-shadow:0 15px 55px #020712a6,inset 0 1px #ffffff0d}
+.boardwrap{position:relative;overflow:hidden;border-radius:13px;background:#040a17;line-height:0;touch-action:none}
+canvas{display:block;width:100%;height:auto;aspect-ratio:650/598;image-rendering:auto}
+.overlay{position:absolute;inset:0;background:linear-gradient(#040b1dde,#050915ee);display:flex;align-items:center;justify-content:center;padding:16px;line-height:1.5;backdrop-filter:blur(3px)}
+.overlay.hidden{display:none}
+.overlay-card{width:min(405px,100%);padding:clamp(22px,4vw,34px) 21px;border-radius:20px;background:linear-gradient(145deg,#17233ae8,#0b1225f5);border:1px solid #42648d;box-shadow:0 12px 50px #000a;text-align:center}
+.overlay-logo{font-size:48px;margin-bottom:8px;filter:drop-shadow(0 0 12px #ffd75a5c)}
+.overlay-card h2{font-size:clamp(23px,3.9vw,32px);line-height:1.12;margin:8px 0 13px}
+.overlay-card p{color:#bcd0ec;font-size:14px;margin:0 0 20px}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.primary{background:linear-gradient(135deg,#ffe37e,#ffb44d);color:#162035;border:0;border-radius:11px;padding:13px 23px;font-weight:850;box-shadow:0 4px 0 #9d622a;min-height:44px}
+.primary:hover{filter:brightness(1.09)}.primary:active{transform:translateY(2px);box-shadow:0 2px 0 #9d622a}
+.footnote{font-size:12px!important;color:#91a9c4!important;margin:17px 0 0!important}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:13px}
+.stat{padding:13px 13px 10px;border-radius:14px;background:linear-gradient(155deg,#14233b,#0e1729);border:1px solid #2c405e;min-width:0}
+.stat small{display:block;text-transform:uppercase;font-size:10px;color:#8eaad0;letter-spacing:1.4px;font-weight:750}
+.stat strong{display:block;font-size:25px;line-height:1.25;font-variant-numeric:tabular-nums;color:#f5f9ff;margin-top:3px}
+.stat strong.gold{color:var(--gold)}.stat strong.cyan{color:var(--cyan)}
+.block{background:#101a2d;border:1px solid #2d425f;border-radius:14px;padding:15px 16px;margin-bottom:12px}
+.block h3{font-size:13px;letter-spacing:.8px;text-transform:uppercase;margin:0 0 12px;color:#e6f4ff}
+.info{display:flex;gap:9px;align-items:center;margin:10px 0;color:#b7c9df;font-size:13px}.dot{font-size:21px;line-height:1;min-width:27px;text-align:center}.muted{color:var(--muted)}
+.pills{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.secondary{background:#1d3150;border:1px solid #486084;border-radius:10px;color:#e1efff;padding:8px 11px;font-size:13px;font-weight:750;min-height:38px}
+.secondary:hover{background:#2b4162}
+.status{font-size:13px;min-height:20px;color:#a7c3e2;margin:8px 2px 0}
+.touchpad{display:none;grid-template-columns:repeat(3,54px);grid-template-rows:repeat(2,52px);gap:7px;justify-content:center;margin:18px auto 4px;user-select:none}
+.touchpad button{border:1px solid #45638a;background:#152945;border-radius:13px;color:#e3f3ff;font-size:22px;font-weight:800;touch-action:manipulation}
+.touchpad button:active{background:#355b85}
+.pad-up{grid-column:2;grid-row:1}.pad-left{grid-column:1;grid-row:2}.pad-down{grid-column:2;grid-row:2}.pad-right{grid-column:3;grid-row:2}
+kbd{border:1px solid #4b5a71;padding:1px 5px;border-radius:5px;background:#1d2a40;font:inherit;font-size:11px;color:#dceafa}
+.tip{font-size:12px;color:#95acc9;margin:12px 0 0}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.right{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats{grid-column:1/-1;grid-template-columns:repeat(4,1fr);margin:0}.block{margin:0}.stat strong{font-size:22px}}
+@media(max-width:550px){.right{display:block}.stats{grid-template-columns:repeat(4,1fr);gap:5px;margin-top:12px}.stat{padding:9px 6px;text-align:center;border-radius:10px}.stat small{font-size:8px;letter-spacing:.3px}.stat strong{font-size:19px}.block{margin-bottom:10px}.touchpad{display:grid}.subtitle{margin-bottom:12px}.shell{padding-top:11px}.gamepanel{padding:5px}}
+@media(pointer:coarse){.touchpad{display:grid}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+ <div class="topline"><a class="back" href="/">← Zurück zur Smart-Home-Bastler-Seite</a><div class="brand">SMART HOME BASTLER · ARCADE</div></div>
+ <h1>NEON <span>LABYRINTH</span></h1>
+ <p class="subtitle">Sammle Lichtpunkte, entkomme den Wächter-Drohnen und knacke den Highscore.</p>
+ <div class="layout">
+  <section>
+   <div class="gamepanel">
+    <div class="boardwrap">
+     <canvas id="board" width="650" height="598" aria-label="Neon Labyrinth Spielfeld"></canvas>
+     <div class="overlay" id="overlay">
+      <div class="overlay-card">
+       <div class="overlay-logo" id="overlayIcon">◉</div>
+       <h2 id="overlayTitle">Willkommen im Labyrinth!</h2>
+       <p id="overlayText">Sammle alle Lichtpunkte. Die bunten Wächter verfolgen dich – mit einer großen Energiekugel kannst du kurzzeitig zurückschlagen.</p>
+       <button class="primary" id="overlayButton" type="button">Spiel starten</button>
+       <p class="footnote">Pfeiltasten / WASD · P für Pause · M für Ton</p>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="touchpad" aria-label="Touch-Steuerung">
+    <button class="pad-up" data-direction="up" aria-label="Nach oben">↑</button>
+    <button class="pad-left" data-direction="left" aria-label="Nach links">←</button>
+    <button class="pad-down" data-direction="down" aria-label="Nach unten">↓</button>
+    <button class="pad-right" data-direction="right" aria-label="Nach rechts">→</button>
+   </div>
+   <p class="tip">Tipp: Du kannst auch auf dem Spielfeld wischen. Auf dem PC steuerst du mit den Pfeiltasten oder WASD.</p>
+  </section>
+  <aside class="right">
+   <div class="stats">
+    <div class="stat"><small>Punkte</small><strong class="gold" id="score">0</strong></div>
+    <div class="stat"><small>Rekord</small><strong id="highscore">0</strong></div>
+    <div class="stat"><small>Level</small><strong class="cyan" id="level">1</strong></div>
+    <div class="stat"><small>Leben</small><strong id="lives">♥ ♥ ♥</strong></div>
+   </div>
+   <div class="block">
+    <h3>So funktioniert's</h3>
+    <div class="info"><span class="dot" style="color:#ffe176">•</span><span>Kleiner Lichtpunkt: <strong>10 Punkte</strong></span></div>
+    <div class="info"><span class="dot" style="color:#72f7ff">✹</span><span>Energiekugel: <strong>50 Punkte</strong> und Wächter jagen</span></div>
+    <div class="info"><span class="dot" style="color:#ffb75b">★</span><span>Bonus-Kristall: <strong>250 Punkte</strong></span></div>
+    <div class="info"><span class="dot" style="color:#ff79ac">⬡</span><span>Wächter erwischen dich: <strong>1 Leben weniger</strong></span></div>
+   </div>
+   <div class="block">
+    <h3>Spielsteuerung</h3>
+    <div class="pills">
+     <button type="button" class="secondary" id="pauseButton">⏸ Pause</button>
+     <button type="button" class="secondary" id="soundButton">♫ Ton an</button>
+     <button type="button" class="secondary" id="restartButton">↻ Neustart</button>
+    </div>
+    <p class="status" id="status" aria-live="polite">Bereit für die Jagd?</p>
+    <p class="tip"><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> oder <kbd>W A S D</kbd> bewegen · <kbd>P</kbd> pausieren · <kbd>M</kbd> Ton</p>
+   </div>
+  </aside>
+ </div>
+</div>
+<script>
+(function(){
+"use strict";
+const C=25,R=23,T=26,W=C*T,H=R*T, directions=["up","left","down","right"];
+const vectors={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}};
+const opposite={up:"down",down:"up",left:"right",right:"left"};
+const colors=["#ff78a8","#6cecff","#ffb65a","#b599ff"];
+const cvs=document.getElementById("board"),ctx=cvs.getContext("2d");
+const $=id=>document.getElementById(id);
+const overlay=$("overlay"),overlayIcon=$("overlayIcon"),overlayTitle=$("overlayTitle"),overlayText=$("overlayText"),overlayButton=$("overlayButton");
+const scoreEl=$("score"),highEl=$("highscore"),levelEl=$("level"),livesEl=$("lives"),statusEl=$("status");
+const pauseButton=$("pauseButton"),soundButton=$("soundButton");
+let board=[],dots=0,player=null,bots=[],playerStart=null,botStarts=[];
+let mode="ready",level=1,score=0,lives=3,high=0,power=0,combo=0,invulnerable=0,elapsed=0,star=null,starCountdown=21,flashMessage="",flashTime=0,animTime=0;
+let rng=()=>Math.random(),audio=null,soundEnabled=true,lastFrame=0;
+try{high=Number(localStorage.getItem("shb-neon-labyrinth-high")||0)||0;soundEnabled=localStorage.getItem("shb-neon-labyrinth-muted")!=="1"}catch(e){}
+function fmt(n){return Math.floor(n).toLocaleString("de-AT")}
+function refreshUI(){
+ scoreEl.textContent=fmt(score);highEl.textContent=fmt(high);levelEl.textContent=String(level);
+ livesEl.textContent=lives?("♥ ".repeat(lives)).trim():"–";
+ pauseButton.textContent=mode==="paused"?"▶ Weiter":"⏸ Pause";
+ soundButton.textContent=soundEnabled?"♫ Ton an":"♫ Ton aus";
+ if(mode==="playing")statusEl.textContent=power>0?"⚡ Energie aktiv: "+power.toFixed(1)+" s":"Noch "+dots+" Lichtpunkte sammeln";
+}
+function record(points){
+ score+=points;
+ if(score>high){high=score;try{localStorage.setItem("shb-neon-labyrinth-high",String(high))}catch(e){}}
+ refreshUI();
+}
+function randomGenerator(seed){
+ let a=seed>>>0;
+ return function(){a^=a<<13;a^=a>>>17;a^=a<<5;return (a>>>0)/4294967296};
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function isFloor(c,r){return r>=0&&r<R&&c>=0&&c<C&&board[r][c]!=="#"}
+function dist(a,b){return Math.abs(a.c-b.c)+Math.abs(a.r-b.r)}
+function closestOpen(target,exclude=[]){
+ let best=null,bestScore=Infinity;
+ for(let r=1;r<R-1;r++)for(let c=1;c<C-1;c++){
+  if(!isFloor(c,r)||exclude.some(p=>p.c===c&&p.r===r))continue;
+  let s=Math.abs(c-target.c)+Math.abs(r-target.r);
+  if(s<bestScore){best={c,r};bestScore=s}
+ }
+ return best;
+}
+function makeMap(){
+ rng=randomGenerator((0x45f62f11+level*2654435761)>>>0);
+ board=Array.from({length:R},()=>Array(C).fill("#"));
+ let stack=[[1,1]];board[1][1]=".";
+ while(stack.length){
+  const [c,r]=stack[stack.length-1], options=shuffle([[2,0],[-2,0],[0,2],[0,-2]])
+   .filter(d=>r+d[1]>0&&r+d[1]<R-1&&c+d[0]>0&&c+d[0]<C-1&&board[r+d[1]][c+d[0]]==="#");
+  if(!options.length){stack.pop();continue}
+  const [dx,dy]=options[0];
+  board[r+dy/2][c+dx/2]=".";
+  board[r+dy][c+dx]=".";
+  stack.push([c+dx,r+dy]);
+ }
+ // Zusätzliche Durchgänge bilden Schleifen statt reiner Sackgassen.
+ for(let r=1;r<R-1;r++)for(let c=1;c<C-1;c++){
+  if(board[r][c]!=="#"||rng()>Math.min(.22,.12+level*.012))continue;
+  const h=isFloor(c-1,r)&&isFloor(c+1,r);
+  const v=isFloor(c,r-1)&&isFloor(c,r+1);
+  if(h||v)board[r][c]=".";
+ }
+ playerStart=closestOpen({c:Math.floor(C/2),r:Math.floor(R/2)});
+ const corners=[{c:2,r:2},{c:C-3,r:2},{c:2,r:R-3},{c:C-3,r:R-3}];
+ botStarts=[];
+ corners.forEach(t=>{
+  const loc=closestOpen(t,[playerStart,...botStarts]);botStarts.push(loc);
+ });
+ const powers=[{c:1,r:1},{c:C-2,r:1},{c:1,r:R-2},{c:C-2,r:R-2}];
+ powers.forEach(t=>{
+  const loc=closestOpen(t,[playerStart,...botStarts]);if(loc)board[loc.r][loc.c]="o";
+ });
+ board[playerStart.r][playerStart.c]=" ";
+ dots=board.flat().filter(t=>t==="."||t==="o").length;
+}
+function makeActor(loc,sp,dir){
+ return {c:loc.c,r:loc.r,x:loc.c,y:loc.r,dir:dir||"left",wanted:dir||"left",speed:sp,move:null,safe:0};
+}
+function resetActors(){
+ player=makeActor(playerStart,7.15,"left");player.wanted="left";
+ bots=botStarts.map((loc,i)=>Object.assign(makeActor(loc,4.0+Math.min(1.5,level*.18),["right","left","up","down"][i]),{index:i,safe:2.5+i*.1}));
+ invulnerable=2.2;
+}
+function setupLevel(){
+ makeMap();resetActors();power=0;combo=0;elapsed=0;star=null;starCountdown=20;flashMessage="";flashTime=0;
+ refreshUI();
+}
+function setOverlay(icon,title,description,buttonText){
+ overlayIcon.textContent=icon;overlayTitle.textContent=title;overlayText.textContent=description;overlayButton.textContent=buttonText;overlay.classList.remove("hidden");
+}
+function hideOverlay(){overlay.classList.add("hidden")}
+function startNewGame(){
+ score=0;lives=3;level=1;setupLevel();mode="playing";hideOverlay();refreshUI();unlockAudio();beep(520,.12,"sine",.09);
+}
+function advanceLevel(){level++;setupLevel();mode="playing";hideOverlay();refreshUI();unlockAudio()}
+function togglePause(){
+ if(mode==="playing"){mode="paused";setOverlay("⏸","Pause","Kurze Verschnaufpause! Die Wächter warten auf dich.","Weiterspielen")}
+ else if(mode==="paused"){mode="playing";hideOverlay();lastFrame=performance.now()}
+ refreshUI();
+}
+function primaryAction(){
+ if(mode==="ready"||mode==="over")startNewGame();
+ else if(mode==="paused")togglePause();
+ else if(mode==="cleared")advanceLevel();
+}
+overlayButton.addEventListener("click",primaryAction);
+pauseButton.addEventListener("click",()=>{if(mode==="playing"||mode==="paused")togglePause()});
+$("restartButton").addEventListener("click",()=>{startNewGame()});
+soundButton.addEventListener("click",()=>{
+ soundEnabled=!soundEnabled;try{localStorage.setItem("shb-neon-labyrinth-muted",soundEnabled?"0":"1")}catch(e){}
+ unlockAudio();refreshUI();if(soundEnabled)beep(680,.12,"sine",.12);
+});
+function unlockAudio(){
+ if(!soundEnabled)return;
+ try{if(!audio){const A=window.AudioContext||window.webkitAudioContext;if(A)audio=new A()}
+ if(audio&&audio.state==="suspended")audio.resume()}catch(e){}
+}
+function beep(freq,duration,type,volume){
+ if(!audio||!soundEnabled)return;
+ try{
+  const o=audio.createOscillator(),g=audio.createGain(),start=audio.currentTime;
+  o.type=type||"sine";o.frequency.setValueAtTime(freq,start);
+  o.frequency.exponentialRampToValueAtTime(Math.max(90,freq*.78),start+duration);
+  g.gain.setValueAtTime(volume||.035,start);
+  g.gain.exponentialRampToValueAtTime(.001,start+duration);
+  o.connect(g);g.connect(audio.destination);o.start(start);o.stop(start+duration+.008)
+ }catch(e){}
+}
+function canMove(c,r,dir){
+ if(!dir)return false;
+ const v=vectors[dir];return isFloor(c+v.x,r+v.y);
+}
+function choosePlayer(a){
+ if(canMove(a.c,a.r,a.wanted))return a.wanted;
+ if(canMove(a.c,a.r,a.dir))return a.dir;
+ return null;
+}
+function chooseBot(b){
+ let opts=directions.filter(d=>canMove(b.c,b.r,d));
+ if(opts.length>1)opts=opts.filter(d=>d!==opposite[b.dir]);
+ if(!opts.length)return opposite[b.dir];
+ const chase={c:player.c,r:player.r},front=vectors[player.dir]||vectors.left;
+ if(b.index===1){chase.c+=front.x*4;chase.r+=front.y*4}
+ if(b.index===2){chase.c+=front.x*2;chase.r+=front.y*2}
+ if(b.index===3){chase.c+=Math.sin(elapsed/5)*6;chase.r+=Math.cos(elapsed/5)*6}
+ // Unterschiedliche Strategien, bei Energie fliehen sie.
+ const scared=power>0&&b.safe<=0;
+ if(rng()<(scared?.26:(.18-level*.008)))return opts[Math.floor(rng()*opts.length)];
+ opts.sort((a,z)=>{
+  const p={c:b.c+vectors[a].x,r:b.r+vectors[a].y};
+  const q={c:b.c+vectors[z].x,r:b.r+vectors[z].y};
+  const s=dist(p,chase),t=dist(q,chase);
+  return scared?(t-s):(s-t)
+ });
+ return opts[0];
+}
+function moveActor(actor,dt,controller){
+ let remain=dt,iterations=0;
+ while(remain>0.00001&&iterations++<8){
+  if(!actor.move){
+   const dir=controller(actor);
+   if(!dir||!canMove(actor.c,actor.r,dir))break;
+   const v=vectors[dir];actor.dir=dir;
+   actor.move={toC:actor.c+v.x,toR:actor.r+v.y,fromC:actor.c,fromR:actor.r,progress:0,duration:1/actor.speed};
+  }
+  const m=actor.move;
+  const moveTime=Math.min(remain,m.duration*(1-m.progress));
+  m.progress=Math.min(1,m.progress+moveTime/m.duration);remain-=moveTime;
+  actor.x=m.fromC+(m.toC-m.fromC)*m.progress;actor.y=m.fromR+(m.toR-m.fromR)*m.progress;
+  if(m.progress>=1-0.000001){
+   actor.c=m.toC;actor.r=m.toR;actor.x=actor.c;actor.y=actor.r;actor.move=null;
+   if(actor===player){collect();if(mode!=="playing")break}
+  }
+ }
+}
+function collect(){
+ const tile=board[player.r][player.c];
+ if(tile==="."||tile==="o"){
+  board[player.r][player.c]=" ";dots--;
+  if(tile==="o"){power=9;combo=0;record(50);flash("ENERGIE AKTIV!",1.15);beep(640,.24,"sawtooth",.055)}
+  else{record(10);beep(280+(score%7)*38,.045,"sine",.014)}
+  if(dots<=0){completeLevel();return}
+ }
+ if(star&&star.c===player.c&&star.r===player.r){
+  star=null;record(250);flash("+250 BONUS-KRISTALL",1.3);beep(890,.25,"triangle",.09)
+ }
+}
+function flash(str,duration){flashMessage=str;flashTime=duration}
+function completeLevel(){
+ record(500+level*100);mode="cleared";beep(740,.35,"triangle",.09);
+ setOverlay("✦","Labyrinth geschafft!","Level "+level+" gemeistert. Bonuspunkte kassiert! Jetzt werden die Drohnen schneller und ein neues Labyrinth wartet.","Nächstes Level");
+ refreshUI();
+}
+function loseLife(){
+ lives--;power=0;combo=0;beep(160,.42,"sawtooth",.11);
+ if(lives<=0){
+  mode="over";
+  setOverlay("◆","Spiel vorbei!","Du hast "+fmt(score)+" Punkte erreicht und Level "+level+" gemeistert. Dein Rekord: "+fmt(high)+" Punkte.","Noch einmal spielen");
+  statusEl.textContent="Spiel beendet · "+fmt(score)+" Punkte";
+ }else{
+  resetActors();flash("LEBEN VERLOREN – NOCH "+lives,1.5);
+ }
+ refreshUI();
+}
+function checkHits(){
+ if(invulnerable>0)return;
+ for(const bot of bots){
+  if(bot.safe>0)continue;
+  const dx=bot.x-player.x,dy=bot.y-player.y;
+  if(dx*dx+dy*dy>.48)continue;
+  if(power>0){
+   const prize=200*Math.pow(2,Math.min(combo++,3));
+   record(prize);flash("WÄCHTER +"+prize,1);beep(790,.17,"square",.06);
+   const start=botStarts[bot.index];bot.c=start.c;bot.r=start.r;bot.x=start.c;bot.y=start.r;bot.move=null;bot.safe=2.3;
+  }else{loseLife();return}
+ }
+}
+function spawnStar(){
+ const eligible=[];
+ for(let r=1;r<R-1;r++)for(let c=1;c<C-1;c++){
+  if(isFloor(c,r)&&dist({c,r},player)>6&&(board[r][c]===" "||board[r][c]==="."))eligible.push({c,r})
+ }
+ if(eligible.length){star=eligible[Math.floor(rng()*eligible.length)];star.life=10}
+}
+function tick(dt){
+ elapsed+=dt;animTime+=dt;
+ power=Math.max(0,power-dt);invulnerable=Math.max(0,invulnerable-dt);
+ if(flashTime>0)flashTime-=dt;
+ if(power===0)combo=0;
+ if(star){star.life-=dt;if(star.life<=0){star=null;starCountdown=13}}
+ else {starCountdown-=dt;if(starCountdown<=0){spawnStar();starCountdown=24}}
+ moveActor(player,dt,choosePlayer);
+ if(mode!=="playing")return;
+ for(const b of bots){b.safe=Math.max(0,b.safe-dt);b.speed=(4.0+Math.min(1.6,level*.18))*(power>0?.74:1);moveActor(b,dt,chooseBot)}
+ checkHits();refreshUI();
+}
+function roundRect(x,y,w,h,r){
+ ctx.beginPath();ctx.roundRect(x,y,w,h,r)
+}
+function render(){
+ ctx.clearRect(0,0,W,H);
+ const grd=ctx.createLinearGradient(0,0,W,H);grd.addColorStop(0,"#061327");grd.addColorStop(1,"#020815");ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
+ ctx.strokeStyle="#182b462e";ctx.lineWidth=.65;
+ for(let x=0;x<=W;x+=T){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+ for(let y=0;y<=H;y+=T){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+ for(let r=0;r<R;r++)for(let c=0;c<C;c++){
+  const v=board[r][c],cx=c*T+T/2,cy=r*T+T/2;
+  if(v==="#"){
+   ctx.fillStyle="#102348";roundRect(c*T+1.15,r*T+1.15,T-2.3,T-2.3,5);ctx.fill();
+   ctx.strokeStyle="#2b79af";ctx.lineWidth=1.4;ctx.stroke();
+   ctx.fillStyle="#20436b";roundRect(c*T+4,r*T+3.6,T-8,3,1.5);ctx.fill();
+  }else if(v==="."){
+   ctx.fillStyle="#ffe185";ctx.shadowColor="#ffe185";ctx.shadowBlur=8;
+   ctx.beginPath();ctx.arc(cx,cy,2.55,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
+  }else if(v==="o"){
+   const f=6.5+Math.sin(animTime*7+c)*1.3;
+   ctx.shadowColor="#56ecff";ctx.shadowBlur=22;ctx.fillStyle="#78f1ff";
+   ctx.beginPath();ctx.arc(cx,cy,f,0,Math.PI*2);ctx.fill();
+   ctx.shadowBlur=0;ctx.strokeStyle="#d6ffff";ctx.lineWidth=1.2;ctx.stroke();
+  }
+ }
+ if(star){
+  const x=(star.c+.5)*T,y=(star.r+.5)*T,p=7+Math.sin(animTime*8)*2;
+  ctx.save();ctx.translate(x,y);ctx.rotate(animTime*1.5);ctx.shadowColor="#ffba5a";ctx.shadowBlur=16;ctx.fillStyle="#ffb75b";
+  ctx.beginPath();for(let i=0;i<10;i++){const a=i*Math.PI/5-Math.PI/2,rad=i%2?p*.45:p;const px=Math.cos(a)*rad,py=Math.sin(a)*rad;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}ctx.closePath();ctx.fill();ctx.restore();
+ }
+ if(player)drawPlayer();
+ bots.forEach(drawBot);
+ if(flashTime>0&&flashMessage){
+  ctx.save();ctx.font="800 21px system-ui";ctx.textAlign="center";ctx.lineWidth=5;ctx.strokeStyle="#061323";ctx.fillStyle="#ffdf8b";ctx.shadowColor="#ffe27c";ctx.shadowBlur=12;
+  ctx.strokeText(flashMessage,W/2,H-21);ctx.fillText(flashMessage,W/2,H-21);ctx.restore();
+ }
+ if(power>0){
+  ctx.save();ctx.fillStyle="#79e9ff";ctx.font="800 13px system-ui";ctx.textAlign="center";ctx.fillText("⚡ ENERGIE "+power.toFixed(1)+"s",W/2,23);ctx.restore();
+ }
+}
+function drawPlayer(){
+ if(invulnerable>0&&Math.floor(animTime*9)%2===0)return;
+ const x=(player.x+.5)*T,y=(player.y+.5)*T;
+ const angle={right:0,down:Math.PI/2,left:Math.PI,up:-Math.PI/2}[player.dir]||0;
+ const mouth=.14+Math.abs(Math.sin(animTime*15))*.36;
+ ctx.save();ctx.translate(x,y);ctx.shadowColor="#ffe680";ctx.shadowBlur=16;
+ ctx.fillStyle="#ffda60";ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,10.4,angle+mouth,angle+Math.PI*2-mouth);ctx.closePath();ctx.fill();
+ ctx.restore();
+}
+function drawBot(b){
+ const x=(b.x+.5)*T,y=(b.y+.5)*T,scared=power>0&&b.safe<=0;
+ const color=scared?"#6598ff":colors[b.index];
+ ctx.save();ctx.translate(x,y);
+ if(b.safe>0)ctx.globalAlpha=.6;
+ ctx.shadowColor=color;ctx.shadowBlur=13;ctx.fillStyle=color;
+ ctx.beginPath();for(let i=0;i<6;i++){const a=-Math.PI/2+i*Math.PI/3;const px=Math.cos(a)*10.5,py=Math.sin(a)*10.5;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}
+ ctx.closePath();ctx.fill();ctx.shadowBlur=0;
+ ctx.fillStyle="#0a1830";roundRect(-7,-4.3,14,9,3.6);ctx.fill();
+ ctx.fillStyle=scared?"#f5f9ff":"#e9feff";
+ const shift=vectors[b.dir]||vectors.left;
+ ctx.beginPath();ctx.arc(-3+shift.x*1.5,-.4+shift.y*1.5,2.5,0,Math.PI*2);ctx.arc(3+shift.x*1.5,-.4+shift.y*1.5,2.5,0,Math.PI*2);ctx.fill();
+ if(scared){ctx.strokeStyle="#d2e7ff";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(-5,6);ctx.lineTo(5,6);ctx.stroke()}
+ ctx.restore();
+}
+function keyToDirection(k){
+ return ({ArrowUp:"up",ArrowDown:"down",ArrowLeft:"left",ArrowRight:"right",w:"up",s:"down",a:"left",d:"right",W:"up",S:"down",A:"left",D:"right"})[k]||null;
+}
+function queueDirection(dir){
+ if(!dir)return;player.wanted=dir;
+}
+document.addEventListener("keydown",e=>{
+ const dir=keyToDirection(e.key);
+ if(dir||[" ","Enter","p","P","m","M"].includes(e.key))e.preventDefault();
+ if(dir){if(mode==="playing")queueDirection(dir);return}
+ if(e.key==="p"||e.key==="P"){togglePause();return}
+ if(e.key==="m"||e.key==="M"){soundButton.click();return}
+ if(e.key==="Enter"||e.key===" "){if(mode!=="playing")primaryAction()}
+});
+document.querySelectorAll("[data-direction]").forEach(btn=>{
+ btn.addEventListener("pointerdown",e=>{e.preventDefault();if(mode==="playing")queueDirection(btn.dataset.direction)});
+});
+let touchX=0,touchY=0;
+cvs.addEventListener("touchstart",e=>{if(e.touches.length){touchX=e.touches[0].clientX;touchY=e.touches[0].clientY}},{passive:true});
+cvs.addEventListener("touchend",e=>{
+ if(!e.changedTouches.length||mode!=="playing")return;
+ const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;
+ if(Math.abs(dx)+Math.abs(dy)<20)return;
+ queueDirection(Math.abs(dx)>Math.abs(dy)?(dx>0?"right":"left"):(dy>0?"down":"up"));
+},{passive:true});
+window.addEventListener("blur",()=>{if(mode==="playing")togglePause()});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&mode==="playing")togglePause()});
+function loop(ts){
+ const dt=Math.min(.05,Math.max(0,(ts-lastFrame)/1000||0));lastFrame=ts;
+ if(mode==="playing")tick(dt);else animTime+=dt*.3;
+ render();requestAnimationFrame(loop);
+}
+(function pixelRatio(){
+ const dpr=Math.min(window.devicePixelRatio||1,2);cvs.width=Math.round(W*dpr);cvs.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+})();
+setupLevel();mode="ready";refreshUI();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
