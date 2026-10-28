@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#091226">
-<title>Neon Tower – Fassflucht | Smart Home Bastler Arcade</title>
+<title>Smarty Tower – Fassflucht | Smart Home Bastler Arcade</title>
 <style>
 :root{color-scheme:dark;--ink:#edf8ff;--muted:#98adc9;--cyan:#65ebff;--gold:#ffd677;--pink:#ff88b5;--line:#2c4a6f}
 *{box-sizing:border-box}
@@ -62,11 +62,11 @@ kbd{font:inherit;font-size:11px;color:#eff8ff;background:#1e324d;border:1px soli
  <nav class="top" aria-label="Webseiten-Navigation">
   <a class="back" href="https://smarthomebastler.github.io/">← Zurück zur Webseite</a><span class="brand">SMART HOME BASTLER · ARCADE</span>
  </nav>
- <div class="heading"><div class="symbol">🛢️</div><div><h1>NEON <span>TOWER</span></h1><p class="subtitle">Fassflucht – rollende und geworfene Fässer machen dir das Leben schwer!</p></div></div>
+ <div class="heading"><div class="symbol">🛢️</div><div><h1>SMARTY <span>TOWER</span></h1><p class="subtitle">Fassflucht – rollende und geworfene Fässer machen dir das Leben schwer!</p></div></div>
  <div class="layout">
   <main>
    <div class="frame"><div class="screen">
-    <canvas id="board" width="720" height="700" aria-label="Neon Tower Spielfeld"></canvas>
+    <canvas id="board" width="720" height="700" aria-label="Smarty Tower Spielfeld"></canvas>
     <div class="overlay" id="overlay">
      <div class="modal"><div id="overlayIcon" class="modal-icon">🛢️</div><h2 id="overlayTitle">Auf zur Turmspitze!</h2>
       <p id="overlayText">Erklimme fünf Etagen, springe über rollende Fässer und weiche gezielten Fasswürfen des Roboters aus. Rote Warnkreise zeigen, wo geworfene Fässer landen. Erreiche die Rettungskapsel!</p>
@@ -452,7 +452,7 @@ function render(){
  rect(0,0,W,31,"#091427c9");
  ctx.fillStyle="#c6e2fa";ctx.font="800 12px monospace";ctx.textAlign="left";ctx.fillText("ZEIT "+Math.ceil(remaining)+"s",15,21);
  ctx.textAlign="right";ctx.fillStyle=p.hammer>0?"#ffe07b":"#9ec6e0";
- ctx.fillText(p.hammer>0?"🔧 EXTRA "+p.hammer.toFixed(1)+"s":"NEON TOWER // V"+level,W-16,21);
+ ctx.fillText(p.hammer>0?"🔧 EXTRA "+p.hammer.toFixed(1)+"s":"SMARTY TOWER // V"+level,W-16,21);
  if(flashTime>0){ctx.font="900 21px system-ui";ctx.textAlign="center";ctx.strokeStyle="#081324";ctx.lineWidth=6;ctx.strokeText(flash,W/2,355);ctx.fillStyle="#ffe3a2";ctx.shadowColor="#ffdd76";ctx.shadowBlur=12;ctx.fillText(flash,W/2,355);ctx.shadowBlur=0}
 }
 function setControl(k,on){
