@@ -56,17 +56,17 @@
       link: /asciicodeueberschriften
 - name: 🎮 Spiele
   dropdown:
-    - name: Schattenpalast ⚔️
+    - name: Smarty Palast ⚔️
       link: /spiele/schattenpalast/
-    - name: Neon Labyrinth ◉
+    - name: Smarty Labyrinth ◉
       link: /spiele/neon-labyrinth/
-    - name: Neon Invaders 👾
+    - name: Smarty Invaders 👾
       link: /spiele/neon-invaders/
-    - name: Neon Tower 🛢️
+    - name: Smarty Tower 🛢️
       link: /spiele/neon-tower/
-    - name: Neon Blocks 🧩
+    - name: Smarty Blocks 🧩
       link: /spiele/neon-blocks/
-    - name: Neon Defense 🏰
+    - name: Smarty Defense 🏰
       link: /spiele/neon-defense/
     - name: Runter Würfeln 🎲
       link: /runterwurfeln
