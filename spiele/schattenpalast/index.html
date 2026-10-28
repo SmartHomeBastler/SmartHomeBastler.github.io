@@ -59,7 +59,7 @@ canvas{width:100%;height:auto;aspect-ratio:16/9;display:block;image-rendering:pi
 const cv=document.getElementById('screen'),c=cv.getContext('2d');
 const $=id=>document.getElementById(id);
 const VW=960,VH=540,GROUND=472,GRAVITY=1650,RUN=242,JUMP=-625;
-const keys=new Set(); let state='menu',levelIndex=0,level,player,score=0,lives=3,seconds=240,camera=0,elapsed=0,last=0,particles=[],shake=0,muted=false,audio=null,toastText='',toastLife=0,flagRestart=false;
+const keys=new Set(); let state='menu',levelIndex=0,level,player,score=0,lives=3,seconds=240,camera=0,elapsed=0,last=0,particles=[],shake=0,muted=false,audio=null,toastText='',toastLife=0,flagRestart=false,sequenceBuffer='',lastSequenceKey=0;
 const palettes=[{sky:'#231c36',rear:'#3d304a',wall:'#514055',floor:'#68505a',accent:'#f4b76b',torch:'#ffbb69'},{sky:'#152735',rear:'#2e4a56',wall:'#45616b',floor:'#58646f',accent:'#7ee3c7',torch:'#8dfff0'},{sky:'#302031',rear:'#553847',wall:'#66515f',floor:'#80616a',accent:'#f4d38c',torch:'#ffd498'},{"sky":"#29202d","rear":"#583b36","wall":"#755452","floor":"#875d54","accent":"#ffc27b","torch":"#ff985a"},{"sky":"#182c33","rear":"#284956","wall":"#436270","floor":"#526e73","accent":"#7beacb","torch":"#6bf2e4"},{"sky":"#2b2239","rear":"#5b4658","wall":"#726474","floor":"#876f7e","accent":"#f5c49a","torch":"#ffb988"},{"sky":"#161e3c","rear":"#354469","wall":"#56658d","floor":"#586b85","accent":"#a2d9ff","torch":"#90caff"},{"sky":"#302134","rear":"#614458","wall":"#72566f","floor":"#89687c","accent":"#ffe0a1","torch":"#ffe0ac"}];
 // Platform coordinates are in world pixels; gaps are real holes. Every room is hand-designed.
 const SCENES=[
@@ -82,8 +82,8 @@ function loadLevel(idx){levelIndex=idx;let s=SCENES[idx];level={...s,solids:[],e
  s.shelves.forEach(([x,y,w])=>level.solids.push(makeSolid(x,y,w,24,'shelf')));
  s.guards.forEach(([x,min,max,hp],i)=>level.enemies.push({x,y:GROUND-52,w:29,h:52,min,max,hp,maxHp:hp,dir:i%2?1:-1,speed:56+i*8,attackTimer:.8,windup:0,stun:0,hitCooldown:0,dead:false,step:rand(0,6),id:i}));
  level.items.push({x:s.key[0],y:s.key[1],type:'key',taken:false,phase:0});s.gems.forEach(([x,y],i)=>level.items.push({x,y,type:'gem',taken:false,phase:i*1.1}));s.potions.forEach(([x,y])=>level.items.push({x,y,type:'potion',taken:false,phase:1.3}));
- player={x:66,y:GROUND-54,w:28,h:54,vx:0,vy:0,face:1,onGround:false,coyote:0,jumpBuffer:0,attack:0,attackCooldown:0,invuln:0,step:0}; seconds=idx<3?240:Math.min(310,255+(idx-3)*13);camera=0;elapsed=0;particles=[];toast(s.hint||'Finde den Schlüssel und erreiche das Tor',3.8);updateHUD();}
-function updateHUD(){ $('room').textContent=SCENES[levelIndex].name;$('score').textContent=String(score).padStart(5,'0');$('lives').textContent='♥ '.repeat(lives).trim()+ ' ♡'.repeat(3-lives);let t=Math.max(0,Math.ceil(seconds));$('time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');$('time').style.color=t<30?'#ff8e8e':'';}
+ player={x:66,y:GROUND-54,w:28,h:54,vx:0,vy:0,face:1,onGround:false,coyote:0,jumpBuffer:0,attack:0,attackCooldown:0,invuln:0,step:0}; seconds=idx<3?240:Math.min(310,255+(idx-3)*13);camera=0;elapsed=0;particles=[];sequenceBuffer='';lastSequenceKey=0;toast(s.hint||'Finde den Schlüssel und erreiche das Tor',3.8);updateHUD();}
+function updateHUD(){ $('room').textContent=SCENES[levelIndex].name;$('score').textContent=String(score).padStart(5,'0');$('lives').textContent='♥ '.repeat(lives).trim()+ ' ♡'.repeat(Math.max(0,3-lives));let t=Math.max(0,Math.ceil(seconds));$('time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');$('time').style.color=t<30?'#ff8e8e':'';}
 function toast(t,d=2){toastText=t;toastLife=d;}
 function playSound(freq=440,dur=.08,type='square',vol=.05){if(muted)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();let o=audio.createOscillator(),g=audio.createGain(),now=audio.currentTime;o.type=type;o.frequency.setValueAtTime(freq,now);o.frequency.exponentialRampToValueAtTime(Math.max(60,freq*.7),now+dur);g.gain.setValueAtTime(vol,now);g.gain.exponentialRampToValueAtTime(.0001,now+dur);o.connect(g).connect(audio.destination);o.start(now);o.stop(now+dur)}catch(e){}}
 function showOverlay(eyebrow,title,body,btn,help=false){$('overlayEyebrow').textContent=eyebrow;$('overlayTitle').textContent=title;$('overlayText').textContent=body;$('mainBtn').textContent=btn;$('helpGrid').style.display=help?'grid':'none';$('overlay').classList.remove('hidden');}
@@ -112,7 +112,43 @@ function attack(){
  }
  updateHUD();
 }
-function onKeyDown(e){let key=e.code;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space','KeyW','KeyA','KeyD','KeyJ','KeyP','KeyR','Enter'].includes(key))e.preventDefault();if(key==='Enter'&&state!=='playing'){mainAction();return}if(key==='KeyP'){if(!e.repeat)setPause();return}if(key==='KeyR'){if(!e.repeat)startGame();return}if(key==='Space'||key==='KeyJ'){if(!e.repeat)attack();keys.add(key);return}if((key==='ArrowUp'||key==='KeyW')&&!e.repeat&&player)player.jumpBuffer=.15;keys.add(key);}
+function summonPotion(){
+ if(state!=='playing'||level.items.some(item=>item.bonusPotion&&!item.taken))return false;
+ const foot=player.y+player.h;
+ const offsets=[55,-55,85,-85,25,-25,115,-115,0,150,-150,185,-185];
+ let options=[];
+ for(const delta of offsets){
+  const x=clamp(player.x+player.w/2+delta,26,level.width-26);
+  if(level.spikes.some(h=>x>h.x-28&&x<h.x+h.w+28))continue;
+  if(level.flames.some(fl=>Math.abs(fl.x-x)<44))continue;
+  if(level.gates.some(g=>!g.open&&Math.abs(g.x-x)<55))continue;
+  for(const platform of level.solids){
+   if(!platform.active||platform.kind==='crumble'||x-16<platform.x||x+16>platform.x+platform.w)continue;
+   const vertical=Math.abs(platform.y-foot);
+   if(vertical>145)continue;
+   options.push({x,landY:platform.y-23,rank:Math.abs(delta)+vertical*1.2});
+  }
+ }
+ options.sort((a,b)=>a.rank-b.rank);
+ const spot=options[0];
+ if(!spot)return false;
+ level.items.push({x:spot.x,y:76,type:'potion',bonusPotion:true,falling:true,vy:0,landY:spot.landY,taken:false,phase:0});
+ burst(spot.x,90,'#ffa9cf',19);playSound(920,.28,'sine',.045);
+ return true;
+}
+function handleSequence(code){
+ const digit=/^(?:Digit|Numpad)([0-9])$/.exec(code);
+ if(!digit||state!=='playing')return false;
+ const now=performance.now();
+ if(now-lastSequenceKey>3200)sequenceBuffer='';
+ lastSequenceKey=now;
+ sequenceBuffer=(sequenceBuffer+digit[1]).slice(-4);
+ if(sequenceBuffer===[0,1,8,5].join('')){sequenceBuffer='';summonPotion()}
+ return true;
+}
+function onKeyDown(e){let key=e.code;
+ if(handleSequence(key)){e.preventDefault();return}
+ if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space','KeyW','KeyA','KeyD','KeyJ','KeyP','KeyR','Enter'].includes(key))e.preventDefault();if(key==='Enter'&&state!=='playing'){mainAction();return}if(key==='KeyP'){if(!e.repeat)setPause();return}if(key==='KeyR'){if(!e.repeat)startGame();return}if(key==='Space'||key==='KeyJ'){if(!e.repeat)attack();keys.add(key);return}if((key==='ArrowUp'||key==='KeyW')&&!e.repeat&&player)player.jumpBuffer=.15;keys.add(key);}
 window.addEventListener('keydown',onKeyDown);window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>{keys.clear();if(state==='playing')setPause()});
 $('mainBtn').addEventListener('click',mainAction);$('pauseBtn').addEventListener('click',setPause);$('soundBtn').addEventListener('click',()=>{muted=!muted;$('soundBtn').textContent=muted?'♫̸':'♫';$('soundBtn').title=muted?'Ton einschalten':'Ton ausschalten';if(!muted)playSound(650,.1)});
 document.querySelectorAll('[data-key]').forEach(btn=>{const k=btn.dataset.key;const press=e=>{e.preventDefault();btn.setPointerCapture?.(e.pointerId);btn.classList.add('pressed');if(k==='ArrowUp'&&player)player.jumpBuffer=.18;else if(k==='Space')attack();keys.add(k);},release=e=>{e.preventDefault();btn.classList.remove('pressed');keys.delete(k)};btn.addEventListener('pointerdown',press);btn.addEventListener('pointerup',release);btn.addEventListener('pointercancel',release);btn.addEventListener('lostpointercapture',()=>{keys.delete(k);btn.classList.remove('pressed')})});
@@ -137,7 +173,15 @@ for(let hz of level.spikes){const hurt={x:hz.x+6,y:hz.y+4,w:hz.w-12,h:18};if(rec
 for(let t of level.traps){let b=trapBall(t),diffX=player.x+14-b.x,diffY=player.y+26-b.y;if(Math.hypot(diffX,diffY)<b.r+15){loseLife('Von der Pendelfalle erwischt');return}}
 for(const f of level.flames)if(flameActive(f)&&rectHit(player,{x:f.x-16,y:GROUND-61,w:32,h:61})){loseLife('Von einer Feuerfalle getroffen');return}
 for(let sw of level.switches)if(!sw.active&&player.x+player.w>sw.x-13&&player.x<sw.x+56&&player.y+player.h>GROUND-13){sw.active=true;level.gates.forEach(g=>g.open=true);score+=150;toast('Druckplatte aktiviert – Gitter geöffnet!',3);burst(sw.x+20,GROUND-8,level.hue,22);playSound(780,.24,'triangle');}
-for(let i of level.items){if(i.taken)continue;let a={x:i.x-13,y:i.y-15,w:26,h:30};if(rectHit(player,a)){i.taken=true;if(i.type==='key'){level.keyCollected=true;score+=250;toast('Goldener Schlüssel gefunden! Ab zum Tor.',3.8);playSound(900,.24)}else if(i.type==='potion'){lives=Math.min(3,lives+1);score+=60;toast('Heiltrank eingesammelt');playSound(590,.15)}else{score+=100;playSound(730,.07)}burst(i.x,i.y,i.type==='key'?'#ffdc7a':'#a6efff',13)}}
+for(let i of level.items){
+ if(i.taken)continue;
+ if(i.falling){
+  i.vy+=1060*dt;i.y=Math.min(i.landY,i.y+i.vy*dt);
+  if(i.y>=i.landY){i.y=i.landY;i.falling=false;burst(i.x,i.y,'#ffbedb',16);playSound(570,.13,'triangle',.032)}
+  continue;
+ }
+ let a={x:i.x-13,y:i.y-15,w:26,h:30};
+ if(rectHit(player,a)){i.taken=true;if(i.type==='key'){level.keyCollected=true;score+=250;toast('Goldener Schlüssel gefunden! Ab zum Tor.',3.8);playSound(900,.24)}else if(i.type==='potion'){lives=i.bonusPotion?Math.min(9,lives+1):Math.max(lives,Math.min(3,lives+1));score+=60;toast('Heiltrank eingesammelt · +1 Leben');playSound(590,.15)}else{score+=100;playSound(730,.07)}burst(i.x,i.y,i.type==='key'?'#ffdc7a':'#a6efff',13)}}
 for(const en of level.enemies){
  if(en.dead)continue;
  en.hitCooldown=Math.max(0,en.hitCooldown-dt);
