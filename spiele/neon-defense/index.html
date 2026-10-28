@@ -170,11 +170,11 @@ function updateUI(){
  ui.sound.textContent=soundOn?"♫ Ton an":"♫ Ton aus";ui.speed.textContent="⏩ "+speedFactor+"× Tempo";ui.auto.textContent=autoWaves?"⟳ Auto an":"⟳ Auto aus";
  ui.waveBtn.disabled=mode!=="build"||wave>=MAX_WAVES;ui.waveBtn.textContent="▶ Welle "+Math.min(MAX_WAVES,wave+1)+" / "+MAX_WAVES+" starten";
  document.querySelectorAll("[data-type]").forEach(el=>{el.classList.toggle("selected",el.dataset.type===selectedType);el.classList.toggle("too-expensive",gold<data[el.dataset.type].cost)});
- ui.upgrade.disabled=!selectedTower||selectedTower.level>=6||gold<upgradeCost(selectedTower)||mode==="over";
- ui.sell.disabled=!selectedTower||mode==="over";
+ ui.upgrade.disabled=!selectedTower||selectedTower.level>=6||gold<upgradeCost(selectedTower)||mode==="over"||mode==="won";
+ ui.sell.disabled=!selectedTower||mode==="over"||mode==="won";
  if(selectedTower){
   const d=data[selectedTower.type],cost=upgradeCost(selectedTower);
-  ui.details.innerHTML="<strong>"+d.icon+" "+d.name+" – Stufe "+selectedTower.level+"</strong><br>"+d.desc+"<br>Reichweite: "+Math.round(d.range*(1+.13*(selectedTower.level-1)))+" · Schaden: "+Math.round(d.damage*levelFactor(selectedTower))+(selectedTower.level===6?"<br>Maximale Stufe erreicht.":"<br>Aufwertung: "+cost+" Gold")+"<br>Verkaufswert: "+Math.floor(selectedTower.invested*.6)+" Gold";
+  ui.details.innerHTML="<strong>"+d.icon+" "+d.name+" – Stufe "+selectedTower.level+"</strong><br>"+d.desc+"<br>Reichweite: "+Math.round(towerRange(selectedTower))+" · Schaden: "+Math.round(d.damage*levelFactor(selectedTower))+(selectedTower.level===6?"<br>Maximale Stufe erreicht.":"<br>Aufwertung: "+cost+" Gold")+"<br>Verkaufswert: "+Math.floor(selectedTower.invested*.6)+" Gold";
   ui.upgrade.textContent=selectedTower.level===6?"⬆ Max. Stufe":"⬆ Aufwerten ("+cost+")";
   ui.sell.textContent="↩ Verkaufen (+"+Math.floor(selectedTower.invested*.6)+")";
  }else if(selectedType){
@@ -197,8 +197,8 @@ function hide(){ui.overlay.classList.add("hidden")}
 function upgradeCost(t){return Math.round(data[t.type].cost*([0,1.05,1.55,2.4,3.7,5.4][t.level]||0))}
 function levelFactor(t){const l=t.level-1;return 1+.85*l+.28*l*l}
 function towerRange(t){return data[t.type].range*(1+.08*(t.level-1))}
-function waveCount(n){return Math.min(36,9+Math.floor(n*1.3))}
-function waveHealth(n){const x=n-1;return Math.round(82*(1+.16*x+.018*x*x))}
+function waveCount(n){return Math.min(34,8+Math.floor(n*1.2))}
+function waveHealth(n){const x=n-1;return Math.round(78*(1+.19*x+.004*x*x))}
 function waveBonus(n){return 38+Math.min(140,Math.round(n*1.7))}
 function saveProgress(){
  if(mode!=="build"&&mode!=="wave")return;
@@ -246,7 +246,7 @@ function upgrade(){
  sound(830,.17,"sine",.06);announce(data[t.type].name+" auf Stufe "+t.level+" verbessert.");updateUI();saveProgress();return true
 }
 function sell(){
- const t=selectedTower;if(!t||mode==="over")return false;
+ const t=selectedTower;if(!t||mode==="over"||mode==="won")return false;
  const amount=Math.floor(t.invested*.6);gold+=amount;
  towers.splice(towers.indexOf(t),1);
  const p=towerPosition(t.c,t.r);effect(p.x,p.y,"#ffd38e",12);
@@ -268,11 +268,11 @@ function pause(){
 }
 function clickMain(){unlockAudio();if(mode==="intro"&&loadProgress()){unlockAudio();return}else if(mode==="intro"||mode==="over"||mode==="won")reset();else if(mode==="paused")pause()}
 function makeEnemy(){
- const idx=spawnIndex++,count=waveCount(wave),bosses=wave%10===0?(wave===100?3:2):wave%5===0?1:0;
+ const idx=spawnIndex++,count=waveCount(wave),bosses=wave%10===0?(wave===100?3:wave>=40?2:1):wave%5===0?1:0;
  const boss=bosses>0&&idx>=count-bosses;
  const kind=boss?"boss":wave>=30&&idx%13===8?"warded":wave>=15&&idx%11===7?"regen":idx%6===3?"armored":idx%5===2?"runner":"grunt";
  const base=waveHealth(wave);
- const m={grunt:1,runner:.73,armored:2.25,regen:1.35,warded:1.75,boss:wave===100?23:14}[kind];
+ const m={grunt:1,runner:.73,armored:2.25,regen:1.35,warded:1.75,boss:wave===100?12:7+Math.min(4,Math.floor(wave/25))}[kind];
  const hp=Math.round(base*m);
  const speed=({grunt:57,runner:96,armored:43,regen:60,warded:68,boss:37}[kind])+Math.min(42,(wave-1)*1.0);
  const p=waypoints[0];
@@ -296,7 +296,7 @@ function walk(e,dt){
   if(e.progress>=segLen-.00001){e.segment++;e.progress=0}
  }
  if(e.segment>=waypoints.length-1){
-  e.escaped=true;lives=Math.max(0,lives-(e.kind==="boss"?5:1));popup(W-75,Y+8,"-"+(e.kind==="boss"?5:1)+" ♥","#ff8299");
+  e.escaped=true;lives=Math.max(0,lives-(e.kind==="boss"?3:1));popup(W-75,Y+8,"-"+(e.kind==="boss"?3:1)+" ♥","#ff8299");
   sound(150,.2,"sawtooth",.05);
   if(lives<=0)gameOver();
  }
