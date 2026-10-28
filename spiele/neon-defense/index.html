@@ -67,7 +67,7 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
     <a class="back" href="https://smarthomebastler.github.io/">← Zurück zur Webseite</a>
     <span class="brand">SMART HOME BASTLER · ARCADE</span>
   </nav>
-  <div class="heading"><div class="crest" aria-hidden="true">🏰</div><div><h1>NEON <span>DEFENSE</span></h1><p class="subtitle">Baue deine Verteidigung. Stoppe die Eindringlinge. Überlebe jede Welle.</p></div></div>
+  <div class="heading"><div class="crest" aria-hidden="true">🏰</div><div><h1>NEON <span>DEFENSE</span></h1><p class="subtitle">100 Wellen. Stärkere Gegner. Knappe Ressourcen. Eine Festung.</p></div></div>
   <div class="layout">
     <main>
       <div class="gameframe">
@@ -77,7 +77,7 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
             <div class="modal">
               <div id="overlayIcon" class="modal-icon">🏰</div>
               <h2 id="overlayTitle">Verteidige die Festung!</h2>
-              <p id="overlayText">Wähle rechts einen Turm und tippe auf eine freie Fläche im Spielfeld. Gegner folgen dem hellen Weg. Mit Gold baust du stärkere Verteidigungen – dann startest du die erste Welle!</p>
+              <p id="overlayText">100 Wellen voller Herausforderungen! Wähle Türme und verteidige den Weg. Verbessere deine Türme bis Stufe 6, bekämpfe neue Gegnertypen und spare Gold für spätere Wellen. Dein Spielstand wird zwischen den Wellen gespeichert.</p>
               <button class="primary" id="overlayButton" type="button">Verteidigung aufbauen ▶</button>
             </div>
           </div>
@@ -86,29 +86,29 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
       <div class="toolbar">
         <div class="actions">
           <button type="button" class="secondary" id="pauseBtn">⏸ Pause</button>
-          <button type="button" class="secondary" id="speedBtn">⏩ 1× Tempo</button>
+          <button type="button" class="secondary" id="speedBtn">⏩ 1× Tempo</button><button type="button" class="secondary" id="autoBtn" title="Nächste Welle automatisch starten">⟳ Auto aus</button>
           <button type="button" class="secondary" id="soundBtn">♫ Ton an</button>
         </div>
         <button type="button" class="wave-btn" id="waveBtn">▶ Welle 1 starten</button>
       </div>
-      <p class="tip">💡 Erst Türme auswählen, dann auf freie Kacheln setzen. Bereits gebaute Türme kannst du anklicken, aufwerten oder verkaufen. Türme dürfen auch während einer Welle gebaut werden.</p>
+      <p class="tip">💡 100 Wellen bis zum Sieg. Platziere Türme geschickt und rüste sie bis Stufe 6 auf. Nach jeder Welle wird gespeichert. Auto-Wellen sind optional.</p>
     </main>
     <aside class="side">
       <div class="stats">
-        <div class="stat"><small>Gold</small><strong class="gold" id="gold">400</strong></div>
-        <div class="stat"><small>Leben</small><strong class="pink" id="lives">20 ♥</strong></div>
-        <div class="stat"><small>Welle</small><strong class="cyan" id="wave">1</strong></div>
+        <div class="stat"><small>Gold</small><strong class="gold" id="gold">320</strong></div>
+        <div class="stat"><small>Leben</small><strong class="pink" id="lives">15 ♥</strong></div>
+        <div class="stat"><small>Welle</small><strong class="cyan" id="wave">1 / 100</strong></div>
         <div class="stat"><small>Punkte</small><strong id="score">0</strong></div>
       </div>
       <section class="card">
         <h3>Deine Verteidigung</h3>
         <div class="towers" id="towerList">
-          <button class="tower" data-type="arrow" type="button"><span class="tower-icon">🏹</span><span><strong>Pfeilturm</strong><small>65 Gold · schnell</small></span></button>
-          <button class="tower" data-type="cannon" type="button"><span class="tower-icon">💣</span><span><strong>Kanone</strong><small>115 Gold · Flächenschaden</small></span></button>
-          <button class="tower" data-type="mage" type="button"><span class="tower-icon">🔮</span><span><strong>Magierturm</strong><small>125 Gold · Feuerzauber</small></span></button>
-          <button class="tower" data-type="lightning" type="button"><span class="tower-icon">⚡</span><span><strong>Blitzturm</strong><small>165 Gold · Kettenblitz</small></span></button>
-          <button class="tower" data-type="laser" type="button"><span class="tower-icon">🔴</span><span><strong>Laserturm</strong><small>205 Gold · Dauerstrahl</small></span></button>
-          <button class="tower" data-type="frost" type="button"><span class="tower-icon">❄️</span><span><strong>Eisturm</strong><small>100 Gold · verlangsamt</small></span></button>
+          <button class="tower" data-type="arrow" type="button"><span class="tower-icon">🏹</span><span><strong>Pfeilturm</strong><small>95 Gold · schnell</small></span></button>
+          <button class="tower" data-type="cannon" type="button"><span class="tower-icon">💣</span><span><strong>Kanone</strong><small>175 Gold · Flächenschaden</small></span></button>
+          <button class="tower" data-type="mage" type="button"><span class="tower-icon">🔮</span><span><strong>Magierturm</strong><small>185 Gold · Feuerzauber</small></span></button>
+          <button class="tower" data-type="lightning" type="button"><span class="tower-icon">⚡</span><span><strong>Blitzturm</strong><small>255 Gold · Kettenblitz</small></span></button>
+          <button class="tower" data-type="laser" type="button"><span class="tower-icon">🔴</span><span><strong>Laserturm</strong><small>340 Gold · Dauerstrahl</small></span></button>
+          <button class="tower" data-type="frost" type="button"><span class="tower-icon">❄️</span><span><strong>Eisturm</strong><small>145 Gold · verlangsamt</small></span></button>
         </div>
       </section>
       <section class="card">
@@ -123,7 +123,7 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
         <h3>Spielsteuerung</h3>
         <div class="details">Maus oder Touch: Turm auswählen und setzen<br><span class="key">1–6</span> Turm auswählen · <span class="key">Esc</span> abwählen<br><span class="key">Leertaste</span> nächste Welle · <span class="key">P</span> Pause · <span class="key">M</span> Ton</div>
         <div class="selected-actions"><button type="button" class="secondary" id="restartBtn">↻ Neues Spiel</button></div>
-        <div class="status" id="status" aria-live="polite">400 Gold verfügbar. Baue zuerst deine Türme!</div>
+        <div class="status" id="status" aria-live="polite">320 Gold Startkapital – 100 Wellen bis zum Sieg</div>
       </section>
     </aside>
   </div>
@@ -131,14 +131,14 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
 <script>
 (function(){
 "use strict";
-const C=15,R=10,S=50,X=20,Y=56,W=790,H=620;
+const C=15,R=10,S=50,X=20,Y=56,W=790,H=620,MAX_WAVES=100,SAVE_KEY="shb-neon-defense-100-checkpoint";
 const data={
- arrow:{name:"Pfeilturm",icon:"🏹",color:"#63e6aa",cost:65,range:135,damage:19,interval:.55,desc:"Schnelle Pfeile gegen einzelne Gegner. Günstig und zuverlässig."},
- cannon:{name:"Kanone",icon:"💣",color:"#ffbf75",cost:115,range:145,damage:44,interval:1.46,desc:"Explodierende Kugeln treffen mehrere Gegner gleichzeitig."},
- mage:{name:"Magierturm",icon:"🔮",color:"#bd9aff",cost:125,range:143,damage:20,interval:.94,desc:"Magischer Schaden umgeht Rüstung und setzt Gegner in Brand."},
- lightning:{name:"Blitzturm",icon:"⚡",color:"#fff188",cost:165,range:137,damage:35,interval:1.20,desc:"Ein Blitz springt auf zwei weitere Gegner in der Nähe über."},
- laser:{name:"Laserturm",icon:"🔴",color:"#ff668f",cost:205,range:150,damage:43,interval:0,desc:"Ein kontinuierlicher Laserstrahl verursacht Schaden pro Sekunde."},
- frost:{name:"Eisturm",icon:"❄️",color:"#85d7ff",cost:100,range:127,damage:11,interval:.75,desc:"Eisgeschosse bremsen Gegner für einige Sekunden."}
+ arrow:{name:"Pfeilturm",icon:"🏹",color:"#63e6aa",cost:95,range:135,damage:16,interval:.55,desc:"Schnelle Pfeile gegen einzelne Gegner. Günstig und zuverlässig."},
+ cannon:{name:"Kanone",icon:"💣",color:"#ffbf75",cost:175,range:145,damage:45,interval:1.46,desc:"Explodierende Kugeln treffen mehrere Gegner gleichzeitig."},
+ mage:{name:"Magierturm",icon:"🔮",color:"#bd9aff",cost:185,range:143,damage:20,interval:.94,desc:"Magischer Schaden umgeht Rüstung und setzt Gegner in Brand."},
+ lightning:{name:"Blitzturm",icon:"⚡",color:"#fff188",cost:255,range:137,damage:33,interval:1.20,desc:"Ein Blitz springt auf zwei weitere Gegner in der Nähe über."},
+ laser:{name:"Laserturm",icon:"🔴",color:"#ff668f",cost:340,range:150,damage:38,interval:0,desc:"Ein kontinuierlicher Laserstrahl verursacht Schaden pro Sekunde."},
+ frost:{name:"Eisturm",icon:"❄️",color:"#85d7ff",cost:145,range:127,damage:11,interval:.75,desc:"Eisgeschosse bremsen Gegner für einige Sekunden."}
 };
 const types=Object.keys(data);
 const coords=[[-1,2],[3,2],[3,7],[8,7],[8,3],[12,3],[12,8],[15,8]];
@@ -151,9 +151,9 @@ for(let i=0;i<coords.length-1;i++){
  while(true){if(c>=0&&c<C&&r>=0&&r<R)blocks.add(c+","+r);if(c===b[0]&&r===b[1])break;c+=dx;r+=dy}
 }
 const cv=document.getElementById("game"),ctx=cv.getContext("2d"),$=id=>document.getElementById(id);
-const ui={overlay:$("overlay"),icon:$("overlayIcon"),title:$("overlayTitle"),text:$("overlayText"),button:$("overlayButton"),gold:$("gold"),lives:$("lives"),wave:$("wave"),score:$("score"),details:$("details"),status:$("status"),waveBtn:$("waveBtn"),pause:$("pauseBtn"),speed:$("speedBtn"),sound:$("soundBtn"),upgrade:$("upgradeBtn"),sell:$("sellBtn")};
+const ui={overlay:$("overlay"),icon:$("overlayIcon"),title:$("overlayTitle"),text:$("overlayText"),button:$("overlayButton"),gold:$("gold"),lives:$("lives"),wave:$("wave"),score:$("score"),details:$("details"),status:$("status"),waveBtn:$("waveBtn"),pause:$("pauseBtn"),speed:$("speedBtn"),sound:$("soundBtn"),upgrade:$("upgradeBtn"),sell:$("sellBtn"),auto:$("autoBtn")};
 let towers=[],enemies=[],shots=[],effects=[],texts=[],starfield=[],hover=null;
-let mode="intro",wave=0,gold=400,lives=20,score=0,high=0,spawnLeft=0,spawnClock=0,spawnIndex=0,selectedType=null,selectedTower=null,speedFactor=1,soundOn=true,audio=null,clock=0,prev=0,uiClock=0,shake=0;
+let mode="intro",wave=0,gold=320,lives=15,score=0,high=0,spawnLeft=0,spawnClock=0,spawnIndex=0,selectedType=null,selectedTower=null,speedFactor=1,autoWaves=false,autoTimer=0,soundOn=true,audio=null,clock=0,prev=0,uiClock=0,shake=0;
 try{high=Number(localStorage.getItem("shb-neon-defense-high")||0)||0;soundOn=localStorage.getItem("shb-neon-defense-muted")!=="1"}catch(e){}
 const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),fmt=n=>Math.floor(n).toLocaleString("de-AT");
 function announce(msg){ui.status.textContent=msg}
@@ -165,17 +165,17 @@ function sound(freq=500,dur=.08,type="triangle",volume=.025){
 }
 function unlockAudio(){if(!soundOn)return;try{if(!audio){const AC=window.AudioContext||window.webkitAudioContext;if(AC)audio=new AC()}if(audio&&audio.state==="suspended")audio.resume()}catch(e){}}
 function updateUI(){
- ui.gold.textContent=fmt(gold);ui.lives.textContent=lives+" ♥";ui.wave.textContent=String(mode==="build"||mode==="intro"?wave+1:wave);ui.score.textContent=fmt(score);
+ ui.gold.textContent=fmt(gold);ui.lives.textContent=lives+" ♥";ui.wave.textContent=(mode==="build"||mode==="intro"?Math.min(MAX_WAVES,wave+1):wave)+" / "+MAX_WAVES;ui.score.textContent=fmt(score);
  ui.pause.textContent=mode==="paused"?"▶ Weiter":"⏸ Pause";
- ui.sound.textContent=soundOn?"♫ Ton an":"♫ Ton aus";ui.speed.textContent=speedFactor===1?"⏩ 1× Tempo":"⏩ 2× Tempo";
- ui.waveBtn.disabled=mode!=="build";ui.waveBtn.textContent="▶ Welle "+(wave+1)+" starten";
+ ui.sound.textContent=soundOn?"♫ Ton an":"♫ Ton aus";ui.speed.textContent="⏩ "+speedFactor+"× Tempo";ui.auto.textContent=autoWaves?"⟳ Auto an":"⟳ Auto aus";
+ ui.waveBtn.disabled=mode!=="build"||wave>=MAX_WAVES;ui.waveBtn.textContent="▶ Welle "+Math.min(MAX_WAVES,wave+1)+" / "+MAX_WAVES+" starten";
  document.querySelectorAll("[data-type]").forEach(el=>{el.classList.toggle("selected",el.dataset.type===selectedType);el.classList.toggle("too-expensive",gold<data[el.dataset.type].cost)});
- ui.upgrade.disabled=!selectedTower||selectedTower.level>=3||gold<upgradeCost(selectedTower)||mode==="over";
+ ui.upgrade.disabled=!selectedTower||selectedTower.level>=6||gold<upgradeCost(selectedTower)||mode==="over";
  ui.sell.disabled=!selectedTower||mode==="over";
  if(selectedTower){
   const d=data[selectedTower.type],cost=upgradeCost(selectedTower);
-  ui.details.innerHTML="<strong>"+d.icon+" "+d.name+" – Stufe "+selectedTower.level+"</strong><br>"+d.desc+"<br>Reichweite: "+Math.round(d.range*(1+.13*(selectedTower.level-1)))+" · Schaden: "+Math.round(d.damage*(1+.6*(selectedTower.level-1)))+(selectedTower.level===3?"<br>Maximale Stufe erreicht.":"<br>Aufwertung: "+cost+" Gold")+"<br>Verkaufswert: "+Math.floor(selectedTower.invested*.6)+" Gold";
-  ui.upgrade.textContent=selectedTower.level===3?"⬆ Max. Stufe":"⬆ Aufwerten ("+cost+")";
+  ui.details.innerHTML="<strong>"+d.icon+" "+d.name+" – Stufe "+selectedTower.level+"</strong><br>"+d.desc+"<br>Reichweite: "+Math.round(d.range*(1+.13*(selectedTower.level-1)))+" · Schaden: "+Math.round(d.damage*levelFactor(selectedTower))+(selectedTower.level===6?"<br>Maximale Stufe erreicht.":"<br>Aufwertung: "+cost+" Gold")+"<br>Verkaufswert: "+Math.floor(selectedTower.invested*.6)+" Gold";
+  ui.upgrade.textContent=selectedTower.level===6?"⬆ Max. Stufe":"⬆ Aufwerten ("+cost+")";
   ui.sell.textContent="↩ Verkaufen (+"+Math.floor(selectedTower.invested*.6)+")";
  }else if(selectedType){
   const d=data[selectedType];
@@ -194,9 +194,33 @@ function effect(x,y,color,count=10){
 }
 function show(icon,title,body,btn){ui.icon.textContent=icon;ui.title.textContent=title;ui.text.textContent=body;ui.button.textContent=btn;ui.overlay.classList.remove("hidden")}
 function hide(){ui.overlay.classList.add("hidden")}
-function upgradeCost(t){return t.level===2?Math.round(data[t.type].cost*.9):Math.round(data[t.type].cost*.65)}
-function levelFactor(t){return 1+.6*(t.level-1)}
-function towerRange(t){return data[t.type].range*(1+.13*(t.level-1))}
+function upgradeCost(t){return Math.round(data[t.type].cost*([0,1.05,1.55,2.4,3.7,5.4][t.level]||0))}
+function levelFactor(t){const l=t.level-1;return 1+.85*l+.28*l*l}
+function towerRange(t){return data[t.type].range*(1+.08*(t.level-1))}
+function waveCount(n){return Math.min(36,9+Math.floor(n*1.3))}
+function waveHealth(n){const x=n-1;return Math.round(82*(1+.16*x+.018*x*x))}
+function waveBonus(n){return 38+Math.min(140,Math.round(n*1.7))}
+function saveProgress(){
+ if(mode!=="build"&&mode!=="wave")return;
+ const completed=mode==="wave"?wave-1:wave;
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify({version:2,wave:completed,gold,lives,score,towers:towers.map(t=>({type:t.type,c:t.c,r:t.r,level:t.level,invested:t.invested}))}))}catch(err){}
+}
+function loadProgress(){
+ try{
+  const raw=localStorage.getItem(SAVE_KEY);if(!raw)return false;
+  const v=JSON.parse(raw);
+  if(v.version!==2||!Number.isInteger(v.wave)||v.wave<0||v.wave>=MAX_WAVES||!Number.isFinite(v.gold)||v.gold<0||!Number.isInteger(v.lives)||v.lives<1||v.lives>15||!Array.isArray(v.towers))return false;
+  const seen=new Set(),restored=[];
+  for(const t of v.towers){
+   if(!data[t.type]||!Number.isInteger(t.c)||!Number.isInteger(t.r)||!Number.isInteger(t.level)||t.level<1||t.level>6||!Number.isFinite(t.invested)||seen.has(t.c+","+t.r)||blocks.has(t.c+","+t.r)||t.c<0||t.c>=C||t.r<0||t.r>=R)return false;
+   seen.add(t.c+","+t.r);restored.push({type:t.type,c:t.c,r:t.r,level:t.level,invested:t.invested,cooldown:0,aim:0,flash:0})
+  }
+  towers=restored;enemies=[];shots=[];effects=[];texts=[];selectedType=null;selectedTower=null;
+  gold=Math.floor(v.gold);lives=v.lives;wave=v.wave;score=Math.floor(v.score||0);mode="build";spawnLeft=0;spawnClock=0;autoTimer=0;speedFactor=1;
+  hide();announce("Spielstand geladen – Welle "+(wave+1)+" / "+MAX_WAVES+" wartet.");updateUI();return true;
+ }catch(err){return false}
+}
+function clearProgress(){try{localStorage.removeItem(SAVE_KEY)}catch(err){}}
 function towerPosition(c,r){return{x:X+(c+.5)*S,y:Y+(r+.5)*S}}
 function tile(x,y){const c=Math.floor((x-X)/S),r=Math.floor((y-Y)/S);return c>=0&&c<C&&r>=0&&r<R?{c,r}:null}
 function free(c,r){return c>=0&&c<C&&r>=0&&r<R&&!blocks.has(c+","+r)&&!towers.some(t=>t.c===c&&t.r===r)}
@@ -210,31 +234,31 @@ function place(c,r){
  if(gold<d.cost){announce("Zu wenig Gold für "+d.name+".");sound(140,.16,"sawtooth",.04);return false}
  gold-=d.cost;towers.push({type:selectedType,c,r,level:1,invested:d.cost,cooldown:0,aim:0,flash:0});
  const p=towerPosition(c,r);effect(p.x,p.y,d.color,13);popup(p.x,p.y-25,"- "+d.cost+" Gold",d.color);
- sound(630,.12,"triangle",.04);announce(d.name+" errichtet!");updateUI();return true
+ sound(630,.12,"triangle",.04);announce(d.name+" errichtet!");updateUI();saveProgress();return true
 }
 function upgrade(){
  const t=selectedTower;
- if(!t||t.level>=3||mode==="over")return false;
+ if(!t||t.level>=6||mode==="over"||mode==="won")return false;
  const cost=upgradeCost(t);
  if(gold<cost){announce("Zu wenig Gold für die Aufwertung.");return false}
  gold-=cost;t.invested+=cost;t.level++;t.cooldown=0;
  const p=towerPosition(t.c,t.r);effect(p.x,p.y,data[t.type].color,20);popup(p.x,p.y-28,"STUFE "+t.level);
- sound(830,.17,"sine",.06);announce(data[t.type].name+" auf Stufe "+t.level+" verbessert.");updateUI();return true
+ sound(830,.17,"sine",.06);announce(data[t.type].name+" auf Stufe "+t.level+" verbessert.");updateUI();saveProgress();return true
 }
 function sell(){
  const t=selectedTower;if(!t||mode==="over")return false;
  const amount=Math.floor(t.invested*.6);gold+=amount;
  towers.splice(towers.indexOf(t),1);
  const p=towerPosition(t.c,t.r);effect(p.x,p.y,"#ffd38e",12);
- selectedTower=null;popup(p.x,p.y-15,"+"+amount+" Gold");announce("Turm verkauft.");updateUI();return true
+ selectedTower=null;popup(p.x,p.y-15,"+"+amount+" Gold");announce("Turm verkauft.");updateUI();saveProgress();return true
 }
 function reset(){
- towers=[];enemies=[];shots=[];effects=[];texts=[];selectedType=null;selectedTower=null;gold=400;lives=20;score=0;wave=0;spawnLeft=0;spawnClock=0;clock=0;speedFactor=1;shake=0;
- mode="build";hide();announce("400 Gold – errichte Türme und starte die erste Welle.");unlockAudio();sound(650,.2,"triangle",.06);updateUI();
+ towers=[];enemies=[];shots=[];effects=[];texts=[];selectedType=null;selectedTower=null;gold=320;lives=15;score=0;wave=0;spawnLeft=0;spawnClock=0;clock=0;speedFactor=1;autoTimer=0;shake=0;clearProgress();
+ mode="build";hide();announce("320 Gold Startkapital – plane deine ersten Türme.");unlockAudio();sound(650,.2,"triangle",.06);updateUI();saveProgress();
 }
 function beginWave(){
- if(mode!=="build")return;
- wave++;mode="wave";spawnLeft=8+wave*3;spawnIndex=0;spawnClock=.4;
+ if(mode!=="build"||wave>=MAX_WAVES)return;
+ saveProgress();wave++;mode="wave";spawnLeft=waveCount(wave);spawnIndex=0;spawnClock=.4;autoTimer=0;
  announce("Welle "+wave+" greift an!");sound(420,.35,"sawtooth",.06);updateUI();
 }
 function pause(){
@@ -242,20 +266,21 @@ function pause(){
  else if(mode==="paused"){mode=window.__resumeMode||"build";hide();prev=performance.now()}
  updateUI();
 }
-function clickMain(){unlockAudio();if(mode==="intro"||mode==="over")reset();else if(mode==="paused")pause()}
+function clickMain(){unlockAudio();if(mode==="intro"&&loadProgress()){unlockAudio();return}else if(mode==="intro"||mode==="over"||mode==="won")reset();else if(mode==="paused")pause()}
 function makeEnemy(){
- const idx=spawnIndex++,boss=wave%5===0&&idx===8+wave*3-1;
- const kind=boss?"boss":idx%7===3?"armored":idx%5===2?"runner":"grunt";
- const base=55*(1+(wave-1)*.24);
- const m={grunt:1,runner:.68,armored:2.05,boss:8}[kind];
+ const idx=spawnIndex++,count=waveCount(wave),bosses=wave%10===0?(wave===100?3:2):wave%5===0?1:0;
+ const boss=bosses>0&&idx>=count-bosses;
+ const kind=boss?"boss":wave>=30&&idx%13===8?"warded":wave>=15&&idx%11===7?"regen":idx%6===3?"armored":idx%5===2?"runner":"grunt";
+ const base=waveHealth(wave);
+ const m={grunt:1,runner:.73,armored:2.25,regen:1.35,warded:1.75,boss:wave===100?23:14}[kind];
  const hp=Math.round(base*m);
- const speed=({grunt:57,runner:93,armored:40,boss:34}[kind])+Math.min(28,(wave-1)*3);
+ const speed=({grunt:57,runner:96,armored:43,regen:60,warded:68,boss:37}[kind])+Math.min(42,(wave-1)*1.0);
  const p=waypoints[0];
- enemies.push({x:p.x,y:p.y,segment:0,progress:0,hp,maxHp:hp,kind,speed,reward:({grunt:16,runner:22,armored:31,boss:145}[kind])+Math.floor(wave*1.6),burn:0,burnDps:0,slow:0,slowRatio:1,dead:false,escaped:false});
+ enemies.push({x:p.x,y:p.y,segment:0,progress:0,hp,maxHp:hp,kind,speed,reward:({grunt:9,runner:12,armored:17,regen:15,warded:19,boss:70}[kind])+Math.floor(wave*(kind==="boss"?2.6:.20)),burn:0,burnDps:0,slow:0,slowRatio:1,dead:false,escaped:false});
 }
 function hurts(e,n,magic=false){
  if(e.dead||e.escaped||mode!=="wave")return false;
- const multiplier=!magic&&e.kind==="armored"?.68:1;
+ const multiplier=!magic&&e.kind==="armored"?.52:magic&&e.kind==="warded"?.55:1;
  e.hp-=n*multiplier;
  if(e.hp<=0){e.dead=true;gold+=e.reward;addScore((e.kind==="boss"?250:25)+wave*3);effect(e.x,e.y,e.kind==="boss"?"#ff81cc":"#ffe49d",e.kind==="boss"?28:12);popup(e.x,e.y,"+"+e.reward+" Gold");sound(e.kind==="boss"?230:470,.13,"triangle",.035);return true}
  return false;
@@ -271,7 +296,7 @@ function walk(e,dt){
   if(e.progress>=segLen-.00001){e.segment++;e.progress=0}
  }
  if(e.segment>=waypoints.length-1){
-  e.escaped=true;lives=Math.max(0,lives-(e.kind==="boss"?4:1));popup(W-75,Y+8,"-"+(e.kind==="boss"?4:1)+" ♥","#ff8299");
+  e.escaped=true;lives=Math.max(0,lives-(e.kind==="boss"?5:1));popup(W-75,Y+8,"-"+(e.kind==="boss"?5:1)+" ♥","#ff8299");
   sound(150,.2,"sawtooth",.05);
   if(lives<=0)gameOver();
  }
@@ -317,7 +342,7 @@ function fireTower(t,dt){
  }
  t.cooldown-=dt;
  if(t.cooldown>0)return;
- t.cooldown=d.interval/(1+.15*(t.level-1));t.flash=.1;
+ t.cooldown=d.interval/(1+.10*(t.level-1));t.flash=.1;
  if(t.type==="lightning")chain(t,e);
  else{projectile(t,e);sound(t.type==="cannon"?200:t.type==="mage"?580:400,.065,t.type==="cannon"?"sawtooth":"triangle",.014)}
 }
@@ -344,12 +369,20 @@ function updateShots(dt){
  }
 }
 function gameOver(){
- mode="over";show("💥","Festung gefallen!","Die Gegner haben das Ziel erreicht. Du hast "+fmt(score)+" Punkte und "+wave+" Wellen geschafft. Dein Highscore: "+fmt(high)+" Punkte.","Noch einmal spielen ▶");
+ clearProgress();mode="over";show("💥","Festung gefallen!","Die Gegner haben das Ziel erreicht. Du hast "+fmt(score)+" Punkte und "+wave+" Wellen geschafft. Dein Highscore: "+fmt(high)+" Punkte.","Noch einmal spielen ▶");
  announce("Game Over · "+fmt(score)+" Punkte");updateUI()
 }
+function victory(){
+ mode="won";clearProgress();selectedTower=null;addScore(lives*1000+5000);
+ show("🏆","Alle 100 Wellen geschafft!","Du hast die Festung bis zum Schluss verteidigt! Endpunktzahl: "+fmt(score)+" · Verbleibende Leben: "+lives+". Dein Highscore: "+fmt(high)+".","Neues Spiel ▶");
+ announce("🏆 SIEG! Alle 100 Wellen überstanden.");sound(1050,.65,"sine",.09);updateUI()
+}
 function waveCleared(){
- const bonus=60+wave*16;gold+=bonus;addScore(100+wave*35);
- mode="build";selectedTower=null;announce("Welle "+wave+" überstanden! +"+bonus+" Gold. Baue weitere Türme.");sound(860,.3,"sine",.06);popup(W/2,37,"WELLE "+wave+" GESCHAFFT · +"+bonus+" GOLD","#ffe17b");updateUI()
+ const bonus=waveBonus(wave);gold+=bonus;addScore(85+wave*25);
+ if(wave>=MAX_WAVES){victory();return}
+ mode="build";selectedTower=null;autoTimer=autoWaves?4.5:0;
+ announce("Welle "+wave+" / "+MAX_WAVES+" überstanden! +"+bonus+" Gold. "+(autoWaves?"Auto-Start in 4,5 s.":"Baue weitere Türme."));
+ sound(860,.3,"sine",.06);popup(W/2,37,"WELLE "+wave+" GESCHAFFT · +"+bonus+" GOLD","#ffe17b");updateUI();saveProgress()
 }
 function update(dt){
  clock+=dt;uiClock+=dt;
@@ -361,6 +394,7 @@ function update(dt){
  }
  for(let i=texts.length-1;i>=0;i--){const a=texts[i];a.y-=dt*21;a.life-=dt;if(a.life<=0)texts.splice(i,1)}
  shake=Math.max(0,shake-dt*15);
+ if(mode==="build"&&autoWaves&&autoTimer>0){autoTimer-=dt;if(autoTimer<=0)beginWave()}
  if(mode!=="wave")return;
  spawnClock-=dt;
  if(spawnLeft>0&&spawnClock<=0){
@@ -369,6 +403,7 @@ function update(dt){
  for(const e of enemies){
   if(e.dead||e.escaped)continue;
   if(e.burn>0){e.burn=Math.max(0,e.burn-dt);hurts(e,e.burnDps*dt,true)}
+  if(e.kind==="regen"&&!e.dead)e.hp=Math.min(e.maxHp,e.hp+e.maxHp*.004*dt);
   if(e.slow>0)e.slow=Math.max(0,e.slow-dt);
   if(!e.dead)walk(e,dt);
   if(mode==="over")return;
@@ -415,7 +450,7 @@ function drawTower(t,preview=false){
 function drawEnemies(){
  for(const e of enemies){
   const size=e.kind==="boss"?19:e.kind==="armored"?14:12;
-  const color={grunt:"#ff8a92",runner:"#f9d17e",armored:"#a7a0ff",boss:"#ff78cd"}[e.kind];
+  const color={grunt:"#ff8a92",runner:"#f9d17e",armored:"#a7a0ff",regen:"#88f5aa",warded:"#bd91ff",boss:"#ff78cd"}[e.kind];
   ctx.save();ctx.translate(e.x,e.y);ctx.shadowColor=color;ctx.shadowBlur=13;
   ctx.fillStyle=color;ctx.beginPath();for(let i=0;i<6;i++){const a=i*Math.PI/3+clock*.6;if(i===0)ctx.moveTo(Math.cos(a)*size,Math.sin(a)*size);else ctx.lineTo(Math.cos(a)*size,Math.sin(a)*size)}ctx.closePath();ctx.fill();ctx.shadowBlur=0;
   ctx.fillStyle="#101d2c";rect(-5,-3,4,5,"#142539");rect(2,-3,4,5,"#142539");
@@ -457,7 +492,7 @@ function draw(){
  drawEnemies();drawEffects();
  round(20,566,750,38,8,"#102642b5");
  ctx.font="800 12px system-ui";ctx.textAlign="left";ctx.fillStyle="#a6d8ef";
- const label=mode==="wave"?"⚔ Welle "+wave+" · "+(enemies.length+spawnLeft)+" Gegner übrig":mode==="build"?"🏗 Bauphase · Starte die nächste Welle, wenn du bereit bist.":mode==="paused"?"⏸ Spiel pausiert":mode==="over"?"❌ Die Festung ist gefallen":"🏰 Bereite deine Verteidigung vor";
+ const label=mode==="wave"?"⚔ Welle "+wave+" / 100 · "+(enemies.length+spawnLeft)+" Gegner übrig":mode==="build"?(autoWaves&&autoTimer>0?"⟳ Nächste Welle in "+Math.ceil(autoTimer)+" s":"🏗 Bauphase · Starte Welle "+(wave+1)+" / 100"):mode==="paused"?"⏸ Spiel pausiert":mode==="over"?"❌ Die Festung ist gefallen":mode==="won"?"🏆 100 Wellen gemeistert!":"🏰 Bereite deine Verteidigung vor";
  ctx.fillText(label,34,590);
  ctx.textAlign="right";ctx.fillStyle="#ffe18a";ctx.fillText("REKORD "+fmt(high),W-34,590);
 }
@@ -478,13 +513,14 @@ ui.upgrade.addEventListener("click",upgrade);ui.sell.addEventListener("click",se
 ui.button.addEventListener("click",clickMain);
 ui.waveBtn.addEventListener("click",()=>{unlockAudio();beginWave()});
 ui.pause.addEventListener("click",pause);
-ui.speed.addEventListener("click",()=>{speedFactor=speedFactor===1?2:1;updateUI()});
+ui.speed.addEventListener("click",()=>{speedFactor=speedFactor===1?2:speedFactor===2?3:1;updateUI()});
+ui.auto.addEventListener("click",()=>{autoWaves=!autoWaves;autoTimer=autoWaves&&mode==="build"&&wave>0?4.5:0;updateUI();announce(autoWaves?"Auto-Wellen aktiviert.":"Auto-Wellen deaktiviert.")});
 ui.sound.addEventListener("click",()=>{soundOn=!soundOn;try{localStorage.setItem("shb-neon-defense-muted",soundOn?"0":"1")}catch(e){}unlockAudio();if(soundOn)sound(740,.1);updateUI()});
 $("restartBtn").addEventListener("click",reset);
 document.addEventListener("keydown",e=>{
  if(/^[1-6]$/.test(e.key)){select(types[Number(e.key)-1]);return}
  if(e.key==="Escape"){selectedType=null;selectedTower=null;updateUI();return}
- if(e.key===" "||e.key==="Spacebar"){e.preventDefault();if(mode==="build")beginWave();else if(mode==="intro"||mode==="over"||mode==="paused")clickMain();return}
+ if(e.key===" "||e.key==="Spacebar"){e.preventDefault();if(mode==="build")beginWave();else if(mode==="intro"||mode==="over"||mode==="won"||mode==="paused")clickMain();return}
  if(e.key==="p"||e.key==="P"){if(mode==="paused"||mode==="build"||mode==="wave")pause();return}
  if(e.key==="m"||e.key==="M")ui.sound.click();
 });
@@ -492,9 +528,10 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden&&(mode==="w
 window.addEventListener("blur",()=>{if(mode==="wave")pause()});
 function frame(now){
  const dt=Math.min(.045,Math.max(0,(now-prev)/1000||0));prev=now;
- update(dt*(mode==="wave"?speedFactor:1));draw();requestAnimationFrame(frame);
+ update(dt*(mode==="wave"||mode==="build"?speedFactor:1));draw();requestAnimationFrame(frame);
 }
 (function hiDpi(){const d=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*d);cv.height=Math.round(H*d);ctx.setTransform(d,0,0,d,0,0)})();
+try{const raw=localStorage.getItem(SAVE_KEY);if(raw){const saved=JSON.parse(raw);if(saved.version===2&&saved.wave>=0&&saved.wave<MAX_WAVES&&saved.lives>0){ui.button.textContent="Spielstand fortsetzen ▶";ui.text.textContent="Gespeichert: Welle "+(saved.wave+1)+" von 100. Setze deine Verteidigung fort, oder starte über „Neues Spiel“ ganz neu."}}}catch(err){}
 updateUI();requestAnimationFrame(frame);
 })();
 </script>
