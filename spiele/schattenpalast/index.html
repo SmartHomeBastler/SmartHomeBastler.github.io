@@ -47,9 +47,9 @@ canvas{width:100%;height:auto;aspect-ratio:16/9;display:block;image-rendering:pi
  <div class="game" id="gameBox">
   <canvas id="screen" width="960" height="540" aria-label="Spielansicht von Smarty Palast"></canvas>
   <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-  <div class="overlay" id="overlay"><div class="overlay-inner"><p class="eyebrow" id="overlayEyebrow">Ein Abenteuer beginnt</p><h2 id="overlayTitle">Die Flucht</h2><p id="overlayText">Acht gefährliche Räume liegen vor dir. Finde Schlüssel, überquere brüchige Brücken, weiche Fallen aus, besiege die Wachen und erreiche das letzte Tor.</p><div class="key-grid" id="helpGrid"><div><span class="keycap">← →</span> Bewegen</div><div><span class="keycap">↑ / W</span> Springen</div><div><span class="keycap">Leertaste / J</span> Schwert</div><div><span class="keycap">P</span> Pause · <span class="keycap">R</span> Neustart</div></div><button id="mainBtn" class="primary">Abenteuer starten ▶</button></div></div>
+  <div class="overlay" id="overlay"><div class="overlay-inner"><p class="eyebrow" id="overlayEyebrow">Ein Abenteuer beginnt</p><h2 id="overlayTitle">Die Flucht</h2><p id="overlayText">Acht gefährliche Räume liegen vor dir. Finde Schlüssel, überquere brüchige Brücken, weiche Fallen aus, besiege die Wachen und erreiche das letzte Tor.</p><div class="key-grid" id="helpGrid"><div><span class="keycap">← →</span> Bewegen</div><div><span class="keycap">↑ / W</span> Springen</div><div><span class="keycap">Leertaste / J</span> Schwert (gedrückt halten)</div><div><span class="keycap">P</span> Pause · <span class="keycap">R</span> Neustart</div></div><button id="mainBtn" class="primary">Abenteuer starten ▶</button></div></div>
  </div>
- <div class="under"><span id="hint">💡 Tipp: Halte beim Springen die Richtung gedrückt. Berühre Bodenplatten, um Gitter zu öffnen.</span><span class="note">Eigenständiges Retro-Spiel · Läuft vollständig offline</span></div>
+ <div class="under"><span id="hint">💡 Tipp: Halte beim Springen die Richtung gedrückt. Berühre Bodenplatten, um Gitter zu öffnen.</span><span class="note">Schwerttaste halten für schnelle Angriffe · Läuft offline</span></div>
 </div>
 <div class="touch" aria-label="Touch-Steuerung"><div class="touch-group"><button data-key="ArrowLeft" aria-label="Links">◀</button><button data-key="ArrowRight" aria-label="Rechts">▶</button></div><div class="touch-group"><button class="jump" data-key="ArrowUp">SPRUNG</button><button class="attack" data-key="Space">ANGRIFF</button></div></div>
 </div>
@@ -80,7 +80,7 @@ function loadLevel(idx){levelIndex=idx;let s=SCENES[idx];level={...s,solids:[],e
  s.ground.forEach(([a,b])=>level.solids.push(makeSolid(a,GROUND,b-a,105)));
  s.crumbles.forEach(([a,b])=>level.solids.push(makeSolid(a,GROUND,b-a,105,'crumble')));
  s.shelves.forEach(([x,y,w])=>level.solids.push(makeSolid(x,y,w,24,'shelf')));
- s.guards.forEach(([x,min,max,hp],i)=>level.enemies.push({x,y:GROUND-52,w:29,h:52,min,max,hp,maxHp:hp,dir:i%2?1:-1,speed:61+i*10,attackTimer:.8,hitCooldown:0,dead:false,step:rand(0,6),id:i}));
+ s.guards.forEach(([x,min,max,hp],i)=>level.enemies.push({x,y:GROUND-52,w:29,h:52,min,max,hp,maxHp:hp,dir:i%2?1:-1,speed:56+i*8,attackTimer:.8,windup:0,stun:0,hitCooldown:0,dead:false,step:rand(0,6),id:i}));
  level.items.push({x:s.key[0],y:s.key[1],type:'key',taken:false,phase:0});s.gems.forEach(([x,y],i)=>level.items.push({x,y,type:'gem',taken:false,phase:i*1.1}));s.potions.forEach(([x,y])=>level.items.push({x,y,type:'potion',taken:false,phase:1.3}));
  player={x:66,y:GROUND-54,w:28,h:54,vx:0,vy:0,face:1,onGround:false,coyote:0,jumpBuffer:0,attack:0,attackCooldown:0,invuln:0,step:0}; seconds=idx<3?240:Math.min(310,255+(idx-3)*13);camera=0;elapsed=0;particles=[];toast(s.hint||'Finde den Schlüssel und erreiche das Tor',3.8);updateHUD();}
 function updateHUD(){ $('room').textContent=SCENES[levelIndex].name;$('score').textContent=String(score).padStart(5,'0');$('lives').textContent='♥ '.repeat(lives).trim()+ ' ♡'.repeat(3-lives);let t=Math.max(0,Math.ceil(seconds));$('time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');$('time').style.color=t<30?'#ff8e8e':'';}
@@ -95,8 +95,23 @@ function loseLife(reason,reset=true){if(player.invuln>0||state!=='playing')retur
 function burst(x,y,color,count=9){for(let i=0;i<count;i++)particles.push({x,y,vx:rand(-165,165),vy:rand(-280,-35),life:rand(.25,.8),full:.8,color,size:rand(2,5)})}
 function rectHit(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
 function solids(){return level.solids.filter(q=>q.active).concat(level.gates.filter(g=>!g.open))}
-function attack(){if(state!=='playing'||player.attackCooldown>0)return;player.attack=.23;player.attackCooldown=.43;playSound(620,.13,'triangle',.034);
-for(let en of level.enemies){if(en.dead||en.hitCooldown>0)continue;let dx=(en.x+en.w/2)-(player.x+player.w/2),dy=Math.abs((en.y+en.h/2)-(player.y+player.h/2));if(dx*player.face>-18&&dx*player.face<82&&dy<52){en.hp--;en.hitCooldown=.34;en.dir=-player.face;burst(en.x+15,en.y+25,'#ffbf83',9);shake=3;score+=25;if(en.hp<=0){en.dead=true;score+=175;burst(en.x+15,en.y+25,'#ffd67f',20);playSound(360,.22,'square',.04)}else playSound(260,.12,'sawtooth',.045)}}updateHUD();}
+function attack(){
+ if(state!=='playing'||player.attackCooldown>0)return;
+ player.attack=.29;player.attackCooldown=.28;playSound(690,.11,'triangle',.05);
+ for(const en of level.enemies){
+  if(en.dead||en.hitCooldown>0)continue;
+  const dx=(en.x+en.w/2)-(player.x+player.w/2);
+  const dy=Math.abs((en.y+en.h/2)-(player.y+player.h/2));
+  if(dx*player.face < -12||dx*player.face > 117||dy>63)continue;
+  en.hp-=2;en.hitCooldown=.21;en.stun=.52;en.windup=0;en.attackTimer=Math.max(en.attackTimer,.55);
+  en.x=clamp(en.x+player.face*78,en.min,en.max);
+  en.dir=-player.face;burst(en.x+15,en.y+25,'#ffbf83',14);
+  shake=3;score+=35;
+  if(en.hp<=0){en.dead=true;score+=175;burst(en.x+15,en.y+25,'#ffd67f',23);playSound(420,.23,'square',.055)}
+  else playSound(310,.14,'sawtooth',.045);
+ }
+ updateHUD();
+}
 function onKeyDown(e){let key=e.code;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space','KeyW','KeyA','KeyD','KeyJ','KeyP','KeyR','Enter'].includes(key))e.preventDefault();if(key==='Enter'&&state!=='playing'){mainAction();return}if(key==='KeyP'){if(!e.repeat)setPause();return}if(key==='KeyR'){if(!e.repeat)startGame();return}if(key==='Space'||key==='KeyJ'){if(!e.repeat)attack();keys.add(key);return}if((key==='ArrowUp'||key==='KeyW')&&!e.repeat&&player)player.jumpBuffer=.15;keys.add(key);}
 window.addEventListener('keydown',onKeyDown);window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>{keys.clear();if(state==='playing')setPause()});
 $('mainBtn').addEventListener('click',mainAction);$('pauseBtn').addEventListener('click',setPause);$('soundBtn').addEventListener('click',()=>{muted=!muted;$('soundBtn').textContent=muted?'♫̸':'♫';$('soundBtn').title=muted?'Ton einschalten':'Ton ausschalten';if(!muted)playSound(650,.1)});
@@ -105,6 +120,7 @@ function tick(dt){elapsed+=dt;seconds-=dt;if(seconds<=0){seconds=0;loseLife('Die
 for(const q of level.solids){if(q.kind==='crumble'&&q.timer>=0){q.timer+=dt;if(q.active&&q.timer>.58){q.active=false;q.respawn=3.4;burst(q.x+q.w/2,q.y+8,'#9e8190',17);playSound(85,.18)}if(!q.active){q.respawn-=dt;if(q.respawn<=0){q.active=true;q.timer=-1}}}}
 for(let part of particles){part.x+=part.vx*dt;part.y+=part.vy*dt;part.vy+=560*dt;part.life-=dt}particles=particles.filter(p=>p.life>0).slice(-200);
 player.invuln=Math.max(0,player.invuln-dt);player.attack=Math.max(0,player.attack-dt);player.attackCooldown=Math.max(0,player.attackCooldown-dt);player.jumpBuffer=Math.max(0,player.jumpBuffer-dt);
+ if(keys.has('Space')||keys.has('KeyJ'))attack();
 const left=keys.has('ArrowLeft')||keys.has('KeyA'),right=keys.has('ArrowRight')||keys.has('KeyD'),down=keys.has('ArrowDown');let dir=Number(right)-Number(left);if(dir)player.face=dir;
 const target=dir*RUN*(down?.42:1);player.vx+=(target-player.vx)*Math.min(1,dt*(player.onGround?13:8));if(Math.abs(player.vx)<.3)player.vx=0;
 if(player.onGround)player.coyote=.105;else player.coyote=Math.max(0,player.coyote-dt);
@@ -122,11 +138,26 @@ for(let t of level.traps){let b=trapBall(t),diffX=player.x+14-b.x,diffY=player.y
 for(const f of level.flames)if(flameActive(f)&&rectHit(player,{x:f.x-16,y:GROUND-61,w:32,h:61})){loseLife('Von einer Feuerfalle getroffen');return}
 for(let sw of level.switches)if(!sw.active&&player.x+player.w>sw.x-13&&player.x<sw.x+56&&player.y+player.h>GROUND-13){sw.active=true;level.gates.forEach(g=>g.open=true);score+=150;toast('Druckplatte aktiviert – Gitter geöffnet!',3);burst(sw.x+20,GROUND-8,level.hue,22);playSound(780,.24,'triangle');}
 for(let i of level.items){if(i.taken)continue;let a={x:i.x-13,y:i.y-15,w:26,h:30};if(rectHit(player,a)){i.taken=true;if(i.type==='key'){level.keyCollected=true;score+=250;toast('Goldener Schlüssel gefunden! Ab zum Tor.',3.8);playSound(900,.24)}else if(i.type==='potion'){lives=Math.min(3,lives+1);score+=60;toast('Heiltrank eingesammelt');playSound(590,.15)}else{score+=100;playSound(730,.07)}burst(i.x,i.y,i.type==='key'?'#ffdc7a':'#a6efff',13)}}
-for(let en of level.enemies){if(en.dead)continue;en.hitCooldown=Math.max(0,en.hitCooldown-dt);en.attackTimer-=dt;const dx=player.x-en.x,close=Math.abs(dx)<185&&Math.abs(player.y-en.y)<65;
- if(close){en.dir=dx>=0?1:-1;if(Math.abs(dx)>34)en.x+=en.dir*en.speed*dt*.8;}
- else {en.x+=en.dir*en.speed*dt*.65;if(en.x<en.min){en.x=en.min;en.dir=1}if(en.x>en.max){en.x=en.max;en.dir=-1}}
+for(const en of level.enemies){
+ if(en.dead)continue;
+ en.hitCooldown=Math.max(0,en.hitCooldown-dt);
+ en.attackTimer=Math.max(0,en.attackTimer-dt);
+ if(en.stun>0){en.stun=Math.max(0,en.stun-dt);en.windup=0;continue}
+ const dx=player.x-en.x,vertical=Math.abs(player.y-en.y),close=Math.abs(dx)<165&&vertical<65;
+ if(en.windup>0){
+  en.windup-=dt;
+  if(en.windup<=0){
+   en.windup=0;en.attackTimer=1.3;
+   if(Math.abs(player.x-en.x)<49&&Math.abs(player.y-en.y)<52)loseLife('Von einer Wache verletzt',false);
+  }
+  continue;
+ }
+ if(close){en.dir=dx>=0?1:-1;if(Math.abs(dx)>53)en.x+=en.dir*en.speed*dt*.58}
+ else{en.x+=en.dir*en.speed*dt*.61;if(en.x<en.min){en.x=en.min;en.dir=1}if(en.x>en.max){en.x=en.max;en.dir=-1}}
  en.x=clamp(en.x,en.min,en.max);en.step+=dt*5;
- if(Math.abs(dx)<40&&Math.abs(player.y-en.y)<48&&en.attackTimer<=0){en.attackTimer=1.45;loseLife('Von einer Wache verletzt',false);}
+ if(Math.abs(player.x-en.x)<47&&vertical<50&&en.attackTimer<=0){
+  en.windup=.46;en.dir=player.x>=en.x?1:-1;playSound(205,.1,'triangle',.018);
+ }
 }
 if(player.x+player.w>level.doorX){if(!level.keyCollected){if(toastLife<.2)toast('Das Tor ist verschlossen. Der goldene Schlüssel fehlt!',2)}else if(level.gates.some(g=>!g.open)){if(toastLife<.2)toast('Aktiviere zuerst die Bodenplatte!',2)}else{score+=Math.max(0,Math.floor(seconds))*3+500;playSound(940,.3,'triangle');if(levelIndex===SCENES.length-1){state='won';showOverlay('Deine Flucht ist gelungen','Du bist frei! 🎉',`Du hast alle ${SCENES.length} Räume überstanden und ${score} Punkte gesammelt. Die Schatten des Palastes liegen hinter dir.`,'Noch einmal spielen ↻');}else{let next=levelIndex+1;loadLevel(next);toast('Raum '+(next+1)+' – '+level.title,3.5)} }}
 let targetCam=clamp(player.x-VW*.33,0,Math.max(0,level.width-VW));camera+=(targetCam-camera)*Math.min(1,dt*5.5);
